@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br" id="html">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title> Login | Horus </title>
+
+    <link rel="stylesheet" type="text/css" href="style/login.css">
+    <link rel="icon" href="./assets/icon/horus.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+</head>
+<div class="esconder"></div>
+    <header>
+        <div class="section_logo">
+            <img src="assets/icon/logo.png" alt="Logo de avião">
+            <p>Horus Monitoring</p>
+        </div>
+        <div class="section_href">
+            <a href="home.html">Home</a>
+            <a href="#">Login</a>
+            <a href="cadastro.html">Cadastro</a>
+        </div>
+    </header>
+    <body id="body">
+        <div class="container">
+            <div class="centro">
+                <div class="boxLogin">
+                    <div class="inicioLogin">
+                        <img src="assets/icon/logo.png" alt="">
+                        <h1>Horus</h1>
+                    </div>
+                    <h2>Login</h2>
+                    <span>Ainda não tem um login?</span>
+                    <a href="cadastro.html" class="registrar-login">Clique aqui</a>
+                    <p class="login">Email</p>
+                    <input id="emailInput" type="email"> <br> <br>
+                    <img src="assets/imgs/login/user.png" alt="" class="user">
+                    <p class="loginS">Senha</p>
+                    <input id="senhaInput" type="password"> <br> <br> <br>
+                    <img src="assets/imgs/login/lock.png" alt="" class="lock">
+                    <button onclick="entrar()">Login</button> <br> <br>
+                </div>
+                <div class="boxBemVindo">
+                </div>
+            </div>
+            </div>
+    </body>
+</html>
+
+<script>
+function entrar() {
+    var email = emailInput.value
+    var senha = senhaInput.value
+
+    fetch("/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },body: JSON.stringify({
+            emailServer: email,
+            senhaServer: senha
+        })
+    })
+        .then(function(resposta) {
+            console.log("resposta: " + resposta);
+
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
+                throw "Houve um erro ao tentar realizar o Login!";
+            }
+        })
+        .then(function(dados) {
+
+            sessionStorage.ID_USUARIO = dados[0].idUsuario;
+            sessionStorage.NOME_USUARIO = dados[0].nome;
+            sessionStorage.EMAIL_USUARIO = dados[0].email;
+
+            alert("Login realizado com sucesso")
+
+            setTimeout(() => {
+                window.location = "???.html";
+            }, 1000);
+            
+        })
+        .catch(function(resposta) {
+            console.log("Erro: " + resposta)
+        })
+
+    return false
+
+}
+</script>
