@@ -1,0 +1,436 @@
+/* Essa é a estilização para restauração dos padrões do site */
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.titulo {
+    font-size: 30px;
+    font-family: "Jura", sans-serif;
+    font-weight: 600;
+}
+
+.texto {
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    text-align: justify;
+}
+
+/*Essa é a estilização do HEADER 
+obs: Ela é feita com position FIXED, ou seja, ao descer na tela ela vai junto*/
+header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.849);
+    position: fixed;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10%;
+    align-items: center;
+    height: 10vh;
+    font-family: "Jura", sans-serif;
+    font-weight: 600;
+    z-index: 99;
+    letter-spacing: 1.5px;
+}
+
+header .section_logo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 50%;
+    gap: 30px;
+}
+
+header .section_logo img {
+    width: 50px;
+}
+
+header .section_href {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 50%;
+    gap: 50px;
+    list-style: none;
+}
+
+header .section_href a {
+    text-decoration: none;
+    color: black;
+    margin-right: 5%;
+    transform: 2s;
+
+}
+
+header .section_href a:hover {
+    border-bottom: 2px solid black;
+    transition: 2s;
+}
+
+header .menu_responsivo div {
+    width: 32px;
+    height: 2px;
+    background-color: rgb(0, 0, 0);
+    margin: 8px;
+}
+
+header .menu_responsivo {
+    cursor: pointer;
+    display: none;
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Fim da estilização da HEADER */
+
+/* Inicio da estilização da MAIN */
+
+/* SECTION CARROSEL - INICIO */
+
+main {
+    background-color: rgb(255, 255, 255);
+    min-height: 100vh;
+    width: 100%;
+}
+
+main .section_carrosel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10% 0px 5% 0px;
+}
+
+main .section_carrosel .carrosel {
+    width: 75%;
+    height: 60vh;
+    background-color: rgb(76, 95, 60);
+    z-index: 97;
+}
+
+main .section_carrosel .banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65%;
+    height: 100%;
+    z-index: 1;
+}
+
+.carrosel {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    border-radius: 20px;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.ativo {
+    display: flex;
+}
+
+
+.slide:nth-child(1) {
+    background: #1abc9c;
+}
+
+.slide:nth-child(2) {
+    background: #3498db;
+}
+
+.slide:nth-child(3) {
+    background: #9b59b6;
+}
+
+.slide:nth-child(4) {
+    background: #e74c3c;
+}
+
+.bolinhas {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.bolinha {
+    height: 15px;
+    width: 15px;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+}
+
+.bolinha.ativa {
+    background: black;
+}
+
+/* SECTION CARROSEL  - TÉRMINO */
+/* SECTION INFORMACOES - ÍNICIO */
+
+main .section_informacoes {
+    background-color: #274690;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 5%;
+    color: white;
+    gap: 5%;
+}
+
+main .section_informacoes img {
+    width: 40%;
+    border-radius: 10px;
+}
+
+main .section_informacoes .textos .texto {
+    margin-top: 5%;
+}
+
+main .section_informacoes .textos .button {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 20vh;
+
+}
+
+main .section_informacoes .textos .button button {
+    border-radius: 15px;
+    padding: 15px 19px;
+    background-color: #1B264F;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    transition: ease-out 0.9s;
+    font-size: 15px;
+    position: relative;
+}
+
+main .section_informacoes .textos .button button:hover {
+    background-color: #fff;
+    border: #1B264F 3px solid;
+    padding: 12px 16px;
+    color: #1B264F;
+}
+
+
+/* SECTION INFORMAÇÕES - FIM */
+/* SECTION CARDS - ÍNICIO*/
+main .section_cards {
+    width: 100%;
+    background-image: linear-gradient(to bottom, #fff 50%, #274690 50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 5%;
+}
+
+main .section_cards .card {
+    width: 28%;
+    background-color: #576CA8;
+    height: 55vh;
+    border-radius: 10px;
+    color: white;
+    padding: 2%;
+}
+
+main .section_cards .card .texto {
+    margin-top: 10%;
+}
+
+/* SECTION CARDS - FIM*/
+/* FOOTER ÍNICIO */
+footer {
+    background-color: #1B264F;
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 5% 5%;
+    align-items: center;
+}
+
+footer .section_esquerda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    gap: 10px;
+}
+
+footer .section_esquerda a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+footer .section_esquerda a:hover {
+    border-bottom: 2px solid white;
+}
+
+footer .logo {
+    width: 100px;
+    height: 100px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    gap: 5px;
+}
+
+footer .logo img {
+    width: 100px;
+}
+
+footer .section_direita {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+footer .section_direita .img {
+    width: 10%;
+    max-height: 50px;
+    margin-left: 3%;
+}
+
+footer .section_direita .img img {
+    width: 100%;
+    height: 100%;
+}
+
+/* FOOTER FIM*/
+
+/* ÍNICIO RESPONSIVIDADE */
+@media screen and (max-width: 667px) {
+    header .section_href {
+        position: absolute;
+        top: 10vh;
+        right: 0;
+        width: 50vw;
+        height: 90vh;
+        background-color: rgba(255, 255, 255, 0.849);
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        transform: translateX(100%);
+    }
+
+    header .section_href.active {
+        transform: translateX(0);
+    }
+
+    header .section_href li {
+        margin-left: 0;
+        opacity: 0;
+    }
+
+    header .menu_responsivo {
+        display: block !important;
+    }
+
+    main {
+        padding-top: 20%;
+    }
+
+    .titulo {
+        font-size: 20px;
+    }
+
+    .texto {
+        font-size: 15px;
+    }
+
+    main .section_carrosel .carrosel {
+        height: 30vh;
+        background-color: rgb(64, 60, 95);
+        margin-bottom: 10%;
+    }
+
+    main .section_informacoes {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 10% 5%;
+    }
+
+    main .section_informacoes img {
+        width: 80%;
+        padding-bottom: 10%;
+    }
+
+    main .section_cards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5% 5%;
+        gap: 10px;
+    }
+
+    main .section_cards .card {
+        width: 80%;
+        height: 40vh;
+    }
+
+    footer {
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    footer .logo img {
+        width: 60px;
+    }
+
+    footer .logo .texto {
+        width: 200px;
+    }
+
+    footer .section_esquerda a {
+        width: 200px;
+        font-size: 15px;
+    }
+
+    footer .section_direita .img {
+        width: 100%;
+        max-height: 50px;
+        margin-left: 3%;
+    }
+
+    footer .section_direita .img img {
+        width: 70%;
+        height: 100%;
+    }
+}
+
+/* TÉRMINO RESPONSIVIDADE */

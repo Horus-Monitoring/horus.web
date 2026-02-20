@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <div class="section_logo">
+            <img src="imgsHome/logo.png" alt="Logo de avião">
+            <p>Horus Monitoring</p>
+        </div>
+        <div class="menu_responsivo">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>img
+        <ul class="section_href">
+            <li><a href="#">Home</a></li>
+            <li><a href="">Login</a></li>
+            <li><a href="">Cadastro</a></li>
+        </ul>
+    </header>
+    <main>
+        <div class="section_carrosel">
+            <div class="carrosel"> 
+                <div class="slide ativo">Slide 1</div>
+                <div class="slide">Slide 2</div>
+                <div class="slide">Slide 3</div>
+                <div class="slide">Slide 4</div>
+
+                <div class="bolinhas">
+                    <span class="bolinha ativa" onclick="irPara(0)"></span>
+                    <span class="bolinha" onclick="irPara(1)"></span>
+                    <span class="bolinha" onclick="irPara(2)"></span>
+                    <span class="bolinha" onclick="irPara(3)"></span>
+                </div>    
+            </div>
+            <img src="imgsHome/home_background.png" alt="" class="banner">
+        </div>
+        <div class="section_informacoes">
+            <img src="imgsHome/dash_image.png" alt="">
+            <div class="textos">
+                <div class="titulo">Título de informação</div>
+                <div class="texto">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi magni architecto a
+                    non atque, rem illo ducimus totam veritatis exercitationem numquam unde ut alias nihil sed nesciunt
+                    nemo ea expedita!</div>
+                <div class="button">
+                    <button>Saiba mais</button>
+                </div>
+            </div>
+        </div>
+        <div class="section_cards">
+            <div class="card">
+                <div class="titulo">Título</div>
+                <div class="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis hic sunt harum
+                    iure mollitia debitis maiores, quod magnam ullam laborum nostrum doloribus fugiat quis quos quaerat
+                    in. Dolorum, quos fugit.</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Título</div>
+                <div class="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis hic sunt harum
+                    iure mollitia debitis maiores, quod magnam ullam laborum nostrum doloribus fugiat quis quos quaerat
+                    in. Dolorum, quos fugit.</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Título</div>
+                <div class="texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis hic sunt harum
+                    iure mollitia debitis maiores, quod magnam ullam laborum nostrum doloribus fugiat quis quos quaerat
+                    in. Dolorum, quos fugit.</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="section_esquerda">
+            <a href="">Políticas de privacidade</a>
+            <a href="">Fale conosco</a>
+            <a href="">Nossa equipe</a>
+        </div>
+        <div class="logo">
+            <img src="imgsHome/logo.png" alt="">
+            <div class="texto">Made by | Horus Corporation</div>
+        </div>
+        <div class="section_direita">
+            <div class="img"><img src="imgsHome/face_icon.png" alt=""></div>
+            <div class="img"><img src="imgsHome/linkedin_icon.png" alt=""></div>
+            <div class="img"><img src="imgsHome/insta_icon.png" alt=""></div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script src="js/index.js"></script>
