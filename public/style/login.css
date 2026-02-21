@@ -122,7 +122,7 @@ header .section_href a:hover {
     font-size: 24px;
     margin-left: 40%;
     margin-bottom: 5%;
-    margin-top: 17%;
+    margin-top: 20%;
     font-weight: bold;
 }
 
@@ -203,7 +203,7 @@ header .section_href a:hover {
 
 .boxLogin a {
     font-size: 16px;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: "inter", sans-serif;
     color: #1B264F;
     font-weight: bold;
 }
