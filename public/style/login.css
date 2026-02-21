@@ -1,0 +1,222 @@
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+/* Essa é a estilização para restauração dos padrões do site */
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/*Essa é a estilização do HEADER
+obs: Ela é feita com position FIXED, ou seja, ao descer na tela ela vai junto*/
+header{
+    width: 100%;
+    background-color: #ffffff62;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10%;
+    align-items: center;
+    height: 15%;
+    font-family: "Jura", sans-serif;
+    font-weight: 600;
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.esconder {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    z-index: 100;
+}
+
+.esconder:hover + header,
+header:hover {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+header .section_logo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 50%;
+    gap: 30px;
+    margin-left: -10%;
+}
+
+header .section_logo p {
+    margin-left: -10%;
+}
+
+header .section_logo img {
+    width: 150px;
+}
+
+header .section_href {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 50%;
+    gap: 50px;
+}
+
+header .section_href a {
+    text-decoration: none;
+    color: black;
+    margin-right: 5%;
+}
+
+header .section_href a:hover {
+    border-bottom: 2px solid black;
+    transition: 2s;
+}
+
+
+/* Fim da estilização da HEADER */
+
+.container {
+    background-color: #1B264F;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.centro {
+    align-items: center;
+    display: flex;
+    font-family: "Inter", sans-serif;
+    width: 100%;
+}
+
+.boxBemVindo {
+    background-image: url("../assets/imgs/login/imagemLogin.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 70%;
+}
+
+.boxLogin {
+    background-color: white;
+    width: 40%;
+    height: 100vh;
+}
+
+.boxLogin h2 {
+    font-size: 24px;
+    margin-left: 40%;
+    margin-bottom: 5%;
+    margin-top: 17%;
+    font-weight: bold;
+}
+
+.boxLogin input {
+    margin-left: 9%;
+    margin-top: 1%;
+    width: 80%;
+    height: 8%;
+    border: 2px, solid, #e2e1e1;
+    border-radius: 10px;
+    padding-left: 3%;
+    font-size: 18px;
+}
+
+.login {
+    margin-left: 10%;
+    font-weight: bold;
+}
+
+.loginS {
+    margin-left: 10%;
+    font-weight: bold;
+}
+
+.user {
+    position: absolute;
+    height: auto;
+    width: 2.2%;
+    top: 28.2%;
+    left: 29.5%;
+}
+
+.lock {
+    position: absolute;
+    height: auto;
+    width: 2.2%;
+    top: 43.4%;
+    left: 29.5%;
+}
+
+.boxLogin span {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+}
+
+.esqueceu {
+    color: #1B264F;
+    font-size: 15px;
+    margin-left: 60%;
+    margin-top: -5%;
+}
+
+.cadastrar {
+    display: inline-block;
+    border-radius: 15px;
+    padding: 15px 15px;
+    margin-left: 15%;
+}
+
+.ou {
+    display: flex;
+    margin: 3%;
+    margin-left: 26%;
+}
+
+.ou h5 {
+    margin-top: -1.5%;
+}
+
+.barraE,
+.barraD {
+    background-color: #e2e1e1;
+    height: 2px;
+    width: 25%;
+    margin: 0% 2%;
+}
+
+.boxLogin a {
+    font-size: 16px;
+    font-family: "Pixelify Sans", sans-serif;
+    color: #1B264F;
+    font-weight: bold;
+}
+
+.boxLogin button {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-left: 10%;
+    width: 77%;
+    height: 8.5%;
+    border-radius: 10px;
+    border: none;
+    background-color: #1B264F;
+    cursor: pointer;
+}
