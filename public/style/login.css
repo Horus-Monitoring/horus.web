@@ -9,9 +9,19 @@ html, body {
     overflow-x: hidden;
 }
 
+/* Essa é a estilização para restauração dos padrões do site */
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/*Essa é a estilização do HEADER
+obs: Ela é feita com position FIXED, ou seja, ao descer na tela ela vai junto*/
 header{
     width: 100%;
-    background-color: #ffffff;
+    background-color: #ffffff62;
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -45,13 +55,17 @@ header .section_logo {
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 30%;
+    width: 50%;
     gap: 30px;
+    margin-left: -10%;
+}
+
+header .section_logo p {
+    margin-left: -10%;
 }
 
 header .section_logo img {
-    width: 50%;
-    border-radius: 10px;
+    width: 150px;
 }
 
 header .section_href {
@@ -59,7 +73,7 @@ header .section_href {
     justify-content: right;
     align-items: center;
     width: 50%;
-    gap: 5px;
+    gap: 50px;
 }
 
 header .section_href a {
@@ -72,6 +86,9 @@ header .section_href a:hover {
     border-bottom: 2px solid black;
     transition: 2s;
 }
+
+
+/* Fim da estilização da HEADER */
 
 .container {
     background-color: #1B264F;
@@ -95,33 +112,6 @@ header .section_href a:hover {
     width: 70%;
 }
 
-.inicioLogin {
-    display: flex;
-    font-family: "Inter", sans-serif;
-}
-
-.inicioLogin img {
-    height: auto;
-    width: 60%;
-}
-
-.inicioLogin h1 {
-    margin: 11%;
-    font-size: 36px;
-    margin-left: -15%;
-}
-
-.boxBemVindo p {
-    margin: 0% 12%;
-}
-
-.boxBemVindo img {
-    margin: 5% 20%;
-    justify-content: center;
-    height: auto;
-    width: 50%;
-}
-
 .boxLogin {
     background-color: white;
     width: 40%;
@@ -132,7 +122,7 @@ header .section_href a:hover {
     font-size: 24px;
     margin-left: 40%;
     margin-bottom: 5%;
-    margin-top: -5%;
+    margin-top: 17%;
     font-weight: bold;
 }
 
@@ -141,14 +131,13 @@ header .section_href a:hover {
     margin-top: 1%;
     width: 80%;
     height: 8%;
-    border: 2px, solid, rgb(226, 225, 225);
+    border: 2px, solid, #e2e1e1;
     border-radius: 10px;
     padding-left: 3%;
     font-size: 18px;
 }
 
 .login {
-    margin-top: 6%;
     margin-left: 10%;
     font-weight: bold;
 }
@@ -162,7 +151,7 @@ header .section_href a:hover {
     position: absolute;
     height: auto;
     width: 2.2%;
-    top: 45.4%;
+    top: 28.2%;
     left: 29.5%;
 }
 
@@ -170,25 +159,51 @@ header .section_href a:hover {
     position: absolute;
     height: auto;
     width: 2.2%;
-    top: 61%;
+    top: 43.4%;
     left: 29.5%;
 }
 
 .boxLogin span {
     font-size: 16px;
-    margin-left: 19%;
-    margin-bottom: 3%;
-    margin-top: 3%;
     color: black;
     font-weight: bold;
+}
+
+.esqueceu {
+    color: #1B264F;
+    font-size: 15px;
+    margin-left: 60%;
+    margin-top: -5%;
+}
+
+.cadastrar {
+    display: inline-block;
+    border-radius: 15px;
+    padding: 15px 15px;
+    margin-left: 15%;
+}
+
+.ou {
+    display: flex;
+    margin: 3%;
+    margin-left: 26%;
+}
+
+.ou h5 {
+    margin-top: -1.5%;
+}
+
+.barraE,
+.barraD {
+    background-color: #e2e1e1;
+    height: 2px;
+    width: 25%;
+    margin: 0% 2%;
 }
 
 .boxLogin a {
     font-size: 16px;
     font-family: "Pixelify Sans", sans-serif;
-    margin-left: 1%;
-    margin-bottom: 3%;
-    margin-top: 3%;
     color: #1B264F;
     font-weight: bold;
 }
@@ -198,7 +213,6 @@ header .section_href a:hover {
     font-size: 18px;
     text-align: center;
     margin-left: 10%;
-    margin-bottom: 2%;
     width: 77%;
     height: 8.5%;
     border-radius: 10px;
