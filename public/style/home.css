@@ -107,6 +107,63 @@ main {
     width: 100%;
 }
 
+main .section_teste {
+    height: 100vh;
+    width: 100%;
+    background-color: #1B264F;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5%;
+}
+
+main .section_teste .conteudo_teste {
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+main .section_teste .conteudo_teste .button {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
+
+main .section_teste .conteudo_teste .button button {
+    border-radius: 15px;
+    padding: 15px 19px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    transition: ease-out 0.9s;
+    font-size: 15px;
+    position: relative;
+}
+
+main .section_teste .conteudo_teste .button button:hover {
+    background-color: #fff;
+    border: #3498db 3px solid;
+    padding: 12px 16px;
+    color: #3498db;
+}
+
+main .section_teste .conteudo_teste .titulo,
+.texto {
+    color: white;
+}
+
+main .section_teste .img {
+    width: 200vw;
+}
+
+main .section_teste .img img {
+    width: 100%;
+}
+
+
+
 main .section_carrosel {
     position: relative;
     display: flex;
