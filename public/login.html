@@ -28,6 +28,14 @@
             <a href="#">Login</a>
             <a href="cadastro.html">Cadastro</a>
         </div>
+        <div class="navbarCelular">
+            <button class="botaoCelular" onclick="navegarCelular()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+            <div class="botoesCelular" style="display: flex;">
+                <a href="index.html">Home</a>
+                <a href="#">Login</a>
+                <a href="cadastro.html">Cadastro</a>
+            </div>
+        </div>
     </header>
     <body id="body">
         <div class="container">
@@ -60,47 +68,52 @@
 </html>
 
 <script>
-function entrar() {
-    var email = emailInput.value
-    var senha = senhaInput.value
 
-    fetch("/autenticar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },body: JSON.stringify({
-            emailServer: email,
-            senhaServer: senha
+    function navegarCelular() {
+
+    }
+
+    function entrar() {
+        var email = emailInput.value
+        var senha = senhaInput.value
+
+        fetch("/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
         })
-    })
-        .then(function(resposta) {
-            console.log("resposta: " + resposta);
+            .then(function(resposta) {
+                console.log("resposta: " + resposta);
 
-            if (resposta.ok) {
-                return resposta.json();
-            } else {
-                alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
-                throw "Houve um erro ao tentar realizar o Login!";
-            }
-        })
-        .then(function(dados) {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else {
+                    alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
+                    throw "Houve um erro ao tentar realizar o Login!";
+                }
+            })
+            .then(function(dados) {
 
-            sessionStorage.ID_USUARIO = dados[0].idUsuario;
-            sessionStorage.NOME_USUARIO = dados[0].nome;
-            sessionStorage.EMAIL_USUARIO = dados[0].email;
+                sessionStorage.ID_USUARIO = dados[0].idUsuario;
+                sessionStorage.NOME_USUARIO = dados[0].nome;
+                sessionStorage.EMAIL_USUARIO = dados[0].email;
 
-            alert("Login realizado com sucesso")
+                alert("Login realizado com sucesso")
 
-            setTimeout(() => {
-                window.location = "???.html";
-            }, 1000);
-            
-        })
-        .catch(function(resposta) {
-            console.log("Erro: " + resposta)
-        })
+                setTimeout(() => {
+                    window.location = "???.html";
+                }, 1000);
+                
+            })
+            .catch(function(resposta) {
+                console.log("Erro: " + resposta)
+            })
 
-    return false
+        return false
 
-}
+    }
 </script>

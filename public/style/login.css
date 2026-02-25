@@ -92,6 +92,7 @@ header .section_href a:hover {
 }
 
 .boxBemVindo {
+    display: none;
     background-image: url("../assets/imgs/login/imagemLogin.jpeg");
     background-position: center;
     background-size: cover;
@@ -200,4 +201,172 @@ header .section_href a:hover {
     border: none;
     background-color: #1B264F;
     cursor: pointer;
+}
+
+.navbarCelular {
+    display: none;
+}
+
+@media (max-width: 767px) {
+
+    header {
+        height: 70px;
+        padding: 0 5%;
+        opacity: 1;
+    }
+
+    header .section_href {
+        display: none;
+    }
+
+    header .section_logo {
+        width: 100%;
+        margin-left: -10%;
+        justify-content: center;
+    }
+
+    .navbarCelular {
+        display: flex;
+    }
+
+    .navbarCelular button{
+        background: none;
+        margin-left: 80%;
+        width: 20%;
+    }
+
+    .navbarCelular img{
+        width: 100%;
+        height: auto;
+    }
+
+    .botoesCelular {
+        background-color: #1B264F;
+        flex-direction: column;
+    }
+
+    .centro {
+        flex-direction: column;
+    }
+
+    .boxBemVindo {
+        display: none;
+    }
+
+    .boxLogin {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .boxLogin h2 {
+        margin-left: 0;
+        text-align: center;
+        margin-top: 30%;
+    }
+
+    .boxLogin input {
+        width: 80%;
+        margin-left: 10%;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .user,
+    .lock {
+        display: none;
+    }
+
+    .esqueceu {
+        margin-left: 10%;
+        margin-top: 10px;
+    }
+
+    .ou {
+        margin-left: 10%;
+    }
+
+    .cadastrar {
+        margin-left: 10%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    header {
+        height: 80px;
+        padding: 0 6%;
+        opacity: 1;
+    }
+
+    .boxBemVindo {
+        width: 45%;
+    }
+
+    .boxLogin {
+        width: 55%;
+    }
+
+    .boxLogin h2 {
+        margin-left: 25%;
+        margin-top: 25%;
+    }
+
+    .user,
+    .lock {
+        width: 5%;
+        margin-left: -8%;
+    }
+
+    .esqueceu {
+        margin-left: 55%;
+    }
+}
+
+@media (min-width: 992px) {
+
+    header {
+        height: 15%;
+        padding: 0 10%;
+    }
+
+    .boxBemVindo {
+        display: block;
+        width: 70%;
+        height: 100vh;
+        background-image: url("../assets/imgs/login/imagemLogin.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .boxLogin {
+        width: 40%;
+        height: 100vh;
+    }
+
+    .boxLogin h2 {
+        margin-left: 40%;
+        margin-top: 20%;
+    }
+}
+
+@media (max-width: 991px) and (orientation: landscape) {
+    .centro {
+        display: flex;
+    }
+
+    .boxBemVindo {
+        display: block;
+        width: 50%;
+        height: 100vh;
+        background-image: url("../assets/imgs/login/imagemLogin.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .boxLogin {
+        width: 50%;
+        height: 100vh;
+    }
 }
