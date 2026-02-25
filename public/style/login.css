@@ -241,8 +241,22 @@ header .section_href a:hover {
     }
 
     .botoesCelular {
-        background-color: #1B264F;
+        color: white;
+        margin-top: 20%;
+        margin-left: 40%;
+        width: 100%;
+        height: auto;
         flex-direction: column;
+        z-index: 9999;
+        position: fixed;
+    }
+    
+    .botoesCelular button {
+        background-color: #576ca8;
+        color: white;
+        font-size: 20px;
+        width: 60%;
+        height: 5vh;
     }
 
     .centro {
