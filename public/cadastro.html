@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br" id="html">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Cadastro | Horus </title>
+
+    <link rel="stylesheet" type="text/css" href="style/cadstro.css">
+    <link rel="icon" href="./assets/icon/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<div class="esconder"></div>
+
+<header>
+    <div class="section_logo">
+        <img src="assets/icon/logo.png" alt="Logo de avião">
+        <p>Horus Monitoring</p>
+    </div>
+    <div class="section_href">
+        <a href="home.html">Home</a>
+        <a href="#">Login</a>
+        <a href="cadastro.html">Cadastro</a>
+    </div>
+</header>
+
+<body>
+    <div class="container">
+        <div class="boxCadastro">
+
+            <h2>Cadastro</h2>
+
+            <div class="formulario">
+                <p class="TokenEmpresa">Token da Empresa</p>
+                <input id="tokenInput" type="text">
+                <!--   <img src="assets/imgs/login/user.png" alt="" class="user">-->
+            </div>
+
+            <div class="formulario">
+                <p class="nome">Nome</p>
+                <input id="nomeInput" type="text">
+
+            </div>
+
+            <div class="formulario">
+                <p class="cpf">CPF</p>
+                <input id="cpfInput" type="number">
+
+            </div>
+
+            <div class="formulario">
+                <p class="email">Email</p>
+                <input id="emailInput" type="text">
+
+            </div>
+
+            <div class="formulario">
+                <p class="confirmarEmail">Confirmar Email</p>
+                <input id="confirmaremailInput" type="text">
+
+            </div>
+
+            <div class="formulario">
+                <p class="senha">Senha</p>
+                <input id="senhaInput" type="password">
+
+            </div>
+
+            <div class="formulario">
+                <p class="confirmarSenha">Confirmar senha</p>
+                <input id="confirmarsenhaInput" type="password">
+
+            </div>
+
+            <div class="botao">
+                <button onclick="cadastrar()">Cadastrar</button>
+            </div>
+
+            <div class="ou">
+                <div class="barraE"></div>
+                <h5>OU</h5>
+                <div class="barraD"></div>
+            </div>
+
+            <div class="temLogin">
+                <span>Ja tem um login?</span>
+                <a href="login.html" class="efetuarLogin">Clique aqui</a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
