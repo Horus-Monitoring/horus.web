@@ -16,6 +16,7 @@
     font-size: 20px;
     font-family: "Inter", sans-serif;
     text-align: justify;
+
 }
 
 /*Essa é a estilização do HEADER 
@@ -199,32 +200,61 @@ main .section_carrosel .banner {
     display: none;
     width: 100%;
     height: 100%;
-    font-size: 30px;
     color: white;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    font-family: "Jura", sans-serif;
 }
 
 .ativo {
     display: flex;
 }
 
+.slide:nth-child(1),
+.slide:nth-child(2),
+.slide:nth-child(3),
+.slide:nth-child(4) {
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+    gap: 10px;
+    border: 3px solid black;
+    padding: 20%;
+    text-align: justify;
+}
 
-.slide:nth-child(1) {
-     background: #37db34;
+.slide:nth-child(1)::before,
+.slide:nth-child(2)::before,
+.slide:nth-child(3)::before,
+.slide:nth-child(4)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../imgsHome/banner1_home.png);
+    background-position: top;
+    background-size: cover;
+    filter: blur(2px);
+    transform: scale(1.1);
+    z-index: -1;
 }
 
 .slide:nth-child(2) {
-    background: #3498db;
+    background-image: url(../imgsHome/banner2_home.png);
+    background-position: center;
+     
 }
 
 .slide:nth-child(3) {
-    background: #9b59b6;
+    background-image: url(../imgsHome/banner3_home.png);
+    background-position: center;
 }
 
 .slide:nth-child(4) {
-    background: #e74c3c;
+     background-image: url(../imgsHome/banner4_home.png);
 }
 
 .bolinhas {
