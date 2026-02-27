@@ -5,14 +5,14 @@ function autenticar(email, senha) {
         "ACESSEI O USUARIO MODEL \n \n\t\t > Se aqui der erro, e alguma credencial do banco"
     )
     var instrucaoSql = `
-        select idUsuario, nome, email usuario from usuario
-            where email = ? and senha = ?
+        select idFuncionario, nome, email from Funcionario
+            where email = '${email}' and senha = '${senha}';
     `
-    console.log("executando a instrucaoSQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql, [email, senha]);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
-function cadastrar(fk_empresa, nome, email, senha, cpf) {
+function cadastrar(fk_empresa, nome, cpf, email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
     
     var instrucaoSql = `
@@ -29,7 +29,7 @@ function listar() {
 }
 
 function empresa(codigo) {
-  var instrucaoSql = `SELECT * FROM Empresa where token_empresa = ${codigo}`;
+  var instrucaoSql = `SELECT * FROM Empresa where token_empresa = '${codigo}'`;
 
   return database.executar(instrucaoSql);
 }
