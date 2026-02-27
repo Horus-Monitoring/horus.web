@@ -65,14 +65,13 @@ function cadastrar(req, res) {
 }
 
 function listar(req, res) {
-  empresaModel.listar().then((resultado) => {
+  usuarioModel.listar().then((resultado) => {
     res.status(200).json(resultado);
   });
 }
 
 function empresa(req, res) {
     var codigo = req.body.codigo;
-
 
     if (codigo == undefined) {
         res.status(400).send("codigo está undefined!");

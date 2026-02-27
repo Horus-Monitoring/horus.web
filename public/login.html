@@ -102,7 +102,7 @@
         var email = emailInput.value
         var senha = senhaInput.value
 
-        fetch("/autenticar", {
+        fetch("/usuario/autenticar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -123,7 +123,7 @@
             })
             .then(function(dados) {
 
-                sessionStorage.ID_USUARIO = dados[0].idUsuario;
+                sessionStorage.ID_USUARIO = dados[0].idFuncionario;
                 sessionStorage.NOME_USUARIO = dados[0].nome;
                 sessionStorage.EMAIL_USUARIO = dados[0].email;
 
