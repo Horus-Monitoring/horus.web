@@ -128,7 +128,6 @@ main .section_inicial .conteudo_inicial {
     flex-direction: column;
     gap: 30px;
     width: 100%;
-
 }
 
 main .section_inicial .conteudo_inicial .titulo p {
@@ -389,7 +388,7 @@ main .section_cards {
 main .section_cards .card {
     width: 28%;
     background-color: #576CA8;
-    height: 55vh;
+    height: 40vh;
     border-radius: 10px;
     color: white;
     padding: 2%;
@@ -504,11 +503,33 @@ footer .section_direita .img img {
         font-size: 15px;
     }
 
+    main .section_inicial .img .aviao_home,
+    .montanha_home {
+        display: none;
+    }
+
+    main .section_inicial .conteudo_inicial {
+        text-align: center;
+    }
+
+    main .section_inicial .conteudo_inicial .button {
+        justify-content: center;
+    }
+
     main .section_carrosel .carrosel {
         height: 30vh;
         background-color: rgb(64, 60, 95);
         margin-bottom: 10%;
     }
+
+    .slide:nth-child(1),
+    .slide:nth-child(2),
+    .slide:nth-child(3),
+    .slide:nth-child(4) {
+        padding: 2px;
+        height: 100%;
+    }
+
 
     main .section_informacoes {
         align-items: center;
@@ -522,6 +543,10 @@ footer .section_direita .img img {
         padding-bottom: 10%;
     }
 
+    main .section_informacoes .textos .button {
+        justify-content: center;
+    }
+
     main .section_cards {
         display: flex;
         flex-direction: column;
@@ -532,7 +557,7 @@ footer .section_direita .img img {
 
     main .section_cards .card {
         width: 80%;
-        height: 40vh;
+        height: 30vh;
     }
 
     footer {
