@@ -16,7 +16,6 @@
     font-size: 20px;
     font-family: "Inter", sans-serif;
     text-align: justify;
-
 }
 
 /*Essa é a estilização do HEADER 
@@ -93,15 +92,73 @@ header .menu_responsivo {
         transform: translateX(0);
     }
 }
+
 /* INICIO MAIN */
-main{
+main {
     background-size: 100vw;
     height: 100vh;
     width: 100%;
     background-image: url(../assets/imgs/faleConosco/FC_fundo.jpg);
     background-repeat: no-repeat;
     background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+main p {
+    color: #fff;
+    font-family: "Jura", sans-serif;
+    font-size: 30px;
+}
+
+input {
+    background-color: transparent;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+main .section_forms {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+}
+
+main .section_forms .titulo{
+    color: white;
+    font-size: 35px;
+    padding-bottom: 3%;
+}
+
+main .section_forms .section_nome div input {
+    width: 100%;
+}
+
+main .section_forms .section_nome {
+    display: flex;
+    width: 30vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .section_forms .section_email input,
+.section_msg input {
+    width: 30vw;
+}
+
+main .section_forms .section_email input,
+.section_nome input {
+    height: 6vh;
+}
+main .section_forms .section_msg input{
+    height: 30vh;
+    text-align: start;
+}
+
+
+
+
 /* FIM MAIN */
 
 /* FOOTER ÍNICIO */
@@ -209,7 +266,7 @@ footer .section_direita .img img {
         font-size: 15px;
     }
 
-  
+
 
     footer {
         min-height: 60vh;
