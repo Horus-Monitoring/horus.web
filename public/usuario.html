@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br" id="html">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title> Usuario | Horus </title>
+
+    <link rel="stylesheet" type="text/css" href="style/usuario.css">
+    <link rel="icon" href="./assets/icon/horus.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+</head>
+    <body id="body">
+        <div class="navbar">
+            <div class="logo">
+                <img src="assets/imgs/usuario/flechaDireita.png" alt="">
+                <h2>Horus</h2>
+                <img src="assets/imgs/usuario/flechaEsquerda.png" alt="">
+            </div>
+            <div class="caracteristicas">
+                <h4>Samuel Sousa</h4>
+                <h5>samuelssousaky@gmail.com</h5>
+                <img src="assets/imgs/usuario/usuario.png" alt="">
+            </div>
+            <div class="linha"></div>
+            <div class="botoesNav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="cadastro.html">Documentação</a>
+                <a href="#">Usuario</a>
+            </div>
+            <div class="saindo">
+                <img src="assets/imgs/usuario/sair.svg" alt="">
+                <a href="">Sair</a>
+            </div>
+            <div class="navbarBotao">
+                <div class="navbarCelular" id="navAbrir">
+                    <button class="botaoCelular" onclick="navegarCelularAbrir()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                </div>
+                <div class="navbarCelularDps" id="navFechar">
+                    <button class="botaoCelular" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="boxCelular">
+                    <div class="botoesCelular" style="display: none;" id="botaoCelular">
+                        <a href="index.html">Home</a>
+                        <a href="cadastro.html">Cadastro</a>              
+                        <a href="#">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+
+    function navegarCelularAbrir() {
+        navAbrir.style.display = "none"
+        navFechar.style.display = "flex"
+        botaoCelular.style.display = "flex"
+    }
+
+    function navegarCelularFechar() {
+        navAbrir.style.display = "flex"
+        navFechar.style.display = "none"
+        botaoCelular.style.display = "none"
+    }
+
+</script>
