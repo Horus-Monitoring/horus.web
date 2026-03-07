@@ -192,45 +192,37 @@ html, body {
 
 .containerPessoa {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    gap: 30px;
 }
 
 .imgCaracter {
     cursor: pointer;
     border-radius: 220px;
     height: 15.6vh;
-    width: 5.5%;
+    max-width: 250px;
 }
 
-#imgPerfil {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%; 
-    object-fit: cover;  
+.imgCaracter img {
+    border-radius: 50%;
     cursor: pointer;
+    max-width: 250px;
+    height: 250px;
     margin-left: 10px;
+    object-fit: cover;
 }
 
 .dadosPessoa {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 55px;
     padding-top: 35px;
-    padding-left: 250px;
 }
 
-.dadosPessoa input{
+.dadosPessoa h4{
     background: none;
     border: none;
     font-size: 25px;
-    width: 280px;
-}
-
-.dadosPessoa input::placeholder {
-    color: #1a1715;
-    font-weight: bold;
 }
 
 #nomeSocial, 
@@ -296,12 +288,13 @@ html, body {
     padding-left: 16px;
 }
 
-.senhaIcon input {
+.emailIcon h5,
+.senhaIcon h5 {
     padding-top: 30px;
 }
 
-.cpfIcon input {
-    padding-top: 30px;
+.cpfIcon h5 {
+    padding-top: 35px;
 }
 
 .perfilCargo {
@@ -311,7 +304,7 @@ html, body {
     background-color: #F9FAFF;
     border-radius: 20px;
     width: 40%;
-    height: 58vh;
+    min-height: 58vh;
     padding: 30px 30px;
 }
 
