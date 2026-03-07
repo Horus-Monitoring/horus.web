@@ -41,6 +41,18 @@ html, body {
     width: 40px;
 }
 
+#imagemLogo {
+    margin-top: -80px;
+    height: 150px;
+    width: 150px;
+}
+
+#imagemLogo img{
+    height: 10px;
+    width: 10px;
+    object-fit: cover;
+}
+
 .caracteristicasNav {
     align-items: center;    
     color: white;
@@ -124,9 +136,24 @@ html, body {
     display: flex;
     flex-direction: column;
     font-family: "inter", sans-serif;
-    padding-top: 40px;
-    padding-left: 40px;
+    padding-top: 100px;
+    padding-left: 100px;
     width: 85%;
+}
+
+.container h1 {
+    font-size: 42px;
+    padding-left: 30px;
+}
+
+.perfilConta {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    background-color: #F9FAFF;
+    border-radius: 20px;
+    width: 40%;
+    height: 58vh;
 }
 
 .boxCaracteristicas {
@@ -137,10 +164,51 @@ html, body {
     padding-left: 30px;
 }
 
+.inicioPessoa {
+    display: flex;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.inicioPessoa img {
+    height: 55px;
+    width: 55px;
+    margin-left: 200px;
+}
+
+.inicioPessoa h2 {
+    font-size: 28px;
+}
+
 .caracteristicas {
-    align-items: flex-end;
     display: flex;
     flex-direction: column;
+}
+
+.caracteristicas img {
+    width: 200px;
+}
+
+.containerPessoa {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imgCaracter {
+    cursor: pointer;
+    border-radius: 220px;
+    height: 15.6vh;
+    width: 5.5%;
+}
+
+#imgPerfil {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%; 
+    object-fit: cover;  
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 .dadosPessoa {
@@ -148,12 +216,15 @@ html, body {
     flex-direction: column;
     gap: 10px;
     height: 55px;
+    padding-top: 35px;
+    padding-left: 250px;
 }
 
 .dadosPessoa input{
     background: none;
     border: none;
     font-size: 25px;
+    width: 280px;
 }
 
 .dadosPessoa input::placeholder {
@@ -163,34 +234,105 @@ html, body {
 
 #nomeSocial, 
 #cargo {
-    font-size: 18px;
+    font-size: 20px;
 }
 
-.caracteristicas img {
-    width: 200px;
-}
-
-.imgCaracter {
-    cursor: pointer;
-    border-radius: 220px;
-    width: 5.5%;
-    height: 17.6vh;
-    opacity: 100%;
-    margin-right: 35%;
-}
-
-#imgPerfil {
-    padding: 10%;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%; 
-    object-fit: cover;  
-    cursor: pointer;
-}
-
-.teste {
+.credenciais {
+    color: #302B27;
     display: flex;
-    flex-direction: row;
+    padding-top: 100px;
+    padding-left: 30px;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.credencialCampo {
+    display: flex;
+    font-size: 20px;
+}
+
+.credencialCampo h4 {
+    padding-top: 28px;
+    padding-right: 15px;
+}
+
+.credencialCampo input {
+    width: 360px;
+    padding-top: 6px;
+}
+
+.credencialCampo input::placeholder {
+    color: #302B27;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.emailIcon img {
+    height: 80px;
+    width: 80px;
+}
+
+.senhaIcon img {
+    margin-left: 10px;
+    height: 60px;
+    width: 60px;
+}
+
+.cpfIcon img {
+    margin-top: 20px;
+    margin-left: 14px;
+    height: 50px;
+    width: 50px;
+}
+
+.senhaIcon h4 {
+    padding-top: 24px;
+    padding-left: 10px;
+}
+
+.cpfIcon h4 {
+    padding-top: 30px;
+    padding-left: 16px;
+}
+
+.senhaIcon input {
+    padding-top: 30px;
+}
+
+.cpfIcon input {
+    padding-top: 30px;
+}
+
+@media (max-width: 1304px) {
+    .inicioPessoa img {
+        height: 55px;
+        width: 55px;
+        margin-left: 100px;
+    }
+}
+
+@media (max-width: 1010px) {
+    .inicioPessoa img {
+        height: 55px;
+        width: 55px;
+        margin-left: 80px;
+    }
+}
+
+@media (max-width: 950px) {
+    .inicioPessoa img {
+        height: 55px;
+        width: 55px;
+        margin-left: 60px;
+    }
+}
+
+@media (max-width: 891px) {
+    .inicioPessoa img {
+        height: 55px;
+        width: 55px;
+        margin-left: 40px;
+    }
 }
 
 @media (min-width: 767px) {
