@@ -25,9 +25,10 @@
                 <h2>Horus</h2>
                 <img src="assets/imgs/usuario/flechaEsquerda.png" alt="">
             </div>
-            <div class="caracteristicas">
+            <div class="caracteristicasNav">
                 <h4>Samuel Sousa</h4>
                 <h5>samuelssousaky@gmail.com</h5>
+                <h6>Cargo</h6>
                 <img src="assets/imgs/usuario/usuario.png" alt="">
             </div>
             <div class="linha"></div>
@@ -48,7 +49,7 @@
                     <button class="botaoCelular" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
                 </div>
             </div>
-            <div class="container">
+            <div class="containerCelular">
                 <div class="boxCelular">
                     <div class="botoesCelular" style="display: none;" id="botaoCelular">
                         <a href="index.html">Home</a>
@@ -57,11 +58,102 @@
                     </div>
                 </div>
             </div>
+        </div>   
+        <div class="container">
+            <h1>Perfil</h1>
+            <div class="boxCaracteristicas">
+                <div class="perfilConta">
+                    <h2>Resumo do seu perfil</h2>
+                    <div class="caracteristicas">
+                        <div class="teste">
+                            <div class="imgCaracter">
+                                <img src="assets/imgs/usuario/usuario.png" id="imgPerfil" onclick="mudarImagemPerfil()" onerror="this.src='assets/imgs/todos/usuario.png'">
+                                <input type="file" id="inpImagem" onchange="salvarImagemPerfil()" hidden>
+                            </div>
+                            <div class="dadosPessoa">
+                                <input type="text" id="nome" placeholder="Samuel Sousa" disabled>
+                                <input type="text" id="nomeSocial" placeholder="Samuel" disabled>
+                                <input type="text" id="cargo" placeholder="Analise de Sistemas" disabled>
+                            </div>
+                        </div>
+                        <div class="credenciais">
+                            <div class="credencialCampo">
+                                <!-- <img src="" alt=""> -->
+                                <h4>Email:</h4>
+                                <input type="text" id="email" placeholder="samuelssousaky@sptech.school" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="perfilCargo">
+    
+                </div>
+            </div>
         </div>
     </body>
 </html>
 
 <script>
+
+    window.onload = () => {
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/imagemPerfil/${idUsuario}`)
+        .then(res => res.json())
+        .then(dados => {
+        const imgPerfil = document.getElementById("imgPerfil");
+        const imgPerfilNav = document.getElementById("imgPerfilNav");
+
+        if (dados.imagem) {
+            if (imgPerfil) { 
+            imgPerfil.src = `../assets/imgsBd/${dados.imagem}`;
+            }
+            if (imgPerfilNav) { 
+            imgPerfilNav.src = `../assets/imgsBd/${dados.imagem}`;
+            }
+        } else {
+            if (imgPerfil) { 
+            imgPerfil.src = `/assets/imgs/todos/usuario.png`;
+            }
+            if (imgPerfilNav) { 
+            imgPerfilNav.src = `/assets/imgs/todos/usuario.png`;
+            }
+        }
+        
+        });
+    };
+
+    function mudarImagemPerfil() {
+        inpImagem.click();
+    }
+
+    function salvarImagemPerfil() {
+        var foto = inpImagem.files[0]
+        
+        const formData = new FormData();
+        formData.append('idUsuario', sessionStorage.ID_USUARIO);
+        formData.append('fotoPerfil', foto)
+
+        fetch("/imagemPerfil", {
+            method: "PUT",
+            body: formData
+        })
+        .then(
+            res => res.json()
+        )
+        .then( dados => {
+            console.log("Imagem salva:", dados);
+            
+            const imgPerfil = document.getElementById("imgPerfil");
+            const imgPerfilNav = document.getElementById("imgPerfilNav");
+    
+            if (imgPerfil) imgPerfil.src = `../assets/imgsBd/${dados.imagem}`;
+            if (imgPerfilNav) imgPerfilNav.src = `../assets/imgsBd/${dados.imagem}`;
+        })
+        .catch(
+            err => console.log(err)
+        );
+    }
 
     function navegarCelularAbrir() {
         navAbrir.style.display = "none"

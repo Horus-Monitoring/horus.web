@@ -16,6 +16,10 @@ html, body {
     margin: 0;
 }
 
+#body {
+    display: flex;
+}
+
 .navbar {
     align-items: center;
     background-color: #302b27;
@@ -37,27 +41,31 @@ html, body {
     width: 40px;
 }
 
-.caracteristicas {
+.caracteristicasNav {
     align-items: center;    
     color: white;
     display: flex;
     flex-direction: column;
 }
 
-.caracteristicas h4 {
+.caracteristicasNav h4 {
     font-size: 16px;
     padding-top: 55px;
     padding-bottom: 5px;
 }
 
-.caracteristicas h5 {
+.caracteristicasNav h5 {
     color: #817973;
     font-size: 12px;
     padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.caracteristicasNav h6 {
     padding-bottom: 20px;
 }
 
-.caracteristicas img {
+.caracteristicasNav img {
     width: 60%;
     height: auto;
 }
@@ -68,7 +76,7 @@ html, body {
     margin: 25px;
     margin-bottom: 35px;
     width: 150px;
-    height: 5px; 
+    height: 2px; 
 }
 
 .botoesNav {
@@ -103,19 +111,6 @@ html, body {
     text-decoration: none;
 }
 
-header .section_logo p {
-}
-
-body .section_logo img {
-    width: 150px;
-}
-
-header .section_href {
-}
-
-header .section_href a {
-}
-
 .navbarBotao,
 .navbarCelular,
 .navbarCelularDps,
@@ -124,7 +119,78 @@ header .section_href a {
 }
 
 .container {
+    background-color: #f5f3f5;
+    color: #302b27;
+    display: flex;
+    flex-direction: column;
+    font-family: "inter", sans-serif;
+    padding-top: 40px;
+    padding-left: 40px;
+    width: 85%;
+}
 
+.boxCaracteristicas {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 60px;
+    padding-left: 30px;
+}
+
+.caracteristicas {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+.dadosPessoa {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 55px;
+}
+
+.dadosPessoa input{
+    background: none;
+    border: none;
+    font-size: 25px;
+}
+
+.dadosPessoa input::placeholder {
+    color: #1a1715;
+    font-weight: bold;
+}
+
+#nomeSocial, 
+#cargo {
+    font-size: 18px;
+}
+
+.caracteristicas img {
+    width: 200px;
+}
+
+.imgCaracter {
+    cursor: pointer;
+    border-radius: 220px;
+    width: 5.5%;
+    height: 17.6vh;
+    opacity: 100%;
+    margin-right: 35%;
+}
+
+#imgPerfil {
+    padding: 10%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
+    object-fit: cover;  
+    cursor: pointer;
+}
+
+.teste {
+    display: flex;
+    flex-direction: row;
 }
 
 @media (min-width: 767px) {
