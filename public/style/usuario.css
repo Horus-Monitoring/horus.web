@@ -225,7 +225,7 @@ html, body {
     background: none;
     border: none;
     font-size: 25px;
-    width: 100%;
+    width: 280px;
 }
 
 .dadosPessoa input::placeholder {
@@ -306,37 +306,26 @@ html, body {
 
 .perfilCargo {
     align-items: flex-start;
-    background-color: #F9FAFF;
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
-    font-family: "inter", sans-serif;
+    background-color: #F9FAFF;
+    border-radius: 20px;
+    width: 40%;
     height: 58vh;
     padding: 30px 30px;
-    width: 40%;
 }
 
-.perfilCargo input::placeholder,
-.perfilCargo textarea {
-    color: #302B27;
-    font-weight: bold;
-    background: none;
-}
-
-#empresaDesc {
+.perfilCargo h2 {
     font-size: 28px;
 }
 
-#cargoDesc {
+.perfilCargo h3 {
     font-size: 25px;
     padding: 10px 0;
 }
 
-#desc {
+.perfilCargo h4 {
     font-size: 20px;
-    width: 95%;
-    max-width: 95%;
-    height: 42vh;
 }
 
 @media (max-width: 1304px) {
