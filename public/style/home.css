@@ -61,9 +61,7 @@ header .section_href {
 header .section_href a {
     text-decoration: none;
     color: black;
-    margin-right: 5%;
     transform: 2s;
-
 }
 
 header .section_href a:hover {

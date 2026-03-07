@@ -60,7 +60,6 @@ header .section_href {
 header .section_href a {
     text-decoration: none;
     color: black;
-    margin-right: 5%;
     transform: 2s;
 }
 
@@ -113,9 +112,11 @@ main p {
 }
 
 input {
-    background-color: transparent;
-    border: 3px solid white;
+    background-color: white;
+    border: 3px solid #1B264F;
     border-radius: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
 }
 
 main .section_forms {
