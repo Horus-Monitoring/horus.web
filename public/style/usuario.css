@@ -162,6 +162,7 @@ html, body {
     justify-content: flex-start;
     padding-top: 60px;
     padding-left: 30px;
+    gap: 100px;
 }
 
 .inicioPessoa {
@@ -224,7 +225,7 @@ html, body {
     background: none;
     border: none;
     font-size: 25px;
-    width: 280px;
+    width: 100%;
 }
 
 .dadosPessoa input::placeholder {
@@ -301,6 +302,41 @@ html, body {
 
 .cpfIcon input {
     padding-top: 30px;
+}
+
+.perfilCargo {
+    align-items: flex-start;
+    background-color: #F9FAFF;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: "inter", sans-serif;
+    height: 58vh;
+    padding: 30px 30px;
+    width: 40%;
+}
+
+.perfilCargo input::placeholder,
+.perfilCargo textarea {
+    color: #302B27;
+    font-weight: bold;
+    background: none;
+}
+
+#empresaDesc {
+    font-size: 28px;
+}
+
+#cargoDesc {
+    font-size: 25px;
+    padding: 10px 0;
+}
+
+#desc {
+    font-size: 20px;
+    width: 95%;
+    max-width: 95%;
+    height: 42vh;
 }
 
 @media (max-width: 1304px) {
