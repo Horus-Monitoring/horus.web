@@ -126,7 +126,7 @@ main .section_forms {
     width: 40%;
 }
 
-main .section_forms .titulo{
+main .section_forms .titulo {
     color: white;
     font-size: 35px;
     padding-bottom: 3%;
@@ -144,19 +144,41 @@ main .section_forms .section_nome {
 }
 
 main .section_forms .section_email input,
-.section_msg input {
+.section_msg textarea {
     width: 30vw;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: 'Inter';
+    border: #1B264F 3px solid;
+    border-radius: 10px;
+    resize: none;
 }
 
 main .section_forms .section_email input,
 .section_nome input {
     height: 6vh;
 }
-main .section_forms .section_msg input{
+
+main .section_forms .section_msg textarea {
     height: 30vh;
-    text-align: start;
+
 }
 
+main .section_forms button {
+    padding: 15px 25px;
+    border-radius: 10px;
+    background-color: #1B264F;
+    color: #fff;
+    cursor: pointer;
+}
+
+main .section_forms button:hover {
+    background-color: #ffffff;
+    color: #1B264F;
+    padding: 12px 22px;
+    border: 3px solid #1B264F;
+    transition: 1s;
+}
 
 
 
@@ -300,6 +322,33 @@ footer .section_direita .img img {
         width: 70%;
         height: 100%;
     }
+
+
+    main {
+        background-size: 200vh;
+    }
+
+    main .section_forms {
+        width: 80vw;
+    }
+
+    main .section_forms .section_nome div input {
+        width: 100%;
+    }
+
+    main .section_forms .section_nome {
+        width: 100%;
+    }
+
+    main .section_forms .section_email input,
+    .section_msg textarea {
+        width: 80vw;
+    }
+
+    main p {
+        font-size: 20px;
+    }
+
 }
 
 /* TÉRMINO RESPONSIVIDADE */
