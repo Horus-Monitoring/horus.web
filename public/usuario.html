@@ -20,7 +20,6 @@
 </head>
     <body id="body">
         <div class="navbar">
-            <img src="assets/imgs/usuario/logo1.png" alt="" id="imagemLogo">
             <div class="logo">
                 <img src="assets/imgs/usuario/flechaDireita.png" alt="">
                 <h2>Horus</h2>
@@ -53,7 +52,7 @@
                         <h2>Resumo do seu perfil</h2>
                     </div>
                     <div class="inicioPessoaImg">
-                        <img src="assets/imgs/usuario/editar.png" alt="">
+                        <img src="assets/imgs/usuario/editar.png" alt="" onclick="editar()" >
                     </div>
                     <div class="caracteristicas">
                         <div class="containerPessoa">
@@ -99,31 +98,82 @@
                         Aldus PageMaker including versions of Lorem Ipsum.
                     </p>
                 </div>
+
+            </div>
+            <div class="boxBotao" id="boxBotao" style="display: none;" onclick="fecharEditar()">
+                <div class="box" onclick="event.stopPropagation()">
+                    <div class="conteudoTexto">
+                        <h2 id="boxTit"></h2>
+                        <div class="traco"></div>
+                        <div id="boxText">
+                            <div class="credencialEdicao">
+                                <h2>Nome</h2>
+                                <input type="text" id="nomeEdicao">
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Nome Social</h2>
+                                <input type="text" id="nomeSocialEdicao">
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Email</h2>
+                                <input type="email" id="emailEdicao">
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Senha</h2>
+                                <input type="text" id="senhaEdicao">
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Cpf</h2>
+                                <input type="number" id="cpfEdicao">
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Empresa</h2>
+                                <input type="text" id="cpfEdicao">
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Cargo</h2>
+                                <select id="cargoEdicao">
+                                    <option disabled selected>Selecione uma opção</option>
+                                    <option>Gestor</option>
+                                    <option>Analista</option>
+                                </select>
+                            </div>
+                            <div class="credencialEdicao">
+                                <h2>Descricao</h2>
+                                <textarea id="descricaoEdicao"></textarea>
+                            </div>
+                            <div class="botoesEdicao">
+                                <button onclick="fecharEditar()">Cancelar</button>
+                                <button onclick="confirmarEdicao()">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="containerCelular">
-        <div class="navbarCelular">
-            <div class="logoCelular">
-                <img src="assets/icon/logo.png" alt="Logo de avião">
-                <a href="usuario.html">Horus Monitoring</a>
-            </div>
-            <div class="navbarBotao">
-                <div class="navbarCelularBotao" id="navAbrir">
-                    <button class="botaoCelula" onclick="navegarCelularAbrir()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+            <div class="navbarCelular">
+                <div class="logoCelular">
+                    <img src="assets/icon/logo.png" alt="Logo de avião">
+                    <a href="usuario.html">Horus Monitoring</a>
                 </div>
-                <div class="navbarCelularBotaoDps" id="navFechar" style="display: none;">
-                    <button class="botaoCelula" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                <div class="navbarBotao">
+                    <div class="navbarCelularBotao" id="navAbrir">
+                        <button class="botaoCelula" onclick="navegarCelularAbrir()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                    </div>
+                    <div class="navbarCelularBotaoDps" id="navFechar" style="display: none;">
+                        <button class="botaoCelula" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                    </div>
+                </div>
+                <div class="boxCelular" style="display: none;" id="botaoCelular">
+                    <div class="botoesCelular" >
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="cadastro.html">Documentação</a>
+                        <a href="#">Usuario</a>
+                        <a href="#">Sair</a>
+                    </div>
                 </div>
             </div>
-            <div class="boxCelular" style="display: none;" id="botaoCelular">
-                <div class="botoesCelular" >
-                    <a href="dashboard.html">Dashboard</a>
-                    <a href="cadastro.html">Documentação</a>
-                    <a href="#">Usuario</a>
-                    <a href="#">Sair</a>
-                </div>
-            </div>
-        </div>
             <h1>Perfil</h1>
             <div class="boxCaracteristicas">
                 <div class="perfilConta">
@@ -259,5 +309,20 @@
         navFechar.style.display = "none"
         botaoCelular.style.display = "none"
     }
+
+    function editar() {
+        boxBotao.style.display = "flex"
+        body.style.overflow = "hidden"
+        html.style.overflow = "hidden"
+        boxTit.innerHTML = "Edição"
+        // boxText.innerHTML = `
+                            
+        //                     `
+    }
+
+    function fecharEditar() {
+        boxBotao.style.display = "none"
+    }
+
 
 </script>
