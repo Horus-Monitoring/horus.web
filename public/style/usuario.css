@@ -138,11 +138,11 @@ html, body {
     font-family: "inter", sans-serif;
     padding-top: 100px;
     padding-left: 100px;
-    width: 85%;
+    min-width: 85%;
 }
 
 .container h1 {
-    font-size: 42px;
+    font-size: 2.2vw;
     padding-left: 30px;
 }
 
@@ -153,7 +153,7 @@ html, body {
     background-color: #F9FAFF;
     border-radius: 20px;
     width: 40%;
-    height: 58vh;
+    max-height: 58vh;
 }
 
 .boxCaracteristicas {
@@ -165,20 +165,29 @@ html, body {
     gap: 100px;
 }
 
-.inicioPessoa {
+.inicioPessoaTexto {
+    align-items: center;
     display: flex;
+    align-self: flex-start;
     padding-left: 30px;
     padding-top: 20px;
 }
 
-.inicioPessoa img {
-    height: 55px;
-    width: 55px;
-    margin-left: 200px;
+.inicioPessoaImg {
+    align-items: center;
+    display: flex;
+    align-self: flex-end;
+    margin-top: -40px;
+    padding-right: 20px;
 }
 
-.inicioPessoa h2 {
-    font-size: 28px;
+.inicioPessoaImg img {
+    height: 3vw;
+    width: 3vw;
+}
+
+.inicioPessoaTexto h2 {
+    font-size: 1.6vw;
 }
 
 .caracteristicas {
@@ -196,19 +205,10 @@ html, body {
     gap: 30px;
 }
 
-.imgCaracter {
-    cursor: pointer;
-    border-radius: 220px;
-    height: 15.6vh;
-    max-width: 250px;
-}
-
 .imgCaracter img {
     border-radius: 50%;
-    cursor: pointer;
-    max-width: 250px;
-    height: 250px;
-    margin-left: 10px;
+    max-width: 13vw;
+    max-height: 13vw;
     object-fit: cover;
 }
 
@@ -216,85 +216,46 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-top: 35px;
 }
 
 .dadosPessoa h4{
-    background: none;
-    border: none;
-    font-size: 25px;
+    font-size: 1.4vw;
 }
 
 #nomeSocial, 
 #cargo {
-    font-size: 20px;
+    font-size: 1.2vw;
 }
 
 .credenciais {
     color: #302B27;
     display: flex;
-    padding-top: 100px;
-    padding-left: 30px;
-    justify-content: flex-start;
     flex-direction: column;
+    padding-left: 10px;
+    gap: 10px;
 }
 
 .credencialCampo {
     display: flex;
-    font-size: 20px;
-}
-
-.credencialCampo h4 {
-    padding-top: 28px;
-    padding-right: 15px;
-}
-
-.credencialCampo input {
-    width: 360px;
-    padding-top: 6px;
-}
-
-.credencialCampo input::placeholder {
-    color: #302B27;
-    font-size: 20px;
-    font-weight: bold;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.4vw;
 }
 
 .emailIcon img {
-    height: 80px;
-    width: 80px;
+    width: clamp(30px, 3.13vw, 60px);
 }
 
 .senhaIcon img {
-    margin-left: 10px;
-    height: 60px;
-    width: 60px;
+    width: clamp(30px, 3.13vw, 60px);
 }
 
 .cpfIcon img {
-    margin-top: 20px;
-    margin-left: 14px;
-    height: 50px;
-    width: 50px;
+    width: clamp(30px, 3.13vw, 60px);
 }
 
-.senhaIcon h4 {
-    padding-top: 24px;
-    padding-left: 10px;
-}
-
-.cpfIcon h4 {
-    padding-top: 30px;
-    padding-left: 16px;
-}
-
-.emailIcon h5,
-.senhaIcon h5 {
-    padding-top: 30px;
-}
-
-.cpfIcon h5 {
-    padding-top: 35px;
+.credencialCampo h5 {
+    word-break: break-word;
 }
 
 .perfilCargo {
@@ -309,25 +270,25 @@ html, body {
 }
 
 .perfilCargo h2 {
-    font-size: 28px;
+    font-size: 1.7vw;
 }
 
 .perfilCargo h3 {
-    font-size: 25px;
-    padding: 10px 0;
+    font-size: 1.4vw;
+    padding: 15px 0;
 }
 
-.perfilCargo h4 {
-    font-size: 20px;
+.perfilCargo p {
+    font-size: 1vw;
 }
 
-@media (max-width: 1304px) {
+/* @media (max-width: 1304px) {
     .inicioPessoa img {
         height: 55px;
         width: 55px;
         margin-left: 100px;
     }
-}
+} */
 
 @media (max-width: 1010px) {
     .inicioPessoa img {
