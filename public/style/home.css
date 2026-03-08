@@ -279,7 +279,7 @@ main .section_carrosel .nuvens_section2 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url(../imgsHome/banner1_home.png);
+    background-image: url(../assets/imgs/home/banner1_home.png);
     background-position: top;
     background-size: cover;
     filter: blur(2px);
@@ -288,18 +288,18 @@ main .section_carrosel .nuvens_section2 {
 }
 
 .slide:nth-child(2) {
-    background-image: url(../imgsHome/banner2_home.png);
+    background-image: url(../assets/imgs/home/banner2_home.png);
     background-position: center;
 
 }
 
 .slide:nth-child(3) {
-    background-image: url(../imgsHome/banner3_home.png);
+    background-image: url(../assets/imgs/home/banner3_home.png);
     background-position: center;
 }
 
 .slide:nth-child(4) {
-    background-image: url(../imgsHome/banner4_home.png);
+    background-image: url(../assets/imgs/home/banner4_home.png);
 }
 
 .bolinhas {
