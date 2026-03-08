@@ -75,6 +75,13 @@ header .section_href a:hover {
     transition: 2s;
 }
 
+#imgPerfilNav {
+    cursor: pointer;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
 
 /* Fim da estilização da HEADER */
 
