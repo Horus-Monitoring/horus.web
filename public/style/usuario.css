@@ -30,6 +30,10 @@ html, body {
     font-size: 1.24vw;
 }
 
+.logo h2 {
+    cursor: pointer;
+}
+
 .logo img{
     width: 2.28vw;
 }
@@ -73,6 +77,21 @@ html, body {
 .caracteristicasNav img {
     width: 60%;
     height: auto;
+}
+
+#imgPerfilNav {
+    border-radius: 220px;
+    width: 95%;
+    height: 14vh;
+    opacity: 100%;
+}
+
+#imgPerfilNav img {
+    padding: 10%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%; 
+    object-fit: cover;  
 }
 
 .linha {
@@ -203,11 +222,19 @@ html, body {
     gap: 30px;
 }
 
+.imgCaracter {
+    border-radius: 220px;
+    width: 50%;
+    height: 22vh;
+    opacity: 100%;
+}
+
 .imgCaracter img {
-    border-radius: 50%;
-    max-width: 13vw;
-    max-height: 13vw;
-    object-fit: cover;
+    padding: 10%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
+    object-fit: cover;  
 }
 
 .dadosPessoa {
@@ -221,7 +248,7 @@ html, body {
 }
 
 #nomeSocial, 
-#cargo {
+#cargoDados {
     font-size: 1.2vw;
 }
 
