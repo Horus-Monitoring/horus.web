@@ -144,7 +144,7 @@
                             </div>
                             <div class="botoesEdicao">
                                 <button onclick="fecharEditar()">Cancelar</button>
-                                <button onclick="confirmarEdicao()">Confirmar</button>
+                                <button onclick="confirmarEdicao()" id="confirmarEdit">Confirmar</button>
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                         <h2>Resumo do seu perfil</h2>
                     </div>
                     <div class="inicioPessoaImg">
-                        <img src="assets/imgs/usuario/editar.png" alt="">
+                        <img src="assets/imgs/usuario/editar.png" alt="" onclick="editar()">
                     </div>
                     <div class="caracteristicas">
                         <div class="imgCaracter">
@@ -230,6 +230,56 @@
                         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
                         Aldus PageMaker including versions of Lorem Ipsum.
                     </p>
+                </div>
+            </div>
+            <div class="boxBotaoCelular" id="boxBotaoCelular" style="display: none;" onclick="fecharEditar()">
+                <div class="boxEditCelular" onclick="event.stopPropagation()">
+                    <div class="conteudoTextoCelular">
+                        <h2 id="boxTitCelular"></h2>
+                        <div class="tracoCelular"></div>
+                        <div id="boxTextCelular">
+                            <div class="credencialEdicaoCelular">
+                                <h2>Nome</h2>
+                                <input type="text" id="nomeEdicao">
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Nome Social</h2>
+                                <input type="text" id="nomeSocialEdicao">
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Email</h2>
+                                <input type="email" id="emailEdicao">
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Senha</h2>
+                                <input type="text" id="senhaEdicao">
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Cpf</h2>
+                                <input type="number" id="cpfEdicao">
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Empresa</h2>
+                                <input type="text" id="cpfEdicao">
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Cargo</h2>
+                                <select id="cargoEdicao">
+                                    <option disabled selected>Selecione uma opção</option>
+                                    <option>Gestor</option>
+                                    <option>Analista</option>
+                                </select>
+                            </div>
+                            <div class="credencialEdicaoCelular">
+                                <h2>Descricao</h2>
+                                <textarea id="descricaoEdicao"></textarea>
+                            </div>
+                            <div class="botoesEdicaoCelular">
+                                <button onclick="fecharEditar()">Cancelar</button>
+                                <button onclick="confirmarEdicao()" id="confirmarEditCelular">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,15 +362,15 @@
 
     function editar() {
         boxBotao.style.display = "flex"
+        boxBotaoCelular.style.display = "flex"
         body.style.overflow = "hidden"
         html.style.overflow = "hidden"
         boxTit.innerHTML = "Edição"
-        // boxText.innerHTML = `
-                            
-        //                     `
+        boxTitCelular.innerHTML = "Edição"
     }
 
     function fecharEditar() {
+        boxBotaoCelular.style.display = "none"
         boxBotao.style.display = "none"
     }
 
