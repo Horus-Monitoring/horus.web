@@ -20,21 +20,23 @@
 </head>
     <body id="body">
         <div class="navbar">
+            <img src="assets/imgs/usuario/logo1.png" alt="" id="imagemLogo">
             <div class="logo">
                 <img src="assets/imgs/usuario/flechaDireita.png" alt="">
-                <h2>Horus</h2>
+                <h2 onclick="home()">Horus</h2>
                 <img src="assets/imgs/usuario/flechaEsquerda.png" alt="">
             </div>
             <div class="caracteristicasNav">
-                <h4>Samuel Sousa</h4>
-                <h5>samuelssousaky@gmail.com</h5>
-                <h6>Cargo</h6>
-                <img src="assets/imgs/usuario/usuario.png" alt="">
+                <h4 id="nome"></h4>
+                <h5 id="email"></h5>
+                <h6 id="cargo"></h6>
+                <img src="assets/imgs/usuario/usuario.png" alt="" id="imgPerfilNav">
             </div>
             <div class="linha"></div>
             <div class="botoesNav">
-                <a href="dashboard.html">Dashboard</a>
-                <a href="cadastro.html">Documentação</a>
+                <a href="" onclick="manutencao()">Dashboard</a>
+                <a href="../docs/Horus Monitoringv3.pdf" download="Horus Monitoringv3.pdf">Documentação</a>
+                <a href="cadastro.html">Cadastro</a>
                 <a href="#">Usuario</a>
             </div>
             <div class="sair">
@@ -57,20 +59,20 @@
                     <div class="caracteristicas">
                         <div class="containerPessoa">
                             <div class="imgCaracter">
-                                <img src="assets/imgs/usuario/usuario.png" id="imgPerfil" onclick="mudarImagemPerfil()" onerror="this.src='assets/imgs/todos/usuario.png'">
+                                <img src="assets/imgs/usuario/usuario.png" id="imgPerfil" onclick="mudarImagemPerfil()" onerror="this.src='assets/imgs/perfil/usuario.png'">
                                 <input type="file" id="inpImagem" onchange="salvarImagemPerfil()" hidden>
                             </div>
                             <div class="dadosPessoa">
-                                <h4 id="nome">Samuel Sousa</h4>
-                                <h4 id="nomeSocial">Samuel</h4>
-                                <h4 id="cargo">Analise de Sistemas</h4>
+                                <h4 id="nomeDados"></h4>
+                                <h4 id="nomeSocial"></h4>
+                                <h4 id="cargoDados"></h4>
                             </div>
                         </div>
                         <div class="credenciais">
                             <div class="credencialCampo emailIcon" >
                                 <img src="assets/imgs/usuario/emailIcon.png" alt="">
                                 <h4>Email:</h4>
-                                <h5>samuelssousaky@sptech.school</h5>
+                                <h5 id="emailCred"></h5>
                             </div>
                             <div class="credencialCampo senhaIcon" >
                                 <img src="assets/imgs/usuario/senhaIcon.png" alt="">
@@ -86,16 +88,9 @@
                     </div>
                 </div>
                 <div class="perfilCargo">
-                    <h2>São Paulo Tech School</h2>
-                    <h3>Analise de Sistemas</h3>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-                        Aldus PageMaker including versions of Lorem Ipsum.
+                    <h2 id="empresa"></h2>
+                    <h3 id="cargo"></h3>
+                    <p id="descricao">
                     </p>
                 </div>
 
@@ -128,7 +123,7 @@
                             </div>
                             <div class="credencialEdicao">
                                 <h2>Empresa</h2>
-                                <input type="text" id="cpfEdicao">
+                                <input type="text" id="empresaEdicao">
                             </div>
                             <div class="credencialEdicao">
                                 <h2>Cargo</h2>
@@ -189,9 +184,9 @@
                             <input type="file" id="inpImagem" onchange="salvarImagemPerfil()" hidden>
                         </div>
                         <div class="dadosPessoa">
-                            <h4 id="nome">Samuel Sousa</h4>
-                            <h4 id="nomeSocial">Samuel</h4>
-                            <h4 id="cargo">Analise de Sistemas</h4>
+                            <h4 id="nomeDados"></h4>
+                            <h4 id="nomeSocial"></h4>
+                            <h4 id="cargoDados"></h4>
                         </div>
                         <div class="credenciais">
                             <div class="credencialCampo" >
@@ -199,7 +194,7 @@
                                     <img src="assets/imgs/usuario/emailIcon.png" alt="">
                                     <h4>Email:</h4>
                                 </div>
-                                <h5>samuelssousaky@sptech.school</h5>
+                                <h5 id="email"></h5>
                             </div>
                             <div class="credencialCampo" >
                                 <div class="senhaIcon">
@@ -219,16 +214,9 @@
                     </div>
                 </div>
                 <div class="perfilCargo">
-                    <h2>São Paulo Tech School</h2>
-                    <h3>Analise de Sistemas</h3>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-                        Aldus PageMaker including versions of Lorem Ipsum.
+                    <h2 id="empresa"></h2>
+                    <h3 id="cargo"></h3>
+                    <p id="descricao">
                     </p>
                 </div>
             </div>
@@ -240,31 +228,31 @@
                         <div id="boxTextCelular">
                             <div class="credencialEdicaoCelular">
                                 <h2>Nome</h2>
-                                <input type="text" id="nomeEdicao">
+                                <input type="text" id="nomeEdicaoCelular">
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Nome Social</h2>
-                                <input type="text" id="nomeSocialEdicao">
+                                <input type="text" id="nomeSocialEdicaoCelular">
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Email</h2>
-                                <input type="email" id="emailEdicao">
+                                <input type="email" id="emailEdicaoCelular">
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Senha</h2>
-                                <input type="text" id="senhaEdicao">
+                                <input type="text" id="senhaEdicaoCelular">
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Cpf</h2>
-                                <input type="number" id="cpfEdicao">
+                                <input type="number" id="cpfEdicaoCelular">
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Empresa</h2>
-                                <input type="text" id="cpfEdicao">
+                                <input type="text" id="empresaEdicaoCelular">
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Cargo</h2>
-                                <select id="cargoEdicao">
+                                <select id="cargoEdicaoCelular">
                                     <option disabled selected>Selecione uma opção</option>
                                     <option>Gestor</option>
                                     <option>Analista</option>
@@ -272,7 +260,7 @@
                             </div>
                             <div class="credencialEdicaoCelular">
                                 <h2>Descricao</h2>
-                                <textarea id="descricaoEdicao"></textarea>
+                                <textarea id="descricaoEdicaoCelular"></textarea>
                             </div>
                             <div class="botoesEdicaoCelular">
                                 <button onclick="fecharEditar()">Cancelar</button>
@@ -283,96 +271,181 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
-
-<script>
-
-    window.onload = () => {
-    const idUsuario = sessionStorage.ID_USUARIO;
-
-    fetch(`/imagemPerfil/${idUsuario}`)
-        .then(res => res.json())
-        .then(dados => {
-        const imgPerfil = document.getElementById("imgPerfil");
-        const imgPerfilNav = document.getElementById("imgPerfilNav");
-
-        if (dados.imagem) {
-            if (imgPerfil) { 
-            imgPerfil.src = `../assets/imgsBd/${dados.imagem}`;
-            }
-            if (imgPerfilNav) { 
-            imgPerfilNav.src = `../assets/imgsBd/${dados.imagem}`;
-            }
-        } else {
-            if (imgPerfil) { 
-            imgPerfil.src = `/assets/imgs/todos/usuario.png`;
-            }
-            if (imgPerfilNav) { 
-            imgPerfilNav.src = `/assets/imgs/todos/usuario.png`;
-            }
-        }
-        
-        });
-    };
-
-    function mudarImagemPerfil() {
-        inpImagem.click();
-    }
-
-    function salvarImagemPerfil() {
-        var foto = inpImagem.files[0]
-        
-        const formData = new FormData();
-        formData.append('idUsuario', sessionStorage.ID_USUARIO);
-        formData.append('fotoPerfil', foto)
-
-        fetch("/imagemPerfil", {
-            method: "PUT",
-            body: formData
-        })
-        .then(
-            res => res.json()
-        )
-        .then( dados => {
-            console.log("Imagem salva:", dados);
-            
+    <script>
+    
+        window.onload = () => {
+        const idUsuario = sessionStorage.ID_USUARIO;
+        carregarUsuario()
+    
+        fetch(`/perfil/imagemPerfil/${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
             const imgPerfil = document.getElementById("imgPerfil");
             const imgPerfilNav = document.getElementById("imgPerfilNav");
     
-            if (imgPerfil) imgPerfil.src = `../assets/imgsBd/${dados.imagem}`;
-            if (imgPerfilNav) imgPerfilNav.src = `../assets/imgsBd/${dados.imagem}`;
-        })
-        .catch(
-            err => console.log(err)
-        );
-    }
+            if (dados.imagem) {
+                if (imgPerfil) { 
+                imgPerfil.src = `../assets/imgsBd/${dados.imagem}`;
+                }
+                if (imgPerfilNav) { 
+                imgPerfilNav.src = `../assets/imgsBd/${dados.imagem}`;
+                }
+            } else {
+                if (imgPerfil) { 
+                imgPerfil.src = `/assets/imgs/usuario/usuario.png`;
+                }
+                if (imgPerfilNav) { 
+                imgPerfilNav.src = `/assets/imgs/usuario/usuario.png`;
+                }
+            }
+            
+            });
+        };
+    
+        function carregarUsuario() {
+            const idUsuario = sessionStorage.ID_USUARIO;
+    
+            fetch(`/perfil/carregar?idUsuario=${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+    
+                const usuario = dados[0]
+                console.log(usuario)
+    
+                document.getElementById("nome").innerText = usuario.nome
+                document.getElementById("nomeDados").innerText = usuario.nome
+                document.getElementById("nomeSocial").innerText = usuario.nome_social
+                document.getElementById("email").innerText = usuario.email
+                document.getElementById("emailCred").innerText = usuario.email
+                document.getElementById("empresa").innerText = usuario.empresa
+                document.getElementById("cargo").innerText = usuario.cargo
+                document.getElementById("cargoDados").innerText = usuario.cargo
+                document.getElementById("descricao").innerText = usuario.descricao
+    
+            })
+        }
+    
+        function mudarImagemPerfil() {
+            document.getElementById("inpImagem").click();
+        }
+    
+        function salvarImagemPerfil() {
+            const inpImagem = document.getElementById("inpImagem");
+    
+            var foto = inpImagem.files[0]
+            
+            const formData = new FormData();
+            formData.append('idUsuario', sessionStorage.ID_USUARIO);
+            formData.append('fotoPerfil', foto)
+    
+            fetch("/perfil/imagemPerfil", {
+                method: "PUT",
+                body: formData
+            })
+            .then(
+                res => res.json()
+            )
+            .then( dados => {
+                console.log("Imagem salva:", dados);
+                
+                const imgPerfil = document.getElementById("imgPerfil");
+                const imgPerfilNav = document.getElementById("imgPerfilNav");
+        
+                if (imgPerfil) imgPerfil.src = `../assets/imgsBd/${dados.imagem}`;
+                if (imgPerfilNav) imgPerfilNav.src = `../assets/imgsBd/${dados.imagem}`;
+            })
+            .catch(
+                err => console.log(err)
+            );
+        }
+    
+        function navegarCelularAbrir() {
+            navAbrir.style.display = "none"
+            navFechar.style.display = "flex"
+            botaoCelular.style.display = "flex"
+        }
+    
+        function navegarCelularFechar() {
+            navAbrir.style.display = "flex"
+            navFechar.style.display = "none"
+            botaoCelular.style.display = "none"
+        }
+    
+        function editar() {
+            boxBotao.style.display = "flex"
+            boxBotaoCelular.style.display = "flex"
+            body.style.overflow = "hidden"
+            html.style.overflow = "hidden"
+            boxTit.innerHTML = "Edição"
+            boxTitCelular.innerHTML = "Edição"
+    
+            const idUsuario = sessionStorage.ID_USUARIO;
+    
+            fetch(`/perfil/carregar?idUsuario=${idUsuario}`)
+            .then(res => res.json())
+            .then(dados => {
+    
+                const usuario = dados[0]
+                console.log(usuario)
+    
+                document.getElementById("nomeEdicao").value = usuario.nome
+                document.getElementById("nomeSocialEdicao").value = usuario.nome_social
+                document.getElementById("emailEdicao").value = usuario.email
+                document.getElementById("senhaEdicao").value = usuario.senha
+                document.getElementById("cpfEdicao").value = usuario.cpf
+                document.getElementById("empresaEdicao").value = usuario.empresa
+                document.getElementById("cargoEdicao").value = usuario.cargo
+                document.getElementById("descricaoEdicao").value = usuario.descricao
+    
+            })
+        }
+    
+        function fecharEditar() {
+            boxBotaoCelular.style.display = "none"
+            boxBotao.style.display = "none"
+        }
+    
+        function manutencao() {
+            alert("Em manutenção...")
+        }
+    
+        function home() {
+            window.location.href = "index.html"; 
+        }
+    
+        function confirmarEdicao() {
+    
+            const edicao = {
+                nome: document.getElementById("nomeEdicao").value,
+                nomeSocial: document.getElementById("nomeSocialEdicao").value,
+                email: document.getElementById("emailEdicao").value,
+                senha: document.getElementById("senhaEdicao").value,
+                cpf: document.getElementById("cpfEdicao").value,
+                empresa: document.getElementById("empresaEdicao").value,
+                cargo: document.getElementById("cargoEdicao").value,
+                descricao: document.getElementById("descricaoEdicao").value
+            }
 
-    function navegarCelularAbrir() {
-        navAbrir.style.display = "none"
-        navFechar.style.display = "flex"
-        botaoCelular.style.display = "flex"
-    }
-
-    function navegarCelularFechar() {
-        navAbrir.style.display = "flex"
-        navFechar.style.display = "none"
-        botaoCelular.style.display = "none"
-    }
-
-    function editar() {
-        boxBotao.style.display = "flex"
-        boxBotaoCelular.style.display = "flex"
-        body.style.overflow = "hidden"
-        html.style.overflow = "hidden"
-        boxTit.innerHTML = "Edição"
-        boxTitCelular.innerHTML = "Edição"
-    }
-
-    function fecharEditar() {
-        boxBotaoCelular.style.display = "none"
-        boxBotao.style.display = "none"
-    }
-
-
-</script>
+            console.log(edicao)
+    
+            const idUsuario = sessionStorage.ID_USUARIO;
+    
+            fetch(`/perfil/editar/${idUsuario}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(edicao)
+            })
+            .then(res => res.json())
+            .then(dados => {
+                console.log("Editado:", dados)
+    
+                carregarUsuario()
+                fecharEditar()
+            })
+            .catch(err => console.log(err))
+        }
+    </script>
+    </body>
+</html>
