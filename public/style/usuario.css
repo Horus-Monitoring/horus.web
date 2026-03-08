@@ -157,7 +157,7 @@ html, body {
     background-color: #F9FAFF;
     border-radius: 20px;
     width: 40%;
-    max-height: 58vh;
+    min-height: 58vh;
 }
 
 .boxCaracteristicas {
@@ -286,110 +286,105 @@ html, body {
     font-size: 1vw;
 }
 
-/* @media (max-width: 1304px) {
-    .inicioPessoa img {
-        height: 55px;
-        width: 55px;
-        margin-left: 100px;
-    }
-} */
-
-@media (max-width: 1010px) {
-    .inicioPessoa img {
-        height: 55px;
-        width: 55px;
-        margin-left: 80px;
-    }
+.navbarCelular {
+    display: none;
 }
 
-@media (max-width: 950px) {
-    .inicioPessoa img {
-        height: 55px;
-        width: 55px;
-        margin-left: 60px;
-    }
-}
-
-@media (max-width: 891px) {
-    .inicioPessoa img {
-        height: 55px;
-        width: 55px;
-        margin-left: 40px;
-    }
+.containerCelular {
+    display: none;
 }
 
 @media (min-width: 767px) {
 
-    header {
-        height: 15%;
-        padding: 0 10%;
-    }
 
-    .navbarCelular {
-        display: flex;
-    }
     
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1162px) {
 
-    header {
-        height: 70px;
-        padding: 0 5%;
-        opacity: 1;
-    }
-
-    header .section_href {
+    .navbar {
         display: none;
     }
 
-    header .section_logo {
+    .container {
+        display: none;
+    }
+    
+    .navbarCelular {
+        background-color: #f5f3f5;
         display: flex;
-        align-self: flex-start;
         width: 100%;
+        min-height: 80px;
+        padding: 0 5%;
+        font-family: "jura", sans-serif;
+        margin-left: 40px;
+    }
+    
+    .logoCelular {
+        display: flex;
+        justify-content: left;
+        width: 50%;
+        margin-left: -10%;
+        align-items: center;
+    }
+    
+    .logoCelular a {
+        margin-left: -10%;
+        text-decoration: none;
+        color: #000000;
+    }
+    
+    .logoCelular img {
+        width: 150px;
     }
 
-    .navbarBotao,
-    .navbarCelular,
+    .navbarCelularBotao,
+    .navbarCelularBotaoDps,
     .botoesCelular {
         display: flex;
     }
+
+    .navbarBotao {
+        display: flex;
+        justify-content: right;
+        width: 50%;
+        align-items: center;
+    }
     
-    .navbarCelular button{
+    .navbarCelularBotao button {
         background: none;
         border-radius: 10px;
         margin-top: 20px;
         padding: 5px;
         padding-right: 10px;
         padding-left: 10px;
-        width: 150%;
         height: auto;
     }
 
-    .navbarCelular img{
+    .navbarCelularBotao img{
         width: 30px;
         height: auto;
     }
     
-    .navbarCelularDps button{
+    .navbarCelularBotaoDps button{
         background: #576ca8;
         border-radius: 10px;
         margin-top: 20px;
         padding: 5px;
         padding-right: 10px;
         padding-left: 10px;
-        width: 150%;
         height: auto;
     }
 
-    .navbarCelularDps img{
+    .navbarCelularBotaoDps img{
         width: 30px;
         height: auto;
     }
 
     .boxCelular {
         display: flex;
-        justify-content: flex-end;
+        flex-direction: row-reverse;
+        justify-content: center;
     }
 
     .botoesCelular {
@@ -403,19 +398,147 @@ html, body {
         position: fixed;
         justify-content: center;
         margin-top: 65px;
-        margin-right: 26px;
-        width: 40%;
+        margin-left: -160px;
+        width: 30%;
         z-index: 9999;
+        gap: 10px;
     }
     
     .botoesCelular a {
+        align-self: center;
         color: white;
-        font-size: 20px;
+        font-size: 2vw;
         font-family: "Jura", sans-serif;
         text-decoration: none;
         text-align: center;
         height: 5vh;
-        width: 60%;
+        width: 40%;
+    }
+
+    .containerCelular {
+        background-color: #f5f3f5;
+        color: #302b27;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "inter", sans-serif;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .containerCelular h1 {
+        font-size: 4.2vw;
+    }
+
+    .boxCaracteristicas {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .perfilConta {
+        background-color: #F9FAFF;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        width: 70vw;
+        min-height: 68vh;
+        flex-direction: column;
+        align-content: space-around;
+    }
+
+    .inicioPessoaTexto h2 {
+        display: flex;
+        font-size: 3vw;
+    }
+
+    .inicioPessoaImg {
+        display: flex;
+        margin-top: -6%;
+    }
+
+    .inicioPessoaImg img {
+        height: 6vw;
+        width: 6vw;
+    }
+
+    .imgCaracter {
+        display: flex;
+        align-self: center;
+        height: 12vw;
+        margin-left: 28%;
+        width: 22vw;
+    }
+
+    .imgCaracter img{
+        width: 100%;
+    }
+
+    .dadosPessoa {
+        display: flex;
+        align-items: center;
+    }
+
+    .dadosPessoa h4 {
+        font-size: 2.7vw;
+    }
+
+    #nomeSocial, #cargo {
+        font-size: 2.1vw;
+    }
+
+    .credenciais {
+        padding-top: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .credencialCampo {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .emailIcon, 
+    .senhaIcon, 
+    .cpfIcon {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .emailIcon h4, 
+    .senhaIcon h4, 
+    .cpfIcon h4 {
+        font-size: 2.3vw;
+        padding-top: 8px;
+    }
+
+    .credencialCampo h5 {
+        font-size: 2.1vw;
+    }
+
+    .perfilCargo {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        background-color: #F9FAFF;
+        border-radius: 20px;
+        width: 70vw;
+        min-height: 38vh;
+        padding: 30px 30px;
+    }
+
+    .perfilCargo h2 {
+        font-size: 3vw;
+    }
+
+    .perfilCargo h3 {
+        font-size: 2.1vw;
+        padding: 15px 0;
+    }
+
+    .perfilCargo p {
+        font-size: 1.6vw;
     }
 
 }

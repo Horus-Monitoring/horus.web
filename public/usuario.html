@@ -44,23 +44,6 @@
                     <a href="">Sair</a>
                 </div>
             </div>
-            <div class="navbarBotao">
-                <div class="navbarCelular" id="navAbrir">
-                    <button class="botaoCelular" onclick="navegarCelularAbrir()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
-                </div>
-                <div class="navbarCelularDps" id="navFechar">
-                    <button class="botaoCelular" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
-                </div>
-            </div>
-            <div class="containerCelular">
-                <div class="boxCelular">
-                    <div class="botoesCelular" style="display: none;" id="botaoCelular">
-                        <a href="index.html">Home</a>
-                        <a href="cadastro.html">Cadastro</a>              
-                        <a href="#">Login</a>
-                    </div>
-                </div>
-            </div>
         </div>   
         <div class="container">
             <h1>Perfil</h1>
@@ -98,6 +81,88 @@
                             <div class="credencialCampo cpfIcon" >
                                 <img src="assets/imgs/usuario/cpfIcon.png" alt="">
                                 <h4>Cpf:</h4>
+                                <h5>***********</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="perfilCargo">
+                    <h2>São Paulo Tech School</h2>
+                    <h3>Analise de Sistemas</h3>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        It has survived not only five centuries, but also the leap into electronic typesetting, 
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
+                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
+                        Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="containerCelular">
+        <div class="navbarCelular">
+            <div class="logoCelular">
+                <img src="assets/icon/logo.png" alt="Logo de avião">
+                <a href="usuario.html">Horus Monitoring</a>
+            </div>
+            <div class="navbarBotao">
+                <div class="navbarCelularBotao" id="navAbrir">
+                    <button class="botaoCelula" onclick="navegarCelularAbrir()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                </div>
+                <div class="navbarCelularBotaoDps" id="navFechar" style="display: none;">
+                    <button class="botaoCelula" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
+                </div>
+            </div>
+            <div class="boxCelular" style="display: none;" id="botaoCelular">
+                <div class="botoesCelular" >
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="cadastro.html">Documentação</a>
+                    <a href="#">Usuario</a>
+                    <a href="#">Sair</a>
+                </div>
+            </div>
+        </div>
+            <h1>Perfil</h1>
+            <div class="boxCaracteristicas">
+                <div class="perfilConta">
+                    <div class="inicioPessoaTexto">
+                        <h2>Resumo do seu perfil</h2>
+                    </div>
+                    <div class="inicioPessoaImg">
+                        <img src="assets/imgs/usuario/editar.png" alt="">
+                    </div>
+                    <div class="caracteristicas">
+                        <div class="imgCaracter">
+                            <img src="assets/imgs/usuario/usuario.png" id="imgPerfil" onclick="mudarImagemPerfil()" onerror="this.src='assets/imgs/todos/usuario.png'">
+                            <input type="file" id="inpImagem" onchange="salvarImagemPerfil()" hidden>
+                        </div>
+                        <div class="dadosPessoa">
+                            <h4 id="nome">Samuel Sousa</h4>
+                            <h4 id="nomeSocial">Samuel</h4>
+                            <h4 id="cargo">Analise de Sistemas</h4>
+                        </div>
+                        <div class="credenciais">
+                            <div class="credencialCampo" >
+                                <div class="emailIcon">
+                                    <img src="assets/imgs/usuario/emailIcon.png" alt="">
+                                    <h4>Email:</h4>
+                                </div>
+                                <h5>samuelssousaky@sptech.school</h5>
+                            </div>
+                            <div class="credencialCampo" >
+                                <div class="senhaIcon">
+                                    <img src="assets/imgs/usuario/senhaIcon.png" alt="">
+                                    <h4>Senha:</h4>
+                                </div>
+                                <h5>********</h5>
+                            </div>
+                            <div class="credencialCampo" >
+                                <div class="cpfIcon">
+                                    <img src="assets/imgs/usuario/cpfIcon.png" alt="">
+                                    <h4>Cpf:</h4>
+                                </div>
                                 <h5>***********</h5>
                             </div>
                         </div>
