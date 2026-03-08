@@ -26,7 +26,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 15%;
     font-family: "Jura", sans-serif;
 }
@@ -34,21 +34,21 @@ html, body {
 .logo {
     color: white;
     display: flex;
-    font-size: 1.04vw;
+    font-size: 1.24vw;
 }
 
 .logo img{
-    width: 2.08vw;
+    width: 2.28vw;
 }
 
 #imagemLogo {
-    width: 7.81vw;
-    height: 7.81vw;
+    width: 8.01vw;
+    height: 8.01vw;
 }
 
 #imagemLogo img{
-    width: 0.52vw;
-    height: 0.52vw;
+    width: 0.72vw;
+    height: 0.72vw;
     object-fit: cover;
 }
 
@@ -60,19 +60,20 @@ html, body {
 }
 
 .caracteristicasNav h4 {
-    font-size: 0.83vw;
+    font-size: 1.03vw;
     padding-top: 55px;
     padding-bottom: 5px;
 }
 
 .caracteristicasNav h5 {
     color: #817973;
-    font-size: 0.63vw;
+    font-size: 0.73vw;
     padding-top: 10px;
     padding-bottom: 15px;
 }
 
 .caracteristicasNav h6 {
+    font-size: 0.73vw;
     padding-bottom: 20px;
 }
 
@@ -94,6 +95,7 @@ html, body {
     align-items: center;
     display: flex;
     flex-direction: column;
+    font-size: 0.93vw;
     gap: 15px;
 }
 
@@ -102,14 +104,16 @@ html, body {
     text-decoration: none;
 }
 
-.saindo {
+.sair {
+    align-self: flex-start;
     display: flex;
-    align-items: center;
+    margin-top: 40px;
+    margin-left: 20px;
 }
 
 .saindo {
-    margin-top: 120px;
-    margin-right: 70px;
+    display: flex;
+    align-items: center;
 }
 
 .saindo img {
