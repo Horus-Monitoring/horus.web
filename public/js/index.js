@@ -65,4 +65,13 @@ function irPara(index) {
   mostrarSlide();
 }
 
+function usuario() {
+    if (!sessionStorage.ID_USUARIO) {
+    alert("Você precisa estar logado!");
+    window.location = "login.html";
+    } else {
+        window.location.href = "usuario.html"; 
+    }
+}
+
 /* FIM DO SLIDER */

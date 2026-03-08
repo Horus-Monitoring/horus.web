@@ -69,6 +69,13 @@ header .section_href a:hover {
     transition: 2s;
 }
 
+#imgPerfilNav {
+    cursor: pointer;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+}
+
 header .menu_responsivo div {
     width: 32px;
     height: 2px;
