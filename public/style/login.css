@@ -152,6 +152,7 @@ header .section_href a:hover {
     border: 2px, solid, #e2e1e1;
     border-radius: 10px;
     font-size: 18px;
+    padding-left: 10px;
 }
 
 .boxManu {
