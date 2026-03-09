@@ -77,42 +77,42 @@
                       <div class="inputLogin">
                           <div class="inputFilho">
                               <p class="login">Nome</p>
-                              <input id="nome" type="text">
+                              <input id="nomeInput" type="text">
                               <img src="assets/imgs/login/user.png" alt="" class="inputIcone">
                           </div>
                       </div>
                       <div class="inputLogin">
                           <div class="inputFilho">
                               <p class="login">Email</p>
-                              <input id="email" type="email">
+                              <input id="emailInput" type="email">
                               <img src="assets/imgs/login/email.png" alt="" class="inputIcone">
                           </div>
                       </div>
                       <div class="inputLogin">
                           <div class="inputFilho">
                               <p class="login">Senha</p>
-                              <input id="senha" type="password">
+                              <input id="senhaInput" type="password">
                               <img src="assets/imgs/login/lock.png" alt="" class="inputIcone">
                           </div>
                       </div>
                       <div class="inputLogin">
                           <div class="inputFilho">
                               <p class="login">Confirmar senha</p>
-                              <input id="confirmarSenha" type="password">
+                              <input id="confirmarSenhaInput" type="password">
                               <img src="assets/imgs/login/lock.png" alt="" class="inputIcone">
                           </div>
                       </div>
                       <div class="inputLogin">
                           <div class="inputFilho">
                           <p class="loginS">Cpf</p>
-                              <input id="cpf" type="text">
+                              <input id="cpfInput" type="text" maxlength="11">
                               <img src="assets/imgs/login/cpf.png" alt="" class="inputIcone">
                           </div>
                       </div>
                       <div class="inputLogin">
                           <div class="inputFilho">
                           <p class="loginS">Cargo</p>
-                              <select id="cargo" class="loginC">
+                              <select id="cargoInput" class="loginC">
                                 <option disabled selected>Selecione uma Opção</option>
                                 <option>Gestor</option>
                                 <option>Analista</option>
@@ -156,12 +156,12 @@
 
   function verificar() {
 
-    var nome = nome.value;
-    var email = email.value;
-    var senha = senha.value;
-    var confirmacaoSenha = confirmarSenha.value;
-    var cpf = cpf.value
-    var cargo = cargo.value
+    var nome = nomeInput.value;
+    var email = emailInput.value;
+    var senha = senhaInput.value;
+    var confirmacaoSenha = confirmarSenhaInput.value;
+    var cpf = cpfInput.value
+    var cargo = cargoInput.value
 
     var listaCaracteres = ['@', '#', '$', '%', '&', '!', '*', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     var temCaracter = false
@@ -186,8 +186,8 @@
       alert("Coloque uma senha com no mínimo 5 caracteres")
     } else if (!temCaracter) {
       alert("Coloque ao menos um caracter especial ou numero")
-    } else if (cpf.length != 11){
-      alert("Cpf Incorreto")
+    } else if (isNaN(cpf)) {
+      alert("Cpf invalido")
     } else {
         fetch("/usuario/cadastrar", {
             method: "POST",

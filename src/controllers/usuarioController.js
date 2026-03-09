@@ -3,6 +3,7 @@ var usuarioModel = require("../models/usuarioModel");
 function autenticar(req, res) {
     var email = req.body.emailServer
     var senha = req.body.senhaServer
+    
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
@@ -32,6 +33,8 @@ function cadastrar(req, res) {
     var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+    var cargo = req.body.cargoServer;
+    console.log("Chegou aqui? controller");
 
 
     if (nome == undefined) {
@@ -43,41 +46,12 @@ function cadastrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else if (fk_empresa == undefined) {
-        res.status(400).send("Sua token está undefined!");
+        res.status(400).send("Seu token está undefined!");
+    } else if (cargo == undefined) {
+        res.status(400).send("Seu Cargo está undefined!");
     } else {
 
-        usuarioModel.cadastrar(fk_empresa, nome, cpf, email, senha)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
-}
-
-function listar(req, res) {
-  usuarioModel.listar().then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
-function empresa(req, res) {
-    var codigo = req.body.codigo;
-
-    if (codigo == undefined) {
-        res.status(400).send("codigo está undefined!");
-    } else {
-
-        usuarioModel.empresa(codigo)
+        usuarioModel.cadastrar(fk_empresa, nome, cpf, email, senha, cargo)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -97,7 +71,5 @@ function empresa(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar,
-    listar,
-    empresa
+    cadastrar
 }
