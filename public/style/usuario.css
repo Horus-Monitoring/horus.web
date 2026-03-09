@@ -224,6 +224,7 @@ html, body {
 
 .imgCaracter {
     border-radius: 220px;
+    cursor: pointer;
     width: 50%;
     height: 22vh;
     opacity: 100%;

@@ -163,9 +163,10 @@
                 <div class="boxCelular" style="display: none;" id="botaoCelular">
                     <div class="botoesCelular" >
                         <a href="dashboard.html">Dashboard</a>
-                        <a href="cadastro.html">Documentação</a>
+                        <a href="../docs/Horus Monitoringv3.pdf" download="Horus Monitoringv3.pdf">Documentação</a>
+                        <a href="cadastro.html">Cadastro</a>
                         <a href="#">Usuario</a>
-                        <a href="#">Sair</a>
+                        <a href="index.html" onclick="saindo()">Sair</a>
                     </div>
                 </div>
             </div>
@@ -184,9 +185,9 @@
                             <input type="file" id="inpImagem" onchange="salvarImagemPerfil()" hidden>
                         </div>
                         <div class="dadosPessoa">
-                            <h4 id="nomeDados"></h4>
-                            <h4 id="nomeSocial"></h4>
-                            <h4 id="cargoDados"></h4>
+                            <h4 id="nomeDadosCelular"></h4>
+                            <h4 id="nomeSocialCelular"></h4>
+                            <h4 id="cargoDadosCelular"></h4>
                         </div>
                         <div class="credenciais">
                             <div class="credencialCampo" >
@@ -194,7 +195,7 @@
                                     <img src="assets/imgs/usuario/emailIcon.png" alt="">
                                     <h4>Email:</h4>
                                 </div>
-                                <h5 id="email"></h5>
+                                <h5 id="emailCelular"></h5>
                             </div>
                             <div class="credencialCampo" >
                                 <div class="senhaIcon">
@@ -214,9 +215,9 @@
                     </div>
                 </div>
                 <div class="perfilCargo">
-                    <h2 id="empresa"></h2>
-                    <h3 id="cargo"></h3>
-                    <p id="descricao">
+                    <h2 id="empresaCelular"></h2>
+                    <h3 id="cargoCelular"></h3>
+                    <p id="descricaoCelular">
                     </p>
                 </div>
             </div>
@@ -322,6 +323,14 @@
                 document.getElementById("cargoDados").innerText = usuario.cargo
                 document.getElementById("descricao").innerText = usuario.descricao
     
+                document.getElementById("nomeDadosCelular").innerText = usuario.nome
+                document.getElementById("nomeSocialCelular").innerText = usuario.nome_social
+                document.getElementById("emailCelular").innerText = usuario.email
+                document.getElementById("empresaCelular").innerText = usuario.empresa
+                document.getElementById("cargoCelular").innerText = usuario.cargo
+                document.getElementById("cargoDadosCelular").innerText = usuario.cargo
+                document.getElementById("descricaoCelular").innerText = usuario.descricao
+    
             })
         }
     
@@ -397,6 +406,15 @@
                 document.getElementById("cargoEdicao").value = usuario.cargo
                 document.getElementById("descricaoEdicao").value = usuario.descricao
     
+                document.getElementById("nomeEdicaoCelular").value = usuario.nome
+                document.getElementById("nomeSocialEdicaoCelular").value = usuario.nome_social
+                document.getElementById("emailEdicaoCelular").value = usuario.email
+                document.getElementById("senhaEdicaoCelular").value = usuario.senha
+                document.getElementById("cpfEdicaoCelular").value = usuario.cpf
+                document.getElementById("empresaEdicaoCelular").value = usuario.empresa
+                document.getElementById("cargoEdicaoCelular").value = usuario.cargo
+                document.getElementById("descricaoEdicaoCelular").value = usuario.descricao
+    
             })
         }
     
@@ -423,12 +441,22 @@
                 cpf: document.getElementById("cpfEdicao").value,
                 empresa: document.getElementById("empresaEdicao").value,
                 cargo: document.getElementById("cargoEdicao").value,
-                descricao: document.getElementById("descricaoEdicao").value
+                descricao: document.getElementById("descricaoEdicao").value,
+
+                nomeCelular: document.getElementById("nomeEdicaoCelular").value,
+                nomeSocialCelular: document.getElementById("nomeSocialEdicaoCelular").value,
+                emailCelular: document.getElementById("emailEdicaoCelular").value,
+                senhaCelular: document.getElementById("senhaEdicaoCelular").value,
+                cpfCelular: document.getElementById("cpfEdicaoCelular").value,
+                empresaCelular: document.getElementById("empresaEdicaoCelular").value,
+                cargoCelular: document.getElementById("cargoEdicaoCelular").value,
+                descricaoCelular: document.getElementById("descricaoEdicaoCelular").value
             }
 
             console.log(edicao)
     
             const idUsuario = sessionStorage.ID_USUARIO;
+            const idEmpresa = sessionStorage.ID_EMPRESA;
     
             fetch(`/perfil/editar/${idUsuario}`, {
                 method: "PUT",
@@ -446,6 +474,11 @@
             })
             .catch(err => console.log(err))
         }
+
+        function saindo() {
+            sessionStorage.clear()
+        }
+
     </script>
     </body>
 </html>
