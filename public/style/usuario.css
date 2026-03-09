@@ -226,14 +226,14 @@ html, body {
     border-radius: 220px;
     cursor: pointer;
     width: 50%;
-    height: 22vh;
+    height: 14vw;
     opacity: 100%;
 }
 
 .imgCaracter img {
     padding: 10%;
-    width: 200px;
-    height: 200px;
+    width: 12vw;
+    height: 12vw;
     border-radius: 50%; 
     object-fit: cover;  
 }
@@ -441,6 +441,7 @@ html, body {
         width: 50%;
         margin-left: -10%;
         align-items: center;
+        font-size: 4vw;
     }
     
     .logoCelular a {
@@ -450,7 +451,7 @@ html, body {
     }
     
     .logoCelular img {
-        width: 150px;
+        width: 250px;
     }
 
     .navbarCelularBotao,
@@ -477,7 +478,7 @@ html, body {
     }
 
     .navbarCelularBotao img{
-        width: 30px;
+        width: 50px;
         height: auto;
     }
     
@@ -492,7 +493,7 @@ html, body {
     }
 
     .navbarCelularBotaoDps img{
-        width: 30px;
+        width: 50px;
         height: auto;
     }
 
@@ -519,7 +520,7 @@ html, body {
     
     .botoesCelular a {
         color: white;
-        font-size: 20px;
+        font-size: 4vw;
         font-family: "Jura", sans-serif;
         text-decoration: none;
         height: 5vh;
@@ -537,7 +538,7 @@ html, body {
     }
 
     .containerCelular h1 {
-        font-size: 6.2vw;
+        font-size: 5.4vw;
         margin: 0 10%;
     }
 
@@ -579,8 +580,8 @@ html, body {
     }
 
     .imgCaracter{
-        width: 80px;
-        height: 80px;
+        width: 200px;
+        height: 200px;
     }
 
     .imgCaracter img {
@@ -689,7 +690,7 @@ html, body {
     }
 
     .conteudoTextoCelular h2 {
-        font-size: 28px;
+        font-size: 5vw;
         font-family: "jura", sans-serif;
     }
 
@@ -707,27 +708,27 @@ html, body {
     }
 
     .credencialEdicaoCelular h2 {
-        font-size: 18px;
+        font-size: 4vw;
         overflow-wrap: break-word;
     }
 
     .credencialEdicaoCelular input {
         padding-left: 10px;
         width: 45%;
-        font-size: 10px;
+        font-size: 3vw;
         border-radius: 10px;
     }
 
     .credencialEdicaoCelular select {
         padding-left: 10px;
         width: 65%;
-        font-size: 10px;
+        font-size: 3vw;
         border-radius: 10px;
     }
 
     .credencialEdicaoCelular textarea {
         border-radius: 10px;
-        font-size: 10px;
+        font-size: 3vw;
         padding-top: 8px;
         padding-left: 8px;
         max-width: 70%;
@@ -748,12 +749,36 @@ html, body {
         border-radius: 20px;
         cursor: pointer;
         height: 5vh;
-        font-size: 15px;
+        font-size: 3.4vw;
         width: 35%;
     }
 
     #confirmarEditCelular {
         background-color: #264690;
         color: white;
+    }
+}
+
+@media (max-width: 540px) {
+    .navbarCelularBotao img{
+        width: 30px;
+        height: auto;
+    }
+
+    .navbarCelularBotaoDps img{
+        width: 30px;
+        height: auto;
+    }
+
+    .logoCelular img {
+        margin: 0 0;
+        margin-left: -40%;
+        width: 200px;
+    }
+
+    .logoCelular a {
+        margin: 0 0;
+        margin-left: -30%;
+        font-size: 5vw;
     }
 }
