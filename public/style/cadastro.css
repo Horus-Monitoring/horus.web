@@ -165,12 +165,13 @@ html, body {
 }
 
 .boxLogin h2 {
-    font-size: 24px;
+    margin: 1vw;
+    font-size: 1.4vw;
     font-weight: bold;
 }
 
 .inputLogin {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .boxLogin .inputLogin {
@@ -191,6 +192,7 @@ html, body {
 
 .inputFilho p {
     align-self: flex-start;
+    font-size: 1vw;
 }
 
 .inputFilho input {
@@ -199,7 +201,7 @@ html, body {
     height: 7vh;
     border: 2px, solid, #e2e1e1;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 1vw;
 }
 
 .boxManu {
@@ -208,10 +210,7 @@ html, body {
     align-items: center;
 }
 
-.login {
-    font-weight: bold;
-}
-
+.login,
 .loginS {
     font-weight: bold;
 }
@@ -221,35 +220,27 @@ html, body {
     height: 7vh;
     border: 2px, solid, #e2e1e1;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 1vw;
 }
 
 .inputIcone {
     display: flex;
     align-self: flex-end;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-right: 7px;
     position: absolute;
     height: auto;
-    width: 28px;
+    width: 2.2vw;
 }
 
 .boxLogin span {
-    font-size: 16px;
+    font-size: 1vw;
     color: black;
     font-weight: bold;
 }
 
 .boxLogin button{
-    margin-top: 50px;
-}
-
-.esqueceu {
-    color: #1B264F;
-    font-size: 15px;
-    width: 80%;
-    text-align: end;
-    padding: 14px 0;
+    margin-top: 20px;
 }
 
 .cadastrar {
@@ -282,14 +273,15 @@ html, body {
 
 .boxLogin button {
     color: white;
-    font-size: 18px;
+    font-size: 1.2vw;
     text-align: center;
-    width: 77%;
-    height: 8vh;
+    width: 50%;
+    height: 7vh;
     border-radius: 10px;
     border: none;
     background-color: #1B264F;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .navbarBotao,
@@ -384,6 +376,26 @@ html, body {
         width: 100%;
     }
 
+    .boxLogin h2 {
+        font-size: 2.8vw;
+    }
+
+    .boxLogin button {
+        font-size: 2.4vw;
+    }
+
+    .inputFilho p {
+        font-size: 2vw;
+    }
+
+    .inputFilho input {
+        font-size: 1.8vw;
+    }
+
+    .inputFilho select {
+        font-size: 1.8vw;
+    }
+
     .boxCelular {
         display: flex;
         justify-content: flex-end;
@@ -395,12 +407,13 @@ html, body {
         border-radius: 10px;
         color: white;
         display: flex;
-        height: 20vh;
+        height: 35vh;
         flex-direction: column;
         position: fixed;
         justify-content: center;
         width: 40%;
         z-index: 9999;
+        gap: 10px;
     }
     
     .botoesCelular a {

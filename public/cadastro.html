@@ -62,9 +62,11 @@
             </div>
             <div class="boxCelular">
               <div class="botoesCelular" style="display: none;" id="botaoCelular">
-                  <a href="index.html">Home</a>
-                  <a href="cadastro.html">Cadastro</a>              
-                  <a href="#">Login</a>
+                    <a onclick="manutencao()">Dashboard</a>
+                    <a href="../docs/Horus Monitoringv3.pdf" download="Horus Monitoringv3.pdf">Documentação</a>
+                    <a href="#">Cadastro</a>
+                    <a href="usuario.html">Usuario</a>
+                    <a href="index.html" onclick="saindo()">Sair</a>
               </div>
             </div>
           </div>
@@ -146,6 +148,10 @@
       } else {
           window.location.href = "usuario.html"; 
       }
+  }
+
+  function manutencao() {
+      alert("Em manutenção...")
   }
 
   function verificar() {
