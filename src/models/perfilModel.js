@@ -34,7 +34,8 @@ function carregarUsuario(idUsuario) {
             f.imagem,
             p.nivel AS cargo,
             p.descricao,
-            e.razao_social AS empresa
+            e.razao_social AS empresa,
+            e.idEmpresa
         FROM Funcionario f
         JOIN Papel p 
             ON f.fk_papel_empresa = p.idPapel
