@@ -32,8 +32,8 @@ function carregarUsuario(idUsuario) {
             f.senha,
             f.cpf,
             f.imagem,
-            p.nivel AS cargo,
-            p.descricao,
+			(SELECT p.nivel FROM Papel p WHERE p.idPapel = ${idUsuario}) AS cargo,
+            (SELECT p.descricao FROM Papel p WHERE p.idPapel = ${idUsuario}) AS descricao,
             e.razao_social AS empresa,
             e.idEmpresa
         FROM Funcionario f

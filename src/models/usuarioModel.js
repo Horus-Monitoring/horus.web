@@ -18,7 +18,7 @@ function cadastrar(fk_empresa, nome, cpf, email, senha, cargo) {
     const promises = []
 
     var sqlFuncionario = `
-        INSERT INTO Funcionario (fk_empresa, nome, cpf, email, senha) VALUES ('${fk_empresa}', '${nome}', '${cpf}', '${email}', '${senha}');
+        INSERT INTO Funcionario (fk_papel_empresa, nome, cpf, email, senha) VALUES ('${fk_empresa}', '${nome}', '${cpf}', '${email}', '${senha}');
     `;
     console.log("Executando a instrução SQL: \n" + sqlFuncionario);
     

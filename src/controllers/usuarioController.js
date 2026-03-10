@@ -34,7 +34,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var cargo = req.body.cargoServer;
-    console.log("Chegou aqui? controller");
+    console.log(cargo);
 
 
     if (nome == undefined) {

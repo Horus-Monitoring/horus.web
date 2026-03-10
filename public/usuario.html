@@ -29,20 +29,20 @@
             <div class="caracteristicasNav">
                 <h4 id="nome"></h4>
                 <h5 id="email"></h5>
-                <h6 id="cargo"></h6>
+                <h6 id="cargoNav"></h6>
                 <img src="assets/imgs/usuario/usuario.png" alt="" id="imgPerfilNav">
             </div>
             <div class="linha"></div>
             <div class="botoesNav">
                 <a href="" onclick="manutencao()">Dashboard</a>
                 <a href="../docs/Horus Monitoringv3.pdf" download="Horus Monitoringv3.pdf">Documentação</a>
-                <a href="cadastro.html">Cadastro</a>
+                <a href="cadastro.html" id="cadastroVer">Cadastro</a>
                 <a href="#">Usuario</a>
             </div>
             <div class="sair">
                 <div class="saindo">
                     <img src="assets/imgs/usuario/sair.svg" alt="">
-                    <a href="">Sair</a>
+                    <a href="index.html" onclick="saindo()">Sair</a>
                 </div>
             </div>
         </div>   
@@ -51,10 +51,10 @@
             <div class="boxCaracteristicas">
                 <div class="perfilConta">
                     <div class="inicioPessoaTexto">
-                        <h2>Resumo do seu perfil</h2>
+                        <h2 id="inicioTexto">Resumo do seu perfil</h2>
                     </div>
                     <div class="inicioPessoaImg">
-                        <img src="assets/imgs/usuario/editar.png" alt="" onclick="editar()" >
+                        <img src="assets/imgs/usuario/editar.png" alt="" onclick="editar()" id="imagemEdicaoVer" >
                     </div>
                     <div class="caracteristicas">
                         <div class="containerPessoa">
@@ -164,7 +164,7 @@
                     <div class="botoesCelular" >
                         <a onclick="manutencao()">Dashboard</a>
                         <a href="../docs/Horus Monitoringv3.pdf" download="Horus Monitoringv3.pdf">Documentação</a>
-                        <a href="cadastro.html">Cadastro</a>
+                        <a href="cadastro.html" id="cadastroVerCelular">Cadastro</a>
                         <a href="#">Usuario</a>
                         <a href="index.html" onclick="saindo()">Sair</a>
                     </div>
@@ -174,10 +174,10 @@
             <div class="boxCaracteristicas">
                 <div class="perfilConta">
                     <div class="inicioPessoaTexto">
-                        <h2>Resumo do seu perfil</h2>
+                        <h2 id="inicioTextoCelular">Resumo do seu perfil</h2>
                     </div>
                     <div class="inicioPessoaImg">
-                        <img src="assets/imgs/usuario/editar.png" alt="" onclick="editar()">
+                        <img src="assets/imgs/usuario/editar.png" alt="" onclick="editar()" id="imagemEdicaoVerCelular">
                     </div>
                     <div class="caracteristicas">
                         <div class="imgCaracter">
@@ -277,7 +277,7 @@
         window.onload = () => {
         const idUsuario = sessionStorage.ID_USUARIO;
         carregarUsuario()
-    
+
         fetch(`/perfil/imagemPerfil/${idUsuario}`)
             .then(res => res.json())
             .then(dados => {
@@ -321,6 +321,7 @@
                 document.getElementById("empresa").innerText = usuario.empresa
                 document.getElementById("cargo").innerText = usuario.cargo
                 document.getElementById("cargoDados").innerText = usuario.cargo
+                document.getElementById("cargoNav").innerText = usuario.cargo
                 document.getElementById("descricao").innerText = usuario.descricao
     
                 document.getElementById("nomeDadosCelular").innerText = usuario.nome
@@ -330,6 +331,19 @@
                 document.getElementById("cargoCelular").innerText = usuario.cargo
                 document.getElementById("cargoDadosCelular").innerText = usuario.cargo
                 document.getElementById("descricaoCelular").innerText = usuario.descricao
+
+                if (usuario.cargo == "Analista") {
+                    const inicioTexto = document.getElementById("inicioTexto");
+                    const inicioTextoCelular = document.getElementById("inicioTextoCelular");
+                    cadastroVer.style.display = "none" 
+                    cadastroVerCelular.style.display = "none" 
+                    imagemEdicaoVer.style.display = "none" 
+                    imagemEdicaoVerCelular.style.display = "none"
+                    inicioTexto.style.marginBottom = "30px"
+                    inicioTextoCelular.style.marginBottom = "50px"
+                }
+
+                sessionStorage.ID_EMPRESA = usuario.idEmpresa;
     
             })
         }
