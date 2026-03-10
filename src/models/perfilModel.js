@@ -31,7 +31,7 @@ function carregarUsuario(idUsuario) {
             f.email,
             f.senha,
             f.cpf,
-            f.imagem,
+            f.foto,
             p.nivel AS cargo,
             p.descricao,
             e.razao_social AS empresa,
