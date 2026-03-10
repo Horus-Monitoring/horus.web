@@ -121,11 +121,6 @@ INSERT INTO Funcionario (fk_papel_empresa, nome,  cpf, email, senha) VALUES
     
     
 SELECT  nivel  FROM Papel JOIN Funcionario
-<<<<<<< HEAD
 	ON idPapel = fk_papel_empresa	
     WHERE nome = 'Herycka';
-=======
-	ON idPapel = fk_papel_empresa
-    WHERE nome = 'Erycka';
->>>>>>> cbeac5b1bd304370ed411df39076e20643c13c53
     
