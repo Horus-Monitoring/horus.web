@@ -2,6 +2,15 @@ CREATE DATABASE horus_db;
 
 USE horus_db;
 
+
+CREATE TABLE Contato_inicial (
+idContato_inicial INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+sobrenome VARCHAR(45),
+emaill VARCHAR(45),
+mensagem VARCHAR(255)
+); 
+
 CREATE TABLE Localizacao (
 idLocalizacao INT PRIMARY KEY AUTO_INCREMENT,
 uf CHAR(2),
@@ -49,7 +58,8 @@ CONSTRAINT pk_funcionario_papel_empresa
 	PRIMARY KEY(idFuncionario, fk_papel_empresa),
 CONSTRAINT fk_papel_registro
 	FOREIGN KEY (fk_papel_empresa)
-		REFERENCES Papel(idPapel)
+		REFERENCES Papel(idPapel),
+foto VARCHAR(255)
 );
 
  CREATE TABLE Servidor (
@@ -107,10 +117,15 @@ INSERT INTO Papel (nivel, descricao, fk_empresa) VALUES
 	('Gestor', 'Deve monitorar e solucionar problemas', 1);
     
 INSERT INTO Funcionario (fk_papel_empresa, nome,  cpf, email, senha) VALUES
-	(1, 'Herycka', '32187634567', 'herycka@gmail.com', 'Herycka_1234');
+	(1, 'Erycka', '32187634567', 'Erycka@gmail.com', 'Erycka_1234');
     
     
 SELECT  nivel  FROM Papel JOIN Funcionario
+<<<<<<< HEAD
 	ON idPapel = fk_papel_empresa	
     WHERE nome = 'Herycka';
+=======
+	ON idPapel = fk_papel_empresa
+    WHERE nome = 'Erycka';
+>>>>>>> cbeac5b1bd304370ed411df39076e20643c13c53
     
