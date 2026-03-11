@@ -7,10 +7,9 @@ CREATE TABLE Contato_inicial (
 idContato_inicial INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 sobrenome VARCHAR(45),
-email VARCHAR(45),
-mensagem VARCHAR(240)
+emaill VARCHAR(45),
+mensagem VARCHAR(255)
 ); 
-select * from Contato_inicial;
 
 CREATE TABLE Localizacao (
 idLocalizacao INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,8 +20,6 @@ logradouro VARCHAR(45),
 numero INT,
 cep CHAR(11)
 );
-
-
 
 CREATE TABLE Empresa (
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -36,9 +33,6 @@ CONSTRAINT fk_localizacao_registro
 		REFERENCES Localizacao(idLocalizacao)
 );
 
-
-
-
 CREATE TABLE Papel (
 idPapel INT  AUTO_INCREMENT,
 nivel VARCHAR(45),
@@ -51,15 +45,11 @@ CONSTRAINT fk_empresa_registro
 		REFERENCES Empresa (idEMpresa)
 );
 
-
-
-
-
-
 CREATE TABLE Funcionario (
 idFuncionario INT AUTO_INCREMENT,
 nome VARCHAR(45),
 nome_social VARCHAR(45),
+imagem varchar(255),
 cpf CHAR(11) NOT NULL UNIQUE,
 email VARCHAR(45) NOT NULL UNIQUE,
 senha VARCHAR(45),
@@ -69,16 +59,9 @@ CONSTRAINT pk_funcionario_papel_empresa
 CONSTRAINT fk_papel_registro
 	FOREIGN KEY (fk_papel_empresa)
 		REFERENCES Papel(idPapel),
-foto_usuario VARCHAR(255)
+foto VARCHAR(255)
 );
 
-
-
-
-
-
- 
- 
  CREATE TABLE Servidor (
 idServidor INT AUTO_INCREMENT,
 data_instalacao DATE,
@@ -114,7 +97,6 @@ CONSTRAINT fk_servidor_registro
 		REFERENCES Servidor(idServidor)
 );
 
-
 CREATE TABLE Registro_Alerta (
 idAlerta INT PRIMARY KEY AUTO_INCREMENT,
 data_alerta DATETIME DEFAULT CURRENT_TIMESTAMP, 
@@ -125,9 +107,6 @@ CONSTRAINT fk_servidor_componente
 		REFERENCES CompServidor(id_componente_v)
 ); 
 
-
-
-
 INSERT INTO Localizacao (uf, cidade, bairro, logradouro, numero, cep) VALUES
 	('SP', 'São Paulo', 'Paulista','Rua Hadock Lobo', 12, '08412210');
     
@@ -135,13 +114,13 @@ INSERT INTO Empresa (razao_social, cnpj, telefone_empresa, token_empresa, fk_loc
 	('LIPSU AERO', '123456789101234', '5573-1234', 'ABC12345', 1);
     
 INSERT INTO Papel (nivel, descricao, fk_empresa) VALUES
-	('Gerente de ATC', 'Deve monitorar e solucionar problemas', 1);
+	('Gestor', 'Deve monitorar e solucionar problemas', 1);
     
 INSERT INTO Funcionario (fk_papel_empresa, nome,  cpf, email, senha) VALUES
-	(1, 'Herycka', '32187634567', 'herycka@gmail.com', 'Herycka_1234');
+	(1, 'Eryka', '32187634567', 'Erika@gmail.com', 'Erycka_1234');
     
     
 SELECT  nivel  FROM Papel JOIN Funcionario
-	ON idPapel = fk_papel_empresa
-    WHERE nome = 'Herycka';
+	ON idPapel = fk_papel_empresa	
+    WHERE nome = 'Erycka';
     
