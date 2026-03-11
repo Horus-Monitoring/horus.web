@@ -117,10 +117,10 @@ INSERT INTO Papel (nivel, descricao, fk_empresa) VALUES
 	('Gestor', 'Deve monitorar e solucionar problemas', 1);
     
 INSERT INTO Funcionario (fk_papel_empresa, nome,  cpf, email, senha) VALUES
-	(1, 'Eryka', '32187634567', 'Erika@gmail.com', 'Erycka_1234');
+	(1, 'Eryka', '32187634567', 'eryka@gmail.com', 'senha123');
     
     
 SELECT  nivel  FROM Papel JOIN Funcionario
 	ON idPapel = fk_papel_empresa	
-    WHERE nome = 'Erycka';
+    WHERE nome = 'Eryka';
     
