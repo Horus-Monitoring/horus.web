@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" id="html">
+
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title> Login | Horus </title>
 
     <link rel="stylesheet" type="text/css" href="style/login.css">
@@ -12,114 +13,112 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/header.css">
 
 </head>
-    <header>
-        <div class="section_logo">
-            <img src="assets/icon/logo.png" alt="Logo de avião">
-            <p>Horus Monitoring</p>
-        </div>
-        <div class="section_href">
-            <a href="index.html">Home</a>
-            <a href="index.html#Sobre_nos">Sobre nós</a>
-            <a href="faleConosco.html">Fale conosco</a>
-            <a href="#">Login</a>
-            <img src="assets/imgs/usuario/usuario.png" alt="" id="imgPerfilNav" onclick="usuario()">
-        </div>
-        <div class="navbarBotao">
-            <div class="navbarCelular" id="navAbrir">
-                <button class="botaoCelular" onclick="navegarCelularAbrir()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
-            </div>
-            <div class="navbarCelularDps" id="navFechar">
-                <button class="botaoCelular" onclick="navegarCelularFechar()"><img src="assets/imgs/login/botaoListra.png" alt=""></button>
-            </div>
-        </div>
-    </header>
-    <body id="body">
-        <div class="container">
-            <div class="boxCelular">
-                <div class="botoesCelular" style="display: none;" id="botaoCelular">
-                    <a href="index.html">Home</a>
-                    <a href="cadastro.html">Cadastro</a>              
-                    <a href="#">Login</a>
-                </div>
-            </div>
-            <div class="centro">
-                <div class="boxLogin">
-                    <div class="boxManu">
-                        <h2>Login</h2>
-                        <div class="inputLogin">
-                            <div class="inputFilho">
-                                <p class="login">Email</p>
-                                <input id="emailInput" type="email">
-                                <img src="assets/imgs/login/user.png" alt="" class="inputIcone">
-                            </div>
-                        </div>
-                        <div class="inputLogin">
-                            <div class="inputFilho">
-                            <p class="loginS">Senha</p>
-                                <input id="senhaInput" type="password">
-                                <img src="assets/imgs/login/lock.png" alt="" class="inputIcone">
-                            </div>
-                        </div>
-                        <h4 class="esqueceu">Esqueceu a senha</h4>
-                        <button onclick="entrar()">Login</button>
-                        <div class="ou">
-                            <div class="barraE"></div>
-                            <h5>OU</h5>
-                            <div class="barraD"></div>
-                        </div>
-                        <div class="cadastrar">
-                            <span>Ainda não tem um login?</span>
-                            <a href="faleConosco.html" class="registrar-login">Clique aqui</a>
+<header>
+    <div class="section_logo">
+        <img src="assets/imgs/home/logo.png" alt="Logo de avião">
+        <p>Horus Monitoring</p>
+    </div>
+    <div class="menu_responsivo">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+    </div>
+    <ul class="section_href">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#Sobre_nos">Sobre nós</a></li>
+        <li><a href="faleConosco.html">Fale Conosco</a></li>
+        <li><a href="#">Login</a></li>
+        <img src="assets/imgs/usuario/usuario.png" alt="" id="imgPerfilNav" onclick="usuario()">
+    </ul>
+</header>
+
+<body id="body">
+    <div class="container">
+        <div class="centro">
+            <div class="boxLogin">
+                <div class="boxManu">
+                    <h2>Login</h2>
+                    <div class="inputLogin">
+                        <div class="inputFilho">
+                            <p class="login">Email</p>
+                            <input id="emailInput" type="email">
+                            <img src="assets/imgs/login/user.png" alt="" class="inputIcone">
                         </div>
                     </div>
-                </div>
-                <div class="boxBemVindo">
+                    <div class="inputLogin">
+                        <div class="inputFilho">
+                            <p class="loginS">Senha</p>
+                            <input id="senhaInput" type="password">
+                            <img src="assets/imgs/login/lock.png" alt="" class="inputIcone">
+                        </div>
+                    </div>
+                    <h4 class="esqueceu">Esqueceu a senha</h4>
+                    <button onclick="entrar()">Login</button>
+                    <div class="ou">
+                        <div class="barraE"></div>
+                        <h5>OU</h5>
+                        <div class="barraD"></div>
+                    </div>
+                    <div class="cadastrar">
+                        <span>Ainda não tem um login?</span>
+                        <a href="faleConosco.html" class="registrar-login">Clique aqui</a>
+                    </div>
                 </div>
             </div>
+            <div class="boxBemVindo">
             </div>
-        <script src="js/usuario.js"></script>
-    </body>
+        </div>
+    </div>
+    <script src="js/usuario.js"></script>
+    <script src="js/header.js"></script>
+</body>
+
 </html>
 
 <script>
 
-    function navegarCelularAbrir() {
-        navAbrir.style.display = "none"
-        navFechar.style.display = "flex"
-        botaoCelular.style.display = "flex"
-    }
+    // function navegarCelularAbrir() {
+    //     navAbrir.style.display = "none"
+    //     navFechar.style.display = "flex"
+    //     botaoCelular.style.display = "flex"
+    // }
 
-    function navegarCelularFechar() {
-        navAbrir.style.display = "flex"
-        navFechar.style.display = "none"
-        botaoCelular.style.display = "none"
-    }
+    // function navegarCelularFechar() {
+    //     navAbrir.style.display = "flex"
+    //     navFechar.style.display = "none"
+    //     botaoCelular.style.display = "none"
+    // }
 
     function entrar() {
 
         var email = emailInput.value
         var senha = senhaInput.value
         if (email.trim() == "" || senha.trim() == "") {
-           alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
+            alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
         } else {
             fetch("/usuario/autenticar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
-                },body: JSON.stringify({
+                }, body: JSON.stringify({
                     emailServer: email,
                     senhaServer: senha
                 })
             })
-                .then(function(resposta) {
+                .then(function (resposta) {
                     console.log("resposta: " + resposta);
-    
+
                     if (resposta.ok) {
                         return resposta.json();
                     } else {
@@ -127,28 +126,28 @@
                         throw "Houve um erro ao tentar realizar o Login!";
                     }
                 })
-                .then(function(dados) {
+                .then(function (dados) {
 
                     if (!dados || dados.length == 0) {
                         alert("Email ou senha inválidos!");
                         return;
                     }
-    
+
                     sessionStorage.ID_USUARIO = dados[0].idFuncionario;
                     sessionStorage.NOME_USUARIO = dados[0].nome;
                     sessionStorage.EMAIL_USUARIO = dados[0].email;
-    
+
                     alert("Login realizado com sucesso")
-    
+
                     setTimeout(() => {
                         window.location = "usuario.html";
                     }, 1000);
-                    
+
                 })
-                .catch(function(resposta) {
+                .catch(function (resposta) {
                     console.log("Erro: " + resposta)
                 })
-    
+
             return false
         }
 
@@ -156,10 +155,10 @@
 
     function usuario() {
         if (!sessionStorage.ID_USUARIO) {
-        alert("Você precisa estar logado!");
-        window.location = "login.html";
+            alert("Você precisa estar logado!");
+            window.location = "login.html";
         } else {
-            window.location.href = "usuario.html"; 
+            window.location.href = "usuario.html";
         }
     }
 </script>

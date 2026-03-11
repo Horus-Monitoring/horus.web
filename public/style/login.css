@@ -5,7 +5,8 @@
     margin: 0;
 }
 
-html, body {
+html,
+body {
     overflow-x: hidden;
 }
 
@@ -19,68 +20,6 @@ html, body {
 
 /*Essa é a estilização do HEADER
 obs: Ela é feita com position FIXED, ou seja, ao descer na tela ela vai junto*/
-header {
-    width: 100%;
-    background-color: #ffffff62;
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 10%;
-    align-items: center;
-    height: 15%;
-    font-family: "Jura", sans-serif;
-    font-weight: 600;
-    z-index: 99;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-header:hover {
-    opacity: 1;
-}
-
-header .section_logo {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: 50%;
-    gap: 30px;
-    margin-left: -10%;
-}
-
-header .section_logo p {
-    margin-left: -10%;
-}
-
-header .section_logo img {
-    width: 150px;
-}
-
-header .section_href {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    width: 50%;
-    gap: 50px;
-}
-
-header .section_href a {
-    text-decoration: none;
-    color: black;
-    margin-right: 5%;
-}
-
-header .section_href a:hover {
-    border-bottom: 2px solid black;
-    transition: 2s;
-}
-
-#imgPerfilNav {
-    cursor: pointer;
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-}
 
 
 /* Fim da estilização da HEADER */
@@ -263,8 +202,8 @@ header .section_href a:hover {
     .botoesCelular {
         display: flex;
     }
-    
-    .navbarCelular button{
+
+    .navbarCelular button {
         background: none;
         border-radius: 10px;
         margin-top: 20px;
@@ -275,12 +214,12 @@ header .section_href a:hover {
         height: auto;
     }
 
-    .navbarCelular img{
+    .navbarCelular img {
         width: 30px;
         height: auto;
     }
-    
-    .navbarCelularDps button{
+
+    .navbarCelularDps button {
         background: #576ca8;
         border-radius: 10px;
         margin-top: 20px;
@@ -291,7 +230,7 @@ header .section_href a:hover {
         height: auto;
     }
 
-    .navbarCelularDps img{
+    .navbarCelularDps img {
         width: 30px;
         height: auto;
     }
@@ -316,7 +255,7 @@ header .section_href a:hover {
         width: 40%;
         z-index: 9999;
     }
-    
+
     .botoesCelular a {
         color: white;
         font-size: 20px;
@@ -343,6 +282,7 @@ header .section_href a:hover {
 }
 
 /* @media (min-width: 768px) and (max-width: 991px) {
+
 
     header {
         height: 80px;
@@ -441,6 +381,33 @@ header .section_href a:hover {
 
     
 } */
+@media screen and (max-width: 667px) {
+    header .section_href {
+        position: absolute;
+        top: 10vh;
+        right: 0;
+        width: 50vw;
+        height: 90vh;
+        background-color: rgba(255, 255, 255, 0.849);
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        transform: translateX(100%);
+    }
+
+    header .section_href.active {
+        transform: translateX(0);
+    }
+
+    header .section_href li {
+        margin-left: 0;
+        opacity: 0;
+    }
+
+    header .menu_responsivo {
+        display: block !important;
+    }
+}
 
 @media (min-width: 767px) {
 
@@ -467,5 +434,5 @@ header .section_href a:hover {
     .navbarCelular {
         display: flex;
     }
-    
+
 }
