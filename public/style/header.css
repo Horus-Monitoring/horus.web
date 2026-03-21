@@ -2,16 +2,15 @@ header {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.849);
     position: fixed;
-    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     padding: 0px 10%;
     align-items: center;
     height: 10vh;
     font-family: "Jura", sans-serif;
-    font-weight: 600;
+    font-size: medium;
     z-index: 99;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.5px; 
 }
 
 header .section_logo {
@@ -22,6 +21,10 @@ header .section_logo {
     gap: 30px;
 }
 
+header .section_logo p {
+    margin-bottom: 0 !important;
+}
+
 header .section_logo img {
     width: 50px;
 }
@@ -30,9 +33,14 @@ header .section_href {
     display: flex;
     justify-content: right;
     align-items: center;
-    width: 50%;
+    width: 100%;
     gap: 50px;
     list-style: none;
+}
+
+header ul {
+    margin-bottom: 0 !important;
+    padding-left: 0 !important;
 }
 
 header .section_href a {
@@ -44,13 +52,6 @@ header .section_href a {
 header .section_href a:hover {
     border-bottom: 2px solid black;
     transition: 2s;
-}
-
-#imgPerfilNav {
-    cursor: pointer;
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
 }
 
 header .menu_responsivo div {
@@ -77,12 +78,12 @@ header .menu_responsivo {
     }
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 1024px) {
     header .section_href {
         position: absolute;
         top: 10vh;
         right: 0;
-        width: 50vw;
+        width: 40vw;
         height: 90vh;
         background-color: rgba(255, 255, 255, 0.849);
         flex-direction: column;
