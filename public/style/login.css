@@ -6,16 +6,25 @@
 
 .alerta-login {
     opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.4s ease;
     position: fixed;
     top: 20px;
     right: 20px;
     background: #fff;
     color: #EB2929;
-    padding: 15px 20px;
+    padding: 15px 18px;
     border-radius: 8px;
     box-shadow: 0 4px 10px #00000033;
     font-size: 14px;
     font-weight: bold;
+}
+.ativo {
+    opacity: 1;
+    transform: translateX(0);
+}
+#alerta_mensagem{
+    padding-left: 8px;
 }
 
 #body {
