@@ -6,104 +6,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Login | Horus </title>
+    <title> Horus | Login </title>
 
     <link rel="stylesheet" type="text/css" href="style/login.css">
-    <link rel="icon" href="./assets/icon/horus.png" />
+    <link rel="icon" href="./assets/icon/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap"
         rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jura:wght@300..700&family=Pixelify+Sans:wght@400..700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=League+Spartan:wght@100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style/header.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 
 </head>
-<header>
-    <div class="section_logo">
-        <img src="assets/imgs/home/logo.png" alt="Logo de avião">
-        <p>Horus Monitoring</p>
-    </div>
-    <div class="menu_responsivo">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-    </div>
-    <ul class="section_href">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#Sobre_nos">Sobre nós</a></li>
-        <li><a href="faleConosco.html">Fale Conosco</a></li>
-        <li><a href="#">Login</a></li>
-        <img src="assets/imgs/usuario/usuario.png" alt="" id="imgPerfilNav" onclick="usuario()">
-    </ul>
-</header>
 
 <body id="body">
-    <div class="container">
-        <div class="centro">
-            <div class="boxLogin">
-                <div class="boxManu">
-                    <h2>Login</h2>
-                    <div class="inputLogin">
-                        <div class="inputFilho">
-                            <p class="login">Email</p>
-                            <input id="emailInput" type="email">
-                            <img src="assets/imgs/login/user.png" alt="" class="inputIcone">
-                        </div>
-                    </div>
-                    <div class="inputLogin">
-                        <div class="inputFilho">
-                            <p class="loginS">Senha</p>
-                            <input id="senhaInput" type="password">
-                            <img src="assets/imgs/login/lock.png" alt="" class="inputIcone">
-                        </div>
-                    </div>
-                    <h4 class="esqueceu">Esqueceu a senha</h4>
-                    <button onclick="entrar()">Login</button>
-                    <div class="ou">
-                        <div class="barraE"></div>
-                        <h5>OU</h5>
-                        <div class="barraD"></div>
-                    </div>
-                    <div class="cadastrar">
-                        <span>Ainda não tem um login?</span>
-                        <a href="faleConosco.html" class="registrar-login">Clique aqui</a>
-                    </div>
-                </div>
+    <div class="alerta-login">
+        <img src="assets/imgs/login/erro.png" alt="">
+        <span id="alerta-mensagem">Teste teste</span>
+    </div>
+
+    <div class="login">
+        <div class="logo">
+            <img src="assets/icon/logo.png" alt="">
+            <h1>Login</h1>
+        </div>
+
+        <div class="formulario">
+            <div class="campo">
+                <span>Email</span>
+                <input type="text" id="input_email">
+                <img src="assets/imgs/login/usuario.png" alt="">
             </div>
-            <div class="boxBemVindo">
+
+            <div class="campo">
+                <span>Senha</span>
+                <input type="password" id="input_senha">
+                <img id="img" src="assets/imgs/login/olho-fechado.png" alt="">
+            </div>
+
+            <button onclick="entrar()">Entrar</button>
+
+            <div class="opcoes">
+                <span>Esqueceu sua senha? <a href="">Clique aqui.</a></span>
+                <span>Ainda não possui um login? <a href="">Clique aqui.</a></span>
             </div>
         </div>
+
+        <a href="index.html" class="botao-sair">
+            <img src="assets/imgs/login/seta.png" alt="">
+            <p>Voltar para tela de início</p>
+        </a>
     </div>
+    <div class="imagem"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/usuario.js"></script>
-    <script src="js/header.js"></script>
 </body>
+
 
 </html>
 
 <script>
 
-    // function navegarCelularAbrir() {
-    //     navAbrir.style.display = "none"
-    //     navFechar.style.display = "flex"
-    //     botaoCelular.style.display = "flex"
-    // }
+    // pega os elementos de acordo com o id (input e a img) e guarda em uma variável
+    var senha = document.getElementById("input_senha");
+    var trocarImg = document.getElementById("img");
 
-    // function navegarCelularFechar() {
-    //     navAbrir.style.display = "flex"
-    //     navFechar.style.display = "none"
-    //     botaoCelular.style.display = "none"
-    // }
+    // adiciona um evento de clique (quando o usuário clicar no icone de "olho" vai executar o código abaixo)
+    // === (serve para fazer uma comparação entre o valor e o tipo)
+    trocarImg.addEventListener("click", () => {
+        if (senha.type === "password") { // valida se o tipo do input é password 
+            senha.type = "text";
+            trocarImg.src = "assets/imgs/login/olho-aberto.png";
+        } else {
+            senha.type = "password"; 
+            trocarImg.src = "assets/imgs/login/olho-fechado.png";
+        }
+    });
 
     function entrar() {
 
-        var email = emailInput.value
-        var senha = senhaInput.value
+        var email = input_email.value;
+        var senha = input_senha.value;
+
         if (email.trim() == "" || senha.trim() == "") {
             alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
         } else {
@@ -154,10 +143,7 @@
     }
 
     function usuario() {
-        if (!sessionStorage.ID_USUARIO) {
-            alert("Você precisa estar logado!");
-            window.location = "login.html";
-        } else {
+        if (sessionStorage.ID_USUARIO) {
             window.location.href = "usuario.html";
         }
     }

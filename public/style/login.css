@@ -1,438 +1,128 @@
 * {
-    border: 0;
-    padding: 0;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 !important;
+    font-family: "Cabin";
 }
 
-html,
-body {
-    overflow-x: hidden;
-}
-
-/* Essa é a estilização para restauração dos padrões do site */
-* {
-    border: 0;
-    padding: 0;
-    box-sizing: border-box;
-    margin: 0;
-}
-
-/*Essa é a estilização do HEADER
-obs: Ela é feita com position FIXED, ou seja, ao descer na tela ela vai junto*/
-
-
-/* Fim da estilização da HEADER */
-
-.container {
-    background-color: #1B264F;
-    width: 100%;
-    min-height: 100vh;
-}
-
-.centro {
-    align-items: center;
-    display: flex;
-    font-family: "Inter", sans-serif;
-    width: 100%;
-}
-
-.boxBemVindo {
-    display: none;
-    background-image: url("../assets/imgs/login/imagemLogin.jpeg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 70%;
-}
-
-.boxLogin {
-    background-color: white;
-    width: 40%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.boxLogin h2 {
-    font-size: 24px;
+.alerta-login {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    color: #EB2929;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px #00000033;
+    font-size: 14px;
     font-weight: bold;
 }
 
-.inputLogin {
-    padding-top: 20px;
-}
-
-.boxLogin .inputLogin {
+#body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    flex-direction: row;
+    height: 100vh;
+    justify-content: space-between;
 }
 
-.inputFilho {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-}
-
-.inputFilho p {
-    align-self: flex-start;
-}
-
-.inputFilho input {
-    width: 100%;
-    height: 7vh;
-    border: 2px, solid, #e2e1e1;
-    border-radius: 10px;
-    font-size: 18px;
-    padding-left: 10px;
-}
-
-.boxManu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.imagem {
+    width: 60%;
+    background-image: url("../assets/imgs/login/imagem-login.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .login {
-    font-weight: bold;
-}
-
-.loginS {
-    font-weight: bold;
-}
-
-.inputIcone {
     display: flex;
-    align-self: flex-end;
-    margin-top: 20px;
-    margin-right: 7px;
-    position: absolute;
-    height: auto;
-    width: 28px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 40px;
+    align-items: center;
+    width: 40%;
 }
 
-.boxLogin span {
-    font-size: 16px;
-    color: black;
-    font-weight: bold;
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
 }
 
-.esqueceu {
-    color: #1B264F;
-    font-size: 15px;
+.logo h1 {
+    font-family: "Jura", sans-serif;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
     width: 80%;
-    text-align: end;
-    padding: 14px 0;
 }
 
-.cadastrar {
-    border-radius: 15px;
+.campo {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.ou {
-    display: flex;
-    padding: 17px;
-}
-
-.ou h5 {
-    margin-top: -1.5%;
-}
-
-.barraE,
-.barraD {
-    background-color: #e2e1e1;
-    height: 2px;
-    width: 25%;
-    margin: 0% 2%;
-}
-
-.boxLogin a {
-    font-size: 16px;
-    font-family: "inter", sans-serif;
-    color: #1B264F;
-    font-weight: bold;
-}
-
-.boxLogin button {
-    color: white;
-    font-size: 18px;
-    text-align: center;
-    width: 77%;
-    height: 8vh;
-    border-radius: 10px;
-    border: none;
-    background-color: #1B264F;
+input {
+    width: 100%;
+    padding: 8px 40px 8px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.navbarBotao,
-.navbarCelular,
-.navbarCelularDps,
-.botoesCelular {
-    display: none;
+.campo img {
+    position: absolute;
+    right: 10px;
+    top: 68%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
 }
 
-@media (max-width: 767px) {
+.formulario button {
+    border: none;
+    color: #FFFFFF;
+    background-color: #576CA8;
+    border-radius: 5px;
+    padding: 8px 0;
+    width: 100%;
+}
 
-    header {
-        height: 70px;
-        padding: 0 5%;
-        opacity: 1;
-    }
+.opcoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    header .section_href {
+.opcoes span {
+    font-size: 14px;
+}
+
+.opcoes a {
+    color: #576CA8;
+}
+
+.botao-sair {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #576CA8;
+    font-weight: bold;
+    padding: 0 0 16px 20px;
+    text-decoration: none;
+    align-self: self-start;
+}
+
+@media (max-width: 800px) {
+    .imagem {
         display: none;
     }
 
-    header .section_logo {
-        display: flex;
-        align-self: flex-start;
+    .login {
         width: 100%;
     }
-
-    .navbarBotao,
-    .navbarCelular,
-    .botoesCelular {
-        display: flex;
-    }
-
-    .navbarCelular button {
-        background: none;
-        border-radius: 10px;
-        margin-top: 20px;
-        padding: 5px;
-        padding-right: 10px;
-        padding-left: 10px;
-        width: 150%;
-        height: auto;
-    }
-
-    .navbarCelular img {
-        width: 30px;
-        height: auto;
-    }
-
-    .navbarCelularDps button {
-        background: #576ca8;
-        border-radius: 10px;
-        margin-top: 20px;
-        padding: 5px;
-        padding-right: 10px;
-        padding-left: 10px;
-        width: 150%;
-        height: auto;
-    }
-
-    .navbarCelularDps img {
-        width: 30px;
-        height: auto;
-    }
-
-    .boxCelular {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .botoesCelular {
-        align-items: center;
-        background-color: #302b27;
-        border-radius: 10px;
-        color: white;
-        display: flex;
-        height: 20vh;
-        flex-direction: column;
-        position: fixed;
-        justify-content: center;
-        margin-top: 65px;
-        margin-right: 26px;
-        width: 40%;
-        z-index: 9999;
-    }
-
-    .botoesCelular a {
-        color: white;
-        font-size: 20px;
-        font-family: "Jura", sans-serif;
-        text-decoration: none;
-        text-align: center;
-        height: 5vh;
-        width: 60%;
-    }
-
-    .centro {
-        flex-direction: column;
-    }
-
-    .boxBemVindo {
-        display: none;
-    }
-
-    .boxLogin {
-        width: 100%;
-        height: 100vh;
-    }
-
-}
-
-/* @media (min-width: 768px) and (max-width: 991px) {
-
-
-    header {
-        height: 80px;
-        padding: 0 6%;
-        opacity: 1;
-    }
-
-    .navbarCelular {
-        display: flex;
-    }
-    
-    .navbarCelular button{
-        background: none;
-        border-radius: 10px;
-        padding-top: 20%;
-        padding-bottom: 20%;
-        padding-right: 20%;
-        padding-left: 20%;
-        height: auto;
-        width: 150%;
-    }
-
-    .navbarCelular img{
-        width: 30px;
-        height: auto;
-    }
-
-    .navbarCelularDps {
-        display: flex;
-    }
-    
-    .navbarCelularDps button{
-        background: #576ca8;
-        border-radius: 10px;
-        padding-top: 20%;
-        padding-bottom: 20%;
-        padding-right: 20%;
-        padding-left: 20%;
-        height: auto;
-        width: 150%;
-    }
-
-    .navbarCelularDps img{
-        width: 30px;
-        height: auto;
-    }
-
-    .botoesCelular {
-        background-color: #302b27;
-        border-radius: 10px;
-        color: white;
-        flex-direction: column;
-        height: 20vh;
-        margin-top: 14%;
-        margin-left: 37%;
-        position: fixed;
-        width: 60%;
-        z-index: 9999;
-    }
-    
-    .botoesCelular a {
-        color: white;
-        font-size: 20px;
-        font-family: "Jura", sans-serif;
-        text-decoration: none;
-        text-align: center;
-        height: 5vh;
-        padding-top: 2%;
-        margin-top: 5%;
-        margin-left: 20%;
-        width: 60%;
-    }
-
-    .boxBemVindo {
-        width: 45%;
-    }
-
-    .boxLogin {
-        width: 55%;
-    }
-
-    .boxLogin h2 {
-        margin-left: 25%;
-        margin-top: 25%;
-    }
-
-    .user,
-    .lock {
-        width: 5%;
-        margin-left: -8%;
-    }
-
-    .esqueceu {
-        margin-left: 55%;
-    }
-
-    
-} */
-@media screen and (max-width: 667px) {
-    header .section_href {
-        position: absolute;
-        top: 10vh;
-        right: 0;
-        width: 50vw;
-        height: 90vh;
-        background-color: rgba(255, 255, 255, 0.849);
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        transform: translateX(100%);
-    }
-
-    header .section_href.active {
-        transform: translateX(0);
-    }
-
-    header .section_href li {
-        margin-left: 0;
-        opacity: 0;
-    }
-
-    header .menu_responsivo {
-        display: block !important;
-    }
-}
-
-@media (min-width: 767px) {
-
-    header {
-        height: 15%;
-        padding: 0 10%;
-    }
-
-    .boxBemVindo {
-        display: block;
-        width: 70%;
-        height: 100vh;
-        background-image: url("../assets/imgs/login/imagemLogin.jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .boxLogin {
-        width: 40%;
-        height: 100vh;
-    }
-
-    .navbarCelular {
-        display: flex;
-    }
-
 }
