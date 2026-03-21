@@ -5,6 +5,7 @@
 }
 
 .alerta-login {
+    opacity: 0;
     position: fixed;
     top: 20px;
     right: 20px;

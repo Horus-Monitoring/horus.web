@@ -25,9 +25,9 @@
 </head>
 
 <body id="body">
-    <div class="alerta-login">
+    <div id="alerta_login" class="alerta-login">
         <img src="assets/imgs/login/erro.png" alt="">
-        <span id="alerta-mensagem">Teste teste</span>
+        <span id="alerta_mensagem"></span>
     </div>
 
     <div class="login">
@@ -83,10 +83,19 @@
             senha.type = "text";
             trocarImg.src = "assets/imgs/login/olho-aberto.png";
         } else {
-            senha.type = "password"; 
+            senha.type = "password";
             trocarImg.src = "assets/imgs/login/olho-fechado.png";
         }
     });
+
+    function mostrarAlerta() {
+        const alerta = document.getElementById("alerta_login");
+        alerta.style.opacity = "1";
+
+        setTimeout(() => {
+            alerta.style.opacity = "0";
+        }, 2000);
+    }
 
     function entrar() {
 
@@ -94,7 +103,8 @@
         var senha = input_senha.value;
 
         if (email.trim() == "" || senha.trim() == "") {
-            alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
+            alerta_mensagem.innerHTML = "Houve um erro ao tentar realizar o login!";
+            mostrarAlerta();
         } else {
             fetch("/usuario/autenticar", {
                 method: "POST",
@@ -111,14 +121,16 @@
                     if (resposta.ok) {
                         return resposta.json();
                     } else {
-                        alert("Houve um erro ao tentar realizar o login! \n Verifique suas credenciais")
+                        alerta_mensagem.innerHTML = "Houve um erro ao tentar realizar o login!";
+                        mostrarAlerta();
                         throw "Houve um erro ao tentar realizar o Login!";
                     }
                 })
                 .then(function (dados) {
 
                     if (!dados || dados.length == 0) {
-                        alert("Email ou senha inválidos!");
+                        alerta_mensagem.innerHTML = "Email ou senha inválidos!";
+                        mostrarAlerta();
                         return;
                     }
 
@@ -126,11 +138,7 @@
                     sessionStorage.NOME_USUARIO = dados[0].nome;
                     sessionStorage.EMAIL_USUARIO = dados[0].email;
 
-                    alert("Login realizado com sucesso")
-
-                    setTimeout(() => {
-                        window.location = "usuario.html";
-                    }, 1000);
+                    window.location = "usuario.html";
 
                 })
                 .catch(function (resposta) {
@@ -142,9 +150,9 @@
 
     }
 
-    function usuario() {
-        if (sessionStorage.ID_USUARIO) {
-            window.location.href = "usuario.html";
-        }
-    }
+    // function usuario() {
+    //     if (sessionStorage.ID_USUARIO) {
+    //         window.location.href = "usuario.html";
+    //     }
+    // }
 </script>
