@@ -90,11 +90,12 @@
 
     function mostrarAlerta() {
         const alerta = document.getElementById("alerta_login");
-        alerta.style.opacity = "1";
 
+        alerta.classList.add("ativo");
         setTimeout(() => {
-            alerta.style.opacity = "0";
+            alerta.classList.remove("ativo")
         }, 2000);
+
     }
 
     function entrar() {
