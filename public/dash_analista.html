@@ -196,7 +196,7 @@
                                 <td>0%</td>
                                 <td>0%</td>
                                 <td>Há cerca de 2 hoars</td>
-                                <td><button>Detalhes</button></td>
+                                <td><button onclick="exibirDetalhes()">Detalhes</button></td>
                             </tr>
 
 
@@ -215,7 +215,7 @@
                                 <td>58%</td>
                                 <td>51%</td>
                                 <td>Há cerca de 2 hoars</td>
-                                <td><button>Detalhes</button></td>
+                                <td><button class="detalhes">Detalhes</button></td>
                             </tr>
                         </table>
 
@@ -224,6 +224,20 @@
                 </div>    
 
             </section>
+
+            <div class="popup" id="modal">
+                <div class="modal">
+                    <div style="border: 10px red solid;">
+                                    <div class="servidor">
+                                        <img src="assets/imgs/painel/servidores-selecionado.png" alt="">
+                                    </div> 
+                                    <div> 
+                                        ATC-SVR-REC-01 <br>
+                                        <span>Recife - PE</span>
+                                    </div> 
+                    </div>
+                </div>
+            </div>
 
         </main>
 
@@ -234,7 +248,25 @@
 </html>
 
 <script>
-    const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
+    
+        const modal = document.getElementById('modal');
+
+        document.querySelectorAll('.detalhes').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('ativo');
+        });
+        });
+
+        document.getElementById('fechar').addEventListener('click', () => {
+        modal.classList.remove('ativo');
+        });
+
+        modal.addEventListener('click', e => {
+        if (e.target === modal) modal.classList.remove('ativo');
+        });
+
+
+        const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
         const graficoRecursos24h = new Chart(recursos24h, {
             type: 'line', 
             data: {
@@ -271,21 +303,4 @@
             }
         });
 
-        const incidentes = document.getElementById('graficoIncidentes').getContext('2d');
-        const graficoIncidentes = new Chart(incidentes, {
-            type: 'bar', // Define o tipo de gráfico
-            data: {
-                labels: ['22/03', '23/03', '24/03', '25/03', '26/03'], // Rótulos do eixo X
-                datasets: [{
-                    label: "Número de Incidentes",
-                    data: [12, 28, 3, 5, 2], // Dados (eixo Y)
-                    borderColor: 'rgb(75, 192, 192)', // Cor da linha
-                    tension: 0.1 // Suavização da linha
-                }]
-            },
-            options: {
-                responsive: true,
-                }
-            }
-        );
 </script>
