@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Horus</title>
+    <link rel="stylesheet" href="./style/dash_analista.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <aside class="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+
+                <div class="item-menu selecionado"><img src="./assets/imgs/painel/dash-selecionado.png" alt="">Visão
+                    geral</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
+
+                <div class="categoria">Administração</div>
+
+                <div class="item-menu"><img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor</div>
+            </nav>
+
+            <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <span><b>Dashboard - Visão Geral</b></span>
+
+                <div class="usuario">
+                    <img src="./assets/imgs/painel/usuario.png" alt="">
+                    <div>
+                        <p>Fernando Brandão</p>
+                        <span class="cargo">Gestor</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="conteudo">
+                <div class="cards">
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Total de Servidores</span>
+                            <span class="kpi">8</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #e5edff;">
+                            <img src="./assets/imgs/painel/servidor.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Servidores Online</span>
+                            <span class="kpi">5</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #f0fdf4;">
+                            <img src="./assets/imgs/painel/online.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Servidores Offline</span>
+                            <span class="kpi">1</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #fef2f2;">
+                            <img src="./assets/imgs/painel/offline.png">
+                        </div>
+
+                    </div>
+                    <div class="card pequeno">
+
+                        
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Alertas Ativos</span>
+                            <span class="kpi">4</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #fefce8;">
+                            <img src="./assets/imgs/painel/alertas.png">
+                        </div>
+
+                    </div>
+                    <div class="card pequeno">
+                        
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">CPU Média</span>
+                            <span class="kpi">51%</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #e5edff;">
+                            <img src="./assets/imgs/painel/cpu.png">
+                        </div>
+
+                    </div>
+                    <div class="card pequeno">
+
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Ram Média</span>
+                            <span class="kpi">5</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #f0fdf4;">
+                            <img src="./assets/imgs/painel/ram.png">
+                        </div>
+
+                    </div>
+                    <div class="card pequeno">
+
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Disco Média</span>
+                            <span class="kpi">5</span>
+                        </div>
+
+                        <div class="card-img" style="background-color: #fefce8;">
+                            <img src="./assets/imgs/painel/disco.png">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="card medio"></div>
+                    <div class="card medio"></div>
+                </div>
+
+                <div class="linha">
+                    <div class="card servidores"></div>
+                    <div class="card alertas"></div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
