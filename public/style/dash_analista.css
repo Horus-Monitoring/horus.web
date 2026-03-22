@@ -219,6 +219,8 @@ body {
 }
 
 .medio {
+  display: flex;
+  flex-direction: column;
   flex: auto;
   height: 360px;
 }

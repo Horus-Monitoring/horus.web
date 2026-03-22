@@ -4,8 +4,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Horus</title>
-    <link rel="stylesheet" href="./style/dash_analista.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analista | Horus </title>
+    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/dash_analista.css">
 </head>
 
 <body>
@@ -26,10 +37,6 @@
                 <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
                 <div class="item-menu"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
 
-                <div class="categoria">Administração</div>
-
-                <div class="item-menu"><img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários</div>
-                <div class="item-menu"><img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor</div>
             </nav>
 
             <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
@@ -138,13 +145,24 @@
                 </div>
 
                 <div class="linha">
-                    <div class="card medio"></div>
-                    <div class="card medio"></div>
+                    <div class="card medio">
+                        <span class="nome-kpi">Uso Médio de Recursos (24h)</span>
+                        <canvas id="graficoRecursos24h"></canvas>
+
+                    </div>
+                    <div class="card medio">
+                        <span class="nome-kpi">Incidentes ao longo do tempo</span>
+                        <canvas id="graficoIncidentes"></canvas>
+                    </div>
                 </div>
 
                 <div class="linha">
-                    <div class="card servidores"></div>
-                    <div class="card alertas"></div>
+                    <div class="card servidores">
+                        <span class="nome-kpi">Resumo de Servidores</span>
+                    </div>
+                    <div class="card alertas">
+                        <span class="nome-kpi">Alertas Recentes</span>
+                    </div>
                 </div>
 
             </section>
@@ -156,3 +174,60 @@
 </body>
 
 </html>
+
+<script>
+    const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
+        const graficoRecursos24h = new Chart(recursos24h, {
+            type: 'line', 
+            data: {
+                labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
+                datasets: [
+                    {
+                        label: 'CPU%',
+                        data: [12, 19, 3, 5, 2], // Dados (eixo Y)
+                        borderColor: 'rgb(75, 192, 192)', // Cor da linha
+                        tension: 0.1 // Suavização da linha
+                    },
+                    {
+                        label: 'RAM%',
+                        data: [45, 27, 32, 52, 40], // Dados (eixo Y)
+                        borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
+                        tension: 0.1
+                    },
+                    {
+                        label: 'DISCO%',
+                        data: [90, 86, 82, 92, 93], // Dados (eixo Y)
+                        borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                scales:{
+                    y: {
+                    beginAtZero: true, 
+                    max: 100 
+                }
+                },
+                responsive: true
+            }
+        });
+
+        const incidentes = document.getElementById('graficoIncidentes').getContext('2d');
+        const graficoIncidentes = new Chart(incidentes, {
+            type: 'bar', // Define o tipo de gráfico
+            data: {
+                labels: ['22/03', '23/03', '24/03', '25/03', '26/03'], // Rótulos do eixo X
+                datasets: [{
+                    label: "Número de Incidentes",
+                    data: [12, 28, 3, 5, 2], // Dados (eixo Y)
+                    borderColor: 'rgb(75, 192, 192)', // Cor da linha
+                    tension: 0.1 // Suavização da linha
+                }]
+            },
+            options: {
+                responsive: true,
+                }
+            }
+        );
+</script>
