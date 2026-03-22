@@ -239,9 +239,11 @@ body {
   background: white;
   padding: 24px;
   border-radius: 12px;
-  width: 400px;
+  width: 800px;
   max-width: 90%;
+  max-height: 80%;
   animation: aparecer 0.2s ease;
+  overflow-y: auto;
 }
 
 @keyframes aparecer {
