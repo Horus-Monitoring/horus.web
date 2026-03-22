@@ -193,13 +193,13 @@ body {
   transition: 0.2s;
 }
 
-.pequeno input{
+.pequeno-filtro input{
     border: 2px var(--borda) solid;
     height: 40px;
     border-radius: 10px;
 }
 
-.pequeno button{
+.pequeno-filtro button{
     border: 2px  var(--borda) solid;
     height: 40px;
     width: 80px;
