@@ -163,6 +163,23 @@ body {
   background: #fff;
   border-radius: 12px;
   border: 1px solid #ddd;
+  height: auto !important;
+  overflow-x: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.pequeno-filtro{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.pequeno-filtro img{
+    width: 20px;
 }
 
 .pequeno {
@@ -189,6 +206,24 @@ body {
     border-radius: 10px;
     background-color: var(--cinza);
     color: var(--texto);
+}
+
+.pequeno table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pequeno table th{
+    align-self: first baseline;
+}
+
+.pequeno table td{
+    text-align: center;
+}
+
+.servidor{
+    display: flex;
+    flex-direction: column;
 }
 
 .tipo-kpi {
