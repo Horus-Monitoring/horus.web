@@ -2,7 +2,6 @@ CREATE DATABASE horus_db;
 
 USE horus_db;
 
-
 CREATE TABLE Contato_inicial (
 idContato_inicial INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
