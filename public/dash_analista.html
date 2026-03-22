@@ -227,14 +227,36 @@
 
             <div class="popup" id="modal">
                 <div class="modal">
-                    <div style="border: 10px red solid;">
-                                    <div class="servidor">
-                                        <img src="assets/imgs/painel/servidores-selecionado.png" alt="">
+                    <div style="border: 10px red solid; display: flex; flex-direction: row; justify-content: space-between;">
+                                    <div>
+                                        <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
                                     </div> 
                                     <div> 
                                         ATC-SVR-REC-01 <br>
                                         <span>Recife - PE</span>
                                     </div> 
+                                    <div>
+                                        <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
+                                    </div>
+                    </div>
+                    <div style="border: 10px red solid; display: flex; flex-direction: row; justify-content: space-between;">
+                        <div style="border: 10px blue solid;">
+                            RAM 45%
+                        </div>
+                        <div style="border: 10px purple solid;">
+                            RAM 62%
+                        </div>
+                        <div style="border: 10px green solid;">
+                            DISCO 55%
+                        </div>
+                    </div>
+                    <div style="border: 10px red solid; display: flex; flex-direction: column; justify-content: space-between;">
+                        <h1>Histórico de Uso (Últimas 24h)</h1>
+                        <canvas id="graficoRecursos24h"></canvas>
+                    </div>
+                    <div style="border: 10px red solid; display: flex; flex-direction: row; justify-content: flex-start">
+                        <img src="assets/imgs/dash_analista/relogio.png" alt="" height="20px">
+                        <span>Última atualização: 22/03/2026 às 14:39:04.</span>
                     </div>
                 </div>
             </div>
