@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Dashboard Horus</title>
     <link rel="stylesheet" href="./style/painel.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -88,7 +89,6 @@
                     </div>
                     <div class="card pequeno">
 
-
                         <div class="tipo-kpi">
                             <span class="nome-kpi">Alertas Ativos</span>
                             <span class="kpi">4</span>
@@ -138,8 +138,18 @@
                 </div>
 
                 <section class="linha">
-                    <div class="card medio"></div>
-                    <div class="card medio"></div>
+                    <div class="card medio">
+                        <h3 class="tipo-grafico">Uso de Recursos (24h)</h3>
+                        <div>
+                            <canvas id="grafico-componentes"></canvas>
+                        </div>
+                    </div>
+                    <div class="card medio">
+                        <h3 class="tipo-grafico">Incidentes por dia</h3>
+                        <div>
+                            <canvas id="grafico-incidentes"></canvas>
+                        </div>
+                    </div>
                 </section>
 
                 <section class="linha">
@@ -149,10 +159,10 @@
                         <div class="lista-servidores">
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -174,10 +184,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-amarela.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -199,10 +209,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -224,10 +234,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -249,10 +259,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-vermelha.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -274,10 +284,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-amarela.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -299,10 +309,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -324,10 +334,10 @@
                             </div>
 
                             <div class="box-servidor">
-                                <div class="nome-servidor">
+                                <div class="info-servidor">
                                     <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                     <div>
-                                        <p>SRV-ACC-SP-01</p>
+                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
                                         <p class="endereco">São Paulo - ACC-SP</p>
                                     </div>
                                 </div>
@@ -351,7 +361,50 @@
                         </div>
                     </div>
 
-                    <div class="card alertas"></div>
+                    <div class="card alertas">
+                        <h3>Alertas Recentes</h3>
+
+                        <div class="linha-alerta">
+                            <div class="alerta alerta-vermelho">
+                                <img src="./assets/imgs/painel/exclamacao.png" alt="">
+                                <div>
+                                    <p class="status-servidor">Servidor offline - Sem resposta há 2h17min</p>
+                                    <p class="endereco">SRV-CWB-01 - 12:45</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="linha-alerta">
+                            <div class="alerta alerta-amarelo">
+                                <img src="./assets/imgs/painel/alertas.png" alt="">
+                                <div>
+                                    <p class="status-servidor">CPU em 88% — limite de atenção ultrapassado</p>
+                                    <p class="endereco">SRV-GIG-01 - 14:29</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="linha-alerta">
+                            <div class="alerta alerta-amarelo">
+                                <img src="./assets/imgs/painel/alertas.png" alt="">
+                                <div>
+                                    <p class="status-servidor">RAM em 82% — próximo do limite crítico</p>
+                                    <p class="endereco">SRV-BSB-01 - 14:30</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="linha-alerta">
+                            <div class="alerta alerta-vermelho">
+                                <img src="./assets/imgs/painel/exclamacao.png" alt="">
+                                <div>
+                                    <p class="status-servidor">Componente CPU Intel Xeon Platinum em nível crítico (88%)</p>
+                                    <p class="endereco">SRV-GIG-01 - 14:29</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </section>
 
             </section>
@@ -363,3 +416,174 @@
 </body>
 
 </html>
+
+<script>
+    const ctx = document.getElementById('grafico-componentes');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
+            datasets: [{
+                label: 'CPU',
+                data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28],
+                borderColor: '#3577d4',
+                backgroundColor: 'rgba(59,130,246,0.1)',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.5,
+                fill: true,
+            },
+            {
+                label: 'Ram',
+                data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40],
+                borderColor: '#22c55e',
+                backgroundColor: 'rgba(34,197,94,0.1)',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.4,
+                fill: true,
+            },
+            {
+                label: 'Disco',
+                data: [50, 52, 51, 50, 49, 51, 55, 53, 50, 48, 47, 49, 51, 50, 52, 54, 57, 60, 58, 55, 47, 45, 49, 51, 50],
+                borderColor: '#f59e0b',
+                backgroundColor: 'rgba(245,158,11,0.08)',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.4,
+                fill: true,
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: '#fff',
+                    borderColor: '#e5e7eb',
+                    borderWidth: 1,
+                    titleColor: '#111827',
+                    bodyColor: '#6b7280',
+                    padding: 12
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: '#6b7280',
+                        font: {
+                            size: 14
+                        },
+                        boxWidth: 16,
+                        boxHeight: 10,
+                        padding: 14
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#9ca3af',
+                        font: {
+                            size: 10
+                        },
+                        maxTicksLimit: 8
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 100,
+                    ticks: {
+                        stepSize: 25,
+                        color: '#303030',
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('grafico-incidentes');
+
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                label: 'Crítico',
+                data: [0, 0, 1, 1, 2, 0, 0],
+                borderColor: 'transparent',
+                backgroundColor: '#dc2828',
+                borderRadius: 5,
+                borderWidth: 2
+            },
+            {
+                label: 'Atenção',
+                data: [1, 4, 2, 5, 1, 5, 3],
+                borderColor: 'transparent',
+                backgroundColor: '#f59f0a',
+                borderRadius: 5,
+                borderWidth: 2
+            },
+            {
+                label: 'Info',
+                data: [5, 2, 5, 5, 2, 4, 2],
+                borderColor: 'transparent',
+                backgroundColor: '#3577d4',
+                borderRadius: 5,
+                borderWidth: 2
+            }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: '#fff',
+                    borderColor: '#e5e7eb',
+                    borderWidth: 1,
+                    titleColor: '#111827',
+                    bodyColor: '#6b7280',
+                    padding: 12
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        pointStyle: 'circle',
+                        color: '#6b7280',
+                        font: {
+                            size: 14
+                        },
+                        boxWidth: 10,
+                        boxHeight: 10,
+                        padding: 20,
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 8,
+                    ticks: {
+                        stepSize: 2,
+                        color: '#303030',
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
