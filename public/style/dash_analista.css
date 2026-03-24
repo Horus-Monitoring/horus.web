@@ -167,8 +167,9 @@ body {
   overflow-x: auto;
   min-width: 0;
   flex: 0 0 auto;
-  display: inline-block;
   max-width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .pequeno-filtro{
@@ -191,6 +192,7 @@ body {
   flex: 1;
   height: 90px;
   transition: 0.2s;
+  width: 100%;
 }
 
 .pequeno-filtro input{
@@ -213,19 +215,6 @@ body {
     border: 2px var(--cinza) solid;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
     transition: 0.2s;
-}
-
-.pequeno table{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.pequeno table th{
-    align-self: first baseline;
-}
-
-.pequeno table td{
-    text-align: center;
 }
 
 .popup {
@@ -263,23 +252,6 @@ body {
     flex-direction: column;
 }
 
-.tipo-kpi {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.nome-kpi {
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.kpi {
-  font-size: 24px;
-  font-weight: bold;
-  color: #111827;
-}
-
 .card-img {
   display: flex;
   align-items: center;
@@ -297,10 +269,6 @@ body {
   transition: 0.2s;
 }
 
-.kpi {
-  font-size: 24px;
-  font-weight: bold;
-}
 
 .linha {
   display: flex;
@@ -332,6 +300,7 @@ body {
   flex-direction: column;
   overflow-y: auto;
   scrollbar-width: none;
+  width: 100%;
 }
 
 .box-servidor {
@@ -341,6 +310,7 @@ body {
   padding: 8px 0;
   border-top: 1px solid var(--borda);
   transition: 0.3s;
+  width: 100%;
 }
 
 .box-servidor:hover {
@@ -357,6 +327,22 @@ body {
 
 .info-servidor img {
   width: 10px;
+}
+
+.info-servidor button{
+    border: 2px  var(--borda) solid;
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
+    background-color: var(--cinza);
+    color: var(--texto);
+}
+
+.info-servidor button:hover{
+    background-color: var(--borda);
+    border: 2px var(--cinza) solid;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
 }
 
 .nome-servidor {
