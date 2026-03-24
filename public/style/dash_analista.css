@@ -30,7 +30,6 @@ body {
 .lateral {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   gap: 1vw;
   width: 260px;
   height: 100vh;
@@ -51,9 +50,7 @@ body {
   color: white;
 }
 
-.logo img {
-  width: 30%;
-}
+.logo img { width: 30%; }
 
 .menu {
   display: flex;
@@ -85,10 +82,7 @@ body {
   transition: 0.2s;
 }
 
-.item-menu:hover {
-  background-color: #2a3646;
-  transition: 0.2s;
-}
+.item-menu:hover { background-color: #2a3646; }
 
 .selecionado {
   background-color: #2a3646;
@@ -109,7 +103,6 @@ body {
 
 .sair:hover {
   background-color: #2a3646;
-  transition: 0.2s;
   cursor: pointer;
 }
 
@@ -130,9 +123,7 @@ body {
   padding: 20px;
 }
 
-.header img {
-  width: 40px;
-}
+.header img { width: 40px; }
 
 .usuario {
   display: flex;
@@ -163,9 +154,7 @@ body {
   background: #fff;
   border-radius: 12px;
   border: 1px solid #ddd;
-  height: auto !important;
   overflow-x: auto;
-  min-width: 0;
   flex: 0 0 auto;
   max-width: 100%;
   display: flex;
@@ -179,9 +168,7 @@ body {
   padding: 20px;
 }
 
-.pequeno-filtro img{
-    width: 20px;
-}
+.pequeno-filtro img { width: 20px; }
 
 .pequeno {
   display: flex;
@@ -191,30 +178,22 @@ body {
   font-size: 12px;
   flex: 1;
   height: 90px;
-  transition: 0.2s;
   width: 100%;
 }
 
 .pequeno-filtro input{
-    border: 2px var(--borda) solid;
-    height: 40px;
-    border-radius: 10px;
+  border: 2px var(--borda) solid;
+  height: 40px;
+  border-radius: 10px;
 }
 
 .pequeno-filtro button{
-    border: 2px  var(--borda) solid;
-    height: 40px;
-    width: 80px;
-    border-radius: 10px;
-    background-color: var(--cinza);
-    color: var(--texto);
-}
-
-.pequeno-filtro button:hover{
-    background-color: var(--borda);
-    border: 2px var(--cinza) solid;
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: 0.2s;
+  border: 2px var(--borda) solid;
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: var(--cinza);
+  color: var(--texto);
 }
 
 .popup {
@@ -227,9 +206,7 @@ body {
   z-index: 999;
 }
 
-.popup.ativo {
-  display: flex;
-}
+.popup.ativo { display: flex; }
 
 .modal {
   background: white;
@@ -238,61 +215,7 @@ body {
   width: 800px;
   max-width: 90%;
   max-height: 80%;
-  animation: aparecer 0.2s ease;
   overflow-y: auto;
-}
-
-@keyframes aparecer {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.servidor{
-    display: flex;
-    flex-direction: column;
-}
-
-.card-img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.pequeno img {
-  width: 18px;
-}
-
-.pequeno:hover {
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: 0.2s;
-}
-
-
-.linha {
-  display: flex;
-  gap: 20px;
-}
-
-.medio {
-  display: flex;
-  flex-direction: column;
-  flex: auto;
-  height: 360px;
-}
-
-.servidores {
-  display: flex;
-  flex-direction: column;  
-  flex: auto;
-  height: 540px;
-  width: 20%;
-}
-
-.alertas {
-  flex: auto;
-  height: 380px;
 }
 
 .lista-servidores {
@@ -309,14 +232,10 @@ body {
   align-items: center;
   padding: 8px 0;
   border-top: 1px solid var(--borda);
-  transition: 0.3s;
   width: 100%;
 }
 
-.box-servidor:hover {
-  background-color: #f6f7f8;
-  transition: 0.3s;
-}
+.box-servidor:hover { background-color: #f6f7f8; }
 
 .info-servidor {
   display: flex;
@@ -325,24 +244,15 @@ body {
   padding: 10px 20px;
 }
 
-.info-servidor img {
-  width: 10px;
-}
+.info-servidor img { width: 10px; }
 
 .info-servidor button{
-    border: 2px  var(--borda) solid;
-    height: 40px;
-    width: 80px;
-    border-radius: 10px;
-    background-color: var(--cinza);
-    color: var(--texto);
-}
-
-.info-servidor button:hover{
-    background-color: var(--borda);
-    border: 2px var(--cinza) solid;
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: 0.2s;
+  border: 2px var(--borda) solid;
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: var(--cinza);
+  color: var(--texto);
 }
 
 .nome-servidor {
@@ -362,9 +272,7 @@ body {
   gap: 6px;
 }
 
-.metricas img {
-  width: 18px;
-}
+.metricas img { width: 18px; }
 
 .pct {
   color: #444444;
@@ -386,15 +294,6 @@ body {
   border-radius: 16px;
 }
 
-.barra-verde {
-  background-color: #2bab6f;
-}
-
-.barra-amarela {
-  background-color: #f59f0a;
-}
-
-.barra-vermelha {
-  background-color: #dc2828;
-}
-
+.barra-verde { background-color: #2bab6f; }
+.barra-amarela { background-color: #f59f0a; }
+.barra-vermelha { background-color: #dc2828; }
