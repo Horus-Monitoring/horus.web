@@ -218,6 +218,27 @@ body {
   overflow-y: auto;
 }
 
+.cards-detalhes{
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between; 
+  height: fit-content;
+}
+
+.cards-detalhes-grafico{
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  min-height: 300px;
+  background-color: var(--cinza);
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border: 2px var(--borda) solid;
+  border-radius: 20px;
+}
+
 .lista-servidores {
   display: flex;
   flex-direction: column;
