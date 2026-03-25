@@ -225,6 +225,39 @@ body {
   height: fit-content;
 }
 
+.card-cpu{
+  background-color: #BEDBFF;
+  color: #1C398E;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border: 2px blue solid;
+  border-radius: 20px;
+}
+
+.card-ram{
+  background-color: #BEDBFF;
+  color: #1C398E;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border: 2px blue solid;
+  border-radius: 20px;
+}
+
+.card-disk{
+  background-color: #BEDBFF;
+  color: #1C398E;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border: 2px blue solid;
+  border-radius: 20px;
+}
+
 .cards-detalhes-grafico{
   display: flex; 
   flex-direction: column; 
