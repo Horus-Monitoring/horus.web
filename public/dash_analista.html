@@ -53,6 +53,7 @@
                         <p>Julia Araripe</p>
                         <span class="cargo">Analista</span>
                     </div>
+                    <button class="menu-sand" id="menu">☰</button>
                 </div>
             </header>
 
@@ -328,7 +329,7 @@
 
             <div class="popup" id="modal">
                 <div class="modal">
-                    <div style="border: 10px red solid; display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="card-nome-servidor">
                                     <div>
                                         <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
                                     </div> 
@@ -398,6 +399,20 @@
 
         modal.addEventListener('click', e => {
         if (e.target === modal) modal.classList.remove('ativo');
+        });
+
+
+        const menu = document.getElementById('menu-');
+        const lateral = document.querySelector('.lateral');
+
+        menu.addEventListener('click', () => {
+        lateral.classList.toggle('ativo');
+        });
+
+        document.addEventListener('click', (e) => {
+        if (!lateral.contains(e.target) && !menu.contains(e.target)) {
+            lateral.classList.remove('ativo');
+        }
         });
 
 

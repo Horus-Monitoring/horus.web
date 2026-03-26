@@ -19,7 +19,7 @@
 body {
   background: var(--cinza);
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .container {
@@ -36,6 +36,14 @@ body {
   background-color: #1f2937;
   border-right: 1px solid var(--borda);
   position: fixed;
+}
+
+.menu-sand {
+  display: none;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .logo {
@@ -220,9 +228,12 @@ body {
 
 .cards-detalhes{
   display: flex; 
+  flex-wrap: wrap;
   flex-direction: row; 
   justify-content: space-between; 
   height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .card-cpu{
@@ -259,6 +270,24 @@ body {
   border: 2px #8cf1af solid;
   border-radius: 10px;
   width: 230px;
+}
+
+.card-nome-servidor{
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between; 
+  background-color: var(--cinza);
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border: 2px var(--borda) solid;
+  border-radius: 20px;
+}
+
+.card-nome-servidor img{
+  height: 40px;
+  width: 40px;
 }
 
 .cards-detalhes-grafico{
@@ -357,3 +386,88 @@ body {
 .barra-azul { background-color: #4628dc; }
 .barra-roxa { background-color: #9b18b0; }
 .barra-verde2 { background-color: #126313; }
+
+
+/*Tablet*/
+
+@media (max-width: 1024px) {
+  .lateral {
+    width: 200px;
+  }
+
+  .main {
+    margin-left: 200px;
+  }
+
+  .card-cpu,
+  .card-ram,
+  .card-disk {
+    max-width: 100%;
+  }
+}
+
+/*Celular*/
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    height: auto;
+  }
+
+  .lateral {
+    position: absolute;
+    left: -100%;
+    transition: 0.3s;
+  }
+
+  .lateral.ativo {
+    left: 0;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .cards-detalhes {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-cpu,
+  .card-ram,
+  .card-disk {
+    max-width: 100%;
+  }
+
+  .pequeno-filtro {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .pequeno-filtro button,
+  .pequeno-filtro input,
+  .pequeno-filtro select {
+    width: 100%;
+  }
+
+  .box-servidor {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .metricas {
+    flex-wrap: wrap;
+  }
+
+   .modal {
+    width: 95%;
+    padding: 15px;
+  }
+
+   .menu {
+    display: block;
+  }
+}
