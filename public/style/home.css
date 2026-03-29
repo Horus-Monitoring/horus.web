@@ -291,7 +291,7 @@ main .section_informacoes {
     padding: 5% 5%;
     color: black;
     gap: 5%;
-    z-index: 99;
+    z-index: 3;
     position: relative;
 }
 
@@ -307,9 +307,9 @@ main .section_informacoes .informacoes {
 
 main .section_informacoes .textos {
     /* background-color: yellow; */
-    /* width: 60vw; */
+    width: 100%;
     /* padding-right: 20px; */
-    /* flex: 1; */
+    flex: 1;
     padding: 10px 30px;
 }
 
@@ -328,8 +328,7 @@ main .section_informacoes .textos .texto {
 
 main .section_informacoes img {
     width: 100%;
-    /* height: 60vh; */
-    /* object-fit: cover; */
+    object-fit: cover;
 }
 
 main .section_informacoes .informacoes .button {
@@ -368,7 +367,7 @@ main .section_informacoes .informacoes .img-info {
     background-position: center;
     background-size: cover;
     padding: 0px 50px;
-    /* flex: 1; */
+    flex: 1;
     display: flex;
     /* overflow: hidden; */
 }
@@ -377,8 +376,6 @@ main .section_informacoes .informacoes .img-info {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* object-fit: none;
-    object-position: -50px -50px; */
 }
 
 main .section_informacoes .banner {
@@ -390,6 +387,7 @@ main .section_informacoes .banner {
     z-index: -1;
     object-fit: cover;
     /* background-color: red; */
+    object-position: 90px 240px;
 }
 
 
