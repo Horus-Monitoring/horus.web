@@ -437,7 +437,7 @@ main .section_cards .card .texto {
 
 .section_contato {
     /* background-color: pink; */
-    height: 100%; /*ou 100vh*/
+    height: 100%; /*ou 100%*/
     padding: 20px 0px;
 }
 
@@ -522,65 +522,93 @@ main .section_cards .card .texto {
 /* SECTION CONTATO - FIM*/
 /* FOOTER ÍNICIO */
 footer {
-    background-color: #1B264F;
+    background-color: #274690;
     width: 100%;
-    height: 30vh;
+    height: 50%;
     display: flex;
     justify-content: space-between;
     padding: 5% 5%;
     align-items: center;
+    margin-top: 5%;
+}
+
+.footer {
+    /* background-color: yellow; */
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+    .footer {
+        height: 60%;
+        gap: 20px;
+    }
+
+    .footer .section_direita {
+        width: 100px;
+    }
+
+    .footer .section_direita img {
+        width: 100px;
+    }
+    
 }
 
 footer .section_esquerda {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 40%;
-    gap: 10px;
-}
-
-footer .section_esquerda a {
-    text-decoration: none;
+    width: 250px;
+    /* background-color: aqua; */
     color: #fff;
-    font-size: 20px;
-    font-family: "Inter", sans-serif;
-}
-
-footer .section_esquerda a:hover {
-    border-bottom: 2px solid white;
+    align-items: start;
 }
 
 footer .logo {
-    width: 100px;
-    height: 100px;
-    width: 20%;
+    height: 100%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     color: #fff;
-    gap: 5px;
+    /* background-color: red; */
+    text-align: center;
 }
 
 footer .logo img {
     width: 100px;
+    /* justify-content: center; */
+    margin-bottom: 2%;
+}
+
+footer .logo .texto {
+    /* background-color: black; */
+    width: 100%;
+    text-align: center;
 }
 
 footer .section_direita {
-    width: 40%;
     display: flex;
-    justify-content: center;
+    justify-content: end;
+    /* background-color: pink; */
+    width: 175px;
+    height: 100px;
 }
 
 footer .section_direita .img {
-    width: 10%;
-    max-height: 50px;
-    margin-left: 3%;
+    /* width: 100px; */
+    /* max-height: 50px; */
+    /* margin-left: 3%; */
+    /* background-color: aqua; */
+    object-fit: cover;
+    /* height: 50%; */
 }
-
+/* 
 footer .section_direita .img img {
     width: 100%;
     height: 100%;
-}
+} */
 
 /* FOOTER FIM*/
 /* ÍNICIO RESPONSIVIDADE */
@@ -693,25 +721,19 @@ footer .section_direita .img img {
         width: 60px;
     }
 
-    footer .logo .texto {
+    /* footer .logo .texto {
         width: 200px;
-    }
+    } */
 
     footer .section_esquerda a {
         width: 200px;
         font-size: 15px;
     }
 
-    footer .section_direita .img {
-        width: 100%;
-        max-height: 50px;
-        margin-left: 3%;
-    }
-
-    footer .section_direita .img img {
+    /* footer .section_direita .img img {
         width: 70%;
         height: 100%;
-    }
+    } */
 }
 
 /* TÉRMINO RESPONSIVIDADE */
