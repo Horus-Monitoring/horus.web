@@ -405,6 +405,14 @@ main .section_cards .card .texto {
 }
 
 /* SECTION CARDS - FIM*/
+/* SECTION CONTATO - INÍCIO*/
+
+.section_contato {
+    /* background-color: pink; */
+    height: 100vh;
+}
+
+/* SECTION CONTATO - FIM*/
 /* FOOTER ÍNICIO */
 footer {
     background-color: #1B264F;
