@@ -68,7 +68,7 @@ main .section_inicial .conteudo_inicial .button button {
     background-color: #274690;
     color: #fff;
     cursor: pointer;
-    font-family: "Inter", sans-serif;
+    font-family: "Cabin", sans-serif;
     transition: ease-out 0.9s;
     font-size: 15px;
     position: relative;
@@ -292,32 +292,44 @@ main .section_informacoes {
     color: black;
     gap: 5%;
     z-index: 99;
+    position: relative;
 }
 
 main .section_informacoes .informacoes {
     /* background-color: #a85790; */
     display: flex;
-    height: 50vh;
+    height: 60vh;
+    /* justify-content: space-between; */
     /* z-index: 5;
     position: absolute; */
+    align-items: stretch;
 }
 
 main .section_informacoes .textos {
     /* background-color: yellow; */
-    width: 50vw;
+    /* width: 60vw; */
+    /* padding-right: 20px; */
+    /* flex: 1; */
+    padding: 10px 30px;
+}
+
+main .section_informacoes .textos .titulo {
+    color: black;
+    /* background-color: #a85790; */
+    /* width: 50%; */
 }
 
 main .section_informacoes .textos .texto {
     color: black;
+    margin-top: 5%;
+    /* padding: 10px 10px; */
+    /* background-color: aqua; */
 }
 
 main .section_informacoes img {
-    width: 40%;
-    /* border-radius: 10px; */
-}
-
-main .section_informacoes .informacoes .texto {
-    margin-top: 5%;
+    width: 100%;
+    /* height: 60vh; */
+    /* object-fit: cover; */
 }
 
 main .section_informacoes .informacoes .button {
@@ -330,11 +342,11 @@ main .section_informacoes .informacoes .button {
 
 main .section_informacoes .informacoes .button button {
     border-radius: 25px;
-    padding: 15px 19px;
+    padding: 15px 20px;
     background-color: #274690;
     color: #fff;
     cursor: pointer;
-    font-family: "Inter", sans-serif;
+    font-family: "Cabin", sans-serif;
     transition: ease-out 0.9s;
     font-size: 15px;
     position: relative;
@@ -350,26 +362,34 @@ main .section_informacoes .informacoes .button button:hover {
 }
 
 main .section_informacoes .informacoes .img-info {
-    width: 100%;
+    width: 70%;
     height: 100%;
     /* background-color: aqua; */
-    /* background-size: cover; */
+    background-position: center;
+    background-size: cover;
+    padding: 0px 50px;
+    /* flex: 1; */
+    display: flex;
+    /* overflow: hidden; */
 }
 
 .main .section_informacoes .informacoes img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* object-fit: none;
+    object-position: -50px -50px; */
 }
 
 main .section_informacoes .banner {
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
-    width: 90%;
+    width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: red;
+    object-fit: cover;
+    /* background-color: red; */
 }
 
 
@@ -380,28 +400,36 @@ main .section_cards {
     background-color: #274690;
     display: flex;
     justify-content: space-between;
-    padding: 3% 3%;
+    padding: 5% 5%;
     /* height: 50vh; */
     align-items: center;
 }
 
 main .section_cards .card {
-    width: 28%;
+    width: 30%;
     background-color: #576CA8;
-    height: 40vh;
+    height: 50vh;
     border-radius: 10px;
     color: white;
-    padding: 2%;
+    padding: 10px 20px;
+}
+
+@media (min-height: 1000px) {
+    main .section_cards .card {
+        height: 35vh !important;
+    }
 }
 
 main .section_cards .card .titulo {
     margin-top: 10%;
+    /* background-color: red; */
+    width: 100%;
 }
 
 main .section_cards .card .texto {
     margin-top: 10%;
-    padding: 10px 20px;
     /* background-color: aqua; */
+    width: 100%;
 }
 
 /* SECTION CARDS - FIM*/
@@ -554,7 +582,7 @@ footer .section_direita .img img {
 
     main .section_informacoes img {
         width: 80%;
-        padding-bottom: 10%;
+        /* padding-bottom: 10%; */
     }
 
     main .section_informacoes .textos .button {
