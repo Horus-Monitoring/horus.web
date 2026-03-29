@@ -298,6 +298,8 @@ main .section_informacoes .informacoes {
     /* background-color: #a85790; */
     display: flex;
     height: 50vh;
+    /* z-index: 5;
+    position: absolute; */
 }
 
 main .section_informacoes .textos {
@@ -367,6 +369,7 @@ main .section_informacoes .banner {
     width: 90%;
     height: 100%;
     z-index: -1;
+    background-color: red;
 }
 
 
@@ -374,10 +377,12 @@ main .section_informacoes .banner {
 /* SECTION CARDS - ÍNICIO*/
 main .section_cards {
     width: 100%;
-    background-image: linear-gradient(to bottom, #fff 50%, #274690 50%);
+    background-color: #274690;
     display: flex;
     justify-content: space-between;
-    padding: 5% 5%;
+    padding: 3% 3%;
+    /* height: 50vh; */
+    align-items: center;
 }
 
 main .section_cards .card {
@@ -389,8 +394,14 @@ main .section_cards .card {
     padding: 2%;
 }
 
+main .section_cards .card .titulo {
+    margin-top: 10%;
+}
+
 main .section_cards .card .texto {
     margin-top: 10%;
+    padding: 10px 20px;
+    /* background-color: aqua; */
 }
 
 /* SECTION CARDS - FIM*/
