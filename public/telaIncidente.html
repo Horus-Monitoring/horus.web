@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,8 +49,8 @@
                 <div class="usuario">
                     <img src="./assets/imgs/painel/usuario.png" alt="">
                     <div>
-                        <p>Julia Araripe</p>
-                        <span class="cargo">Analista</span>
+                        <p>Fernando Brandão</p>
+                        <span class="cargo">Gestor de TI</span>
                     </div>
                     <button class="menu-sand" id="menu">☰</button>
                 </div>
@@ -59,26 +58,30 @@
 
             <section class="conteudo">
                 <div class="cards">
+
                     <h4>Alertas e Incidentes</h4>
 
-                    <div class="card pequeno-filtro">
-                        <h1>JIRA</h1>
-                        <h5>Abertos | Andamento | Concluído</h5>
-                        <a href="">Ir para o Jira</a>
-                    </div>
+                    <div class="indicadores-incidentes"
+                        style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div class="card pequeno-filtro" style="display: flex; flex-direction: column;">
+                            <h1>JIRA</h1>
+                            <h5>Abertos | Andamento | Concluído</h5>
+                            <a href="">Ir para o Jira</a>
+                        </div>
 
-                    <div class="card pequeno-filtro">
-                        <button>Todas</button>
-                        <button>Crítica</button>
-                        <button>Alta</button>
-                        <button>Média</button>
-                        <button>Baixa</button>
-                        <button>Ativos</button>
-                        <button>Resolvidos</button>
+                        <div class="card pequeno-filtro" style="display: flex; padding: 20px 30px; width: 750px;">
+                            <button>Todas</button>
+                            <button>Crítica</button>
+                            <button>Alta</button>
+                            <button>Média</button>
+                            <button>Baixa</button>
+                            <button>Ativos</button>
+                            <button>Resolvidos</button>
+                        </div>
                     </div>
 
                     <div class="card pequeno">
-        
+
                         <div class="lista-servidores">
                             <div class="box-servidor" style="border: 1px solid red; border-radius: 15px;">
                                 <div class="info-servidor">
@@ -86,145 +89,108 @@
                                     <div>
                                         <p class="nome-servidor">QUEDA DE SERVIDOR</p>
                                         <p class="endereco">ATC-SVR-GIG-01</p>
+                                        <h4>Servidor offline sem resposta</h4>
+
                                     </div>
                                 </div>
 
                                 <div class="metricas">
-                                   
-                                </div>
-
-                                 <div class="info-servidor">
-                                        <div>
-                                            <p class="nome-servidor">Última Atualização há 2 horas.</p>
+                                    <div class="info-servidor">
+                                        <div class="cards-detalhes"
+                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
+                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
+                                                14:39:04.</span>
                                         </div>
-                                        <div>
-                                            <button class="detalhes">Detalhes</button>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="box-servidor">
+                            <!---->
+                            <div class="box-servidor" style="border: 1px solid blue; border-radius: 15px;">
                                 <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
+                                    <img style="width: 30px;" src="assets/imgs/incidentes/AvisoAzul.png" alt="">
                                     <div>
-                                        <p class="nome-servidor">ATC-SVR-CGH-01</p>
-                                        <p class="endereco">São Paulo - SP</p>
+                                        <p class="nome-servidor">QUEDA DE SERVIDOR</p>
+                                        <p class="endereco">ATC-SVR-GIG-01</p>
+                                        <h4>Servidor offline sem resposta</h4>
+
                                     </div>
                                 </div>
 
                                 <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">42%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">61%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 61%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">55%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="info-servidor">
-                                        <div>
-                                            <p class="nome-servidor">Última Atualização há 2 horas.</p>
+                                    <div class="info-servidor">
+                                        <div class="cards-detalhes"
+                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
+                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
+                                                14:39:04.</span>
                                         </div>
-                                        <div>
-                                            <button class="detalhes">Detalhes</button>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="box-servidor">
+                            <!---->
+                            <div class="box-servidor" style="border: 1px solid yellow; border-radius: 15px;">
                                 <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
+                                    <img style="width: 30px;" src="assets/imgs/incidentes/AvisoAmarelo.png" alt="">
                                     <div>
-                                        <p class="nome-servidor">ATC-SVR-CNF-01</p>
-                                        <p class="endereco">Confins - MG</p>
+                                        <p class="nome-servidor">QUEDA DE SERVIDOR</p>
+                                        <p class="endereco">ATC-SVR-GIG-01</p>
+                                        <h4>Servidor offline sem resposta</h4>
+
                                     </div>
                                 </div>
 
                                 <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">25%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 25%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">40%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 40%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">28%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 28%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="info-servidor">
-                                        <div>
-                                            <p class="nome-servidor">Última Atualização há 2 horas.</p>
+                                    <div class="info-servidor">
+                                        <div class="cards-detalhes"
+                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
+                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
+                                                14:39:04.</span>
                                         </div>
-                                        <div>
-                                            <button class="detalhes">Detalhes</button>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="box-servidor">
+                            <!---->
+                            <div class="box-servidor" style="border: 1px solid orangered; border-radius: 15px;">
                                 <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-vermelha.png" alt="">
+                                    <img style="width: 30px;" src="assets/imgs/incidentes/AvisoLaranja.png" alt="">
                                     <div>
-                                        <p class="nome-servidor">ATC-SVR-POA-01</p>
-                                        <p class="endereco">Porto Alegre - RS</p>
+                                        <p class="nome-servidor">QUEDA DE SERVIDOR</p>
+                                        <p class="endereco">ATC-SVR-GIG-01</p>
+                                        <h4>Servidor offline sem resposta</h4>
+
                                     </div>
                                 </div>
 
                                 <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">0%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 0%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">0%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 0%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">72%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 72%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="info-servidor">
-                                        <div>
-                                            <p class="nome-servidor">Última Atualização há 2 horas.</p>
+                                    <div class="info-servidor">
+                                        <div class="cards-detalhes"
+                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
+                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
+                                                14:39:04.</span>
                                         </div>
-                                        <div>
-                                            <button class="detalhes">Detalhes</button>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-                </div>    
-
+                </div>
             </section>
-
             <div class="popup" id="modal">
                 <div class="modal">
                     <div class="card-nome-servidor">
-                                    <div>
-                                        <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
-                                    </div> 
-                                    <div> 
-                                        ATC-SVR-REC-01 <br>
-                                        <span>Recife - PE</span>
-                                    </div> 
-                                    <div>
-                                        <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
-                                    </div>
+                        <div>
+                            <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
+                        </div>
+                        <div>
+                            ATC-SVR-REC-01 <br>
+                            <span>Recife - PE</span>
+                        </div>
+                        <div>
+                            <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
+                        </div>
                     </div>
                     <div class="cards-detalhes">
                         <div class="card-cpu">
@@ -269,73 +235,73 @@
 </html>
 
 <script>
-    
-        const modal = document.getElementById('modal');
 
-        document.querySelectorAll('.detalhes').forEach(btn => {
+    const modal = document.getElementById('modal');
+
+    document.querySelectorAll('.detalhes').forEach(btn => {
         btn.addEventListener('click', () => {
             modal.classList.add('ativo');
         });
-        });
+    });
 
-        document.getElementById('fechar').addEventListener('click', () => {
+    document.getElementById('fechar').addEventListener('click', () => {
         modal.classList.remove('ativo');
-        });
+    });
 
-        modal.addEventListener('click', e => {
+    modal.addEventListener('click', e => {
         if (e.target === modal) modal.classList.remove('ativo');
-        });
+    });
 
 
-        const menu = document.getElementById('menu-');
-        const lateral = document.querySelector('.lateral');
+    const menu = document.getElementById('menu-');
+    const lateral = document.querySelector('.lateral');
 
-        menu.addEventListener('click', () => {
+    menu.addEventListener('click', () => {
         lateral.classList.toggle('ativo');
-        });
+    });
 
-        document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
         if (!lateral.contains(e.target) && !menu.contains(e.target)) {
             lateral.classList.remove('ativo');
         }
-        });
+    });
 
 
-        const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
-        const graficoRecursos24h = new Chart(recursos24h, {
-            type: 'line', 
-            data: {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
-                datasets: [
-                    {
-                        label: 'CPU%',
-                        data: [12, 19, 3, 5, 2], // Dados (eixo Y)
-                        borderColor: 'rgb(75, 192, 192)', // Cor da linha
-                        tension: 0.1 // Suavização da linha
-                    },
-                    {
-                        label: 'RAM%',
-                        data: [45, 27, 32, 52, 40], // Dados (eixo Y)
-                        borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
-                        tension: 0.1
-                    },
-                    {
-                        label: 'DISCO%',
-                        data: [90, 86, 82, 92, 93], // Dados (eixo Y)
-                        borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                scales:{
-                    y: {
-                    beginAtZero: true, 
-                    max: 100 
-                }
+    const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
+    const graficoRecursos24h = new Chart(recursos24h, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
+            datasets: [
+                {
+                    label: 'CPU%',
+                    data: [12, 19, 3, 5, 2], // Dados (eixo Y)
+                    borderColor: 'rgb(75, 192, 192)', // Cor da linha
+                    tension: 0.1 // Suavização da linha
                 },
-                responsive: true
-            }
-        });
+                {
+                    label: 'RAM%',
+                    data: [45, 27, 32, 52, 40], // Dados (eixo Y)
+                    borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
+                    tension: 0.1
+                },
+                {
+                    label: 'DISCO%',
+                    data: [90, 86, 82, 92, 93], // Dados (eixo Y)
+                    borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
+                    tension: 0.1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            },
+            responsive: true
+        }
+    });
 
 </script>
