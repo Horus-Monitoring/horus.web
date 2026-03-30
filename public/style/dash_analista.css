@@ -189,6 +189,10 @@ body {
   width: 100%;
 }
 
+.info-servidor button {
+  background-color: #576CA8;
+}
+
 .pequeno-filtro input{
   border: 2px var(--borda) solid;
   height: 40px;
@@ -202,6 +206,11 @@ body {
   border-radius: 10px;
   background-color: var(--cinza);
   color: var(--texto);
+}
+
+.pequeno-filtro button:hover{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
 }
 
 .popup {
