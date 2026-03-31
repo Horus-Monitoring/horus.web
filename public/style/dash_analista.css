@@ -426,6 +426,7 @@ body {
     background: rgba(0,0,0,0.5);
     display: none;
     z-index: 998;
+    
   }
 
   .lateral.ativo {
@@ -434,23 +435,23 @@ body {
 
   .modal-lateral.ativo{
     display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 
 @media (max-width: 1024px) {
 
   .lateral {
-    width: 200px;
+    position: fixed;
   }
 
   .hamburguer {
     display: flex;
   }
 
-
-  
   .main {
-    margin-left: 200px;
+    margin-left: 0;
   }
 
   .cards-detalhes {
@@ -476,6 +477,9 @@ body {
     display: flex;
   }
 
+  .lateral {
+    position: fixed;
+  }
 
   .main {
     margin-left: 0;
