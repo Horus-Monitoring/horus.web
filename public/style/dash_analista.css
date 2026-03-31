@@ -518,28 +518,79 @@ body {
     flex-direction: row;
   }
 
-  .cards-detalhes-grafico {
-    min-height: 250px;
+
+  .cards-detalhes-grafico{
+    justify-content: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
-  canvas {
-    width: 100% !important;
-    height: 250px !important;
+  .cards-detalhes-grafico h1{
+    font-size: medium;
+    padding: 0;
+    height: 30px;
   }
 
   .att-servidor{
     display: none;
   }
 
+  .modalFiltro {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 998;
+  }
+
+  .filtros {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    z-index: 1000;
+    transition: 0.3s;
+    opacity: 0;
+    padding: 5px 5px 5px 5px;
+    background-color: var(--cinza);
+    border: 3px var(--borda) solid;
+    border-radius: 10px;
+  }
+
+
+  .filtros.ativo {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .modalFiltro.ativo{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+
   .pequeno-filtro {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     gap: 10px;
   }
 
-  .pequeno-filtro input,
+  .pequeno-filtro input{
+    width: 90%;
+  }
+
+
   .pequeno-filtro button,
-  .pequeno-filtro select {
-    width: 100%;
+  .pequeno-filtro select{
+    width: 45%;
+  }
+
+  .pequeno-filtro option{
+    font-size: smaller;
   }
 
   .box-servidor {
@@ -553,7 +604,6 @@ body {
     width: 95%;
     padding: 15px;
   }
-
   
   .barra {
     width: 90%;
@@ -572,6 +622,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
+    justify-content: center;
   }
 
 }
