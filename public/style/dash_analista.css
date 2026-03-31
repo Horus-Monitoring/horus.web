@@ -177,6 +177,17 @@ body {
   align-items: center;
 }
 
+.filtros{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  font-size: 12px;
+  flex: 1;
+  height: 90px;
+  width: 100%;
+}
+
 .pequeno-filtro{
   display: flex;
   justify-content: space-between;
@@ -184,7 +195,9 @@ body {
   padding: 20px;
 }
 
-.pequeno-filtro img { width: 20px; }
+.pequeno-filtro img { 
+  width: 20px;
+}
 
 .pequeno {
   display: flex;
@@ -565,6 +578,9 @@ body {
     background-color: var(--cinza);
     border: 3px var(--borda) solid;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
   }
 
 
@@ -595,7 +611,7 @@ body {
     width: 45%;
   }
   .pequeno-filtro select{
-    width: 100%;
+    width: 80%;
   }
 
   .pequeno-filtro option{
