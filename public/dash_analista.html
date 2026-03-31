@@ -21,6 +21,8 @@
 
 <body>
 
+    <div class="modal-lateral" id="modal-lateral"></div>
+
     <div class="container">
 
         <aside class="lateral">
@@ -45,8 +47,9 @@
         <main class="main">
 
             <header class="header">
-                <img src="assets/imgs/painel/menu-sand.png" alt="">
-
+                <div class="hamburguer" id="hamburguer">
+                    <img src="assets/imgs/painel/menu-sand.png" alt="">
+                </div>    
                 <span><b>Dashboard - Visão Geral</b></span>
 
                 <div class="usuario">
@@ -385,6 +388,21 @@
 </html>
 
 <script>
+        const btnHamburguer = document.getElementById('hamburguer'); 
+        const lateral = document.getElementById('lateral'); 
+        const modalLateral = document.getElementById('modal-lateral'); 
+        
+        function abrirMenu() { 
+            lateral.classList.add('aberto'); modal.classList.add('ativo'); 
+        } 
+        
+        function fecharMenu() { 
+            lateral.classList.remove('aberto'); modal.classList.remove('ativo'); 
+        } 
+        
+        btnHamburguer.addEventListener('click', () => { 
+            lateral.classList.contains('aberto') ? fecharMenu() : abrirMenu(); });
+        modal.addEventListener('click', fecharMenu);
     
         const modal = document.getElementById('modal');
 
@@ -404,11 +422,7 @@
 
 
         const menu = document.getElementById('menu');
-        const lateral = document.querySelector('.lateral');
 
-        menu.addEventListener('click', () => {
-        lateral.classList.toggle('ativo');
-        });
 
         document.addEventListener('click', (e) => {
         if (!lateral.contains(e.target) && !menu.contains(e.target)) {
