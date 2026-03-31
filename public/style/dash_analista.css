@@ -517,4 +517,10 @@ body {
     border-radius: 16px;
   }
 
+  .info-servidor{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
 }
