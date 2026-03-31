@@ -477,7 +477,7 @@ body {
   .card-cpu,
   .card-ram,
   .card-disk {
-    width: 45%;
+    width: 30%;
   }
 
   .modal {
@@ -515,6 +515,7 @@ body {
   .card-ram,
   .card-disk {
     width: 100%;
+    flex-direction: row;
   }
 
   .cards-detalhes-grafico {
