@@ -504,7 +504,14 @@ body {
     flex-direction: row;
     justify-content: space-between;
     height: auto;
+    padding-left: 8px;
+    padding-right: 8px;
   }
+
+  .header img{
+    padding-right: 10px;
+  }
+
 
   .cards-detalhes {
     flex-wrap: wrap;
