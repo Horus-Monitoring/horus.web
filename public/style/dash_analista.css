@@ -591,9 +591,11 @@ body {
   }
 
 
-  .pequeno-filtro button,
-  .pequeno-filtro select{
+  .pequeno-filtro button{
     width: 45%;
+  }
+  .pequeno-filtro select{
+    width: 100%;
   }
 
   .pequeno-filtro option{
