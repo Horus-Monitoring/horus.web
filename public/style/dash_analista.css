@@ -308,6 +308,12 @@ body {
   width: 40px;
 }
 
+.att-servidor{
+  font-weight: bold;
+  font-size: 14px;
+  padding-bottom: 6px;
+}
+
 .cards-detalhes-grafico{
   display: flex; 
   flex-wrap: wrap;
@@ -345,7 +351,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 20px;
+  padding: 10px;
 }
 
 .info-servidor img { width: 10px; }
@@ -412,8 +418,17 @@ body {
   .lateral {
     width: 220px;
   }
+
   .main {
     margin-left: 220px;
+  }
+
+  .metricas{
+    display: none;
+  }
+
+  .box-servidor{
+    justify-content: space-around;
   }
 
   .lateral{
@@ -511,6 +526,10 @@ body {
     height: 250px !important;
   }
 
+  .att-servidor{
+    display: none;
+  }
+
   .pequeno-filtro {
     flex-direction: column;
     gap: 10px;
@@ -523,16 +542,11 @@ body {
   }
 
   .box-servidor {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 10px;
   }
 
-  .metricas {
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
-  }
 
   .modal {
     width: 95%;
@@ -555,7 +569,7 @@ body {
 
   .info-servidor{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
   }
 
