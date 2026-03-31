@@ -243,6 +243,7 @@ body {
   overflow-y: auto;
 }
 
+
 .cards-detalhes{
   display: flex; 
   flex-wrap: wrap;
@@ -407,12 +408,47 @@ body {
 
 /*Responsividade*/
 
+@media (max-width: 1440px) {
+  .lateral {
+    width: 220px;
+  }
+  .main {
+    margin-left: 220px;
+  }
+
+  .lateral{
+    transform: translateX(-100%);
+  }
+
+  .modal-lateral {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 998;
+  }
+
+  .lateral.ativo {
+    transform: translateX(0);
+  }
+
+  .modal-lateral.ativo{
+    display: block;
+  }
+}
+
 @media (max-width: 1024px) {
 
   .lateral {
     width: 200px;
   }
 
+  .hamburguer {
+    display: flex;
+  }
+
+
+  
   .main {
     margin-left: 200px;
   }
@@ -436,22 +472,10 @@ body {
 
 @media (max-width: 768px) {
 
-  .menu-sand {
-    display: block;
+  .hamburguer {
+    display: flex;
   }
 
-  .lateral {
-    position: fixed;
-    top: 0;
-    height: 100%;
-    z-index: 1000;
-    transition: 0.3s;
-    transform: translateX(-100%);
-  }
-
-  .lateral.ativo {
-    left: 0;
-  }
 
   .main {
     margin-left: 0;
