@@ -397,9 +397,10 @@ body {
 .barra-verde2 { background-color: #126313; }
 
 
-/*Tablet*/
+/*Responsividade*/
 
 @media (max-width: 1024px) {
+
   .lateral {
     width: 200px;
   }
@@ -408,25 +409,35 @@ body {
     margin-left: 200px;
   }
 
+  .cards-detalhes {
+    gap: 15px;
+    justify-content: center;
+  }
+
   .card-cpu,
   .card-ram,
   .card-disk {
-    max-width: 100%;
+    width: 45%;
   }
+
+  .modal {
+    width: 90%;
+  }
+
 }
 
-/*Celular*/
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    height: auto;
+
+  .menu-sand {
+    display: block;
   }
 
   .lateral {
-    position: absolute;
+    position: fixed;
     left: -100%;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
     transition: 0.3s;
   }
 
@@ -438,6 +449,12 @@ body {
     margin-left: 0;
   }
 
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    height: auto;
+  }
+
   .cards-detalhes {
     flex-direction: column;
     gap: 10px;
@@ -446,17 +463,25 @@ body {
   .card-cpu,
   .card-ram,
   .card-disk {
-    max-width: 100%;
+    width: 100%;
+  }
+
+  .cards-detalhes-grafico {
+    min-height: 250px;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 250px !important;
   }
 
   .pequeno-filtro {
     flex-direction: column;
-    align-items: stretch;
     gap: 10px;
   }
 
-  .pequeno-filtro button,
   .pequeno-filtro input,
+  .pequeno-filtro button,
   .pequeno-filtro select {
     width: 100%;
   }
@@ -469,14 +494,27 @@ body {
 
   .metricas {
     flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
   }
 
-   .modal {
+  .modal {
     width: 95%;
     padding: 15px;
   }
 
-   .menu {
-    display: block;
+  
+  .barra {
+    width: 90%;
+    height: 8px;
+    border-radius: 16px;
+    background-color: #ebedf0;
+    margin-right: 20px;
   }
+
+  .preencher {
+    height: 100%;
+    border-radius: 16px;
+  }
+
 }
