@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -21,11 +20,11 @@
 
 <body>
 
-    <div class="modal-lateral" id="modal-lateral"></div>
+    <div class="modal-lateral" id="overlay"></div>
 
     <div class="container">
 
-        <aside class="lateral">
+        <aside class="lateral" id="lateral">
             <div class="logo">
                 <img src="./assets/imgs/painel/logo_v2.png" alt="">
                 Horus
@@ -388,21 +387,35 @@
 </html>
 
 <script>
+        //Modal para o menu sanduíche
+        
         const btnHamburguer = document.getElementById('hamburguer'); 
         const lateral = document.getElementById('lateral'); 
-        const modalLateral = document.getElementById('modal-lateral'); 
-        
+        const overlay = document.getElementById('overlay'); 
+
         function abrirMenu() { 
-            lateral.classList.add('aberto'); modal.classList.add('ativo'); 
+            lateral.classList.add('ativo'); 
+            overlay.classList.add('ativo'); 
         } 
-        
+
         function fecharMenu() { 
-            lateral.classList.remove('aberto'); modal.classList.remove('ativo'); 
+            lateral.classList.remove('ativo'); 
+            overlay.classList.remove('ativo'); 
         } 
-        
+
         btnHamburguer.addEventListener('click', () => { 
-            lateral.classList.contains('aberto') ? fecharMenu() : abrirMenu(); });
-        modal.addEventListener('click', fecharMenu);
+            lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+        });
+
+        overlay.addEventListener('click', fecharMenu);
+
+        document.addEventListener('click', (e) => {
+        if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
+            fecharMenu();
+        }
+        });
+
+        // Modal para o gráfico
     
         const modal = document.getElementById('modal');
 
@@ -418,16 +431,6 @@
 
         modal.addEventListener('click', e => {
         if (e.target === modal) modal.classList.remove('ativo');
-        });
-
-
-        const menu = document.getElementById('menu');
-
-
-        document.addEventListener('click', (e) => {
-        if (!lateral.contains(e.target) && !menu.contains(e.target)) {
-            lateral.classList.remove('ativo');
-        }
         });
 
 
