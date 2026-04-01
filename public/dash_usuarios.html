@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários | Horus </title>
+    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/dash_usuarios.css">
+</head>
+
+<body>
+
+    <div class="modal-lateral" id="overlay"></div>
+    <div class="modalFiltro" id="modalFiltro"></div>
+
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo_v2.png" alt="">
+                Horus
+            </div>
+
+            <nav id="menu" class="menu">
+                <div class="categoria">Monitoramento</div>
+
+                <div class="item-menu"><img src="./assets/imgs/painel/dash.png" alt="">Visão
+                    geral</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
+
+                <div class="categoria">Administração</div>
+                <div class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/cadastrar-usuario-selecionado.png" alt="">Usuários
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </div>
+
+            </nav>
+
+            <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="assets/imgs/painel/menu-sand.png" alt="">
+                </div>    
+                <span><b>Dashboard - Gerenciamento de Usuários</b></span>
+
+                <div class="usuario">
+                    <img src="./assets/imgs/painel/usuario.png" alt="">
+                    <div>
+                        <p>Fernando Brandão</p>
+                        <span class="cargo">Gestor</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="conteudo">
+                <div class="cards">
+
+                    <div class="card pequeno-filtro">
+                        <input type="text" name="" id="" placeholder="Buscar servidor">
+
+                        <div class="card">
+                            <div>
+                                <img src="assets/imgs/dash_user/total.png" alt="">
+                            </div>
+                            <div>
+                                <span>Total de Usuários</span>
+                                <p>3</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div>
+                                <img src="assets/imgs/dash_user/gestor.png" alt="">
+                            </div>
+                            <div>
+                                <span>Gestores</span>
+                                <p>1</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div>
+                                <img src="assets/imgs/dash_user/analista.png" alt="">
+                            </div>
+                            <div>
+                                <span>Analistas</span>
+                                <p>2</p>
+                            </div>
+                        </div>
+                            
+                    </div>
+
+                    
+
+                    <div class="card pequeno">
+        
+                        <div class="lista-servidores">
+
+                            <div class="box-servidor">
+                                <div class="info-servidor">
+                                   <b>Nome</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Email</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Função</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Data de Cadastro</b>
+                                </div>
+                                <div class="info-servidor">
+                                    <b>Ações</b>
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-servidor">
+                                    <img src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Gustavo Pietro</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-servidor">
+                                    <p>gustavo@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="metricas">
+                                    <img src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="att-servidor">
+                                        <div>
+                                            <p class="att-servidor">01 de março de 2026</p>
+                                        </div>
+                                </div>
+                                
+                                <div class="info-servidor">
+                                        <div>
+                                           <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-servidor">
+                                    <img src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Gustavo Pietro</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-servidor">
+                                    <p>gustavo@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="metricas">
+                                    <img src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="att-servidor">
+                                        <div>
+                                            <p class="att-servidor">01 de março de 2026</p>
+                                        </div>
+                                </div>
+                                
+                                <div class="info-servidor">
+                                        <div>
+                                           <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-servidor">
+                                    <img src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Gustavo Pietro</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-servidor">
+                                    <p>gustavo@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="metricas">
+                                    <img src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="att-servidor">
+                                        <div>
+                                            <p class="att-servidor">01 de março de 2026</p>
+                                        </div>
+                                </div>
+                                
+                                <div class="info-servidor">
+                                        <div>
+                                           <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-servidor">
+                                    <img src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Gustavo Pietro</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-servidor">
+                                    <p>gustavo@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="metricas">
+                                    <img src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="att-servidor">
+                                        <div>
+                                            <p class="att-servidor">01 de março de 2026</p>
+                                        </div>
+                                </div>
+                                
+                                <div class="info-servidor">
+                                        <div>
+                                           <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>    
+
+            </section>
+
+            <div class="popup" id="modal">
+                <div class="modal">
+                    <div class="card-nome-servidor">
+                                    <div>
+                                        <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
+                                    </div> 
+                                    <div> 
+                                        ATC-SVR-REC-01 <br>
+                                        <span>Recife - PE</span>
+                                    </div> 
+                                    <div>
+                                        <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
+                                    </div>
+                    </div>
+                    <div class="cards-detalhes">
+                        <div class="card-cpu">
+                            <span>CPU</span>
+                            <h1>28%</h1>
+                            <div class="barra">
+                                <div class="preencher barra-azul" style="width: 28%;"></div>
+                            </div>
+                        </div>
+                        <div class="card-ram">
+                            <span>RAM</span>
+                            <h1>62%</h1>
+                            <div class="barra">
+                                <div class="preencher barra-roxa" style="width: 62%;"></div>
+                            </div>
+                        </div>
+                        <div class="card-disk">
+                            <span>DISCO</span>
+                            <h1>55%</h1>
+                            <div class="barra">
+                                <div class="preencher barra-verde2" style="width: 55%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cards-detalhes-grafico">
+                        <h1>Histórico de Uso (Últimas 24h)</h1>
+                        <canvas id="graficoRecursos24h" class="graficoRecursos24h"></canvas>
+                    </div>
+                    <div class="cards-detalhes">
+                        <img src="assets/imgs/dash_analista/relogio.png" alt="" height="20px">
+                        <span>Última atualização: 22/03/2026 às 14:39:04.</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+        //Modal para o menu sanduíche
+        
+        const btnHamburguer = document.getElementById('hamburguer'); 
+        const lateral = document.getElementById('lateral'); 
+        const overlay = document.getElementById('overlay'); 
+
+        function abrirMenu() { 
+            lateral.classList.add('ativo'); 
+            overlay.classList.add('ativo'); 
+        } 
+
+        function fecharMenu() { 
+            lateral.classList.remove('ativo'); 
+            overlay.classList.remove('ativo'); 
+        } 
+
+        btnHamburguer.addEventListener('click', () => { 
+            lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+        });
+
+        overlay.addEventListener('click', fecharMenu);
+
+        document.addEventListener('click', (e) => {
+        if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
+            fecharMenu();
+        }
+        });
+
+        //Modal para filtro (celular)
+
+        const btnFiltro = document.getElementById('filtro'); 
+        const filtros = document.getElementById('filtros'); 
+        const modalFiltro = document.getElementById('modalFiltro');
+
+        function abrirFiltro() { 
+            filtros.classList.add('ativo'); 
+            modalFiltro.classList.add('ativo'); 
+        } 
+
+        function fecharFiltro() { 
+            filtros.classList.remove('ativo'); 
+            modalFiltro.classList.remove('ativo'); 
+        } 
+
+        btnFiltro.addEventListener('click', () => { 
+            filtros.classList.contains('ativo') ? fecharFiltro() : abrirFiltro();
+        });
+
+        modalFiltro.addEventListener('click', fecharFiltro);
+
+        document.addEventListener('click', (e) => {
+        if (!filtros.contains(e.target) && !btnFiltro.contains(e.target)) {
+            fecharFiltro();
+        }
+        });
+
+        // Modal para o gráfico
+    
+        const modal = document.getElementById('modal');
+
+        document.querySelectorAll('.detalhes').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('ativo');
+        });
+        });
+
+        document.getElementById('fechar').addEventListener('click', () => {
+        modal.classList.remove('ativo');
+        });
+
+        modal.addEventListener('click', e => {
+        if (e.target === modal) modal.classList.remove('ativo');
+        });
+
+
+        const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
+        const graficoRecursos24h = new Chart(recursos24h, {
+            type: 'line', 
+            data: {
+                labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
+                datasets: [
+                    {
+                        label: 'CPU%',
+                        data: [12, 19, 3, 5, 2], // Dados (eixo Y)
+                        borderColor: 'rgb(75, 192, 192)', // Cor da linha
+                        tension: 0.1 // Suavização da linha
+                    },
+                    {
+                        label: 'RAM%',
+                        data: [45, 27, 32, 52, 40], // Dados (eixo Y)
+                        borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
+                        tension: 0.1
+                    },
+                    {
+                        label: 'DISCO%',
+                        data: [90, 86, 82, 92, 93], // Dados (eixo Y)
+                        borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                scales:{
+                    y: {
+                    beginAtZero: true, 
+                    max: 100 
+                }
+                },
+                responsive: true
+            }
+        });
+
+</script>
