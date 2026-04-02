@@ -162,7 +162,7 @@ body {
 
 .cards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 15px;
 }
 
@@ -181,6 +181,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 39%;
   padding: 20px;
 }
 
@@ -206,7 +207,7 @@ body {
 .pequeno-filtro input{
   border: 2px var(--borda) solid;
   height: 40px;
-  width: 400px;
+  width: 99%;
   border-radius: 10px;
 }
 
@@ -475,6 +476,7 @@ body {
   .cards-detalhes {
     gap: 15px;
     justify-content: center;
+    flex-direction: row;
   }
 
   .card-cpu,
@@ -512,6 +514,10 @@ body {
 
   .header img{
     padding-right: 10px;
+  }
+
+  .cards{
+    flex-direction: column;
   }
 
 
