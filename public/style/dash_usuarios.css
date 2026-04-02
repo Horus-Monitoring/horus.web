@@ -200,7 +200,7 @@ body {
   width: 100%;
 }
 
-.info-servidor button {
+.info-usuarios button {
   background-color: #576CA8;
 }
 
@@ -312,10 +312,11 @@ body {
   width: 40px;
 }
 
-.att-servidor{
+.data-usuarios{
   font-weight: bold;
   font-size: 14px;
   padding-bottom: 6px;
+  width: 19%;
 }
 
 .cards-detalhes-grafico{
@@ -351,16 +352,17 @@ body {
 
 .box-servidor:hover { background-color: #f6f7f8; }
 
-.info-servidor {
+.info-usuarios {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px;
+  width: 20%;
 }
 
-.info-servidor img { width: 10px; }
+.info-usuarios img { width: 10px; }
 
-.info-servidor button{
+.info-usuarios button{
   border: 2px var(--borda) solid;
   height: 40px;
   width: 80px;
@@ -548,7 +550,7 @@ body {
     height: 30px;
   }
 
-  .att-servidor{
+  .data-usuarios{
     display: none;
   }
 
@@ -635,7 +637,7 @@ body {
     border-radius: 16px;
   }
 
-  .info-servidor{
+  .info-usuarios{
     display: flex;
     flex-direction: row;
     width: 100%;
