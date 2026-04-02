@@ -220,6 +220,25 @@ body {
   color: var(--texto);
 }
 
+.gestao-usuario{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gestao-usuario button{
+  background-color: var(--azul);
+  color: white;
+  border: 3px var(--azul) solid;
+  border-radius: 5px;
+  width: 30%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .pequeno-filtro button:hover{
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
   transform: translateY(-2px);
@@ -245,7 +264,19 @@ body {
   max-width: 90%;
   max-height: 90%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: space-between;
 }
+
+.modal input,
+.modal select{
+  border: 3px var(--cinza) solid;
+  border-radius: 5px;
+}
+
+
 
 
 .cards-detalhes{
@@ -360,7 +391,7 @@ body {
   width: 20%;
 }
 
-.info-usuarios img { width: 10px; }
+.img-login { width: 40px; }
 
 .info-usuarios button{
   border: 2px var(--borda) solid;
