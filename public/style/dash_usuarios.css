@@ -184,7 +184,9 @@ body {
   padding: 20px;
 }
 
-.pequeno-filtro img { width: 20px; }
+.pequeno-filtro img { 
+  width: 40px;
+}
 
 .pequeno {
   display: flex;
@@ -204,6 +206,7 @@ body {
 .pequeno-filtro input{
   border: 2px var(--borda) solid;
   height: 40px;
+  width: 400px;
   border-radius: 10px;
 }
 
@@ -491,7 +494,6 @@ body {
   .hamburguer {
     display: flex;
   }
-
   .lateral {
     position: fixed;
   }
