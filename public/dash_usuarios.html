@@ -248,33 +248,46 @@
 
             <div class="popup" id="modal">
                 <div class="modal">
-                    <div>
-                        Cadastrar novo usuário
-                        <img src="assets/imgs/dash_user/fechar.png" alt="">
+                    <div class="box-cadastro" style="justify-content: space-between;">
+                        <h2>Cadastrar novo usuário</h2>
+                        <img id="fechar" src="assets/imgs/dash_user/fechar.png" alt="">
                     </div>
-                    <div style="border: 2px red solid">
-                        Nome <br>
-                        <input type="text"> 
-                        Senha 
-                        <input type="text">
+                    <div class="box-cadastro">
+                        <div class="campos">
+                            Nome <br>
+                            <input type="text">
+                        </div>
+                        <div class="campos">
+                            Senha <br>
+                            <input type="text">
+                        </div>
                     </div>
-                    <div style="border: 2px green solid">
-                        Email <br>
-                        <input type="text">
-                        Confirmar Senha 
-                        <input type="text">
+                    <div class="box-cadastro">
+                        <div class="campos">
+                            Email <br>
+                            <input type="text">
+                        </div>
+                        <div class="campos">
+                            Confirmar Senha <br>
+                            <input type="text">
+                        </div>
                     </div>
-                    <div style="border: 2px blue solid">
-                        CPF <br>
-                        <input type="text">
-                        Função
-                        <select name="" id="">
-                            <option value="#" selected disabled>--Selecione--</option>
-                            <option value="gestor">Gestor</option>
-                            <option value="analista">Analista</option>
-                        </select>
+                    <div class="box-cadastro">
+                        <div class="campos">
+                            CPF <br>
+                            <input type="text">
+                        </div>
+                        <div class="campos">
+                            Função <br>
+                            <select name="" id="">
+                                <option value="#" selected disabled>--Selecione--</option>
+                                <option value="gestor">Gestor</option>
+                                <option value="analista">Analista</option>
+                            </select>
+                        </div>
+                        
                     </div>
-                    <div style="border: 2px orange solid">
+                    <div class="box-cadastro">
                         <button class="btnCancelar">Cancelar</button>
                         <button class="btnCadastrar">Cadastrar</button>
                     </div>

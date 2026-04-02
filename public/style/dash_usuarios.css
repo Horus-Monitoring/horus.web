@@ -270,20 +270,35 @@ body {
   justify-items: space-between;
 }
 
+.campos{
+  width: 49%;
+}
+
 .modal input,
 .modal select{
   border: 3px var(--cinza) solid;
   border-radius: 5px;
+  width: 90%;
+}
+
+.box-cadastro{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+  border: 2px red solid;
 }
 
 .btnCancelar{
   border: 4px var(--azul) solid;
   color: var(--azul);
+  width: 40%;
 }
 
 .btnCadastrar{
   background-color: var(--azul);
   color: white;
+  width: 40%;
 }
 
 
