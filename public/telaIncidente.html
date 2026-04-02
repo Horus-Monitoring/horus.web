@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analista | Horus </title>
-    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,6 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/telaIncidente.css">
 </head>
 
@@ -31,8 +30,10 @@
             <nav class="menu">
                 <div class="categoria">Monitoramento</div>
 
-                <div class="item-menu selecionado"><img src="./assets/imgs/painel/dash-selecionado.png" alt="">Visão
-                    geral</div>
+                <div class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">
+                    Visão geral
+                </div>
                 <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
                 <div class="item-menu"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
 
@@ -41,18 +42,25 @@
             <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
         </aside>
 
+        <aside class="aside-tablet">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </aside>
+
+
         <main class="main">
 
             <header class="header">
                 <span><b>Incidentes</b></span>
 
                 <div class="usuario">
-                    <img src="./assets/imgs/painel/usuario.png" alt="">
+                    <img src="./assets/imgs/painel/usuario.png" alt="" class = "img-foto-perfil">
                     <div>
                         <p>Fernando Brandão</p>
                         <span class="cargo">Gestor de TI</span>
                     </div>
-                    <button class="menu-sand" id="menu">☰</button>
                 </div>
             </header>
 
@@ -61,247 +69,123 @@
 
                     <h4>Alertas e Incidentes</h4>
 
-                    <div class="indicadores-incidentes"
-                        style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div class="card pequeno-filtro" style="display: flex; flex-direction: column;">
-                            <h1>JIRA</h1>
-                            <h5>Abertos | Andamento | Concluído</h5>
-                            <a href="">Ir para o Jira</a>
+                    <div class="indicadores-incidentes">
+                        <div class="card pequeno-filtro">
+                            <div class="abertos">
+                                <h5>Abertos</h5>
+                                <h1>4</h1>
+                            </div>
+                            <div class="Andamento">
+                                <h5>Andamento</h5>
+                                <h1>2</h1>
+                            </div>
+                            <div class="Concluído">
+                                <h5>Concluídos</h5>
+                                <h1>2</h1>
+                            </div>
+                            <a href="https://www.atlassian.com/software/jira/service-management?..." class="link-jira">ir
+                                para site</a>
                         </div>
 
-                        <div class="card pequeno-filtro" style="display: flex; padding: 20px 30px; width: 750px;">
-                            <button>Todas</button>
-                            <button>Crítica</button>
-                            <button>Alta</button>
-                            <button>Média</button>
-                            <button>Baixa</button>
+                        <div class="card pequeno-filtro botoes-filtro">
+                            <button>Todas(4)</button>
+                            <button>Crítica(1)</button>
+                            <button>Alta(1)</button>
+                            <button>Média(1)</button>
+                            <button>Baixa(1)</button>
                             <button>Ativos</button>
                             <button>Resolvidos</button>
                         </div>
                     </div>
 
                     <div class="card pequeno">
-
                         <div class="lista-servidores">
-                            <div class="box-servidor" style="border: 1px solid red; border-radius: 15px;">
+                            
+                            <div class="box-servidor servidor-critico">
                                 <div class="info-servidor">
-                                    <img style="width: 30px;" src="assets/imgs/incidentes/alertaVermelho.png" alt="">
+                                    <img class="img-alerta" src="assets/imgs/incidentes/alertaVermelho.png" alt="">
                                     <div>
                                         <p class="nome-servidor">QUEDA DE SERVIDOR</p>
                                         <p class="endereco">ATC-SVR-GIG-01</p>
                                         <h4>Servidor offline sem resposta</h4>
-
                                     </div>
                                 </div>
 
                                 <div class="metricas">
                                     <div class="info-servidor">
-                                        <div class="cards-detalhes"
-                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
-                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
-                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
-                                                14:39:04.</span>
+                                        <div class="cards-detalhes texto-data">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" class="img-relogio">
+                                            <span class="negrito">22/03/2026 às 14:39:04.</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!---->
-                            <div class="box-servidor" style="border: 1px solid blue; border-radius: 15px;">
+
+                            <div class="box-servidor servidor-informativo">
                                 <div class="info-servidor">
-                                    <img style="width: 30px;" src="assets/imgs/incidentes/AvisoAzul.png" alt="">
+                                    <img class="img-alerta" src="assets/imgs/incidentes/AvisoAzul.png" alt="">
                                     <div>
                                         <p class="nome-servidor">QUEDA DE SERVIDOR</p>
                                         <p class="endereco">ATC-SVR-GIG-01</p>
                                         <h4>Servidor offline sem resposta</h4>
-
                                     </div>
                                 </div>
 
                                 <div class="metricas">
                                     <div class="info-servidor">
-                                        <div class="cards-detalhes"
-                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
-                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
-                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
-                                                14:39:04.</span>
+                                        <div class="cards-detalhes texto-data">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" class="img-relogio">
+                                            <span class="negrito">22/03/2026 às 14:39:04.</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!---->
-                            <div class="box-servidor" style="border: 1px solid yellow; border-radius: 15px;">
+
+                            <div class="box-servidor servidor-atencao">
                                 <div class="info-servidor">
-                                    <img style="width: 30px;" src="assets/imgs/incidentes/AvisoAmarelo.png" alt="">
+                                    <img class="img-alerta" src="assets/imgs/incidentes/AvisoAmarelo.png" alt="">
                                     <div>
                                         <p class="nome-servidor">QUEDA DE SERVIDOR</p>
                                         <p class="endereco">ATC-SVR-GIG-01</p>
                                         <h4>Servidor offline sem resposta</h4>
-
                                     </div>
                                 </div>
 
                                 <div class="metricas">
                                     <div class="info-servidor">
-                                        <div class="cards-detalhes"
-                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
-                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
-                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
-                                                14:39:04.</span>
+                                        <div class="cards-detalhes texto-data">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" class="img-relogio">
+                                            <span class="negrito">22/03/2026 às 14:39:04.</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!---->
-                            <div class="box-servidor" style="border: 1px solid orangered; border-radius: 15px;">
+
+                            <div class="box-servidor servidor-alerta">
                                 <div class="info-servidor">
-                                    <img style="width: 30px;" src="assets/imgs/incidentes/AvisoLaranja.png" alt="">
+                                    <img class="img-alerta" src="assets/imgs/incidentes/AvisoLaranja.png" alt="">
                                     <div>
                                         <p class="nome-servidor">QUEDA DE SERVIDOR</p>
                                         <p class="endereco">ATC-SVR-GIG-01</p>
                                         <h4>Servidor offline sem resposta</h4>
-
                                     </div>
                                 </div>
 
                                 <div class="metricas">
                                     <div class="info-servidor">
-                                        <div class="cards-detalhes"
-                                            style="display: flex; flex-direction: row; color: rgba(0, 0, 0, 0.5);">
-                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" width="5px">
-                                            <span style="padding: 2px;font-weight: bolder;">22/03/2026 às
-                                                14:39:04.</span>
+                                        <div class="cards-detalhes texto-data">
+                                            <img src="assets/imgs/dash_analista/relogio.png" alt="" class="img-relogio">
+                                            <span class="negrito">22/03/2026 às 14:39:04.</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </section>
-            <div class="popup" id="modal">
-                <div class="modal">
-                    <div class="card-nome-servidor">
-                        <div>
-                            <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
-                        </div>
-                        <div>
-                            ATC-SVR-REC-01 <br>
-                            <span>Recife - PE</span>
-                        </div>
-                        <div>
-                            <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
-                        </div>
-                    </div>
-                    <div class="cards-detalhes">
-                        <div class="card-cpu">
-                            <span>CPU</span>
-                            <h1>28%</h1>
-                            <div class="barra">
-                                <div class="preencher barra-azul" style="width: 28%;"></div>
-                            </div>
-                        </div>
-                        <div class="card-ram">
-                            <span>RAM</span>
-                            <h1>62%</h1>
-                            <div class="barra">
-                                <div class="preencher barra-roxa" style="width: 62%;"></div>
-                            </div>
-                        </div>
-                        <div class="card-disk">
-                            <span>DISCO</span>
-                            <h1>55%</h1>
-                            <div class="barra">
-                                <div class="preencher barra-verde2" style="width: 55%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cards-detalhes-grafico">
-                        <h1>Histórico de Uso (Últimas 24h)</h1>
-                        <canvas id="graficoRecursos24h"></canvas>
-                    </div>
-                    <div class="cards-detalhes">
-                        <img src="assets/imgs/dash_analista/relogio.png" alt="" height="20px">
-                        <span>Última atualização: 22/03/2026 às 14:39:04.</span>
-                    </div>
-                </div>
-            </div>
-
         </main>
-
     </div>
-
 </body>
-
 </html>
-
-<script>
-
-    const modal = document.getElementById('modal');
-
-    document.querySelectorAll('.detalhes').forEach(btn => {
-        btn.addEventListener('click', () => {
-            modal.classList.add('ativo');
-        });
-    });
-
-    document.getElementById('fechar').addEventListener('click', () => {
-        modal.classList.remove('ativo');
-    });
-
-    modal.addEventListener('click', e => {
-        if (e.target === modal) modal.classList.remove('ativo');
-    });
-
-
-    const menu = document.getElementById('menu-');
-    const lateral = document.querySelector('.lateral');
-
-    menu.addEventListener('click', () => {
-        lateral.classList.toggle('ativo');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!lateral.contains(e.target) && !menu.contains(e.target)) {
-            lateral.classList.remove('ativo');
-        }
-    });
-
-
-    const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
-    const graficoRecursos24h = new Chart(recursos24h, {
-        type: 'line',
-        data: {
-            labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
-            datasets: [
-                {
-                    label: 'CPU%',
-                    data: [12, 19, 3, 5, 2], // Dados (eixo Y)
-                    borderColor: 'rgb(75, 192, 192)', // Cor da linha
-                    tension: 0.1 // Suavização da linha
-                },
-                {
-                    label: 'RAM%',
-                    data: [45, 27, 32, 52, 40], // Dados (eixo Y)
-                    borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
-                    tension: 0.1
-                },
-                {
-                    label: 'DISCO%',
-                    data: [90, 86, 82, 92, 93], // Dados (eixo Y)
-                    borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
-                    tension: 0.1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            },
-            responsive: true
-        }
-    });
-
-</script>
