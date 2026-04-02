@@ -276,6 +276,16 @@ body {
   border-radius: 5px;
 }
 
+.btnCancelar{
+  border: 4px var(--azul) solid;
+  color: var(--azul);
+}
+
+.btnCadastrar{
+  background-color: var(--azul);
+  color: white;
+}
+
 
 
 
