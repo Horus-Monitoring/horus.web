@@ -1,49 +1,33 @@
 * {
-  border: 0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-:root {
-  --turquesa: #1b264f;
-  --azul: #274690;
-  --ciano: #576ca8;
-  --preto: #302b27;
-  --cinza: #f5f3f5;
-  --borda: #ebe6e7;
-  --texto: #404040;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  background: var(--cinza);
-  height: 100vh;
-  overflow: auto;
+  background: #f5f5f5;
 }
 
-.container {
-  display: flex;
-  height: 100%;
-}
-
-/* Sidebar */
 .lateral {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 1vw;
   width: 260px;
   height: 100vh;
   background-color: #1f2937;
   border-right: 1px solid var(--borda);
   position: fixed;
+  z-index: 999;
+  transition: transform 0.3s ease;
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1vw;
+  gap: 10px;
   padding: 20px;
   font-weight: bold;
   font-size: 24px;
@@ -51,26 +35,11 @@ body {
   color: white;
 }
 
-.logo img { width: 30%; }
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 4px;
-  padding: 0 15px;
-  color: var(--borda);
-  font-size: 14px;
-}
-
-.menu img {
-  width: 18px;
-  margin-left: 10px;
-}
-
 .categoria {
   color: #a0a5a8;
-  margin: 1vw 0 0 1vw;
+  margin: 16px 0 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
 }
 
 .item-menu {
@@ -83,18 +52,20 @@ body {
   transition: 0.2s;
 }
 
-.item-menu:hover { background-color: #2a3646; }
+.item-menu:hover {
+  background-color: #2a3646;
+}
 
 .selecionado {
   background-color: #2a3646;
-  color: #478bd1;
+  color: #3577d4;
 }
 
 .sair {
   display: flex;
   padding: 20px;
   gap: 15px;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--ciano);
   align-items: center;
   justify-content: center;
@@ -102,104 +73,90 @@ body {
   transition: 0.2s;
 }
 
-.sair:hover { background-color: #2a3646; cursor: pointer; }
+.sair p {
+  cursor: pointer;
+}
 
-/* Main Content */
-.main {
-  flex: auto;
+.sair p:hover {
+  color: #4383d6;
+  transition: 0.2s;
+}
+
+.menu {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  gap: 4px;
+  padding: 0 15px;
+  color: var(--borda);
+  font-size: 14px;
+}
+
+
+.main {
   margin-left: 260px;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  background-color: white;
-  border-bottom: 1px solid var(--borda);
   padding: 20px;
-}
-
-.usuario {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.cargo {
-  font-size: 12px;
-  color: #a0a5a8;
 }
 
 .conteudo {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+
 .indicadores-incidentes {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .card {
-  background: #fff;
+  background: white;
   border-radius: 12px;
   border: 1px solid #ddd;
 }
 
-.pequeno-filtro {
+
+.indicadores {
   display: flex;
-  flex-direction: row;
-  gap: 15px;
-  justify-content: space-between;
-  align-items: center;
+  gap: 40px;
   padding: 20px;
 }
 
-/* Estilos específicos dos cards de status (Abertos, Andamento, Concluídos) */
-.abertos, .Andamento, .Concluído {
+.indicadores h5 {
+  font-size: 12px;
+  color: #888;
+}
+
+
+.botoes-filtro {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px;
 }
 
-.pequeno-filtro a {
-  text-decoration: none; /* Corrigido de font-style: none */
-}
-
-/* Filtros de botões */
-.indicadores-incidentes .card.pequeno-filtro:last-child {
-  padding: 20px 30px;
-  width: 600px;
-  gap: 12px;
-}
-
-.pequeno-filtro button {
-  border: 2px var(--borda) solid;
-  height: 40px;
-  width: 80px;
+.botoes-filtro button {
+  padding: 8px 12px;
   border-radius: 10px;
-  background-color: var(--cinza);
-  color: var(--texto);
+  border: 1px solid #ddd;
+  background: #eee;
   cursor: pointer;
 }
 
-/* Lista de Servidores/Incidentes */
-.pequeno {
-  display: flex;
-  flex-direction: column; /* Ajustado para conter a lista */
+.botoes-filtro button:hover {
+  background: #ddd;
+}
+
+
+.lista-container {
   padding: 20px;
-  width: 100%;
 }
 
 .lista-servidores {
   display: flex;
   flex-direction: column;
-  width: 100%;
   gap: 15px;
 }
 
@@ -208,59 +165,94 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-radius: 15px;
-  width: 100%;
+  border-radius: 12px;
 }
 
-/* Cores das bordas vindas do inline */
-.box-servidor[style*="red"] { border: 1px solid red; }
-.box-servidor[style*="blue"] { border: 1px solid blue; }
-.box-servidor[style*="yellow"] { border: 1px solid yellow; }
-.box-servidor[style*="orangered"] { border: 1px solid orangered; }
+.servidor-critico {
+  border: 1px solid #ff4d4d;
+}
+
+.servidor-alta {
+  border: 1px solid #ff944d;
+}
+
+.servidor-media {
+  border: 1px solid #ffd11a;
+}
+
+.servidor-baixa {
+  border: 1px solid #4da6ff;
+}
+
 
 .info-servidor {
   display: flex;
-  align-items: center;
   gap: 10px;
-}
-
-.info-servidor img[src*="alerta"], 
-.info-servidor img[src*="Aviso"] { 
-  width: 30px; 
+  align-items: center;
 }
 
 .nome-servidor {
   font-weight: bold;
-  font-size: 14px;
 }
 
 .endereco {
-  font-size: 11px;
-  color: #a0a5a8;
+  font-size: 12px;
+  color: #777;
 }
 
-.card-nome-servidor {
+.descricao {
+  font-size: 13px;
+}
+
+.lado-direito {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: var(--cinza);
-  padding: 10px 20px;
-  border: 2px var(--borda) solid;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+
+.status {
+  padding: 4px 10px;
   border-radius: 20px;
+  font-size: 12px;
 }
 
-.cards-detalhes {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 20px 0;
+.status.ativo {
+  background: #ffcccc;
+  color: red;
 }
 
-.img-relogio{
-  width: 20px;
+.status.resolvido {
+  background: #ccffcc;
+  color: green;
 }
 
-.img-foto-perfil{
-  width: 30px;
+.status.media{
+  background-color: #FFF9DF;
+  color: #FFCC00;
+}
+
+.status.baixa{
+  background-color: #E1EFFF;
+   color: #274690;
+}
+
+.status.alta{
+  background-color: #FFF0DF;
+  color: #FF8400;
+}
+
+.status.critica{
+  background-color: #FFEFEF;
+  color: #C70C0C;
+}
+
+.img-icone{
+  width: 35px;
+}
+
+.data {
+  font-size: 12px;
+  color: #777;
 }
