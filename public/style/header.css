@@ -1,10 +1,10 @@
 header {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.849);
+    background-color: #fff;
     position: fixed;
     display: flex;
     justify-content: space-between;
-    padding: 0px 10%;
+    padding: 50px 40px 50px 20px;
     align-items: center;
     height: 10vh;
     font-family: "Cabin", sans-serif;
@@ -19,15 +19,18 @@ header .section_logo {
     justify-content: left;
     align-items: center;
     width: 50%;
-    gap: 30px;
+    gap: 15px;
 }
 
 header .section_logo p {
     margin-bottom: 0 !important;
+    font-family: "Jura";
+    font-size: 22px;
+    font-weight: bold;
 }
 
 header .section_logo img {
-    width: 50px;
+    width: 60px;
 }
 
 header .section_href {
@@ -35,7 +38,7 @@ header .section_href {
     justify-content: right;
     align-items: center;
     width: 100%;
-    gap: 50px;
+    gap: 40px;
     list-style: none;
 }
 
@@ -90,7 +93,6 @@ header .menu_responsivo {
         background-color: rgba(255, 255, 255, 0.849);
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
         transform: translateX(100%);
     }
 
