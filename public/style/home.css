@@ -19,9 +19,7 @@
 
 }
 
-
 /* Inicio da estilização da MAIN */
-
 
 /* SECTION INICIO - INICIO */
 main {
@@ -454,9 +452,9 @@ main .section_cards .card .texto {
     left: 0;
 }
 
-.section_contato img {
-    /* width: 50%; */
-}
+/* .section_contato img {
+    width: 50%;
+} */
 
 .section_contato .section_forms {
     /* background-color: aqua; */
