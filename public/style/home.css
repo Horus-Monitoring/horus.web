@@ -15,8 +15,7 @@
 .texto {
     font-size: 20px;
     font-family: "Cabin", sans-serif;
-    text-align: justify;
-
+    /* text-align: justify; */
 }
 
 
@@ -64,23 +63,24 @@ main .section_inicial .conteudo_inicial .button {
 
 main .section_inicial .conteudo_inicial .button button {
     border-radius: 25px;
-    padding: 15px 19px;
+    padding: 10px 20px;
     background-color: #274690;
     color: #fff;
     cursor: pointer;
     font-family: "Cabin", sans-serif;
-    transition: ease-out 0.9s;
+    /* transition: ease-out 0.9s; */
     font-size: 15px;
     position: relative;
     box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.3);
     font-weight: 600;
+    border: #274690 3px solid;
+    transition: 0.2s;
 }
 
 main .section_inicial .conteudo_inicial .button button:hover {
     background-color: #fff;
-    border: #274690 3px solid;
-    padding: 12px 16px;
     color: #274690;
+    transition: 0.2s;
 }
 
 main .section_inicial .conteudo_inicial .titulo,
@@ -310,7 +310,10 @@ main .section_informacoes .textos {
     width: 100%;
     /* padding-right: 20px; */
     flex: 1;
-    padding: 10px 30px;
+    padding: 0px 30px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 main .section_informacoes .textos .titulo {
@@ -321,7 +324,7 @@ main .section_informacoes .textos .titulo {
 
 main .section_informacoes .textos .texto {
     color: black;
-    margin-top: 5%;
+    /* margin-top: 5%; */
     /* padding: 10px 10px; */
     /* background-color: aqua; */
 }
@@ -336,28 +339,28 @@ main .section_informacoes .informacoes .button {
     display: flex;
     justify-content: left;
     align-items: center;
-    height: 20vh;
 }
 
 main .section_informacoes .informacoes .button button {
     border-radius: 25px;
-    padding: 15px 20px;
+    padding: 10px 30px;
     background-color: #274690;
     color: #fff;
     cursor: pointer;
     font-family: "Cabin", sans-serif;
-    transition: ease-out 0.9s;
+    /* transition: ease-out 0.9s; */
+    transition: 0.2s;
     font-size: 15px;
     position: relative;
     box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.3);
     font-weight: 600;
+    border: #274690 3px solid;
 }
 
 main .section_informacoes .informacoes .button button:hover {
     background-color: #fff;
-    border: #1B264F 3px solid;
-    padding: 12px 16px;
-    color: #1B264F;
+    color: #274690;
+    transition: 0.2s;
 }
 
 main .section_informacoes .informacoes .img-info {
@@ -366,7 +369,7 @@ main .section_informacoes .informacoes .img-info {
     /* background-color: aqua; */
     background-position: center;
     background-size: cover;
-    padding: 0px 50px;
+    padding: 0px 40px;
     flex: 1;
     display: flex;
     /* overflow: hidden; */
@@ -387,7 +390,7 @@ main .section_informacoes .banner {
     z-index: -1;
     object-fit: cover;
     /* background-color: red; */
-    object-position: 90px 240px;
+    object-position: 50px 68px;
 }
 
 
@@ -446,22 +449,24 @@ main .section_cards .card .texto {
 }
 
 .section_contato .mensagem {
-    margin-top: 10%;
+    margin-top: 5%;
     /* background-color: aqua; */
 }
 
 .section_contato .img-mensagem {
     left: 0;
+    height: 480px;
 }
 
-.section_contato img {
-    /* width: 50%; */
-}
+/* .section_contato img {
+    width: 50%;
+} */
 
 .section_contato .section_forms {
     /* background-color: aqua; */
     width: 100%;
-    padding: 0px 30px;
+    padding: 0 50px;
+    padding-right: 100px;
 }
 
 @media (min-width: 1400px) {
@@ -485,7 +490,7 @@ main .section_cards .card .texto {
     border: 2px solid #D7CBCB;
     border-radius: 5px;
     width: 100%;
-    height: 40px;
+    height: 45px;
     padding: 10px 10px;
 }
 
@@ -504,7 +509,7 @@ main .section_cards .card .texto {
     font-family: "Cabin", sans-serif;
     border-radius: 5px;
     width: 100%;
-    height: 40px;
+    height: 45px;
     margin-top: 5%;
     cursor: pointer;
     transition: ease-out 0.9s;
@@ -525,7 +530,7 @@ footer {
     height: 50%;
     display: flex;
     justify-content: space-between;
-    padding: 5% 5%;
+    padding: 3%;
     align-items: center;
     margin-top: 5%;
 }
@@ -543,13 +548,6 @@ footer {
         gap: 20px;
     }
 
-    .footer .section_direita {
-        width: 100px;
-    }
-
-    .footer .section_direita img {
-        width: 100px;
-    }
     
 }
 
@@ -568,14 +566,14 @@ footer .logo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
     color: #fff;
     /* background-color: red; */
     text-align: center;
 }
 
 footer .logo img {
-    width: 100px;
+    width: 80px;
     /* justify-content: center; */
     margin-bottom: 2%;
 }
@@ -589,17 +587,25 @@ footer .logo .texto {
 footer .section_direita {
     display: flex;
     justify-content: end;
+    flex-direction: column;
     /* background-color: pink; */
     width: 175px;
     height: 100px;
 }
 
-footer .section_direita .img {
+footer .section_direita div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+     color: #fff;
+}
+
+footer .section_direita img {
     /* width: 100px; */
     /* max-height: 50px; */
     /* margin-left: 3%; */
     /* background-color: aqua; */
-    object-fit: cover;
+    height: 50px;
     /* height: 50%; */
 }
 /* 
@@ -621,7 +627,6 @@ footer .section_direita .img img {
         background-color: rgba(255, 255, 255, 0.849);
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
         transform: translateX(100%);
     }
 
@@ -708,7 +713,7 @@ footer .section_direita .img img {
     }
 
     footer {
-        min-height: 60vh;
+        /* min-height: 60vh; */
         display: flex;
         flex-direction: column;
         text-align: center;
@@ -719,9 +724,9 @@ footer .section_direita .img img {
         width: 60px;
     }
 
-    /* footer .logo .texto {
-        width: 200px;
-    } */
+    footer .logo .texto {
+       font-size: 12px;
+    }
 
     footer .section_esquerda a {
         width: 200px;
@@ -735,3 +740,15 @@ footer .section_direita .img img {
 }
 
 /* TÉRMINO RESPONSIVIDADE */
+
+@media (max-width: 1199px) {
+    main .section_informacoes .banner{
+        object-position: 10px 260px;
+    }
+}
+
+@media (max-width: 992px){
+    .section_contato .section_forms{
+        padding-right: 50px;
+    }
+}
