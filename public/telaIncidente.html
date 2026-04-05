@@ -9,7 +9,7 @@
 
 <body>
 <div class="container">
-
+    <div class="overlay" id="overlay"></div>
     <aside class="lateral" id="lateral">
             <div class="logo">
                 <img src="./assets/imgs/painel/logo_v2.png" alt="">
@@ -33,48 +33,49 @@
                 </div>
 
             </nav>
-
+            
             <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
         </aside>
 
-          <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="assets/imgs/painel/menu-sand.png" alt="">
-                </div>    
+           <header class="header">
+            <div class="hamburguer" id="hamburguer">☰</div>
+                <span><b>Incidentes</b></span>
 
                 <div class="usuario">
                     <img src="./assets/imgs/painel/usuario.png" alt="">
                     <div>
-                        <p>Fernando Brandão</p>
-                        <span class="cargo">Gestor</span>
+                        <p>Julia Araripe</p>
+                        <span class="cargo">Analista</span>
                     </div>
                 </div>
             </header>
-
   <main class="main">
 
     <section class="conteudo">
 
+
       <h3>Alertas e Incidentes</h3>
+<div class="indicadores-incidentes">
+      <div class="card pequeno-filtro indicadores">
 
-      <div class="indicadores-incidentes">
+  <div class="chamados">
+    <h5>Abertos</h5>
+    <h1 id="qtdAbertos">4</h1>
+  </div>
 
-        <div class="card pequeno-filtro indicadores">
-          <div>
-            <h5>Abertos</h5>
-            <h1 id="qtdAbertos">4</h1>
-          </div>
+  <div class="chamados">
+    <h5>Andamento</h5>
+    <h1 id="qtdAndamento">2</h1>
+  </div>
 
-          <div>
-            <h5>Andamento</h5>
-            <h1 id="qtdAndamento">2</h1>
-          </div>
+  <div class="chamados">
+    <h5>Concluídos</h5>
+    <h1 id="qtdConcluidos">2</h1>
+  </div>
 
-          <div>
-            <h5>Concluídos</h5>
-            <h1 id="qtdConcluidos">2</h1>
-          </div>
-        </div>
+  <a href="#" class="link-jira">Link Jira</a>
+
+</div>
 
         <div class="card pequeno-filtro botoes-filtro">
 
@@ -210,4 +211,19 @@
 
 </div>
 </body>
+<script>
+const hamburguer = document.getElementById("hamburguer");
+const lateral = document.getElementById("lateral");
+const overlay = document.getElementById("overlay");
+
+hamburguer.addEventListener("click", () => {
+  lateral.classList.toggle("ativo");
+  overlay.classList.toggle("ativo");
+});
+
+overlay.addEventListener("click", () => {
+  lateral.classList.remove("ativo");
+  overlay.classList.remove("ativo");
+});
+</script>
 </html>

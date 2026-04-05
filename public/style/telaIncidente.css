@@ -21,6 +21,7 @@ body {
   position: fixed;
   z-index: 999;
   transition: transform 0.3s ease;
+  transform: translateX(0);
 }
 
 .logo {
@@ -298,4 +299,108 @@ body {
 .data {
   font-size: 12px;
   color: #777;
+}
+
+
+.hamburguer {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #1f2937;
+}
+
+@media (max-width: 1439px) and (min-width: 800px) {
+  .lateral {
+    transform: translateX(-260px);
+    width: 260px;
+  }
+
+  .lateral.ativo {
+    transform: translateX(0);
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .hamburguer {
+    display: block;
+  }
+
+  .indicadores-incidentes {
+    flex-direction: column;
+  }
+
+  .botoes-filtro {
+    flex-direction: column;
+  }
+
+  .indicadores {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 799px) {
+  .lateral {
+    transform: translateX(-260px);
+    width: 260px;
+  }
+
+  .lateral.ativo {
+    transform: translateX(0);
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 12px;
+  }
+
+  .hamburguer {
+    display: block;
+  }
+
+  .indicadores-incidentes {
+    flex-direction: column;
+  }
+
+  .botoes-filtro {
+    flex-direction: column;
+  }
+
+  .indicadores {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .box-servidor {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .lado-direito {
+    align-items: flex-start;
+  }
+
+  .header {
+    padding: 12px;
+  }
+
+  .card.lista-container {
+    padding: 12px;
+  }
+}
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.overlay.ativo {
+  display: block;
 }
