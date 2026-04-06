@@ -18,6 +18,17 @@ function irPara(index) {
   mostrarSlide();
 }
 
+function proximoSlide() {
+  atual++;
+  if(atual >= slides.length) {
+    atual = 0; 
+  }
+
+  mostrarSlide();
+}
+
+setInterval(proximoSlide, 5000);
+
 function usuario() {
     if (!sessionStorage.ID_USUARIO) {
     alert("Você precisa estar logado!");
