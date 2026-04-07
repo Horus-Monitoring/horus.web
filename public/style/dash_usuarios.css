@@ -237,12 +237,17 @@ body {
   justify-content: space-between;
 }
 
+.gestao-usuario p{
+  align-self: center;
+  font-size: large;
+}
+
 .gestao-usuario button{
   background-color: var(--azul);
   color: white;
   border: 3px var(--azul) solid;
   border-radius: 5px;
-  width: 30%;
+  width: 25%;
   height: 50px;
   display: flex;
   flex-direction: row;
@@ -465,6 +470,11 @@ body {
 }
 
 .box-servidor:hover { background-color: #f6f7f8; }
+
+.cabecario{
+  background-color: #f5f3f5;
+  font-size: small;
+}
 
 .info-usuarios {
   display: flex;
