@@ -1,17 +1,17 @@
 header {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.849);
+    background-color: #fff;
     position: fixed;
-    border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    padding: 0px 10%;
+    padding: 50px 40px 50px 20px;
     align-items: center;
     height: 10vh;
-    font-family: "Jura", sans-serif;
-    font-weight: 600;
+    font-family: "Cabin", sans-serif;
+    font-size: larger;
     z-index: 99;
     letter-spacing: 1.5px;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.3); 
 }
 
 header .section_logo {
@@ -19,38 +19,44 @@ header .section_logo {
     justify-content: left;
     align-items: center;
     width: 50%;
-    gap: 30px;
+    gap: 15px;
+}
+
+header .section_logo p {
+    margin-bottom: 0 !important;
+    font-family: "Jura";
+    font-size: 22px;
+    font-weight: bold;
 }
 
 header .section_logo img {
-    width: 50px;
+    width: 60px;
 }
 
 header .section_href {
     display: flex;
     justify-content: right;
     align-items: center;
-    width: 50%;
-    gap: 50px;
+    width: 100%;
+    gap: 40px;
     list-style: none;
+}
+
+header ul {
+    margin-bottom: 0 !important;
+    padding-left: 0 !important;
 }
 
 header .section_href a {
     text-decoration: none;
     color: black;
     transform: 2s;
+    font-size: large;
 }
 
 header .section_href a:hover {
     border-bottom: 2px solid black;
     transition: 2s;
-}
-
-#imgPerfilNav {
-    cursor: pointer;
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
 }
 
 header .menu_responsivo div {
@@ -77,17 +83,16 @@ header .menu_responsivo {
     }
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 1024px) {
     header .section_href {
         position: absolute;
         top: 10vh;
         right: 0;
-        width: 50vw;
+        width: 40vw;
         height: 90vh;
         background-color: rgba(255, 255, 255, 0.849);
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
         transform: translateX(100%);
     }
 
