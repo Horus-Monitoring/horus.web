@@ -190,7 +190,6 @@ body {
 
 .pequeno-filtro{
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 39%;
   padding: 20px;
@@ -198,6 +197,7 @@ body {
 
 .pequeno-filtro img { 
   width: 40px;
+  padding-right: 10px;
 }
 
 .pequeno {
