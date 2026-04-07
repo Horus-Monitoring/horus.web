@@ -26,6 +26,7 @@ body {
 .container {
   display: flex;
   height: 100%;
+  width: 100%;
 }
 
 .lateral {
@@ -478,6 +479,7 @@ body {
   .lateral {
     width: 220px;
     transform: translateX(-100%);
+     will-change: transform; 
   }
 
   .main {
@@ -513,6 +515,7 @@ body {
 
   .lateral {
     position: fixed;
+    will-change: transform; 
   }
 
   .hamburguer {
@@ -570,6 +573,28 @@ body {
     padding-right: 10px;
   }
 
+  .gestao-usuario{
+    flex-direction: column;
+    align-items: first baseline;
+  }
+
+  .gestao-usuario p{
+    padding-bottom: 10px;
+  }
+  .gestao-usuario button{
+    width: 60%;
+    padding: 0;
+    align-self: center;
+  }
+
+  .email{
+    display: none;
+  }
+
+  .header span{
+    display: none;
+  }
+
 
   .cards-detalhes {
     flex-wrap: wrap;
@@ -602,7 +627,6 @@ body {
     display: none;
   }
 
-
   .pequeno-filtro {
     display: flex;
     flex-direction: row;
@@ -613,24 +637,11 @@ body {
     width: 90%;
   }
 
-
-  .pequeno-filtro button{
-    width: 45%;
-  }
-  .pequeno-filtro select{
-    width: 80%;
-  }
-
-  .pequeno-filtro option{
-    font-size: smaller;
-  }
-
   .box-servidor {
     flex-direction: row;
     align-items: flex-start;
     gap: 10px;
   }
-
 
   .modal {
     width: 95%;
@@ -655,6 +666,10 @@ body {
     flex-direction: row;
     width: 100%;
     justify-content: center;
+  }
+  
+  .cargo{
+    display: none;
   }
 
 }
