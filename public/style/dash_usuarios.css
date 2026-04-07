@@ -20,7 +20,7 @@
 body {
   background: var(--cinza);
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .container {
@@ -161,6 +161,7 @@ body {
 .cards {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -177,6 +178,7 @@ body {
   align-items: center;
   width: 39%;
   padding: 20px;
+  flex: 1 1 200px;
 }
 
 .pequeno-filtro img { 
@@ -475,10 +477,11 @@ body {
 @media (max-width: 1024px) {
   .lateral {
     width: 220px;
+    transform: translateX(-100%);
   }
 
   .main {
-    margin-left: 220px;
+    margin-left: 0;
   }
 
   .metricas{
@@ -487,10 +490,6 @@ body {
 
   .box-servidor{
     justify-content: space-around;
-  }
-
-  .lateral{
-    transform: translateX(-100%);
   }
 
   .modal-lateral {
@@ -520,10 +519,6 @@ body {
     display: flex;
   }
 
-  .main {
-    margin-left: 0;
-  }
-
   .cards-detalhes {
     gap: 15px;
     justify-content: center;
@@ -544,7 +539,7 @@ body {
   }
 
   .total{
-    display: none;
+    display: none !important;
   }
 
 }
