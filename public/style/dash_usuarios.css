@@ -672,4 +672,43 @@ body {
     display: none;
   }
 
+  .head{
+    height: 20%;
+  }
+
+  .box-cadastro h2{
+    font-size: medium;
+    padding: 0;
+  }
+
+  .box-cadastro img{
+    width: 9%;
+    height: 18%;
+  }
+
+  .campos{
+    width: 99%;
+  }
+
+  .campo{
+    flex-direction: column;
+    padding-bottom: 12px;
+  }
+
+  .campo input{
+    width: 100%;
+    border: 3px var(--borda) solid;
+    padding-bottom: 5px;
+  }
+
+  .campo select{
+    width: 100%;
+    border: 3px var(--borda) solid;
+    font-size: small;
+  }
+
+  .campo option{
+    width: 50%;
+    font-size: small;
+  }
 }
