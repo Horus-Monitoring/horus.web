@@ -279,6 +279,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-items: space-between;
+  height: 500px;
 }
 
 .campos{
@@ -290,26 +291,34 @@ body {
   border: 3px var(--cinza) solid;
   border-radius: 5px;
   width: 90%;
+  height: 60%;
 }
 
 .box-cadastro{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 90%;
-  border: 2px red solid;
+  height: 20%;
+}
+
+.box-cadastro img{
+  width: 5%;
+  height: 25%;
 }
 
 .btnCancelar{
   border: 4px var(--azul) solid;
   color: var(--azul);
   width: 40%;
+  height: 60%;
 }
 
 .btnCadastrar{
   background-color: var(--azul);
   color: white;
   width: 40%;
+  height: 60%;
 }
 
 
