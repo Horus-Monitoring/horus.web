@@ -196,7 +196,7 @@ body {
 }
 
 .pequeno-filtro img { 
-  width: 40px;
+  width: 50px;
   padding-right: 10px;
 }
 
@@ -476,10 +476,10 @@ body {
 }
 
 .data-usuarios{
-  font-weight: bold;
   font-size: 14px;
   padding-bottom: 6px;
   width: 19%;
+  color: var(--subtexto);
 }
 
 .cards-detalhes-grafico{
