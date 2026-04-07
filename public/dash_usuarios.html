@@ -157,7 +157,7 @@
                                 </div>
                                 
                                 <div class="info-usuarios" style="justify-content: center;">
-                                    <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
                                 </div>
                             </div>
 
@@ -182,7 +182,7 @@
                                 </div>
                                 
                                 <div class="info-usuarios" style="justify-content: center;">
-                                           <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                           <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
                                 </div>
                             </div>
 
@@ -207,7 +207,7 @@
                                 </div>
                                 
                                 <div class="info-usuarios" style="justify-content: center;">
-                                    <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
                                 </div>
                             </div>
 
@@ -232,7 +232,7 @@
                                 </div>
                                 
                                 <div class="info-usuarios" style="justify-content: center;">
-                                    <img src="assets/imgs/dash_user/lixeira.png" alt="">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
                                 </div>
                             </div>
                             
@@ -295,6 +295,20 @@
                 </div>
             </div>
 
+            <div class="popup" id="modal2">
+                <div class="modal2">
+                    <div class="box-excluir">
+                        <h2>Tem certeza que deseja excluir este usuário?</h2>
+                        
+                    </div>
+                    <div class="box-excluir">
+                        <button id="btnCancelarExcluir" class="btnCancelarExcluir">Cancelar</button>
+                        <button class="btnExcluir">Cadastrar</button>
+                    </div>
+                
+                </div>
+            </div>
+
         </main>
 
     </div>
@@ -321,6 +335,24 @@
 
         modal.addEventListener('click', e => {
         if (e.target === modal) modal.classList.remove('ativo');
+        });
+
+        // Modal para excluir usuários
+    
+        const modal2 = document.getElementById('modal2');
+
+        document.querySelectorAll('.apagar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal2.classList.add('ativo');
+        });
+        });
+
+        document.getElementById('btnCancelarExcluir').addEventListener('click', () => {
+        modal2.classList.remove('ativo');
+        });
+
+        modal2.addEventListener('click', e => {
+        if (e.target === modal2) modal2.classList.remove('ativo');
         });
 
 
