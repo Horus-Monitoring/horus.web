@@ -200,6 +200,10 @@ body {
   padding-right: 10px;
 }
 
+.pequeno-filtro input{
+  padding-left: 10px;
+}
+
 .pequeno {
   display: flex;
   justify-content: space-between;
@@ -250,9 +254,11 @@ body {
   width: 25%;
   height: 50px;
   display: flex;
+  gap: 8px;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  font-size: medium;
 }
 
 .gestao-usuario button:hover{
@@ -287,6 +293,10 @@ body {
 
 .cadastrar:hover .icone .normal {
   opacity: 0;
+}
+
+.apagar:hover{
+  box-shadow:  0 10px 20px rgba(0,0,0,0.2);
 }
 
 .pequeno-filtro button:hover{
@@ -527,6 +537,10 @@ body {
   border-radius: 10px;
   background-color: var(--cinza);
   color: var(--texto);
+}
+
+.icone-cargo{
+  width: 80px;
 }
 
 .nome-servidor {
