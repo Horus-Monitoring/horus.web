@@ -22,7 +22,7 @@
 
 
     <div class="container">
-
+        <div class="modal-lateral" id="overlay"></div>
         <aside class="lateral" id="lateral">
             <div class="logo">
                 <img src="./assets/imgs/painel/logo_v2.png" alt="">
@@ -130,10 +130,10 @@
                                 <div class="info-usuarios">
                                     <b>Email</b>
                                 </div>
-                                <div class="info-usuarios">
+                                <div class="data-usuarios">
                                     <b>Função</b>
                                 </div>
-                                <div class="info-usuarios">
+                                <div class="data-usuarios">
                                     <b>Data de Cadastro</b>
                                 </div>
                                 <div class="info-usuarios" style="justify-content: center;">
@@ -153,7 +153,7 @@
                                     <p>gustavo@horus.monitoring.com.br</p>
                                 </div>
 
-                                <div class="info-usuarios">
+                                <div class="data-usuarios">
                                     <img class="icone-cargo" src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
                                 </div>
                                 
@@ -178,7 +178,7 @@
                                     <p>vitoria@horus.monitoring.com.br</p>
                                 </div>
 
-                                <div class="info-usuarios">
+                                <div class="data-usuarios">
                                     <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
                                 </div>
                                 
@@ -203,7 +203,7 @@
                                     <p>fernando@horus.monitoring.com.br</p>
                                 </div>
 
-                                <div class="info-usuarios">
+                                <div class="data-usuarios">
                                     <img class="icone-cargo" src="./assets/imgs/dash_user/analista_etiqueta.png" alt="">
                                 </div>
                                 
@@ -228,7 +228,7 @@
                                     <p>alguém@horus.monitoring.com.br</p>
                                 </div>
 
-                                <div class="info-usuarios">
+                                <div class="data-usuarios">
                                     <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
                                 </div>
                                 
@@ -324,7 +324,35 @@
 
 <script>
 
-        // Modal para o cadastro
+    //Modal para o menu sanduíche
+        
+        const btnHamburguer = document.getElementById('hamburguer'); 
+        const lateral = document.getElementById('lateral'); 
+        const overlay = document.getElementById('overlay'); 
+
+        function abrirMenu() { 
+            lateral.classList.add('ativo'); 
+            overlay.classList.add('ativo'); 
+        } 
+
+        function fecharMenu() { 
+            lateral.classList.remove('ativo'); 
+            overlay.classList.remove('ativo'); 
+        } 
+
+        btnHamburguer.addEventListener('click', () => { 
+            lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+        });
+
+        overlay.addEventListener('click', fecharMenu);
+
+        document.addEventListener('click', (e) => {
+        if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
+            fecharMenu();
+        }
+        });    
+
+    // Modal para o cadastro
     
         const modal = document.getElementById('modal');
 
