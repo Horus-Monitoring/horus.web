@@ -27,7 +27,7 @@ function proximoSlide() {
   mostrarSlide();
 }
 
-setInterval(proximoSlide, 5000);
+setInterval(proximoSlide, 10000);
 
 function usuario() {
     if (!sessionStorage.ID_USUARIO) {
