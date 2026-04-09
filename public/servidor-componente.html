@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Horus</title>
+    <link rel="stylesheet" href="./style/servidor-componente.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="modal" id="modal"></div>
+
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/dash.png" alt="">Visão geral
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
+                </div>
+
+                <div class="categoria">Administração</div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </div>
+                <div class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/cadastrar-servidor-selecionado.png" alt="">Cadastrar servidor
+                </div>
+            </nav>
+
+            <div class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p>Sair</p>
+            </div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                </div>
+
+                <span class="header-titulo">Dashboard — Visão Geral</span>
+
+                <div class="header-acoes">
+
+                    <div class="usuario-desktop">
+                        <img src="./assets/imgs/painel/usuario.png" alt="">
+                        <div>
+                            <p>Fernando Brandão</p>
+                            <span class="cargo">Gestor de TI</span>
+                        </div>
+                    </div>
+
+                    <img class="usuario-mobile" src="./assets/imgs/painel/usuario.png" alt="">
+                </div>
+            </header>
+
+            <section class="conteudo">
+
+                <div class="linha">
+                    <div class="titulo">
+                        <h3>Gestão de Servidores</h3>
+                        <p>Gerencie servidores e seus componentes de hardware</p>
+                    </div>
+
+                    <div class="botoes">
+                        <div class="botao botao-servidor" onclick="abrirCadastroServidor()">
+                            <img src="./assets/imgs/painel/mais.png" alt="">
+                            <p>Cadastrar Servidor</p>
+                        </div>
+
+                        <div class="botao botao-componente" onclick="abrirCadastroComponente()">
+                            <img src="./assets/imgs/painel/mais.png" alt="">
+                            <p>Cadastrar Componente</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buscar-servidor">
+                    <input class="ipt-buscar" type="text" placeholder="Buscar servidor pelo nome...">
+                </div>
+
+                <div class="servidores">
+
+                    <div class="servidor">
+                        <div class="coluna servidor-info">
+                            <div class="linha-servidor">
+                                <span class="detalhes" onclick="abrirDetalhes()">Detalhes</span>
+
+                                <div class="coluna">
+                                    <span class="nome-servidor">SRV-ACC-SP-01</span>
+                                    <span class="subtexto">São Paulo - ACC-SP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="subtexto">IP</span>
+                            <span class="subtexto-info">192.168.1.10</span>
+                        </div>
+
+                        <div class="coluna sumir">
+                            <span class="subtexto">Sistema Operacional</span>
+                            <span class="subtexto-info">Ubuntu Server 22.04</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="status status-online">Online</span>
+                        </div>
+
+                        <div class="coluna sumir">
+                            <span class="subtexto">Componentes</span>
+                            <span class="subtexto-info">4</span>
+                        </div>
+
+                        <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <div class="popup" id="popup">
+
+            <div class="popup-servidor" id="popupServidor">
+                <div class="linha">
+                    <h3>Cadastrar novo servidor</h3>
+
+                    <img onclick="fecharCadastroServidor()" class="fechar" src="./assets/imgs/painel/fechar-azul.png"
+                        alt="" width="30px">
+                </div>
+
+                <div class="linha">
+                    <div class="coluna">
+                        <span class="subtexto">Nome do servidor</span>
+                        <input class="ipt-servidor" type="text" placeholder="Ex: SRV-ACC-SP-01">
+                    </div>
+
+                    <div class="coluna">
+                        <span class="subtexto">Endereço IP</span>
+                        <input class="ipt-servidor" type="text" placeholder="Ex: 192.53.1.10">
+                    </div>
+                </div>
+
+                <div class="coluna">
+                    <span class="subtexto">Localização</span>
+                    <input class="ipt-servidor" type="text" placeholder="Ex: São Paulo - ACC-SP" style="width: 100%;">
+                </div>
+
+                <div class="linha">
+                    <div class="coluna">
+                        <span class="subtexto">Sistema Operacional</span>
+                        <input class="ipt-servidor" type="text" placeholder="Ex: Ubuntu Server 20.4">
+                    </div>
+
+                    <div class="coluna">
+                        <span class="subtexto">Status Inicial</span>
+                        <select class="ipt-servidor" name="" id="">
+                            <option value="operacional">Operacional</option>
+                            <option value="atencao">Atenção</option>
+                            <option value="critico">Crítico</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="cancelar" onclick="fecharCadastroServidor()">
+                        <span>Cancelar</span>
+                    </div>
+
+                    <div class="cadastrar">
+                        <span>Cadastrar</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="popup-componente" id="popupComponente">
+                <div class="linha">
+                    <h3>Cadastrar novo componente</h3>
+
+                    <img onclick="fecharCadastroComponente()" class="fechar" src="./assets/imgs/painel/fechar-azul.png"
+                        alt="" width="30px">
+                </div>
+
+                <div class="linha">
+                    <div class="coluna">
+                        <span class="subtexto">Servidor de Destino</span>
+                        <select class="ipt-servidor" name="" id="" style="width: 620px">
+                            <option value="">SRV-01</option>
+                            <option value="">SRV-02</option>
+                            <option value="">SRV-03</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="coluna">
+                        <span class="subtexto">Tipo de Componente</span>
+                        <select class="ipt-servidor" name="" id="">
+                            <option value="cpu">CPU</option>
+                            <option value="ram">RAM</option>
+                            <option value="disco">Disco</option>
+                        </select>
+                    </div>
+
+                    <div class="coluna">
+                        <span class="subtexto">Marca</span>
+                        <input class="ipt-servidor" type="text" placeholder="Ex: Intel">
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="coluna">
+                        <span class="subtexto">Modelo</span>
+                        <input class="ipt-servidor" type="text" placeholder="Ex: Xeon Gold">
+                    </div>
+
+                    <div class="coluna">
+                        <span class="subtexto">Status Inicial</span>
+                        <select class="ipt-servidor" name="" id="">
+                            <option value="operacional">Operacional</option>
+                            <option value="atencao">Atenção</option>
+                            <option value="critico">Crítico</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="cancelar" onclick="fecharCadastroComponente()">
+                        <span>Cancelar</span>
+                    </div>
+
+                    <div class="cadastrar">
+                        <span>Cadastrar</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-detalhes" id="popupDetalhes">
+                <div class="linha">
+                    <span class="nome-servidor">SRV-ACC-SP-01</span>
+                    <img class="fechar" onclick="fecharDetalhes()" src="./assets/imgs/painel/fechar-azul.png" alt=""
+                        width="30px">
+                </div>
+
+                <div class="box-detalhe">
+                    <div class="linha-detalhe">
+                        <div class="coluna">
+                            <span class="subtexto">Tipo</span>
+                            <span class="subtexto-info">CPU</span>
+                        </div>
+
+                        <div class="coluna sumir">
+                            <span class="subtexto">Marca/Modelo</span>
+                            <span class="subtexto-info">AMD</span>
+                            <span class="subtexto">EPYC 7543</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="subtexto">Especificações</span>
+                            <span class="subtexto-info">Velocidade: 2.8GHz</span>
+                        </div>
+
+                        <div class="coluna">
+                            <span class="subtexto">Status</span>
+                            <span class="status status-online">Operacional</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="box-detalhe">
+                    <div class="linha-detalhe">
+                        <div class="coluna">
+                            <span class="subtexto">Tipo</span>
+                            <span class="subtexto-info">RAM</span>
+                        </div>
+
+                        <div class="coluna sumir">
+                            <span class="subtexto">Marca/Modelo</span>
+                            <span class="subtexto-info">Corsair</span>
+                            <span class="subtexto">Vengaence DDR4</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="subtexto">Especificações</span>
+                            <span class="subtexto-info">Memória: 32GB</span>
+                            <span class="subtexto">Velocidade: 2666MHz</span>
+                        </div>
+
+                        <div class="coluna">
+                            <span class="subtexto">Status</span>
+                            <span class="status status-atencao">Atenção</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-detalhe">
+                    <div class="linha-detalhe">
+                        <div class="coluna">
+                            <span class="subtexto">Tipo</span>
+                            <span class="subtexto-info">Disco</span>
+                        </div>
+
+                        <div class="coluna sumir sumir-celular">
+                            <span class="subtexto">Marca/Modelo</span>
+                            <span class="subtexto-info">Western Digital</span>
+                            <span class="subtexto">Black SN850</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="subtexto">Especificações</span>
+                            <span class="subtexto-info">Capacidade: 1TB</span>
+                        </div>
+
+                        <div class="coluna">
+                            <span class="subtexto">Status</span>
+                            <span class="status status-critico">Crítico</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function abrirCadastroServidor() {
+            popup.style = 'display: flex'
+            popupServidor.style = 'display: flex'
+        }
+
+        function fecharCadastroServidor() {
+            popup.style = 'display: none'
+            popupServidor.style = 'display: none'
+        }
+
+        function abrirCadastroComponente() {
+            popup.style = 'display: flex'
+            popupComponente.style = 'display: flex'
+        }
+
+        function fecharCadastroComponente() {
+            popup.style = 'display: none'
+            popupComponente.style = 'display: none'
+        }
+
+        function abrirDetalhes() {
+            popup.style = 'display: flex'
+            popupDetalhes.style = 'display: flex'
+        }
+
+        function fecharDetalhes() {
+            popup.style = 'display: none'
+            popupDetalhes.style = 'display: none'
+        }
+
+        const btnHamburguer = document.getElementById('hamburguer');
+        const lateral = document.getElementById('lateral');
+        const modal = document.getElementById('modal');
+
+        function abrirMenu() {
+            lateral.classList.add('aberto');
+            modal.classList.add('ativo');
+        }
+
+        function fecharMenu() {
+            lateral.classList.remove('aberto');
+            modal.classList.remove('ativo');
+        }
+
+        btnHamburguer.addEventListener('click', () => {
+            lateral.classList.contains('aberto') ? fecharMenu() : abrirMenu();
+        });
+
+        modal.addEventListener('click', fecharMenu);
+
+    </script>
+</body>
+
+</html>
