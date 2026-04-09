@@ -23,28 +23,28 @@
 
             <nav class="menu">
                 <div class="categoria">Monitoramento</div>
-                <div class="item-menu">
+                <div onclick="window.location.href='painel.html'" class="item-menu">
                     <img src="./assets/imgs/painel/dash.png" alt="">Visão geral
                 </div>
-                <div class="item-menu">
+                <div onclick="window.location.href='dash_analista.html'" class="item-menu">
                     <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
                 </div>
-                <div class="item-menu">
+                <div onclick="window.location.href='telaIncidente.html'" class="item-menu">
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </div>
 
                 <div class="categoria">Administração</div>
-                <div class="item-menu">
+                <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
                     <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
                 </div>
-                <div class="item-menu selecionado">
+                <div onclick="window.location.href='servidor-componente.html'" class="item-menu selecionado">
                     <img src="./assets/imgs/painel/cadastrar-servidor-selecionado.png" alt="">Cadastrar servidor
                 </div>
             </nav>
 
             <div class="sair">
                 <img src="./assets/imgs/painel/sair.png" alt="">
-                <p>Sair</p>
+                <p onclick="window.location.href='index.html'">Sair</p>
             </div>
         </aside>
 
@@ -151,29 +151,31 @@
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Nome do servidor</span>
-                        <input class="ipt-servidor" type="text" placeholder="Ex: SRV-ACC-SP-01">
+                        <input id="nome" class="ipt-servidor" type="text" placeholder="Ex: SRV-ACC-SP-01">
                     </div>
 
                     <div class="coluna">
                         <span class="subtexto">Endereço IP</span>
-                        <input class="ipt-servidor" type="text" placeholder="Ex: 192.53.1.10">
+                        <input id="ip" class="ipt-servidor" type="text" placeholder="Ex: 192.53.1.10">
                     </div>
                 </div>
 
                 <div class="coluna">
                     <span class="subtexto">Localização</span>
-                    <input class="ipt-servidor" type="text" placeholder="Ex: São Paulo - ACC-SP" style="width: 100%;">
+                    <input id="localizacao" class="ipt-servidor" type="text" placeholder="Ex: São Paulo - ACC-SP"
+                        style="width: 100%;">
                 </div>
 
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Sistema Operacional</span>
-                        <input class="ipt-servidor" type="text" placeholder="Ex: Ubuntu Server 20.4">
+                        <input id="sistemaOperacional" class="ipt-servidor" type="text"
+                            placeholder="Ex: Ubuntu Server 20.4">
                     </div>
 
                     <div class="coluna">
                         <span class="subtexto">Status Inicial</span>
-                        <select class="ipt-servidor" name="" id="">
+                        <select class="ipt-servidor" name="" id="statusInicial">
                             <option value="operacional">Operacional</option>
                             <option value="atencao">Atenção</option>
                             <option value="critico">Crítico</option>
@@ -186,7 +188,7 @@
                         <span>Cancelar</span>
                     </div>
 
-                    <div class="cadastrar">
+                    <div class="cadastrar" onclick="cadastrarServidor()">
                         <span>Cadastrar</span>
                     </div>
                 </div>
@@ -384,6 +386,56 @@
         function fecharDetalhes() {
             popup.style = 'display: none'
             popupDetalhes.style = 'display: none'
+        }
+
+        // Cadastro de servidor
+        function cadastrarServidor() {
+            const fkEmpresaVar = 1 //sessionStorage.ID_EMPRESA
+
+            var nomeVar = nome.value;
+            var ipVar = ip.value;
+            var localizacaoVar = localizacao.value;
+            var sistemaOperacionalVar = sistemaOperacional.value;
+            var statusInicialVar = statusInicial.value;
+
+            if (
+                nomeVar == '' ||
+                ipVar == '' ||
+                localizacaoVar == '' ||
+                sistemaOperacionalVar == ''
+            ) {
+                alert('Preencha todas as informações corretamente')
+            } else {
+
+                fetch("/servidores/cadastrarServidor", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        fkEmpresaServer: fkEmpresaVar,
+                        nomeServer: nomeVar,
+                        ipServer: ipVar,
+                        localizacaoServer: localizacaoVar,
+                        sistemaOperacionalServer: sistemaOperacionalVar,
+                        statusInicialServer: statusInicialVar
+                    }),
+                })
+                    .then(resposta => {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            alert("Servidor cadastrado com sucesso!");
+                        } else {
+                            throw "Houve um erro ao tentar realizar o cadastro!";
+                        }
+
+                    })
+                    .catch(erro => {
+                        console.log(`#ERRO: ${erro}`);
+                    });
+            }
+
         }
 
         const btnHamburguer = document.getElementById('hamburguer');

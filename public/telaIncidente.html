@@ -16,25 +16,31 @@
                 Horus
             </div>
 
-            <nav id="menu" class="menu">
+            <nav class="menu">
                 <div class="categoria">Monitoramento</div>
-
-                <div class="item-menu"><img src="./assets/imgs/painel/dash.png" alt="">Visão
-                    geral</div>
-                <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
-                <div class="item-menu selecionado"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
+                <div onclick="window.location.href='painel.html'" class="item-menu">
+                    <img src="./assets/imgs/painel/dash.png" alt="">Visão geral
+                </div>
+                <div onclick="window.location.href='dash_analista.html'" class="item-menu">
+                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
+                </div>
+                <div onclick="window.location.href='telaIncidente.html'" class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/alerta-selecionado.png" alt="">Incidentes
+                </div>
 
                 <div class="categoria">Administração</div>
-                <div class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-usuario-selecionado.png" alt="">Usuários
+                <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
                 </div>
-                <div class="item-menu">
+                <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
                     <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                 </div>
-
             </nav>
             
-            <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
+            <div class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p onclick="window.location.href='index.html'">Sair</p>
+            </div>
         </aside>
 
            <header class="header">
