@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários | Horus </title>
+    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/dash_usuarios.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="modal-lateral" id="overlay"></div>
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo_v2.png" alt="">
+                Horus
+            </div>
+
+            <nav id="menu" class="menu">
+                <div class="categoria">Monitoramento</div>
+
+                <div class="item-menu"><img src="./assets/imgs/painel/dash.png" alt="">Visão
+                    geral</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
+
+                <div class="categoria">Administração</div>
+                <div class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/cadastrar-usuario-selecionado.png" alt="">Usuários
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </div>
+
+            </nav>
+
+            <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="assets/imgs/painel/menu-sand.png" alt="">
+                </div>    
+                <span><b>Dashboard - Gerenciamento de Usuários</b></span>
+
+                <div class="usuario">
+                    <img src="./assets/imgs/painel/usuario.png" alt="">
+                    <div>
+                        <p>Fernando Brandão</p>
+                        <span class="cargo">Gestor</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="conteudo">
+                <div class="gestao-usuario">
+                    <p>Gestão de usuários</p>
+                    <button class="cadastrar">
+                        <span class="icone">
+                            <img class="normal" src="assets/imgs/dash_user/+.png" height="25px" alt="">
+                            <img class="hover" src="assets/imgs/dash_user/+ hover.png" alt="25px">
+                        </span>
+                        Cadastrar novo usuário</button>
+                </div>
+                
+                <div class="cards" style="justify-content: space-between;">
+
+                    <div class="card pequeno-filtro">
+                        <input type="text" name="" id="" placeholder="Buscar servidor">
+                    </div>
+
+                    <div class="card pequeno-filtro total" style="width: 19% !important;">       
+                            <div>
+                                <img src="assets/imgs/dash_user/total.png" alt="">
+                            </div>
+                            <div>
+                                <span>Total de Usuários</span>
+                                <p>3</p>
+                            </div>
+                    </div>
+
+                        
+                    <div class="card pequeno-filtro cargo" style="width: 19% !important;">
+                            <div>
+                                <img src="assets/imgs/dash_user/gestor.png" alt="">
+                            </div>
+                            <div>
+                                <span>Gestores</span>
+                                <p>1</p>
+                            </div>
+                    </div>
+
+                    
+                    <div class="card pequeno-filtro cargo" style="width: 19% !important;">
+                            <div>
+                                <img src="assets/imgs/dash_user/analista.png" alt="">
+                            </div>
+                            <div>
+                                <span>Analistas</span>
+                                <p>2</p>
+                            </div>
+                    </div>
+                </div>
+                
+                    
+                <div class="cards" style="flex-direction: column !important;">
+                    <div class="card pequeno">
+        
+                        <div class="lista-servidores">
+
+                            <div class="box-servidor cabecario">
+                                <div class="info-usuarios">
+                                   <b>Nome</b>
+                                </div>
+                                <div class="info-usuarios email">
+                                    <b>Email</b>
+                                </div>
+                                <div class="data-usuarios">
+                                    <b>Função</b>
+                                </div>
+                                <div class="data-usuarios">
+                                    <b>Data de Cadastro</b>
+                                </div>
+                                <div class="info-usuarios" style="justify-content: center;">
+                                    <b>Ações</b>
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-usuarios">
+                                    <img class="img-login" src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Gustavo Pietro</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-usuarios email">
+                                    <p>gustavo@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="data-usuarios">
+                                    <img class="icone-cargo" src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="data-usuarios">
+                                    <p>01 de abril de 2026</p>
+                                </div>
+                                
+                                <div class="info-usuarios" style="justify-content: center;">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-usuarios">
+                                    <img class="img-login" src="./assets/imgs/dash_user/vitoria.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Vitória Lima</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-usuarios email">
+                                    <p>vitoria@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="data-usuarios">
+                                    <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="data-usuarios">
+                                    <p>21 de março de 2026</p>    
+                                </div>
+                                
+                                <div class="info-usuarios" style="justify-content: center;">
+                                           <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-usuarios">
+                                    <img class="img-login" src="./assets/imgs/dash_user/fernando.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Fernando Brandão</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-usuarios email">
+                                    <p>fernando@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="data-usuarios">
+                                    <img class="icone-cargo" src="./assets/imgs/dash_user/analista_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="data-usuarios">
+                                   <p>20 de fevereiro de 2026</p>
+                                </div>
+                                
+                                <div class="info-usuarios" style="justify-content: center;">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-usuarios">
+                                    <img class="img-login" src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Alguém</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-usuarios email">
+                                    <p>alguém@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="data-usuarios">
+                                    <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="data-usuarios">
+                                    <p>12 de fevereiro de 2026</p>
+                                </div>
+                                
+                                <div class="info-usuarios" style="justify-content: center;">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
+                                </div>
+                            </div>
+                            
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>    
+
+            </section>
+
+            <div class="popup" id="modal">
+                <div class="modal">
+                    <div class="box-cadastro head">
+                        <h2>Cadastrar novo usuário</h2>
+                        <img id="fechar" src="assets/imgs/dash_user/fechar.png" alt="">
+                    </div>
+                    <div class="box-cadastro campo">
+                        <div class="campos">
+                            Nome <br>
+                            <input type="text">
+                        </div>
+                        <div class="campos">
+                            Senha <br>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="box-cadastro campo">
+                        <div class="campos">
+                            Email <br>
+                            <input type="text">
+                        </div>
+                        <div class="campos">
+                            Confirmar Senha <br>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="box-cadastro campo">
+                        <div class="campos">
+                            CPF <br>
+                            <input type="text">
+                        </div>
+                        <div class="campos">
+                            Função <br>
+                            <select name="" id="">
+                                <option value="#" selected disabled>--Selecione--</option>
+                                <option value="gestor">Gestor</option>
+                                <option value="analista">Analista</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="box-cadastro">
+                        <button class="btnCancelar">Cancelar</button>
+                        <button class="btnCadastrar">Cadastrar</button>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="popup" id="modal2">
+                <div class="modal2">
+                    <div class="box-excluir">
+                        <h2>Tem certeza que deseja excluir este usuário?</h2>
+                        
+                    </div>
+                    <div class="box-excluir">
+                        <button id="btnCancelarExcluir" class="btnCancelarExcluir">Cancelar</button>
+                        <button class="btnExcluir">Cadastrar</button>
+                    </div>
+                
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    //Modal para o menu sanduíche
+        
+        const btnHamburguer = document.getElementById('hamburguer'); 
+        const lateral = document.getElementById('lateral'); 
+        const overlay = document.getElementById('overlay'); 
+
+        function abrirMenu() { 
+            lateral.classList.add('ativo'); 
+            overlay.classList.add('ativo'); 
+        } 
+
+        function fecharMenu() { 
+            lateral.classList.remove('ativo'); 
+            overlay.classList.remove('ativo'); 
+        } 
+
+        btnHamburguer.addEventListener('click', () => { 
+            lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+        });
+
+        overlay.addEventListener('click', fecharMenu);
+
+        document.addEventListener('click', (e) => {
+        if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
+            fecharMenu();
+        }
+        });    
+
+    // Modal para o cadastro
+    
+        const modal = document.getElementById('modal');
+
+        document.querySelectorAll('.cadastrar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('ativo');
+        });
+        });
+
+        document.getElementById('fechar').addEventListener('click', () => {
+        modal.classList.remove('ativo');
+        });
+
+        modal.addEventListener('click', e => {
+        if (e.target === modal) modal.classList.remove('ativo');
+        });
+
+        // Modal para excluir usuários
+    
+        const modal2 = document.getElementById('modal2');
+
+        document.querySelectorAll('.apagar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal2.classList.add('ativo');
+        });
+        });
+
+        document.getElementById('btnCancelarExcluir').addEventListener('click', () => {
+        modal2.classList.remove('ativo');
+        });
+
+        modal2.addEventListener('click', e => {
+        if (e.target === modal2) modal2.classList.remove('ativo');
+        });
+
+
+</script>
