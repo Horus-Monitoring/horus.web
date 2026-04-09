@@ -59,9 +59,10 @@ main .section_inicial .conteudo_inicial .button {
     justify-content: left;
 }
 
-main .section_inicial .conteudo_inicial .button button {
+main .section_inicial .conteudo_inicial .button a {
     border-radius: 25px;
     padding: 10px 20px;
+    text-decoration: none;
     background-color: #274690;
     color: #fff;
     cursor: pointer;
@@ -75,7 +76,7 @@ main .section_inicial .conteudo_inicial .button button {
     transition: 0.2s;
 }
 
-main .section_inicial .conteudo_inicial .button button:hover {
+main .section_inicial .conteudo_inicial .button a:hover {
     background-color: #fff;
     color: #274690;
     transition: 0.2s;
@@ -510,14 +511,23 @@ main .section_cards .card .texto {
     height: 45px;
     margin-top: 5%;
     cursor: pointer;
-    transition: ease-out 0.9s;
     font-weight: 600;
+    border: #274690 3px solid;
+    transition: 0.2s;
+}
+
+.deslocamento_navbar_contato{
+    scroll-margin-top: -60px;
+}
+
+.deslocamento_navbar{
+    scroll-margin-top: 100px;
 }
 
 .section_contato .button button:hover {
     background-color: #fff;
-    border: #1B264F 3px solid;
-    color: #1B264F;
+    color: #274690;
+    transition: 0.2s;
 }
 
 /* SECTION CONTATO - FIM*/
