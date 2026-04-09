@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incidentes | Horus</title>
+  <link rel="stylesheet" href="style/telaIncidente.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="overlay" id="overlay"></div>
+    <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo_v2.png" alt="">
+                Horus
+            </div>
+
+            <nav id="menu" class="menu">
+                <div class="categoria">Monitoramento</div>
+
+                <div class="item-menu"><img src="./assets/imgs/painel/dash.png" alt="">Visão
+                    geral</div>
+                <div class="item-menu"><img src="./assets/imgs/painel/servidores.png" alt="">Servidores</div>
+                <div class="item-menu selecionado"><img src="./assets/imgs/painel/alerta.png" alt="">Incidentes</div>
+
+                <div class="categoria">Administração</div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-usuario-selecionado.png" alt="">Usuários
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </div>
+
+            </nav>
+            
+            <div class="sair"><img src="./assets/imgs/painel/sair.png" alt="">Sair</div>
+        </aside>
+
+           <header class="header">
+            <div class="hamburguer" id="hamburguer">☰</div>
+                <span><b>Incidentes</b></span>
+
+                <div class="usuario">
+                    <img src="./assets/imgs/painel/usuario.png" alt="">
+                    <div>
+                        <p>Julia Araripe</p>
+                        <span class="cargo">Analista</span>
+                    </div>
+                </div>
+            </header>
+  <main class="main">
+
+    <section class="conteudo">
+
+
+      <h3>Alertas e Incidentes</h3>
+<div class="indicadores-incidentes">
+      <div class="card pequeno-filtro indicadores">
+
+  <div class="chamados">
+    <h5>Abertos</h5>
+    <h1 id="qtdAbertos">4</h1>
+  </div>
+
+  <div class="chamados">
+    <h5>Andamento</h5>
+    <h1 id="qtdAndamento">2</h1>
+  </div>
+
+  <div class="chamados">
+    <h5>Concluídos</h5>
+    <h1 id="qtdConcluidos">2</h1>
+  </div>
+
+  <a href="#" class="link-jira">Link Jira</a>
+
+</div>
+
+        <div class="card pequeno-filtro botoes-filtro">
+
+  <div class="grupo-filtro">
+    <p class="titulo">Filtrar por Severidade:</p>
+
+    <div class="botoes">
+      <button data-filtro="todas" style="color :#576CA8; background-color: #A0A5A8;">Todas</button>
+      <button data-filtro="critico">Crítica</button>
+      <button data-filtro="alta">Alta</button>
+      <button data-filtro="media">Média</button>
+      <button data-filtro="baixa">Baixa</button>
+    </div>
+  </div>
+
+  <div class="grupo-filtro">
+    <p class="titulo">Filtrar por Status:</p>
+
+    <div class="botoes">
+      <button data-filtro="todos" style="color :#576CA8; background-color: #A0A5A8;">Todos</button>
+      <button data-filtro="ativo">Ativos</button>
+      <button data-filtro="resolvido">Resolvidos</button>
+    </div>
+  </div>
+
+</div>
+      </div>
+
+     
+      <div class="card lista-container">
+        <div class="lista-servidores" id="listaIncidentes">
+
+    
+          <div class="box-servidor servidor-critico">
+
+            <div class="info-servidor">
+              <div class="icone alerta-critico">
+                <img src="./assets/imgs/incidentes/alertaVermelho.png" alt="critico" class="img-icone">
+              </div>
+
+              <div>
+                <p class="nome-servidor">Queda de Servidor</p>
+                <p class="endereco">ATC-SVR-01</p>
+                <p class="descricao">Servidor offline sem resposta</p>
+                 <span class="data">22/03/2026 14:39</span>
+              </div>
+            </div>
+
+            <div class="lado-direito">
+                <div class="status">
+                    <span class="status critica ">critica</span>
+                    <span class="status ativo">Ativo</span>
+                </div>
+            </div>
+
+          </div>
+          <div class="box-servidor servidor-baixa">
+
+            <div class="info-servidor">
+              <div class="icone alerta-baixa">
+                <img src="./assets/imgs/incidentes/AvisoAzul.png" alt="baixa" class="img-icone">
+              </div>
+
+              <div>
+                <p class="nome-servidor">Queda de Servidor</p>
+                <p class="endereco">ATC-SVR-01</p>
+                <p class="descricao">Servidor offline sem resposta</p>
+                <span class="data">22/03/2026 14:39</span>
+              </div>
+            </div>
+
+            <div class="lado-direito">
+                <div class="status">
+                    <span class="status baixa">Baixa</span>
+                    <span class="status ativo">Ativo</span>
+                </div>
+            </div>
+
+          </div>
+          <div class="box-servidor servidor-media">
+
+            <div class="info-servidor">
+              <div class="icone alerta-media">
+                <img src="./assets/imgs/incidentes/AvisoAmarelo.png" alt="media" class="img-icone">
+              </div>
+
+              <div>
+                <p class="nome-servidor">Queda de Servidor</p>
+                <p class="endereco">ATC-SVR-01</p>
+                <p class="descricao">Servidor offline sem resposta</p>
+                 <span class="data">22/03/2026 14:39</span>
+              </div>
+            </div>
+
+            <div class="lado-direito">
+              <div class="status">
+                    <span class="status media">Média</span>
+                    <span class="status resolvido">Resolvido</span>
+                </div>
+            </div>
+
+          </div>
+          <div class="box-servidor servidor-alta">
+
+            <div class="info-servidor">
+              <div class="icone alerta-alta">
+                <img src="./assets/imgs/incidentes/AvisoLaranja.png" alt="alta" class="img-icone">
+              </div>
+
+              <div>
+                <p class="nome-servidor">Queda de Servidor</p>
+                <p class="endereco">ATC-SVR-01</p>
+                <p class="descricao">Servidor offline sem resposta</p>
+                 <span class="data">22/03/2026 14:39</span>
+              </div>
+            </div>
+
+            <div class="lado-direito">
+               <div class="status">
+                    <span class="status alta">Alta</span>
+                    <span class="status resolvido">Resolvido</span>
+                </div>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+</body>
+<script>
+const hamburguer = document.getElementById("hamburguer");
+const lateral = document.getElementById("lateral");
+const overlay = document.getElementById("overlay");
+
+hamburguer.addEventListener("click", () => {
+  lateral.classList.toggle("ativo");
+  overlay.classList.toggle("ativo");
+});
+
+overlay.addEventListener("click", () => {
+  lateral.classList.remove("ativo");
+  overlay.classList.remove("ativo");
+});
+</script>
+</html>
