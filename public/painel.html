@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Horus</title>
+    <link rel="stylesheet" href="./style/painel.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="modal" id="modal"></div>
+
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+                <div class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Visão geral
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
+                </div>
+
+                <div class="categoria">Administração</div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </div>
+                <div class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </div>
+            </nav>
+
+            <div class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt=""><p>Sair</p>
+            </div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                </div>
+
+                <span class="header-titulo">Dashboard — Visão Geral</span>
+
+                <div class="header-acoes">
+              
+                    <div class="usuario-desktop">
+                        <img src="./assets/imgs/painel/usuario.png" alt="">
+                        <div>
+                            <p>Fernando Brandão</p>
+                            <span class="cargo">Gestor de TI</span>
+                        </div>
+                    </div>
+
+                    <img class="usuario-mobile" src="./assets/imgs/painel/usuario.png" alt="">
+                </div>
+            </header>
+
+            <section class="conteudo">
+
+                <div class="cards">
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Total de Servidores</span>
+                            <span class="kpi">8</span>
+                        </div>
+                        <div class="card-img" style="background-color: #e5edff;">
+                            <img src="./assets/imgs/painel/servidor.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Servidores Online</span>
+                            <span class="kpi">5</span>
+                        </div>
+                        <div class="card-img" style="background-color: #f0fdf4;">
+                            <img src="./assets/imgs/painel/online.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Servidores Offline</span>
+                            <span class="kpi">1</span>
+                        </div>
+                        <div class="card-img" style="background-color: #fef2f2;">
+                            <img src="./assets/imgs/painel/offline.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Alertas Ativos</span>
+                            <span class="kpi">4</span>
+                        </div>
+                        <div class="card-img" style="background-color: #fefce8;">
+                            <img src="./assets/imgs/painel/alertas.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">CPU Média</span>
+                            <span class="kpi">51%</span>
+                        </div>
+                        <div class="card-img" style="background-color: #e5edff;">
+                            <img src="./assets/imgs/painel/cpu.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Ram Média</span>
+                            <span class="kpi">57%</span>
+                        </div>
+                        <div class="card-img" style="background-color: #f0fdf4;">
+                            <img src="./assets/imgs/painel/ram.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Disco Média</span>
+                            <span class="kpi">53%</span>
+                        </div>
+                        <div class="card-img" style="background-color: #fefce8;">
+                            <img src="./assets/imgs/painel/disco.png">
+                        </div>
+                    </div>
+
+                </div>
+
+                <section class="linha">
+                    <div class="card card-grafico">
+                        <h3 class="tipo-grafico">Uso de CPU (24h)</h3>
+                        <div class="interface-grafico">
+                            <canvas id="grafico-cpu"></canvas>
+                        </div>
+                    </div>
+                    <div class="card card-grafico">
+                        <h3 class="tipo-grafico">Incidentes por dia</h3>
+                        <div class="interface-grafico">
+                            <canvas id="grafico-incidentes"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="linha">
+                    <div class="card card-grafico">
+                        <h3 class="tipo-grafico">Uso de RAM (24h)</h3>
+                        <div class="interface-grafico">
+                            <canvas id="grafico-ram"></canvas>
+                        </div>
+                    </div>
+                    <div class="card card-grafico">
+                        <h3 class="tipo-grafico">Uso de Disco (24h)</h3>
+                        <div class="interface-grafico">
+                            <canvas id="grafico-disco"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+    
+        const btnHamburguer = document.getElementById('hamburguer');
+        const lateral = document.getElementById('lateral');
+        const modal = document.getElementById('modal');
+
+        function abrirMenu() {
+            lateral.classList.add('aberto');
+            modal.classList.add('ativo');
+        }
+
+        function fecharMenu() {
+            lateral.classList.remove('aberto');
+            modal.classList.remove('ativo');
+        }
+
+        btnHamburguer.addEventListener('click', () => {
+            lateral.classList.contains('aberto') ? fecharMenu() : abrirMenu();
+        });
+
+        modal.addEventListener('click', fecharMenu);
+
+        new Chart(document.getElementById('grafico-cpu'), {
+            type: 'line',
+            data: {
+                labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
+                datasets: [
+                    { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                    { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                    { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                    legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+                },
+                scales: {
+                    x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                    y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('grafico-incidentes'), {
+            type: 'bar',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [
+                    { label: 'Crítico', data: [0,0,1,1,2,0,0], backgroundColor: '#dc2828', borderRadius: 5, borderWidth: 0 },
+                    { label: 'Atenção', data: [1,4,2,5,1,5,3], backgroundColor: '#f59f0a', borderRadius: 5, borderWidth: 0 },
+                    { label: 'Info',    data: [5,2,5,5,2,4,2], backgroundColor: '#3577d4', borderRadius: 5, borderWidth: 0 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                    legend: { display: true, position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', color: '#6b7280', font: { size: 13 }, boxWidth: 10, boxHeight: 10, padding: 20 } }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } },
+                    y: { min: 0, max: 8, grid: { color: '#f0f2f5' }, ticks: { stepSize: 2, color: '#9ca3af', font: { size: 11 } } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('grafico-ram'), {
+            type: 'line',
+            data: {
+                labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
+                datasets: [
+                    { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                    { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                    { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                    legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+                },
+                scales: {
+                    x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                    y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('grafico-disco'), {
+            type: 'line',
+            data: {
+                labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
+                datasets: [
+                    { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                    { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                    { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                    legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+                },
+                scales: {
+                    x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                    y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
