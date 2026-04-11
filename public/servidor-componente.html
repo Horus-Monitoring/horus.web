@@ -96,43 +96,7 @@
                     <input class="ipt-buscar" type="text" placeholder="Buscar servidor pelo nome...">
                 </div>
 
-                <div class="servidores">
-
-                    <div class="servidor">
-                        <div class="coluna servidor-info">
-                            <div class="linha-servidor">
-                                <span class="detalhes" onclick="abrirDetalhes()">Detalhes</span>
-
-                                <div class="coluna">
-                                    <span class="nome-servidor">SRV-ACC-SP-01</span>
-                                    <span class="subtexto">São Paulo - ACC-SP</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <span class="subtexto">IP</span>
-                            <span class="subtexto-info">192.168.1.10</span>
-                        </div>
-
-                        <div class="coluna sumir">
-                            <span class="subtexto">Sistema Operacional</span>
-                            <span class="subtexto-info">Ubuntu Server 22.04</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <span class="status status-online">Online</span>
-                        </div>
-
-                        <div class="coluna sumir">
-                            <span class="subtexto">Componentes</span>
-                            <span class="subtexto-info">4</span>
-                        </div>
-
-                        <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
-                    </div>
-
-                </div>
+                <div id="servidores" class="servidores"></div>
 
             </section>
 
@@ -206,39 +170,35 @@
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Servidor de Destino</span>
-                        <select class="ipt-servidor" name="" id="" style="width: 620px">
-                            <option value="">SRV-01</option>
-                            <option value="">SRV-02</option>
-                            <option value="">SRV-03</option>
-                        </select>
+                        <select class="ipt-servidor" name="" id="select_servidor" style="width: 620px"></select>
                     </div>
                 </div>
 
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Tipo de Componente</span>
-                        <select class="ipt-servidor" name="" id="">
-                            <option value="cpu">CPU</option>
-                            <option value="ram">RAM</option>
-                            <option value="disco">Disco</option>
+                        <select class="ipt-servidor" name="" id="tipo_componente">
+                            <option value="1">CPU</option>
+                            <option value="2">RAM</option>
+                            <option value="3">Disco</option>
                         </select>
                     </div>
 
                     <div class="coluna">
                         <span class="subtexto">Marca</span>
-                        <input class="ipt-servidor" type="text" placeholder="Ex: Intel">
+                        <input id="marcaComponente" class="ipt-servidor" type="text" placeholder="Ex: Intel">
                     </div>
                 </div>
 
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Modelo</span>
-                        <input class="ipt-servidor" type="text" placeholder="Ex: Xeon Gold">
+                        <input id="modeloComponente" class="ipt-servidor" type="text" placeholder="Ex: Xeon Gold">
                     </div>
 
                     <div class="coluna">
                         <span class="subtexto">Status Inicial</span>
-                        <select class="ipt-servidor" name="" id="">
+                        <select class="ipt-servidor" name="" id="statusComponente">
                             <option value="operacional">Operacional</option>
                             <option value="atencao">Atenção</option>
                             <option value="critico">Crítico</option>
@@ -251,7 +211,7 @@
                         <span>Cancelar</span>
                     </div>
 
-                    <div class="cadastrar">
+                    <div onclick="cadastrarComponente()" class="cadastrar">
                         <span>Cadastrar</span>
                     </div>
                 </div>
@@ -371,6 +331,7 @@
         function abrirCadastroComponente() {
             popup.style = 'display: flex'
             popupComponente.style = 'display: flex'
+            listarServidores()
         }
 
         function fecharCadastroComponente() {
@@ -425,6 +386,7 @@
                         console.log("resposta: ", resposta);
 
                         if (resposta.ok) {
+                            exibirServidores()
                             alert("Servidor cadastrado com sucesso!");
                         } else {
                             throw "Houve um erro ao tentar realizar o cadastro!";
@@ -437,6 +399,95 @@
             }
 
         }
+
+        function listarServidores() {
+            var fkEmpresa = 1;
+
+            fetch(`/servidores/listarServidores/${fkEmpresa}`)
+                .then(resposta => resposta.json())
+                .then((lista) => {
+                    select_servidor.innerHTML = lista.map(servidor =>
+                        `<option value = "${servidor.id_servidor}">${servidor.nome}</option>`
+                    ).join('')
+                })
+        }
+        listarServidores()
+
+        function cadastrarComponente() {
+            var fkServidorVar = select_servidor.value;
+            var fkComponenteVar = tipo_componente.value;
+            var marcaVar = marcaComponente.value;
+            var modeloVar = modeloComponente.value;
+            var statusInicialVar = statusComponente.value;
+
+            if (fkServidorVar == '' || marcaVar == '' || modeloVar == '') {
+                alert('Preencha todas as informações corretamente')
+                return;
+            }
+
+            fetch(`/servidores/cadastrarComponente`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    fkServidorServer: fkServidorVar,
+                    fkComponenteServer: fkComponenteVar,
+                    marcaServer: marcaVar,
+                    modeloServer: modeloVar,
+                    statusInicialServer: statusInicialVar
+                })
+            })
+        }
+
+        function exibirServidores() {
+            var fkEmpresa = 1;
+
+            fetch(`/servidores/exibirServidores/${fkEmpresa}`)
+                .then(resposta => resposta.json())
+                .then((lista) => {
+                    servidores.innerHTML = lista.map(servidor =>
+                        `
+              <div class="servidor">
+                        <div class="coluna servidor-info">
+                            <div class="linha-servidor">
+                                <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
+
+                                <div class="coluna">
+                                    <span class="nome-servidor">${servidor.nome}</span>
+                                    <span class="subtexto">${servidor.localizacao}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="subtexto">IP</span>
+                            <span class="subtexto-info">${servidor.ip}</span>
+                        </div>
+
+                        <div class="coluna sumir">
+                            <span class="subtexto">Sistema Operacional</span>
+                            <span class="subtexto-info">${servidor.sistema_operacional}</span>
+                        </div>
+
+                        <div class="coluna sumir-celular">
+                            <span class="status status-online">${servidor.status_inicial}</span>
+                        </div>
+
+                        <div class="coluna sumir">
+                            <span class="subtexto">Componentes</span>
+                            <span class="subtexto-info">${3}</span>
+                        </div>
+
+                        <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                    </div>
+              `).join('')
+                })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos servidores: ${error.message}`);
+                });
+        }
+        exibirServidores()
 
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
