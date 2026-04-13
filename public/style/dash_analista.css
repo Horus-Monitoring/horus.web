@@ -11,10 +11,12 @@
   --azul: #274690;
   --ciano: #576ca8;
   --preto: #302b27;
-  --cinza: #f5f3f5;
+  --cinza: #f6f6f6;
   --borda: #ebe6e7;
   --texto: #111827;
- --subtexto: #6b7280;
+  --subtexto: #6b7280;
+  --verde: #22c55e;
+  --vermelho: #ef4444;
 }
 
 body {
@@ -83,7 +85,9 @@ body {
 
 .categoria {
   color: #a0a5a8;
-  margin: 1vw 0 0 1vw;
+  margin: 16px 0 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
 }
 
 .item-menu {
@@ -107,7 +111,7 @@ body {
   display: flex;
   padding: 20px;
   gap: 15px;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--ciano);
   align-items: center;
   justify-content: center;
@@ -115,9 +119,13 @@ body {
   transition: 0.2s;
 }
 
-.sair:hover {
-  background-color: #2a3646;
+.sair p {
   cursor: pointer;
+}
+
+.sair p:hover {
+  color: #4383d6;
+  transition: 0.2s;
 }
 
 .main {
