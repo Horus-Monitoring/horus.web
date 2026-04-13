@@ -217,103 +217,10 @@
                 </div>
             </div>
 
-            <div class="popup-detalhes" id="popupDetalhes">
-                <div class="linha">
-                    <span class="nome-servidor">SRV-ACC-SP-01</span>
-                    <img class="fechar" onclick="fecharDetalhes()" src="./assets/imgs/painel/fechar-azul.png" alt=""
-                        width="30px">
-                </div>
+            <div class="popup-detalhes" id="popupDetalhes"></div>
 
-                <div class="box-detalhe">
-                    <div class="linha-detalhe">
-                        <div class="coluna">
-                            <span class="subtexto">Tipo</span>
-                            <span class="subtexto-info">CPU</span>
-                        </div>
-
-                        <div class="coluna sumir">
-                            <span class="subtexto">Marca/Modelo</span>
-                            <span class="subtexto-info">AMD</span>
-                            <span class="subtexto">EPYC 7543</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <span class="subtexto">Especificações</span>
-                            <span class="subtexto-info">Velocidade: 2.8GHz</span>
-                        </div>
-
-                        <div class="coluna">
-                            <span class="subtexto">Status</span>
-                            <span class="status status-online">Operacional</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="box-detalhe">
-                    <div class="linha-detalhe">
-                        <div class="coluna">
-                            <span class="subtexto">Tipo</span>
-                            <span class="subtexto-info">RAM</span>
-                        </div>
-
-                        <div class="coluna sumir">
-                            <span class="subtexto">Marca/Modelo</span>
-                            <span class="subtexto-info">Corsair</span>
-                            <span class="subtexto">Vengaence DDR4</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <span class="subtexto">Especificações</span>
-                            <span class="subtexto-info">Memória: 32GB</span>
-                            <span class="subtexto">Velocidade: 2666MHz</span>
-                        </div>
-
-                        <div class="coluna">
-                            <span class="subtexto">Status</span>
-                            <span class="status status-atencao">Atenção</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="box-detalhe">
-                    <div class="linha-detalhe">
-                        <div class="coluna">
-                            <span class="subtexto">Tipo</span>
-                            <span class="subtexto-info">Disco</span>
-                        </div>
-
-                        <div class="coluna sumir sumir-celular">
-                            <span class="subtexto">Marca/Modelo</span>
-                            <span class="subtexto-info">Western Digital</span>
-                            <span class="subtexto">Black SN850</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <span class="subtexto">Especificações</span>
-                            <span class="subtexto-info">Capacidade: 1TB</span>
-                        </div>
-
-                        <div class="coluna">
-                            <span class="subtexto">Status</span>
-                            <span class="status status-critico">Crítico</span>
-                        </div>
-
-                        <div class="coluna sumir-celular">
-                            <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
 
     </div>
 
@@ -337,11 +244,6 @@
         function fecharCadastroComponente() {
             popup.style = 'display: none'
             popupComponente.style = 'display: none'
-        }
-
-        function abrirDetalhes() {
-            popup.style = 'display: flex'
-            popupDetalhes.style = 'display: flex'
         }
 
         function fecharDetalhes() {
@@ -438,6 +340,69 @@
                     statusInicialServer: statusInicialVar
                 })
             })
+            .then(resposta => {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            exibirServidores()
+                            alert("Componente cadastrado com sucesso!");
+                        } else {
+                            throw "Houve um erro ao tentar realizar o cadastro!";
+                        }
+
+                    })
+                    .catch(erro => {
+                        console.log(`#ERRO: ${erro}`);
+                    });
+        }
+
+        function abrirDetalhes(id) {
+            popup.style = 'display: flex'
+            popupDetalhes.style = 'display: flex'
+
+            fetch(`/servidores/abrirDetalhes/${id}`)
+                .then(resposta => resposta.json())
+                .then((lista) => {
+                    var topo = 
+                    `
+                    <div class="linha">
+                        <span class="nome-servidor">${lista[0].nome}</span>
+                        <img class="fechar" onclick="fecharDetalhes()" src="./assets/imgs/painel/fechar-azul.png" alt="" width="30px">
+                    </div>
+                    `
+                    var detalhes = lista.map(componente =>
+                        `
+                        <div class="box-detalhe">
+                            <div class="linha-detalhe">
+                                <div class="coluna">
+                                    <span class="subtexto">Tipo</span>
+                                    <span class="subtexto-info">${componente.tipo}</span>
+                                </div>
+
+                                <div class="coluna sumir">
+                                    <span class="subtexto">Marca/Modelo</span>
+                                    <span class="subtexto-info">${componente.marca}</span>
+                                    <span class="subtexto">${componente.modelo}</span>
+                                </div>
+
+                                <div class="coluna">
+                                    <span class="subtexto">Status</span>
+                                    <span class="status status-online">${componente.status_inicial}</span>
+                                </div>
+
+                                <div class="coluna sumir-celular">
+                                    <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    ).join('')
+
+                    popupDetalhes.innerHTML = topo + detalhes
+                })
+                .catch((error) => {
+                    console.error(`Erro na obtenção dos detalhes: ${error.message}`)
+                })
         }
 
         function exibirServidores() {
@@ -448,39 +413,39 @@
                 .then((lista) => {
                     servidores.innerHTML = lista.map(servidor =>
                         `
-              <div class="servidor">
-                        <div class="coluna servidor-info">
-                            <div class="linha-servidor">
-                                <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
+                        <div class="servidor">
+                            <div class="coluna servidor-info">
+                                <div class="linha-servidor">
+                                    <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
 
-                                <div class="coluna">
-                                    <span class="nome-servidor">${servidor.nome}</span>
-                                    <span class="subtexto">${servidor.localizacao}</span>
+                                    <div class="coluna">
+                                        <span class="nome-servidor">${servidor.nome}</span>
+                                        <span class="subtexto">${servidor.localizacao}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="coluna sumir-celular">
-                            <span class="subtexto">IP</span>
-                            <span class="subtexto-info">${servidor.ip}</span>
-                        </div>
+                            <div class="coluna sumir-celular">
+                                <span class="subtexto">IP</span>
+                                <span class="subtexto-info">${servidor.ip}</span>
+                            </div>
 
-                        <div class="coluna sumir">
-                            <span class="subtexto">Sistema Operacional</span>
-                            <span class="subtexto-info">${servidor.sistema_operacional}</span>
-                        </div>
+                            <div class="coluna sumir">
+                                <span class="subtexto">Sistema Operacional</span>
+                                <span class="subtexto-info">${servidor.sistema_operacional}</span>
+                            </div>
 
-                        <div class="coluna sumir-celular">
-                            <span class="status status-online">${servidor.status_inicial}</span>
-                        </div>
+                            <div class="coluna sumir-celular">
+                                <span class="status status-online">${servidor.status_inicial}</span>
+                            </div>
 
-                        <div class="coluna sumir">
-                            <span class="subtexto">Componentes</span>
-                            <span class="subtexto-info">${3}</span>
-                        </div>
+                            <div class="coluna sumir">
+                                <span class="subtexto">Componentes</span>
+                                <span class="subtexto-info">${servidor.quantidade}</span>
+                            </div>
 
-                        <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
-                    </div>
+                            <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                        </div>
               `).join('')
                 })
                 .catch(function (error) {

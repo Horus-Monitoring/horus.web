@@ -21,4 +21,8 @@ router.post("/cadastrarComponente", function (req, res) {
     servidoresController.cadastrarComponente(req, res);
 })
 
+router.get("/abrirDetalhes/:id", function (req, res) {
+    servidoresController.abrirDetalhes(req, res);
+})
+
 module.exports = router;

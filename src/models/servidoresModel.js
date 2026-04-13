@@ -15,7 +15,24 @@ function exibirServidores(fkEmpresa) {
     console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa);
 
     var instrucaoSql = `
-        SELECT * FROM servidor WHERE fk_empresa = ${fkEmpresa};
+        SELECT 
+        servidor.id_servidor,
+        servidor.nome,
+        servidor.localizacao,
+        servidor.ip,
+        servidor.sistema_operacional,
+        servidor.status_inicial,
+        COUNT(servidor_componente.fk_componente) AS quantidade 
+        FROM servidor
+        JOIN servidor_componente ON fk_servidor = id_servidor
+        WHERE fk_empresa = ${fkEmpresa}
+        GROUP BY 
+        servidor.id_servidor,
+        servidor.nome,
+        servidor.localizacao,
+        servidor.ip,
+        servidor.sistema_operacional,
+        servidor.status_inicial;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -25,7 +42,11 @@ function listarServidores(fkEmpresa) {
     console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa);
 
     var instrucaoSql = `
-        SELECT id_servidor, nome FROM servidor WHERE fk_empresa = ${fkEmpresa};
+        SELECT 
+        id_servidor, 
+        nome 
+        FROM servidor 
+        WHERE fk_empresa = ${fkEmpresa};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -42,9 +63,26 @@ function cadastrarComponente(fkServidor, fkComponente, marca, modelo, statusInic
     return database.executar(instrucaoSql);
 }
 
+function abrirDetalhes(fkServidor) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor);
+
+    var instrucaoSql = `
+        SELECT *,
+        componente.tipo AS tipo,
+        servidor.nome AS servidor
+        FROM servidor_componente 
+        JOIN componente ON fk_componente = id_componente
+        JOIN servidor ON fk_servidor = id_servidor
+        WHERE fk_servidor = '${fkServidor}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrarServidor,
     exibirServidores,
     listarServidores,
-    cadastrarComponente
+    cadastrarComponente,
+    abrirDetalhes
 };
