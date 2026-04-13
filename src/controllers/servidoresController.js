@@ -120,9 +120,30 @@ function cadastrarComponente(req, res) {
     }
 }
 
+function abrirDetalhes(req, res) {
+    var fkServidor = req.params.id
+    
+    servidoresModel.abrirDetalhes(fkServidor)
+        .then(
+            (resultado => {
+                res.json(resultado);
+            })
+        ).catch(
+            (erro => {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao abrir os detalhes!\nErro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }) 
+        );
+}
+
 module.exports = {
     cadastrarServidor,
     exibirServidores,
     listarServidores,
-    cadastrarComponente
+    cadastrarComponente,
+    abrirDetalhes
 }
