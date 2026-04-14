@@ -148,7 +148,7 @@ body {
   height: 60px;
   background-color: white;
   border-bottom: 1px solid var(--borda);
-  padding: 0 20px;
+  padding:    20px;
 }
 
 .hamburguer {
