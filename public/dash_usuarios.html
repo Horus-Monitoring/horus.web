@@ -296,7 +296,7 @@
                     </div>
                     <div class="box-cadastro">
                         <button class="btnCancelar">Cancelar</button>
-                        <button class="btnCadastrar">Cadastrar</button>
+                        <button onclick="cadastrarUsuario()" class="btnCadastrar">Cadastrar</button>
                     </div>
                 
                 </div>
@@ -401,7 +401,6 @@
             ) {
                 alert('Preencha todas as informações corretamente')
             } else {
-
                 fetch("/usuario/cadastrarUsuario", {
                     method: "POST",
                     headers: {

@@ -47,8 +47,7 @@ function cadastrarUsuario(req, res) {
     } else if (funcao == undefined) {
         res.status(400).send("Sua função está undefined!");
     } else {
-
-        usuarioModel.cadastrar(fk_empresa, nome, email, cpf, senha, funcao)
+        usuarioModel.cadastrarUsuario(fk_empresa, nome, email, cpf, senha, funcao)
             .then(
                 function (resultado) {
                     res.json(resultado);
