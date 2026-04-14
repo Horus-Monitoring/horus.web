@@ -224,12 +224,12 @@
                                 <div class="info-usuarios">
                                     <img class="img-login" src="./assets/imgs/dash_user/gustavo.png" alt="">
                                     <div>
-                                        <p class="nome-servidor">Alguém</p>
+                                        <p class="nome-servidor">Letícia Costa</p>
                                     </div>
                                 </div>
 
                                 <div class="info-usuarios email">
-                                    <p>alguém@horus.monitoring.com.br</p>
+                                    <p>leticia@horus.monitoring.com.br</p>
                                 </div>
 
                                 <div class="data-usuarios">
@@ -332,23 +332,19 @@
         
         const btnHamburguer = document.getElementById('hamburguer'); 
         const lateral = document.getElementById('lateral'); 
-        const overlay = document.getElementById('overlay'); 
 
         function abrirMenu() { 
-            lateral.classList.add('ativo'); 
-            overlay.classList.add('ativo'); 
+            lateral.classList.add('ativo');  
         } 
 
         function fecharMenu() { 
             lateral.classList.remove('ativo'); 
-            overlay.classList.remove('ativo'); 
         } 
 
         btnHamburguer.addEventListener('click', () => { 
             lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
         });
 
-        overlay.addEventListener('click', fecharMenu);
 
         document.addEventListener('click', (e) => {
         if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
