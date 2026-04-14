@@ -5,37 +5,25 @@ function autenticar(email, senha) {
         "ACESSEI O USUARIO MODEL \n \n\t\t > Se aqui der erro, e alguma credencial do banco"
     )
     var instrucaoSql = `
-        select idFuncionario, nome, email from Funcionario
-            where email = '${email}' and senha = '${senha}';
+        SELECT id_funcionario, nome, email, fk_empresa FROM Funcionario
+            WHERE email = '${email}' AND senha = '${senha}';
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function cadastrar(fk_empresa, nome, cpf, email, senha, cargo) {
+function cadastrarUsuario(fk_empresa, nome, email, cpf, senha, funcao) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fk_empresa, nome, cpf, email, senha, cargo);
     
-    const promises = []
-
-    var sqlFuncionario = `
-        INSERT INTO Funcionario (fk_papel_empresa, nome, cpf, email, senha) VALUES ('${fk_empresa}', '${nome}', '${cpf}', '${email}', '${senha}');
+    var instrucaoSql = `
+        INSERT INTO Funcionario (nome, email, cpf, senha, funcao, fk_empresa) VALUES ('${nome}', '${email}', '${cpf}', '${senha}', '${funcao}', '${fk_empresa});
     `;
-    console.log("Executando a instrução SQL: \n" + sqlFuncionario);
-    
-    promises.push(database.executar(sqlFuncionario))
-
-    var sqlCargo = `
-        INSERT INTO Papel (nivel, fk_empresa) VALUES ('${cargo}', '${fk_empresa}');
-    `;
-    console.log("Executando a instrução SQL: \n" + sqlCargo);
-    
-    promises.push(database.executar(sqlCargo))
-
-    return Promise.all(promises)
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 
 }
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrarUsuario
 };

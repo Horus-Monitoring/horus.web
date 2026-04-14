@@ -245,8 +245,6 @@
                                 </div>
                             </div>
                             
-                            
-
                         </div>
 
                     </div>
@@ -264,17 +262,17 @@
                     <div class="box-cadastro campo">
                         <div class="campos">
                             Nome <br>
-                            <input type="text">
+                            <input id="nome" type="text">
                         </div>
                         <div class="campos">
                             Senha <br>
-                            <input type="text">
+                            <input id="senha" type="text">
                         </div>
                     </div>
                     <div class="box-cadastro campo">
                         <div class="campos">
                             Email <br>
-                            <input type="text">
+                            <input id="email" type="text">
                         </div>
                         <div class="campos">
                             Confirmar Senha <br>
@@ -284,14 +282,14 @@
                     <div class="box-cadastro campo">
                         <div class="campos">
                             CPF <br>
-                            <input type="text">
+                            <input id="cpf" type="text">
                         </div>
                         <div class="campos">
                             Função <br>
-                            <select name="" id="">
+                            <select name="" id="select_funcao">
                                 <option value="#" selected disabled>--Selecione--</option>
-                                <option value="gestor">Gestor</option>
-                                <option value="analista">Analista</option>
+                                <option value="Gestor">Gestor</option>
+                                <option value="Analista">Analista</option>
                             </select>
                         </div>
                         
@@ -388,5 +386,50 @@
         if (e.target === modal2) modal2.classList.remove('ativo');
         });
 
+        function cadastrarUsuario() {
+            var empresaVar = sessionStorage.ID_EMPRESA;
+            var nomeVar = nome.value;
+            var emailVar = email.value;
+            var cpfVar = cpf.value;
+            var funcaoVar = select_funcao.value;
+
+            if (
+                nomeVar == '' ||
+                nomeVar == '' ||
+                emailVar == '' ||
+                funcaoVar == '#'
+            ) {
+                alert('Preencha todas as informações corretamente')
+            } else {
+
+                fetch("/usuario/cadastrarUsuario", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        empresaServer: empresaVar,
+                        nomeServer: nomeVar,
+                        emailServer: emailVar,
+                        cpfServer: cpfVar,
+                        funcaoServer: funcaoVar
+                    }),
+                })
+                    .then(resposta => {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            alert("Cadastrado com sucesso!");
+                        } else {
+                            throw "Houve um erro ao tentar realizar o cadastro!";
+                        }
+
+                    })
+                    .catch(erro => {
+                        console.log(`#ERRO: ${erro}`);
+                    });
+            }
+
+        }
 
 </script>
