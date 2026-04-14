@@ -4,7 +4,6 @@ function autenticar(req, res) {
     var email = req.body.emailServer
     var senha = req.body.senhaServer
     
-
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
@@ -27,15 +26,13 @@ function autenticar(req, res) {
     }
 }
 
-function cadastrar(req, res) {
-    var fk_empresa = req.body.idEmpresa
+function cadastrarUsuario(req, res) {
+    var fk_empresa = req.body.empresaServer
     var nome = req.body.nomeServer;
-    var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
+    var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
-    var cargo = req.body.cargoServer;
-    console.log(cargo);
-
+    var funcao = req.body.funcaoServer;
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -47,11 +44,11 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else if (fk_empresa == undefined) {
         res.status(400).send("Seu token está undefined!");
-    } else if (cargo == undefined) {
-        res.status(400).send("Seu Cargo está undefined!");
+    } else if (funcao == undefined) {
+        res.status(400).send("Sua função está undefined!");
     } else {
 
-        usuarioModel.cadastrar(fk_empresa, nome, cpf, email, senha, cargo)
+        usuarioModel.cadastrar(fk_empresa, nome, email, cpf, senha, funcao)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -71,5 +68,5 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrarUsuario
 }
