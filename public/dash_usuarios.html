@@ -48,7 +48,7 @@
                 </div>
             </nav>
 
-            <div class="sair">
+            <div onclick="limparSessionStorage()" class="sair">
                 <img src="./assets/imgs/painel/sair.png" alt="">
                 <p onclick="window.location.href='index.html'">Sair</p>
             </div>
@@ -98,7 +98,6 @@
                             </div>
                     </div>
 
-                        
                     <div class="card pequeno-filtro cargo" style="width: 19% !important;">
                             <div>
                                 <img src="assets/imgs/dash_user/gestor.png" alt="">
@@ -109,7 +108,6 @@
                             </div>
                     </div>
 
-                    
                     <div class="card pequeno-filtro cargo" style="width: 19% !important;">
                             <div>
                                 <img src="assets/imgs/dash_user/analista.png" alt="">
@@ -121,7 +119,6 @@
                     </div>
                 </div>
                 
-                    
                 <div class="cards" style="flex-direction: column !important;">
                     <div class="card pequeno">
         
@@ -389,13 +386,14 @@
         function cadastrarUsuario() {
             var empresaVar = sessionStorage.ID_EMPRESA;
             var nomeVar = nome.value;
+            var senhaVar = senha.value;
             var emailVar = email.value;
             var cpfVar = cpf.value;
             var funcaoVar = select_funcao.value;
 
             if (
                 nomeVar == '' ||
-                nomeVar == '' ||
+                senhaVar == '' ||
                 emailVar == '' ||
                 funcaoVar == '#'
             ) {
@@ -409,6 +407,7 @@
                     body: JSON.stringify({
                         empresaServer: empresaVar,
                         nomeServer: nomeVar,
+                        senhaServer: senhaVar,
                         emailServer: emailVar,
                         cpfServer: cpfVar,
                         funcaoServer: funcaoVar
