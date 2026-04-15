@@ -13,6 +13,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=League+Spartan:wght@100..900&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/dash_usuarios.css">
@@ -46,6 +51,8 @@
                 <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
                     <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                 </div>
+
+                <button>Gerar Relatório em PDF</button>
             </nav>
 
             <div class="sair">
@@ -59,15 +66,15 @@
             <header class="header">
                 <div class="hamburguer" id="hamburguer">
                     <img src="assets/imgs/painel/menu-sand.png" alt="">
-                </div>    
-                <span><b>Dashboard - Gerenciamento de Usuários</b></span>
+                </div>
+                <span class="titulo"><b>Gerenciamento de Usuários</b></span>
 
                 <div class="usuario">
-                    <img src="./assets/imgs/painel/usuario.png" alt="">
                     <div>
                         <p>Fernando Brandão</p>
-                        <span class="cargo">Gestor</span>
+                        <p class="cargo">Gestor</p>
                     </div>
+                    <span>F</span>
                 </div>
             </header>
 
@@ -75,61 +82,61 @@
                 <div class="gestao-usuario">
                     <p>Gestão de usuários</p>
                     <button class="cadastrar">
-                        <span class="icone">
-                            <img class="normal" src="assets/imgs/dash_user/+.png" height="25px" alt="">
-                            <img class="hover" src="assets/imgs/dash_user/+ hover.png" alt="25px">
-                        </span>
+                        <img src="./assets/imgs/dash_user/+.png" width="20px" alt="">
                         Cadastrar novo usuário</button>
                 </div>
-                
+
                 <div class="cards" style="justify-content: space-between;">
 
-                    <div class="card pequeno-filtro">
-                        <input type="text" name="" id="" placeholder="Buscar servidor">
+                    <div class="card-inicial card pequeno-filtro">
+                        <div class="card-pesquisar">
+                            <input type="text" name="" id="" placeholder="Buscar usuário pelo nome...">
+                            <img id="lupa" src="./assets/imgs/dash_user/lupa.png" alt="lupa">
+                        </div>
                     </div>
 
-                    <div class="card pequeno-filtro total" style="width: 19% !important;">       
-                            <div>
-                                <img src="assets/imgs/dash_user/total.png" alt="">
-                            </div>
-                            <div>
-                                <span>Total de Usuários</span>
-                                <p>3</p>
-                            </div>
+                    <div class="card pequeno-filtro total cargo" style="width: 19% !important;">
+                        <div>
+                            <img src="assets/imgs/dash_user/total.png" alt="">
+                        </div>
+                        <div>
+                            <span>Total de Usuários</span>
+                            <p class="quantidade_usuarios">3</p>
+                        </div>
                     </div>
 
-                        
-                    <div class="card pequeno-filtro cargo" style="width: 19% !important;">
-                            <div>
-                                <img src="assets/imgs/dash_user/gestor.png" alt="">
-                            </div>
-                            <div>
-                                <span>Gestores</span>
-                                <p>1</p>
-                            </div>
+
+                    <div class="card kpi-funcionario pequeno-filtro cargo" style="width: 19% !important;">
+                        <div>
+                            <img src="assets/imgs/dash_user/gestor.png" alt="">
+                        </div>
+                        <div>
+                            <span>Gestores</span>
+                            <p class="quantidade_usuarios">1</p>
+                        </div>
                     </div>
 
-                    
-                    <div class="card pequeno-filtro cargo" style="width: 19% !important;">
-                            <div>
-                                <img src="assets/imgs/dash_user/analista.png" alt="">
-                            </div>
-                            <div>
-                                <span>Analistas</span>
-                                <p>2</p>
-                            </div>
+
+                    <div class="card kpi-funcionario pequeno-filtro cargo" style="width: 19% !important;">
+                        <div>
+                            <img src="assets/imgs/dash_user/analista.png" alt="">
+                        </div>
+                        <div>
+                            <span>Analistas</span>
+                            <p class="quantidade_usuarios">2</p>
+                        </div>
                     </div>
                 </div>
-                
-                    
+
+
                 <div class="cards" style="flex-direction: column !important;">
                     <div class="card pequeno">
-        
+
                         <div class="lista-servidores">
 
                             <div class="box-servidor cabecario">
                                 <div class="info-usuarios">
-                                   <b>Nome</b>
+                                    <b>Nome</b>
                                 </div>
                                 <div class="info-usuarios email">
                                     <b>Email</b>
@@ -145,113 +152,68 @@
                                 </div>
                             </div>
 
-                            <div class="box-servidor">
-                                <div class="info-usuarios">
-                                    <img class="img-login" src="./assets/imgs/dash_user/gustavo.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">Gustavo Pietro</p>
+                            <div>
+                                <div class="box-servidor">
+                                    <div class="info-usuarios">
+                                        <span style="background-color: #FF8400;" class="box-profile">VL</span>
+                                        <div>
+                                            <p class="nome-servidor">Vitória Lima</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-usuarios email">
+                                        <p>vitoria@horus.monitoring.com.br</p>
+                                    </div>
+
+                                    <div class="data-usuarios">
+                                        <span style="background-color: #FF840040; color: #FF8400;"  class="icone-cargo">
+                                            <img src="./assets/imgs/dash_user/escudo-gestor.png" alt="">
+                                            <p>Gestor</p>
+                                        </span>
+                                    </div>
+
+                                    <div class="data-usuarios">
+                                        <p>21 de março de 2026</p>
+                                    </div>
+
+                                    <div class="info-usuarios" style="justify-content: center;">
+                                        <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
                                     </div>
                                 </div>
 
-                                <div class="info-usuarios email">
-                                    <p>gustavo@horus.monitoring.com.br</p>
-                                </div>
+                                <div class="box-servidor">
+                                    <div class="info-usuarios">
+                                        <span style="background-color: #20A200;" class="box-profile">FB</span>
+                                        <div>
+                                            <p class="nome-servidor">Fernando Brandão</p>
+                                        </div>
+                                    </div>
 
-                                <div class="data-usuarios">
-                                    <img class="icone-cargo" src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
-                                </div>
-                                
-                                <div class="data-usuarios">
-                                    <p>01 de abril de 2026</p>
-                                </div>
-                                
-                                <div class="info-usuarios" style="justify-content: center;">
-                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
-                                </div>
-                            </div>
+                                    <div class="info-usuarios email">
+                                        <p>fernando@horus.monitoring.com.br</p>
+                                    </div>
 
-                            <div class="box-servidor">
-                                <div class="info-usuarios">
-                                    <img class="img-login" src="./assets/imgs/dash_user/vitoria.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">Vitória Lima</p>
+                                    <div class="data-usuarios">
+                                        <span style="background-color: #BFFBB0; color: #20A200;" class="icone-cargo">
+                                            <img src="./assets/imgs/dash_user/escudo-analista.png" alt="">
+                                            <p>Analista</p>
+                                        </span>
+                                    </div>
+
+                                    <div class="data-usuarios">
+                                        <p>20 de fevereiro de 2026</p>
+                                    </div>
+
+                                    <div class="info-usuarios" style="justify-content: center;">
+                                        <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
                                     </div>
                                 </div>
-
-                                <div class="info-usuarios email">
-                                    <p>vitoria@horus.monitoring.com.br</p>
-                                </div>
-
-                                <div class="data-usuarios">
-                                    <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
-                                </div>
-                                
-                                <div class="data-usuarios">
-                                    <p>21 de março de 2026</p>    
-                                </div>
-                                
-                                <div class="info-usuarios" style="justify-content: center;">
-                                           <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
-                                </div>
                             </div>
-
-                            <div class="box-servidor">
-                                <div class="info-usuarios">
-                                    <img class="img-login" src="./assets/imgs/dash_user/fernando.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">Fernando Brandão</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-usuarios email">
-                                    <p>fernando@horus.monitoring.com.br</p>
-                                </div>
-
-                                <div class="data-usuarios">
-                                    <img class="icone-cargo" src="./assets/imgs/dash_user/analista_etiqueta.png" alt="">
-                                </div>
-                                
-                                <div class="data-usuarios">
-                                   <p>20 de fevereiro de 2026</p>
-                                </div>
-                                
-                                <div class="info-usuarios" style="justify-content: center;">
-                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
-                                </div>
-                            </div>
-
-                            <div class="box-servidor">
-                                <div class="info-usuarios">
-                                    <img class="img-login" src="./assets/imgs/dash_user/gustavo.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">Letícia Costa</p>
-                                    </div>
-                                </div>
-
-                                <div class="info-usuarios email">
-                                    <p>leticia@horus.monitoring.com.br</p>
-                                </div>
-
-                                <div class="data-usuarios">
-                                    <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
-                                </div>
-                                
-                                <div class="data-usuarios">
-                                    <p>12 de fevereiro de 2026</p>
-                                </div>
-                                
-                                <div class="info-usuarios" style="justify-content: center;">
-                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
-                                </div>
-                            </div>
-                            
-                            
 
                         </div>
-
                     </div>
 
-                </div>    
+                </div>
 
             </section>
 
@@ -294,13 +256,13 @@
                                 <option value="analista">Analista</option>
                             </select>
                         </div>
-                        
+
                     </div>
                     <div class="box-cadastro">
                         <button class="btnCancelar">Cancelar</button>
                         <button class="btnCadastrar">Cadastrar</button>
                     </div>
-                
+
                 </div>
             </div>
 
@@ -308,13 +270,13 @@
                 <div class="modal2">
                     <div class="box-excluir">
                         <h2>Tem certeza que deseja excluir este usuário?</h2>
-                        
+
                     </div>
                     <div class="box-excluir">
                         <button id="btnCancelarExcluir" class="btnCancelarExcluir">Cancelar</button>
                         <button class="btnExcluir">Cadastrar</button>
                     </div>
-                
+
                 </div>
             </div>
 
@@ -329,64 +291,64 @@
 <script>
 
     //Modal para o menu sanduíche
-        
-        const btnHamburguer = document.getElementById('hamburguer'); 
-        const lateral = document.getElementById('lateral'); 
 
-        function abrirMenu() { 
-            lateral.classList.add('ativo');  
-        } 
+    const btnHamburguer = document.getElementById('hamburguer');
+    const lateral = document.getElementById('lateral');
 
-        function fecharMenu() { 
-            lateral.classList.remove('ativo'); 
-        } 
+    function abrirMenu() {
+        lateral.classList.add('ativo');
+    }
 
-        btnHamburguer.addEventListener('click', () => { 
-            lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
-        });
+    function fecharMenu() {
+        lateral.classList.remove('ativo');
+    }
+
+    btnHamburguer.addEventListener('click', () => {
+        lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+    });
 
 
-        document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
         if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
             fecharMenu();
         }
-        });    
+    });
 
     // Modal para o cadastro
-    
-        const modal = document.getElementById('modal');
 
-        document.querySelectorAll('.cadastrar').forEach(btn => {
+    const modal = document.getElementById('modal');
+
+    document.querySelectorAll('.cadastrar').forEach(btn => {
         btn.addEventListener('click', () => {
             modal.classList.add('ativo');
         });
-        });
+    });
 
-        document.getElementById('fechar').addEventListener('click', () => {
+    document.getElementById('fechar').addEventListener('click', () => {
         modal.classList.remove('ativo');
-        });
+    });
 
-        modal.addEventListener('click', e => {
+    modal.addEventListener('click', e => {
         if (e.target === modal) modal.classList.remove('ativo');
-        });
+    });
 
-        // Modal para excluir usuários
-    
-        const modal2 = document.getElementById('modal2');
+    // Modal para excluir usuários
 
-        document.querySelectorAll('.apagar').forEach(btn => {
+    const modal2 = document.getElementById('modal2');
+
+    document.querySelectorAll('.apagar').forEach(btn => {
         btn.addEventListener('click', () => {
             modal2.classList.add('ativo');
         });
-        });
+    });
 
-        document.getElementById('btnCancelarExcluir').addEventListener('click', () => {
+    document.getElementById('btnCancelarExcluir').addEventListener('click', () => {
         modal2.classList.remove('ativo');
-        });
+    });
 
-        modal2.addEventListener('click', e => {
+    modal2.addEventListener('click', e => {
         if (e.target === modal2) modal2.classList.remove('ativo');
-        });
+    });
 
 
 </script>
