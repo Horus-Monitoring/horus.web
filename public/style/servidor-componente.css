@@ -299,7 +299,7 @@ body {
 
 .servidores {
   width: 90%;
-  height: 560px;
+  max-height: 560px;
   border: 1px solid #dfdfdf;
   border-radius: 4px;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.05);
