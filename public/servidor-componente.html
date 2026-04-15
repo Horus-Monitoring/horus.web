@@ -42,7 +42,7 @@
                 </div>
             </nav>
 
-            <div class="sair">
+            <div onclick="limparSessionStorage()" class="sair">
                 <img src="./assets/imgs/painel/sair.png" alt="">
                 <p onclick="window.location.href='index.html'">Sair</p>
             </div>
@@ -466,6 +466,10 @@
         function fecharMenu() {
             lateral.classList.remove('aberto');
             modal.classList.remove('ativo');
+        }
+
+        function limparSessionStorage() {
+            sessionStorage.clear();
         }
 
         btnHamburguer.addEventListener('click', () => {
