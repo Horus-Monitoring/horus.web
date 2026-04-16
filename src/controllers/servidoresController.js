@@ -160,11 +160,32 @@ function abrirDetalhes(req, res) {
         );
 }
 
+function deletarComponente(req, res) {
+    var id = req.params.id
+    
+    servidoresModel.deletarComponente(id)
+        .then(
+            (resultado => {
+                res.json(resultado);
+            })
+        ).catch(
+            (erro => {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao deletar servidor!\nErro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }) 
+        );
+}
+
 module.exports = {
     cadastrarServidor,
     exibirServidores,
     listarServidores,
     cadastrarComponente,
     abrirDetalhes,
-    deletarServidor
+    deletarServidor,
+    deletarComponente
 }
