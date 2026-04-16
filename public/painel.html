@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Horus</title>
     <link rel="stylesheet" href="./style/painel.css">
+    <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -62,8 +63,12 @@
                     <div class="usuario-desktop">
                         <img src="./assets/imgs/painel/usuario.png" alt="">
                         <div>
-                            <p>Fernando Brandão</p>
-                            <span class="cargo">Gestor de TI</span>
+                            <p id="nome_usuario"></p>
+                            <span id="funcao_usuario" class="cargo"></span>
+                        </div>
+
+                        <div class="usuario-logado">
+                            <p id="inicial_usuario"></p>
                         </div>
                     </div>
 
@@ -188,6 +193,8 @@
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
         const modal = document.getElementById('modal');
+
+        exibirUsuarioAtivo();
 
         function abrirMenu() {
             lateral.classList.add('aberto');
