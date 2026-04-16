@@ -52,6 +52,23 @@ function listarServidores(fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function deletarServidor(id) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", id);
+
+    var deletarComponentes = `
+        DELETE FROM servidor_componente WHERE fk_servidor = ${id};
+    `;
+
+    var deletarServidor = `
+        DELETE FROM servidor WHERE id_servidor = ${id};
+    `;
+
+    return database.executar(deletarComponentes)
+        .then(() => {
+            return database.executar(deletarServidor);
+        });
+}
+
 // Componentes
 function cadastrarComponente(fkServidor, fkComponente, marca, modelo, statusInicial) {
     console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor, fkComponente, marca, modelo, statusInicial);
@@ -84,5 +101,6 @@ module.exports = {
     exibirServidores,
     listarServidores,
     cadastrarComponente,
-    abrirDetalhes
+    abrirDetalhes,
+    deletarServidor
 };

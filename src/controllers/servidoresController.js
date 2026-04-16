@@ -82,6 +82,26 @@ function listarServidores(req, res) {
         );
 }
 
+function deletarServidor(req, res) {
+    var id = req.params.id
+    
+    servidoresModel.deletarServidor(id)
+        .then(
+            (resultado => {
+                res.json(resultado);
+            })
+        ).catch(
+            (erro => {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao deletar servidor!\nErro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }) 
+        );
+}
+
 // Componentes
 function cadastrarComponente(req, res) {
     var fkServidor = req.body.fkServidorServer
@@ -145,5 +165,6 @@ module.exports = {
     exibirServidores,
     listarServidores,
     cadastrarComponente,
-    abrirDetalhes
+    abrirDetalhes,
+    deletarServidor
 }
