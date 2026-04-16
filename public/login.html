@@ -135,11 +135,12 @@
                         return;
                     }
 
-                    sessionStorage.ID_USUARIO = dados[0].idFuncionario;
+                    sessionStorage.ID_USUARIO = dados[0].id_funcionario;
                     sessionStorage.NOME_USUARIO = dados[0].nome;
                     sessionStorage.EMAIL_USUARIO = dados[0].email;
+                    sessionStorage.ID_EMPRESA = dados[0].fk_empresa;
 
-                    window.location = "usuario.html";
+                    window.location = "painel.html";
 
                 })
                 .catch(function (resposta) {
@@ -151,9 +152,4 @@
 
     }
 
-    // function usuario() {
-    //     if (sessionStorage.ID_USUARIO) {
-    //         window.location.href = "usuario.html";
-    //     }
-    // }
 </script>

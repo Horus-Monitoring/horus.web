@@ -55,7 +55,7 @@
                 <button>Gerar Relatório em PDF</button>
             </nav>
 
-            <div class="sair">
+            <div onclick="limparSessionStorage()" class="sair">
                 <img src="./assets/imgs/painel/sair.png" alt="">
                 <p onclick="window.location.href='index.html'">Sair</p>
             </div>
@@ -105,30 +105,27 @@
                         </div>
                     </div>
 
-
-                    <div class="card kpi-funcionario pequeno-filtro cargo" style="width: 19% !important;">
-                        <div>
-                            <img src="assets/imgs/dash_user/gestor.png" alt="">
-                        </div>
-                        <div>
-                            <span>Gestores</span>
-                            <p class="quantidade_usuarios">1</p>
-                        </div>
+                    <div class="card pequeno-filtro cargo" style="width: 19% !important;">
+                            <div>
+                                <img src="assets/imgs/dash_user/gestor.png" alt="">
+                            </div>
+                            <div>
+                                <span>Gestores</span>
+                                <p>1</p>
+                            </div>
                     </div>
 
-
-                    <div class="card kpi-funcionario pequeno-filtro cargo" style="width: 19% !important;">
-                        <div>
-                            <img src="assets/imgs/dash_user/analista.png" alt="">
-                        </div>
-                        <div>
-                            <span>Analistas</span>
-                            <p class="quantidade_usuarios">2</p>
-                        </div>
+                    <div class="card pequeno-filtro cargo" style="width: 19% !important;">
+                            <div>
+                                <img src="assets/imgs/dash_user/analista.png" alt="">
+                            </div>
+                            <div>
+                                <span>Analistas</span>
+                                <p>2</p>
+                            </div>
                     </div>
                 </div>
-
-
+                
                 <div class="cards" style="flex-direction: column !important;">
                     <div class="card pequeno">
 
@@ -210,6 +207,56 @@
                                 </div>
                             </div>
 
+                            <div class="box-servidor">
+                                <div class="info-usuarios">
+                                    <img class="img-login" src="./assets/imgs/dash_user/fernando.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Fernando Brandão</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-usuarios email">
+                                    <p>fernando@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="data-usuarios">
+                                    <img class="icone-cargo" src="./assets/imgs/dash_user/analista_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="data-usuarios">
+                                   <p>20 de fevereiro de 2026</p>
+                                </div>
+                                
+                                <div class="info-usuarios" style="justify-content: center;">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
+                                </div>
+                            </div>
+
+                            <div class="box-servidor">
+                                <div class="info-usuarios">
+                                    <img class="img-login" src="./assets/imgs/dash_user/gustavo.png" alt="">
+                                    <div>
+                                        <p class="nome-servidor">Letícia Costa</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-usuarios email">
+                                    <p>leticia@horus.monitoring.com.br</p>
+                                </div>
+
+                                <div class="data-usuarios">
+                                    <img class="icone-cargo"  src="./assets/imgs/dash_user/gestor_etiqueta.png" alt="">
+                                </div>
+                                
+                                <div class="data-usuarios">
+                                    <p>12 de fevereiro de 2026</p>
+                                </div>
+                                
+                                <div class="info-usuarios" style="justify-content: center;">
+                                    <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -226,17 +273,17 @@
                     <div class="box-cadastro campo">
                         <div class="campos">
                             Nome <br>
-                            <input type="text">
+                            <input id="nome" type="text">
                         </div>
                         <div class="campos">
                             Senha <br>
-                            <input type="text">
+                            <input id="senha" type="text">
                         </div>
                     </div>
                     <div class="box-cadastro campo">
                         <div class="campos">
                             Email <br>
-                            <input type="text">
+                            <input id="email" type="text">
                         </div>
                         <div class="campos">
                             Confirmar Senha <br>
@@ -246,21 +293,21 @@
                     <div class="box-cadastro campo">
                         <div class="campos">
                             CPF <br>
-                            <input type="text">
+                            <input id="cpf" type="text">
                         </div>
                         <div class="campos">
                             Função <br>
-                            <select name="" id="">
+                            <select name="" id="select_funcao">
                                 <option value="#" selected disabled>--Selecione--</option>
-                                <option value="gestor">Gestor</option>
-                                <option value="analista">Analista</option>
+                                <option value="Gestor">Gestor</option>
+                                <option value="Analista">Analista</option>
                             </select>
                         </div>
 
                     </div>
                     <div class="box-cadastro">
                         <button class="btnCancelar">Cancelar</button>
-                        <button class="btnCadastrar">Cadastrar</button>
+                        <button onclick="cadastrarUsuario()" class="btnCadastrar">Cadastrar</button>
                     </div>
 
                 </div>
@@ -350,5 +397,51 @@
         if (e.target === modal2) modal2.classList.remove('ativo');
     });
 
+        function cadastrarUsuario() {
+            var empresaVar = sessionStorage.ID_EMPRESA;
+            var nomeVar = nome.value;
+            var senhaVar = senha.value;
+            var emailVar = email.value;
+            var cpfVar = cpf.value;
+            var funcaoVar = select_funcao.value;
+
+            if (
+                nomeVar == '' ||
+                senhaVar == '' ||
+                emailVar == '' ||
+                funcaoVar == '#'
+            ) {
+                alert('Preencha todas as informações corretamente')
+            } else {
+                fetch("/usuario/cadastrarUsuario", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        empresaServer: empresaVar,
+                        nomeServer: nomeVar,
+                        senhaServer: senhaVar,
+                        emailServer: emailVar,
+                        cpfServer: cpfVar,
+                        funcaoServer: funcaoVar
+                    }),
+                })
+                    .then(resposta => {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            alert("Cadastrado com sucesso!");
+                        } else {
+                            throw "Houve um erro ao tentar realizar o cadastro!";
+                        }
+
+                    })
+                    .catch(erro => {
+                        console.log(`#ERRO: ${erro}`);
+                    });
+            }
+
+        }
 
 </script>

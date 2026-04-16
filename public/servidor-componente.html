@@ -42,7 +42,7 @@
                 </div>
             </nav>
 
-            <div class="sair">
+            <div onclick="limparSessionStorage()" class="sair">
                 <img src="./assets/imgs/painel/sair.png" alt="">
                 <p onclick="window.location.href='index.html'">Sair</p>
             </div>
@@ -253,7 +253,7 @@
 
         // Cadastro de servidor
         function cadastrarServidor() {
-            const fkEmpresaVar = 1 //sessionStorage.ID_EMPRESA
+            const fkEmpresaVar = sessionStorage.ID_EMPRESA
 
             var nomeVar = nome.value;
             var ipVar = ip.value;
@@ -303,7 +303,7 @@
         }
 
         function listarServidores() {
-            var fkEmpresa = 1;
+            const fkEmpresa = sessionStorage.ID_EMPRESA;
 
             fetch(`/servidores/listarServidores/${fkEmpresa}`)
                 .then(resposta => resposta.json())
@@ -406,7 +406,7 @@
         }
 
         function exibirServidores() {
-            var fkEmpresa = 1;
+            var fkEmpresa = sessionStorage.ID_EMPRESA;
 
             fetch(`/servidores/exibirServidores/${fkEmpresa}`)
                 .then(resposta => resposta.json())
@@ -466,6 +466,10 @@
         function fecharMenu() {
             lateral.classList.remove('aberto');
             modal.classList.remove('ativo');
+        }
+
+        function limparSessionStorage() {
+            sessionStorage.clear();
         }
 
         btnHamburguer.addEventListener('click', () => {
