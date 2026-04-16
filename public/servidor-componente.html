@@ -444,7 +444,7 @@
                                 <span class="subtexto-info">${servidor.quantidade}</span>
                             </div>
 
-                            <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                            <img onclick="deletarServidor(${servidor.id_servidor})" class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
                         </div>
               `).join('')
                 })
@@ -453,6 +453,23 @@
                 });
         }
         exibirServidores()
+
+        function deletarServidor(id) {
+            fetch(`/servidores/deletarServidor/${id}`, {
+                method: 'DELETE'
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    alert('Servidor deletado com sucesso!');
+                    exibirServidores();
+                } else {
+                    alert('Erro ao deletar servidor')
+                }
+            })
+            .catch((erro) => {
+                console.log(`ERRO: ${erro}`);
+            })
+        }
 
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
