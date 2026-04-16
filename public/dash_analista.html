@@ -14,6 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/dash_analista.css">
 </head>
@@ -62,16 +63,25 @@
 
             <header class="header">
                 <div class="hamburguer" id="hamburguer">
-                    <img src="assets/imgs/painel/menu-sand.png" alt="">
-                </div>    
-                <span class="titulo"><b>Dashboard - Visão Geral</b></span>
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                </div>
 
-                <div class="usuario">
-                    <img src="./assets/imgs/painel/usuario.png" alt="">
-                    <div>
-                        <p>Julia Araripe</p>
-                        <span class="cargo">Analista</span>
+                <span class="header-titulo">Dashboard — Visão Geral</span>
+
+                <div class="header-acoes">
+
+                    <div class="usuario-desktop">
+                        <img src="./assets/imgs/painel/usuario.png" alt="">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <span id="funcao_usuario" class="cargo"></span>
+                        </div>
+
+                        <div class="usuario-logado">
+                            <p id="inicial_usuario"></p>
+                        </div>
                     </div>
+
                 </div>
             </header>
 
@@ -480,6 +490,8 @@
         const btnFiltro = document.getElementById('filtro'); 
         const filtros = document.getElementById('filtros'); 
         const modalFiltro = document.getElementById('modalFiltro');
+
+        exibirUsuarioAtivo();
 
         function abrirFiltro() { 
             filtros.classList.add('ativo'); 

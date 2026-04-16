@@ -7,6 +7,7 @@
     <title>Dashboard Horus</title>
     <link rel="stylesheet" href="./style/servidor-componente.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
 </head>
 
 <body>
@@ -64,6 +65,10 @@
                         <div>
                             <p id="nome_usuario"></p>
                             <span id="funcao_usuario" class="cargo"></span>
+                        </div>
+
+                        <div class="usuario-logado">
+                            <p id="inicial_usuario"></p>
                         </div>
                     </div>
 
@@ -481,7 +486,6 @@
                     componente.remove();
                     alert('Componente deletado com sucesso!')
                     exibirServidores();
-                    fecharDetalhes();
                 } else {
                     alert('Erro ao deletar componente')
                 }
@@ -491,10 +495,6 @@
             })
         }
 
-        function exibirUsuarioAtivo() {
-            nome_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-            funcao_usuario.innerHTML = sessionStorage.FUNCAO_USUARIO;
-        }
         exibirUsuarioAtivo();
 
         const btnHamburguer = document.getElementById('hamburguer');

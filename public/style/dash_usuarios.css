@@ -186,6 +186,21 @@ body {
   font-size: 12px;
 }
 
+.usuario-logado {
+  display: flex;
+  background-color: var(--turquesa);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.usuario-logado p {
+  color: white;
+  font-weight: normal;
+}
+
 .cargo {
   font-size: 12px !important;
   color: #5F5F5F;
