@@ -5,7 +5,7 @@ function autenticar(email, senha) {
         "ACESSEI O USUARIO MODEL \n \n\t\t > Se aqui der erro, e alguma credencial do banco"
     )
     var instrucaoSql = `
-        SELECT id_funcionario, nome, email, fk_empresa FROM funcionario
+        SELECT * FROM funcionario
             WHERE email = '${email}' AND senha = '${senha}';
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

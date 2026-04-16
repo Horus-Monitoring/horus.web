@@ -29,4 +29,8 @@ router.get("/abrirDetalhes/:id", function (req, res) {
     servidoresController.abrirDetalhes(req, res);
 })
 
+router.delete("/deletarComponente/:id", function (req, res) {
+    servidoresController.deletarComponente(req, res);
+})
+
 module.exports = router;
