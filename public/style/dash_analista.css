@@ -511,6 +511,10 @@ body {
 
 @media (max-width: 768px) {
 
+  .titulo{
+    display: none;
+  }
+
   .hamburguer {
     display: flex;
   }
