@@ -30,133 +30,6 @@ body {
   height: 100%;
 }
 
-.lateral {
-  display: flex;
-  flex-direction: column;
-  gap: 1vw;
-  width: 260px;
-  height: 100vh;
-  background-color: #1f2937;
-  border-right: 1px solid var(--borda);
-  position: fixed;
-  z-index: 999;
-  transition: transform 0.3s ease;
-}
-
-.hamburguer {
-  display: none;
-  cursor: pointer;
-  padding: 4px;
-}
-
-.hamburguer img {
-  width: 22px;
-  height: 22px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1vw;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 24px;
-  border-bottom: 1px solid #2b3646;
-  color: white;
-}
-
-.logo img { width: 30%; }
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 4px;
-  padding: 0 15px;
-  color: var(--borda);
-  font-size: 14px;
-}
-
-.menu img {
-  width: 18px;
-  margin-left: 10px;
-}
-
-.categoria {
-  color: #a0a5a8;
-  margin: 16px 0 4px 10px;
-  font-size: 11px;
-  text-transform: uppercase;
-}
-
-.item-menu {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.item-menu:hover { background-color: #2a3646; }
-
-.selecionado {
-  background-color: #2a3646;
-  color: #478bd1;
-}
-
-.sair {
-  display: flex;
-  padding: 20px;
-  gap: 15px;
-  font-size: 16px;
-  color: var(--ciano);
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid #2b3646;
-  transition: 0.2s;
-}
-
-.sair p {
-  cursor: pointer;
-}
-
-.sair p:hover {
-  color: #4383d6;
-  transition: 0.2s;
-}
-
-.main {
-  flex: auto;
-  display: flex;
-  flex-direction: column;
-  margin-left: 260px;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  background-color: white;
-  border-bottom: 1px solid var(--borda);
-  padding: 20px;
-}
-
-.header img { width: 40px; }
-
-.usuario {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.cargo {
-  font-size: 12px;
-  color: #a0a5a8;
-}
 
 .conteudo {
   padding: 20px;
@@ -171,7 +44,7 @@ body {
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .card {
@@ -200,7 +73,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .pequeno-filtro img { 
@@ -211,7 +84,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   font-size: 12px;
   flex: 1;
   height: 90px;
@@ -222,24 +94,68 @@ body {
   background-color: #576CA8;
 }
 
-.pequeno-filtro input{
-  border: 2px var(--borda) solid;
+#lupa{
+  width: 15px;
+  height: 15px;
+  padding: 0;
+}
+
+.card-pesquisar{
+  display: flex;
+  align-items: center;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
+  border: 1.5px var(--borda) solid;
+  padding-right: 10px;
+  margin-right: 15px;
+  width: 25%;
+}
+
+.pequeno-filtro input{
+  width: 100%;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.pequeno-filtro input:focus{
+  outline: none;
 }
 
 .pequeno-filtro button{
-  border: 2px var(--borda) solid;
+  border: 1.5px var(--borda) solid;
   height: 40px;
   width: 80px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: var(--cinza);
   color: var(--texto);
+  transition: 0.2s;
 }
 
-.pequeno-filtro button:hover{
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  transform: translateY(-2px);
+.filtros button:hover{
+  transition: 0.2s;
+  background-color: #5770a861 !important;
+  cursor: pointer;
+}
+
+.tempo_dash{
+  display: flex;
+  align-items: center;
+  border: 1.5px var(--borda) solid;
+  height: 40px;
+  width: 25%;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+#tempo{
+  outline: none;
+  width: 100%;
+  padding: 0 5px;
+}
+
+#relogio{
+  width: 13px;
+  height: 13px;
 }
 
 .popup {
@@ -329,12 +245,6 @@ body {
   width: 40px;
 }
 
-.att-servidor{
-  font-weight: bold;
-  font-size: 14px;
-  padding-bottom: 6px;
-}
-
 .cards-detalhes-grafico{
   display: flex; 
   flex-wrap: wrap;
@@ -361,7 +271,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 8px 20px;
   border-top: 1px solid var(--borda);
   width: 100%;
 }
@@ -369,6 +279,13 @@ body {
 .box-servidor:hover { 
   background-color: #f6f7f8;
  }
+
+ .cabecario {
+  background-color: #f5f3f5;
+  border-top: none;
+  padding: 8px 30px;
+  padding-left: 90px;
+}
 
 .info-servidor {
   display: flex;
@@ -380,12 +297,13 @@ body {
 .info-servidor img { width: 10px; }
 
 .info-servidor button{
-  border: 2px var(--borda) solid;
+  border: 1.5px var(--borda) solid;
   height: 40px;
   width: 80px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: var(--cinza);
-  color: var(--texto);
+  color: #576CA8;
+  font-weight: bold;
 }
 
 .nome-servidor {
@@ -623,9 +541,6 @@ body {
 
   .pequeno-filtro button{
     width: 45%;
-  }
-  .pequeno-filtro select{
-    width: 80%;
   }
 
   .pequeno-filtro option{

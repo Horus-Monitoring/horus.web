@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analista | Horus </title>
+    <title>Servidores | Horus </title>
+    <link rel="icon" href="./assets/icon/logo.png" />
+
     <link rael="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
@@ -16,6 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/dash_analista.css">
+
+    <link rel="stylesheet" href=".css">
 </head>
 
 <body>
@@ -50,6 +54,8 @@
                 <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
                     <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                 </div>
+
+                <button>Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -63,15 +69,15 @@
             <header class="header">
                 <div class="hamburguer" id="hamburguer">
                     <img src="assets/imgs/painel/menu-sand.png" alt="">
-                </div>    
-                <span class="titulo"><b>Dashboard - Visão Geral</b></span>
+                </div>
+                <span class="titulo"><b>Dashboard - Servidores</b></span>
 
                 <div class="usuario">
-                    <img src="./assets/imgs/painel/usuario.png" alt="">
                     <div>
-                        <p>Julia Araripe</p>
-                        <span class="cargo">Analista</span>
+                        <p>Fernando Brandão</p>
+                        <p class="cargo">Gestor</p>
                     </div>
+                    <span>F</span>
                 </div>
             </header>
 
@@ -79,30 +85,35 @@
                 <div class="cards">
 
                     <div class="card pequeno-filtro">
-                        <input type="text" name="" id="" placeholder="Buscar servidor">
+                        <div class="card-pesquisar">
+                            <input type="text" name="" id="" placeholder="Buscar servidor pelo nome...">
+                            <img id="lupa" src="./assets/imgs/dash_user/lupa.png" alt="lupa">
+                        </div>
                         <img class="filtro" id="filtro" src="assets/imgs/dash_analista/filtro.png" alt="">
                         <div class="filtros" id="filtros">
                             <button style="background-color: rgba(87, 112, 168, 0.38);">Todos (8)</button>
-                            <button  style="background-color: #E3FBDD;">Online (5)</button>
-                            <button  style="background-color: #FFF9DF;">Atenção (1)</button>
-                            <button  style="background-color: #FFEFEF;">Crítico (1)</button>
-                            <button >Offline (1)</button> <br>
-                            <select name="" id="">
-                                <option value="tempoReal" selected>Tempo Real</option>
-                                <option value="30s">A cada 30 segundos</option>
-                                <option value="1min">A cada 1 minutos</option>
-                                <option value="5min">A cada 5 minutos</option>  
-                            </select>
-                        </div>     
+                            <button style="background-color: #E3FBDD;">Online (5)</button>
+                            <button style="background-color: #FFF9DF;">Atenção (1)</button>
+                            <button style="background-color: #FFEFEF;">Crítico (1)</button>
+                            <button>Offline (1)</button>
+                            <div class="tempo_dash">
+                                <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                                <select name="" id="tempo">
+                                    <option value="30s">Últimas 24 horas</option>
+                                    <option value="1min">última semana</option>
+                                    <option value="5min">último mês</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card pequeno">
-        
+
                         <div class="lista-servidores">
 
-                            <div class="box-servidor">
+                            <div class="box-servidor cabecario">
                                 <div class="info-servidor">
-                                   <b>Servidor</b>
+                                    <b>Servidor</b>
                                 </div>
                                 <div class="metricas">
                                     <b>CPU(%)</b>
@@ -113,296 +124,324 @@
                                 <div class="metricas">
                                     <b>DISCO(%)</b>
                                 </div>
-                                <div class="att-servidor">
-                                    <p>Ultima Atualização</p>
+                                <div class="metricas">
+                                    <b>Última Atualização</b>
                                 </div>
                                 <div class="info-servidor">
                                     <b>Ações</b>
                                 </div>
                             </div>
 
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">SRV-ACC-SP-01</p>
-                                        <p class="endereco">São Paulo - SP</p>
-                                    </div>
-                                </div>
-
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">42%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">61%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 61%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">55%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="att-servidor">
+                            <div>
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <p class="nome-servidor">SRV-ACC-SP-01</p>
+                                            <p class="endereco">São Paulo - SP</p>
                                         </div>
-                                </div>
-                                
-                                <div class="info-servidor">
+                                    </div>
+
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
+                                            class="pct">42%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 42%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
+                                            class="pct">61%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-amarela" style="width: 61%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">55%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 42%;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="att-servidor">
                                         <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
-                                </div>
-                            </div>
+                                    </div>
 
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-amarela.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">ATC-SVR-GIG-01</p>
-                                        <p class="endereco">Rio de Janeiro - RJ</p>
-                                    </div>
-                                </div>
-
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">78%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 78%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">82%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-vermelha" style="width: 82%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">60%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="att-servidor">
+                                    <div class="info-servidor">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="info-servidor">
+
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-amarela.png" alt="">
                                         <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                            <p class="nome-servidor">ATC-SVR-GIG-01</p>
+                                            <p class="endereco">Rio de Janeiro - RJ</p>
                                         </div>
-                                </div>
-                            </div>
+                                    </div>
 
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">ATC-SVR-CGH-01</p>
-                                        <p class="endereco">São Paulo - SP</p>
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
+                                            class="pct">78%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-amarela" style="width: 78%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
+                                            class="pct">82%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-vermelha" style="width: 82%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">60%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-amarela" style="width: 60%;"></div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">42%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">61%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 61%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">55%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="att-servidor">
+                                    <div class="att-servidor">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
-                                </div>
-                                
-                                <div class="info-servidor">
+                                    </div>
+
+                                    <div class="info-servidor">
                                         <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
-                                </div>
-                            </div>
-
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">ATC-SVR-CNF-01</p>
-                                        <p class="endereco">Confins - MG</p>
                                     </div>
                                 </div>
 
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">25%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 25%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">40%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 40%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">28%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 28%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="att-servidor">
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <p class="nome-servidor">ATC-SVR-CGH-01</p>
+                                            <p class="endereco">São Paulo - SP</p>
                                         </div>
-                                </div>
-                                
-                                <div class="info-servidor">
+                                    </div>
+
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
+                                            class="pct">42%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 42%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
+                                            class="pct">61%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-amarela" style="width: 61%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">55%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 42%;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="att-servidor">
                                         <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
-                                </div>
-                            </div>
+                                    </div>
 
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-vermelha.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">ATC-SVR-POA-01</p>
-                                        <p class="endereco">Porto Alegre - RS</p>
-                                    </div>
-                                </div>
-
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">0%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 0%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">0%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 0%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">72%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 72%;"></div>
-                                    </div>
-                                </div>
-
-                                 <div class="att-servidor">
+                                    <div class="info-servidor">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="info-servidor">
+
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                         <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                            <p class="nome-servidor">ATC-SVR-CNF-01</p>
+                                            <p class="endereco">Confins - MG</p>
                                         </div>
-                                </div>
-                            </div>
-
-
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">ATC-SVR-REC-01</p>
-                                        <p class="endereco">Recife - PE</p>
                                     </div>
-                                </div>
 
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">42%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
+                                            class="pct">25%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 25%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
+                                            class="pct">40%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 40%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">28%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 28%;"></div>
+                                        </div>
                                     </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">61%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-amarela" style="width: 61%;"></div>
-                                    </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">55%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 42%;"></div>
-                                    </div>
-                                </div>
 
-                                <div class="att-servidor">
+                                    <div class="att-servidor">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
-                                </div>
-                                
-                                <div class="info-servidor">
-                                        <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
-                                        </div>
-                                </div>
-                            </div>
+                                    </div>
 
-                            <div class="box-servidor">
-                                <div class="info-servidor">
-                                    <img src="./assets/imgs/painel/bola-verde.png" alt="">
-                                    <div>
-                                        <p class="nome-servidor">ATC-SVR-FOR-01</p>
-                                        <p class="endereco">Fortaleza - CE</p>
+                                    <div class="info-servidor">
+                                        <div>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="metricas">
-                                    <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">25%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 25%;"></div>
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-vermelha.png" alt="">
+                                        <div>
+                                            <p class="nome-servidor">ATC-SVR-POA-01</p>
+                                            <p class="endereco">Porto Alegre - RS</p>
+                                        </div>
                                     </div>
-                                    <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">40%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 40%;"></div>
+
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">0%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 0%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">0%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 0%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">72%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-amarela" style="width: 72%;"></div>
+                                        </div>
                                     </div>
-                                    <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span class="pct">28%</span>
-                                    <div class="barra">
-                                        <div class="preencher barra-verde" style="width: 28%;"></div>
+
+                                    <div class="att-servidor">
+                                        <div>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-servidor">
+                                        <div>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                        </div>
                                     </div>
                                 </div>
 
-                                 <div class="att-servidor">
+
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-verde.png" alt="">
                                         <div>
-                                            <p class="att-servidor">Última Atualização há 2 horas.</p>
+                                            <p class="nome-servidor">ATC-SVR-REC-01</p>
+                                            <p class="endereco">Recife - PE</p>
                                         </div>
-                                </div>
-                                
-                                <div class="info-servidor">
+                                    </div>
+
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
+                                            class="pct">42%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 42%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
+                                            class="pct">61%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-amarela" style="width: 61%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">55%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 42%;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="att-servidor">
                                         <div>
-                                           <button class="detalhes" style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
+                                    </div>
+
+                                    <div class="info-servidor">
+                                        <div>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            
+
+                                <div class="box-servidor">
+                                    <div class="info-servidor">
+                                        <img src="./assets/imgs/painel/bola-verde.png" alt="">
+                                        <div>
+                                            <p class="nome-servidor">ATC-SVR-FOR-01</p>
+                                            <p class="endereco">Fortaleza - CE</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="metricas">
+                                        <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
+                                            class="pct">25%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 25%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
+                                            class="pct">40%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 40%;"></div>
+                                        </div>
+                                        <img src="./assets/imgs/painel/disco-cinza.png" alt=""><span
+                                            class="pct">28%</span>
+                                        <div class="barra">
+                                            <div class="preencher barra-verde" style="width: 28%;"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="att-servidor">
+                                        <div>
+                                            <p class="att-servidor">Há cerca de 2 horas</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-servidor">
+                                        <div>
+                                            <button class="detalhes"
+                                                style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
 
                         </div>
 
                     </div>
 
-                </div>    
+                </div>
 
             </section>
 
             <div class="popup" id="modal">
                 <div class="modal">
                     <div class="card-nome-servidor">
-                                    <div>
-                                        <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
-                                    </div> 
-                                    <div> 
-                                        ATC-SVR-REC-01 <br>
-                                        <span>Recife - PE</span>
-                                    </div> 
-                                    <div>
-                                        <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
-                                    </div>
+                        <div>
+                            <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
+                        </div>
+                        <div>
+                            ATC-SVR-REC-01 <br>
+                            <span>Recife - PE</span>
+                        </div>
+                        <div>
+                            <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
+                        </div>
                     </div>
                     <div class="cards-detalhes">
                         <div class="card-cpu">
@@ -447,116 +486,116 @@
 </html>
 
 <script>
-        //Modal para o menu sanduíche
-        
-        const btnHamburguer = document.getElementById('hamburguer'); 
-        const lateral = document.getElementById('lateral'); 
-        const overlay = document.getElementById('overlay'); 
+    //Modal para o menu sanduíche
 
-        function abrirMenu() { 
-            lateral.classList.add('ativo'); 
-            overlay.classList.add('ativo'); 
-        } 
+    const btnHamburguer = document.getElementById('hamburguer');
+    const lateral = document.getElementById('lateral');
+    const overlay = document.getElementById('overlay');
 
-        function fecharMenu() { 
-            lateral.classList.remove('ativo'); 
-            overlay.classList.remove('ativo'); 
-        } 
+    function abrirMenu() {
+        lateral.classList.add('ativo');
+        overlay.classList.add('ativo');
+    }
 
-        btnHamburguer.addEventListener('click', () => { 
-            lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
-        });
+    function fecharMenu() {
+        lateral.classList.remove('ativo');
+        overlay.classList.remove('ativo');
+    }
 
-        overlay.addEventListener('click', fecharMenu);
+    btnHamburguer.addEventListener('click', () => {
+        lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+    });
 
-        document.addEventListener('click', (e) => {
+    overlay.addEventListener('click', fecharMenu);
+
+    document.addEventListener('click', (e) => {
         if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
             fecharMenu();
         }
-        });
+    });
 
-        //Modal para filtro (celular)
+    //Modal para filtro (celular)
 
-        const btnFiltro = document.getElementById('filtro'); 
-        const filtros = document.getElementById('filtros'); 
-        const modalFiltro = document.getElementById('modalFiltro');
+    const btnFiltro = document.getElementById('filtro');
+    const filtros = document.getElementById('filtros');
+    const modalFiltro = document.getElementById('modalFiltro');
 
-        function abrirFiltro() { 
-            filtros.classList.add('ativo'); 
-            modalFiltro.classList.add('ativo'); 
-        } 
+    function abrirFiltro() {
+        filtros.classList.add('ativo');
+        modalFiltro.classList.add('ativo');
+    }
 
-        function fecharFiltro() { 
-            filtros.classList.remove('ativo'); 
-            modalFiltro.classList.remove('ativo'); 
-        } 
+    function fecharFiltro() {
+        filtros.classList.remove('ativo');
+        modalFiltro.classList.remove('ativo');
+    }
 
-        btnFiltro.addEventListener('click', () => { 
-            filtros.classList.contains('ativo') ? fecharFiltro() : abrirFiltro();
-        });
+    btnFiltro.addEventListener('click', () => {
+        filtros.classList.contains('ativo') ? fecharFiltro() : abrirFiltro();
+    });
 
-        modalFiltro.addEventListener('click', fecharFiltro);
+    modalFiltro.addEventListener('click', fecharFiltro);
 
-        document.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
         if (!filtros.contains(e.target) && !btnFiltro.contains(e.target)) {
             fecharFiltro();
         }
-        });
+    });
 
-        // Modal para o gráfico
-    
-        const modal = document.getElementById('modal');
+    // Modal para o gráfico
 
-        document.querySelectorAll('.detalhes').forEach(btn => {
+    const modal = document.getElementById('modal');
+
+    document.querySelectorAll('.detalhes').forEach(btn => {
         btn.addEventListener('click', () => {
             modal.classList.add('ativo');
         });
-        });
+    });
 
-        document.getElementById('fechar').addEventListener('click', () => {
+    document.getElementById('fechar').addEventListener('click', () => {
         modal.classList.remove('ativo');
-        });
+    });
 
-        modal.addEventListener('click', e => {
+    modal.addEventListener('click', e => {
         if (e.target === modal) modal.classList.remove('ativo');
-        });
+    });
 
 
-        const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
-        const graficoRecursos24h = new Chart(recursos24h, {
-            type: 'line', 
-            data: {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
-                datasets: [
-                    {
-                        label: 'CPU%',
-                        data: [12, 19, 3, 5, 2], // Dados (eixo Y)
-                        borderColor: 'rgb(75, 192, 192)', // Cor da linha
-                        tension: 0.1 // Suavização da linha
-                    },
-                    {
-                        label: 'RAM%',
-                        data: [45, 27, 32, 52, 40], // Dados (eixo Y)
-                        borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
-                        tension: 0.1
-                    },
-                    {
-                        label: 'DISCO%',
-                        data: [90, 86, 82, 92, 93], // Dados (eixo Y)
-                        borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                scales:{
-                    y: {
-                    beginAtZero: true, 
-                    max: 100 
-                }
+    const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
+    const graficoRecursos24h = new Chart(recursos24h, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
+            datasets: [
+                {
+                    label: 'CPU%',
+                    data: [12, 19, 3, 5, 2], // Dados (eixo Y)
+                    borderColor: 'rgb(75, 192, 192)', // Cor da linha
+                    tension: 0.1 // Suavização da linha
                 },
-                responsive: true
-            }
-        });
+                {
+                    label: 'RAM%',
+                    data: [45, 27, 32, 52, 40], // Dados (eixo Y)
+                    borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
+                    tension: 0.1
+                },
+                {
+                    label: 'DISCO%',
+                    data: [90, 86, 82, 92, 93], // Dados (eixo Y)
+                    borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
+                    tension: 0.1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            },
+            responsive: true
+        }
+    });
 
 </script>
