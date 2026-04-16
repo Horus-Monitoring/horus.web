@@ -70,6 +70,10 @@ body {
   font-size: 14px;
 }
 
+.menu button{
+  background-color: #4383d6;
+}
+
 .menu img {
   width: 18px;
   margin-left: 10px;
