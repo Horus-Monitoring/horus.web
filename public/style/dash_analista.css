@@ -65,7 +65,7 @@ body {
   padding: 20px;
   font-size: 12px;
   flex: 1;
-  height: 90px;
+  min-height: 90px;
   width: 100%;
 }
 
@@ -86,7 +86,7 @@ body {
   align-items: center;
   font-size: 12px;
   flex: 1;
-  height: 90px;
+  min-height: 90px;
   width: 100%;
 }
 
@@ -532,6 +532,13 @@ body {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    padding: 20px 30px;
+  }
+
+  .card-pesquisar{
+    width: 90%;
+    justify-content: space-between;
+    margin: 0;
   }
 
   .pequeno-filtro input{
@@ -577,6 +584,10 @@ body {
     flex-direction: row;
     width: 100%;
     justify-content: center;
+  }
+
+  .cabecario{
+    padding: 8px 30px;
   }
 
 }

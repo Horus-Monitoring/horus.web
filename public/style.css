@@ -76,10 +76,16 @@
   padding: 10px 8px;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
   transition: 0.2s;
+  color: #fff;
 }
 
-.item-menu:hover { background-color: #2a3646; }
+.item-menu:hover {
+  transition: 0.2s; 
+  background-color: #2a3646;
+  border-radius: 5px;
+}
 
 .selecionado {
   background-color: #2a3646;
@@ -158,4 +164,48 @@
 .cargo {
   font-size: 12px !important;
   color: #5F5F5F;
+}
+
+@media (max-width: 1024px) {
+  .lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    transition: 0.3s;
+    z-index: 1000 !important;
+  }
+
+  .lateral.ativo {
+    transform: translateX(0); 
+  }
+
+  .main {
+    margin-left: 0 !important; 
+    width: 100%;
+  }
+
+  .hamburguer {
+    display: block;
+  }
+
+
+  .modal-lateral { /* Seu overlay */
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 998 !important; 
+  }
+
+  .modal-lateral.ativo {
+    display: block;
+  }
+
+  .item-menu {
+    width: 100%;
+    display: flex;
+    position: relative;
+    z-index: 1001; 
+  }
 }
