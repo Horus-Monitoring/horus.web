@@ -321,7 +321,7 @@
                     </div>
                     <div class="box-excluir">
                         <button id="btnCancelarExcluir" class="btnCancelarExcluir">Cancelar</button>
-                        <button class="btnExcluir">Cadastrar</button>
+                        <button class="btnExcluir" onclick="excluir()">Excluir</button>
                     </div>
 
                 </div>
@@ -442,6 +442,40 @@
                     });
             }
 
+        }
+
+        function deletarServidor(id) {
+            fetch(`/servidores/deletarServidor/${id}`, {
+                method: 'DELETE'
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    alert('Servidor deletado com sucesso!');
+                    exibirServidores();
+                } else {
+                    alert('Erro ao deletar servidor')
+                }
+            })
+            .catch((erro) => {
+                console.log(`ERRO: ${erro}`);
+            })
+        }
+
+        function deletarUsuario(id) {
+            fetch(`/usuario/deletarUsuario/${id}`, {
+                method: 'DELETE'
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    alert('usuario deletado com sucesso!');
+                    exibirUsuario();
+                } else {
+                    alert('Erro ao deletar usuario')
+                }
+            })
+            .catch((erro) => {
+                console.log(`ERRO: ${erro}`);
+            })
         }
 
 </script>
