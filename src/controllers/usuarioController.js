@@ -65,7 +65,29 @@ function cadastrarUsuario(req, res) {
     }
 }
 
+function deletarUsuario(req, res) {
+    var id = req.params.id
+    
+    usuarioModel.deletarUsuario(id)
+        .then(
+            (resultado => {
+                res.json(resultado);
+            })
+        ).catch(
+            (erro => {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao deletar usuario!\nErro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }) 
+        );
+}
+
+
 module.exports = {
     autenticar,
-    cadastrarUsuario
+    cadastrarUsuario,
+    deletarUsuario
 }
