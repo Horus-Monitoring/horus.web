@@ -123,9 +123,10 @@ body {
   background-color: white;
   border-bottom: 1px solid var(--borda);
   padding: 20px;
+  z-index: 1;
 }
 
-.header img { width: 40px; }
+.header img { width: 20px; }
 
 .usuario {
   display: flex;
@@ -142,6 +143,7 @@ body {
 .main {
   margin-left: 260px;
   padding: 20px;
+  z-index: 1;
 }
 
 .conteudo {
@@ -333,7 +335,7 @@ body {
   color: #1f2937;
 }
 
-@media (max-width: 1439px) and (min-width: 800px) {
+@media (max-width: 1024px) and (min-width: 768px) {
   .lateral {
     transform: translateX(-260px);
     width: 260px;
@@ -343,12 +345,13 @@ body {
     transform: translateX(0);
   }
 
-  .main {
-    margin-left: 0;
-  }
-
+  
   .hamburguer {
     display: block;
+  }
+  
+  .main {
+    margin-left: 0;
   }
 
   .indicadores-incidentes {
@@ -363,9 +366,16 @@ body {
     flex-wrap: wrap;
     gap: 20px;
   }
+
+  
+  .header {
+    padding: 12px;
+  }
+
+
 }
 
-@media (max-width: 799px) {
+@media (max-width: 767px) {
   .lateral {
     transform: translateX(-260px);
     width: 260px;
