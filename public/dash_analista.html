@@ -16,6 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_analista.css">
@@ -68,16 +69,25 @@
 
             <header class="header">
                 <div class="hamburguer" id="hamburguer">
-                    <img src="assets/imgs/painel/menu-sand.png" alt="">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
                 </div>
-                <span class="titulo"><b>Dashboard - Servidores</b></span>
 
-                <div class="usuario">
-                    <div>
-                        <p>Fernando Brandão</p>
-                        <p class="cargo">Gestor</p>
+                <span class="header-titulo">Dashboard — Visão Geral</span>
+
+                <div class="header-acoes">
+
+                    <div class="usuario-desktop">
+                        <img src="./assets/imgs/painel/usuario.png" alt="">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <span id="funcao_usuario" class="cargo"></span>
+                        </div>
+
+                        <div class="usuario-logado">
+                            <p id="inicial_usuario"></p>
+                        </div>
                     </div>
-                    <span>F</span>
+
                 </div>
             </header>
 
@@ -520,10 +530,12 @@
     const filtros = document.getElementById('filtros');
     const modalFiltro = document.getElementById('modalFiltro');
 
-    function abrirFiltro() {
-        filtros.classList.add('ativo');
-        modalFiltro.classList.add('ativo');
-    }
+        exibirUsuarioAtivo();
+
+        function abrirFiltro() { 
+            filtros.classList.add('ativo'); 
+            modalFiltro.classList.add('ativo'); 
+        } 
 
     function fecharFiltro() {
         filtros.classList.remove('ativo');
