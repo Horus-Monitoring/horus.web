@@ -7,6 +7,7 @@
     <title>Dashboard Horus</title>
     <link rel="stylesheet" href="./style/servidor-componente.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
 </head>
 
 <body>
@@ -62,8 +63,12 @@
                     <div class="usuario-desktop">
                         <img src="./assets/imgs/painel/usuario.png" alt="">
                         <div>
-                            <p>Fernando Brandão</p>
-                            <span class="cargo">Gestor de TI</span>
+                            <p id="nome_usuario"></p>
+                            <span id="funcao_usuario" class="cargo"></span>
+                        </div>
+
+                        <div class="usuario-logado">
+                            <p id="inicial_usuario"></p>
                         </div>
                     </div>
 
@@ -372,7 +377,7 @@
                     `
                     var detalhes = lista.map(componente =>
                         `
-                        <div class="box-detalhe">
+                        <div id="componente${componente.id_servidor_componente}" class="box-detalhe">
                             <div class="linha-detalhe">
                                 <div class="coluna">
                                     <span class="subtexto">Tipo</span>
@@ -391,7 +396,7 @@
                                 </div>
 
                                 <div class="coluna sumir-celular">
-                                    <img class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
+                                    <img onclick="deletarComponente(${componente.id_servidor_componente})" class="lixo" src="./assets/imgs/painel/lixo.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -444,7 +449,7 @@
                                 <span class="subtexto-info">${servidor.quantidade}</span>
                             </div>
 
-                            <img class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                            <img onclick="deletarServidor(${servidor.id_servidor})" class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
                         </div>
               `).join('')
                 })
@@ -453,6 +458,44 @@
                 });
         }
         exibirServidores()
+
+        function deletarServidor(id) {
+            fetch(`/servidores/deletarServidor/${id}`, {
+                method: 'DELETE'
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    alert('Servidor deletado com sucesso!');
+                    exibirServidores();
+                } else {
+                    alert('Erro ao deletar servidor')
+                }
+            })
+            .catch((erro) => {
+                console.log(`ERRO: ${erro}`);
+            })
+        }
+
+        function deletarComponente(id) {
+            fetch(`/servidores/deletarComponente/${id}`, {
+                method: 'DELETE'
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    var componente = document.getElementById(`componente${id}`);
+                    componente.remove();
+                    alert('Componente deletado com sucesso!')
+                    exibirServidores();
+                } else {
+                    alert('Erro ao deletar componente')
+                }
+            })
+            .catch((erro) => {
+                console.log(`ERRO: ${erro}`);
+            })
+        }
+
+        exibirUsuarioAtivo();
 
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');

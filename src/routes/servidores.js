@@ -16,6 +16,10 @@ router.get("/listarServidores/:fkEmpresa", function (req, res) {
     servidoresController.listarServidores(req, res);
 })
 
+router.delete("/deletarServidor/:id", function (req, res) {
+    servidoresController.deletarServidor(req, res);
+})
+
 // Componentes
 router.post("/cadastrarComponente", function (req, res) {
     servidoresController.cadastrarComponente(req, res);
@@ -23,6 +27,10 @@ router.post("/cadastrarComponente", function (req, res) {
 
 router.get("/abrirDetalhes/:id", function (req, res) {
     servidoresController.abrirDetalhes(req, res);
+})
+
+router.delete("/deletarComponente/:id", function (req, res) {
+    servidoresController.deletarComponente(req, res);
 })
 
 module.exports = router;
