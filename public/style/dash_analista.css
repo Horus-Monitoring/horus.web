@@ -192,7 +192,7 @@ body {
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .card {
@@ -213,7 +213,7 @@ body {
   padding: 20px;
   font-size: 12px;
   flex: 1;
-  height: 90px;
+  min-height: 90px;
   width: 100%;
 }
 
@@ -221,7 +221,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .pequeno-filtro img { 
@@ -232,10 +232,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   font-size: 12px;
   flex: 1;
-  height: 90px;
+  min-height: 90px;
   width: 100%;
 }
 
@@ -243,24 +242,68 @@ body {
   background-color: #576CA8;
 }
 
-.pequeno-filtro input{
-  border: 2px var(--borda) solid;
+#lupa{
+  width: 15px;
+  height: 15px;
+  padding: 0;
+}
+
+.card-pesquisar{
+  display: flex;
+  align-items: center;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
+  border: 1.5px var(--borda) solid;
+  padding-right: 10px;
+  margin-right: 15px;
+  width: 25%;
+}
+
+.pequeno-filtro input{
+  width: 100%;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.pequeno-filtro input:focus{
+  outline: none;
 }
 
 .pequeno-filtro button{
-  border: 2px var(--borda) solid;
+  border: 1.5px var(--borda) solid;
   height: 40px;
   width: 80px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: var(--cinza);
   color: var(--texto);
+  transition: 0.2s;
 }
 
-.pequeno-filtro button:hover{
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  transform: translateY(-2px);
+.filtros button:hover{
+  transition: 0.2s;
+  background-color: #5770a861 !important;
+  cursor: pointer;
+}
+
+.tempo_dash{
+  display: flex;
+  align-items: center;
+  border: 1.5px var(--borda) solid;
+  height: 40px;
+  width: 25%;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+#tempo{
+  outline: none;
+  width: 100%;
+  padding: 0 5px;
+}
+
+#relogio{
+  width: 13px;
+  height: 13px;
 }
 
 .popup {
@@ -350,12 +393,6 @@ body {
   width: 40px;
 }
 
-.att-servidor{
-  font-weight: bold;
-  font-size: 14px;
-  padding-bottom: 6px;
-}
-
 .cards-detalhes-grafico{
   display: flex; 
   flex-wrap: wrap;
@@ -382,7 +419,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 8px 20px;
   border-top: 1px solid var(--borda);
   width: 100%;
 }
@@ -390,6 +427,13 @@ body {
 .box-servidor:hover { 
   background-color: #f6f7f8;
  }
+
+ .cabecario {
+  background-color: #f5f3f5;
+  border-top: none;
+  padding: 8px 30px;
+  padding-left: 90px;
+}
 
 .info-servidor {
   display: flex;
@@ -401,12 +445,13 @@ body {
 .info-servidor img { width: 10px; }
 
 .info-servidor button{
-  border: 2px var(--borda) solid;
+  border: 1.5px var(--borda) solid;
   height: 40px;
   width: 80px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: var(--cinza);
-  color: var(--texto);
+  color: #576CA8;
+  font-weight: bold;
 }
 
 .nome-servidor {
@@ -635,6 +680,13 @@ body {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    padding: 20px 30px;
+  }
+
+  .card-pesquisar{
+    width: 90%;
+    justify-content: space-between;
+    margin: 0;
   }
 
   .pequeno-filtro input{
@@ -644,9 +696,6 @@ body {
 
   .pequeno-filtro button{
     width: 45%;
-  }
-  .pequeno-filtro select{
-    width: 80%;
   }
 
   .pequeno-filtro option{
@@ -730,5 +779,9 @@ body {
 .usuario-logado p {
   color: white;
 }
+
+  .cabecario{
+    padding: 8px 30px;
+  }
 
 }
