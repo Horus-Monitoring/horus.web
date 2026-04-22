@@ -256,6 +256,25 @@
             popupDetalhes.style = 'display: none'
         }
 
+        //deletar servidor 
+
+        function deletarUsuario(id) {
+            fetch(`/usuario/deletarUsuario/${id}`, {
+                method: 'DELETE'
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    alert('Servidor deletado com sucesso!');
+                    exibirServidores();
+                } else {
+                    alert('Erro ao deletar servidor')
+                }
+            })
+            .catch((erro) => {
+                console.log(`ERRO: ${erro}`);
+            })
+        }
+
         // Cadastro de servidor
         function cadastrarServidor() {
             const fkEmpresaVar = sessionStorage.ID_EMPRESA
