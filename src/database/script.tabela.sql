@@ -1,17 +1,11 @@
+#SCRIPT HORUS-MONITORING
+
 CREATE DATABASE horus_db;
 
 USE horus_db;
 
-CREATE TABLE Contato_inicial (
-idContato_inicial INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45),
-sobrenome VARCHAR(45),
-emaill VARCHAR(45),
-mensagem VARCHAR(255)
-); 
-
-CREATE TABLE Localizacao (
-idLocalizacao INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE localizacao(
+id_localizacao INT PRIMARY KEY AUTO_INCREMENT,
 uf CHAR(2),
 cidade VARCHAR(45),
 bairro VARCHAR(45),
@@ -20,106 +14,67 @@ numero INT,
 cep CHAR(11)
 );
 
-CREATE TABLE Empresa (
-idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+
+CREATE TABLE empresa(
+id_empresa INT PRIMARY KEY AUTO_INCREMENT,
 razao_social VARCHAR(45),
-cnpj CHAR(15) NOT NULL UNIQUE,
-telefone_empresa CHAR(11) NOT NULL UNIQUE,
-token_empresa CHAR(8) NOT NULL UNIQUE,
+cnpj CHAR(15),
+telefone_empresa CHAR,
+token_empresa CHAR(8),
 fk_localizacao INT,
-CONSTRAINT fk_localizacao_registro
-	FOREIGN KEY (fk_localizacao)
-		REFERENCES Localizacao(idLocalizacao)
+ FOREIGN KEY(fk_localizacao) REFERENCES localizacao (id_localizacao)
 );
 
-CREATE TABLE Papel (
-idPapel INT  AUTO_INCREMENT,
-nivel VARCHAR(45),
-descricao VARCHAR(80),
-fk_empresa INT, 
-CONSTRAINT pk_papel_empresa
-	PRIMARY KEY(idPapel, fk_empresa),
-CONSTRAINT fk_empresa_registro
-	FOREIGN KEY (fk_empresa)
-		REFERENCES Empresa (idEMpresa)
-);
 
-CREATE TABLE Funcionario (
-idFuncionario INT AUTO_INCREMENT,
+CREATE TABLE funcionario(
+id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
-nome_social VARCHAR(45),
-imagem varchar(255),
-cpf CHAR(11) NOT NULL UNIQUE,
-email VARCHAR(45) NOT NULL UNIQUE,
+email VARCHAR(45),
+cpf CHAR(11),
 senha VARCHAR(45),
-fk_papel_empresa INT,
-CONSTRAINT pk_funcionario_papel_empresa
-	PRIMARY KEY(idFuncionario, fk_papel_empresa),
-CONSTRAINT fk_papel_registro
-	FOREIGN KEY (fk_papel_empresa)
-		REFERENCES Papel(idPapel),
-foto VARCHAR(255)
+funcao ENUM('Analista','Gestor'),
+fk_empresa INT,
+FOREIGN KEY(fk_empresa) REFERENCES empresa (id_empresa),
+imagem VARCHAR(255)
 );
 
- CREATE TABLE Servidor (
-idServidor INT AUTO_INCREMENT,
+CREATE TABLE servidor(
+id_servidor INT PRIMARY KEY AUTO_INCREMENT,
 data_instalacao DATE,
 tag_servidor VARCHAR(45),
 fk_empresa INT,
- CONSTRAINT pk_servidor_empresa
-	PRIMARY KEY (idServidor, fk_empresa),
-CONSTRAINT fk_empresa_registro_servidor
-	FOREIGN KEY (fk_empresa)
-		REFERENCES Empresa(idEmpresa)
+FOREIGN KEY(fk_empresa) REFERENCES empresa (id_empresa)
 );
 
-CREATE TABLE Componentes (
-idComponentes INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE componentes(
+id_componente INT PRIMARY KEY AUTO_INCREMENT,
 nome_componente VARCHAR(45),
 tipo_componente VARCHAR(45),
 unidade_medida VARCHAR(45)
 );
 
-
-CREATE TABLE CompServidor (
-id_componente_v INT AUTO_INCREMENT,
+CREATE TABLE servidor_componente(
+id_componente_v INT PRIMARY KEY AUTO_INCREMENT,
 fk_componente INT,
 fk_servidor INT,
 limite VARCHAR(45),
-CONSTRAINT pk_componente_servidor_componente_v
-	PRIMARY KEY (id_componente_v, fk_componente, fk_servidor),
-CONSTRAINT fk_componente_registro
-	FOREIGN KEY (fk_componente)
-		REFERENCES Componentes(idComponentes),
-CONSTRAINT fk_servidor_registro
-	FOREIGN KEY (fk_servidor)
-		REFERENCES Servidor(idServidor)
+FOREIGN KEY(fk_componente) REFERENCES  componentes (id_componente),
+FOREIGN KEY(fk_servidor) REFERENCES servidor (id_servidor)
 );
 
-CREATE TABLE Registro_Alerta (
-idAlerta INT PRIMARY KEY AUTO_INCREMENT,
-data_alerta DATETIME DEFAULT CURRENT_TIMESTAMP, 
-criticidade VARCHAR(45), 
-fk_servidor_componentes INT,
-CONSTRAINT fk_servidor_componente
-	FOREIGN KEY (fk_servidor_componentes)
-		REFERENCES CompServidor(id_componente_v)
-); 
-
-INSERT INTO Localizacao (uf, cidade, bairro, logradouro, numero, cep) VALUES
-	('SP', 'São Paulo', 'Paulista','Rua Hadock Lobo', 12, '08412210');
-    
-INSERT INTO Empresa (razao_social, cnpj, telefone_empresa, token_empresa, fk_localizacao) VALUES
-	('LIPSU AERO', '123456789101234', '5573-1234', 'ABC12345', 1);
-    
-INSERT INTO Papel (nivel, descricao, fk_empresa) VALUES
-	('Gestor', 'Deve monitorar e solucionar problemas', 1);
-    
-INSERT INTO Funcionario (fk_papel_empresa, nome,  cpf, email, senha) VALUES
-	(1, 'Eryka', '32187634567', 'eryka@gmail.com', 'senha123');
-    
-    
-SELECT  nivel  FROM Papel JOIN Funcionario
-	ON idPapel = fk_papel_empresa	
-    WHERE nome = 'Eryka';
-    
+CREATE TABLE registro_alerta(
+id_alerta INT PRIMARY KEY AUTO_INCREMENT,
+data_alerta DATETIME,
+criticidade VARCHAR(45),
+fk_servidor_componente INT,
+FOREIGN KEY (fk_servidor_componente) REFERENCES servidor_componente (id_componente_v)
+);
+ 
+ 
+ CREATE TABLE contato_inicial(
+ id_componente INT PRIMARY KEY AUTO_INCREMENT,
+ nome VARCHAR(45),
+ sobrenome VARCHAR(45),
+ email VARCHAR(45),
+ mensagem VARCHAR(255)
+ );

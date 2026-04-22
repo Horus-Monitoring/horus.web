@@ -86,8 +86,52 @@ function deletarUsuario(req, res) {
 }
 
 
+function exibirUsuarios(req, res) {
+    var id = req.params.id
+    
+    usuariosModel.exibirUsuarios(id)
+        .then(
+            (resultado => {
+                res.json(resultado);
+            })
+        ).catch(
+            (erro => {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao exibir os usuarios!\nErro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }) 
+        );
+}
+
+function listarUsuarios(req, res) {
+    var id = req.params.id
+    
+    UsuariosModel.listarUsuarios(id)
+        .then(
+            (resultado => {
+                res.json(resultado);
+            })
+        ).catch(
+            (erro => {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao listar os servidores!\nErro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }) 
+        );
+}
+
+
+
 module.exports = {
     autenticar,
     cadastrarUsuario,
-    deletarUsuario
+    deletarUsuario,
+    listarUsuarios,
+    exibirUsuarios
 }
