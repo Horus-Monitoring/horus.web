@@ -16,4 +16,14 @@ router.delete("/deletarUsuario:id", function (req, res) {
     usuarioController.deletarUsuario(req, res);
 });
 
+
+router.get("/exibirUsuarios/:id", function (req, res) {
+    usuarioController.exibirUsuarios(req, res);
+})
+
+router.get("/listarUsuarios/:id", function (req, res) {
+    usuarioController.listarUsuarios(req, res);
+})
+
+
 module.exports = router;
