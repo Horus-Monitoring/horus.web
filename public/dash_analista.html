@@ -93,7 +93,7 @@
                 </div>
             </header>
 
-            <section class="conteudo">
+            <section class="conteudo" id="conteudo">
                 <div class="cards">
 
                     <div class="card pequeno-filtro">
@@ -348,7 +348,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="box-servidor">
                                     <div class="info-servidor">
                                         <img src="./assets/imgs/painel/bola-verde.png" alt="">
@@ -443,51 +442,190 @@
 
             <div class="popup" id="modal">
                 <div class="modal">
-                    <div class="card-nome-servidor">
-                        <div>
-                            <img src="assets/imgs/painel/servidores-selecionado.png" alt="" width="20px">
+                    <div class="topo">
+                        <div class="linha-topo">
+                            <div id="fechar" class="fechar">
+                                <img src="assets/imgs/painel/seta-esquerda.png" alt="" width="25px">
+                                <p>Voltar</p>
+                            </div>
+
+                            <div class="local">
+                                <h3>SRV-ACC-SP-01</h3>
+                                <div class="linha">
+                                    <img src="assets/imgs/painel/local.png" alt="" width="16px">
+                                    <span class="nome-local">São Paulo, SP</span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            ATC-SVR-REC-01 <br>
-                            <span>Recife - PE</span>
-                        </div>
-                        <div>
-                            <img id="fechar" src="assets/imgs/painel/sair.png" alt="" width="20px">
+
+                        <div class="status">
+                            <div class="status-rotulo">
+                                <img src="assets/imgs/painel/i.png" alt="" width="20px">
+                                <span>Status</span>
+                            </div>
+
+                            <div class="status-info">
+                                Online
+                            </div>
                         </div>
                     </div>
+
                     <div class="cards-detalhes">
                         <div class="card-cpu">
-                            <span>CPU</span>
-                            <h1>28%</h1>
-                            <div class="barra">
-                                <div class="preencher barra-azul" style="width: 28%;"></div>
+                            <div class="topo-card">
+                                <img src="assets/imgs/painel/cpu-card.png" width="60px">
+                                <div>
+                                    <span class="negrito">CPU</span>
+                                    <h1 class="registro">38%</h1>
+                                </div>
+                            </div>
+
+                            <div class="barra-registro">
+                                <div class="preencher barra-azul" style="width: 38%;"></div>
                             </div>
                         </div>
+
                         <div class="card-ram">
-                            <span>RAM</span>
-                            <h1>62%</h1>
-                            <div class="barra">
-                                <div class="preencher barra-roxa" style="width: 62%;"></div>
+                            <div class="topo-card">
+                                <img src="assets/imgs/painel/ram-card.png" width="60px">
+                                <div>
+                                    <span class="negrito">RAM</span>
+                                    <h1 class="registro">58%</h1>
+                                </div>
+                            </div>
+
+                            <div class="barra-registro">
+                                <div class="preencher barra-roxa" style="width: 58%;"></div>
                             </div>
                         </div>
+
                         <div class="card-disk">
-                            <span>DISCO</span>
-                            <h1>55%</h1>
-                            <div class="barra">
-                                <div class="preencher barra-verde2" style="width: 55%;"></div>
+                            <div class="topo-card">
+                                <img src="assets/imgs/painel/disco-card.png" width="60px">
+                                <div>
+                                    <span class="negrito">Disco</span>
+                                    <h1 class="registro">72%</h1>
+                                </div>
+                            </div>
+
+                            <div class="barra-registro">
+                                <div class="preencher barra-verde2" style="width: 72%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="card-info">
+                            <span class="subtexto">Última atualização</span>
+                            <span>18/04/2026 ás 20:06</span>
+                            <span class="subtexto">Endereço IP</span>
+                            <span>192.168.1.10</span>
+                        </div>
+                    </div>
+
+                    <div class="linha">
+                        <div class="cards-detalhes-grafico">
+                            <div class="card-detalhes-topo">
+                                <span>Uso dos principais componentes (%)</span>
+
+                                <select class="select_filtro" name="" id="">
+                                    <option value="1">Últimas 24 horas</option>
+                                    <option value="2">Últimos 3 dias</option>
+                                    <option value="3">Última semana</option>
+                                    <option value="4">Último mês</option>
+                                </select>
+                            </div>
+
+                            <div class="grafico-recursos">
+                                <canvas id="graficoRecursos24h"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card-grafico-processos">
+                            <div class="card-detalhes-topo">
+                                <span>Processos Ativos</span>
+
+                                <select class="select_filtro" name="" id="">
+                                    <option value="1">Últimas 24 horas</option>
+                                    <option value="2">Últimos 3 dias</option>
+                                    <option value="3">Última semana</option>
+                                    <option value="4">Último mês</option>
+                                </select>
+                            </div>
+
+                            <div class="grafico-processos">
+                                <canvas id="graficoProcessos"></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="cards-detalhes-grafico">
-                        <h1>Histórico de Uso (Últimas 24h)</h1>
-                        <canvas id="graficoRecursos24h" class="graficoRecursos24h"></canvas>
+
+                    <div class="linha">
+                        <div class="card-grafico-processos">
+                            <div class="card-detalhes-topo">
+                                <span>Rede (megabytes)</span>
+
+                                <select class="select_filtro" name="" id="">
+                                    <option value="1">Últimas 24 horas</option>
+                                    <option value="2">Últimos 3 dias</option>
+                                    <option value="3">Última semana</option>
+                                    <option value="4">Último mês</option>
+                                </select>
+                            </div>
+
+                            <div class="grafico-rede">
+                                <canvas id="graficoRede"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card-processos">
+                            <span class="titulo-tabela">Processos Ativos que mais consomem recursos</span>
+
+                            <table class="tabela-processos">
+                                <thead>
+                                    <tr>
+                                        <th>PID</th>
+                                        <th class="sumir-celular">Nome</th>
+                                        <th>CPU (%)</th>
+                                        <th>RAM (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0</td>
+                                        <td class="sumir-celular">System Idle Process</td>
+                                        <td>88,4</td>
+                                        <td>0,1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td class="sumir-celular">System</td>
+                                        <td>1,2</td>
+                                        <td>0,2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1240</td>
+                                        <td class="sumir-celular">svchost.exe</td>
+                                        <td>3,8</td>
+                                        <td>1,5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3420</td>
+                                        <td class="sumir-celular">explorer.exe</td>
+                                        <td>2,1</td>
+                                        <td>2,8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>880</td>
+                                        <td class="sumir-celular">winlogon.exe</td>
+                                        <td>0,5</td>
+                                        <td>0,3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="cards-detalhes">
-                        <img src="assets/imgs/dash_analista/relogio.png" alt="" height="20px">
-                        <span>Última atualização: 22/03/2026 às 14:39:04.</span>
-                    </div>
+
                 </div>
             </div>
+            <!-- FIM DO MODAL -->
 
         </main>
 
@@ -532,12 +670,12 @@
     const filtros = document.getElementById('filtros');
     const modalFiltro = document.getElementById('modalFiltro');
 
-        exibirUsuarioAtivo();
+    exibirUsuarioAtivo();
 
-        function abrirFiltro() { 
-            filtros.classList.add('ativo'); 
-            modalFiltro.classList.add('ativo'); 
-        } 
+    function abrirFiltro() {
+        filtros.classList.add('ativo');
+        modalFiltro.classList.add('ativo');
+    }
 
     function fecharFiltro() {
         filtros.classList.remove('ativo');
@@ -563,52 +701,81 @@
     document.querySelectorAll('.detalhes').forEach(btn => {
         btn.addEventListener('click', () => {
             modal.classList.add('ativo');
+            conteudo.style = "display: none";
         });
     });
 
     document.getElementById('fechar').addEventListener('click', () => {
         modal.classList.remove('ativo');
+        conteudo.style = "display: flex";
     });
 
-    modal.addEventListener('click', e => {
-        if (e.target === modal) modal.classList.remove('ativo');
-    });
-
-
-    const recursos24h = document.getElementById('graficoRecursos24h').getContext('2d');
-    const graficoRecursos24h = new Chart(recursos24h, {
+    new Chart(document.getElementById('graficoRecursos24h'), {
         type: 'line',
         data: {
-            labels: ['00:00', '04:00', '08:00', '12:00', '16:00'], // Rótulos do eixo X
+            labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
             datasets: [
-                {
-                    label: 'CPU%',
-                    data: [12, 19, 3, 5, 2], // Dados (eixo Y)
-                    borderColor: 'rgb(75, 192, 192)', // Cor da linha
-                    tension: 0.1 // Suavização da linha
-                },
-                {
-                    label: 'RAM%',
-                    data: [45, 27, 32, 52, 40], // Dados (eixo Y)
-                    borderColor: 'rgb(255, 99, 132)', // Cor diferente para diferenciar
-                    tension: 0.1
-                },
-                {
-                    label: 'DISCO%',
-                    data: [90, 86, 82, 92, 93], // Dados (eixo Y)
-                    borderColor: 'rgb(255, 205, 86)', // Cor diferente para diferenciar
-                    tension: 0.1
-                }
+                { label: 'CPU', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                { label: 'RAM', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#b772ff', backgroundColor: '#b772ff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                { label: 'Disco', data: [50, 52, 51, 50, 49, 51, 55, 53, 50, 48, 47, 49, 51, 50, 52, 54, 57, 60, 58, 55, 47, 45, 49, 51, 50], borderColor: '#3bff7f', backgroundColor: '#3bff7f', borderWidth: 2, pointRadius: 0, tension: 0.4 }
             ]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100
-                }
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
             },
-            responsive: true
+            scales: {
+                x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('graficoProcessos'), {
+        type: 'bar',
+        data: {
+            labels: ['01:00', '04:00', '07:00', '10:00', '13:00', '16:00', '19:00', '23:00'],
+            datasets: [
+                { label: 'Número de processos ativos', data: [15, 6, 30, 20, 100, 45, 75, 115], backgroundColor: '#d7eda1', borderRadius: 0, borderWidth: 0 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                legend: { display: true, position: 'top', labels: { usePointStyle: false, pointStyle: 'circle', color: '#6b7280', font: { size: 13 }, boxWidth: 18, boxHeight: 12, padding: 20 } }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } },
+                y: { min: 0, grid: { color: '#ffff' }, ticks: { stepSize: 2, color: '#9ca3af', font: { size: 11 } } }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('graficoRede'), {
+        type: 'line',
+        data: {
+            labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
+            datasets: [
+                { label: 'Enviados', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                { label: 'Recebidos', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#FF5959', backgroundColor: '#FF5959', borderWidth: 2, pointRadius: 0, tension: 0.4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+            },
+            scales: {
+                x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+            }
         }
     });
 
