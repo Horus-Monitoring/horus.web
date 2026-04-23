@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Horus</title>
     <link rel="stylesheet" href="./style/painel.css">
-    <link rel="stylesheet" href="./style.css">
+    
     <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -19,7 +19,7 @@
 
        <aside class="lateral" id="lateral">
             <div class="logo">
-                <img src="./assets/imgs/painel/logo.png" alt="">
+                <img src="./assets/imgs/painel/logo.png" alt="" style="font-family: Jura, sans-serif;">
                 Horus
             </div>
 
@@ -190,12 +190,18 @@
     </div>
 
     <script>
+
+        window.onload = () => {
     
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
         const modal = document.getElementById('modal');
 
-        exibirUsuarioAtivo();
+        try{
+            exibirUsuarioAtivo()
+        }catch(erro){
+            console.warn("Erro ao exibir o usuario", erro)
+        }
 
         function abrirMenu() {
             lateral.classList.add('aberto');
@@ -307,7 +313,7 @@
                     y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
                 }
             }
-        });
+        });};
     </script>
 </body>
 </html>

@@ -531,7 +531,13 @@ body {
 @media (max-width: 1024px) {
   .lateral {
     width: 220px;
+    position: fixed;
   }
+  
+  .hamburguer {
+    display: block;
+  }
+
 
   .main {
     margin-left: 220px;
@@ -567,22 +573,7 @@ body {
     width: 100%;
     height: 100%;
   }
-}
-
-@media (max-width: 1024px) {
-
-  .lateral {
-    position: fixed;
-  }
-
-  .hamburguer {
-    display: block;
-  }
-
-  .main {
-    margin-left: 0;
-  }
-
+  
   .cards-detalhes {
     gap: 15px;
     justify-content: center;
@@ -597,7 +588,6 @@ body {
   .modal {
     width: 90%;
   }
-
 }
 
 @media (max-width: 768px) {
