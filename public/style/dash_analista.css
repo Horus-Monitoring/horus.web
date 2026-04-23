@@ -66,7 +66,9 @@ body {
   color: white;
 }
 
-.logo img { width: 30%; }
+.logo img {
+  width: 30%;
+}
 
 .menu {
   display: flex;
@@ -83,6 +85,34 @@ body {
   margin-left: 10px;
 }
 
+<<<<<<< Updated upstream
+=======
+.categoria {
+  color: #a0a5a8;
+  margin: 16px 0 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.item-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.item-menu:hover {
+  background-color: #2a3646;
+}
+
+.selecionado {
+  background-color: #2a3646;
+  color: #478bd1;
+}
+>>>>>>> Stashed changes
 
 .sair {
   display: flex;
@@ -119,7 +149,7 @@ body {
   height: 60px;
   background-color: white;
   border-bottom: 1px solid var(--borda);
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .header-acoes {
@@ -128,7 +158,9 @@ body {
   gap: 12px;
 }
 
-.header img { width: 40px; }
+.header img {
+  width: 40px;
+}
 
 .usuario-desktop {
   display: flex;
@@ -178,7 +210,7 @@ body {
   align-items: center;
 }
 
-.filtros{
+.filtros {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -189,14 +221,14 @@ body {
   width: 100%;
 }
 
-.pequeno-filtro{
+.pequeno-filtro {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
 }
 
-.pequeno-filtro img { 
+.pequeno-filtro img {
   width: 20px;
 }
 
@@ -211,16 +243,16 @@ body {
 }
 
 .info-servidor button {
-  background-color: #576CA8;
+  background-color: #576ca8;
 }
 
-#lupa{
+#lupa {
   width: 15px;
   height: 15px;
   padding: 0;
 }
 
-.card-pesquisar{
+.card-pesquisar {
   display: flex;
   align-items: center;
   height: 40px;
@@ -231,17 +263,17 @@ body {
   width: 25%;
 }
 
-.pequeno-filtro input{
+.pequeno-filtro input {
   width: 100%;
   padding-left: 10px;
   font-size: 12px;
 }
 
-.pequeno-filtro input:focus{
+.pequeno-filtro input:focus {
   outline: none;
 }
 
-.pequeno-filtro button{
+.pequeno-filtro button {
   border: 1.5px var(--borda) solid;
   height: 40px;
   width: 80px;
@@ -251,13 +283,13 @@ body {
   transition: 0.2s;
 }
 
-.filtros button:hover{
+.filtros button:hover {
   transition: 0.2s;
   background-color: #5770a861 !important;
   cursor: pointer;
 }
 
-.tempo_dash{
+.tempo_dash {
   display: flex;
   align-items: center;
   border: 1.5px var(--borda) solid;
@@ -267,116 +299,183 @@ body {
   border-radius: 5px;
 }
 
-#tempo{
+#tempo {
   outline: none;
   width: 100%;
   padding: 0 5px;
 }
 
-#relogio{
+#relogio {
   width: 13px;
   height: 13px;
 }
 
 .popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
   display: none;
-  align-items: center;
-  justify-content: center;
   z-index: 999;
-}
-
-.popup.ativo { display: flex; }
-
-.modal {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  width: 800px;
-  max-width: 90%;
-  max-height: 90%;
   overflow-y: auto;
 }
 
+.popup.ativo {
+  display: flex;
+}
 
-.cards-detalhes{
-  display: flex; 
-  flex-wrap: wrap;
-  flex-direction: row; 
-  justify-content: space-between; 
+.modal {
+  background: var(--cinza);
+  padding: 32px;
+  border-radius: 12px;
+  width: 100%;
+  min-height: 100%;
+}
+
+.cards-detalhes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   height: fit-content;
   padding-top: 20px;
   padding-bottom: 20px;
+  overflow-x: auto;
 }
 
-.card-cpu{
-  background-color: #BEDBFF;
-  color: #1C398E;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  border: 2px #92bff6 solid;
-  border-radius: 10px;
-  width: 230px;
+.topo-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.card-ram{
-  background-color: #E9D4FF;
-  color: #59168B;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  border: 2px #dcc0fb solid;
-  border-radius: 10px;
-  width: 230px;
+.card-cpu,
+.card-ram,
+.card-disk,
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 5px;
+  max-width: 300px;
+  height: 130px;
+  flex-shrink: 0;
+  flex: 1;
+  min-width: 220px;
 }
 
-.card-disk{
-  background-color: #B9F8CF;
-  color: #0D542B;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  border: 2px #8cf1af solid;
-  border-radius: 10px;
-  width: 230px;
+.card-cpu {
+  border: 2px solid #92bff6;
 }
 
-.card-nome-servidor{
-  display: flex; 
-  flex-direction: row; 
-  justify-content: space-between; 
-  background-color: var(--cinza);
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
+.card-ram {
+  border: 2px solid #dcc0fb;
+}
+
+.card-disk {
+  border: 2px solid #8cf1af;
+}
+
+.card-info {
+  border: 2px solid #e7e4e4;
+}
+
+.cards-detalhes-grafico {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  height: 400px;
+  background-color: white;
+  padding: 20px;
   border: 2px var(--borda) solid;
-  border-radius: 20px;
+  border-radius: 6px;
+  margin-bottom: 30px;
 }
 
-.card-nome-servidor img{
-  height: 40px;
-  width: 40px;
+.grafico-recursos {
+  width: 100%;
+  height: 90%;
 }
 
-.cards-detalhes-grafico{
-  display: flex; 
+.card-grafico-processos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  height: 400px;
+  background-color: white;
+  padding: 20px;
+  border: 2px var(--borda) solid;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+
+.card-detalhes-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: space-between; 
-  min-height: 300px;
-  background-color: var(--cinza);
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  border: 2px var(--borda) solid;
-  border-radius: 20px;
+}
+
+.card-processos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: white;
+  border: 2px solid var(--borda);
+  border-radius: 6px;
+  width: 60%;
+  height: 400px;
+}
+
+.titulo-tabela {
+  font-size: 18px;
+  padding: 20px 0 0 20px;
+}
+
+.tabela-processos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela-processos thead tr {
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela-processos th {
+  background-color: #f6f6f6;
+  padding: 16px 22px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--texto);
+}
+
+.tabela-processos td {
+  padding: 16px 18px;
+  text-align: center;
+  color: var(--subtexto);
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela-processos tbody tr:hover {
+  background-color: #f6f7f8;
+}
+
+.select_filtro {
+  width: 200px;
+  height: 40px;
+  border: 2px solid #e7e3e3;
+  border-radius: 4px;
+  color: var(--subtexto);
+  background-image: url("../assets/imgs/painel/hora.png");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 20px;
+  padding-left: 34px;
 }
 
 .lista-servidores {
@@ -396,11 +495,11 @@ body {
   width: 100%;
 }
 
-.box-servidor:hover { 
+.box-servidor:hover {
   background-color: #f6f7f8;
- }
+}
 
- .cabecario {
+.cabecario {
   background-color: #f5f3f5;
   border-top: none;
   padding: 8px 30px;
@@ -414,15 +513,17 @@ body {
   padding: 10px;
 }
 
-.info-servidor img { width: 10px; }
+.info-servidor img {
+  width: 10px;
+}
 
-.info-servidor button{
+.info-servidor button {
   border: 1.5px var(--borda) solid;
   height: 40px;
   width: 80px;
   border-radius: 5px;
   background-color: var(--cinza);
-  color: #576CA8;
+  color: #576ca8;
   font-weight: bold;
 }
 
@@ -443,7 +544,9 @@ body {
   gap: 6px;
 }
 
-.metricas img { width: 18px; }
+.metricas img {
+  width: 18px;
+}
 
 .pct {
   color: #444444;
@@ -460,19 +563,54 @@ body {
   margin-right: 20px;
 }
 
+.card-cpu .barra-registro {
+  width: 100%;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #92bff6;
+  margin-right: 20px;
+}
+
+.card-ram .barra-registro {
+  width: 100%;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #e9d4ff;
+  margin-right: 20px;
+}
+
+.card-disk .barra-registro {
+  width: 100%;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #b9f8cf;
+  margin-right: 20px;
+}
+
+.card.barra {
+  width: 100%;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #ebedf0;
+  margin-right: 20px;
+}
+
 .preencher {
   height: 100%;
   border-radius: 16px;
 }
 
-.barra-verde { background-color: #2bab6f; }
-.barra-amarela { background-color: #f59f0a; }
-.barra-vermelha { background-color: #dc2828; }
-.barra-azul { background-color: #4628dc; }
-.barra-roxa { background-color: #9b18b0; }
-.barra-verde2 { background-color: #126313; }
+.linha {
+  display: flex;
+  gap: 10px;
+}
 
+.linha-topo {
+  display: flex;
+  gap: 10px;
+}
 
+<<<<<<< Updated upstream
   .header {
     flex-direction: row;
     justify-content: space-between;
@@ -527,10 +665,165 @@ body {
 
 
 /*Responsividade*/
+=======
+.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+>>>>>>> Stashed changes
 
-@media (max-width: 1024px) {
+.fechar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 8px 0;
+  border-radius: 4px;
+  font-size: 19px;
+  cursor: pointer;
+  background-color: var(--ciano);
+  width: 110px;
+  color: white;
+  transition: 0.2s;
+}
+
+.local {
+  margin-left: 30px;
+}
+
+.nome-local {
+  color: #5f5f5f;
+  font-size: 14px;
+}
+
+.fechar:hover {
+  background-color: var(--azul);
+  transition: 0.2s;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.status-rotulo {
+  display: flex;
+  justify-content: center;
+  background-color: var(--azul);
+  width: 50%;
+  color: white;
+  display: flex;
+  border: 2px solid var(--azul);
+  border-right: none;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  gap: 6px;
+  padding: 6px;
+}
+
+.status-info {
+  display: flex;
+  justify-content: center;
+  background-color: #b9e8b0;
+  width: 50%;
+  color: #20a200;
+  border: 2px solid #20a200;
+  border-left: none;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 6px;
+}
+
+.registro {
+  color: black;
+  font-size: 42px;
+}
+
+.card-cpu .negrito {
+  font-weight: bold;
+  font-size: 15px;
+  color: #274690;
+}
+
+.card-ram .negrito {
+  font-weight: bold;
+  font-size: 15px;
+  color: #59168b;
+}
+
+.card-disk .negrito {
+  font-weight: bold;
+  font-size: 15px;
+  color: #0d542b;
+}
+
+.card-cpu img {
+  background-color: #bedbff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.card-ram img {
+  background-color: #e9d4ff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.card-disk img {
+  background-color: #b9f8cf;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.subtexto {
+  font-size: 12px;
+  color: var(--subtexto);
+}
+
+.barra-verde {
+  background-color: #2bab6f;
+}
+.barra-amarela {
+  background-color: #f59f0a;
+}
+.barra-vermelha {
+  background-color: #dc2828;
+}
+.barra-azul {
+  background-color: #274690;
+}
+.barra-roxa {
+  background-color: #59168b;
+}
+.barra-verde2 {
+  background-color: #0d542b;
+}
+
+@media (max-width: 1549px) {
+  .card-cpu,
+  .card-ram,
+  .card-disk,
+  .card-info {
+    max-width: 270px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1439px) {
   .lateral {
     width: 220px;
+<<<<<<< Updated upstream
     position: fixed;
   }
   
@@ -552,97 +845,170 @@ body {
   }
 
   .lateral{
+=======
+>>>>>>> Stashed changes
     transform: translateX(-100%);
-  }
-
-  .modal-lateral {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    z-index: 998;
-    
   }
 
   .lateral.ativo {
     transform: translateX(0);
   }
 
-  .modal-lateral.ativo{
+  .modal-lateral {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 998;
+  }
+
+  .modal-lateral.ativo {
     display: block;
     width: 100%;
     height: 100%;
   }
+<<<<<<< Updated upstream
   
   .cards-detalhes {
     gap: 15px;
-    justify-content: center;
-  }
-
-  .card-cpu,
-  .card-ram,
-  .card-disk {
-    width: 30%;
-  }
-
-  .modal {
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .titulo{
-    display: none;
-  }
+=======
 
   .hamburguer {
     display: flex;
-  }
-
-  .lateral {
-    position: fixed;
   }
 
   .main {
     margin-left: 0;
   }
 
-
-  .header img{
-    padding-right: 10px;
+  .cabecario {
+    display: none;
   }
 
+  .metricas {
+    display: none;
+  }
+
+  .att-servidor {
+    display: flex;
+    flex: 1;
+>>>>>>> Stashed changes
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .box-servidor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
 
   .cards-detalhes {
+    display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 14px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .card-cpu,
   .card-ram,
-  .card-disk {
+  .card-disk,
+  .card-info {
+    flex: auto;
+    width: 40%;
+    height: 130px;
+  }
+
+  .linha {
+    flex-direction: column;
+    gap: 0;
+  }
+<<<<<<< Updated upstream
+=======
+
+  .cards-detalhes-grafico {
     width: 100%;
+    height: 350px;
+    margin-bottom: 20px;
+  }
+
+  .card-grafico-processos {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 20px;
+  }
+
+  .card-processos {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .grafico-recursos,
+  .grafico-processos,
+  .grafico-rede {
+    width: 100%;
+    height: 88%;
+  }
+>>>>>>> Stashed changes
+}
+
+/* Celular */
+@media (max-width: 799px) {
+  body {
+    overflow: hidden;
+  }
+
+<<<<<<< Updated upstream
+=======
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background-color: white;
+    border-bottom: 1px solid var(--borda);
+    padding: 0 16px;
+  }
+
+  .header-titulo {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--texto);
+  }
+
+  .header img {
+    padding-right: 8px;
+  }
+>>>>>>> Stashed changes
+
+  .conteudo {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .pequeno-filtro {
+    display: flex;
     flex-direction: row;
+    gap: 10px;
+    padding: 12px 16px;
   }
 
-
-  .cards-detalhes-grafico{
-    justify-content: center;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+  .card-pesquisar {
+    width: 90%;
+    justify-content: space-between;
+    margin: 0;
   }
 
-  .cards-detalhes-grafico h1{
-    font-size: medium;
-    padding: 0;
-    height: 30px;
-  }
-
-  .att-servidor{
-    display: none;
+  .pequeno-filtro input {
+    width: 90%;
   }
 
   .modalFiltro {
@@ -653,92 +1019,78 @@ body {
     z-index: 998;
   }
 
+  .modalFiltro.ativo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
   .filtros {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background: white;
     z-index: 1000;
     transition: 0.3s;
     opacity: 0;
-    padding: 5px 5px 5px 5px;
+    padding: 16px;
     background-color: var(--cinza);
     border: 3px var(--borda) solid;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: 300px;
+    gap: 10px;
+    height: auto;
+    min-height: 250px;
+    width: 80%;
   }
-
 
   .filtros.ativo {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
   }
 
-  .modalFiltro.ativo{
-    display: flex;
+  .tempo_dash {
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
   }
 
-  .pequeno-filtro {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    padding: 20px 30px;
+  .cabecario {
+    display: none;
   }
 
-  .card-pesquisar{
-    width: 90%;
-    justify-content: space-between;
-    margin: 0;
+  .metricas {
+    display: none;
   }
 
-  .pequeno-filtro input{
-    width: 90%;
-  }
-
-
-  .pequeno-filtro button{
-    width: 45%;
-  }
-
-  .pequeno-filtro option{
-    font-size: smaller;
+  .att-servidor {
+    display: none;
   }
 
   .box-servidor {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-
-  .modal {
-    width: 95%;
-    padding: 15px;
-  }
-  
-  .barra {
-    width: 90%;
-    height: 8px;
-    border-radius: 16px;
-    background-color: #ebedf0;
-    margin-right: 20px;
-  }
-
-  .preencher {
-    height: 100%;
-    border-radius: 16px;
-  }
-
-  .info-servidor{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+  }
+
+  .info-servidor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+  }
+
+  .popup {
+    overflow-y: auto;
+  }
+
+  .modal {
+    padding: 16px;
     width: 100%;
+<<<<<<< Updated upstream
     justify-content: center;
   }
   
@@ -750,6 +1102,124 @@ body {
 
   .cabecario{
     padding: 8px 30px;
+=======
+    border-radius: 0;
+>>>>>>> Stashed changes
   }
 
+  .topo {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .local {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .status {
+    align-self: flex-start;
+  }
+
+  .cards-detalhes {
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .card-cpu,
+  .card-ram,
+  .card-disk {
+    width: 100%;
+    height: auto;
+    gap: 16px;
+  }
+
+  .card-info {
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  .registro {
+    font-size: 28px;
+  }
+
+  .linha,
+  .linha-topo {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cards-detalhes-grafico {
+    width: 100%;
+    height: 260px;
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .card-grafico-processos {
+    width: 100%;
+    height: 260px;
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .grafico-recursos,
+  .grafico-processos,
+  .grafico-rede {
+    width: 100%;
+    height: 85%;
+  }
+
+  .card-detalhes-topo {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .select_filtro {
+    width: 130px;
+    font-size: 11px;
+    padding-left: 28px;
+  }
+
+  .card-processos {
+    width: 100%;
+    height: auto;
+    min-height: 280px;
+    margin-bottom: 20px;
+  }
+
+  .titulo-tabela {
+    font-size: 14px;
+    padding: 14px 0 0 14px;
+  }
+
+  .tabela-processos th,
+  .tabela-processos td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .barra {
+    width: 60px;
+    height: 8px;
+    margin-right: 8px;
+  }
+
+  .info-servidor button {
+    height: 34px;
+    width: 72px;
+    font-size: 11px;
+  }
+
+  .sumir-celular {
+    display: none;
+  }
 }
