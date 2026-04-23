@@ -185,7 +185,7 @@ body {
 .indicadores {
   display: flex;
   padding: 20px;
-  max-width: 25%;
+  max-width: 30%;
   gap: 10px;
 }
 
