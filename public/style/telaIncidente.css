@@ -184,8 +184,13 @@ body {
 
 .indicadores {
   display: flex;
-  gap: 40px;
   padding: 20px;
+  max-width: 25%;
+  gap: 10px;
+}
+
+.link-jira img{
+  max-width: 100%;
 }
 
 .indicadores h5 {
@@ -199,6 +204,7 @@ body {
   justify-content: space-between;
   padding: 15px;
   gap: 15px;
+  max-width: 80%;
 }
 
 .grupo-filtro {
@@ -226,6 +232,7 @@ body {
   border: 1px solid #ddd;
   background: #eee;
   cursor: pointer;
+  margin: 10px;
 }
 
 .botoes button:hover {
@@ -350,6 +357,7 @@ body {
   border: none;
   color: #1f2937;
 }
+
 
 @media (max-width: 1024px) and (min-width: 768px) {
   .lateral {
