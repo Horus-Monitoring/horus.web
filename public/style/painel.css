@@ -56,9 +56,9 @@ body {
   color: white;
 }
 
-.logo img {
+/* .logo img {
   width: 30%;
-}
+} */
 
 .menu {
   display: flex;
@@ -75,7 +75,6 @@ body {
 }
 
 .menu img {
-  width: 18px;
   margin-left: 10px;
 }
 
@@ -215,10 +214,10 @@ body {
   font-weight: normal;
 }
 
-.cargo {
+/* .cargo {
   font-size: 12px;
   color: var(--subtexto);
-}
+} */
 
 .conteudo {
   padding: 20px;
@@ -333,6 +332,10 @@ body {
   .pequeno {
     flex: 1;
   }
+
+  .header-titulo{
+    display: none;
+  }
 }
 
 /* Celular */
@@ -348,10 +351,6 @@ body {
 
   .hamburguer {
     display: flex;
-  }
-
-  .usuario-desktop {
-    display: none;
   }
 
   .usuario-mobile {
