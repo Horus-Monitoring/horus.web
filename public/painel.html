@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Horus</title>
+    <title>Dashboard | Horus</title>
     <link rel="stylesheet" href="./style/painel.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./assets/icon/logo.png" />
     
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -26,7 +29,7 @@
             <nav class="menu">
                 <div class="categoria">Monitoramento</div>
                 <div onclick="window.location.href='painel.html'" class="item-menu selecionado">
-                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Visão geral
+                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
                 </div>
                 <div onclick="window.location.href='dash_analista.html'" class="item-menu">
                     <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
@@ -42,6 +45,8 @@
                 <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
                     <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                 </div>
+
+                <button>Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -57,23 +62,14 @@
                     <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
                 </div>
 
-                <span class="header-titulo">Dashboard — Visão Geral</span>
+                <span class="header-titulo">Dashboard</span>
 
-                <div class="header-acoes">
-              
-                    <div class="usuario-desktop">
-                        <img src="./assets/imgs/painel/usuario.png" alt="">
-                        <div>
-                            <p id="nome_usuario"></p>
-                            <span id="funcao_usuario" class="cargo"></span>
-                        </div>
-
-                        <div class="usuario-logado">
-                            <p id="inicial_usuario"></p>
-                        </div>
+                <div class="usuario">
+                    <div>
+                        <p  id="nome_usuario"></p>
+                        <p id="funcao_usuario" class="cargo"></p>
                     </div>
-
-                    <img class="usuario-mobile" src="./assets/imgs/painel/usuario.png" alt="">
+                    <span id="inicial_usuario"></span>
                 </div>
             </header>
 
@@ -83,8 +79,8 @@
 
                     <div class="card pequeno">
                         <div class="tipo-kpi">
-                            <span class="nome-kpi">Total de Servidores</span>
-                            <span class="kpi">8</span>
+                            <span class="nome-kpi">Dia mais crítico</span>
+                            <span class="kpi">Sábado</span>
                         </div>
                         <div class="card-img" style="background-color: #e5edff;">
                             <img src="./assets/imgs/painel/servidor.png">
@@ -93,18 +89,8 @@
 
                     <div class="card pequeno">
                         <div class="tipo-kpi">
-                            <span class="nome-kpi">Servidores Online</span>
+                            <span class="nome-kpi">Servidor com mais incidentes</span>
                             <span class="kpi">5</span>
-                        </div>
-                        <div class="card-img" style="background-color: #f0fdf4;">
-                            <img src="./assets/imgs/painel/online.png">
-                        </div>
-                    </div>
-
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Servidores Offline</span>
-                            <span class="kpi">1</span>
                         </div>
                         <div class="card-img" style="background-color: #fef2f2;">
                             <img src="./assets/imgs/painel/offline.png">
@@ -113,41 +99,21 @@
 
                     <div class="card pequeno">
                         <div class="tipo-kpi">
-                            <span class="nome-kpi">Alertas Ativos</span>
-                            <span class="kpi">4</span>
+                            <span class="nome-kpi">Tempo de recuperação</span>
+                            <span class="kpi">5 minutos</span>
+                        </div>
+                        <div class="card-img" style="background-color: #f0fdf4;">
+                            <img src="./assets/imgs/painel/online.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Prejuizos estimados</span>
+                            <span class="kpi">R$ 5,50</span>
                         </div>
                         <div class="card-img" style="background-color: #fefce8;">
                             <img src="./assets/imgs/painel/alertas.png">
-                        </div>
-                    </div>
-
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">CPU Média</span>
-                            <span class="kpi">51%</span>
-                        </div>
-                        <div class="card-img" style="background-color: #e5edff;">
-                            <img src="./assets/imgs/painel/cpu.png">
-                        </div>
-                    </div>
-
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Ram Média</span>
-                            <span class="kpi">57%</span>
-                        </div>
-                        <div class="card-img" style="background-color: #f0fdf4;">
-                            <img src="./assets/imgs/painel/ram.png">
-                        </div>
-                    </div>
-
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Disco Média</span>
-                            <span class="kpi">53%</span>
-                        </div>
-                        <div class="card-img" style="background-color: #fefce8;">
-                            <img src="./assets/imgs/painel/disco.png">
                         </div>
                     </div>
 
