@@ -1,9 +1,10 @@
 /* Essa é a estilização para restauração dos padrões do site */
 * {
-    border: 0;
-    padding: 0;
-    box-sizing: border-box;
-    margin: 0;
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .titulo {
