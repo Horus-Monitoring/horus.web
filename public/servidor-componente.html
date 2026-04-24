@@ -22,6 +22,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/script.js"></script>
     <link rel="stylesheet" href="style/servidor-componente.css">
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -76,21 +77,12 @@
 
                 <span class="header-titulo">Gerenciamento de Servidores</span>
 
-                <div class="header-acoes">
-
-                    <div class="usuario-desktop">
-                        <img src="./assets/imgs/painel/usuario.png" alt="">
-                        <div>
-                            <p id="nome_usuario"></p>
-                            <span id="funcao_usuario" class="cargo"></span>
-                        </div>
-
-                        <div class="usuario-logado">
-                            <p id="inicial_usuario"></p>
-                        </div>
+                <div class="usuario">
+                    <div>
+                        <p  id="nome_usuario"></p>
+                        <p id="funcao_usuario" class="cargo"></p>
                     </div>
-
-                    <img class="usuario-mobile" src="./assets/imgs/painel/usuario.png" alt="">
+                    <span id="inicial_usuario"></span>
                 </div>
             </header>
 
