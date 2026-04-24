@@ -2,76 +2,76 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incidentes | Horus</title>
-    <link rel="stylesheet" href="./style/telaIncidente.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./assets/icon/logo.png" />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
-    <script src="./js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incidentes | Horus</title>
+  <link rel="stylesheet" href="./style/telaIncidente.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="./assets/icon/logo.png" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+  <script src="./js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <div class="modal" id="modal"></div>
+  <div class="modal" id="modal"></div>
 
-    <div class="container">
+  <div class="container">
 
-       <aside class="lateral" id="lateral">
-            <div class="logo">
-                <img src="./assets/imgs/painel/logo.png" alt="" style="font-family: Jura, sans-serif;">
-                Horus
-            </div>
+    <aside class="lateral" id="lateral">
+      <div class="logo">
+        <img src="./assets/imgs/painel/logo.png" alt="" style="font-family: Jura, sans-serif;">
+        Horus
+      </div>
 
-            <nav class="menu">
-                <div class="categoria">Monitoramento</div>
-                <div onclick="window.location.href='painel.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
-                </div>
-                <div onclick="window.location.href='dash_analista.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </div>
-                <div onclick="window.location.href='telaIncidente.html'" class="item-menu selecionado">
-                    <img src="./assets/imgs/painel/alerta-selecionado.png" alt="">Incidentes
-                </div>
+      <nav class="menu">
+        <div class="categoria">Monitoramento</div>
+        <div onclick="window.location.href='painel.html'" class="item-menu">
+          <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
+        </div>
+        <div onclick="window.location.href='dash_analista.html'" class="item-menu">
+          <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
+        </div>
+        <div onclick="window.location.href='telaIncidente.html'" class="item-menu selecionado">
+          <img src="./assets/imgs/painel/alerta-selecionado.png" alt="">Incidentes
+        </div>
 
-                <div class="categoria">Administração</div>
-                <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                </div>
-                <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                </div>
+        <div class="categoria">Administração</div>
+        <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+          <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+        </div>
+        <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
+          <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+        </div>
 
-                <button>Gerar Relatório em PDF</button>
-            </nav>
+        <button>Gerar Relatório em PDF</button>
+      </nav>
 
-            <div onclick="limparSessionStorage()" class="sair">
-                <img src="./assets/imgs/painel/sair.png" alt="">
-                <p onclick="window.location.href='index.html'">Sair</p>
-            </div>
-        </aside>
+      <div onclick="limparSessionStorage()" class="sair">
+        <img src="./assets/imgs/painel/sair.png" alt="">
+        <p onclick="window.location.href='index.html'">Sair</p>
+      </div>
+    </aside>
 
-        <main class="main">
+    <main class="main">
 
-            <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
+      <header class="header">
+        <div class="hamburguer" id="hamburguer">
+          <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+        </div>
 
-                <span class="header-titulo">Alertas e Incidentes</span>
+        <span class="header-titulo">Alertas e Incidentes</span>
 
-                <div class="usuario">
+        <div class="usuario">
                     <div>
-                        <p id="nome_usuario"></p>
+                        <p  id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
                     <span id="inicial_usuario"></span>
                 </div>
-            </header>
+      </header>
 
       <section class="conteudo">
 
@@ -94,7 +94,8 @@
             </div>
 
             <div class="chamados">
-              <a href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20cf%5B10019%5D%20ASC" class="link-jira" target="_blank">
+              <a href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20cf%5B10019%5D%20ASC"
+                class="link-jira" target="_blank">
                 <img src="assets/imgs/incidentes/jira.png" alt="">
               </a>
             </div>
@@ -236,19 +237,20 @@
   </div>
 </body>
 <script>
+  exibirUsuarioAtivo();
+
   const hamburguer = document.getElementById("hamburguer");
   const lateral = document.getElementById("lateral");
-  const overlay = document.getElementById("overlay");
 
   hamburguer.addEventListener("click", () => {
     lateral.classList.toggle("ativo");
-    overlay.classList.toggle("ativo");
   });
 
   overlay.addEventListener("click", () => {
     lateral.classList.remove("ativo");
-    overlay.classList.remove("ativo");
   });
+
+  
 </script>
 
 </html>

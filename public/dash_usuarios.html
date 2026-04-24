@@ -22,6 +22,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/script.js"></script>
     <link rel="stylesheet" href="style/dash_usuarios.css">
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -74,10 +75,10 @@
 
                 <div class="usuario">
                     <div>
-                        <p>Fernando Brandão</p>
-                        <p class="cargo">Gestor</p>
+                        <p  id="nome_usuario"></p>
+                        <p id="funcao_usuario" class="cargo"></p>
                     </div>
-                    <span>F</span>
+                    <span id="inicial_usuario"></span>
                 </div>
             </header>
 
@@ -430,5 +431,7 @@
                 console.log(`ERRO: ${erro}`);
             })
         }
+
+    exibirUsuarioAtivo();
 
 </script>
