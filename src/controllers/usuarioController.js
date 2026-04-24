@@ -89,7 +89,7 @@ function deletarUsuario(req, res) {
 function exibirUsuarios(req, res) {
     var id = req.params.id
     
-    usuariosModel.exibirUsuarios(id)
+    usuarioModel.exibirUsuarios(id)
         .then(
             (resultado => {
                 res.json(resultado);
@@ -109,7 +109,7 @@ function exibirUsuarios(req, res) {
 function listarUsuarios(req, res) {
     var id = req.params.id
     
-    UsuariosModel.listarUsuarios(id)
+    usuarioModel.listarUsuarios(id)
         .then(
             (resultado => {
                 res.json(resultado);

@@ -1,4 +1,3 @@
-const { exibirUsuarios } = require("../controllers/usuarioController");
 var database = require("../database/config")
 
 function autenticar(email, senha) {

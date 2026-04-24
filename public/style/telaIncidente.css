@@ -20,7 +20,9 @@
 }
 
 body {
-  background: #f5f5f5;
+   background: var(--cinza);
+  height: 100vh;
+  overflow: hidden;
 }
 
 .lateral {
@@ -124,15 +126,30 @@ body {
   background-color: white;
   border-bottom: 1px solid var(--borda);
   padding: 20px;
-  z-index: 1;
 }
 
 .header img { width: 20px; }
 
-.usuario {
+.usuario-desktop {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+}
+
+.usuario-desktop img {
+  width: 36px;
+  border-radius: 50%;
+}
+
+.usuario-desktop p {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--texto);
+}
+
+.usuario-mobile {
+  display: none;
+  width: 36px;
 }
 
 .usuario-logado {
@@ -150,22 +167,20 @@ body {
   font-weight: normal;
 }
 
-.cargo {
-  font-size: 12px;
-  color: #a0a5a8;
-}
-
 
 .main {
+ flex: auto;
+  display: flex;
+  flex-direction: column;
   margin-left: 260px;
-  padding: 20px;
-  z-index: 1;
+  min-height: 0;
 }
 
 .conteudo {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 20px;
 }
 
 
@@ -184,8 +199,13 @@ body {
 
 .indicadores {
   display: flex;
-  gap: 40px;
   padding: 20px;
+  max-width: 30%;
+  gap: 10px;
+}
+
+.link-jira img{
+  max-width: 100%;
 }
 
 .indicadores h5 {
@@ -199,6 +219,7 @@ body {
   justify-content: space-between;
   padding: 15px;
   gap: 15px;
+  max-width: 80%;
 }
 
 .grupo-filtro {
@@ -226,6 +247,7 @@ body {
   border: 1px solid #ddd;
   background: #eee;
   cursor: pointer;
+  margin: 10px;
 }
 
 .botoes button:hover {
@@ -350,6 +372,7 @@ body {
   border: none;
   color: #1f2937;
 }
+
 
 @media (max-width: 1024px) and (min-width: 768px) {
   .lateral {
