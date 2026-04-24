@@ -120,6 +120,12 @@
   margin-left: 260px;
 }
 
+.header-titulo {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--texto);
+  }
+
 .header {
   display: flex;
   align-items: center;
