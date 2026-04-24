@@ -334,7 +334,7 @@
                 .then(resposta => resposta.json())
                 .then((lista) => {
                     select_servidor.innerHTML = lista.map(servidor =>
-                        `<option value = "${servidor.id_servidor}">${servidor.nome}</option>`
+                        `<option value = "${servidor.id_servidor}">${servidor.hostname}</option>`
                     ).join('')
                 })
         }
