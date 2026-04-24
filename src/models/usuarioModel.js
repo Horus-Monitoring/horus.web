@@ -1,3 +1,4 @@
+const { exibirUsuarios } = require("../controllers/usuarioController");
 var database = require("../database/config")
 
 function autenticar(email, senha) {
@@ -8,6 +9,21 @@ function autenticar(email, senha) {
         SELECT * FROM funcionario
             WHERE email = '${email}' AND senha = '${senha}';
     `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function exibirUsuarios(id) {
+    console.log("ACESSEI O MODEL USUARIOS \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", id);
+
+    var instrucaoSql = `
+        SELECT
+        funcionario.id_funcionario, 
+        funcionario.nome,
+        funcionario.email,
+        funcionario.funcao,
+        funcionario.data_cadastro
+    `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -39,27 +55,9 @@ function cadastrarUsuario(fk_empresa, nome, email, cpf, senha, funcao) {
 }
 
 
-function listarUsuarios(id,fk_empresa) {
-    console.log("ACESSEI O MODEL USUARIOS \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa);
-
-    var instrucaoSql = `
-        SELECT 
-        imagem,
-        nome,
-        email,
-        funcao,
-        fk_empresa,
-        FROM funcionario 
-        WHERE id_funcionario = ${id} AND fk_empresa = ${fk_empresa};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-
 module.exports = {
     autenticar,
     cadastrarUsuario,
     deletarUsuario,
-    listarUsuarios
+    exibirUsuarios,
 };
