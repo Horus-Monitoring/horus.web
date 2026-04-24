@@ -5,7 +5,7 @@ function cadastrarServidor(nome, ip, localizacao, sistemaOperacional, statusInic
     console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, ip, localizacao, sistemaOperacional, statusInicial, fkEmpresa);
 
     var instrucaoSql = `
-        INSERT INTO servidor (nome, ip, localizacao, sistema_operacional, status_inicial, fk_empresa) VALUES ('${nome}', '${ip}', '${localizacao}', '${sistemaOperacional}', '${statusInicial}', '${fkEmpresa}');
+        INSERT INTO servidor (hostname, ip, localizacao, sistema_operacional, status_inicial, fk_empresa) VALUES ('${nome}', '${ip}', '${localizacao}', '${sistemaOperacional}', '${statusInicial}', '${fkEmpresa}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -44,7 +44,7 @@ function listarServidores(fkEmpresa) {
     var instrucaoSql = `
         SELECT 
         id_servidor, 
-        nome 
+        hostname 
         FROM servidor 
         WHERE fk_empresa = ${fkEmpresa};
     `;
@@ -70,11 +70,11 @@ function deletarServidor(id) {
 }
 
 // Componentes
-function cadastrarComponente(fkServidor, fkComponente, marca, modelo, statusInicial) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor, fkComponente, marca, modelo, statusInicial);
+function cadastrarComponente(fkServidor, fkComponente, marca, modelo, ativo) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor, fkComponente, marca, modelo, ativo);
 
     var instrucaoSql = `
-        INSERT INTO servidor_componente (fk_servidor, fk_componente, marca, modelo, status_inicial) VALUES ('${fkServidor}', '${fkComponente}', '${marca}', '${modelo}', '${statusInicial}');
+        INSERT INTO servidor_componente (fk_servidor, fk_componente, marca, modelo, status_inicial) VALUES ('${fkServidor}', '${fkComponente}', '${marca}', '${modelo}', '${ativo}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
