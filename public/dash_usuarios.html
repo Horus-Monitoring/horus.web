@@ -129,91 +129,8 @@
                     </div>
                 </div>
                 
-                <div class="cards" style="flex-direction: column !important;">
-                    <div class="card pequeno">
-
-                        <div class="lista-servidores">
-
-                            <div class="box-servidor cabecario">
-                                <div class="info-usuarios">
-                                    <b>Nome</b>
-                                </div>
-                                <div class="info-usuarios email">
-                                    <b>Email</b>
-                                </div>
-                                <div class="data-usuarios">
-                                    <b>Função</b>
-                                </div>
-                                <div class="data-usuarios">
-                                    <b>Data de Cadastro</b>
-                                </div>
-                                <div class="info-usuarios" style="justify-content: center;">
-                                    <b>Ações</b>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="box-servidor">
-                                    <div class="info-usuarios">
-                                        <span style="background-color: #FF8400;" class="box-profile">VL</span>
-                                        <div>
-                                            <p class="nome-servidor">Vitória Lima</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-usuarios email">
-                                        <p>vitoria@horus.monitoring.com.br</p>
-                                    </div>
-
-                                    <div class="data-usuarios">
-                                        <span style="background-color: #FF840040; color: #FF8400;"  class="icone-cargo">
-                                            <img src="./assets/imgs/dash_user/escudo-gestor.png" alt="">
-                                            <p>Gestor</p>
-                                        </span>
-                                    </div>
-
-                                    <div class="data-usuarios">
-                                        <p>21 de março de 2026</p>
-                                    </div>
-
-                                    <div class="info-usuarios" style="justify-content: center;">
-                                        <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="box-servidor">
-                                    <div class="info-usuarios">
-                                        <span style="background-color: #20A200;" class="box-profile">FB</span>
-                                        <div>
-                                            <p class="nome-servidor">Fernando Brandão</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-usuarios email">
-                                        <p>fernando@horus.monitoring.com.br</p>
-                                    </div>
-
-                                    <div class="data-usuarios">
-                                        <span style="background-color: #BFFBB0; color: #20A200;" class="icone-cargo">
-                                            <img src="./assets/imgs/dash_user/escudo-analista.png" alt="">
-                                            <p>Analista</p>
-                                        </span>
-                                    </div>
-
-                                    <div class="data-usuarios">
-                                        <p>20 de fevereiro de 2026</p>
-                                    </div>
-
-                                    <div class="info-usuarios" style="justify-content: center;">
-                                        <img class="apagar" src="assets/imgs/dash_user/lixeira.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                           
-                        </div>
-                    </div>
-
-                </div>
+                
+                   <div id="usuarios" class="usuarios"></div>
 
             </section>
 
@@ -397,23 +314,6 @@
 
         }
 
-        function deletarServidor(id) {
-            fetch(`/servidores/deletarServidor/${id}`, {
-                method: 'DELETE'
-            })
-            .then(resposta => {
-                if (resposta.ok) {
-                    alert('Servidor deletado com sucesso!');
-                    exibirServidores();
-                } else {
-                    alert('Erro ao deletar servidor')
-                }
-            })
-            .catch((erro) => {
-                console.log(`ERRO: ${erro}`);
-            })
-        }
-
         function deletarUsuario(id) {
             fetch(`/usuario/deletarUsuario/${id}`, {
                 method: 'DELETE'
@@ -430,5 +330,53 @@
                 console.log(`ERRO: ${erro}`);
             })
         }
+        function exibirUsuarios() {
+            var id = sessionStorage.ID_USUARIO;
+
+            fetch(`/usuario/exibirUsuarios/${id}`)
+                .then(resposta => resposta.json())
+                .then((lista) => {
+                    usuarios.innerHTML = lista.map(usuario =>
+                        `
+                        <div class="servidor">
+                            <div class="coluna servidor-info">
+                                <div class="linha-servidor">
+                                    <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
+
+                                    <div class="coluna">
+                                        <span class="nome-servidor">${funcionario.nome}</span>
+                                        <span class="subtexto">${funcionario.email}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="coluna sumir-celular">
+                                <span class="subtexto">IP</span>
+                                <span class="subtexto-info">${servidor.ip}</span>
+                            </div>
+
+                            <div class="coluna sumir">
+                                <span class="subtexto">Sistema Operacional</span>
+                                <span class="subtexto-info">${servidor.sistema_operacional}</span>
+                            </div>
+
+                            <div class="coluna sumir-celular">
+                                <span class="status status-online">${servidor.status_inicial}</span>
+                            </div>
+
+                            <div class="coluna sumir">
+                                <span class="subtexto">Componentes</span>
+                                <span class="subtexto-info">${servidor.quantidade}</span>
+                            </div>
+
+                            <img onclick="deletarServidor(${servidor.id_servidor})" class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                        </div>
+              `).join('')
+                })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos usuarios: ${error.message}`);
+                });
+        }
+        exibirUsuarios()
 
 </script>

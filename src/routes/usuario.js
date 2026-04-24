@@ -21,9 +21,6 @@ router.get("/exibirUsuarios/:id", function (req, res) {
     usuarioController.exibirUsuarios(req, res);
 })
 
-router.get("/listarUsuarios/:id", function (req, res) {
-    usuarioController.listarUsuarios(req, res);
-})
 
 
 module.exports = router;
