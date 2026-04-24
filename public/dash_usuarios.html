@@ -231,7 +231,8 @@
                         </div>
                         <div class="campos">
                             Senha <br>
-                            <input id="senha" type="text">
+                            <input id="input_senha" type="password">
+                            <img id="img" src="assets/imgs/login/olho-fechado.png" alt="">
                         </div>
                     </div>
                     <div class="box-cadastro campo">
@@ -241,7 +242,8 @@
                         </div>
                         <div class="campos">
                             Confirmar Senha <br>
-                            <input type="text">
+                            <input id="input_senha_conf" type="password">
+                            <img id="imgC" src="assets/imgs/login/olho-fechado.png" alt="">
                         </div>
                     </div>
                     <div class="box-cadastro campo">
@@ -290,6 +292,39 @@
 </html>
 
 <script>
+    
+    //Visualizar senha
+    var senha = document.getElementById("input_senha");
+    var trocarImg = document.getElementById("img");
+
+    // adiciona um evento de clique (quando o usuário clicar no icone de "olho" vai executar o código abaixo)
+    // === (serve para fazer uma comparação entre o valor e o tipo)
+    trocarImg.addEventListener("click", () => {
+        if (senha.type === "password") { // valida se o tipo do input é password 
+            senha.type = "text";
+            trocarImg.src = "assets/imgs/login/olho-aberto.png";
+        } else {
+            senha.type = "password";
+            trocarImg.src = "assets/imgs/login/olho-fechado.png";
+        }
+    });
+
+    //Visualizar senha confirmação
+
+    var senhaC = document.getElementById("input_senha_conf")
+    var trocarImgC = document.getElementById("imgC");
+
+    // adiciona um evento de clique (quando o usuário clicar no icone de "olho" vai executar o código abaixo)
+    // === (serve para fazer uma comparação entre o valor e o tipo)
+    trocarImgC.addEventListener("click", () => {
+        if (senhaC.type === "password") { // valida se o tipo do input é password 
+            senhaC.type = "text";
+            trocarImgC.src = "assets/imgs/login/olho-aberto.png";
+        } else {
+            senhaC.type = "password";
+            trocarImgC.src = "assets/imgs/login/olho-fechado.png";
+        }
+    });
 
     //Modal para o menu sanduíche
 
