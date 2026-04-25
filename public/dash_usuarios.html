@@ -402,6 +402,7 @@
             .then(resposta => {
                 if (resposta.ok) {
                     alert("Cadastrado com sucesso!");
+                    exibirUsuarios();
                 } else {
                     throw "Erro no cadastro";
                 }
@@ -418,7 +419,7 @@
             .then(resposta => {
                 if (resposta.ok) {
                     alert('usuario deletado com sucesso!');
-                    exibirUsuario();
+                    exibirUsuarios();
                 } else {
                     alert('Erro ao deletar usuario')
                 }
@@ -428,53 +429,69 @@
             })
         }
         function exibirUsuarios() {
-            var id = sessionStorage.ID_USUARIO;
+    var id = sessionStorage.ID_EMPRESA;
 
-            fetch(`/usuario/exibirUsuarios/${id}`)
-                .then(resposta => resposta.json())
-                .then((lista) => {
-                    usuarios.innerHTML = lista.map(usuario =>
-                        `
-                        <div class="servidor">
-                            <div class="coluna servidor-info">
-                                <div class="linha-servidor">
-                                    <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
+    fetch(`/usuario/exibirUsuarios/${id}`)
+        .then(resposta => resposta.json())
+        .then((lista) => {
 
-                                    <div class="coluna">
-                                        <span class="nome-servidor">${funcionario.nome}</span>
-                                        <span class="subtexto">${funcionario.email}</span>
-                                    </div>
-                                </div>
+    
+            var total    = lista.length;
+            var gestores = lista.filter(u => u.funcao === "Gestor").length;
+            var analistas = lista.filter(u => u.funcao === "Analista").length;
+
+            var qtds = document.querySelectorAll(".quantidade_usuarios");
+            if (qtds[0]) qtds[0].textContent = total;
+            if (qtds[1]) qtds[1].textContent = gestores;
+            if (qtds[2]) qtds[2].textContent = analistas;
+
+    
+            document.getElementById("usuarios").innerHTML = lista.map(usuario => `
+                <div class="servidor">
+                    <div class="coluna servidor-info">
+                        <div class="linha-servidor">
+                            <div class="coluna">
+                                <span class="nome-servidor">${usuario.nome}</span>
+                                <span class="subtexto">${usuario.email}</span>
                             </div>
-
-                            <div class="coluna sumir-celular">
-                                <span class="subtexto">IP</span>
-                                <span class="subtexto-info">${servidor.ip}</span>
-                            </div>
-
-                            <div class="coluna sumir">
-                                <span class="subtexto">Sistema Operacional</span>
-                                <span class="subtexto-info">${servidor.sistema_operacional}</span>
-                            </div>
-
-                            <div class="coluna sumir-celular">
-                                <span class="status status-online">${servidor.status_inicial}</span>
-                            </div>
-
-                            <div class="coluna sumir">
-                                <span class="subtexto">Componentes</span>
-                                <span class="subtexto-info">${servidor.quantidade}</span>
-                            </div>
-
-                            <img onclick="deletarServidor(${servidor.id_servidor})" class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
                         </div>
-              `).join('')
-                })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos usuarios: ${error.message}`);
+                    </div>
+
+                    <div class="coluna sumir-celular">
+                        <span class="subtexto">Função</span>
+                        <span class="subtexto-info">${usuario.funcao}</span>
+                    </div>
+
+                    <div class="coluna sumir">
+                        <span class="subtexto">Data de Cadastro</span>
+                        <span class="subtexto-info">${
+                            usuario.data_cadastro
+                                ? new Date(usuario.data_cadastro).toLocaleDateString("pt-BR")
+                                : "—"
+                        }</span>
+                    </div>
+
+                    <img 
+                        onclick="deletarUsuario(${usuario.id_funcionario})" 
+                        class="lixo sumir-celular" 
+                        src="./assets/imgs/painel/lixo.png" 
+                        alt="Excluir"
+                    >
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.apagar').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    modal2.classList.add('ativo');
                 });
-        }
-        exibirUsuarios()
+            });
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos usuários: ${error.message}`);
+        });
+}
+
+exibirUsuarios();
 
     exibirUsuarioAtivo();
 
