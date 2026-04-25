@@ -130,12 +130,26 @@
                     </div>
                 </div>
                 
-                
-                   <div id="usuarios" class="usuarios">
-
-
-                   </div>
-
+                <div>
+                            <div class="box-servidor cabecario">
+                                <div class="metricas">
+                                    <b>Nome</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Email</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Função</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Data de cadastro</b>
+                                </div>
+                                <div class="metricas">
+                                    <b>Ações</b>
+                                </div>
+                            </div>
+                   <div id="usuarios" class="usuarios"></div>
+                    </div>            
             </section>
 
             <div class="popup" id="modal">
@@ -514,10 +528,10 @@
     <div class="box-servidor">
         
         <div class="info-usuarios">
-            <div>
                 <span class="nome-servidor">${usuario.nome}</span><br>
-                <span class="subtexto">${usuario.email}</span>
-            </div>
+        </div>
+        <div class = "info-usuarios">
+                 <span class="subtexto">${usuario.email}</span>
         </div>
 
         <div class="info-usuarios sumir-celular">
