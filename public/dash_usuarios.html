@@ -131,7 +131,10 @@
                 </div>
                 
                 
-                   <div id="usuarios" class="usuarios"></div>
+                   <div id="usuarios" class="usuarios">
+
+
+                   </div>
 
             </section>
 
@@ -195,6 +198,28 @@
                     <div class="box-excluir">
                         <button id="btnCancelarExcluir" class="btnCancelarExcluir">Cancelar</button>
                         <button class="btnExcluir" onclick="excluir()">Excluir</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="popup" id="modal3">
+                <div class="modal3">
+                    
+                    <div class="box-servidor head">
+                        <h2>Gerenciamento de Servidores</h2>
+                    </div>
+
+                    <div class="lista-checkbox">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="servidor_1">
+                            <label for="servidor_1">Servidor Exemplo</label>
+                        </div>
+                    </div>
+
+                    <div class="box-acoes">
+                        <button class="btnCancelar" onclick="modal3.classList.remove('ativo')">Fechar</button>
+                        <button class="btnCadastrar" onclick="salvarServidores()">Salvar Alterações</button>
                     </div>
 
                 </div>
@@ -307,6 +332,29 @@
 
     modal2.addEventListener('click', e => {
         if (e.target === modal2) modal2.classList.remove('ativo');
+    });
+
+    // Modal para gerenciar servidores
+
+    const modal3 = document.getElementById('modal3');
+
+    function abrirModalGerenciarServidores(id) {
+    idUsuarioParaGerenciar = id;
+    modal3.classList.add('ativo');
+}
+
+    document.querySelectorAll('.gerenciarServidor').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal3.classList.add('ativo');
+        });
+    });
+
+    document.getElementById('btnCancelarExcluir').addEventListener('click', () => {
+        modal3.classList.remove('ativo');
+    });
+
+    modal3.addEventListener('click', e => {
+        if (e.target === modal3) modal3.classList.remove('ativo');
     });
 
        function cadastrarUsuario() {
@@ -489,6 +537,12 @@
             class="apagar" 
             src="./assets/imgs/painel/lixo.png" 
             alt="Excluir"
+        >
+        <img 
+            onclick="abrirModalGerenciarServidores(${usuario.id_funcionario})" 
+            class="gerenciarServidor" 
+            src="./assets/imgs/painel/cadastrar-servidor-selecionado.png" 
+            alt="GerenciarServidor"
         >
     </div>
 `).join('');
