@@ -462,6 +462,7 @@ body {
 
 .apagar{
   cursor: pointer;
+  width: 25px;
 }
 
 .popup {
