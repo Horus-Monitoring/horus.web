@@ -22,12 +22,12 @@
 body {
   background: var(--cinza);
   height: 100vh;
-  overflow: hidden;
 }
 
 .container {
   display: flex;
   height: 100%;
+  overflow: hidden;
 }
 
 .modal {
@@ -56,7 +56,7 @@ body {
   height: 60px;
   background-color: white;
   border-bottom: 1px solid var(--borda);
-  padding:    20px;
+  padding: 20px;
 }
 
 .hamburguer {
@@ -72,7 +72,7 @@ body {
 
 .header-titulo {
   font-size: 15px;
-  font-weight:bolder;
+  font-weight: bolder;
   color: var(--texto);
 }
 
@@ -532,6 +532,32 @@ body {
   transition: 0.3s;
 }
 
+.alerta-servidor {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.4s ease;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  color: #eb2929;
+  padding: 15px 18px;
+  border-radius: 12px 0 12px 12px;
+  box-shadow: 0 4px 10px #00000033;
+  font-size: 13px;
+  font-weight: bold;
+  z-index: 999;
+}
+.ativo {
+  opacity: 1;
+  transform: translateX(0);
+}
+#alerta_mensagem {
+  padding-left: 8px;
+}
+
 .status {
   padding: 4px 12px;
   border-radius: 20px;
@@ -588,7 +614,7 @@ body {
     width: 100%;
   }
 
-   .popup {
+  .popup {
     padding-left: 220px;
   }
 
