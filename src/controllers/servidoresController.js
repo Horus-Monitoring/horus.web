@@ -7,7 +7,13 @@ function cadastrarServidor(req, res) {
     var ip = req.body.ipServer;
     var localizacao = req.body.localizacaoServer;
     var sistemaOperacional = req.body.sistemaOperacionalServer;
-    var statusInicial = req.body.statusInicialServer;
+    var limiteCpu = req.body.limiteCpuServer;
+    var unidadeMedidaCpu = req.body.unidadeMedidaCpuServer;
+    var limiteRam = req.body.limiteRamServer;
+    var unidadeMedidaRam = req.body.unidadeMedidaRamServer;
+    var limiteDisco = req.body.limiteDiscoServer;
+    var unidadeMedidaDisco = req.body.unidadeMedidaDiscoServer;
+
     console.log("Servidores Controller");
 
     if (fkEmpresa == undefined) {
@@ -20,11 +26,9 @@ function cadastrarServidor(req, res) {
         res.status(400).send("Localização está undefined!");
     } else if (sistemaOperacional == undefined) {
         res.status(400).send("Sistema Operacional está undefined!");
-    } else if (statusInicial == undefined) {
-        res.status(400).send("Status inicial está undefined!");
     } else {
         
-        servidoresModel.cadastrarServidor(nome, ip, localizacao, sistemaOperacional, statusInicial, fkEmpresa)
+        servidoresModel.cadastrarServidor(nome, ip, localizacao, sistemaOperacional, fkEmpresa, limiteCpu, unidadeMedidaCpu, limiteRam, unidadeMedidaRam, limiteDisco, unidadeMedidaDisco)
             .then(
                 (resultado => {
                     res.json(resultado);
