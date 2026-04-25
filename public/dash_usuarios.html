@@ -213,6 +213,7 @@
     //Visualizar senha
     var senha = document.getElementById("input_senha");
     var trocarImg = document.getElementById("img");
+    var idUsuarioParaExcluir = null;
 
     // adiciona um evento de clique (quando o usuário clicar no icone de "olho" vai executar o código abaixo)
     // === (serve para fazer uma comparação entre o valor e o tipo)
@@ -288,6 +289,11 @@
     // Modal para excluir usuários
 
     const modal2 = document.getElementById('modal2');
+
+    function abrirModalExcluir(id) {
+    idUsuarioParaExcluir = id;
+    modal2.classList.add('ativo');
+}
 
     document.querySelectorAll('.apagar').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -412,6 +418,14 @@
             });
         }
 
+        function excluir() {
+    if (idUsuarioParaExcluir != null) {
+        deletarUsuario(idUsuarioParaExcluir);
+        modal2.classList.remove('ativo');
+        idUsuarioParaExcluir = null;
+    }
+}
+
         function deletarUsuario(id) {
             fetch(`/usuario/deletarUsuario/${id}`, {
                 method: 'DELETE'
@@ -419,10 +433,12 @@
             .then(resposta => {
                 if (resposta.ok) {
                     alert('usuario deletado com sucesso!');
-                    exibirUsuarios();
+                   exibirUsuarios();
                 } else {
                     alert('Erro ao deletar usuario')
+                    exibirUsuarios();
                 }
+                 
             })
             .catch((erro) => {
                 console.log(`ERRO: ${erro}`);
@@ -436,9 +452,9 @@
         .then((lista) => {
 
     
-            var total    = lista.length;
-            var gestores = lista.filter(u => u.funcao === "Gestor").length;
-            var analistas = lista.filter(u => u.funcao === "Analista").length;
+            var total = lista.length;
+            var gestores = lista.filter(u => u.funcao == "Gestor").length;
+            var analistas = lista.filter(u => u.funcao == "Analista").length;
 
             var qtds = document.querySelectorAll(".quantidade_usuarios");
             if (qtds[0]) qtds[0].textContent = total;
@@ -447,38 +463,35 @@
 
     
             document.getElementById("usuarios").innerHTML = lista.map(usuario => `
-                <div class="servidor">
-                    <div class="coluna servidor-info">
-                        <div class="linha-servidor">
-                            <div class="coluna">
-                                <span class="nome-servidor">${usuario.nome}</span>
-                                <span class="subtexto">${usuario.email}</span>
-                            </div>
-                        </div>
-                    </div>
+    <div class="box-servidor">
+        
+        <div class="info-usuarios">
+            <div>
+                <span class="nome-servidor">${usuario.nome}</span><br>
+                <span class="subtexto">${usuario.email}</span>
+            </div>
+        </div>
 
-                    <div class="coluna sumir-celular">
-                        <span class="subtexto">Função</span>
-                        <span class="subtexto-info">${usuario.funcao}</span>
-                    </div>
+        <div class="info-usuarios sumir-celular">
+            <span class="subtexto-info">${usuario.funcao}</span>
+        </div>
 
-                    <div class="coluna sumir">
-                        <span class="subtexto">Data de Cadastro</span>
-                        <span class="subtexto-info">${
-                            usuario.data_cadastro
-                                ? new Date(usuario.data_cadastro).toLocaleDateString("pt-BR")
-                                : "—"
-                        }</span>
-                    </div>
+        <div class="data-usuarios sumir">
+            <span class="subtexto-info">${
+                usuario.data_cadastro
+                    ? new Date(usuario.data_cadastro).toLocaleDateString("pt-BR")
+                    : "—"
+            }</span>
+        </div>
 
-                    <img 
-                        onclick="deletarUsuario(${usuario.id_funcionario})" 
-                        class="lixo sumir-celular" 
-                        src="./assets/imgs/painel/lixo.png" 
-                        alt="Excluir"
-                    >
-                </div>
-            `).join('');
+        <img 
+            onclick="abrirModalExcluir(${usuario.id_funcionario})" 
+            class="apagar" 
+            src="./assets/imgs/painel/lixo.png" 
+            alt="Excluir"
+        >
+    </div>
+`).join('');
 
             document.querySelectorAll('.apagar').forEach(btn => {
                 btn.addEventListener('click', () => {
