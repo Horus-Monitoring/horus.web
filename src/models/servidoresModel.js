@@ -1,14 +1,29 @@
 var database = require("../database/config")
 
 // Servidores
-function cadastrarServidor(nome, ip, localizacao, sistemaOperacional, statusInicial, fkEmpresa) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, ip, localizacao, sistemaOperacional, statusInicial, fkEmpresa);
+function cadastrarServidor(nome, ip, localizacao, sistemaOperacional, fkEmpresa, limiteCpu, unidadeMedidaCpu, limiteRam, unidadeMedidaRam, limiteDisco, unidadeMedidaDisco) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, ip, localizacao, sistemaOperacional, fkEmpresa, limiteCpu, unidadeMedidaCpu, limiteRam, unidadeMedidaRam, limiteDisco, unidadeMedidaDisco);
 
     var instrucaoSql = `
-        INSERT INTO servidor (hostname, ip, localizacao, sistema_operacional, status_inicial, fk_empresa) VALUES ('${nome}', '${ip}', '${localizacao}', '${sistemaOperacional}', '${statusInicial}', '${fkEmpresa}');
+        INSERT INTO servidor (hostname, endereco_ip, localizacao, sistema_operacional, fk_empresa) 
+        VALUES ('${nome}', '${ip}', '${localizacao}', '${sistemaOperacional}', '${fkEmpresa}');
     `;
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    
+    return database.executar(instrucaoSql)
+    .then ((resultado) => {
+        var idServidor = resultado.insertId;
+
+        var componentesSql = `
+            INSERT INTO servidor_componente (fk_servidor, fk_componente, unidade_medida, limite) VALUES
+            ('${idServidor}', '1',  '${unidadeMedidaCpu}',  '${limiteCpu}'),
+            ('${idServidor}', '2',  '${unidadeMedidaRam}',  '${limiteRam}'),
+            ('${idServidor}', '3','${unidadeMedidaDisco}','${limiteDisco}');
+        `;
+
+        return database.executar(componentesSql)
+    });
 }
 
 function exibirServidores(fkEmpresa) {
@@ -17,9 +32,9 @@ function exibirServidores(fkEmpresa) {
     var instrucaoSql = `
         SELECT 
         servidor.id_servidor,
-        servidor.nome,
+        servidor.hostname,
         servidor.localizacao,
-        servidor.ip,
+        servidor.enredeco_ip,
         servidor.sistema_operacional,
         servidor.status_inicial,
         COUNT(servidor_componente.fk_componente) AS quantidade 
