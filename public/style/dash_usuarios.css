@@ -399,11 +399,11 @@ body {
 }
 
 .box-servidor {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 20px;
-  border-bottom: 1px solid var(--borda);
+display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 80px;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
 }
 
 .box-servidor:hover { background-color: #f6f7f8; }
@@ -413,12 +413,13 @@ body {
 }
 
 .info-usuarios {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 80px;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
-  width: 20%;
+  padding: 8px 5px;
+  
 }
+
 
 .img-login { width: 40px; }
 
@@ -453,11 +454,11 @@ body {
 }
 
 .data-usuarios {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 80px;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
-  width: 20%;
+  padding: 10px 20px;
+  
 }
 
 .apagar{
