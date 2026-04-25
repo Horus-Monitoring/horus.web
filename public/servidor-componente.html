@@ -28,6 +28,10 @@
 </head>
 
 <body>
+    <div id="alertaServidor" class="alerta-servidor">
+        <img src="assets/imgs/login/erro.png" alt="">
+        <span id="alerta_mensagem"></span>
+    </div>
 
     <div class="modal" id="modal"></div>
 
@@ -186,10 +190,10 @@
                                 <span class="subtexto">Unidade de medida</span>
                                 <select oninput="verificarObrigatorios()" class="ipt-box" name="" id="select_cpu">
                                     <option selected disabled value="#">Selecione...</option>
-                                    <option value="">%</option>
-                                    <option value="">GHz</option>
-                                    <option value="">Cores</option>
-                                    <option value="">Threads</option>
+                                    <option value="%">%</option>
+                                    <option value="GHz">GHz</option>
+                                    <option value="Cores">Cores</option>
+                                    <option value="Threads">Threads</option>
                                 </select>
                             </div>
                         </div>
@@ -200,10 +204,10 @@
                                     <span class="subtexto">Limite crítico</span>
                                     <span id="limiteAtualCpu" class="subtexto-info"></span>
                                 </div>
-                                
+
                                 <input oninput="calcularLimiteCpu()" id="limite_cpu" class="limite" type="range" min="0"
                                     max="100">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -223,10 +227,10 @@
                                 <span class="subtexto">Unidade de medida</span>
                                 <select oninput="verificarObrigatorios()" class="ipt-box" name="" id="select_ram">
                                     <option selected disabled value="#">Selecione...</option>
-                                    <option value="">%</option>
-                                    <option value="">MB</option>
-                                    <option value="">GB</option>
-                                    <option value="">TB</option>
+                                    <option value="%">%</option>
+                                    <option value="MB">MB</option>
+                                    <option value="GB">GB</option>
+                                    <option value="TB">TB</option>
                                 </select>
                             </div>
                         </div>
@@ -237,10 +241,10 @@
                                     <span class="subtexto">Limite crítico</span>
                                     <span id="limiteAtualRam" class="subtexto-info"></span>
                                 </div>
-                                
+
                                 <input oninput="calcularLimiteRam()" id="limite_ram" class="limite" type="range" min="0"
                                     max="100">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -260,10 +264,10 @@
                                 <span class="subtexto">Unidade de medida</span>
                                 <select oninput="verificarObrigatorios()" class="ipt-box" name="" id="select_disco">
                                     <option selected disabled value="#">Selecione...</option>
-                                    <option value="">%</option>
-                                    <option value="">GB</option>
-                                    <option value="">TB</option>
-                                    <option value="">IOPS</option>
+                                    <option value="%">%</option>
+                                    <option value="GB">GB</option>
+                                    <option value="TB">TB</option>
+                                    <option value="IOPS">IOPS</option>
                                 </select>
                             </div>
                         </div>
@@ -274,10 +278,10 @@
                                     <span class="subtexto">Limite crítico</span>
                                     <span id="limiteAtualDisco" class="subtexto-info"></span>
                                 </div>
-                                
-                                <input oninput="calcularLimiteDisco()" id="limite_disco" class="limite" type="range" min="0"
-                                    max="100">
-                                
+
+                                <input oninput="calcularLimiteDisco()" id="limite_disco" class="limite" type="range"
+                                    min="0" max="100">
+
                             </div>
                         </div>
                     </div>
@@ -414,7 +418,12 @@
             var ipVar = ip.value;
             var localizacaoVar = localizacao.value;
             var sistemaOperacionalVar = sistemaOperacional.value;
-            var statusInicialVar = statusInicial.value;
+            var limiteCpuVar = limite_cpu.value;
+            var unidadeMedidaCpuVar = select_cpu.value;
+            var limiteRamVar = limite_ram.value;
+            var unidadeMedidaRamVar = select_ram.value;
+            var limiteDiscoVar = limite_disco.value;
+            var unidadeMedidaDiscoVar = select_disco.value;
 
             if (
                 nomeVar == '' ||
@@ -422,7 +431,8 @@
                 localizacaoVar == '' ||
                 sistemaOperacionalVar == ''
             ) {
-                alert('Preencha todas as informações corretamente')
+                alerta_mensagem.innerHTML = "Houve um erro ao tentar cadastrar o servidor!";
+                mostrarAlerta()
             } else {
 
                 fetch("/servidores/cadastrarServidor", {
@@ -436,7 +446,12 @@
                         ipServer: ipVar,
                         localizacaoServer: localizacaoVar,
                         sistemaOperacionalServer: sistemaOperacionalVar,
-                        statusInicialServer: statusInicialVar
+                        limiteCpuServer: limiteCpuVar,
+                        unidadeMedidaCpuServer: unidadeMedidaCpuVar,
+                        limiteRamServer: limiteRamVar,
+                        unidadeMedidaRamServer: unidadeMedidaRamVar,
+                        limiteDiscoServer: limiteDiscoVar,
+                        unidadeMedidaDiscoServer: unidadeMedidaDiscoVar
                     }),
                 })
                     .then(resposta => {
@@ -505,6 +520,16 @@
                 obrigatorio.style = 'display: none';
                 obrigatorioCompleto.style = 'display: block';
             }
+        }
+
+        function mostrarAlerta() {
+            const alerta = document.getElementById("alertaServidor");
+
+            alerta.classList.add("ativo");
+            setTimeout(() => {
+                alerta.classList.remove("ativo")
+            }, 2000);
+
         }
 
         function listarServidores() {
