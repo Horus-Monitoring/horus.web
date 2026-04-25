@@ -110,23 +110,20 @@ function deletarServidor(req, res) {
 function cadastrarComponente(req, res) {
     var fkServidor = req.body.fkServidorServer
     var fkComponente = req.body.fkComponenteServer;
-    var marca = req.body.marcaServer;
-    var modelo = req.body.modeloServer;
-    var statusInicial = req.body.statusInicialServer;
+    var unidadeMedida = req.body.unidadeMedidaServer;
+    var componenteLimite = req.body.componenteLimiteServer;
 
     if (fkServidor == undefined) {
         res.status(400).send("fkServidor está undefined!");
     } else if (fkComponente == undefined) {
         res.status(400).send("fkComponente está undefined!");
-    } else if (marca == undefined) {
-        res.status(400).send("marca está undefined!");
-    } else if (modelo == undefined) {
-        res.status(400).send("modelo está undefined!");
-    } else if (statusInicial == undefined) {
-        res.status(400).send("statusInicial está undefined!");
+    } else if (unidadeMedida == undefined) {
+        res.status(400).send("Unidade medida está undefined!");
+    } else if (componenteLimite == undefined) {
+        res.status(400).send("Limite está undefined!");
     } else {
         
-        servidoresModel.cadastrarComponente(fkServidor, fkComponente, marca, modelo, statusInicial)
+        servidoresModel.cadastrarComponente(fkServidor, fkComponente, unidadeMedida, componenteLimite)
             .then(
                 (resultado => {
                     res.json(resultado);
