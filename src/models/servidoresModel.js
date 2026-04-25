@@ -10,7 +10,7 @@ function cadastrarServidor(nome, ip, localizacao, sistemaOperacional, fkEmpresa,
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    
+
     return database.executar(instrucaoSql)
     .then ((resultado) => {
         var idServidor = resultado.insertId;
@@ -34,20 +34,20 @@ function exibirServidores(fkEmpresa) {
         servidor.id_servidor,
         servidor.hostname,
         servidor.localizacao,
-        servidor.enredeco_ip,
+        servidor.endereco_ip,
         servidor.sistema_operacional,
-        servidor.status_inicial,
+        servidor.status_servidor,
         COUNT(servidor_componente.fk_componente) AS quantidade 
         FROM servidor
         JOIN servidor_componente ON fk_servidor = id_servidor
         WHERE fk_empresa = ${fkEmpresa}
         GROUP BY 
         servidor.id_servidor,
-        servidor.nome,
+        servidor.hostname,
         servidor.localizacao,
-        servidor.ip,
+        servidor.endereco_ip,
         servidor.sistema_operacional,
-        servidor.status_inicial;
+        servidor.status_servidor;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -85,11 +85,12 @@ function deletarServidor(id) {
 }
 
 // Componentes
-function cadastrarComponente(fkServidor, fkComponente, marca, modelo, ativo) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor, fkComponente, marca, modelo, ativo);
+function cadastrarComponente(fkServidor, fkComponente, unidadeMedida, componenteLimite) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor, fkComponente, unidadeMedida, componenteLimite);
 
     var instrucaoSql = `
-        INSERT INTO servidor_componente (fk_servidor, fk_componente, marca, modelo, status_inicial) VALUES ('${fkServidor}', '${fkComponente}', '${marca}', '${modelo}', '${ativo}');
+        INSERT INTO servidor_componente (fk_servidor, fk_componente, unidade_medida, limite) 
+        VALUES ('${fkServidor}', '${fkComponente}', '${unidadeMedida}', '${componenteLimite}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -101,7 +102,7 @@ function abrirDetalhes(fkServidor) {
     var instrucaoSql = `
         SELECT *,
         componente.tipo AS tipo,
-        servidor.nome AS servidor
+        servidor.hostname AS servidor
         FROM servidor_componente 
         JOIN componente ON fk_componente = id_componente
         JOIN servidor ON fk_servidor = id_servidor
