@@ -13,20 +13,18 @@ function autenticar(email, senha) {
 }
 
 function exibirUsuarios(id) {
-    console.log("ACESSEI O MODEL USUARIOS \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", id);
-
     var instrucaoSql = `
         SELECT
-        funcionario.id_funcionario, 
-        funcionario.nome,
-        funcionario.email,
-        funcionario.funcao,
-        funcionario.data_cadastro
+            funcionario.id_funcionario, 
+            funcionario.nome,
+            funcionario.email,
+            funcionario.funcao,
+            funcionario.data_cadastro
+        FROM funcionario
+        WHERE funcionario.fk_empresa = ${id};
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
 
 function deletarUsuario(id) {
     console.log("ACESSEI O MODEL USUARIO \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o usuario de seu BD está rodando corretamente. \n\n function cadastrar():", id);
