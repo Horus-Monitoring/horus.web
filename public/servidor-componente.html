@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Servidores | Horus </title>
     <link rael="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,10 @@
 </head>
 
 <body>
+    <div id="alertaServidor" class="alerta-servidor">
+        <img src="assets/imgs/login/erro.png" alt="">
+        <span id="alerta_mensagem"></span>
+    </div>
 
     <div class="modal" id="modal"></div>
 
@@ -79,7 +83,7 @@
 
                 <div class="usuario">
                     <div>
-                        <p  id="nome_usuario"></p>
+                        <p id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
                     <span id="inicial_usuario"></span>
@@ -159,6 +163,127 @@
                             <option value="atencao">Atenção</option>
                             <option value="critico">Crítico</option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <span class="subtexto">Componentes</span>
+                    <span id="obrigatorioCompleto" class="obrigatorio-completo">Obrigatórios completos</span>
+                </div>
+
+                <span id="obrigatorio" class="obrigatorio">
+                    <img src="assets/imgs/painel/alertas.png" alt="">
+                    É obrigatório informar CPU, RAM e Disco para cadastrar o servidor.
+                </span>
+
+                <div class="linha">
+                    <div class="box-componente">
+                        <div class="linha">
+                            <div class="coluna">
+                                <span class="subtexto">Tipo</span>
+                                <select disabled class="ipt-box" name="" id="">
+                                    <option value="">CPU</option>
+                                </select>
+                            </div>
+
+                            <div class="coluna">
+                                <span class="subtexto">Unidade de medida</span>
+                                <select oninput="verificarObrigatorios()" class="ipt-box" name="" id="select_cpu">
+                                    <option selected disabled value="#">Selecione...</option>
+                                    <option value="%">%</option>
+                                    <option value="GHz">GHz</option>
+                                    <option value="Cores">Cores</option>
+                                    <option value="Threads">Threads</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="linha-limite">
+                            <div class="coluna-limite">
+                                <div class="mostrar-limite">
+                                    <span class="subtexto">Limite crítico</span>
+                                    <span id="limiteAtualCpu" class="subtexto-info"></span>
+                                </div>
+
+                                <input oninput="calcularLimiteCpu()" id="limite_cpu" class="limite" type="range" min="0"
+                                    max="100">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="box-componente">
+                        <div class="linha">
+                            <div class="coluna">
+                                <span class="subtexto">Tipo</span>
+                                <select disabled class="ipt-box" name="" id="">
+                                    <option value="">RAM</option>
+                                </select>
+                            </div>
+
+                            <div class="coluna">
+                                <span class="subtexto">Unidade de medida</span>
+                                <select oninput="verificarObrigatorios()" class="ipt-box" name="" id="select_ram">
+                                    <option selected disabled value="#">Selecione...</option>
+                                    <option value="%">%</option>
+                                    <option value="MB">MB</option>
+                                    <option value="GB">GB</option>
+                                    <option value="TB">TB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="linha-limite">
+                            <div class="coluna-limite">
+                                <div class="mostrar-limite">
+                                    <span class="subtexto">Limite crítico</span>
+                                    <span id="limiteAtualRam" class="subtexto-info"></span>
+                                </div>
+
+                                <input oninput="calcularLimiteRam()" id="limite_ram" class="limite" type="range" min="0"
+                                    max="100">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="box-componente">
+                        <div class="linha">
+                            <div class="coluna">
+                                <span class="subtexto">Tipo</span>
+                                <select disabled class="ipt-box" name="" id="">
+                                    <option value="">Disco</option>
+                                </select>
+                            </div>
+
+                            <div class="coluna">
+                                <span class="subtexto">Unidade de medida</span>
+                                <select oninput="verificarObrigatorios()" class="ipt-box" name="" id="select_disco">
+                                    <option selected disabled value="#">Selecione...</option>
+                                    <option value="%">%</option>
+                                    <option value="GB">GB</option>
+                                    <option value="TB">TB</option>
+                                    <option value="IOPS">IOPS</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="linha-limite">
+                            <div class="coluna-limite">
+                                <div class="mostrar-limite">
+                                    <span class="subtexto">Limite crítico</span>
+                                    <span id="limiteAtualDisco" class="subtexto-info"></span>
+                                </div>
+
+                                <input oninput="calcularLimiteDisco()" id="limite_disco" class="limite" type="range"
+                                    min="0" max="100">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -272,17 +397,17 @@
             fetch(`/usuario/deletarUsuario/${id}`, {
                 method: 'DELETE'
             })
-            .then(resposta => {
-                if (resposta.ok) {
-                    alert('Servidor deletado com sucesso!');
-                    exibirServidores();
-                } else {
-                    alert('Erro ao deletar servidor')
-                }
-            })
-            .catch((erro) => {
-                console.log(`ERRO: ${erro}`);
-            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        alert('Servidor deletado com sucesso!');
+                        exibirServidores();
+                    } else {
+                        alert('Erro ao deletar servidor')
+                    }
+                })
+                .catch((erro) => {
+                    console.log(`ERRO: ${erro}`);
+                })
         }
 
         // Cadastro de servidor
@@ -293,7 +418,12 @@
             var ipVar = ip.value;
             var localizacaoVar = localizacao.value;
             var sistemaOperacionalVar = sistemaOperacional.value;
-            var statusInicialVar = statusInicial.value;
+            var limiteCpuVar = limite_cpu.value;
+            var unidadeMedidaCpuVar = select_cpu.value;
+            var limiteRamVar = limite_ram.value;
+            var unidadeMedidaRamVar = select_ram.value;
+            var limiteDiscoVar = limite_disco.value;
+            var unidadeMedidaDiscoVar = select_disco.value;
 
             if (
                 nomeVar == '' ||
@@ -301,7 +431,8 @@
                 localizacaoVar == '' ||
                 sistemaOperacionalVar == ''
             ) {
-                alert('Preencha todas as informações corretamente')
+                alerta_mensagem.innerHTML = "Houve um erro ao tentar cadastrar o servidor!";
+                mostrarAlerta()
             } else {
 
                 fetch("/servidores/cadastrarServidor", {
@@ -315,7 +446,12 @@
                         ipServer: ipVar,
                         localizacaoServer: localizacaoVar,
                         sistemaOperacionalServer: sistemaOperacionalVar,
-                        statusInicialServer: statusInicialVar
+                        limiteCpuServer: limiteCpuVar,
+                        unidadeMedidaCpuServer: unidadeMedidaCpuVar,
+                        limiteRamServer: limiteRamVar,
+                        unidadeMedidaRamServer: unidadeMedidaRamVar,
+                        limiteDiscoServer: limiteDiscoVar,
+                        unidadeMedidaDiscoServer: unidadeMedidaDiscoVar
                     }),
                 })
                     .then(resposta => {
@@ -333,6 +469,66 @@
                         console.log(`#ERRO: ${erro}`);
                     });
             }
+
+        }
+
+        function calcularLimiteCpu() {
+            limiteAtualCpu.innerHTML = `${limite_cpu.value}%`
+
+            if (limite_cpu.value <= 69) {
+                limiteAtualCpu.style = 'color:green'
+            } else if (limite_cpu.value <= 89) {
+                limiteAtualCpu.style = 'color:orange'
+            } else {
+                limiteAtualCpu.style = 'color:red'
+            }
+        }
+
+        function calcularLimiteRam() {
+            limiteAtualRam.innerHTML = `${limite_ram.value}%`
+
+            if (limite_ram.value <= 69) {
+                limiteAtualRam.style = 'color:green'
+            } else if (limite_ram.value <= 89) {
+                limiteAtualRam.style = 'color:orange'
+            } else {
+                limiteAtualRam.style = 'color:red'
+            }
+        }
+
+        function calcularLimiteDisco() {
+            limiteAtualDisco.innerHTML = `${limite_disco.value}%`
+
+            if (limite_disco.value <= 69) {
+                limiteAtualDisco.style = 'color:green'
+            } else if (limite_disco.value <= 89) {
+                limiteAtualDisco.style = 'color:orange'
+            } else {
+                limiteAtualDisco.style = 'color:red'
+            }
+        }
+
+        function verificarObrigatorios() {
+            if (
+                select_cpu.value == '#' ||
+                select_ram.value == '#' ||
+                select_disco.value == '#'
+            ) {
+                obrigatorio.style = 'display: flex';
+                obrigatorioCompleto.style = 'display: none';
+            } else {
+                obrigatorio.style = 'display: none';
+                obrigatorioCompleto.style = 'display: block';
+            }
+        }
+
+        function mostrarAlerta() {
+            const alerta = document.getElementById("alertaServidor");
+
+            alerta.classList.add("ativo");
+            setTimeout(() => {
+                alerta.classList.remove("ativo")
+            }, 2000);
 
         }
 
@@ -374,20 +570,20 @@
                     statusInicialServer: statusInicialVar
                 })
             })
-            .then(resposta => {
-                        console.log("resposta: ", resposta);
+                .then(resposta => {
+                    console.log("resposta: ", resposta);
 
-                        if (resposta.ok) {
-                            exibirServidores()
-                            alert("Componente cadastrado com sucesso!");
-                        } else {
-                            throw "Houve um erro ao tentar realizar o cadastro!";
-                        }
+                    if (resposta.ok) {
+                        exibirServidores()
+                        alert("Componente cadastrado com sucesso!");
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
 
-                    })
-                    .catch(erro => {
-                        console.log(`#ERRO: ${erro}`);
-                    });
+                })
+                .catch(erro => {
+                    console.log(`#ERRO: ${erro}`);
+                });
         }
 
         function abrirDetalhes(id) {
@@ -397,8 +593,8 @@
             fetch(`/servidores/abrirDetalhes/${id}`)
                 .then(resposta => resposta.json())
                 .then((lista) => {
-                    var topo = 
-                    `
+                    var topo =
+                        `
                     <div class="linha">
                         <span class="nome-servidor">${lista[0].nome}</span>
                         <img class="fechar" onclick="fecharDetalhes()" src="./assets/imgs/painel/fechar-azul.png" alt="" width="30px">
@@ -492,36 +688,36 @@
             fetch(`/servidores/deletarServidor/${id}`, {
                 method: 'DELETE'
             })
-            .then(resposta => {
-                if (resposta.ok) {
-                    alert('Servidor deletado com sucesso!');
-                    exibirServidores();
-                } else {
-                    alert('Erro ao deletar servidor')
-                }
-            })
-            .catch((erro) => {
-                console.log(`ERRO: ${erro}`);
-            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        alert('Servidor deletado com sucesso!');
+                        exibirServidores();
+                    } else {
+                        alert('Erro ao deletar servidor')
+                    }
+                })
+                .catch((erro) => {
+                    console.log(`ERRO: ${erro}`);
+                })
         }
 
         function deletarComponente(id) {
             fetch(`/servidores/deletarComponente/${id}`, {
                 method: 'DELETE'
             })
-            .then(resposta => {
-                if (resposta.ok) {
-                    var componente = document.getElementById(`componente${id}`);
-                    componente.remove();
-                    alert('Componente deletado com sucesso!')
-                    exibirServidores();
-                } else {
-                    alert('Erro ao deletar componente')
-                }
-            })
-            .catch((erro) => {
-                console.log(`ERRO: ${erro}`);
-            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        var componente = document.getElementById(`componente${id}`);
+                        componente.remove();
+                        alert('Componente deletado com sucesso!')
+                        exibirServidores();
+                    } else {
+                        alert('Erro ao deletar componente')
+                    }
+                })
+                .catch((erro) => {
+                    console.log(`ERRO: ${erro}`);
+                })
         }
 
         exibirUsuarioAtivo();
