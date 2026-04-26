@@ -300,7 +300,7 @@
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Servidor de Destino</span>
-                        <select class="ipt-servidor" name="" id="select_servidor" style="width: 620px"></select>
+                        <select class="ipt-servidor" name="" id="select_servidor"></select>
                     </div>
                 </div>
 
@@ -639,6 +639,16 @@
             fetch(`/servidores/exibirServidores/${fkEmpresa}`)
                 .then(resposta => resposta.json())
                 .then((lista) => {
+                    if (lista.length === 0) {
+                        servidores.innerHTML = `
+                            <div class="sem-servidores">
+                                <p>Nenhum servidor cadastrado.</p>
+                                <span>Cadastre um novo servidor clicando em "Cadastrar Servidor" para que ele apareça aqui.</span>
+                            </div>
+                        `;
+                        return;
+                    }
+
                     servidores.innerHTML = lista.map(servidor =>
                         `
                         <div class="servidor">
