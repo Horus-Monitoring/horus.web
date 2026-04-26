@@ -399,12 +399,29 @@ body {
 }
 
 .box-servidor {
-display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 80px;
-  padding: 10px 20px;
-  font-weight: bold;
-  border-bottom: 2px solid #ddd;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1.5fr 80px;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+  gap: 10px;
 }
+
+
+
+.imagem{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #274690;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
 
 .box-servidor:hover { background-color: #f6f7f8; }
 
@@ -412,13 +429,7 @@ display: grid;
   background-color: #f5f3f5;
 }
 
-.info-usuarios {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 80px;
-  align-items: center;
-  padding: 8px 5px;
-  
-}
+
 
 
 .img-login { width: 40px; }
@@ -453,13 +464,7 @@ display: grid;
   font-size: 14px;
 }
 
-.data-usuarios {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 80px;
-  align-items: center;
-  padding: 10px 20px;
-  
-}
+
 
 .apagar{
   cursor: pointer;
