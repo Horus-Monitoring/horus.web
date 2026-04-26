@@ -571,16 +571,12 @@ body {
 
 /*Responsividade*/
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .titulo{
     display: none;
   }
 
-  .lateral {
-    width: 220px;
-    transform: translateX(-100%);
-     will-change: transform; 
-  }
+
 
   .main {
     margin-left: 0;
