@@ -48,15 +48,16 @@
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </a>
 
-                <div class="categoria">Administração</div>
-                <a href="dash_usuarios.html" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                </a>
-                <a href="servidor-componente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                </a>
+                <div class="categoria adm" id="administracao">Administração
+                    <a href="dash_usuarios.html" class="item-menu">
+                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                    </a>
+                    <a href="servidor-componente.html" class="item-menu">
+                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                    </a>
+                </div>
 
-                <button>Gerar Relatório em PDF</button>
+                <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -626,6 +627,15 @@
 </html>
 
 <script>
+
+   window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao == "Gestor") {
+                document.getElementById("administracao").style.display = "block";
+                document.getElementById("gerarRelatorio").style.display = "block";
+            }
+        }
+
     //Modal para o menu sanduíche
 
     const btnHamburguer = document.getElementById('hamburguer');

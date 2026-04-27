@@ -126,6 +126,18 @@ body {
   border-radius: 12px;
 }
 
+.categoria {
+  color: #a0a5a8;
+  margin: 16px 0 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.adm{
+  display: none;
+}
+
+
 .servidor-critico {
   border: 1px solid #ff4d4d;
 }

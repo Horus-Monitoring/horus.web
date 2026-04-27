@@ -248,7 +248,16 @@
 </html>
 
 <script>
-    
+    //Verificar tipo de usuário
+    window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+    if (funcao != "Gestor") {
+        alert("Você não tem autorização de acessar essa página!");
+        window.location = "painel.html";
+    }
+    }
+
+
     //Visualizar senha
     var senha = document.getElementById("input_senha");
     var trocarImg = document.getElementById("img");
