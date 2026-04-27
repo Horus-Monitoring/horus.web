@@ -48,14 +48,14 @@
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </a>
 
-                <div class="categoria adm" id="administracao">Administração
-                    <a href="dash_usuarios.html" class="item-menu">
+                <div class="categoria adm" id="administracao">Administração </div>
+                    <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
                         <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
                     </a>
-                    <a href="servidor-componente.html" class="item-menu">
+                    <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
                         <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                     </a>
-                </div>
+                
 
                 <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
             </nav>
@@ -630,11 +630,13 @@
 
    window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
-            if (funcao == "Gestor") {
+             if (funcao == "Gestor") {
                 document.getElementById("administracao").style.display = "block";
                 document.getElementById("gerarRelatorio").style.display = "block";
+                document.getElementById("cadastrarServidor").style.display = "flex";
+                document.getElementById("cadastrarUsuario").style.display = "flex";
             }
-        }
+   }
 
     //Modal para o menu sanduíche
 
