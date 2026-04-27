@@ -38,15 +38,16 @@
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </div>
 
-                <div class="categoria">Administração</div>
-                <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                </div>
-                <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                <div class="categoria adm" id="administracao">Administração
+                    <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                    </div>
+                    <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
+                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                    </div>
                 </div>
 
-                <button>Gerar Relatório em PDF</button>
+                <button id="gerarRelatorio" class="adm" style="align-items: center;">Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -156,6 +157,13 @@
     </div>
 
     <script>
+        window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao === "Gestor") {
+                document.getElementById("administracao").style.display = "flex";
+                document.getElementById("gerarRelatorio").style.display = "flex";
+            }
+        }
 
         window.onload = () => {
     

@@ -1,10 +1,20 @@
-function usuario() {
+export function usuario() {
     if (!sessionStorage.ID_USUARIO) {
     alert("Você precisa estar logado!");
     window.location = "login.html";
     } else {
         window.location.href = "usuario.html"; 
     }
+}
+
+export function usuarioTipo(){
+    const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+    if (!funcao === "Gestor") {
+        alert("Você não tem autorização de acessar essa página!");
+        window.location = "painel.html";
+    }
+    
 }
 
 window.onload = () => {
