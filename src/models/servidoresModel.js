@@ -121,6 +121,43 @@ function deletarComponente(id) {
     return database.executar(instrucaoSql)
 }
 
+function listarServidoresComAcesso(fkEmpresa, fkFuncionario) {
+    const instrucaoSql = `
+        SELECT 
+            s.id_servidor,
+            s.hostname,
+            CASE 
+                WHEN a.fk_servidor IS NOT NULL THEN 1
+                ELSE 0
+            END AS tem_acesso
+        FROM servidor s
+        LEFT JOIN acesso_servidor a 
+            ON s.id_servidor = a.fk_servidor 
+            AND a.fk_funcionario = ${fkFuncionario}
+        WHERE s.fk_empresa = ${fkEmpresa};
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
+function limparAcessos(fkFuncionario) {
+    return database.executar(`
+        DELETE FROM acesso_servidor 
+        WHERE fk_funcionario = ${fkFuncionario}
+    `);
+}
+
+function inserirAcessos(fkFuncionario, servidores) {
+    if (servidores.length === 0) return Promise.resolve();
+
+    const values = servidores.map(id => `(${fkFuncionario}, ${id})`).join(",");
+
+    return database.executar(`
+        INSERT INTO acesso_servidor (fk_funcionario, fk_servidor)
+        VALUES ${values}
+    `);
+}
+
 module.exports = {
     cadastrarServidor,
     exibirServidores,
@@ -128,5 +165,8 @@ module.exports = {
     cadastrarComponente,
     abrirDetalhes,
     deletarServidor,
-    deletarComponente
+    deletarComponente,
+    listarServidoresComAcesso,
+    limparAcessos,
+    inserirAcessos
 };
