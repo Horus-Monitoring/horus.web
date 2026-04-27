@@ -126,6 +126,18 @@ body {
   border-radius: 12px;
 }
 
+.categoria {
+  color: #a0a5a8;
+  margin: 16px 0 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.adm{
+  display: none;
+}
+
+
 .servidor-critico {
   border: 1px solid #ff4d4d;
 }
@@ -220,6 +232,11 @@ body {
   background: none;
   border: none;
   color: #1f2937;
+}
+
+.botao-ativo {
+  color: #576CA8;
+  background-color: #A0A5A8;
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {

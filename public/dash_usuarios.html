@@ -94,7 +94,7 @@
 
                     <div class="card-inicial card pequeno-filtro">
                         <div class="card-pesquisar">
-                            <input type="text" name="" id="" placeholder="Buscar usuário pelo nome...">
+                            <input type="text" name="" id="filtro_usuario" placeholder="Buscar usuário pelo nome..." oninput="filtrarUsuarios()">
                             <img id="lupa" src="./assets/imgs/dash_user/lupa.png" alt="lupa">
                         </div>
                     </div>
@@ -248,7 +248,16 @@
 </html>
 
 <script>
-    
+    //Verificar tipo de usuário
+    window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+    if (funcao != "Gestor") {
+        alert("Você não tem autorização de acessar essa página!");
+        window.location = "painel.html";
+    }
+    }
+
+
     //Visualizar senha
     var senha = document.getElementById("input_senha");
     var trocarImg = document.getElementById("img");
@@ -601,6 +610,65 @@
 
 exibirUsuarios();
 
-    exibirUsuarioAtivo();
+exibirUsuarioAtivo();
+
+//Filtro para usuário
+    function filtrarUsuarios() {
+    var id = sessionStorage.ID_EMPRESA;
+    var nomeFiltro = filtro_usuario.value.toLowerCase(); 
+
+    fetch(`/usuario/exibirUsuarios/${id}`)
+        .then(resposta => resposta.json())
+        .then((lista) => {
+            var total = lista.length;
+            var gestores = lista.filter(u => u.funcao == "Gestor").length;
+            var analistas = lista.filter(u => u.funcao == "Analista").length;
+
+            var qtds = document.querySelectorAll(".quantidade_usuarios");
+            if (qtds[0]) qtds[0].textContent = total;
+            if (qtds[1]) qtds[1].textContent = gestores;
+            if (qtds[2]) qtds[2].textContent = analistas;
+
+            var listaFiltrada = lista.filter(usuario => 
+                usuario.nome.toLowerCase().includes(nomeFiltro)
+            );
+
+            var container = document.getElementById("usuarios");
+            container.innerHTML = ""; // Limpa antes de renderizar
+
+            if (listaFiltrada.length === 0) {
+                container.innerHTML = "<p>Nenhum usuário encontrado.</p>";
+                return;
+            }
+
+            listaFiltrada.forEach(usuario => {
+                container.innerHTML += `
+                    <div class="box-servidor">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div class="imagem" style="background:${corAvatar(usuario.nome)}">${gerarIniciais(usuario.nome)}</div>
+                            <span class="nome-servidor">${usuario.nome}</span>
+                        </div>
+                        <div><span class="subtexto">${usuario.email}</span></div>
+                        <div>
+                            <span class="badge-funcao ${usuario.funcao == 'Gestor' ? 'badge-gestor' : 'badge-analista'}">
+                                ${usuario.funcao}
+                            </span>
+                        </div>
+                        <div>
+                            <span class="subtexto-info">${usuario.data_cadastro ? new Date(usuario.data_cadastro).toLocaleDateString("pt-BR") : "—"}</span>
+                        </div>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <img onclick="abrirModalExcluir(${usuario.id_funcionario})" class="apagar" src="./assets/imgs/painel/lixo.png" alt="Excluir">
+                            <img onclick="abrirModalGerenciarServidores(${usuario.id_funcionario})" class="gerenciarServidor" src="./assets/imgs/painel/cadastrar-servidor-selecionado.png" alt="Gerenciar">
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => console.error('Erro ao buscar usuários:', error));
+}
+
+
+
 
 </script>

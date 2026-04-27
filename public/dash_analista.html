@@ -48,15 +48,16 @@
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </a>
 
-                <div class="categoria">Administração</div>
-                <a href="dash_usuarios.html" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                </a>
-                <a href="servidor-componente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                </a>
+                <div class="categoria adm" id="administracao">Administração
+                    <a href="dash_usuarios.html" class="item-menu">
+                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                    </a>
+                    <a href="servidor-componente.html" class="item-menu">
+                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                    </a>
+                </div>
 
-                <button>Gerar Relatório em PDF</button>
+                <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -93,17 +94,17 @@
                         </div>
                         <img class="filtro" id="filtro" src="assets/imgs/dash_analista/filtro.png" alt="">
                         <div class="filtros" id="filtros">
-                            <button style="background-color: rgba(87, 112, 168, 0.38);">Todos (8)</button>
-                            <button style="background-color: #E3FBDD;">Online (5)</button>
-                            <button style="background-color: #FFF9DF;">Atenção (1)</button>
-                            <button style="background-color: #FFEFEF;">Crítico (1)</button>
-                            <button>Offline (1)</button>
+                            <button data-status="todos" class="ativo">Todos (8)</button>
+                            <button data-status="verde">Online (5)</button>
+                            <button data-status="amarelo">Atenção (1)</button>
+                            <button data-status="vermelho">Crítico (1)</button>
+                            <button data-status="cinza">Offline (1)</button>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
                                 <select name="" id="tempo">
                                     <option value="30s">Últimas 24 horas</option>
-                                    <option value="1min">última semana</option>
-                                    <option value="5min">último mês</option>
+                                    <option value="1min">Última Semana</option>
+                                    <option value="5min">Último Mês</option>
                                 </select>
                             </div>
                         </div>
@@ -626,6 +627,15 @@
 </html>
 
 <script>
+
+   window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao == "Gestor") {
+                document.getElementById("administracao").style.display = "block";
+                document.getElementById("gerarRelatorio").style.display = "block";
+            }
+        }
+
     //Modal para o menu sanduíche
 
     const btnHamburguer = document.getElementById('hamburguer');

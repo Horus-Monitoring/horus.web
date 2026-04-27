@@ -38,15 +38,16 @@
           <img src="./assets/imgs/painel/alerta-selecionado.png" alt="" width="18px">Incidentes
         </div>
 
-        <div class="categoria">Administração</div>
-        <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
-          <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-        </div>
-        <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
-          <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+        <div class="categoria adm" id="administracao">Administração
+            <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+              <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+            </div>
+            <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
+              <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+            </div>
         </div>
 
-        <button>Gerar Relatório em PDF</button>
+        <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
       </nav>
 
       <div onclick="limparSessionStorage()" class="sair">
@@ -108,11 +109,11 @@
               <p class="titulo">Filtrar por Severidade:</p>
 
               <div class="botoes">
-                <button data-filtro="todas" style="color :#576CA8; background-color: #A0A5A8;">Todas</button>
-                <button data-filtro="critico">Crítica</button>
-                <button data-filtro="alta">Alta</button>
-                <button data-filtro="media">Média</button>
-                <button data-filtro="baixa">Baixa</button>
+                <button data-filtro="todas">Todas</button>
+                <button data-filtro="critico" >Crítica</button>
+                <button data-filtro="alta" >Alta</button>
+                <button data-filtro="media" >Média</button>
+                <button data-filtro="baixa" >Baixa</button>
               </div>
             </div>
 
@@ -120,9 +121,9 @@
               <p class="titulo">Filtrar por Status:</p>
 
               <div class="botoes">
-                <button data-filtro="todos" style="color :#576CA8; background-color: #A0A5A8;">Todos</button>
-                <button data-filtro="ativo">Ativos</button>
-                <button data-filtro="resolvido">Resolvidos</button>
+                <button data-filtro="todos">Todos</button>
+                <button data-filtro="ativo" >Ativos</button>
+                <button data-filtro="resolvido" >Resolvidos</button>
               </div>
             </div>
 
@@ -151,7 +152,7 @@
 
               <div class="lado-direito">
                 <div class="status">
-                  <span class="status critica ">critica</span>
+                  <span class="status critica ">Crítica</span>
                   <span class="status ativo">Ativo</span>
                 </div>
               </div>
@@ -239,8 +240,17 @@
 <script>
   exibirUsuarioAtivo();
 
+  window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao == "Gestor") {
+                document.getElementById("administracao").style.display = "block";
+                document.getElementById("gerarRelatorio").style.display = "block";
+            }
+        }
+
   const hamburguer = document.getElementById("hamburguer");
   const lateral = document.getElementById("lateral");
+  const overlay = document.getElementById("modal");
 
   hamburguer.addEventListener("click", () => {
     lateral.classList.toggle("ativo");
@@ -249,6 +259,66 @@
   overlay.addEventListener("click", () => {
     lateral.classList.remove("ativo");
   });
+
+let filtroTipo = "todas";
+let filtroStatus = "todos";
+
+document.querySelectorAll('[data-filtro]').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const valor = this.dataset.filtro;
+
+        if (["todas","critico","alta","media","baixa"].includes(valor)) {
+            filtroTipo = valor;
+        } else {
+            filtroStatus = valor;
+        }
+
+        aplicarFiltros();
+    });
+});
+
+function aplicarFiltros(){
+    const incidentes = document.querySelectorAll('.box-servidor');
+
+    incidentes.forEach(div => {
+
+        const matchTipo = 
+            (filtroTipo === "todas") || 
+            div.classList.contains(`servidor-${filtroTipo}`);
+
+        const matchStatus = 
+            (filtroStatus === "todos") || 
+            div.querySelector('.status span:last-child').classList.contains(filtroStatus);
+
+        div.style.display = (matchTipo && matchStatus) ? "flex" : "none";
+    });
+}
+
+document.querySelectorAll('[data-filtro]').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const valor = this.dataset.filtro;
+        const grupo = this.closest('.grupo-filtro');
+
+        // Remove ativo de todos do mesmo grupo
+        grupo.querySelectorAll('button').forEach(b => {
+            b.classList.remove('botao-ativo');
+        });
+
+        // Ativa o clicado
+        this.classList.add('botao-ativo');
+
+        // Atualiza filtros
+        if (["todas","critico","alta","media","baixa"].includes(valor)) {
+            filtroTipo = valor;
+        } else {
+            filtroStatus = valor;
+        }
+
+        aplicarFiltros();
+    });
+});
 
   
 </script>
