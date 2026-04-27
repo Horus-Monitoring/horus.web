@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="buscar-servidor">
-                    <input class="ipt-buscar" type="text" placeholder="Buscar servidor pelo nome...">
+                    <input class="ipt-buscar" id="filtrar_servidor" type="text" placeholder="Buscar servidor pelo nome..." oninput="filtrarServidores()">
                 </div>
 
                 <div id="servidores" class="servidores"></div>
@@ -354,6 +354,16 @@
     </div>
 
     <script>
+
+         //Verificar tipo de usuário
+         window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao != "Gestor") {
+                alert("Você não tem autorização de acessar essa página!");
+                window.location = "painel.html";
+            }
+        }
+
         function abrirCadastroServidor() {
             popup.style = 'display: flex'
             popupServidor.style = 'display: flex'
@@ -753,6 +763,71 @@
         });
 
         modal.addEventListener('click', fecharMenu);
+
+        //Filtrar servidores por nome
+        function filtrarServidores() {
+            const fkEmpresa = sessionStorage.ID_EMPRESA;
+            var nomeServidor = filtrar_servidor.value.toLowerCase();
+
+            fetch(`/servidores/exibirServidores/${fkEmpresa}`)
+                .then(resposta => resposta.json())
+                .then((lista) => {
+                    var listaFiltrada = lista.filter(servidor => 
+                        servidor.hostname.toLowerCase().includes(nomeServidor)
+                        )
+                    console.log(listaFiltrada)
+                    if (listaFiltrada.length === 0) {
+                        servidores.innerHTML = `
+                            <div class="sem-servidores">
+                                <p>Nenhum servidor cadastrado.</p>
+                                <span>Cadastre um novo servidor clicando em "Cadastrar Servidor" para que ele apareça aqui.</span>
+                            </div>
+                        `;
+                        return;
+                    }
+                    else {servidores.innerHTML = listaFiltrada.map(servidor =>
+                        `
+                        <div class="servidor">
+                            <div class="coluna servidor-info">
+                                <div class="linha-servidor">
+                                    <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
+
+                                    <div class="coluna">
+                                        <span class="nome-servidor">${servidor.hostname}</span>
+                                        <span class="subtexto">${servidor.localizacao}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="coluna sumir-celular">
+                                <span class="subtexto">IP</span>
+                                <span class="subtexto-info">${servidor.endereco_ip}</span>
+                            </div>
+
+                            <div class="coluna sumir">
+                                <span class="subtexto">Sistema Operacional</span>
+                                <span class="subtexto-info">${servidor.sistema_operacional}</span>
+                            </div>
+
+                            <div class="coluna sumir-celular">
+                                <span class="status status-online">${servidor.status_servidor}</span>
+                            </div>
+
+                            <div class="coluna sumir">
+                                <span class="subtexto">Componentes</span>
+                                <span class="subtexto-info">${servidor.quantidade}</span>
+                            </div>
+
+                            <img onclick="deletarServidor(${servidor.id_servidor})" class="lixo sumir-celular" src="./assets/imgs/painel/lixo.png" alt="">
+                        </div>
+              `).join('')
+                }})
+
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos servidores: ${error.message}`);
+                });
+        }
+                        
 
     </script>
 </body>

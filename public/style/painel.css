@@ -85,6 +85,10 @@ body {
   text-transform: uppercase;
 }
 
+.adm{
+  display: none;
+}
+
 .item-menu {
   display: flex;
   align-items: center;
