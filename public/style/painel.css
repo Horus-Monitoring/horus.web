@@ -82,7 +82,7 @@ body {
   color: #a0a5a8;
   margin: 16px 0 4px 10px;
   font-size: 11px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .adm{
@@ -90,7 +90,7 @@ body {
 } 
 
 .prejuizo{
-  display:none !important;
+  display:none;
 }
 
 .item-menu {
