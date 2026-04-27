@@ -222,6 +222,11 @@ body {
   color: #1f2937;
 }
 
+.botao-ativo {
+  color: #576CA8;
+  background-color: #A0A5A8;
+}
+
 @media (max-width: 1024px) and (min-width: 768px) {
   .lateral {
     transform: translateX(-260px);
