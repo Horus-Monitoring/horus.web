@@ -143,26 +143,16 @@
                     </div>
                 </div>
 
-                <div class="coluna">
-                    <span class="subtexto">Localização</span>
-                    <input id="localizacao" class="ipt-servidor" type="text" placeholder="Ex: São Paulo - ACC-SP"
-                        style="width: 100%;">
-                </div>
-
                 <div class="linha">
+                    <div class="coluna">
+                        <span class="subtexto">Localização</span>
+                        <input id="localizacao" class="ipt-servidor" type="text" placeholder="Ex: São Paulo - ACC-SP">
+                    </div>
+
                     <div class="coluna">
                         <span class="subtexto">Sistema Operacional</span>
                         <input id="sistemaOperacional" class="ipt-servidor" type="text"
                             placeholder="Ex: Ubuntu Server 20.4">
-                    </div>
-
-                    <div class="coluna">
-                        <span class="subtexto">Status Inicial</span>
-                        <select class="ipt-servidor" name="" id="statusInicial">
-                            <option value="operacional">Operacional</option>
-                            <option value="atencao">Atenção</option>
-                            <option value="critico">Crítico</option>
-                        </select>
                     </div>
                 </div>
 
@@ -310,7 +300,7 @@
                 <div class="linha">
                     <div class="coluna">
                         <span class="subtexto">Servidor de Destino</span>
-                        <select class="ipt-servidor" name="" id="select_servidor" style="width: 620px"></select>
+                        <select class="ipt-servidor" name="" id="select_servidor"></select>
                     </div>
                 </div>
 
@@ -318,31 +308,30 @@
                     <div class="coluna">
                         <span class="subtexto">Tipo de Componente</span>
                         <select class="ipt-servidor" name="" id="tipo_componente">
-                            <option value="1">CPU</option>
-                            <option value="2">RAM</option>
-                            <option value="3">Disco</option>
+                            <option value="6">Processos</option>
+                            <option value="7">Rede</option>
                         </select>
                     </div>
 
                     <div class="coluna">
-                        <span class="subtexto">Marca</span>
-                        <input id="marcaComponente" class="ipt-servidor" type="text" placeholder="Ex: Intel">
+                        <span class="subtexto">Unidade de medida</span>
+                        <select class="ipt-servidor" name="" id="unidadeMedida">
+                            <option value="CPU %">Consumo CPU (%)</option>
+                            <option value="RAM %">Consumo RAM (%)</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="linha">
-                    <div class="coluna">
-                        <span class="subtexto">Modelo</span>
-                        <input id="modeloComponente" class="ipt-servidor" type="text" placeholder="Ex: Xeon Gold">
-                    </div>
+                <div class="linha-limite">
+                    <div class="coluna-limite">
+                        <div class="mostrar-limite">
+                            <span class="subtexto">Limite crítico</span>
+                            <span id="limiteAtual" class="subtexto-info"></span>
+                        </div>
 
-                    <div class="coluna">
-                        <span class="subtexto">Status Inicial</span>
-                        <select class="ipt-servidor" name="" id="statusComponente">
-                            <option value="operacional">Operacional</option>
-                            <option value="atencao">Atenção</option>
-                            <option value="critico">Crítico</option>
-                        </select>
+                        <input oninput="calcularLimite()" id="limite_componente" class="limite" type="range" min="0"
+                            max="100">
+
                     </div>
                 </div>
 
@@ -508,6 +497,18 @@
             }
         }
 
+        function calcularLimite() {
+            limiteAtual.innerHTML = `${limite_componente.value}%`
+
+            if (limite_componente.value <= 69) {
+                limiteAtual.style = 'color:green'
+            } else if (limite_componente.value <= 89) {
+                limiteAtual.style = 'color:orange'
+            } else {
+                limiteAtual.style = 'color:red'
+            }
+        }
+
         function verificarObrigatorios() {
             if (
                 select_cpu.value == '#' ||
@@ -548,11 +549,10 @@
         function cadastrarComponente() {
             var fkServidorVar = select_servidor.value;
             var fkComponenteVar = tipo_componente.value;
-            var marcaVar = marcaComponente.value;
-            var modeloVar = modeloComponente.value;
-            var statusInicialVar = statusComponente.value;
+            var unidadeMedidaVar = unidadeMedida.value;
+            var componenteLimiteVar = limite_componente.value;
 
-            if (fkServidorVar == '' || marcaVar == '' || modeloVar == '') {
+            if (fkServidorVar == '' || unidadeMedidaVar == '' || componenteLimiteVar == '') {
                 alert('Preencha todas as informações corretamente')
                 return;
             }
@@ -565,9 +565,8 @@
                 body: JSON.stringify({
                     fkServidorServer: fkServidorVar,
                     fkComponenteServer: fkComponenteVar,
-                    marcaServer: marcaVar,
-                    modeloServer: modeloVar,
-                    statusInicialServer: statusInicialVar
+                    unidadeMedidaServer: unidadeMedidaVar,
+                    componenteLimiteServer: componenteLimiteVar
                 })
             })
                 .then(resposta => {
@@ -596,7 +595,7 @@
                     var topo =
                         `
                     <div class="linha">
-                        <span class="nome-servidor">${lista[0].nome}</span>
+                        <span class="nome-servidor">${lista[0].hostname}</span>
                         <img class="fechar" onclick="fecharDetalhes()" src="./assets/imgs/painel/fechar-azul.png" alt="" width="30px">
                     </div>
                     `
@@ -610,14 +609,13 @@
                                 </div>
 
                                 <div class="coluna sumir">
-                                    <span class="subtexto">Marca/Modelo</span>
-                                    <span class="subtexto-info">${componente.marca}</span>
-                                    <span class="subtexto">${componente.modelo}</span>
+                                    <span class="subtexto">Unidade de medida</span>
+                                    <span class="subtexto-info">${componente.unidade_medida}</span>
                                 </div>
 
                                 <div class="coluna">
-                                    <span class="subtexto">Status</span>
-                                    <span class="status status-online">${componente.status_inicial}</span>
+                                    <span class="subtexto">Limite crítico</span>
+                                    <span class="status status-online">${Math.round(componente.limite)}%</span>
                                 </div>
 
                                 <div class="coluna sumir-celular">
@@ -641,6 +639,16 @@
             fetch(`/servidores/exibirServidores/${fkEmpresa}`)
                 .then(resposta => resposta.json())
                 .then((lista) => {
+                    if (lista.length === 0) {
+                        servidores.innerHTML = `
+                            <div class="sem-servidores">
+                                <p>Nenhum servidor cadastrado.</p>
+                                <span>Cadastre um novo servidor clicando em "Cadastrar Servidor" para que ele apareça aqui.</span>
+                            </div>
+                        `;
+                        return;
+                    }
+
                     servidores.innerHTML = lista.map(servidor =>
                         `
                         <div class="servidor">
@@ -649,7 +657,7 @@
                                     <span class="detalhes" onclick="abrirDetalhes(${servidor.id_servidor})">Detalhes</span>
 
                                     <div class="coluna">
-                                        <span class="nome-servidor">${servidor.nome}</span>
+                                        <span class="nome-servidor">${servidor.hostname}</span>
                                         <span class="subtexto">${servidor.localizacao}</span>
                                     </div>
                                 </div>
@@ -657,7 +665,7 @@
 
                             <div class="coluna sumir-celular">
                                 <span class="subtexto">IP</span>
-                                <span class="subtexto-info">${servidor.ip}</span>
+                                <span class="subtexto-info">${servidor.endereco_ip}</span>
                             </div>
 
                             <div class="coluna sumir">
@@ -666,7 +674,7 @@
                             </div>
 
                             <div class="coluna sumir-celular">
-                                <span class="status status-online">${servidor.status_inicial}</span>
+                                <span class="status status-online">${servidor.status_servidor}</span>
                             </div>
 
                             <div class="coluna sumir">
