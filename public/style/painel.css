@@ -87,6 +87,10 @@ body {
 
 .adm{
   display: none;
+} 
+
+.prejuizo{
+  display:none !important;
 }
 
 .item-menu {

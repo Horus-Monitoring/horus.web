@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="card pequeno">
+                    <div class="card pequeno prejuizo" id="prejuizo">
                         <div class="tipo-kpi">
                             <span class="nome-kpi">Prejuizos estimados</span>
                             <span class="kpi">R$ 31.048.101,58</span>
@@ -157,15 +157,16 @@
     </div>
 
     <script>
-        window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
-
-            if (funcao === "Gestor") {
-                document.getElementById("administracao").style.display = "flex";
-                document.getElementById("gerarRelatorio").style.display = "flex";
-            }
-        }
 
         window.onload = () => {
+
+        const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao == "Gestor") {
+                document.getElementById("administracao").style.display = "block";
+                document.getElementById("gerarRelatorio").style.display = "block";
+                document.getElementById("prejuizo").style.display = "flex";
+            }
     
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
