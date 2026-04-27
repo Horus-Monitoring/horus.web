@@ -565,7 +565,9 @@
     </div>
 
     <div>
-      <span class="subtexto-info">${usuario.funcao}</span>
+      <span class="badge-funcao ${usuario.funcao == 'Gestor' ? 'badge-gestor' : 'badge-analista'}">
+            ${usuario.funcao}
+        </span>
     </div>
 
     <div>
