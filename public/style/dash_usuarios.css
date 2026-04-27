@@ -407,6 +407,24 @@ body {
   gap: 10px;
 }
 
+.badge-funcao {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge-gestor {
+  background-color: #FFF0DC;
+  color: #B06000;
+}
+
+.badge-analista {
+  background-color: #DFFAEC;
+  color: #1A7A45;
+}
+
 
 
 .imagem{
@@ -631,6 +649,16 @@ body {
 /*Responsividade*/
 
 @media (max-width: 1200px) {
+
+   .box-servidor {
+    grid-template-columns: 2fr 1fr 80px;
+  }
+
+  .box-servidor > div:nth-child(2),
+  .box-servidor > div:nth-child(4) {
+    display: none;
+  }
+
   .titulo{
     display: none;
   }
@@ -704,6 +732,16 @@ body {
 }
 
 @media (max-width: 768px) {
+
+  .box-servidor {
+    grid-template-columns: 2fr 80px;
+  }
+
+  .box-servidor > div:nth-child(2),
+  .box-servidor > div:nth-child(3),
+  .box-servidor > div:nth-child(4) {
+    display: none;
+  }
 
   .titulo{
     display: none;
