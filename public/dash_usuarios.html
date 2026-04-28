@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários | Horus </title>
-    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,6 @@
         rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./js/script.js"></script>
     <link rel="stylesheet" href="style/dash_usuarios.css">
     <link rel="stylesheet" href="./style.css">
@@ -565,7 +564,7 @@
   <div class="box-servidor">
 
     <div style="display:flex; align-items:center; gap:12px;">
-      <div class="imagem style = "background:${corAvatar(usuario.nome)}">${gerarIniciais(usuario.nome)}</div>
+      <div class="imagem" style = "background:${corAvatar(usuario.nome)}">${gerarIniciais(usuario.nome)}</div>
       <span class="nome-servidor">${usuario.nome}</span>
     </div>
 
@@ -668,7 +667,56 @@ exibirUsuarioAtivo();
         .catch(error => console.error('Erro ao buscar usuários:', error));
 }
 
+// Checkbox para registro de servidores
+function abrirModalGerenciarServidores(id) {
+    idUsuarioParaGerenciar = id;
 
+    const fkEmpresa = sessionStorage.ID_EMPRESA;
 
+    fetch(`/servidores/listarServidoresComAcesso/${fkEmpresa}/${id}`)
+        .then(res => res.json())
+        .then(lista => {
+            const container = document.querySelector(".lista-checkbox");
+
+            container.innerHTML = lista.map(servidor => `
+                <div class="checkbox-item">
+                    <input type="checkbox" 
+                           value="${servidor.id_servidor}"
+                           ${servidor.tem_acesso ? "checked" : ""}>
+                    <label>${servidor.hostname}</label>
+                </div>
+            `).join("");
+        });
+
+    modal3.classList.add('ativo');
+}
+
+function salvarServidores() {
+    const checkboxes = document.querySelectorAll(".lista-checkbox input");
+    const selecionados = [];
+
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            selecionados.push(cb.value);
+        }
+    });
+
+    fetch("/servidores/atualizarAcessos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkFuncionario: idUsuarioParaGerenciar,
+            servidores: selecionados
+        })
+    })
+    .then(res => {
+        if (res.ok) {
+            alert("Acessos atualizados");
+            modal3.classList.remove("ativo");
+        }
+    });
+}
 
 </script>

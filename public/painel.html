@@ -38,14 +38,14 @@
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </div>
 
-                <div class="categoria adm" id="administracao">Administração
-                    <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+                <div class="categoria adm" id="administracao">Administração</div>
+                    <div onclick="window.location.href='dash_usuarios.html'" class="item-menu adm" id="cadastrarUsuario">
                         <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
                     </div>
-                    <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
+                    <div onclick="window.location.href='servidor-componente.html'" class="item-menu adm" id="cadastrarServidor">
                         <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                     </div>
-                </div>
+                
 
                 <button id="gerarRelatorio" class="adm" style="align-items: center;">Gerar Relatório em PDF</button>
             </nav>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="card pequeno">
+                    <div class="card pequeno prejuizo" id="prejuizo">
                         <div class="tipo-kpi">
                             <span class="nome-kpi">Prejuizos estimados</span>
                             <span class="kpi">R$ 31.048.101,58</span>
@@ -122,15 +122,15 @@
 
                 <section class="linha">
                     <div class="card card-grafico">
-                        <h3 class="tipo-grafico">Uso de CPU (24h)</h3>
-                        <div class="interface-grafico">
-                            <canvas id="grafico-cpu"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-grafico">
                         <h3 class="tipo-grafico">Incidentes por dia</h3>
                         <div class="interface-grafico">
                             <canvas id="grafico-incidentes"></canvas>
+                        </div>
+                    </div>
+                    <div class="card card-grafico">
+                        <h3 class="tipo-grafico">Uso de CPU (24h)</h3>
+                        <div class="interface-grafico">
+                            <canvas id="grafico-cpu"></canvas>
                         </div>
                     </div>
                 </section>
@@ -157,15 +157,18 @@
     </div>
 
     <script>
-        window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
-
-            if (funcao === "Gestor") {
-                document.getElementById("administracao").style.display = "flex";
-                document.getElementById("gerarRelatorio").style.display = "flex";
-            }
-        }
 
         window.onload = () => {
+
+        const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+            if (funcao == "Gestor") {
+                document.getElementById("administracao").style.display = "block";
+                document.getElementById("gerarRelatorio").style.display = "block";
+                document.getElementById("cadastrarServidor").style.display = "flex";
+                document.getElementById("cadastrarUsuario").style.display = "flex";
+                document.getElementById("prejuizo").style.display = "flex";
+            }
     
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
@@ -222,9 +225,10 @@
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
                 datasets: [
-                    { label: 'Crítico', data: [0,0,1,1,2,0,0], backgroundColor: '#dc2828', borderRadius: 5, borderWidth: 0 },
-                    { label: 'Atenção', data: [1,4,2,5,1,5,3], backgroundColor: '#f59f0a', borderRadius: 5, borderWidth: 0 },
-                    { label: 'Info',    data: [5,2,5,5,2,4,2], backgroundColor: '#3577d4', borderRadius: 5, borderWidth: 0 }
+                    { label: 'Baixa', data: [5,4,7,2,1,5,3], backgroundColor: '#274690', borderRadius: 5, borderWidth: 0 },
+                    { label: 'Média',    data: [4,2,4,1,3,6,2], backgroundColor: '#ffcc00', borderRadius: 5, borderWidth: 0 },
+                    { label: 'Alta',    data: [3,1,3,5,2,4,1], backgroundColor: '#ff8400', borderRadius: 5, borderWidth: 0 },
+                    { label: 'Crítica', data: [3,2,4,1,1,2,4], backgroundColor: '#c70c0c', borderRadius: 5, borderWidth: 0 }
                 ]
             },
             options: {

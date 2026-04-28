@@ -181,6 +181,27 @@ function deletarComponente(req, res) {
         );
 }
 
+function listarServidoresComAcesso(req, res) {
+    const fkEmpresa = req.params.fkEmpresa;
+    const fkFuncionario = req.params.fkFuncionario;
+
+    servidoresModel.listarServidoresComAcesso(fkEmpresa, fkFuncionario)
+        .then(resultado => res.json(resultado))
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function atualizarAcessos(req, res) {
+    const { fkFuncionario, servidores } = req.body;
+
+    servidoresModel.limparAcessos(fkFuncionario)
+        .then(() => servidoresModel.inserirAcessos(fkFuncionario, servidores))
+        .then(() => res.sendStatus(200))
+        .catch(err => res.status(500).json(err));
+}
+
 module.exports = {
     cadastrarServidor,
     exibirServidores,
@@ -188,5 +209,7 @@ module.exports = {
     cadastrarComponente,
     abrirDetalhes,
     deletarServidor,
-    deletarComponente
+    deletarComponente,
+    listarServidoresComAcesso,
+    atualizarAcessos
 }
