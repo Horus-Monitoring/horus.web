@@ -38,14 +38,14 @@
           <img src="./assets/imgs/painel/alerta-selecionado.png" alt="" width="18px">Incidentes
         </div>
 
-        <div class="categoria adm" id="administracao">Administração
-            <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+        <div class="categoria adm" id="administracao">Administração</div>
+            <div onclick="window.location.href='dash_usuarios.html'" class="item-menu adm" id="cadastrarUsuario">
               <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
             </div>
-            <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
+            <div onclick="window.location.href='servidor-componente.html'" class="item-menu adm" id="cadastrarServidor">
               <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
             </div>
-        </div>
+        
 
         <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
       </nav>
@@ -240,13 +240,17 @@
 <script>
   exibirUsuarioAtivo();
 
-  window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
-
-            if (funcao == "Gestor") {
+  window.onload = () => {
+  
+  const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+        console.log(funcao)
+             if (funcao == "Gestor") {
                 document.getElementById("administracao").style.display = "block";
                 document.getElementById("gerarRelatorio").style.display = "block";
+                document.getElementById("cadastrarServidor").style.display = "flex";
+                document.getElementById("cadastrarUsuario").style.display = "flex";
             }
-        }
+   }
 
   const hamburguer = document.getElementById("hamburguer");
   const lateral = document.getElementById("lateral");

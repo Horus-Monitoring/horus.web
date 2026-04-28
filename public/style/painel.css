@@ -82,11 +82,19 @@ body {
   color: #a0a5a8;
   margin: 16px 0 4px 10px;
   font-size: 11px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
+}
+
+.item-menu.adm{
+  display: none;
 }
 
 .adm{
   display: none;
+}
+
+.card.pequeno.prejuizo{
+  display:none;
 }
 
 .item-menu {

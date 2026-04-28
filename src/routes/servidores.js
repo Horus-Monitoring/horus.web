@@ -33,4 +33,12 @@ router.delete("/deletarComponente/:id", function (req, res) {
     servidoresController.deletarComponente(req, res);
 })
 
+router.get("/listarServidoresComAcesso/:fkEmpresa/:fkFuncionario", function (req, res) {
+    servidoresController.listarServidoresComAcesso(req, res);
+});
+
+router.post("/atualizarAcessos", function (req, res) {
+    servidoresController.atualizarAcessos(req, res);
+});
+
 module.exports = router;
