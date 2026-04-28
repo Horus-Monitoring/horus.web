@@ -428,7 +428,13 @@
                 nomeVar == '' ||
                 ipVar == '' ||
                 localizacaoVar == '' ||
-                sistemaOperacionalVar == ''
+                sistemaOperacionalVar == '' ||
+                limiteCpuVar == '' ||
+                unidadeMedidaCpuVar == '#' ||
+                limiteRamVar == '' ||
+                unidadeMedidaRamVar == '#' ||
+                limiteDiscoVar == '' ||
+                unidadeMedidaDiscoVar == '#'
             ) {
                 alerta_mensagem.innerHTML = "Houve um erro ao tentar cadastrar o servidor!";
                 mostrarAlerta()
