@@ -713,6 +713,7 @@
                 method: 'DELETE'
             })
                 .then(resposta => {
+                    console.log(resposta)
                     if (resposta.ok) {
                         alert('Servidor deletado com sucesso!');
                         exibirServidores();
