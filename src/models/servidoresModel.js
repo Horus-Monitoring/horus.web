@@ -78,7 +78,14 @@ function deletarServidor(id) {
         DELETE FROM servidor WHERE id_servidor = ${id};
     `;
 
+    var deletarAssociativa = `
+        DELETE FROM acesso_servidor WHERE fk_servidor = ${id};
+    `
+
     return database.executar(deletarComponentes)
+        .then(() => {
+            return database.executar(deletarAssociativa);
+        })
         .then(() => {
             return database.executar(deletarServidor);
         });
