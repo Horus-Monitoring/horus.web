@@ -1,9 +1,10 @@
+@import url('https://googleapis.com');
 * {
   border: 0;
   padding: 0;
-  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
 }
 
 html, body {
