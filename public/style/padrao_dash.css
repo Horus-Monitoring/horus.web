@@ -188,6 +188,28 @@ body {
     padding: 12px;
     gap: 12px;
   }
+  
+  .servidores{
+  
+    width: 60%;
+  }
+
+  .selecionar-servidores{
+    width: 40%;
+    align-items: flex-end;
+  }
+
+
+
+  .selecionar-servidores select{
+    width: 100%;
+    margin-left: 10%; 
+  }
+
+  .ip,
+  .att{
+    display: none;
+  }
 }
 
 /* desktop */
