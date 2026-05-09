@@ -53,7 +53,7 @@
                     <img src="./assets/imgs/painel/processos.png" alt="">Processos
                 </a>
                 <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt="">Temperatura
+                    <img src="./assets/imgs/painel/temperatura.png" alt="">  Temperatura
                 </a>
 
                 <div class="categoria adm" id="administracao">Administração </div>
@@ -64,8 +64,6 @@
                         <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                     </a>
                 
-
-                <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -93,35 +91,35 @@
             </header>
 
             <section class="conteudo" id="conteudo">
-                
-                <div style="border: 10px solid red; display: flex; flex-direction: row;">
-                    <div style="border: 10px solid green; display: flex; flex-direction: row;">
-                        <div style="border: 10px solid blue;  display: flex; flex-direction: row;">
-                            <div>
-                                <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                <div class="padrao-serv">
+                    <div class="servidores">
+                        <div class="detalhes-servidores">
+                            <div style="border: 10px solid blue;  display: flex; flex-direction: row;">
+                                <div>
+                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                                </div>
+                                <div>
+                                    <p>Nome Servidor</p>
+                                    <p>[Local Servidor]</p>
+                                </div>
                             </div>
-                            <div>
-                                <p>Nome Servidor</p>
-                                <p>[Local Servidor]</p>
+                            <div style="border: 10px solid blue;">
+                                <p>IP do Servidor</p>
+                                <p>[ip do servidor]</p>
                             </div>
-                        </div>
-                        <div style="border: 10px solid blue;">
-                            <p>IP do Servidor</p>
-                            <p>[ip do servidor]</p>
-                        </div>
-                        <div style="border: 10px solid blue;">
-                            <p>Última atualização</p>
-                            <p>[Data e Hora]</p>
+                            <div style="border: 10px solid blue;">
+                                <p>Última atualização</p>
+                                <p>[Data e Hora]</p>
+                            </div>
                         </div>
                     </div>
-                    <div style="border: 10px solid green;">
-                        <p>Selecione o servidor:</p>
-                        <select name="servidores" id="servidores">
-                            <option value="#" selected disabled>Nome Servidor</option>
-                        </select>
+                    <div class="selecionar-servidores">
+                            <p>Selecione o servidor:</p>
+                            <select name="servidores" id="servidores">
+                                <option value="#" selected disabled>Nome Servidor</option>
+                            </select>
                     </div>
                 </div>
-
             </section>
 
 
@@ -135,7 +133,7 @@
 
 <script>
 
-   window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+   /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
              if (funcao == "Gestor") {
                 document.getElementById("administracao").style.display = "block";
@@ -143,7 +141,7 @@
                 document.getElementById("cadastrarServidor").style.display = "flex";
                 document.getElementById("cadastrarUsuario").style.display = "flex";
             }
-   }
+   }*/
 
    //exibirUsuarioAtivo();
 
