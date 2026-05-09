@@ -94,22 +94,22 @@
                 <div class="padrao-serv">
                     <div class="servidores">
                         <div class="detalhes-servidores">
-                            <div style="border: 10px solid blue;  display: flex; flex-direction: row;">
-                                <div>
+                            <div class="info-servidores nome">
+                                <div style="padding-right: 10px;">
                                     <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
                                 </div>
                                 <div>
-                                    <p>Nome Servidor</p>
+                                    <span>Nome Servidor</span>
                                     <p>[Local Servidor]</p>
                                 </div>
                             </div>
-                            <div style="border: 10px solid blue;">
+                            <div class="info-servidores">
                                 <p>IP do Servidor</p>
-                                <p>[ip do servidor]</p>
+                                <span>[ip do servidor]</span>
                             </div>
-                            <div style="border: 10px solid blue;">
+                            <div class="info-servidores">
                                 <p>Última atualização</p>
-                                <p>[Data e Hora]</p>
+                                <span>[Data e Hora]</span>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
 
 <script>
 
-   /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+   window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
              if (funcao == "Gestor") {
                 document.getElementById("administracao").style.display = "block";
@@ -141,9 +141,9 @@
                 document.getElementById("cadastrarServidor").style.display = "flex";
                 document.getElementById("cadastrarUsuario").style.display = "flex";
             }
-   }*/
+   }
 
-   //exibirUsuarioAtivo();
+   exibirUsuarioAtivo();
 
     //Modal para o menu sanduíche
 

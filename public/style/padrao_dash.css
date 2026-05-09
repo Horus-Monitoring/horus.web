@@ -70,6 +70,7 @@ body {
   flex-direction: row;
   width: 80%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .detalhes-servidores{ 
@@ -79,6 +80,25 @@ body {
   width: 100%;
 }
 
+.info-servidores{
+  border: 10px;  
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.nome{
+  flex-direction: row;
+}
+
+.info-servidores span{
+  font-weight: bold;
+}
+
+.info-servidores p{
+  color: var(--subtexto)
+}
 .selecionar-servidores{
   align-self: flex-end;
   align-items: flex-end;
