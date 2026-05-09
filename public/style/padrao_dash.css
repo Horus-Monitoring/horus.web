@@ -1,9 +1,10 @@
+@import url('https://googleapis.com');
 * {
   border: 0;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Cabin', sans-serif;
 }
 
 :root {
@@ -52,8 +53,53 @@ body {
 }
 
 .adm {
-  display: none;
+  display:none;
 }
+
+.padrao-serv{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.servidores{
+  border: 2px var(--borda) solid;
+  border-radius: 10px;
+  display: flex; 
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.detalhes-servidores{ 
+  display: flex; 
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.selecionar-servidores{
+  align-self: flex-end;
+  align-items: flex-end;
+  width: 20%;
+  justify-items: flex-end;
+}
+
+.selecionar-servidores select{
+  border: 2px var(--borda) solid;
+  border-radius: 10px;
+  justify-self: flex-end;
+  padding: 5%;
+  width: 75%;
+  margin-left: 30%;
+  appearance: none;
+  background-image: url(../assets/imgs/painel/select-baixo.png);
+  background-repeat: no-repeat ;
+  background-position: right 10px top 50%;
+  background-size: 24px auto;
+}
+
 
 /* overlay do menu hamburguer */
 .modal-lateral {
