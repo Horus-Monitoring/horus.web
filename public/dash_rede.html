@@ -91,7 +91,8 @@
             </header>
 
             <section class="conteudo" id="conteudo">
-                <div class="padrao-serv">
+                document.getElementById("conteudo").innerHTML = "
+        <div class="padrao-serv">
                     <div class="servidores">
                         <div class="detalhes-servidores">
                             <div class="info-servidores nome">
@@ -120,95 +121,95 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="kpis">
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Perda de Pacotes
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/rede.png" alt="">
+                    <div class="kpis">
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Perda de Pacotes
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/rede.png" alt="">
+                            </div>
+                            <span class="valor">2.3%</span>
+                            <img src="assets/imgs/rede/caindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                         </div>
-                        <span class="valor">2.3%</span>
-                        <img src="assets/imgs/rede/caindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Latência
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/velocimetro.png" alt="">
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Latência
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/velocimetro.png" alt="">
+                            </div>
+                            <span class="valor">18ms</span>
+                            <img src="assets/imgs/rede/subindo_verm.png" alt="">
+                            <span class="situacao">piorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                         </div>
-                        <span class="valor">18ms</span>
-                        <img src="assets/imgs/rede/subindo_verm.png" alt="">
-                        <span class="situacao">piorando</span>    
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Atualização ADS-B
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/sinal.png" alt="">
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Atualização ADS-B
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/sinal.png" alt="">
+                            </div>
+                            <span class="valor">98.7%</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                         </div>
-                        <span class="valor">98.7%</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Rotas Sem Atualização
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/nuvem.png" alt="">
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Rotas Sem Atualização
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/nuvem.png" alt="">
+                            </div>
+                            <span class="valor">14 rotas</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                         </div>
-                        <span class="valor">14 rotas</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
+
                     </div>
 
-                </div>
+                    <div class="linha-graficos">
+                        <div class="grafico-linha-box" style="flex: 3;">
+                            <canvas id="graficoTransferencia"></canvas>
+                        </div>
+                        <div class="box-grafico" style="flex: 1;">
+                            Taxa de perda de pacotes
+                        </div>
+                    </div>
 
-                <div class="linha-graficos">
-                    <div class="grafico-linha-box" style="flex: 3;">
-                        <canvas id="graficoTransferencia"></canvas>
-                    </div>
-                    <div class="box-grafico" style="flex: 1;">
-                        Taxa de perda de pacotes
-                    </div>
-                </div>
+                    <div class="linha-graficos">
+                        <div class="box-grafico">
+                            <canvas id="graficoLatencia"></canvas>
+                        </div>
+                        <div class="box-grafico">
+                            <canvas id="graficoBanda"></canvas>
+                        </div>
+                    </div>"
 
-                <div class="linha-graficos">
-                    <div class="box-grafico">
-                        <canvas id="graficoLatencia"></canvas>
-                    </div>
-                    <div class="box-grafico">
-                        <canvas id="graficoBanda"></canvas>
-                    </div>
-                </div>
             </section>
 
 
@@ -233,6 +234,132 @@
     }
  
     exibirUsuarioAtivo(); */
+
+    var tipo = "gestor";
+
+    if (tipo == "gestor") {
+        document.getElementById("conteudo").innerHTML = `
+        <div class="padrao-serv">
+                    <div class="servidores">
+                        <div class="detalhes-servidores">
+                            <div class="info-servidores nome">
+                                <div style="padding-right: 10px;">
+                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                                </div>
+                                <div>
+                                    <span>Nome Servidor</span>
+                                    <p>[Local Servidor]</p>
+                                </div>
+                            </div>
+                            <div class="info-servidores ip">
+                                <p>IP do Servidor</p>
+                                <span>[ip do servidor]</span>
+                            </div>
+                            <div class="info-servidores att">
+                                <p>Última atualização</p>
+                                <span>[Data e Hora]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selecionar-servidores">
+                        <p>Selecione o servidor:</p>
+                        <select name="servidores" id="servidores">
+                            <option value="#" selected disabled>Nome Servidor</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="kpis">
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Perda de Pacotes
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/rede.png" alt="">
+                            </div>
+                            <span class="valor">2.3%</span>
+                            <img src="assets/imgs/rede/caindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Latência
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/velocimetro.png" alt="">
+                            </div>
+                            <span class="valor">18ms</span>
+                            <img src="assets/imgs/rede/subindo_verm.png" alt="">
+                            <span class="situacao">piorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Atualização ADS-B
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/sinal.png" alt="">
+                            </div>
+                            <span class="valor">98.7%</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Rotas Sem Atualização
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/nuvem.png" alt="">
+                            </div>
+                            <span class="valor">14 rotas</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="linha-graficos">
+                        <div class="grafico-linha-box" style="flex: 3;">
+                            <canvas id="graficoTransferencia"></canvas>
+                        </div>
+                        <div class="box-grafico" style="flex: 1;">
+                            Taxa de perda de pacotes
+                        </div>
+                    </div>
+
+                    <div class="linha-graficos">
+                        <div class="box-grafico">
+                            <canvas id="graficoLatencia"></canvas>
+                        </div>
+                        <div class="box-grafico">
+                            <canvas id="graficoBanda"></canvas>
+                        </div>
+                    </div>`
+    } else {
+        document.getElementById("conteudoAdmin").style.display = "none";
+        document.getElementById("conteudoAnalista").style.display = "flex"
+    }
 
     //Modal para o menu sanduíche
 
