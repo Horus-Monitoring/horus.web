@@ -45,10 +45,10 @@ body {
 
 .conteudo {
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   overflow: hidden;
 }
 
@@ -61,8 +61,34 @@ body {
 
 .kpi-card {
   background: white;
+  border: 2px var(--borda) solid;
   border-radius: 12px;
   padding: 15px;
+}
+
+.kpi-card img{
+  width: 20px;
+  height: 20px;
+}
+
+.kpi-card select{
+  width: 100%;
+  border: 2px var(--borda) solid;
+  border-radius: 5px;
+}
+
+.valor{
+  font-size: xx-large;
+}
+
+.situacao{
+  font-size: x-small;
+}
+
+.nome{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .linha-graficos {
@@ -73,6 +99,7 @@ body {
 
 .box-grafico {
   background: white;
+  border: 2px var(--borda) solid;
   border-radius: 12px;
   padding: 15px;
   flex: 1;
@@ -143,13 +170,17 @@ body {
   justify-items: flex-end;
 }
 
+.selecionar-servidores p{
+    margin-right: 10%;
+}
+
 .selecionar-servidores select{
   border: 2px var(--borda) solid;
   border-radius: 10px;
   justify-self: flex-end;
   padding: 5%;
   width: 75%;
-  margin-left: 30%;
+  margin-left: 20%;
   appearance: none;
   background-image: url(../assets/imgs/painel/select-baixo.png);
   background-repeat: no-repeat ;
