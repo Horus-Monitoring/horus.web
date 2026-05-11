@@ -193,7 +193,7 @@
                 </div>
 
                 <div class="linha-graficos">
-                    <div class="box-grafico" style="flex: 3;">
+                    <div class="grafico-linha-box" style="flex: 3;">
                         <canvas id="graficoTransferencia"></canvas>
                     </div>
                     <div class="box-grafico" style="flex: 1;">
@@ -320,6 +320,7 @@
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
