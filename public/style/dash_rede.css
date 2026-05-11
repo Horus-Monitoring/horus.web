@@ -140,6 +140,24 @@ body {
   transition: transform 0.3s ease;
 }
 
+.graficos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.grafico-box {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+}
+
+/* gráfico de linha ocupa largura maior */
+.grafico-box:first-child {
+    grid-column: span 2;
+}
+
 /* tablet/mobile */
 @media (max-width: 1439px) {
   .lateral {
