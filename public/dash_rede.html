@@ -53,17 +53,17 @@
                     <img src="./assets/imgs/painel/processos.png" alt="">Processos
                 </a>
                 <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt="">  Temperatura
+                    <img src="./assets/imgs/painel/temperatura.png" alt=""> Temperatura
                 </a>
 
                 <div class="categoria adm" id="administracao">Administração </div>
-                    <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
-                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                    </a>
-                    <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
-                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                    </a>
-                
+                <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </a>
+                <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </a>
+
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -74,7 +74,7 @@
 
         <main class="main">
 
-           <header class="header">
+            <header class="header">
                 <div class="hamburguer" id="hamburguer">
                     <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
                 </div>
@@ -83,7 +83,7 @@
 
                 <div class="usuario">
                     <div>
-                        <p  id="nome_usuario"></p>
+                        <p id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
                     <span id="inicial_usuario"></span>
@@ -114,15 +114,15 @@
                         </div>
                     </div>
                     <div class="selecionar-servidores">
-                            <p>Selecione o servidor:</p>
-                            <select name="servidores" id="servidores">
-                                <option value="#" selected disabled>Nome Servidor</option>
-                            </select>
+                        <p>Selecione o servidor:</p>
+                        <select name="servidores" id="servidores">
+                            <option value="#" selected disabled>Nome Servidor</option>
+                        </select>
                     </div>
                 </div>
 
                 <div style="border: 10px red solid; display: flex; flex-direction: row;">
-                    <div style="border:10px yellow solid"> 
+                    <div style="border:10px yellow solid">
                         <div style="border: 3px green solid;">
                             Nome da KPI i Imagem
                         </div>
@@ -135,33 +135,7 @@
                         <select name="" id=""></select>
                     </div>
 
-                    <div style="border:10px yellow solid"> 
-                        <div style="border: 3px green solid;">
-                                Nome da KPI i Imagem
-                            </div>
-                            <div style="border: 3px rgb(65, 242, 65) solid;">
-                                % da KPI
-                            </div>
-                            <div style="border: 3px rgb(7, 89, 7) solid;">
-                                status
-                            </div>
-                            <select name="" id=""></select>
-                    </div>
-
-                    <div style="border:10px yellow solid"> 
-                       <div style="border: 3px green solid;">
-                            Nome da KPI i Imagem
-                        </div>
-                        <div style="border: 3px rgb(65, 242, 65) solid;">
-                            % da KPI
-                        </div>
-                        <div style="border: 3px rgb(7, 89, 7) solid;">
-                            status
-                        </div>
-                        <select name="" id=""></select>
-                    </div>
-
-                    <div style="border:10px yellow solid"> 
+                    <div style="border:10px yellow solid">
                         <div style="border: 3px green solid;">
                             Nome da KPI i Imagem
                         </div>
@@ -174,6 +148,50 @@
                         <select name="" id=""></select>
                     </div>
 
+                    <div style="border:10px yellow solid">
+                        <div style="border: 3px green solid;">
+                            Nome da KPI i Imagem
+                        </div>
+                        <div style="border: 3px rgb(65, 242, 65) solid;">
+                            % da KPI
+                        </div>
+                        <div style="border: 3px rgb(7, 89, 7) solid;">
+                            status
+                        </div>
+                        <select name="" id=""></select>
+                    </div>
+
+                    <div style="border:10px yellow solid">
+                        <div style="border: 3px green solid;">
+                            Nome da KPI i Imagem
+                        </div>
+                        <div style="border: 3px rgb(65, 242, 65) solid;">
+                            % da KPI
+                        </div>
+                        <div style="border: 3px rgb(7, 89, 7) solid;">
+                            status
+                        </div>
+                        <select name="" id=""></select>
+                    </div>
+
+                </div>
+
+                <div style="border: 10px blue solid; display: flex; flex-direction: row;">
+                    <div style="border: 10px pink solid;">
+                        <canvas id="graficoTransferencia"></canvas>
+                    </div>
+                    <div style="border: 10px pink solid;">
+                        Taxa de perda de pacotes
+                    </div>
+                </div>
+
+                <div style="border: 10px purple solid; display: flex; flex-direction: row;">
+                    <div style="border: 10px orange solid;">
+                        <canvas id="graficoLatencia"></canvas>
+                    </div>
+                    <div style="border: 10px orange solid;">
+                        <canvas id="graficoBanda"></canvas>
+                    </div>
                 </div>
             </section>
 
@@ -188,17 +206,17 @@
 
 <script>
 
-   window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
-
-             if (funcao == "Gestor") {
-                document.getElementById("administracao").style.display = "block";
-                document.getElementById("gerarRelatorio").style.display = "block";
-                document.getElementById("cadastrarServidor").style.display = "flex";
-                document.getElementById("cadastrarUsuario").style.display = "flex";
-            }
-   }
-
-   exibirUsuarioAtivo();
+    /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+ 
+              if (funcao == "Gestor") {
+                 document.getElementById("administracao").style.display = "block";
+                 document.getElementById("gerarRelatorio").style.display = "block";
+                 document.getElementById("cadastrarServidor").style.display = "flex";
+                 document.getElementById("cadastrarUsuario").style.display = "flex";
+             }
+    }
+ 
+    exibirUsuarioAtivo(); */
 
     //Modal para o menu sanduíche
 
@@ -219,7 +237,7 @@
     if (btnHamburguer) {
         btnHamburguer.addEventListener("click", function (e) {
             e.stopPropagation();
-            
+
             if (lateral.classList.contains("ativo")) {
                 fecharMenu();
             } else {
@@ -240,6 +258,128 @@
         }
     });
 
-    
+    //Gráficos
+    const ctxTransferencia = document.getElementById("graficoTransferencia");
+
+    new Chart(ctxTransferencia, {
+        type: "line",
+        data: {
+            labels: [
+                "0:00",
+                "1:00",
+                "4:00",
+                "7:00",
+                "10:00",
+                "13:00",
+                "16:00",
+                "19:00",
+                "23:00"
+            ],
+            datasets: [
+                {
+                    label: "Rastreamento",
+                    data: [50, 90, 180, 200, 270, 260, 150, 140, 70],
+                    borderColor: "#2F80ED",
+                    backgroundColor: "transparent",
+                    tension: 0.4,
+                    borderWidth: 4
+                },
+                {
+                    label: "Rotas",
+                    data: [20, 60, 140, 160, 250, 230, 110, 100, 30],
+                    borderColor: "#9B51E0",
+                    backgroundColor: "transparent",
+                    tension: 0.4,
+                    borderWidth: 4
+                },
+                {
+                    label: "Correlação",
+                    data: [0, 20, 80, 90, 150, 145, 60, 55, 0],
+                    borderColor: "#2ECC71",
+                    backgroundColor: "transparent",
+                    tension: 0.4,
+                    borderWidth: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Taxa de Transferência de Rede por Servidor"
+                }
+            }
+        }
+    });
+
+    const ctxLatencia = document.getElementById("graficoLatencia");
+
+    new Chart(ctxLatencia, {
+        type: "bar",
+        data: {
+            labels: [
+                "Radar - Rastreamento",
+                "Rastreamento - Correlação",
+                "Correlação - Data Base"
+            ],
+            datasets: [{
+                label: "Latência (ms)",
+                data: [20, 18, 13],
+                backgroundColor: [
+                    "#05056B",
+                    "#0A4A96",
+                    "#12B7E5"
+                ],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Latência entre Componentes"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    const ctxBanda = document.getElementById("graficoBanda");
+
+    new Chart(ctxBanda, {
+        type: "bar",
+        data: {
+            labels: [
+                "ADS-B",
+                "Sinc. de Voo",
+                "Replicação de Rota",
+                "API Gateway"
+            ],
+            datasets: [{
+                label: "Mbps",
+                data: [125, 85, 50, 100],
+                backgroundColor: "#0E7AB5",
+                borderRadius: 12
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Processos com maior Consumo de Banda"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
 
 </script>
