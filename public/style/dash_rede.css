@@ -1,0 +1,220 @@
+@import url('https://googleapis.com');
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+}
+
+:root {
+  --turquesa: #1b264f;
+  --azul: #274690;
+  --ciano: #576ca8;
+  --preto: #302b27;
+  --cinza: #f6f6f6;
+  --borda: #ebe6e7;
+  --texto: #111827;
+  --subtexto: #6b7280;
+}
+
+body {
+  background: var(--cinza);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.main {
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  margin-left: 260px;
+}
+
+.conteudo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.categoria {
+  color: #a0a5a8;
+  margin: 16px 0 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.adm {
+  display:none;
+}
+
+.padrao-serv{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.servidores{
+  border: 2px var(--borda) solid;
+  border-radius: 10px;
+  display: flex; 
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detalhes-servidores{ 
+  display: flex; 
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.info-servidores{
+  border: 10px;  
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.nome{
+  flex-direction: row;
+}
+
+.info-servidores span{
+  font-weight: bold;
+}
+
+.info-servidores p{
+  color: var(--subtexto)
+}
+.selecionar-servidores{
+  align-self: flex-end;
+  align-items: flex-end;
+  width: 20%;
+  justify-items: flex-end;
+}
+
+.selecionar-servidores select{
+  border: 2px var(--borda) solid;
+  border-radius: 10px;
+  justify-self: flex-end;
+  padding: 5%;
+  width: 75%;
+  margin-left: 30%;
+  appearance: none;
+  background-image: url(../assets/imgs/painel/select-baixo.png);
+  background-repeat: no-repeat ;
+  background-position: right 10px top 50%;
+  background-size: 24px auto;
+}
+
+
+/* overlay do menu hamburguer */
+.modal-lateral {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 998;
+  
+}
+
+.modal-lateral.ativo {
+  display: block;
+}
+
+.lateral {
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+/* tablet/mobile */
+@media (max-width: 1439px) {
+  .lateral {
+    width: 220px;
+    transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    transition: transform 0.3s ease;
+  }
+
+  .lateral.ativo {
+    transform: translateX(0);
+  }
+
+
+  .modal-lateral {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 998;
+  }
+
+  .modal-lateral.ativo {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hamburguer {
+    display: flex;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* celular */
+@media (max-width: 799px) {
+  .conteudo {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .servidores{
+  
+    width: 60%;
+  }
+
+  .selecionar-servidores{
+    width: 40%;
+    align-items: flex-end;
+  }
+
+
+
+  .selecionar-servidores select{
+    width: 100%;
+    margin-left: 10%; 
+  }
+
+  .ip,
+  .att{
+    display: none;
+  }
+}
+
+/* desktop */
+@media (min-width: 1440px) {
+  .modal-lateral {
+    display: none !important;
+  }
+}
