@@ -193,6 +193,13 @@
 
                     <div class="linha-graficos">
                         <div class="grafico-linha-box" style="flex: 3;">
+                            <h3>Taxa de Transferência de Rede por Servidor</h3>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                             <canvas id="graficoTransferencia"></canvas>
                         </div>
                         <div class="box-grafico" style="flex: 1;">
@@ -272,9 +279,23 @@
 
                     <div class="linha-graficos">
                         <div class="box-grafico">
+                            <h3>Latência entre Componentes</h3>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                             <canvas id="graficoLatencia"></canvas>
                         </div>
                         <div class="box-grafico">
+                            <h3>Processos com maior consumo de banda</h3>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
                             <canvas id="graficoBanda"></canvas>
                         </div>
                     </div>`
@@ -718,12 +739,6 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: "Taxa de Transferência de Rede por Servidor"
-                    }
-                }
             }
         });
 
@@ -752,10 +767,6 @@
                 indexAxis: "y",
                 responsive: true,
                 plugins: {
-                    title: {
-                        display: true,
-                        text: "Latência entre Componentes"
-                    },
                     legend: {
                         display: false
                     }
@@ -785,10 +796,6 @@
                 indexAxis: "y",
                 responsive: true,
                 plugins: {
-                    title: {
-                        display: true,
-                        text: "Processos com maior Consumo de Banda"
-                    },
                     legend: {
                         display: false
                     }
