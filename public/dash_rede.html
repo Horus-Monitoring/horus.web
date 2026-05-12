@@ -90,8 +90,7 @@
                 </div>
             </header>
 
-            <section class="conteudo" id="conteudo">
-                document.getElementById("conteudo").innerHTML = "
+        <section class="conteudo" id="conteudo">
         <div class="padrao-serv">
                     <div class="servidores">
                         <div class="detalhes-servidores">
@@ -124,12 +123,12 @@
                     <div class="kpis">
                         <div class="kpi-card">
                             <div class="nome">
-                                Perda de Pacotes
+                                Disponibilidade
                                 <img src="assets/imgs/rede/info.png" alt="">
-                                <img src="assets/imgs/rede/rede.png" alt="">
+                                <img src="assets/imgs/rede/transmissao.png" alt="">
                             </div>
-                            <span class="valor">2.3%</span>
-                            <img src="assets/imgs/rede/caindo-verde.png" alt="">
+                            <span class="valor">99.94%</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
                             <span class="situacao">melhorando</span>
                             <select name="" id="">
                                 <option value="24">Últimas 24 horas</option>
@@ -141,11 +140,11 @@
 
                         <div class="kpi-card">
                             <div class="nome">
-                                Latência
+                                Aeronaves Impactadas
                                 <img src="assets/imgs/rede/info.png" alt="">
-                                <img src="assets/imgs/rede/velocimetro.png" alt="">
+                                <img src="assets/imgs/rede/aviao.png" alt="">
                             </div>
-                            <span class="valor">18ms</span>
+                            <span class="valor">14 aeronaves</span>
                             <img src="assets/imgs/rede/subindo_verm.png" alt="">
                             <span class="situacao">piorando</span>
                             <select name="" id="">
@@ -158,11 +157,11 @@
 
                         <div class="kpi-card">
                             <div class="nome">
-                                Atualização ADS-B
+                                Rotas Desatualizadas
                                 <img src="assets/imgs/rede/info.png" alt="">
-                                <img src="assets/imgs/rede/sinal.png" alt="">
+                                <img src="assets/imgs/rede/rotas.png" alt="">
                             </div>
-                            <span class="valor">98.7%</span>
+                            <span class="valor">4 rotas</span>
                             <img src="assets/imgs/rede/subindo-verde.png" alt="">
                             <span class="situacao">melhorando</span>
                             <select name="" id="">
@@ -175,11 +174,11 @@
 
                         <div class="kpi-card">
                             <div class="nome">
-                                Rotas Sem Atualização
+                                Tempo Médio de Recuperação
                                 <img src="assets/imgs/rede/info.png" alt="">
-                                <img src="assets/imgs/rede/nuvem.png" alt="">
+                                <img src="assets/imgs/rede/relogio.png" alt="">
                             </div>
-                            <span class="valor">14 rotas</span>
+                            <span class="valor">4 min.</span>
                             <img src="assets/imgs/rede/subindo-verde.png" alt="">
                             <span class="situacao">melhorando</span>
                             <select name="" id="">
@@ -191,24 +190,52 @@
                         </div>
 
                     </div>
-
-                    <div class="linha-graficos">
-                        <div class="grafico-linha-box" style="flex: 3;">
-                            <canvas id="graficoTransferencia"></canvas>
+                        
+                    <div style="border: red 10px solid; display: flex; flex-direction: column;">
+                        <div style="border: orange 10px solid; display: flex;">
+                            <div style="border: blue 10px solid;">
+                                Voos Atrasados
+                            </div>
+                            <div style="border: blue 10px solid;">
+                                Usuários Afetados
+                            </div>
+                            <div style="border: blue 10px solid;">
+                                Aeroportos Afetados
+                            </div>
+                            <div style="border: blue 10px solid;">
+                                Nível de Impacto
+                            </div>
                         </div>
-                        <div class="box-grafico" style="flex: 1;">
-                            Taxa de perda de pacotes
+                        <div style="border: 1px black solid; height: 2%; width: 100%;">
+
+                        </div>
+                        <div style="border: orange 10px solid; display: flex;">
+                            <div style="border: violet 10px solid">
+                                <p>Ação Recomendada</p>
+                                <span>Verificar servidores de alta latência e otimizar configurações de rede</span>
+                            </div>
+                            <div style="border: violet 10px solid">
+                                <button style="background-color: blue;">Gerar Relatório</button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="linha-graficos">
-                        <div class="box-grafico">
-                            <canvas id="graficoLatencia"></canvas>
+                    <div style="border: goldenrod 10px solid; display: flex;">
+                        <div style="border: slateblue 10px solid">
+                            <div style="border: yellowgreen 10px solid;">
+                                Tendência de Indisponibilidade
+                            </div>
+                            <div style="border: yellowgreen 10px solid;">
+                                Capacidade de rede Vs. Demanda Operacional
+                            </div>
                         </div>
-                        <div class="box-grafico">
-                            <canvas id="graficoBanda"></canvas>
+                        <div style="border: slateblue 10px solid">
+                            <div style="border: yellowgreen 10px solid;">
+                                Cumprimento de SLA
+                            </div>
                         </div>
-                    </div>"
+
+                    </div>
 
             </section>
 
@@ -235,7 +262,7 @@
  
     exibirUsuarioAtivo(); */
 
-    var tipo = "gestor";
+    var tipo = "analista";
 
     if (tipo == "gestor") {
         document.getElementById("conteudo").innerHTML = `
