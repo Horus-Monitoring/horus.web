@@ -20,8 +20,9 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
@@ -39,24 +40,23 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 260px;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .conteudo {
   flex: 1;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  overflow: hidden;
+  gap: 20px;
+  overflow: visible;
 }
 
 .kpis {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  height: 20%;
 }
 
 .kpi-card {
@@ -94,31 +94,36 @@ body {
 .linha-graficos {
   display: flex;
   gap: 20px;
-  height: 35%;
+  width: 100%;
+  flex-wrap: wrap; 
 }
 
 .grafico-linha-box {
-    width: 75%;
+    flex: 3;
+    min-height: 350px;
+    max-height: 350px;
     background: white;
-    border: 2px var(--borda) solid;
+    border: 2px solid var(--borda);
     border-radius: 12px;
     padding: 20px;
+    position: relative;
 }
 
-#graficoTransferencia {
+canvas {
     width: 100% !important;
     height: 100% !important;
+    max-height: 300px;
 }
 
 .box-grafico {
-  background: white;
-  border: 2px var(--borda) solid;
-  border-radius: 12px;
-  padding: 15px;
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 350px;
+  max-height: 350px;
+  background: white;
+  border: 2px solid var(--borda);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
 }
 
 .categoria {
@@ -209,9 +214,10 @@ body {
   padding: 10px;
   display: flex; 
   flex-direction: column;
+  min-height: 220px;
 }
 
-.span-tempo{
+.span-subtitulo{
   color: var(--subtexto);
   font-size: x-small;
 }
@@ -227,6 +233,44 @@ body {
 
 .dados p{
   font-size: xx-small;
+}
+
+.graficos-inferiores {
+    display: flex;
+    gap: 20px;
+    min-height: 500px;
+    align-items: stretch;
+}
+
+.coluna-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 2;
+}
+
+.grafico-card {
+    background: white;
+    border: 2px solid var(--borda);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.grande {
+    min-height: 240px;
+}
+
+.sla-card {
+    flex: 1;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.grafico-card canvas {
+    width: 100% !important;
+    max-height: 300px;
 }
 
 /* overlay do menu hamburguer */
