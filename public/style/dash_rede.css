@@ -126,6 +126,23 @@ canvas {
   position: relative;
 }
 
+.tabela-pacotes{
+  align-items: center;
+  border-radius: 5px;
+  margin-top:20px;
+  margin-bottom: 20px;
+  background-color: white;  
+  display: flex; 
+  justify-content: space-between;
+
+}
+
+.indicador-pacotes{
+  border: red 2px solid; 
+  background-color: rgb(238, 147, 147);
+
+}
+
 .categoria {
   color: #a0a5a8;
   margin: 16px 0 4px 10px;
