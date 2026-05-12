@@ -193,18 +193,27 @@
 
                     <div class="linha-graficos">
                         <div class="grafico-linha-box" style="flex: 3;">
-                            <h3>Taxa de Transferência de Rede por Servidor</h3>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Taxa de Transferência de Rede por Servidor</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>
+                            </div>
                             <canvas id="graficoTransferencia"></canvas>
                         </div>
                         <div class="box-grafico" style="flex: 1;">
-                            <h3>Taxa de perda de pacotes</h3>
-
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Taxa de perda de pacotes</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>
+                            </div>   
                             <div class="tabela-pacotes" >
                                 <div>
                                     Rastreamento
@@ -279,23 +288,27 @@
 
                     <div class="linha-graficos">
                         <div class="box-grafico">
-                            <h3>Latência entre Componentes</h3>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Latência entre Componentes</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>
+                            </div>
                             <canvas id="graficoLatencia"></canvas>
                         </div>
                         <div class="box-grafico">
-                            <h3>Processos com maior consumo de banda</h3>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Processos com maior consumo de banda</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>   
+                            </div>
                             <canvas id="graficoBanda"></canvas>
                         </div>
                     </div>`
