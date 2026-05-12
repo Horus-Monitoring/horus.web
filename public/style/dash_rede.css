@@ -234,6 +234,11 @@ canvas {
   font-size: xx-small;
 }
 
+.titulo-grafico{
+  display: flex; 
+  justify-content: space-between;
+}
+
 .graficos-inferiores {
     display: flex;
     gap: 20px;
@@ -265,6 +270,33 @@ canvas {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.sla-metricas{
+  padding: 10px;
+  color: var(--subtexto);
+  border: 2px var(--borda) solid;
+  background-color: var(--cinza);
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sla-metricas b{
+  color: red;
+}
+
+.indicador-sla{
+  border: red 2px solid; 
+  border-radius: 15px; 
+  background-color: rgb(238, 133, 133); 
+  color: red; 
+  align-self: center;
+  text-align: center;
+  width: 50%;
+  margin-top: 20px;
 }
 
 .grafico-card canvas {
