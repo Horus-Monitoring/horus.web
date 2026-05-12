@@ -201,6 +201,33 @@ body {
   background-size: 24px auto;
 }
 
+/*Gestor*/
+.box-alerta{
+  background: white;
+  border: 2px var(--borda) solid;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex; 
+  flex-direction: column;
+}
+
+.span-tempo{
+  color: var(--subtexto);
+  font-size: x-small;
+}
+
+.dados {
+  background: white;
+  border: 2px var(--borda) solid;
+  border-radius: 12px;
+  padding: 5px;
+  margin-top:5px;
+  margin-bottom: 5px;
+}
+
+.dados p{
+  font-size: xx-small;
+}
 
 /* overlay do menu hamburguer */
 .modal-lateral {
