@@ -129,8 +129,8 @@ canvas {
 .tabela-pacotes{
   align-items: center;
   border-radius: 5px;
-  margin-top:20px;
-  margin-bottom: 20px;
+  margin-top:15px;
+  margin-bottom: 15px;
   background-color: white;  
   display: flex; 
   justify-content: space-between;
