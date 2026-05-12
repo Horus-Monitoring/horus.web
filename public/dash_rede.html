@@ -182,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="kpis">
                     <div class="kpi-card">
                         <div class="nome">
@@ -260,19 +260,50 @@
 
                     <div class="coluna-esquerda">
                         <div class="grafico-card grande">
-                            <h3>Tendência de Indisponibilidade Mensal</h3>
+                            <div class="titulo-grafico">
+                                <h3>Tendência de Indisponibilidade Mensal</h3>
+                                <select name="" id="">
+                                    <option value="">Últimas 24 horas</option>
+                                </select>
+                            </div>
                             <canvas id="graficoIndisponibilidade"></canvas>
                         </div>
 
                         <div class="grafico-card grande">
-                            <h3>Capacidade de Rede vs Demanda Operacional</h3>
+                            <div class="titulo-grafico">
+                                <h3>Capacidade de Rede vs Demanda Operacional</h3>
+                                <select name="" id="">
+                                    <option value="">Últimas 24 horas</option>
+                                </select>
+                            </div>
                             <canvas id="graficoCapacidade"></canvas>
                         </div>
                     </div>
 
                     <div class="grafico-card sla-card">
-                        <h3>Cumprimento de SLA</h3>
+                        <div class="titulo-grafico" style="margin-bottom: 110px;">
+                            <h3>Cumprimento de SLA</h3>
+                            <select name="" id="">
+                                <option value="">Últimas 24 horas</option>
+                            </select>
+                        </div>
+                        
+                        <div class="sla-metricas">
+                            <span>Meta SLA</span>
+                            <span style="color: black !important; font-weight: bold;">99.9%</span>
+                        </div>
+                        <div class="sla-metricas">
+                            <span>Desempenho Atual</span>
+                            <span><b>94.4%</b></span>
+                        </div>
+                        <div class="sla-metricas">
+                            <span>Diferença</span>
+                            <span><b>5.5%</b></span>
+                        </div>
                         <canvas id="graficoSLA"></canvas>
+                        <div class="indicador-sla">
+                            Abaixo da Meta
+                        </div>
                     </div>
 
                 </div>
