@@ -91,7 +91,37 @@
             </header>
 
             <section class="conteudo" id="conteudo">
-                <div class="padrao-serv">
+                
+            </section>
+
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+ 
+              if (funcao == "Gestor") {
+                 document.getElementById("administracao").style.display = "block";
+                 document.getElementById("gerarRelatorio").style.display = "block";
+                 document.getElementById("cadastrarServidor").style.display = "flex";
+                 document.getElementById("cadastrarUsuario").style.display = "flex";
+             }
+    }
+ 
+    exibirUsuarioAtivo(); */
+
+    var tipo = "analista";
+
+    if (tipo == "analista") {
+    document.getElementById("conteudo").innerHTML = 
+        `<div class="padrao-serv">
                     <div class="servidores">
                         <div class="detalhes-servidores">
                             <div class="info-servidores nome">
@@ -311,67 +341,9 @@
                             </div>
                             <canvas id="graficoBanda"></canvas>
                         </div>
-                    </div>`
-
-            </section>
-
-
-        </main>
-
-    </div>
-
-</body>
-
-</html>
-
-<script>
-
-    /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
- 
-              if (funcao == "Gestor") {
-                 document.getElementById("administracao").style.display = "block";
-                 document.getElementById("gerarRelatorio").style.display = "block";
-                 document.getElementById("cadastrarServidor").style.display = "flex";
-                 document.getElementById("cadastrarUsuario").style.display = "flex";
-             }
-    }
- 
-    exibirUsuarioAtivo(); */
-
-    var tipo = "analista";
-
-    if (tipo == "analista") {
-        
+                    </div>`        
     } else {
-     document.getElementById("conteudo").innerHTML = `<div class="padrao-serv">
-                    <div class="servidores">
-                        <div class="detalhes-servidores">
-                            <div class="info-servidores nome">
-                                <div style="padding-right: 10px;">
-                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
-                                </div>
-                                <div>
-                                    <span>Nome Servidor</span>
-                                    <p>[Local Servidor]</p>
-                                </div>
-                            </div>
-                            <div class="info-servidores ip">
-                                <p>IP do Servidor</p>
-                                <span>[ip do servidor]</span>
-                            </div>
-                            <div class="info-servidores att">
-                                <p>Última atualização</p>
-                                <span>[Data e Hora]</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="selecionar-servidores">
-                        <p>Selecione o servidor:</p>
-                        <select name="servidores" id="servidores">
-                            <option value="#" selected disabled>Nome Servidor</option>
-                        </select>
-                    </div>
-                </div>
+     document.getElementById("conteudo").innerHTML = `
                 <div class="box-alerta">
                     <div>
                         <span>Impacto Operacional</span>
