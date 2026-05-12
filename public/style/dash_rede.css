@@ -214,7 +214,6 @@ canvas {
   padding: 10px;
   display: flex; 
   flex-direction: column;
-  min-height: 220px;
 }
 
 .span-subtitulo{
