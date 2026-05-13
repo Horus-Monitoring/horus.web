@@ -1,4 +1,5 @@
 @import url('https://googleapis.com');
+
 * {
   border: 0;
   padding: 0;
@@ -48,6 +49,7 @@ body {
   flex: 1;
 }
 
+
 .categoria {
   color: #a0a5a8;
   margin: 16px 0 4px 10px;
@@ -55,8 +57,41 @@ body {
   text-transform: uppercase;
 }
 
-.adm{
+.adm {
   display: none;
+}
+
+
+.modal-lateral {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 998;
+}
+
+.modal-lateral.ativo {
+  display: block;
+}
+
+.lateral {
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+
+.modalFiltro {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 998;
+}
+
+.modalFiltro.ativo {
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -176,6 +211,7 @@ body {
   width: 13px;
   height: 13px;
 }
+
 
 .popup {
   width: 100%;
@@ -454,14 +490,6 @@ body {
   margin-right: 20px;
 }
 
-.card.barra {
-  width: 100%;
-  height: 8px;
-  border-radius: 16px;
-  background-color: #ebedf0;
-  margin-right: 20px;
-}
-
 .preencher {
   height: 100%;
   border-radius: 16px;
@@ -488,13 +516,18 @@ body {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 8px 0 8px 0;
+  padding: 8px 0;
   border-radius: 4px;
   font-size: 19px;
   cursor: pointer;
   background-color: var(--ciano);
   width: 110px;
   color: white;
+  transition: 0.2s;
+}
+
+.fechar:hover {
+  background-color: var(--azul);
   transition: 0.2s;
 }
 
@@ -505,11 +538,6 @@ body {
 .nome-local {
   color: #5f5f5f;
   font-size: 14px;
-}
-
-.fechar:hover {
-  background-color: var(--azul);
-  transition: 0.2s;
 }
 
 .topo {
@@ -531,7 +559,6 @@ body {
   background-color: var(--azul);
   width: 50%;
   color: white;
-  display: flex;
   border: 2px solid var(--azul);
   border-right: none;
   border-radius: 4px;
@@ -604,23 +631,242 @@ body {
 .barra-verde {
   background-color: #2bab6f;
 }
+
 .barra-amarela {
   background-color: #f59f0a;
 }
+
 .barra-vermelha {
   background-color: #dc2828;
 }
+
 .barra-azul {
   background-color: #274690;
 }
+
 .barra-roxa {
   background-color: #59168b;
 }
+
 .barra-verde2 {
   background-color: #0d542b;
 }
 
+
+.card-visao {
+  background: #fff;
+  border: 1.5px solid #111;
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.visao-topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.visao-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  flex-shrink: 0;
+}
+
+.visao-subtitulo {
+  font-size: 12px;
+  color: #444;
+  font-weight: 500;
+}
+
+.visao-titulo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.visao-descricao {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+}
+
+.visao-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid;
+}
+
+.badge-online {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+.badge-atencao {
+  background-color: #fef9c3;
+  border-color: #fde047;
+  color: #a16207;
+}
+
+.badge-critico {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.card-severidade-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.card-severidade {
+  background: #fff;
+  border: 1.5px solid #111;
+  border-radius: 12px;
+  padding: 22px 26px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sev-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+}
+
+.sev-escala {
+  font-size: 11px;
+  color: #555;
+  margin-top: -8px;
+}
+
+.sev-linhas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sev-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sev-label {
+  font-size: 12px;
+  color: #333;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.sev-barra-bg {
+  flex: 1;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.sev-barra {
+  height: 100%;
+  border-radius: 16px;
+}
+
+.sev-verde {
+  background-color: #22c55e;
+}
+
+.sev-amarela {
+  background-color: #f59e0b;
+}
+
+.sev-vermelha {
+  background-color: #ef4444;
+}
+
+.sev-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+  width: 34px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+
+.card-contadores {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 130px;
+}
+
+.contador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 14px 20px;
+  flex: 1;
+  border: 1.5px solid #111;
+}
+
+.cont-num {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cont-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+.contador-estaveis {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+}
+
+.contador-atencao {
+  background-color: #fefce8;
+  border-color: #fde047;
+}
+
+.contador-criticos {
+  background-color: #fff1f2;
+  border-color: #fca5a5;
+}
+
+
+
+
 @media (max-width: 1549px) {
+
   .card-cpu,
   .card-ram,
   .card-disk,
@@ -629,12 +875,23 @@ body {
   }
 }
 
-/* Tablet */
-@media (max-width: 1439px) {
+@media (min-width: 1440px) {
+  .modal-lateral {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+
   .lateral {
     width: 220px;
     transform: translateX(-100%);
     position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    transition: transform 0.3s ease;
   }
 
   .lateral.ativo {
@@ -661,6 +918,7 @@ body {
 
   .main {
     margin-left: 0;
+    width: 100%;
   }
 
   .cabecario {
@@ -680,14 +938,31 @@ body {
   }
 
   .box-servidor {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
   }
 
+
+  .card-severidade-wrapper {
+    flex-direction: column;
+  }
+
+  .card-contadores {
+    flex-direction: row;
+    min-width: unset;
+  }
+
+  .contador {
+    flex: 1;
+  }
+
+  .visao-titulo {
+    font-size: 19px;
+  }
+
+
   .cards-detalhes {
-    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
@@ -704,6 +979,7 @@ body {
     width: 40%;
     height: 130px;
   }
+
 
   .linha {
     flex-direction: column;
@@ -737,8 +1013,9 @@ body {
   }
 }
 
-/* Celular */
+
 @media (max-width: 799px) {
+
   body {
     overflow: hidden;
   }
@@ -748,8 +1025,67 @@ body {
     gap: 12px;
   }
 
+
+  .card-visao {
+    padding: 16px 18px;
+  }
+
+  .visao-titulo {
+    font-size: 16px;
+  }
+
+  .visao-subtitulo {
+    font-size: 11px;
+  }
+
+  .visao-descricao {
+    font-size: 12px;
+  }
+
+  .visao-badges {
+    gap: 8px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+
+  .card-severidade {
+    padding: 16px 18px;
+  }
+
+  .sev-label {
+    width: 100px;
+    font-size: 11px;
+  }
+
+  .sev-titulo {
+    font-size: 14px;
+  }
+
+
+  .card-contadores {
+    flex-direction: row;
+    gap: 8px;
+    min-width: unset;
+  }
+
+  .contador {
+    flex: 1;
+    padding: 10px 8px;
+  }
+
+  .cont-num {
+    font-size: 22px;
+  }
+
+  .cont-label {
+    font-size: 9px;
+  }
+
   .pequeno-filtro {
-    display: flex;
     flex-direction: row;
     gap: 10px;
     padding: 12px 16px;
@@ -763,21 +1099,6 @@ body {
 
   .pequeno-filtro input {
     width: 90%;
-  }
-
-  .modalFiltro {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 998;
-  }
-
-  .modalFiltro.ativo {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
   }
 
   .filtros {
@@ -809,6 +1130,7 @@ body {
     width: 100%;
   }
 
+
   .cabecario {
     display: none;
   }
@@ -822,7 +1144,6 @@ body {
   }
 
   .box-servidor {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -830,7 +1151,6 @@ body {
   }
 
   .info-servidor {
-    display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;

@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servidores | Horus </title>
+    <title>Servidores | Horus</title>
     <link rel="icon" href="./assets/icon/logo.png" />
 
-    <link rael="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,10 +17,8 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_analista.css">
-
 </head>
 
 <body>
@@ -29,7 +27,6 @@
     <div class="modalFiltro" id="modalFiltro"></div>
 
     <div class="container">
-
         <aside class="lateral" id="lateral">
             <div class="logo">
                 <img src="./assets/imgs/painel/logo.png" alt="">
@@ -47,15 +44,23 @@
                 <a href="telaIncidente.html" class="item-menu">
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </a>
+                <a href="comunicacao.html" class="item-menu">
+                    <img src="./assets/imgs/painel/comunicacao.png" alt="">Comunicação
+                </a>
+                <a href="processos.html" class="item-menu">
+                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
+                </a>
+                <a href="temperatura.html" class="item-menu">
+                    <img src="./assets/imgs/painel/temperatura.png" alt="">Temperatura
+                </a>
 
-                <div class="categoria adm" id="administracao">Administração </div>
-                    <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
-                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                    </a>
-                    <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
-                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                    </a>
-                
+                <div class="categoria adm" id="administracao">Administração</div>
+                <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </a>
+                <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </a>
 
                 <button id="gerarRelatorio" class="adm" style="justify-content: center;">Gerar Relatório em PDF</button>
             </nav>
@@ -65,10 +70,9 @@
                 <p onclick="window.location.href='index.html'">Sair</p>
             </div>
         </aside>
-
         <main class="main">
 
-           <header class="header">
+            <header class="header">
                 <div class="hamburguer" id="hamburguer">
                     <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
                 </div>
@@ -77,7 +81,7 @@
 
                 <div class="usuario">
                     <div>
-                        <p  id="nome_usuario"></p>
+                        <p id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
                     <span id="inicial_usuario"></span>
@@ -85,11 +89,81 @@
             </header>
 
             <section class="conteudo" id="conteudo">
+
+                <div class="card-visao">
+                    <div class="visao-topo">
+                        <div class="visao-icone">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                        </div>
+                        <span class="visao-subtitulo">Visão consolidada da frota — SISCEAB / SAGITARIO · 5
+                            servidores</span>
+                    </div>
+                    <div id="visao-status-geral">
+                        <h2 class="visao-titulo">Boa tarde, Erick. A operação está sob controle.</h2>
+                    </div>
+                    <div id="visao-alerta">
+                        <p class="visao-descricao">1 servidor(es) em estado crítico — abra os detalhes para investigar.
+                        </p>
+                    </div>
+                    <div class="visao-badges">
+                        <span class="badge badge-online">2 Online</span>
+                        <span class="badge badge-atencao">2 Atenção</span>
+                        <span class="badge badge-critico">1 Crítico</span>
+                    </div>
+                </div>
+
+                <div class="card-severidade-wrapper">
+                    <div class="card-severidade">
+                        <div class="sev-titulo">Severidade por escala de uso</div>
+                        <div class="sev-escala">70–79 baixa · 80–89 média · 90+ crítica</div>
+                        <div class="sev-linhas">
+                            <div class="sev-linha">
+                                <span class="sev-label">Baixa (70–79%)</span>
+                                <div class="sev-barra-bg">
+                                    <div class="sev-barra sev-verde" style="width: 40%;"></div>
+                                </div>
+                                <span class="sev-pct">40%</span>
+                            </div>
+                            <div class="sev-linha">
+                                <span class="sev-label">Média (80–89%)</span>
+                                <div class="sev-barra-bg">
+                                    <div class="sev-barra sev-amarela" style="width: 28%;"></div>
+                                </div>
+                                <span class="sev-pct">28%</span>
+                            </div>
+                            <div class="sev-linha">
+                                <span class="sev-label">Crítica (90–100%)</span>
+                                <div class="sev-barra-bg">
+                                    <div class="sev-barra sev-vermelha" style="width: 16%;"></div>
+                                </div>
+                                <span class="sev-pct">16%</span>
+                            </div>
+                        </div>
+                        <div class="card-contadores">
+                            <div class="contador contador-estaveis">
+                                <span class="cont-num">2</span>
+                                <span class="cont-label">ESTÁVEIS</span>
+                            </div>
+                            <div class="contador contador-atencao">
+                                <span class="cont-num">2</span>
+                                <span class="cont-label">ATENÇÃO</span>
+                            </div>
+                            <div class="contador contador-criticos">
+                                <span class="cont-num">1</span>
+                                <span class="cont-label">CRÍTICOS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="cards">
 
                     <div class="card pequeno-filtro">
                         <div class="card-pesquisar">
-                            <input type="text" name="" id="" placeholder="Buscar servidor pelo nome...">
+                            <input type="text" placeholder="Buscar servidor pelo nome...">
                             <img id="lupa" src="./assets/imgs/dash_user/lupa.png" alt="lupa">
                         </div>
                         <img class="filtro" id="filtro" src="assets/imgs/dash_analista/filtro.png" alt="">
@@ -101,7 +175,7 @@
                             <button data-status="cinza">Offline (1)</button>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                <select name="" id="tempo">
+                                <select id="tempo">
                                     <option value="30s">Últimas 24 horas</option>
                                     <option value="1min">Última Semana</option>
                                     <option value="5min">Último Mês</option>
@@ -111,28 +185,15 @@
                     </div>
 
                     <div class="card pequeno">
-
                         <div class="lista-servidores">
 
                             <div class="box-servidor cabecario">
-                                <div class="info-servidor">
-                                    <b>Servidor</b>
-                                </div>
-                                <div class="metricas">
-                                    <b>CPU(%)</b>
-                                </div>
-                                <div class="metricas">
-                                    <b>RAM(%)</b>
-                                </div>
-                                <div class="metricas">
-                                    <b>DISCO(%)</b>
-                                </div>
-                                <div class="metricas">
-                                    <b>Última Atualização</b>
-                                </div>
-                                <div class="info-servidor">
-                                    <b>Ações</b>
-                                </div>
+                                <div class="info-servidor"><b>Servidor</b></div>
+                                <div class="metricas"><b>CPU(%)</b></div>
+                                <div class="metricas"><b>RAM(%)</b></div>
+                                <div class="metricas"><b>DISCO(%)</b></div>
+                                <div class="metricas"><b>Última Atualização</b></div>
+                                <div class="info-servidor"><b>Ações</b></div>
                             </div>
 
                             <div>
@@ -144,7 +205,6 @@
                                             <p class="endereco">São Paulo - SP</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
                                             class="pct">42%</span>
@@ -162,16 +222,13 @@
                                             <div class="preencher barra-verde" style="width: 42%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
@@ -185,7 +242,6 @@
                                             <p class="endereco">Rio de Janeiro - RJ</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
                                             class="pct">78%</span>
@@ -203,16 +259,13 @@
                                             <div class="preencher barra-amarela" style="width: 60%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
@@ -226,7 +279,6 @@
                                             <p class="endereco">São Paulo - SP</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
                                             class="pct">42%</span>
@@ -244,16 +296,13 @@
                                             <div class="preencher barra-verde" style="width: 42%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
@@ -267,7 +316,6 @@
                                             <p class="endereco">Confins - MG</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
                                             class="pct">25%</span>
@@ -285,16 +333,13 @@
                                             <div class="preencher barra-verde" style="width: 28%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
@@ -308,7 +353,6 @@
                                             <p class="endereco">Porto Alegre - RS</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span class="pct">0%</span>
                                         <div class="barra">
@@ -324,16 +368,13 @@
                                             <div class="preencher barra-amarela" style="width: 72%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
@@ -347,7 +388,6 @@
                                             <p class="endereco">Recife - PE</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
                                             class="pct">42%</span>
@@ -365,16 +405,13 @@
                                             <div class="preencher barra-verde" style="width: 42%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
@@ -388,7 +425,6 @@
                                             <p class="endereco">Fortaleza - CE</p>
                                         </div>
                                     </div>
-
                                     <div class="metricas">
                                         <img src="./assets/imgs/painel/cpu-cinza.png" alt=""><span
                                             class="pct">25%</span>
@@ -406,25 +442,20 @@
                                             <div class="preencher barra-verde" style="width: 28%;"></div>
                                         </div>
                                     </div>
-
                                     <div class="att-servidor">
                                         <div>
                                             <p class="att-servidor">Há cerca de 2 horas</p>
                                         </div>
                                     </div>
-
                                     <div class="info-servidor">
-                                        <div>
-                                            <button class="detalhes"
+                                        <div><button class="detalhes"
                                                 style="background-color: rgba(87, 112, 168, 0.38);">Detalhes</button>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 
                         </div>
-
                     </div>
 
                 </div>
@@ -439,7 +470,6 @@
                                 <img src="assets/imgs/painel/seta-esquerda.png" alt="" width="25px">
                                 <p>Voltar</p>
                             </div>
-
                             <div class="local">
                                 <h3>SRV-ACC-SP-01</h3>
                                 <div class="linha">
@@ -448,16 +478,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="status">
                             <div class="status-rotulo">
                                 <img src="assets/imgs/painel/i.png" alt="" width="20px">
                                 <span>Status</span>
                             </div>
-
-                            <div class="status-info">
-                                Online
-                            </div>
+                            <div class="status-info">Online</div>
                         </div>
                     </div>
 
@@ -470,12 +496,10 @@
                                     <h1 class="registro">38%</h1>
                                 </div>
                             </div>
-
                             <div class="barra-registro">
                                 <div class="preencher barra-azul" style="width: 38%;"></div>
                             </div>
                         </div>
-
                         <div class="card-ram">
                             <div class="topo-card">
                                 <img src="assets/imgs/painel/ram-card.png" width="60px">
@@ -484,12 +508,10 @@
                                     <h1 class="registro">58%</h1>
                                 </div>
                             </div>
-
                             <div class="barra-registro">
                                 <div class="preencher barra-roxa" style="width: 58%;"></div>
                             </div>
                         </div>
-
                         <div class="card-disk">
                             <div class="topo-card">
                                 <img src="assets/imgs/painel/disco-card.png" width="60px">
@@ -498,12 +520,10 @@
                                     <h1 class="registro">72%</h1>
                                 </div>
                             </div>
-
                             <div class="barra-registro">
                                 <div class="preencher barra-verde2" style="width: 72%;"></div>
                             </div>
                         </div>
-
                         <div class="card-info">
                             <span class="subtexto">Última atualização</span>
                             <span>18/04/2026 ás 20:06</span>
@@ -516,32 +536,27 @@
                         <div class="cards-detalhes-grafico">
                             <div class="card-detalhes-topo">
                                 <span>Uso dos principais componentes (%)</span>
-
-                                <select class="select_filtro" name="" id="">
+                                <select class="select_filtro">
                                     <option value="1">Últimas 24 horas</option>
                                     <option value="2">Últimos 3 dias</option>
                                     <option value="3">Última semana</option>
                                     <option value="4">Último mês</option>
                                 </select>
                             </div>
-
                             <div class="grafico-recursos">
                                 <canvas id="graficoRecursos24h"></canvas>
                             </div>
                         </div>
-
                         <div class="card-grafico-processos">
                             <div class="card-detalhes-topo">
                                 <span>Processos Ativos</span>
-
-                                <select class="select_filtro" name="" id="">
+                                <select class="select_filtro">
                                     <option value="1">Últimas 24 horas</option>
                                     <option value="2">Últimos 3 dias</option>
                                     <option value="3">Última semana</option>
                                     <option value="4">Último mês</option>
                                 </select>
                             </div>
-
                             <div class="grafico-processos">
                                 <canvas id="graficoProcessos"></canvas>
                             </div>
@@ -552,23 +567,19 @@
                         <div class="card-grafico-processos">
                             <div class="card-detalhes-topo">
                                 <span>Rede (megabytes)</span>
-
-                                <select class="select_filtro" name="" id="">
+                                <select class="select_filtro">
                                     <option value="1">Últimas 24 horas</option>
                                     <option value="2">Últimos 3 dias</option>
                                     <option value="3">Última semana</option>
                                     <option value="4">Último mês</option>
                                 </select>
                             </div>
-
                             <div class="grafico-rede">
                                 <canvas id="graficoRede"></canvas>
                             </div>
                         </div>
-
                         <div class="card-processos">
                             <span class="titulo-tabela">Processos Ativos que mais consomem recursos</span>
-
                             <table class="tabela-processos">
                                 <thead>
                                     <tr>
@@ -616,169 +627,173 @@
 
                 </div>
             </div>
-            <!-- FIM DO MODAL -->
 
         </main>
-
     </div>
 
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-</html>
-
-<script>
-
-   window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
-
-             if (funcao == "Gestor") {
+            const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+            if (funcao == "Gestor") {
                 document.getElementById("administracao").style.display = "block";
                 document.getElementById("gerarRelatorio").style.display = "block";
                 document.getElementById("cadastrarServidor").style.display = "flex";
                 document.getElementById("cadastrarUsuario").style.display = "flex";
             }
-   }
 
-    //Modal para o menu sanduíche
+            try {
+                exibirUsuarioAtivo();
+            } catch (e) {
+                console.warn('script.js não carregado ou exibirUsuarioAtivo() indisponível:', e);
+            }
 
-    const btnHamburguer = document.getElementById('hamburguer');
-    const lateral = document.getElementById('lateral');
-    const overlay = document.getElementById('overlay');
 
-    function abrirMenu() {
-        lateral.classList.add('ativo');
-        overlay.classList.add('ativo');
-    }
+            const btnHamburguer = document.getElementById('hamburguer');
+            const lateral = document.getElementById('lateral');
+            const overlay = document.getElementById('overlay');
 
-    function fecharMenu() {
-        lateral.classList.remove('ativo');
-        overlay.classList.remove('ativo');
-    }
+            function abrirMenu() {
+                lateral.classList.add('ativo');
+                overlay.classList.add('ativo');
+            }
 
-    btnHamburguer.addEventListener('click', () => {
-        lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
-    });
+            function fecharMenu() {
+                lateral.classList.remove('ativo');
+                overlay.classList.remove('ativo');
+            }
 
-    overlay.addEventListener('click', fecharMenu);
+            btnHamburguer.addEventListener('click', (e) => {
+                e.stopPropagation();
+                lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
+            });
 
-    document.addEventListener('click', (e) => {
-        if (!lateral.contains(e.target) && !btnHamburguer.contains(e.target)) {
-            fecharMenu();
-        }
-    });
+            overlay.addEventListener('click', fecharMenu);
 
-    //Modal para filtro (celular)
+            document.addEventListener('click', (e) => {
+                if (lateral.classList.contains('ativo') &&
+                    !lateral.contains(e.target) &&
+                    !btnHamburguer.contains(e.target)) {
+                    fecharMenu();
+                }
+            });
 
-    const btnFiltro = document.getElementById('filtro');
-    const filtros = document.getElementById('filtros');
-    const modalFiltro = document.getElementById('modalFiltro');
+            const btnFiltro = document.getElementById('filtro');
+            const filtros = document.getElementById('filtros');
+            const modalFiltro = document.getElementById('modalFiltro');
 
-    exibirUsuarioAtivo();
+            function abrirFiltro() {
+                filtros.classList.add('ativo');
+                modalFiltro.classList.add('ativo');
+            }
 
-    function abrirFiltro() {
-        filtros.classList.add('ativo');
-        modalFiltro.classList.add('ativo');
-    }
+            function fecharFiltro() {
+                filtros.classList.remove('ativo');
+                modalFiltro.classList.remove('ativo');
+            }
 
-    function fecharFiltro() {
-        filtros.classList.remove('ativo');
-        modalFiltro.classList.remove('ativo');
-    }
+            btnFiltro.addEventListener('click', (e) => {
+                e.stopPropagation();
+                filtros.classList.contains('ativo') ? fecharFiltro() : abrirFiltro();
+            });
 
-    btnFiltro.addEventListener('click', () => {
-        filtros.classList.contains('ativo') ? fecharFiltro() : abrirFiltro();
-    });
+            modalFiltro.addEventListener('click', fecharFiltro);
 
-    modalFiltro.addEventListener('click', fecharFiltro);
+            document.addEventListener('click', (e) => {
+                if (!filtros.contains(e.target) && !btnFiltro.contains(e.target)) {
+                    fecharFiltro();
+                }
+            });
 
-    document.addEventListener('click', (e) => {
-        if (!filtros.contains(e.target) && !btnFiltro.contains(e.target)) {
-            fecharFiltro();
-        }
-    });
 
-    // Modal para o gráfico
+            const modal = document.getElementById('modal');
+            const conteudo = document.getElementById('conteudo');
 
-    const modal = document.getElementById('modal');
+            document.querySelectorAll('.detalhes').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    modal.classList.add('ativo');
+                    conteudo.style.display = "none";
+                });
+            });
 
-    document.querySelectorAll('.detalhes').forEach(btn => {
-        btn.addEventListener('click', () => {
-            modal.classList.add('ativo');
-            conteudo.style = "display: none";
+            document.getElementById('fechar').addEventListener('click', () => {
+                modal.classList.remove('ativo');
+                conteudo.style.display = "flex";
+            });
+
+
+            new Chart(document.getElementById('graficoRecursos24h'), {
+                type: 'line',
+                data: {
+                    labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
+                    datasets: [
+                        { label: 'CPU', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                        { label: 'RAM', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#b772ff', backgroundColor: '#b772ff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                        { label: 'Disco', data: [50, 52, 51, 50, 49, 51, 55, 53, 50, 48, 47, 49, 51, 50, 52, 54, 57, 60, 58, 55, 47, 45, 49, 51, 50], borderColor: '#3bff7f', backgroundColor: '#3bff7f', borderWidth: 2, pointRadius: 0, tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                        legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+                    },
+                    scales: {
+                        x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                        y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('graficoProcessos'), {
+                type: 'bar',
+                data: {
+                    labels: ['01:00', '04:00', '07:00', '10:00', '13:00', '16:00', '19:00', '23:00'],
+                    datasets: [
+                        { label: 'Número de processos ativos', data: [15, 6, 30, 20, 100, 45, 75, 115], backgroundColor: '#d7eda1', borderRadius: 0, borderWidth: 0 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                        legend: { display: true, position: 'top', labels: { usePointStyle: false, color: '#6b7280', font: { size: 13 }, boxWidth: 18, boxHeight: 12, padding: 20 } }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } },
+                        y: { min: 0, grid: { color: '#ffff' }, ticks: { stepSize: 2, color: '#9ca3af', font: { size: 11 } } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('graficoRede'), {
+                type: 'line',
+                data: {
+                    labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
+                    datasets: [
+                        { label: 'Enviados', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
+                        { label: 'Recebidos', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#FF5959', backgroundColor: '#FF5959', borderWidth: 2, pointRadius: 0, tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
+                        legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+                    },
+                    scales: {
+                        x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
+                        y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+                    }
+                }
+            });
+
         });
-    });
+    </script>
 
-    document.getElementById('fechar').addEventListener('click', () => {
-        modal.classList.remove('ativo');
-        conteudo.style = "display: flex";
-    });
+</body>
 
-    new Chart(document.getElementById('graficoRecursos24h'), {
-        type: 'line',
-        data: {
-            labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
-            datasets: [
-                { label: 'CPU', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                { label: 'RAM', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#b772ff', backgroundColor: '#b772ff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                { label: 'Disco', data: [50, 52, 51, 50, 49, 51, 55, 53, 50, 48, 47, 49, 51, 50, 52, 54, 57, 60, 58, 55, 47, 45, 49, 51, 50], borderColor: '#3bff7f', backgroundColor: '#3bff7f', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-            ]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-            },
-            scales: {
-                x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-            }
-        }
-    });
-
-    new Chart(document.getElementById('graficoProcessos'), {
-        type: 'bar',
-        data: {
-            labels: ['01:00', '04:00', '07:00', '10:00', '13:00', '16:00', '19:00', '23:00'],
-            datasets: [
-                { label: 'Número de processos ativos', data: [15, 6, 30, 20, 100, 45, 75, 115], backgroundColor: '#d7eda1', borderRadius: 0, borderWidth: 0 }
-            ]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                legend: { display: true, position: 'top', labels: { usePointStyle: false, pointStyle: 'circle', color: '#6b7280', font: { size: 13 }, boxWidth: 18, boxHeight: 12, padding: 20 } }
-            },
-            scales: {
-                x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } },
-                y: { min: 0, grid: { color: '#ffff' }, ticks: { stepSize: 2, color: '#9ca3af', font: { size: 11 } } }
-            }
-        }
-    });
-
-    new Chart(document.getElementById('graficoRede'), {
-        type: 'line',
-        data: {
-            labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
-            datasets: [
-                { label: 'Enviados', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                { label: 'Recebidos', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#FF5959', backgroundColor: '#FF5959', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-            ]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-            },
-            scales: {
-                x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-            }
-        }
-    });
-
-</script>
+</html>
