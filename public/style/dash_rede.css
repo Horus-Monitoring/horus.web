@@ -402,6 +402,9 @@ canvas {
 
 /* celular */
 @media (max-width: 799px) {
+  *{
+    font-size: small;
+  }
   .conteudo {
     padding: 12px;
     gap: 12px;
@@ -418,6 +421,23 @@ canvas {
   }
 
 
+  .kpis {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: 20px;
+}
+
+  .kpis span{
+    font-size: small;
+  }
+
+  .graficos-inferiores{
+    flex-direction: column;
+  }
+
+  .sla-card{
+    display: none;
+  }
 
   .selecionar-servidores select{
     width: 100%;
