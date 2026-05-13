@@ -114,53 +114,88 @@
                         <span class="badge badge-critico">1 Crítico</span>
                     </div>
                 </div>
-
                 <div class="card-severidade-wrapper">
+
                     <div class="card-severidade">
-                        <div class="sev-titulo">Severidade por escala de uso</div>
-                        <div class="sev-escala">70–79 baixa · 80–89 média · 90+ crítica</div>
-                        <div class="sev-linhas">
-                            <div class="sev-linha">
-                                <span class="sev-label">Baixa (70–79%)</span>
-                                <div class="sev-barra-bg">
-                                    <div class="sev-barra sev-verde" style="width: 40%;"></div>
-                                </div>
-                                <span class="sev-pct">40%</span>
-                            </div>
-                            <div class="sev-linha">
-                                <span class="sev-label">Média (80–89%)</span>
-                                <div class="sev-barra-bg">
-                                    <div class="sev-barra sev-amarela" style="width: 28%;"></div>
-                                </div>
-                                <span class="sev-pct">28%</span>
-                            </div>
-                            <div class="sev-linha">
-                                <span class="sev-label">Crítica (90–100%)</span>
-                                <div class="sev-barra-bg">
-                                    <div class="sev-barra sev-vermelha" style="width: 16%;"></div>
-                                </div>
-                                <span class="sev-pct">16%</span>
+
+                        <div class="sev-header">
+                            <div class="sev-titulo">Severidade por escala de uso</div>
+                            <div class="sev-escala">
+                                70–79 baixa · 80–89 média · 90+ crítica
                             </div>
                         </div>
-                        <div class="card-contadores">
-                            <div class="contador contador-estaveis">
-                                <span class="cont-num">2</span>
-                                <span class="cont-label">ESTÁVEIS</span>
+                        <div class="container-cards-severidade">
+                            <div class="sev-linhas">
+
+                                <div class="sev-linha">
+
+                                    <div class="sev-topo">
+                                        <span class="sev-label">Baixa (70–79%)</span>
+                                       
+                                    </div>
+
+                                    <div class="sev-barra-bg">
+                                        <div class="sev-barra sev-verde" style="width: 40%;"> 
+                                            <span class="sev-pct">40%</span>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="sev-linha">
+
+                                    <div class="sev-topo">
+                                        <span class="sev-label">Média (80–89%)</span>
+                              
+                                    </div>
+
+                                    <div class="sev-barra-bg">
+                                        <div class="sev-barra sev-amarela" style="width: 28%;">
+                                               <span class="sev-pct">28%</span>
+                                        </div>
+                                               
+                                    </div>
+
+                                </div>
+
+                                <div class="sev-linha">
+
+                                    <div class="sev-topo">
+                                        <span class="sev-label">Crítica (90–100%)</span>
+                                      
+                                    </div>
+
+                                    <div class="sev-barra-bg">
+                                        <div class="sev-barra sev-vermelha" style="width: 16%;">
+                                             <span class="sev-pct">16%</span>
+                                        </div>
+                                         
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div class="contador contador-atencao">
-                                <span class="cont-num">2</span>
-                                <span class="cont-label">ATENÇÃO</span>
-                            </div>
-                            <div class="contador contador-criticos">
-                                <span class="cont-num">1</span>
-                                <span class="cont-label">CRÍTICOS</span>
+                            <div class="card-contadores">
+
+                                <div class="contador contador-estaveis">
+                                    <span class="cont-num">2</span>
+                                    <span class="cont-label">ESTÁVEIS</span>
+                                </div>
+
+                                <div class="contador contador-atencao">
+                                    <span class="cont-num">2</span>
+                                    <span class="cont-label">ATENÇÃO</span>
+                                </div>
+
+                                <div class="contador contador-criticos">
+                                    <span class="cont-num">1</span>
+                                    <span class="cont-label">CRÍTICOS</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="cards">
-
                     <div class="card pequeno-filtro">
                         <div class="card-pesquisar">
                             <input type="text" placeholder="Buscar servidor pelo nome...">
@@ -549,14 +584,9 @@
                         </div>
                         <div class="card-grafico-processos">
                             <div class="card-detalhes-topo">
-                                <span>Processos Ativos</span>
-                                <select class="select_filtro">
-                                    <option value="1">Últimas 24 horas</option>
-                                    <option value="2">Últimos 3 dias</option>
-                                    <option value="3">Última semana</option>
-                                    <option value="4">Último mês</option>
-                                </select>
+                                <span>Análise preditiva do aumento de RAM</span>
                             </div>
+                            <!--grafico preditivo regressao linear-->
                             <div class="grafico-processos">
                                 <canvas id="graficoProcessos"></canvas>
                             </div>
@@ -566,62 +596,20 @@
                     <div class="linha">
                         <div class="card-grafico-processos">
                             <div class="card-detalhes-topo">
-                                <span>Rede (megabytes)</span>
-                                <select class="select_filtro">
-                                    <option value="1">Últimas 24 horas</option>
-                                    <option value="2">Últimos 3 dias</option>
-                                    <option value="3">Última semana</option>
-                                    <option value="4">Último mês</option>
-                                </select>
+                                <span>quantidade de chamados criticos e alertas</span>
                             </div>
+                            <!--Mudar para grafico de pizza vermelho critico e amarelo alerta-->
                             <div class="grafico-rede">
                                 <canvas id="graficoRede"></canvas>
                             </div>
                         </div>
+                        <!--mudar para grafico de saude da maquina-->
                         <div class="card-processos">
-                            <span class="titulo-tabela">Processos Ativos que mais consomem recursos</span>
-                            <table class="tabela-processos">
-                                <thead>
-                                    <tr>
-                                        <th>PID</th>
-                                        <th class="sumir-celular">Nome</th>
-                                        <th>CPU (%)</th>
-                                        <th>RAM (%)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>0</td>
-                                        <td class="sumir-celular">System Idle Process</td>
-                                        <td>88,4</td>
-                                        <td>0,1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td class="sumir-celular">System</td>
-                                        <td>1,2</td>
-                                        <td>0,2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1240</td>
-                                        <td class="sumir-celular">svchost.exe</td>
-                                        <td>3,8</td>
-                                        <td>1,5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3420</td>
-                                        <td class="sumir-celular">explorer.exe</td>
-                                        <td>2,1</td>
-                                        <td>2,8</td>
-                                    </tr>
-                                    <tr>
-                                        <td>880</td>
-                                        <td class="sumir-celular">winlogon.exe</td>
-                                        <td>0,5</td>
-                                        <td>0,3</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <span class="titulo-tabela">Analise de saude do servidor</span>
+                            <!--grafico de analise de saude da maquina-->
+                            <div class="grafico-rede">
+                                <canvas id="graficoRede"></canvas>
+                            </div>
                         </div>
                     </div>
 
@@ -745,52 +733,6 @@
                     }
                 }
             });
-
-            new Chart(document.getElementById('graficoProcessos'), {
-                type: 'bar',
-                data: {
-                    labels: ['01:00', '04:00', '07:00', '10:00', '13:00', '16:00', '19:00', '23:00'],
-                    datasets: [
-                        { label: 'Número de processos ativos', data: [15, 6, 30, 20, 100, 45, 75, 115], backgroundColor: '#d7eda1', borderRadius: 0, borderWidth: 0 }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                        tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                        legend: { display: true, position: 'top', labels: { usePointStyle: false, color: '#6b7280', font: { size: 13 }, boxWidth: 18, boxHeight: 12, padding: 20 } }
-                    },
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } },
-                        y: { min: 0, grid: { color: '#ffff' }, ticks: { stepSize: 2, color: '#9ca3af', font: { size: 11 } } }
-                    }
-                }
-            });
-
-            new Chart(document.getElementById('graficoRede'), {
-                type: 'line',
-                data: {
-                    labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
-                    datasets: [
-                        { label: 'Enviados', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                        { label: 'Recebidos', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#FF5959', backgroundColor: '#FF5959', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                        tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                        legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-                    },
-                    scales: {
-                        x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                        y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-                    }
-                }
-            });
-
         });
     </script>
 
