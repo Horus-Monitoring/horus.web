@@ -172,6 +172,8 @@
   color: #5F5F5F;
 }
 
+
+
 @media (max-width: 1024px) {
   .lateral {
     position: fixed;
