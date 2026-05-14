@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redes| Horus </title>
+    <link rel="icon" href="./assets/icon/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style/dash_rede.css">
+
+</head>
+
+<body>
+
+    <div class="modal-lateral" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+                <a href="painel.html" class="item-menu">
+                    <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
+                </a>
+                <a href="dash_analista.html" class="item-menu">
+                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
+                </a>
+                <a href="telaIncidente.html" class="item-menu">
+                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
+                </a>
+                <a href="comunicacao.html" class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/comunicacao-selecionado.png" alt="">Comunicação
+                </a>
+                <a href="processos.html" class="item-menu">
+                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
+                </a>
+                <a href="temperatura.html" class="item-menu">
+                    <img src="./assets/imgs/painel/temperatura.png" alt=""> Temperatura
+                </a>
+
+                <div class="categoria adm" id="administracao">Administração </div>
+                <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </a>
+                <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </a>
+
+            </nav>
+
+            <div onclick="limparSessionStorage()" class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p onclick="window.location.href='index.html'">Sair</p>
+            </div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                </div>
+
+                <span class="header-titulo">Comunicação e Rede</span>
+
+                <div class="usuario">
+                    <div>
+                        <p id="nome_usuario"></p>
+                        <p id="funcao_usuario" class="cargo"></p>
+                    </div>
+                    <span id="inicial_usuario"></span>
+                </div>
+            </header>
+
+            <section class="conteudo" id="conteudo">
+                
+            </section>
+
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+ 
+              if (funcao == "Gestor") {
+                 document.getElementById("administracao").style.display = "block";
+                 document.getElementById("gerarRelatorio").style.display = "block";
+                 document.getElementById("cadastrarServidor").style.display = "flex";
+                 document.getElementById("cadastrarUsuario").style.display = "flex";
+             }
+    }
+ 
+    exibirUsuarioAtivo(); */
+
+    var tipo = "analista";
+
+    if (tipo == "analista") {
+    document.getElementById("conteudo").innerHTML = 
+        `<div class="padrao-serv">
+                    <div class="servidores">
+                        <div class="detalhes-servidores">
+                            <div class="info-servidores nome">
+                                <div style="padding-right: 10px;">
+                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                                </div>
+                                <div>
+                                    <span>Nome Servidor</span>
+                                    <p>[Local Servidor]</p>
+                                </div>
+                            </div>
+                            <div class="info-servidores ip">
+                                <p>IP do Servidor</p>
+                                <span>[ip do servidor]</span>
+                            </div>
+                            <div class="info-servidores att">
+                                <p>Última atualização</p>
+                                <span>[Data e Hora]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selecionar-servidores">
+                        <p>Selecione o servidor:</p>
+                        <select name="servidores" id="servidores">
+                            <option value="#" selected disabled>Nome Servidor</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="kpis">
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Perda de Pacotes
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/rede.png" alt="">
+                            </div>
+                            <span class="valor">2.3%</span>
+                            <img src="assets/imgs/rede/caindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Latência
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/velocimetro.png" alt="">
+                            </div>
+                            <span class="valor">18ms</span>
+                            <img src="assets/imgs/rede/subindo_verm.png" alt="">
+                            <span class="situacao">piorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Atualização ADS-B
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/sinal.png" alt="">
+                            </div>
+                            <span class="valor">98.7%</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="nome">
+                                Rotas Sem Atualização
+                                <img src="assets/imgs/rede/info.png" alt="">
+                                <img src="assets/imgs/rede/nuvem.png" alt="">
+                            </div>
+                            <span class="valor">14 rotas</span>
+                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                            <span class="situacao">melhorando</span>
+                            <select name="" id="">
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="3">Últimos 3 dias</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="linha-graficos">
+                        <div class="grafico-linha-box" style="flex: 3;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Taxa de Transferência de Rede por Servidor</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>
+                            </div>
+                            <canvas id="graficoTransferencia"></canvas>
+                        </div>
+                        <div class="box-grafico" style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Taxa de perda de pacotes</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>
+                            </div>   
+                            <div class="tabela-pacotes" >
+                                <div>
+                                    Rastreamento
+                                </div>
+                                <div class="indicador-pacotes">
+                                    2.5%
+                                </div>
+                            </div>
+                            <div class="tabela-pacotes"  >
+                                <div>
+                                    Rotas
+                                </div>
+                                <div class="indicador-pacotes">
+                                    2.5%
+                                </div>
+                            </div>
+                            <div class="tabela-pacotes"  >
+                                <div>
+                                    Correlação
+                                </div>
+                                <div class="indicador-pacotes">
+                                    2.5%
+                                </div>
+                            </div>
+                            <div class="tabela-pacotes"  >
+                                <div>
+                                    API Gateway
+                                </div>
+                                <div class="indicador-pacotes">
+                                    2.5%
+                                </div>
+                            </div>
+                            <div class="tabela-pacotes"  >
+                                <div>
+                                    Banco de Dados
+                                </div>
+                                <div class="indicador-pacotes">
+                                    2.5%
+                                </div>
+                            </div>
+                            <div class="tabela-pacotes"  >
+                                <div>
+                                    Sinc Service
+                                </div>
+                                <div class="indicador-pacotes">
+                                    2.5%
+                                </div>
+                            </div>
+                            <div style="border: #ebe6e7 1px solid; height: 1px; width: 95%; margin: 5px"></div>
+                            <div style="display: flex; flex-direction:row; justify-content: space-evenly;">
+                                <div style="display: flex; flex-direction:row">
+                                    <div style="border: green 2px solid; background-color: rgb(149, 246, 149); width: 10px; height: 10px; align-self: center; margin-right: 3px">
+
+                                    </div>
+                                    <span> < 1% </span>
+                                </div>
+                                <div style="display: flex; flex-direction:row">
+                                    <div style="border: orange 2px solid; background-color: rgb(233, 197, 130); width: 10px; height: 10px; align-self: center; margin-right: 3px">
+
+                                    </div>
+                                    <span> 1-2% </span>
+                                </div>
+                                <div style="display: flex; flex-direction:row">
+                                    <div style="border: red 2px solid; background-color: rgb(236, 103, 103); width: 10px; height: 10px; align-self: center; margin-right: 3px ;">
+
+                                    </div>
+                                    <span> > 2% </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="linha-graficos">
+                        <div class="box-grafico">
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Latência entre Componentes</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>
+                            </div>
+                            <canvas id="graficoLatencia"></canvas>
+                        </div>
+                        <div class="box-grafico">
+                            <div style="display: flex; justify-content: space-between;">
+                                <h3>Processos com maior consumo de banda</h3>
+                                <select name="" id="">
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="3">Últimos 3 dias</option>
+                                    <option value="7">Últimos 7 dias</option>
+                                    <option value="30">Últimos 30 dias</option>
+                                </select>   
+                            </div>
+                            <canvas id="graficoBanda"></canvas>
+                        </div>
+                    </div>`        
+    } else {
+     document.getElementById("conteudo").innerHTML = `
+                <div class="box-alerta">
+                    <div>
+                        <span>Impacto Operacional</span>
+                        <span class="span-subtitulo">últimas 24 horas</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <div class="dados">
+                            <div>
+                                <img src="assets/imgs/rede/aviao-lar.png" alt="">
+                                Voos atrasados
+                            </div>
+                            <div>
+                                8 voos
+                            </div>
+                            <p> Atrasos por falha de comunicação</p>
+                        </div>
+                        <div class="dados">
+                            <div>
+                                <img src="assets/imgs/rede/user-verm.png" alt="">
+                                Usuários Afetados
+                            </div>
+                            <div>
+                                4 mil
+                            </div>
+                            <p>Devido a indisponibilidade do sistema</p>
+                        </div>
+                        <div class="dados">
+                            <div>
+                                <img src="assets/imgs/rede/pin-lar.png" alt="">
+                                Aeroportos Afetados
+                            </div>
+                            <div>
+                                3 aeroportos
+                            </div>
+                            <p>GRU, CGH, BSB</p>
+                        </div>
+                        <div class="dados">
+                            <div>
+                                <img src="assets/imgs/rede/alerta-lar.png" alt="">
+                                Nível de Impacto
+                            </div>
+                            <div>
+                                Médio
+                            </div>
+                            <p> Com base em histórico e severidade</p>
+                        </div>
+                    </div>
+                    <div style="border: 1px #ebe6e7 solid; height: 1%; width: 100%;">
+
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <p>Ação Recomendada</p>
+                            <span class="span-subtitulo">Verificar servidores de alta latência e otimizar configurações
+                                de rede</span>
+                        </div>
+                        <div style="align-self: center;">
+                            <button style="background-color: blue;">Gerar Relatório</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpis">
+                    <div class="kpi-card">
+                        <div class="nome">
+                            Disponibilidade
+                            <img src="assets/imgs/rede/info.png" alt="">
+                            <img src="assets/imgs/rede/transmissao.png" alt="">
+                        </div>
+                        <span class="valor">99.94%</span>
+                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                        <span class="situacao">melhorando</span>
+                        <select name="" id="">
+                            <option value="24">Últimas 24 horas</option>
+                            <option value="3">Últimos 3 dias</option>
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30">Últimos 30 dias</option>
+                        </select>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="nome">
+                            Aeronaves Impactadas
+                            <img src="assets/imgs/rede/info.png" alt="">
+                            <img src="assets/imgs/rede/aviao.png" alt="">
+                        </div>
+                        <span class="valor">14 aviões</span>
+                        <img src="assets/imgs/rede/subindo_verm.png" alt="">
+                        <span class="situacao">piorando</span>
+                        <select name="" id="">
+                            <option value="24">Últimas 24 horas</option>
+                            <option value="3">Últimos 3 dias</option>
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30">Últimos 30 dias</option>
+                        </select>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="nome">
+                            Rotas Desatualizadas
+                            <img src="assets/imgs/rede/info.png" alt="">
+                            <img src="assets/imgs/rede/rotas.png" alt="">
+                        </div>
+                        <span class="valor">4 rotas</span>
+                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                        <span class="situacao">melhorando</span>
+                        <select name="" id="">
+                            <option value="24">Últimas 24 horas</option>
+                            <option value="3">Últimos 3 dias</option>
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30">Últimos 30 dias</option>
+                        </select>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="nome">
+                            Média de Recuperação
+                            <img src="assets/imgs/rede/info.png" alt="">
+                            <img src="assets/imgs/rede/relogio.png" alt="">
+                        </div>
+                        <span class="valor">4 min.</span>
+                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
+                        <span class="situacao">melhorando</span>
+                        <select name="" id="">
+                            <option value="24">Últimas 24 horas</option>
+                            <option value="3">Últimos 3 dias</option>
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30">Últimos 30 dias</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                
+
+                <div class="graficos-inferiores">
+
+                    <div class="coluna-esquerda">
+                        <div class="grafico-card grande">
+                            <div class="titulo-grafico">
+                                <h3>Tendência de Indisponibilidade Mensal</h3>
+                                <select name="" id="">
+                                    <option value="">Últimas 24 horas</option>
+                                </select>
+                            </div>
+                            <canvas id="graficoIndisponibilidade"></canvas>
+                        </div>
+
+                        <div class="grafico-card grande">
+                            <div class="titulo-grafico">
+                                <h3>Capacidade de Rede vs Demanda Operacional</h3>
+                                <select name="" id="">
+                                    <option value="">Últimas 24 horas</option>
+                                </select>
+                            </div>
+                            <canvas id="graficoCapacidade"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grafico-card sla-card">
+                        <div class="titulo-grafico" style="margin-bottom: 60px;">
+                            <h3>Cumprimento de SLA</h3>
+                            <select name="" id="">
+                                <option value="">Últimas 24 horas</option>
+                            </select>
+                        </div>
+                        <div class="indicador-sla">
+                            Abaixo da Meta
+                        </div>
+                        <canvas id="graficoSLA"></canvas>
+                        
+                        <div class="sla-metricas">
+                            <span>Meta SLA</span>
+                            <span style="color: black !important; font-weight: bold;">99.9%</span>
+                        </div>
+                        <div class="sla-metricas">
+                            <span>Desempenho Atual</span>
+                            <span><b>94.4%</b></span>
+                        </div>
+                        <div class="sla-metricas">
+                            <span>Diferença</span>
+                            <span><b>5.5%</b></span>
+                        </div>                        
+                    </div>
+
+                </div>`  
+    }
+
+    //Modal para o menu sanduíche
+
+    const btnHamburguer = document.getElementById("hamburguer");
+    const lateral = document.getElementById("lateral");
+    const overlay = document.getElementById("overlay");
+
+    function abrirMenu() {
+        lateral.classList.add("ativo");
+        overlay.classList.add("ativo");
+    }
+
+    function fecharMenu() {
+        lateral.classList.remove("ativo");
+        overlay.classList.remove("ativo");
+    }
+
+    if (btnHamburguer) {
+        btnHamburguer.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            if (lateral.classList.contains("ativo")) {
+                fecharMenu();
+            } else {
+                abrirMenu();
+            }
+        });
+    }
+
+    overlay.addEventListener("click", fecharMenu);
+
+    document.addEventListener("click", function (e) {
+        if (
+            lateral.classList.contains("ativo") &&
+            !lateral.contains(e.target) &&
+            !btnHamburguer.contains(e.target)
+        ) {
+            fecharMenu();
+        }
+    });
+
+    if (tipo == "gestor") {
+        const ctxInd = document.getElementById("graficoIndisponibilidade");
+
+        new Chart(ctxInd, {
+            type: "line",
+            data: {
+                labels: ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"],
+                datasets: [{
+                    data: [0, 0.15, 0.02, 0.11, 0.05, null, null, null, null, null, null, null],
+                    borderColor: "#0057D9",
+                    backgroundColor: "#0057D9",
+                    tension: 0.4,
+                    pointRadius: 5,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const ctxCap = document.getElementById("graficoCapacidade");
+
+        new Chart(ctxCap, {
+            type: "line",
+            data: {
+                labels: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
+                datasets: [
+                    {
+                        label: "Demanda Operacional",
+                        data: [100, 320, 120, 620, 380, 360],
+                        borderColor: "#0066FF",
+                        backgroundColor: "transparent",
+                        tension: 0,
+                        borderWidth: 3
+                    },
+                    {
+                        label: "Capacidade Total",
+                        data: [500, 500, 500, 500, 500, 500],
+                        borderColor: "#FF4D4D",
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        const ctxSLA = document.getElementById("graficoSLA");
+
+        new Chart(ctxSLA, {
+            type: "doughnut",
+            data: {
+                datasets: [{
+                    data: [94.4, 5.6],
+                    backgroundColor: [
+                        "#FF2B2B",
+                        "#EEEEEE"
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: "75%",
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                }
+            },
+            plugins: [{
+                id: 'textoCentro',
+                beforeDraw(chart) {
+                    const { width } = chart;
+                    const { height } = chart;
+                    const ctx = chart.ctx;
+
+                    ctx.restore();
+                    ctx.font = "bold 28px Arial";
+                    ctx.textBaseline = "middle";
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = "#111";
+
+                    ctx.fillText("94.4%", width / 2, height / 2);
+
+                    ctx.save();
+                }
+            }]
+        });
+    } else {
+        const ctxTransferencia = document.getElementById("graficoTransferencia");
+
+        new Chart(ctxTransferencia, {
+            type: "line",
+            data: {
+                labels: [
+                    "0:00",
+                    "1:00",
+                    "4:00",
+                    "7:00",
+                    "10:00",
+                    "13:00",
+                    "16:00",
+                    "19:00",
+                    "23:00"
+                ],
+                datasets: [
+                    {
+                        label: "Rastreamento",
+                        data: [50, 90, 180, 200, 270, 260, 150, 140, 70],
+                        borderColor: "#2F80ED",
+                        backgroundColor: "transparent",
+                        tension: 0.4,
+                        borderWidth: 4
+                    },
+                    {
+                        label: "Rotas",
+                        data: [20, 60, 140, 160, 250, 230, 110, 100, 30],
+                        borderColor: "#9B51E0",
+                        backgroundColor: "transparent",
+                        tension: 0.4,
+                        borderWidth: 4
+                    },
+                    {
+                        label: "Correlação",
+                        data: [0, 20, 80, 90, 150, 145, 60, 55, 0],
+                        borderColor: "#2ECC71",
+                        backgroundColor: "transparent",
+                        tension: 0.4,
+                        borderWidth: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+
+        const ctxLatencia = document.getElementById("graficoLatencia");
+
+        new Chart(ctxLatencia, {
+            type: "bar",
+            data: {
+                labels: [
+                    "Radar - Rastreamento",
+                    "Rastreamento - Correlação",
+                    "Correlação - Data Base"
+                ],
+                datasets: [{
+                    label: "Latência (ms)",
+                    data: [20, 18, 13],
+                    backgroundColor: [
+                        "#05056B",
+                        "#0A4A96",
+                        "#12B7E5"
+                    ],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const ctxBanda = document.getElementById("graficoBanda");
+
+        new Chart(ctxBanda, {
+            type: "bar",
+            data: {
+                labels: [
+                    "ADS-B",
+                    "Sinc. de Voo",
+                    "Replicação de Rota",
+                    "API Gateway"
+                ],
+                datasets: [{
+                    label: "Mbps",
+                    data: [125, 85, 50, 100],
+                    backgroundColor: "#0E7AB5",
+                    borderRadius: 12
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+    }
+
+</script>
