@@ -65,6 +65,7 @@ body {
 
 .servidores{
   border: 2px var(--borda) solid;
+  background-color: white;
   border-radius: 10px;
   display: flex; 
   flex-direction: row;
@@ -105,6 +106,9 @@ body {
   width: 20%;
   justify-items: flex-end;
 }
+.selecionar-servidores p{
+    margin-right: 10%;
+}
 
 .selecionar-servidores select{
   border: 2px var(--borda) solid;
@@ -112,7 +116,7 @@ body {
   justify-self: flex-end;
   padding: 5%;
   width: 75%;
-  margin-left: 30%;
+  margin-left: 20%;
   appearance: none;
   background-image: url(../assets/imgs/painel/select-baixo.png);
   background-repeat: no-repeat ;
@@ -184,6 +188,9 @@ body {
 
 /* celular */
 @media (max-width: 799px) {
+  *{
+    font-size: small;
+  }
   .conteudo {
     padding: 12px;
     gap: 12px;
