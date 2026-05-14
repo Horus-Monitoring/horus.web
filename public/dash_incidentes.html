@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incidentes | Horus </title>
+    <link rel="icon" href="./assets/icon/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style/dash_incidentes.css">
+
+</head>
+
+<body>
+
+    <div class="modal-lateral" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+                <a href="painel.html" class="item-menu">
+                    <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
+                </a>
+                <a href="dash_analista.html" class="item-menu">
+                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
+                </a>
+                <a href="telaIncidente.html" class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/alerta-selecionado.png" alt="">Incidentes
+                </a>
+                <a href="comunicacao.html" class="item-menu">
+                    <img src="./assets/imgs/painel/comunicacao.png" alt="">Comunicação
+                </a>
+                <a href="processos.html" class="item-menu">
+                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
+                </a>
+                <a href="temperatura.html" class="item-menu">
+                    <img src="./assets/imgs/painel/temperatura.png" alt=""> Temperatura
+                </a>
+
+                <div class="categoria adm" id="administracao">Administração </div>
+                <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </a>
+                <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </a>
+
+            </nav>
+
+            <div onclick="limparSessionStorage()" class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p onclick="window.location.href='index.html'">Sair</p>
+            </div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                </div>
+
+                <span class="header-titulo">Alertas e Incidentes</span>
+
+                <div class="usuario">
+                    <div>
+                        <p id="nome_usuario"></p>
+                        <p id="funcao_usuario" class="cargo"></p>
+                    </div>
+                    <span id="inicial_usuario"></span>
+                </div>
+            </header>
+
+            <section class="conteudo" id="conteudo">
+                <div class="padrao-serv">
+                    <div class="servidores">
+                        <div class="detalhes-servidores">
+                            <div class="info-servidores nome">
+                                <div style="padding-right: 10px;">
+                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                                </div>
+                                <div>
+                                    <span>Nome Servidor</span>
+                                    <p>[Local Servidor]</p>
+                                </div>
+                            </div>
+                            <div class="info-servidores ip">
+                                <p>IP do Servidor</p>
+                                <span>[ip do servidor]</span>
+                            </div>
+                            <div class="info-servidores att">
+                                <p>Última atualização</p>
+                                <span>[Data e Hora]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="selecionar-servidores">
+                        <p>Selecione o servidor:</p>
+                        <select name="servidores" id="servidores">
+                            <option value="#" selected disabled>Todos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="kpis">
+                    <div style="border: 1px solid #FFCC00;" class="kpi">
+                        <div class="informacoes">
+                            <div>
+                                <img style="border: 1px solid #FFCC00;" id="kpi-alerta"
+                                    src="./assets/imgs/incidentes/kpi-alerta.png" alt="">
+                                <div class="informacoes-principais">
+                                    <span>Total de Alertas Ativos</span>
+                                    <h1>10</h1>
+                                </div>
+                            </div>
+                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                        </div>
+                        <div class="tempo_dash">
+                            <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                            <select name="" id="tempo">
+                                <option value="30s">Últimas 24 horas</option>
+                                <option value="1min">Última Semana</option>
+                                <option value="5min">Último Mês</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="border: 1px solid #C70C0C;" class="kpi">
+                        <div class="informacoes">
+                            <div>
+                                <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
+                                    src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
+                                <div class="informacoes-principais">
+                                    <span>Total de Alertas Ativos</span>
+                                    <h1>10</h1>
+                                </div>
+                            </div>
+                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                        </div>
+                        <div class="tempo_dash">
+                            <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                            <select name="" id="tempo">
+                                <option value="30s">Últimas 24 horas</option>
+                                <option value="1min">Última Semana</option>
+                                <option value="5min">Último Mês</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="border: 1px solid #E7E4E4; height: 165px;" class="kpi">
+                        <div style="margin: 0;" class="tempo_dash">
+                            <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                            <select name="" id="tempo">
+                                <option value="30s">Últimas 24 horas</option>
+                                <option value="1min">Última Semana</option>
+                                <option value="5min">Último Mês</option>
+                            </select>
+                        </div>
+                        <button>Baixar Logs em CSV</button>
+                    </div>
+                </div>
+
+                <div class="corpo-dashboard">
+                    <div class="corpo-esquerda">
+                        <div class="painel-saude card">
+                            <div class="titulo">
+                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <h1>Painel de Saúde de Servidores</h1>
+                            </div>
+
+                            <div class="lista-servidores">
+                                <div style="border: 3px solid #C70C0C; background-color: #FFB9B9;" class="card-servidor">
+                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
+                                    <h2>Nome Servidor</h2>
+                                </div>
+
+                                <div style="border: 3px solid #C70C0C; background-color: #FFB9B9;" class="card-servidor">
+                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
+                                    <h2>Nome Servidor</h2>
+                                </div>
+
+                                <div style="border: 3px solid #20A200; background-color: #BFFBB0;" class="card-servidor">
+                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
+                                    <h2>Nome Servidor</h2>
+                                </div>
+
+                                <div style="border: 3px solid #FFCC00; background-color: #FAFCA5;" class="card-servidor">
+                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
+                                    <h2>Nome Servidor</h2>
+                                </div>
+                            </div>
+
+                            <div class="opcao-ocultar-servidores">
+                                <input type="checkbox">
+                                <span>Ocultar servidores estáveis</span>
+                            </div>
+                        </div>
+
+                        <div class="painel-saude card">
+                            <div class="titulo">
+                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <h1>Alertas por Severidade</h1>
+
+                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
+                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                                    <select name="" id="tempo">
+                                        <option value="30s">Últimas 24 horas</option>
+                                        <option value="1min">Última Semana</option>
+                                        <option value="5min">Último Mês</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grafico-container">
+                                <canvas id="graficoSeveridade"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="corpo-direita">
+                        <div class="painel-saude card">
+                            <div class="titulo">
+                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <h1>Principais causas de Incidentes</h1>
+
+                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
+                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                                    <select name="" id="tempo">
+                                        <option value="30s">Últimas 24 horas</option>
+                                        <option value="1min">Última Semana</option>
+                                        <option value="5min">Último Mês</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="podio">
+                                <div class="posicoes">
+                                    <img src="./assets/imgs/incidentes/podium-um.png" alt="">
+                                    <span>Vazamento de Memória</span>
+
+                                    <div style="color: #FFCC00; border: 3px solid #FFCC00; background-color: #FAFCA5;" class="posicao-representante">
+                                        Representam 20% de 20 incidentes
+                                    </div>
+                                </div>
+
+                                <div class="posicoes">
+                                    <img src="./assets/imgs/incidentes/podium-dois.png" alt="">
+                                    <span>Sobrecarga de Processamento</span>
+
+                                    <div style="color: #FFCC00; border: 3px solid #FFCC00; background-color: #FAFCA5;" class="posicao-representante">
+                                        Representam 15% de 20 incidentes
+                                    </div>
+                                </div>
+
+                                <div class="posicoes">
+                                    <img src="./assets/imgs/incidentes/podium-tres.png" alt="">
+                                    <span>IOWAIT Elevado</span>
+
+                                    <div style="color: #20A200; border: 3px solid #20A200; background-color: #BFFBB0;" class="posicao-representante">
+                                        Representam 5% de 20 incidentes
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="painel-saude card">
+                            <div class="titulo">
+                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <h1>Horários críticos de falhas</h1>
+
+                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
+                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                                    <select name="" id="tempo">
+                                        <option value="30s">Últimas 24 horas</option>
+                                        <option value="1min">Última Semana</option>
+                                        <option value="5min">Último Mês</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- GRÁFICO AQUI -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+        const ctx = document.getElementById('graficoSeveridade');
+
+        new Chart(ctx, {
+            type: 'bar',
+
+            data: {
+                labels: ['Baixa', 'Média', 'Alta', 'Crítica'],
+
+                datasets: [{
+                    label: 'Alertas',
+                    data: [19, 6, 1, 6],
+
+                    backgroundColor: [
+                        '#7A88C7',
+                        '#FFD633',
+                        '#FFA133',
+                        '#D93B3B'
+                    ],
+
+                    borderRadius: {
+                        topLeft: 6,
+                        topRight: 6,
+                        bottomLeft: 0,
+                        bottomRight: 0
+                    },
+                    borderSkipped: false
+                }]
+            },
+
+            options: {
+                responsive: true,
+
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                        grid: {
+                            display: false
+                        },
+
+                        ticks: {
+                            stepSize: 4
+                        }
+                    },
+
+                    x: {
+                        grid: {
+                            borderDash: [4, 4],
+                            color: '#D9D9D9'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
+<script>
+
+    window.onload = () => {
+        const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+        if (funcao == "Gestor") {
+            document.getElementById("administracao").style.display = "block";
+            document.getElementById("gerarRelatorio").style.display = "block";
+            document.getElementById("cadastrarServidor").style.display = "flex";
+            document.getElementById("cadastrarUsuario").style.display = "flex";
+        }
+    }
+
+    exibirUsuarioAtivo();
+
+    //Modal para o menu sanduíche
+
+    const btnHamburguer = document.getElementById("hamburguer");
+    const lateral = document.getElementById("lateral");
+    const overlay = document.getElementById("overlay");
+
+    function abrirMenu() {
+        lateral.classList.add("ativo");
+        overlay.classList.add("ativo");
+    }
+
+    function fecharMenu() {
+        lateral.classList.remove("ativo");
+        overlay.classList.remove("ativo");
+    }
+
+    if (btnHamburguer) {
+        btnHamburguer.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            if (lateral.classList.contains("ativo")) {
+                fecharMenu();
+            } else {
+                abrirMenu();
+            }
+        });
+    }
+
+    overlay.addEventListener("click", fecharMenu);
+
+    document.addEventListener("click", function (e) {
+        if (
+            lateral.classList.contains("ativo") &&
+            !lateral.contains(e.target) &&
+            !btnHamburguer.contains(e.target)
+        ) {
+            fecharMenu();
+        }
+    });
+
+
+
+</script>
