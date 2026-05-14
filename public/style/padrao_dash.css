@@ -100,12 +100,14 @@ body {
 .info-servidores p{
   color: var(--subtexto)
 }
+
 .selecionar-servidores{
   align-self: flex-end;
   align-items: flex-end;
   width: 20%;
   justify-items: flex-end;
 }
+
 .selecionar-servidores p{
     margin-right: 10%;
 }
@@ -161,7 +163,6 @@ body {
     transform: translateX(0);
   }
 
-
   .modal-lateral {
     position: fixed;
     inset: 0;
@@ -205,8 +206,6 @@ body {
     width: 40%;
     align-items: flex-end;
   }
-
-
 
   .selecionar-servidores select{
     width: 100%;
