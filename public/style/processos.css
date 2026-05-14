@@ -1,3 +1,12 @@
+@import url('https://googleapis.com');
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Cabin', sans-serif;
+}
+
 /* header */
 
 /* .exportar {
@@ -41,7 +50,7 @@
   height: 150px;
   transition: 0.2s;
   gap: 10px;
-  /* background-color:red; */
+  /* background-color:red;  */
 }
 
 .titulo {
@@ -113,6 +122,49 @@
   background-size: 24px auto;
   background-color: #fff;
 }
+
+.info-latencia {
+  /* background-color: rebeccapurple; */
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.info-status {
+  gap: 5px;
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.nome-proc {
+  /* color: #FD3434; */
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.latencia-proc {
+  color: #fd3434;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.pid-proc {
+  color: #5f5f5f;
+  font-size: 15px;
+}
+
+.info-status img {
+  width: 12px;
+}
+
+.texto-status {
+  color: #5f5f5f;
+}
+
+/* .indicador {
+} */
 
 /* Resoluções menores */
 @media (max-width: 1440px) {

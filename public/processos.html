@@ -136,31 +136,66 @@
                             </div>
                             <div class="tipo-kpi">
                                 <span class="nome-kpi">Processos Críticos</span>
-                                <!-- <span class="kpi">16/03/2026</span> -->
                             </div>
                         </div>
                     </div>
 
                     <div class="card pequeno">
-                        <div class="titulo">
-                            <div class="card-img" style="background-color: #e5edff;">
-                                <img src="./assets/imgs/processos/info.png">
+                        <div class="indicador">
+                            <div class="titulo">
+                                <div class="card-img" style="background-color: #e5edff;">
+                                    <img src="./assets/imgs/processos/info.png">
+                                </div>
+                                <div class="tipo-kpi">
+                                    <span class="nome-kpi">Status do Sistema</span>
+                                </div>
                             </div>
-                            <div class="tipo-kpi">
-                                <span class="nome-kpi">Status do Sistema</span>
-                                <!-- <span class="kpi">SRV-ACC-SP-01</span> -->
+                            <div class="info-status">
+                                <div class="running">
+                                    <div>
+                                        <div>
+                                            <img src="./assets/imgs/processos/bolinha-verde.png">
+                                            <span class="texto-status">Running</span>
+                                        </div>
+                                        <span style="color: #20A200; font-weight: bold;">10</span>
+                                    </div>
+                                </div>
+                                <div class="sleeping">
+                                    <div>
+                                        <div>
+                                            <img src="./assets/imgs/processos/lua.png">
+                                            <span class="texto-status">Sleeping</span>
+                                        </div>
+                                    <span style="color: #308CFF; font-weight: bold;">3</span>
+                                    </div>
+                                </div>
+                                <div class="stopped">
+                                    <div>
+                                        <div>
+                                            <img src="./assets/imgs/processos/retangulo-amarelo.png">
+                                            <span class="texto-status">Stopped</span>
+                                        </div>
+                                        <span style="color: #FFCC00; font-weight: bold;">2</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="card pequeno">
-                        <div class="titulo">
-                            <div class="card-img" style="background-color: #fef2f2;">
-                                <img src="./assets/imgs/processos/raio.png">
+                        <div class="indicador">        
+                            <div class="titulo">
+                                <div class="card-img" style="background-color: #fef2f2;">
+                                    <img src="./assets/imgs/processos/raio.png">
+                                </div>
+                                <div class="tipo-kpi">
+                                    <span class="nome-kpi">Maior Latência</span>
+                                </div>
                             </div>
-                            <div class="tipo-kpi">
-                                <span class="nome-kpi">Maior Latência</span>
-                                <!-- <span class="kpi">5 minutos</span> -->
+                            <div class="info-latencia">
+                                <span class="nome-proc">node</span>
+                                <span class="latencia-proc">100ms</span>
+                                <span class="pid-proc">PID: 3456</span>
                             </div>
                         </div>
                     </div>
