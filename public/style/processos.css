@@ -163,6 +163,12 @@
   color: #5f5f5f;
 }
 
+.status {
+  display: flex;
+  /* background-color: yellow; */
+  gap: 30px
+}
+
 /* .indicador {
 } */
 
