@@ -40,7 +40,17 @@
   flex: 1;
   height: 150px;
   transition: 0.2s;
-  gap: 10px
+  gap: 10px;
+  /* background-color:red; */
+}
+
+.titulo {
+  /* background-color: blue; */ 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  
 }
 
 .pequeno img {
@@ -59,8 +69,9 @@
 }
 
 .nome-kpi {
-  font-size: 13px;
-  color: var(--subtexto);
+  font-size: 20px;
+  color: #5f5f5f;
+  font-weight: bold;
 }
 
 .kpi {
@@ -75,6 +86,32 @@
   justify-content: center;
   padding: 10px;
   border-radius: 10px;
+}
+
+.selecionar-servidores{
+  align-self: flex-end;
+  align-items: flex-end;
+  width: 20%;
+  justify-items: flex-end;
+}
+
+.selecionar-servidores p{
+    margin-right: 10%;
+}
+
+.selecionar-servidores select{
+  border: 2px var(--borda) solid;
+  border-radius: 10px;
+  justify-self: flex-end;
+  padding: 5%;
+  width: 75%;
+  margin-left: 20%;
+  appearance: none;
+  background-image: url(../assets/imgs/painel/select-baixo.png);
+  background-repeat: no-repeat ;
+  background-position: right 10px top 50%;
+  background-size: 24px auto;
+  background-color: #fff;
 }
 
 /* Resoluções menores */
