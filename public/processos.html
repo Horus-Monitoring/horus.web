@@ -17,10 +17,12 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="/public/style/processos.css">
+    <link rel="stylesheet" href="style/processos.css">
     <link rel="stylesheet" href="style/padrao_dash.css">
+    
 
 </head>
 
@@ -82,13 +84,17 @@
 
                 <span class="header-titulo">Processos</span>
 
+                <!-- <div class="exportar">
+                    <button>Exportar</button>
+                </div> -->
+
                 <div class="usuario">
                     <div>
                         <p  id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
                     <span id="inicial_usuario"></span>
-                </div>
+                </div>        
             </header>
 
             <section class="conteudo" id="conteudo">
@@ -123,10 +129,50 @@
                 </div>
             </section>
 
+            <section class="conteudo">
+                <div class="cards">
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Dia mais crítico</span>
+                            <span class="kpi">16/03/2026</span>
+                        </div>
+                        <div class="card-img" style="background-color: #e5edff;">
+                            <img src="./assets/imgs/painel/servidor.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Servidor com mais incidentes</span>
+                            <span class="kpi">SRV-ACC-SP-01</span>
+                        </div>
+                        <div class="card-img" style="background-color: #fef2f2;">
+                            <img src="./assets/imgs/painel/offline.png">
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="tipo-kpi">
+                            <span class="nome-kpi">Tempo de recuperação</span>
+                            <span class="kpi">5 minutos</span>
+                        </div>
+                        <div class="card-img" style="background-color: #f0fdf4;">
+                            <img src="./assets/imgs/painel/online.png">
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
 
         </main>
 
     </div>
+
+    <!-- <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script> -->
 
 </body>
 
