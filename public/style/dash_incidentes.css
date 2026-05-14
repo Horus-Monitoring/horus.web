@@ -336,10 +336,10 @@ body {
   align-items: center;
   gap: 4px;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 
   h1 {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: normal;
   }
 }
@@ -354,7 +354,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   flex-direction: row;
-  gap: 20px;
+  gap: 15px;
   place-items: center;
 
   .card-servidor {
@@ -364,18 +364,18 @@ body {
     justify-content: center;
     text-align: center;
     gap: 15px;
-    width: 130px;
-    height: 100px;
+    width: 110px;
+    height: 90px;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 9px;
+    font-size: 8px;
   }
 }
 
 .podio {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 13px;
 }
 
 .podio .posicoes {
@@ -384,14 +384,15 @@ body {
   border: 1px solid #DBDBDB;
   border-radius: 8px;
   width: 100%;
-  padding: 16px 16px 16px 20px;
+  padding: 14px 14px 14px 20px;
   align-items: center;
   gap: 10px;
+  font-size: 14px;
 
   .posicao-representante{
     padding: 8px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 11px;
     margin-left: auto !important;
   }
 }
@@ -429,4 +430,16 @@ body {
   .posicao-representante{
     opacity: 0;
   }
+}
+
+@media (max-width: 400px) {
+  .titulo {
+        flex-wrap: wrap;
+    }
+
+    .tempo_alerta {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
 }
