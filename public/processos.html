@@ -114,28 +114,48 @@
                                 <span>[ip do servidor]</span>
                             </div>
                             <div class="info-servidores att">
-                                <p>Última atualização</p>
+                                <p>Última Atualização</p>
                                 <span>[Data e Hora]</span>
                             </div>
                         </div>
                     </div>
                     <div class="selecionar-servidores">
-                            <p>Selecione o servidor:</p>
-                            <select name="servidores" id="servidores">
-                                <option value="#" selected disabled>Nome Servidor</option>
-                            </select>
+                        <p style="color:#5f5f5f; font-weight: bold;">Selecione o Servidor</p>
+                        <select name="servidores" id="servidores">
+                            <option value="#" selected disabled>Nome Servidor</option>
+                        </select>
                     </div>
                 </div>
             
                 <div class="cards">
 
-                    <div class="card pequeno">
-                        <div class="titulo">
-                            <div class="card-img" style="background-color: #fef2f2;">
-                                <img src="./assets/imgs/processos/alerta.png">
+                    <div class="card-critico pequeno">
+                        <div class="indicador">
+                            <div class="titulo">
+                                <div class="card-img" style="background-color: #FAAAAA;">
+                                    <img src="./assets/imgs/processos/alerta.png">
+                                </div>
+                                <div class="tipo-kpi">
+                                    <span class="nome-kpi">Processos Críticos</span>
+                                </div>
                             </div>
-                            <div class="tipo-kpi">
-                                <span class="nome-kpi">Processos Críticos</span>
+                            <div class="info-critico">
+                                <span style="color: #fd3434; font-weight: bold; font-size: 25px;">1</span>
+                                <span style="color: #5f5f5f; font-size: 15px;">processo afetado</span>
+                            </div>
+                            <div class="qtd-critico">
+                                <div style="color: #C70C0C; font-size: 15px; font-weight: bold; background-color: #FAAAAA;" class="info-alerta">
+                                    <span>1</span>
+                                    <span>Latência</span>
+                                </div>
+                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                    <span>0</span>
+                                    <span>CPU</span>
+                                </div>
+                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                    <span>0</span>
+                                    <span>RAM</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,29 +173,29 @@
                             <div class="info-status">
                                 <div class="running">
                                     <div class="status">
-                                        <div>
+                                        <div class="tipo-proc">
                                             <img src="./assets/imgs/processos/bolinha-verde.png">
                                             <span class="texto-status">Running</span>
                                         </div>
-                                        <span style="color: #20A200; font-weight: bold;">10</span>
+                                        <span style="color: #20A200; font-weight: bold; font-size: 15px;">10</span>
                                     </div>
                                 </div>
                                 <div class="sleeping">
                                     <div class="status">
-                                        <div>
+                                        <div class="tipo-proc">
                                             <img src="./assets/imgs/processos/lua.png">
                                             <span class="texto-status">Sleeping</span>
                                         </div>
-                                    <span style="color: #308CFF; font-weight: bold;">3</span>
+                                    <span style="color: #308CFF; font-weight: bold; font-size: 15px;">3</span>
                                     </div>
                                 </div>
                                 <div class="stopped">
                                     <div class="status">
-                                        <div>
+                                        <div class="tipo-proc">
                                             <img src="./assets/imgs/processos/retangulo-amarelo.png">
                                             <span class="texto-status">Stopped</span>
                                         </div>
-                                        <span style="color: #FFCC00; font-weight: bold;">2</span>
+                                        <span style="color: #FFCC00; font-weight: bold; font-size: 15px;">2</span>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +205,7 @@
                     <div class="card pequeno">
                         <div class="indicador">        
                             <div class="titulo">
-                                <div class="card-img" style="background-color: #fef2f2;">
+                                <div class="card-img" style="background-color: #FAAAAA;">
                                     <img src="./assets/imgs/processos/raio.png">
                                 </div>
                                 <div class="tipo-kpi">

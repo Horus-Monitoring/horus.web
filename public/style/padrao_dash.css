@@ -118,7 +118,7 @@ body {
   justify-self: flex-end;
   padding: 5%;
   width: 75%;
-  margin-left: 20%;
+  /* margin-left: 20%; */
   appearance: none;
   background-image: url(../assets/imgs/painel/select-baixo.png);
   background-repeat: no-repeat ;
@@ -185,6 +185,11 @@ body {
     margin-left: 0;
     width: 100%;
   }
+
+  .selecionar-servidores p {
+    width: 100%;
+    margin-right: -20%;
+  }
 }
 
 /* celular */
@@ -192,19 +197,24 @@ body {
   *{
     font-size: small;
   }
+
   .conteudo {
     padding: 12px;
     gap: 12px;
   }
   
   .servidores{
-  
     width: 60%;
   }
 
   .selecionar-servidores{
     width: 40%;
     align-items: flex-end;
+  }
+
+  .selecionar-servidores p {
+    width: 95%;
+    margin-right: 5%;
   }
 
   .selecionar-servidores select{
