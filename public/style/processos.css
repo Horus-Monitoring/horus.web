@@ -112,9 +112,9 @@
 }
 
 .selecionar-servidores p{
-    margin-right: 10%;
-    /* background-color: yellow; */
-    width: 50%;
+    /* margin-right: 10%; */
+    background-color: yellow;
+    /* width: 80%; */
 }
 
 .selecionar-servidores select{
