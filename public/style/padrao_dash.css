@@ -37,7 +37,7 @@ body {
 }
 
 .conteudo {
-  padding: 20px;
+  padding: 20px !important; 
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -213,7 +213,7 @@ body {
   }
 
   .selecionar-servidores p {
-    width: 95%;
+    /* width: 95%; */
     margin-right: 5%;
   }
 
