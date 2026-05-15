@@ -216,7 +216,15 @@
   border-radius: 10px;
 }
 
+.graficos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 
+.graficos .card .pequeno {
+  height: 50vh;
+}
 
 /* Resoluções menores */
 @media (max-width: 1440px) {
@@ -284,7 +292,7 @@
     /* padding: 12px; */
   }
 
-  .cards {
+  .cards, .graficos {
     flex-direction: column;
     gap: 16px;
   }
