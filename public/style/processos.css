@@ -40,6 +40,12 @@
   border: 1px solid var(--borda);
 }
 
+.card-critico {
+  background: #fff;
+  border-radius: 14px;
+  border: 2px solid #C70C0C;
+}
+
 .pequeno {
   display: flex;
   /* justify-content: space-between; */
@@ -47,7 +53,7 @@
   padding: 20px;
   font-size: 12px;
   flex: 1;
-  height: 150px;
+  min-height: 150px;
   transition: 0.2s;
   gap: 10px;
   /* background-color:red;  */
@@ -100,12 +106,15 @@
 .selecionar-servidores{
   align-self: flex-end;
   align-items: flex-end;
-  width: 20%;
+  width: 100%;
   justify-items: flex-end;
+  /* background-color: #C70C0C; */
 }
 
 .selecionar-servidores p{
     margin-right: 10%;
+    /* background-color: yellow; */
+    width: 50%;
 }
 
 .selecionar-servidores select{
@@ -136,6 +145,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  margin-left: 5px;
 }
 
 .nome-proc {
@@ -161,16 +171,52 @@
 
 .texto-status {
   color: #5f5f5f;
+  font-size: 15px;
 }
 
 .status {
   display: flex;
-  /* background-color: yellow; */
-  gap: 30px
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
 }
 
-/* .indicador {
-} */
+.tipo-proc {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.info-critico {
+  /* background-color: rebeccapurple; */
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  margin-left: 5px;
+  align-items: center;
+}
+
+.qtd-critico {
+  display: flex;
+  /* flex-direction: row; */
+  margin-left: 5px;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.info-qtd {
+  border: 2px solid #a0a0a0;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.info-alerta {
+  border: 2px solid #c70c0c;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+
 
 /* Resoluções menores */
 @media (max-width: 1440px) {
@@ -195,6 +241,7 @@
 
 /* Celular */
 @media (max-width: 768px) {
+
   .lateral {
     transform: translateX(-100%);
     width: 260px;
@@ -206,14 +253,6 @@
 
   .hamburguer {
     display: flex;
-  }
-
-  .usuario-mobile {
-    display: block;
-  }
-
-  .linha {
-    flex-direction: column;
   }
 
   .main {
@@ -229,24 +268,73 @@
     gap: 14px;
   }
 
-  .cards {
+  .padrao-serv {
+    flex-direction: column;
     gap: 12px;
   }
 
+  .selecionar-servidores {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .selecionar-servidores select {
+    width: 100%;
+    /* margin-left: 0; */
+    /* padding: 12px; */
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .pequeno {
-    flex: 1;
-    height: 80px;
+    width: 100%;
+    height: auto;
+    min-height: 140px;
+
+    padding: 16px;
+    align-items: flex-start;
+  }
+
+  .titulo {
+    align-items: center;
   }
 
   .nome-kpi {
-    font-size: 11px;
+    font-size: 16px;
   }
 
-  .kpi {
+  .status {
+    width: 100%;
+  }
+
+  .texto-status {
+    font-size: 14px;
+  }
+
+  .qtd-critico {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .info-qtd,
+  .info-alerta {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .nome-proc {
     font-size: 20px;
   }
 
-  .interface-grafico {
-    height: 220px;
+  .latencia-proc {
+    font-size: 32px;
   }
+
+  .pid-proc {
+    font-size: 14px;
+  }
+
 }
