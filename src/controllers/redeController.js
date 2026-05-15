@@ -1,17 +1,22 @@
-var redeModel = require("../models/redeModel");
+async function buscarDadosRede(req, res) {
+    try {
+        const periodo = req.params.periodo;
 
-function buscarDadosRede(req,res){
-    const servidor = req.params.servidor;
-    const periodo = req.params.periodo;
+        const params = {
+            Bucket: "horus-monitoring",
+            Key: `client/empresa_1/c0:35:32:c7:0b:59/dashboard.json`
+        };
 
-    redeModel.buscarJsonS3(servidor, periodo)
-        .then(resultado=>{
-            res.json(resultado)
-        })
-        .catch(erro=>{
-            console.log(erro)
-            res.status(500).json(erro)
-        })
+        const data = await s3.getObject(params).promise();
+
+        const json = JSON.parse(data.Body.toString("utf-8"));
+
+        res.json(json);
+
+    } catch (erro) {
+        console.log(erro);
+        res.status(500).json(erro);
+    }
 }
 
 module.exports = {
