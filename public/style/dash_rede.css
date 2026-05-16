@@ -137,10 +137,22 @@ canvas {
 
 }
 
-.indicador-pacotes{
-  border: red 2px solid; 
-  background-color: rgb(238, 147, 147);
+.verde {
+    background-color: rgb(149, 246, 149);
+    color: green;
+    border: green 1px solid;
+}
 
+.laranja {
+    background-color: rgb(233, 197, 130);
+    color: orange;
+    border: orange 1px solid;
+}
+
+.vermelho {
+    background-color: rgb(236, 103, 103);
+    color: red;
+    border: red 1px solid;
 }
 
 .categoria {

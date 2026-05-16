@@ -215,54 +215,7 @@
                                     <option value="30">Últimos 30 dias</option>
                                 </select>
                             </div>   
-                            <div class="tabela-pacotes" >
-                                <div>
-                                    Rastreamento
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Rotas
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Correlação
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    API Gateway
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Banco de Dados
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Sinc Service
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
+                            <div id="listaPacotes"></div>
                             <div style="border: #ebe6e7 1px solid; height: 1px; width: 95%; margin: 5px"></div>
                             <div style="display: flex; flex-direction:row; justify-content: space-evenly;">
                                 <div style="display: flex; flex-direction:row">
@@ -560,6 +513,7 @@
 
         atualizarKPIs(dados);
         atualizarGraficos(dados);
+        atualizarPerdaPacotes(dados);
     }
 
     function atualizarGraficos(dados){
@@ -700,6 +654,37 @@
             }
         });
 
+    }
+
+    function atualizarPerdaPacotes(dados) {
+        const container = document.getElementById("listaPacotes");
+
+        container.innerHTML = "";
+
+        const perdas = dados.perda_pacotes_servico;
+
+        for (let servico in perdas) {
+            const valor = perdas[servico];
+
+            let corClasse = "";
+
+            if (valor < 1) {
+                corClasse = "verde";
+            } else if (valor <= 2) {
+                corClasse = "laranja";
+            } else {
+                corClasse = "vermelho";
+            }
+
+            container.innerHTML += `
+                <div class="tabela-pacotes">
+                    <div>${servico}</div>
+                    <div class="indicador-pacotes ${corClasse}">
+                        ${valor}%
+                    </div>
+                </div>
+            `;
+        }
     }
     //Modal para o menu sanduíche
 
