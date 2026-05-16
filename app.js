@@ -7,7 +7,7 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });
 
-var AWS = require("aws-sdk");
+var AWS = require("@aws-sdk/client-s3");
 
 var express = require("express");
 var cors = require("cors");
