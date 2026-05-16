@@ -232,7 +232,16 @@
 
                 <section class="linha">
                     <div class="card card-grafico">
-                        <h3 style="color:#5f5f5f; font-size: 16px;" class="tipo-grafico">Top 5 processos que mais estão consumindo recursos</h3>
+                        <div class="topo-grafico">
+                            <h3 class="tipo-grafico">
+                                Top 5 processos que mais estão consumindo recursos
+                            </h3>
+
+                            <div class="alternador">
+                                <button id="btnCPU" class="ativo">CPU</button>
+                                <button id="btnRAM">RAM</button>
+                            </div>
+                        </div>
                         <div class="interface-grafico">
                             <canvas id="grafico-top5"></canvas>
                         </div>
@@ -307,31 +316,12 @@
                 }
             });
 
-                // new Chart(document.getElementById('grafico-cpu'), {
-                //     type: 'line',
-                //     data: {
-                //         labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
-                //         datasets: [
-                //             { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                //             { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                //             { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-                //         ]
-                //     },
-                //     options: {
-                //         responsive: true, maintainAspectRatio: false,
-                //         interaction: { mode: 'index', intersect: false },
-                //         plugins: {
-                //             tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                //             legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-                //         },
-                //         scales: {
-                //             x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                //             y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-                //         }
-                //     }
-                // });
+                const dados = {
+                    cpu: [92.35, 78.65, 65.23, 58.11, 31.29],
+                    ram: [70.12, 88.45, 45.90, 62.33, 55.18]
+                };
 
-                new Chart(document.getElementById('grafico-top5'), {
+                const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
                     type: 'bar',
 
                     data: {
@@ -340,7 +330,7 @@
                         datasets: [{
                             label: 'CPU %',
 
-                            data: [92.35, 78.65, 65.23, 58.11, 31.29],
+                            data: dados.cpu,
 
                             backgroundColor: 'rgba(139, 92, 246, 0.75)',
 
@@ -452,6 +442,37 @@
                             });
                         }
                     }]
+                });
+
+                const btnCPU = document.getElementById('btnCPU');
+                const btnRAM = document.getElementById('btnRAM');
+
+                btnCPU.addEventListener('click', () => {
+
+                    graficoTop5.data.datasets[0].data = dados.cpu;
+
+                    graficoTop5.data.datasets[0].label = 'CPU %';
+
+                    graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
+
+                    graficoTop5.update();
+
+                    btnCPU.classList.add('ativo');
+                    btnRAM.classList.remove('ativo');
+                });
+
+                btnRAM.addEventListener('click', () => {
+
+                    graficoTop5.data.datasets[0].data = dados.ram;
+
+                    graficoTop5.data.datasets[0].label = 'RAM %';
+
+                    graficoTop5.data.datasets[0].backgroundColor = 'rgba(62, 142, 222, 0.75)';
+
+                    graficoTop5.update();
+
+                    btnRAM.classList.add('ativo');
+                    btnCPU.classList.remove('ativo');
                 });
 
                 // new Chart(document.getElementById('grafico-incidentes'), {
