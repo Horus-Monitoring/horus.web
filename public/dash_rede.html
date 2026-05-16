@@ -17,6 +17,7 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script> <!--Vai melhorar a vusualização?-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_rede.css">
@@ -202,7 +203,7 @@
                                     <option value="30">Últimos 30 dias</option>
                                 </select>
                             </div>
-                            <canvas id="graficoTransferencia"></canvas>
+                            <div id="graficoTransferencia" style="width:100%; height:400px;"></div>
                         </div>
                         <div class="box-grafico" style="flex: 1;">
                             <div style="display: flex; justify-content: space-between;">
@@ -562,44 +563,92 @@
     }
 
     function atualizarGraficos(dados){
-        const ctxTransferencia = document.getElementById("graficoTransferencia");
+        const chartDom = document.getElementById("graficoTransferencia");
 
-        new Chart(ctxTransferencia, {
-            type: "line",
-            data: {
-                labels: dados.grafico_transferencia.timestamps,
-                datasets: [
-                    {
-                        label: "Rastreamento",
-                        data: dados.grafico_transferencia.rastreamento,
-                        borderColor: "#2F80ED",
-                        backgroundColor: "transparent",
-                        tension: 0.4,
-                        borderWidth: 4
-                    },
-                    {
-                        label: "Rotas",
-                        data: dados.grafico_transferencia.rotas,
-                        borderColor: "#9B51E0",
-                        backgroundColor: "transparent",
-                        tension: 0.4,
-                        borderWidth: 4
-                    },
-                    {
-                        label: "Correlação",
-                        data: dados.grafico_transferencia.correlacao,
-                        borderColor: "#2ECC71",
-                        backgroundColor: "transparent",
-                        tension: 0.4,
-                        borderWidth: 4
-                    }
-                ]
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+            tooltip: {
+                trigger: 'axis'
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-            }
+
+            legend: {
+                data: ['Rastreamento', 'Rotas', 'Correlação']
+            },
+
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '15%',
+                containLabel: true
+            },
+
+            xAxis: {
+                type: 'category',
+                data: dados.grafico_transferencia.hora,
+                axisLabel: {
+                    rotate: 45
+                }
+            },
+
+            yAxis: {
+                type: 'value',
+                name: 'Mbps'
+            },
+
+            dataZoom: [
+                {
+                    type: 'inside'
+                },
+                {
+                    type: 'slider'
+                }
+            ],
+
+            series: [
+                {
+                    name: 'Rastreamento',
+                    type: 'line',
+                    smooth: true,
+                    data: dados.grafico_transferencia.rastreamento,
+                    lineStyle: {
+                        width: 2,
+                        color: '#2F80ED'
+                    },
+                    symbol: 'none'
+                },
+                {
+                    name: 'Rotas',
+                    type: 'line',
+                    smooth: true,
+                    data: dados.grafico_transferencia.rotas,
+                    lineStyle: {
+                        width: 2,
+                        color: '#9B51E0'
+                    },
+                    symbol: 'none'
+                },
+                {
+                    name: 'Correlação',
+                    type: 'line',
+                    smooth: true,
+                    data: dados.grafico_transferencia.correlacao,
+                    lineStyle: {
+                        width: 2,
+                        color: '#2ECC71'
+                    },
+                    symbol: 'none'
+                },
+                
+            ]
+        };
+
+        myChart.setOption(option);
+
+        window.addEventListener('resize', function () {
+            myChart.resize();
         });
+    
 
         const ctxLatencia = document.getElementById("graficoLatencia");
 
@@ -650,9 +699,8 @@
                 }
             }
         });
+
     }
-
-
     //Modal para o menu sanduíche
 
     const btnHamburguer = document.getElementById("hamburguer");
