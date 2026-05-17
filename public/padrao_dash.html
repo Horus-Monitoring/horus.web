@@ -40,21 +40,6 @@
                 <a href="painel.html" class="item-menu">
                     <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
                 </a>
-                <a href="dash_analista.html" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </a>
-                <a href="telaIncidente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
-                </a>
-                <a href="comunicacao.html" class="item-menu">
-                    <img src="./assets/imgs/painel/comunicacao.png" alt="">Comunicação
-                </a>
-                <a href="processos.html" class="item-menu">
-                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
-                </a>
-                <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt="">  Temperatura
-                </a>
 
                 <div class="categoria adm" id="administracao">Administração </div>
                     <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
@@ -75,51 +60,61 @@
         <main class="main">
 
            <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
 
-                <span class="header-titulo">Dashboard Padrão |RENOMEAR|</span>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
 
-                <div class="usuario">
-                    <div>
-                        <p  id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
-                    </div>
-                    <span id="inicial_usuario"></span>
-                </div>
-            </header>
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong>SRV-WEB-01</strong> /
+                                <span class="renomear">RENOMEAR</span>
+                            </span>
 
-            <section class="conteudo" id="conteudo">
-                <div class="padrao-serv">
-                    <div class="servidores">
-                        <div class="detalhes-servidores">
-                            <div class="info-servidores nome">
-                                <div style="padding-right: 10px;">
-                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span class="status-dot verde"></span>
+
+                                    <select>
+                                        <option>SRV-WEB-01</option>
+                                        <option>SRV-DB-02</option>
+                                        <option>SRV-API-03</option>
+                                    </select>
                                 </div>
-                                <div>
-                                    <span>Nome Servidor</span>
-                                    <p>[Local Servidor]</p>
+
+                                <div class="alertas">
+                                    ! 3 alertas
                                 </div>
-                            </div>
-                            <div class="info-servidores ip">
-                                <p>IP do Servidor</p>
-                                <span>[ip do servidor]</span>
-                            </div>
-                            <div class="info-servidores att">
-                                <p>Última atualização</p>
-                                <span>[Data e Hora]</span>
                             </div>
                         </div>
                     </div>
-                    <div class="selecionar-servidores">
-                            <p>Selecione o servidor:</p>
-                            <select name="servidores" id="servidores">
-                                <option value="#" selected disabled>Nome Servidor</option>
-                            </select>
+
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
                     </div>
                 </div>
+
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="#" class="ativo">Resumo</a>
+                        <a href="#">Processos</a>
+                        <a href="#">Comunicação e rede</a>
+                        <a href="#">Temperatura</a>
+                        <a href="#">Logs</a>
+                    </nav>
+                </div>
+
+            </header>
+
+            <section class="conteudo" id="conteudo">
+                
             </section>
 
 
