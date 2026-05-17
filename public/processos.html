@@ -221,15 +221,6 @@
 
                 </div>
 
-                <!-- <div class="graficos">
-                    <div class="card pequeno">
-                        <canvas id="grafico1"></canvas>
-                    </div>
-                    <div class="card pequeno">
-                        <canvas id="grafico2"></canvas>
-                    </div>
-                </div> -->
-
                 <section class="linha">
                     <div class="card card-grafico">
                         <div class="topo-grafico">
@@ -268,6 +259,55 @@
                         </div>   
                     </div>
                 </section>
+
+                <div class="tabela-container">
+                    <table class="tabela-processos">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Nome</th>
+                                <th>Usuário</th>
+                                <th>CPU</th>
+                                <th>RAM</th>
+                                <th>Latência</th>
+                                <th>Status</th>
+                                <th>Tempo de Execução</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="proc-cinza">3456</td>
+                                <td class="proc-cinza">node</td>
+                                <td class="proc-cinza">nodejs</td>
+                                <td><span class="proc-alerta">48.2%</span></td>
+                                <td><span class="proc-grave">19.7%</span></td>
+                                <td><span class="proc-grave">100ms</span></td>
+                                <td>Running</td>
+                                <td><span class="proc-cinza">2d 4h</span></td>
+                            </tr>
+                            <tr>
+                                <td class="proc-cinza">1234</td>
+                                <td class="proc-cinza">docker</td>
+                                <td class="proc-cinza">root</td>
+                                <td><span class="proc-estavel">30.5%</span></td>
+                                <td><span class="proc-alerta">12.8%</span></td>
+                                <td><span class="proc-alerta">60ms</span></td>
+                                <td>Sleeping</td>
+                                <td><span class="proc-cinza">15h</span></td>    
+                            </tr>
+                            <tr>
+                                <td class="proc-cinza">7685</td>
+                                <td class="proc-cinza">chrome.exe</td>
+                                <td class="proc-cinza">leticia</td>
+                                <td><span class="proc-estavel">21.6%</span></td>
+                                <td><span class="proc-estavel">7.9%</span></td>
+                                <td><span class="proc-estavel">35ms</span></td>
+                                <td>Stopped</td>
+                                <td><span class="proc-cinza">40m</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </section>
         </main>

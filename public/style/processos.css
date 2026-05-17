@@ -262,26 +262,20 @@ canvas {
 .alternador {
   display: flex;
   gap: 5px;
-
   background-color: #ececec;
   padding: 4px;
   border-radius: 10px;
-
   flex-shrink: 0;
 }
 
 .alternador button {
   border: none;
   background: transparent;
-
   padding: 8px 16px;
   border-radius: 8px;
-
   cursor: pointer;
-
   color: #5f5f5f;
   font-weight: bold;
-
   transition: 0.2s;
 }
 
@@ -359,6 +353,101 @@ canvas {
 .alternador-pesquisar button.ativo {
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* .tabela-container {
+    width: 100%;
+    overflow-x: auto;
+} */
+
+/* .tabela-processos {
+    width: 100%;
+    min-width: 1100px;
+} */
+
+/* .secao-tabela {
+    background-color: white;
+
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+} */
+
+/* .tabela-container {
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--borda);
+    padding: 10px;
+    min-height: 350px;
+} */
+
+.tabela-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 14px;
+  border: 1px solid var(--borda);
+  /* overflow-y: auto; */
+  overflow-x: auto;
+  /* max-height: 500px; */
+  padding: 10px;
+}
+
+.tabela-processos {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.tabela-processos th {
+  text-align: center;
+  padding: 14px;
+  color: #000000;
+  font-size: 14px;
+  border-bottom: 2px solid #ececec;
+  /* position: sticky; */
+}
+
+.tabela-processos td {
+  text-align: center;
+  padding: 14px;
+  color: #5f5f5f;
+  font-size: 14px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.tabela-processos tbody tr:hover {
+  background-color: #fafafa;
+}
+
+.proc-cinza {
+  color: #5f5f5f;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.proc-estavel {
+  color: #20A200;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.proc-alerta {
+  color: #FFCC00;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.proc-grave {
+  color: #FB2C36;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 /* Resoluções menores */
