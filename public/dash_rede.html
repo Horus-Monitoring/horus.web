@@ -125,7 +125,15 @@
                     <div class="kpis">
                         <div class="kpi-card">
                             <div class="nome">
-                                <img src="assets/imgs/rede/info.png" alt="">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Pacotes de dados perdidos durante a tentativa de comunicação entre os diferentes
+                                        sistemas do SAGITARIO.
+                                        Altas taxas de perda ocasionam perda de informação.
+                                    </div>
+                                </div>
                                 Perda de Pacotes
                                 <img src="assets/imgs/rede/rede.png" alt="">
                             </div>
@@ -141,7 +149,15 @@
 
                         <div class="kpi-card">
                             <div class="nome">
-                                <img src="assets/imgs/rede/info.png" alt="">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Indica o ping médio do servidor. 
+                                        Influencia o recebimento de pacotes e indica falha de comunicação.
+                                        Alta latência gera lentidão.
+                                    </div>
+                                </div>
                                 Latência
                                 <img src="assets/imgs/rede/velocimetro.png" alt="">
                             </div>
@@ -157,7 +173,13 @@
 
                         <div class="kpi-card">
                             <div class="nome">
-                                <img src="assets/imgs/rede/info.png" alt="">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+                                    <div class="tooltip-box">
+                                        Indica a taxa média de atualização do Sensor ADS-B.
+                                        Níveis baixos de atualização impactam na operação, gerando perda de aeronaves e rotas.
+                                    </div>
+                                </div>
                                 Atualização ADS-B
                                 <img src="assets/imgs/rede/sinal.png" alt="">
                             </div>
@@ -173,7 +195,15 @@
 
                         <div class="kpi-card">
                             <div class="nome">
-                                <img src="assets/imgs/rede/info.png" alt="">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Indica o número de rotas que seguem sem atualização há mais de 8 horas.
+                                        Falta de atualização pode ser causada por lentidão no sistema, problemas de hardware no ADS-B 
+                                        e até mesmo questões climáticas.
+                                    </div>
+                                </div>
                                 Rotas Sem Atualização
                                 <img src="assets/imgs/rede/nuvem.png" alt="">
                             </div>
@@ -490,13 +520,13 @@
             dados.kpis.adsb_update + "%";
 
         document.getElementById("rotasValor").innerHTML =
-            dados.kpis.rotas_sem_atualizacao + " rotas";
+            dados.kpis.rotas_sem_atualizacao;
     }
 
     async function carregarDashboard() {
 
-        const servidor = document.getElementById("servidores").value;
-        const periodo = 24;
+        /*const servidor = document.getElementById("servidores").value;
+        const periodo = 24;*/
 
         const response = await fetch(
             `/rede/buscarDadosRede`
