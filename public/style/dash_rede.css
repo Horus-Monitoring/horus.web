@@ -157,6 +157,40 @@ body {
   white-space: nowrap;
 }
 
+.acoes-header {
+  display: flex;
+  align-items: center;
+}
+
+.btn-turno {
+  background: linear-gradient(135deg, #274690 0%, #3557b7 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(39, 70, 144, 0.18);
+  white-space: nowrap;
+}
+
+.btn-turno:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(39, 70, 144, 0.28);
+  opacity: 0.96;
+}
+
+.btn-turno:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(39, 70, 144, 0.18);
+  transition: none;
+}
+
 .header-nav-scroll {
   width: 100%;
   display: flex;
@@ -224,10 +258,20 @@ body {
   height: 20px;
 }
 
-.kpi-card select{
-  width: 100%;
-  border: 2px var(--borda) solid;
-  border-radius: 5px;
+.kpi-card select {
+  width: 25%;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 6px 6px;
+  background-color: #fff;
+  font-size: 8px;
+  font-weight: 400;
+  text-align: center;
+  text-align-last: center;
+  color: var(--subtexto);
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .valor{
@@ -262,6 +306,22 @@ body {
     position: relative;
 }
 
+.grafico-linha-box select{
+  width: 15%;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 6px 6px;
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  text-align-last: center;
+  color: var(--subtexto);
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
 canvas {
     width: 100% !important;
     height: 100% !important;
@@ -277,6 +337,22 @@ canvas {
   border-radius: 12px;
   padding: 20px;
   position: relative;
+}
+
+.box-grafico select{
+  width: 30%;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 6px 6px;
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  text-align-last: center;
+  color: var(--subtexto);
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .tabela-pacotes{
