@@ -164,6 +164,9 @@ html, body {
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .header-nav-scroll {
