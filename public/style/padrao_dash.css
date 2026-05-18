@@ -18,50 +18,34 @@
   --subtexto: #6b7280;
 }
 
-/* body {
-  background: var(--cinza);
-  height: 100vh;
-  overflow: hidden;
-} */
-
-body {
-  background: var(--cinza);
-  min-height: 100vh;
-  overflow-y: auto;
+html, body {
+  width: 100%;
+  min-height: 100%;
   overflow-x: hidden;
 }
-
-/* .container {
-  display: flex;
-  height: 100%;
-} */
 
 .container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
 }
 
 .main {
-  flex: auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   margin-left: 260px;
+  min-height: 100vh;
+  overflow: visible;
 }
 
-/* .conteudo {
-  padding: 20px !important; 
+.conteudo {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
   flex: 1;
-} */
-
-.conteudo {
-  padding: 20px !important;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .categoria {
@@ -75,95 +59,6 @@ body {
   display:none;
 }
 
-.padrao-serv{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.servidores{
-  border: 2px var(--borda) solid;
-  background-color: white;
-  border-radius: 10px;
-  display: flex; 
-  flex-direction: row;
-  width: 80%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.detalhes-servidores{ 
-  display: flex; 
-  justify-content: space-between;
-  flex-direction: row;
-  width: 100%;
-}
-
-.info-servidores{
-  border: 10px;  
-  display: flex;
-  flex-direction: column;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.nome{
-  flex-direction: row;
-}
-
-.info-servidores span{
-  font-weight: bold;
-}
-
-.info-servidores p{
-  color: var(--subtexto)
-}
-
-.selecionar-servidores{
-  align-self: flex-end;
-  align-items: flex-end;
-  width: 20%;
-  justify-items: flex-end;
-}
-
-.selecionar-servidores p{
-    margin-right: 10%;
-}
-
-.selecionar-servidores select{
-  border: 2px var(--borda) solid;
-  border-radius: 10px;
-  justify-self: flex-end;
-  padding: 5%;
-  width: 75%;
-  /* margin-left: 20%; */
-  appearance: none;
-  background-image: url(../assets/imgs/painel/select-baixo.png);
-  background-repeat: no-repeat ;
-  background-position: right 10px top 50%;
-  background-size: 24px auto;
-}
-
-
-/* overlay do menu hamburguer */
-.modal-lateral {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-  z-index: 998;
-  
-}
-
-.modal-lateral.ativo {
-  display: block;
-}
-
-.lateral {
-  z-index: 999;
-  transition: transform 0.3s ease;
-}
 
 /*INICIO HEADER NOVO*/
 .header {
@@ -321,6 +216,26 @@ body {
 
 /*FIM HEADER NOVO*/
 
+
+/* overlay do menu hamburguer */
+.modal-lateral {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 998;
+  
+}
+
+.modal-lateral.ativo {
+  display: block;
+}
+
+.lateral {
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
 /* tablet/mobile */
 @media (max-width: 1439px) {
   .lateral {
@@ -337,6 +252,7 @@ body {
   .lateral.ativo {
     transform: translateX(0);
   }
+
 
   .modal-lateral {
     position: fixed;
@@ -361,18 +277,34 @@ body {
     width: 100%;
   }
 
-  .selecionar-servidores p {
-    width: 100%;
-    margin-right: -20%;
+  .header {
+    padding: 10px 12px 0;
   }
+
+  .header-topo {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header-servidor {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .status-servidor {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .breadcrumb {
+    font-size: 13px;
+  }
+
 }
 
 /* celular */
 @media (max-width: 799px) {
-  *{
-    font-size: small;
-  }
-
   .conteudo {
     padding: 12px;
     gap: 12px;
@@ -387,11 +319,6 @@ body {
     align-items: flex-end;
   }
 
-  .selecionar-servidores p {
-    /* width: 95%; */
-    margin-right: 5%;
-  }
-
   .selecionar-servidores select{
     width: 100%;
     margin-left: 10%; 
@@ -401,6 +328,36 @@ body {
   .att{
     display: none;
   }
+
+  .header {
+    padding: 10px 12px 0;
+
+  }
+
+  .header-topo {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .header-servidor {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .status-servidor {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .breadcrumb {
+    display: none;
+  }
+
+  .usuario{
+    align-self: center;
+  }
+
 }
 
 /* desktop */
@@ -409,3 +366,8 @@ body {
     display: none !important;
   }
 }
+
+
+
+
+
