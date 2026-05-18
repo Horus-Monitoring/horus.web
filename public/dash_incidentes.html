@@ -75,53 +75,61 @@
         <main class="main">
 
             <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
 
-                <span class="header-titulo">Alertas e Incidentes</span>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
 
-                <div class="usuario">
-                    <div>
-                        <p id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
-                    </div>
-                    <span id="inicial_usuario"></span>
-                </div>
-            </header>
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong>SRV-WEB-01</strong> /
+                                <span class="renomear">Incidentes</span>
+                            </span>
 
-            <section class="conteudo" id="conteudo">
-                <div class="padrao-serv">
-                    <div class="servidores">
-                        <div class="detalhes-servidores">
-                            <div class="info-servidores nome">
-                                <div style="padding-right: 10px;">
-                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span id="status-dot" class="status-dot verde"></span>
+
+                                    <select id="servidores" onchange="selecionar()">
+                                        <option value="#">Todos</option>
+                                        <option>SRV-WEB-01</option>
+                                        <option>SRV-DB-02</option>
+                                        <option>SRV-API-03</option>
+                                    </select>
                                 </div>
-                                <div id="sumir-nome">
-                                    <span>Nome Servidor</span>
-                                    <p>[Local Servidor]</p>
+
+                                <div class="alertas">
+                                    <img src="assets/imgs/incidentes/alerta-lar.png" alt=""
+                                        style="height: 12px !important; width: 12px !important;"> 3 alertas
                                 </div>
-                            </div>
-                            <div id="sumir-ip" class="info-servidores ip">
-                                <p>IP do Servidor</p>
-                                <span>[ip do servidor]</span>
-                            </div>
-                            <div class="info-servidores att">
-                                <p>Última atualização</p>
-                                <span>[Data e Hora]</span>
                             </div>
                         </div>
                     </div>
-                    <div class="selecionar-servidores">
-                        <p>Selecione o servidor:</p>
-                        <select name="servidores" id="servidores" onchange="selecionar()">
-                            <option value="#" selected>Todos</option>
-                            <option value="servidor">Servidor 1</option>
-                        </select>
+
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
                     </div>
                 </div>
 
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="#">Resumo</a>
+                        <a href="#">Processos</a>
+                        <a href="#">Comunicação e rede</a>
+                        <a href="#">Temperatura</a>
+                        <a href="#" class="ativo">Incidentes</a>
+                    </nav>
+                </div>
+
+            </header>
+            <section>
                 <div class="kpis" id="kpis-todos">
                     <div style="border: 1px solid #FFCC00;" class="kpi">
                         <div class="informacoes">
@@ -151,7 +159,7 @@
                                 <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
                                     src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
                                 <div class="informacoes-principais">
-                                    <span>Total de Alertas Ativos</span>
+                                    <span>Servidor com mais Alertas</span>
                                     <h1>10</h1>
                                 </div>
                             </div>
@@ -167,8 +175,19 @@
                         </div>
                     </div>
 
-                    <div style="border: 1px solid #E7E4E4;" class="kpi">
-                        <div style="margin: 0;" class="tempo_dash">
+                    <div style="border: 1px solid #C70C0C;" class="kpi">
+                        <div class="informacoes">
+                            <div>
+                                <img style="border: 1px solid #C70C0C; padding: 9px;" id="kpi-alerta"
+                                    src="./assets/imgs/incidentes/tempo-reparo.png" alt="">
+                                <div class="informacoes-principais">
+                                    <span>Tempo Médio para Reparo</span>
+                                    <h1>5 minutos</h1>
+                                </div>
+                            </div>
+                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                        </div>
+                        <div class="tempo_dash">
                             <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
                             <select name="" id="tempo">
                                 <option value="30s">Últimas 24 horas</option>
@@ -176,8 +195,6 @@
                                 <option value="5min">Último Mês</option>
                             </select>
                         </div>
-                        <button>Baixar Logs em CSV</button>
-                        <button style="background-color: #274690;">Baixar Relatório em PDF</button>
                     </div>
                 </div>
 
@@ -349,6 +366,28 @@
                             </div>
                         </div>
 
+                        <div style="border: 1px solid #C70C0C;" class="kpi">
+                            <div class="informacoes">
+                                <div>
+                                    <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
+                                        src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
+                                    <div class="informacoes-principais">
+                                        <span>Disponibilidade do Servidor</span>
+                                        <h1>100%</h1>
+                                    </div>
+                                </div>
+                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                            </div>
+                            <div class="tempo_dash">
+                                <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
+                                <select name="" id="tempo">
+                                    <option value="30s">Últimas 24 horas</option>
+                                    <option value="1min">Última Semana</option>
+                                    <option value="5min">Último Mês</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div style="border: 1px solid #FFCC00;" class="kpi">
                             <div class="informacoes">
                                 <div>
@@ -369,19 +408,6 @@
                                     <option value="5min">Último Mês</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div style="border: 1px solid #E7E4E4;" class="kpi">
-                            <div style="margin: 0;" class="tempo_dash">
-                                <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                <select name="" id="tempo">
-                                    <option value="30s">Últimas 24 horas</option>
-                                    <option value="1min">Última Semana</option>
-                                    <option value="5min">Último Mês</option>
-                                </select>
-                            </div>
-                            <button>Baixar Logs em CSV</button>
-                            <button style="background-color: #274690;">Baixar Relatório em PDF</button>
                         </div>
 
                         <div style="border: 1px solid #E7E4E4;" class="kpi filtros">
@@ -418,14 +444,57 @@
                         </div>
                     </div>
 
-                    <div style="width: 100%; padding: 50px;" class="lista-alertas card">
+                    <div style="width: 100%; padding: 25px 50px;" class="lista-alertas card">
                         <div style="border: 1.5px solid #C70C0C;" class="card-alerta">
                             <div class="principal">
-                                <img width="65px" height="65px" src="./assets/imgs/incidentes/alerta-critico.png" alt="">
+                                <img width="65px" height="65px" src="./assets/imgs/incidentes/alerta-critico.png"
+                                    alt="">
                                 <div class="informacoes-alerta">
                                     <h1>CPU está com 75% de uso</h1>
                                     <h2>SRV-ACC-SP-01</h2>
-                                    <h3>Possibilidade de Lag no Sistema</h3>
+                                    <h4>08/05/2026 às 16h30</h4>
+                                </div>
+                                <div class="classificacao-alerta">
+                                    <span style="background-color: #FCA5A5; color: #C70C0C;">Crítico</span>
+                                    <span style="background-color: #BEDBFF; color: #274690;">CPU</span>
+                                    <span style="background-color: #BFFBB0; color: #20A200;">Resolvido</span>
+                                </div>
+                            </div>
+
+                            <button>
+                                Investigar
+                                <img src="./assets/imgs/incidentes/icon-investigar.svg" alt="">
+                            </button>
+                        </div>
+
+                        <div style="border: 1.5px solid #C70C0C;" class="card-alerta">
+                            <div class="principal">
+                                <img width="65px" height="65px" src="./assets/imgs/incidentes/alerta-critico.png"
+                                    alt="">
+                                <div class="informacoes-alerta">
+                                    <h1>CPU está com 75% de uso</h1>
+                                    <h2>SRV-ACC-SP-01</h2>
+                                    <h4>08/05/2026 às 16h30</h4>
+                                </div>
+                                <div class="classificacao-alerta">
+                                    <span style="background-color: #FCA5A5; color: #C70C0C;">Crítico</span>
+                                    <span style="background-color: #BEDBFF; color: #274690;">CPU</span>
+                                </div>
+                            </div>
+
+                            <button>
+                                Investigar
+                                <img src="./assets/imgs/incidentes/icon-investigar.svg" alt="">
+                            </button>
+                        </div>
+
+                        <div style="border: 1.5px solid #C70C0C;" class="card-alerta">
+                            <div class="principal">
+                                <img width="65px" height="65px" src="./assets/imgs/incidentes/alerta-critico.png"
+                                    alt="">
+                                <div class="informacoes-alerta">
+                                    <h1>CPU está com 75% de uso</h1>
+                                    <h2>SRV-ACC-SP-01</h2>
                                     <h4>08/05/2026 às 16h30</h4>
                                 </div>
                                 <div class="classificacao-alerta">
@@ -455,10 +524,12 @@
                 document.getElementById("corpo-dashboard-todos").style.display = "grid";
                 document.getElementById("corpo-dashboard-servidor").style.display = "none";
                 document.getElementById("kpis-todos").style.display = "grid";
+                document.getElementById("status-dot").style.display = "none";
             } else {
                 document.getElementById("corpo-dashboard-todos").style.display = "none";
                 document.getElementById("corpo-dashboard-servidor").style.display = "block";
                 document.getElementById("kpis-todos").style.display = "none";
+                document.getElementById("status-dot").style.display = "block";
             }
         }
         selecionar();
