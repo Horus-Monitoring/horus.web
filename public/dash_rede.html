@@ -136,8 +136,8 @@
                             </div>
                             <div class="nome">
                                 <span id="perdaPacotesValor" class="valor"></span>
-                                <img src="assets/imgs/rede/caindo-verde.png" alt="">
-                                <span class="situacao">melhorando</span>
+                                <img id="perdaPacotesIcone">
+                                <span id="perdaPacotesSituacao" class="situacao"></span>
                                 <select data-filtro="perdaPacotes">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
@@ -162,8 +162,8 @@
                             </div>
                             <div class="nome">
                                 <span id="latenciaValor" class="valor"></span>
-                                <img src="assets/imgs/rede/subindo_verm.png" alt="">
-                                <span class="situacao">piorando</span>
+                                <img id="latenciaIcone" alt="">
+                                <span id="latenciaSituacao" class="situacao"></span>
                                 <select data-filtro="latencia">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
@@ -186,8 +186,8 @@
                             </div>
                             <div class="nome">
                                 <span id="adsbValor" class="valor"></span>
-                                <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                                <span class="situacao">melhorando</span>
+                                <img id="adsbIcone" alt="">
+                                <span id="adsbSituacao" class="situacao">melhorando</span>
                                 <select data-filtro="adsb">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
@@ -212,8 +212,8 @@
                             </div>
                             <div class="nome">
                                 <span id="rotasValor" class="valor"></span>
-                                <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                                <span class="situacao">melhorando</span>
+                                <img id="rotasIcone" alt="">
+                                <span id="rotasSituacao" class="situacao">melhorando</span>
                                 <select data-filtro="rotas">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
@@ -436,6 +436,155 @@
             dados.kpis.rotas_sem_atualizacao;
     }
 
+    // Estado da KPI
+
+    function obterPeriodoAnterior(periodo) {
+
+        if (periodo === "24") return "3";
+        if (periodo === "3") return "7";
+
+        return null;
+    }
+
+    function atualizarSituacao(
+        atual,
+        anterior,
+        elementoTexto,
+        elementoIcone,
+        menorEhMelhor = true
+    ) {
+
+        if (anterior == null) {
+            elementoTexto.innerHTML = "—";
+            return;
+        }
+
+        if (atual === anterior) {
+            elementoTexto.innerHTML = "estável";
+            elementoIcone.src = "assets/imgs/painel/cpu-cinza.png";
+            return;
+        }
+
+        const melhorou = menorEhMelhor
+            ? atual < anterior
+            : atual > anterior;
+
+        const subiu = atual > anterior;
+
+        let cor = "";
+        let texto = "";
+
+        if (melhorou) {
+            texto = "melhorando";
+            cor = "verde";
+            color = "green"
+        } else {
+            texto = "piorando";
+            cor = "verm";
+            color = "red"
+        }
+
+        elementoTexto.innerHTML = texto;
+        elementoTexto.style.color = color;
+
+        // direção da seta depende da mudança real
+        const seta = subiu ? "subindo" : "caindo";
+
+        elementoIcone.src =
+            `assets/imgs/rede/${seta}-${cor}.png`;
+    }
+
+    function renderizarKPIPerdaPacotes() {
+
+        const periodoAtual = filtros.perdaPacotes;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = dashboards[periodoAtual].kpis.perda_pacotes;
+
+        document.getElementById("perdaPacotesValor").innerHTML =
+            atual + "%";
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.perda_pacotes;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("perdaPacotesSituacao"),
+            document.getElementById("perdaPacotesIcone"),
+            true // menor é melhor
+        );
+    }
+
+    function renderizarKPILatencia() {
+
+        const periodoAtual = filtros.latencia;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = Number(dashboards[periodoAtual].kpis.latencia_media);
+
+        document.getElementById("latenciaValor").innerHTML =
+            atual.toFixed(1) + " ms";
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.latencia_media;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("latenciaSituacao"),
+            document.getElementById("latenciaIcone"),
+            true //menor é melhor
+        );
+    }
+
+    function renderizarKPIAdsb() {
+
+        const periodoAtual = filtros.adsb;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = dashboards[periodoAtual].kpis.adsb_update;
+
+        document.getElementById("adsbValor").innerHTML =
+            atual + "%";
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.adsb_update;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("adsbSituacao"),
+            document.getElementById("adsbIcone"),
+            false // maior é melhor
+        );
+    }
+
+    function renderizarKPIRotas() {
+
+        const periodoAtual = filtros.rotas;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = dashboards[periodoAtual].kpis.rotas_sem_atualizacao;
+
+        document.getElementById("rotasValor").innerHTML =
+            atual;
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.rotas_sem_atualizacao;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("rotasSituacao"),
+            document.getElementById("rotasIcone"),
+            true
+        );
+    }
 
     function renderizarGraficoTransferencia() {
 
