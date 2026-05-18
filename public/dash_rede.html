@@ -138,7 +138,7 @@
                                 <span id="perdaPacotesValor" class="valor"></span>
                                 <img src="assets/imgs/rede/caindo-verde.png" alt="">
                                 <span class="situacao">melhorando</span>
-                                <select name="" id="">
+                                <select data-filtro="perdaPacotes">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -164,7 +164,7 @@
                                 <span id="latenciaValor" class="valor"></span>
                                 <img src="assets/imgs/rede/subindo_verm.png" alt="">
                                 <span class="situacao">piorando</span>
-                                <select name="" id="">
+                                <select data-filtro="latencia">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -188,7 +188,7 @@
                                 <span id="adsbValor" class="valor"></span>
                                 <img src="assets/imgs/rede/subindo-verde.png" alt="">
                                 <span class="situacao">melhorando</span>
-                                <select name="" id="">
+                                <select data-filtro="adsb">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -214,7 +214,7 @@
                                 <span id="rotasValor" class="valor"></span>
                                 <img src="assets/imgs/rede/subindo-verde.png" alt="">
                                 <span class="situacao">melhorando</span>
-                                <select name="" id="">
+                                <select data-filtro="rotas">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -228,7 +228,7 @@
                         <div class="grafico-linha-box" style="flex: 3;">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Taxa de Transferência de Rede por Servidor</h3>
-                                <select name="" id="">
+                                <select data-filtro="transferencia">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -239,7 +239,7 @@
                         <div class="box-grafico" style="flex: 1;">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Taxa de perda de pacotes</h3>
-                                <select name="" id="">
+                                <select data-filtro="perdaServicos">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -274,7 +274,7 @@
                         <div class="box-grafico">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Latência entre Componentes</h3>
-                                <select name="" id="">
+                                <select data-filtro="latenciaComponentes">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -285,7 +285,7 @@
                         <div class="box-grafico">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Processos com maior consumo de banda</h3>
-                                <select name="" id="">
+                                <select data-filtro="banda">
                                     <option value="24">24 horas</option>
                                     <option value="3">3 dias</option>
                                     <option value="7">7 dias</option>
@@ -307,265 +307,149 @@
 
 <script>
 
-    window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
- 
-              if (funcao == "Gestor") {
-                 document.getElementById("administracao").style.display = "block";
-                 /*document.getElementById("gerarRelatorio").style.display = "block";*/
-                 document.getElementById("cadastrarServidor").style.display = "flex";
-                 document.getElementById("cadastrarUsuario").style.display = "flex";
-             }
+    window.onload = () => {
+
+        const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+        if (funcao == "Gestor") {
+            document.getElementById("administracao").style.display = "block";
+            document.getElementById("cadastrarServidor").style.display = "flex";
+            document.getElementById("cadastrarUsuario").style.display = "flex";
+        }
+
+        exibirUsuarioAtivo();
+        listarServidores();
+        carregarDashboards();
+        configurarFiltros();
     }
- 
-    function gerarRelatorio(){
 
-    const servidor =
-        select_servidor.options[
-            select_servidor.selectedIndex
-        ].text;
+    let dashboards = {
+        "24": null,
+        "3": null,
+        "7": null
+    };
 
-    const email = sessionStorage.EMAIL_USUARIO;
+    let filtros = {
+        perdaPacotes: "24",
+        latencia: "24",
+        adsb: "24",
+        rotas: "24",
+        transferencia: "24",
+        perdaServicos: "24",
+        latenciaComponentes: "24",
+        banda: "24"
+    };
 
-    window.open(
-        `/relatorio/${
-            encodeURIComponent(servidor)
-        }/${
-            encodeURIComponent(email)
-        }`
-    );
-}
-    /*var tipo = "analista";
+    let graficoTransferencia = null;
+    let graficoLatencia = null;
+    let graficoBanda = null;
 
-    if (tipo == "gestor") {
-    document.getElementById("conteudo").innerHTML = 
-        ``        
-    } else {
-     document.getElementById("conteudo").innerHTML = `
-                <div class="box-alerta">
-                    <div>
-                        <span>Impacto Operacional</span>
-                        <span class="span-subtitulo">24 horas</span>
-                    </div>
+    async function carregarDashboards() {
 
-                    <div style="display: flex; justify-content: space-evenly;">
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/aviao-lar.png" alt="">
-                                Voos atrasados
-                            </div>
-                            <div>
-                                8 voos
-                            </div>
-                            <p> Atrasos por falha de comunicação</p>
-                        </div>
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/user-verm.png" alt="">
-                                Usuários Afetados
-                            </div>
-                            <div>
-                                4 mil
-                            </div>
-                            <p>Devido a indisponibilidade do sistema</p>
-                        </div>
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/pin-lar.png" alt="">
-                                Aeroportos Afetados
-                            </div>
-                            <div>
-                                3 aeroportos
-                            </div>
-                            <p>GRU, CGH, BSB</p>
-                        </div>
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/alerta-lar.png" alt="">
-                                Nível de Impacto
-                            </div>
-                            <div>
-                                Médio
-                            </div>
-                            <p> Com base em histórico e severidade</p>
-                        </div>
-                    </div>
-                    <div style="border: 1px #ebe6e7 solid; height: 1%; width: 100%;">
+        try {
 
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <div>
-                            <p>Ação Recomendada</p>
-                            <span class="span-subtitulo">Verificar servidores de alta latência e otimizar configurações
-                                de rede</span>
-                        </div>
-                        <div style="align-self: center;">
-                            <button style="background-color: blue;">Gerar Relatório</button>
-                        </div>
-                    </div>
-                </div>
+           const [d24, d3, d7] = await Promise.all([
 
-                <div class="kpis">
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Disponibilidade
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/transmissao.png" alt="">
-                        </div>
-                        <span class="valor">99.94%</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+                fetch("/rede/buscarDadosRede/24h")
+                    .then(r => r.json()),
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Aeronaves Impactadas
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/aviao.png" alt="">
-                        </div>
-                        <span class="valor">14 aviões</span>
-                        <img src="assets/imgs/rede/subindo_verm.png" alt="">
-                        <span class="situacao">piorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+                fetch("/rede/buscarDadosRede/3d")
+                    .then(r => r.json()),
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Rotas Desatualizadas
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/rotas.png" alt="">
-                        </div>
-                        <span class="valor">4 rotas</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+                fetch("/rede/buscarDadosRede/7d")
+                    .then(r => r.json())
+            ]);
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Média de Recuperação
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/relogio.png" alt="">
-                        </div>
-                        <span class="valor">4 min.</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+            dashboards["24"] = d24;
+            dashboards["3"] = d3;
+            dashboards["7"] = d7;
 
-                </div>
+            renderizarTudo();
 
-                
+        } catch (erro) {
+            console.error("Erro ao carregar dashboards:", erro);
+        }
+    }
 
-                <div class="graficos-inferiores">
+    function configurarFiltros() {
 
-                    <div class="coluna-esquerda">
-                        <div class="grafico-card grande">
-                            <div class="titulo-grafico">
-                                <h3>Tendência de Indisponibilidade Mensal</h3>
-                                <select name="" id="">
-                                    <option value="">Últimas 24 horas</option>
-                                </select>
-                            </div>
-                            <canvas id="graficoIndisponibilidade"></canvas>
-                        </div>
+        const selects = document.querySelectorAll("select[data-filtro]");
 
-                        <div class="grafico-card grande">
-                            <div class="titulo-grafico">
-                                <h3>Capacidade de Rede vs Demanda Operacional</h3>
-                                <select name="" id="">
-                                    <option value="">Últimas 24 horas</option>
-                                </select>
-                            </div>
-                            <canvas id="graficoCapacidade"></canvas>
-                        </div>
-                    </div>
+        selects.forEach(select => {
 
-                    <div class="grafico-card sla-card">
-                        <div class="titulo-grafico" style="margin-bottom: 60px;">
-                            <h3>Cumprimento de SLA</h3>
-                            <select name="" id="">
-                                <option value="">Últimas 24 horas</option>
-                            </select>
-                        </div>
-                        <div class="indicador-sla">
-                            Abaixo da Meta
-                        </div>
-                        <canvas id="graficoSLA"></canvas>
-                        
-                        <div class="sla-metricas">
-                            <span>Meta SLA</span>
-                            <span style="color: black !important; font-weight: bold;">99.9%</span>
-                        </div>
-                        <div class="sla-metricas">
-                            <span>Desempenho Atual</span>
-                            <span><b>94.4%</b></span>
-                        </div>
-                        <div class="sla-metricas">
-                            <span>Diferença</span>
-                            <span><b>5.5%</b></span>
-                        </div>                        
-                    </div>
+            select.addEventListener("change", function () {
 
-                </div>`  
-    }*/
+                const chave = this.dataset.filtro;
 
-    function atualizarKPIs(dados) {
+                filtros[chave] = this.value;
+
+                renderizarTudo();
+            });
+        });
+    }
+
+    function renderizarTudo() {
+
+        renderizarKPIPerdaPacotes();
+        renderizarKPILatencia();
+        renderizarKPIAdsb();
+        renderizarKPIRotas();
+
+        renderizarGraficoTransferencia();
+        renderizarGraficoLatencia();
+        renderizarGraficoBanda();
+
+        renderizarPerdaPacotesServico();
+    }
+
+    // KPIs
+
+    function renderizarKPIPerdaPacotes() {
+
+        const dados = dashboards[filtros.perdaPacotes];
+
         document.getElementById("perdaPacotesValor").innerHTML =
             dados.kpis.perda_pacotes + "%";
+    }
+
+    function renderizarKPILatencia() {
+
+        const dados = dashboards[filtros.latencia];
 
         document.getElementById("latenciaValor").innerHTML =
             dados.kpis.latencia_media + " ms";
+    }
+
+    function renderizarKPIAdsb() {
+
+        const dados = dashboards[filtros.adsb];
 
         document.getElementById("adsbValor").innerHTML =
             dados.kpis.adsb_update + "%";
+    }
+
+    function renderizarKPIRotas() {
+
+        const dados = dashboards[filtros.rotas];
 
         document.getElementById("rotasValor").innerHTML =
             dados.kpis.rotas_sem_atualizacao;
     }
 
-    async function carregarDashboard() {
 
-        /*const servidor = document.getElementById("servidores").value;
-        const periodo = 24;*/
+    function renderizarGraficoTransferencia() {
 
-        const response = await fetch(
-            `/rede/buscarDadosRede`
-        );
+        const dados = dashboards[filtros.transferencia];
 
-        const dados = await response.json();
+        const chartDom =
+            document.getElementById("graficoTransferencia");
 
-        atualizarKPIs(dados);
-        atualizarGraficos(dados);
-        atualizarPerdaPacotes(dados);
-    }
+        if (!graficoTransferencia) {
+            graficoTransferencia = echarts.init(chartDom);
+        }
 
-    function atualizarGraficos(dados){
-        const chartDom = document.getElementById("graficoTransferencia");
+        graficoTransferencia.setOption({
 
-        const myChart = echarts.init(chartDom);
-
-        const option = {
             tooltip: {
                 trigger: 'axis'
             },
@@ -583,7 +467,7 @@
 
             xAxis: {
                 type: 'category',
-                data: dados.grafico_transferencia.hora,
+                data: dados.grafico_transferencia.labels,
                 axisLabel: {
                     rotate: 45
                 }
@@ -608,65 +492,69 @@
                     name: 'Rastreamento',
                     type: 'line',
                     smooth: true,
-                    data: dados.grafico_transferencia.rastreamento,
-                    lineStyle: {
-                        width: 2,
-                        color: '#2F80ED'
-                    },
-                    symbol: 'none'
+                    data: dados.grafico_transferencia.rastreamento
                 },
                 {
                     name: 'Rotas',
                     type: 'line',
                     smooth: true,
-                    data: dados.grafico_transferencia.rotas,
-                    lineStyle: {
-                        width: 2,
-                        color: '#9B51E0'
-                    },
-                    symbol: 'none'
+                    data: dados.grafico_transferencia.rotas
                 },
                 {
                     name: 'Correlação',
                     type: 'line',
                     smooth: true,
-                    data: dados.grafico_transferencia.correlacao,
-                    lineStyle: {
-                        width: 2,
-                        color: '#2ECC71'
-                    },
-                    symbol: 'none'
-                },
-                
+                    data: dados.grafico_transferencia.correlacao
+                }
             ]
-        };
-
-        myChart.setOption(option);
-
-        window.addEventListener('resize', function () {
-            myChart.resize();
         });
-    
+    }
 
-        const ctxLatencia = document.getElementById("graficoLatencia");
 
-        new Chart(ctxLatencia, {
+    function renderizarGraficoLatencia() {
+
+        const dados =
+            dashboards[filtros.latenciaComponentes];
+
+        const ctx =
+            document.getElementById("graficoLatencia");
+
+        if (graficoLatencia) {
+            graficoLatencia.destroy();
+        }
+
+        graficoLatencia = new Chart(ctx, {
+
             type: "bar",
+
             data: {
+                labels: Object.keys(
+                    dados.grafico_latencia_componentes
+                ),
+
                 datasets: [{
                     label: "Latência (ms)",
-                    data: dados.grafico_latencia_componentes,
+
+                    data: Object.values(
+                        dados.grafico_latencia_componentes
+                    ),
+
                     backgroundColor: [
                         "#05056B",
                         "#0A4A96",
-                        "#12B7E5"
+                        "#12B7E5",
+                        "#2F80ED",
+                        "#56CCF2"
                     ],
+
                     borderRadius: 8
                 }]
             },
+
             options: {
                 indexAxis: "y",
                 responsive: true,
+
                 plugins: {
                     legend: {
                         display: false
@@ -674,22 +562,51 @@
                 }
             }
         });
+    }
 
-        const ctxBanda = document.getElementById("graficoBanda");
 
-        new Chart(ctxBanda, {
+    function renderizarGraficoBanda() {
+
+        const dados =
+            dashboards[filtros.banda];
+
+        const ctx =
+            document.getElementById("graficoBanda");
+
+        if (graficoBanda) {
+            graficoBanda.destroy();
+        }
+
+        graficoBanda = new Chart(ctx, {
+
             type: "bar",
+
             data: {
+
+                labels: Object.keys(
+                    dados.consumo_banda
+                ),
+
                 datasets: [{
+
                     label: "Mbps",
-                    data: dados.consumo_banda,
+
+                    data: Object.values(
+                        dados.consumo_banda
+                    ),
+
                     backgroundColor: "#0E7AB5",
+
                     borderRadius: 12
                 }]
             },
+
             options: {
+
                 indexAxis: "y",
+
                 responsive: true,
+
                 plugins: {
                     legend: {
                         display: false
@@ -697,32 +614,45 @@
                 }
             }
         });
-
     }
 
-    function atualizarPerdaPacotes(dados) {
-        const container = document.getElementById("listaPacotes");
+    
+
+    function renderizarPerdaPacotesServico() {
+
+        const dados =
+            dashboards[filtros.perdaServicos];
+
+        const container =
+            document.getElementById("listaPacotes");
 
         container.innerHTML = "";
 
-        const perdas = dados.perda_pacotes_servico;
+        const perdas =
+            dados.perda_pacotes_servico;
 
         for (let servico in perdas) {
+
             const valor = perdas[servico];
 
             let corClasse = "";
 
             if (valor < 1) {
                 corClasse = "verde";
-            } else if (valor <= 2) {
+            }
+
+            else if (valor <= 2) {
                 corClasse = "laranja";
-            } else {
+            }
+
+            else {
                 corClasse = "vermelho";
             }
 
             container.innerHTML += `
                 <div class="tabela-pacotes">
                     <div>${servico}</div>
+
                     <div class="indicador-pacotes ${corClasse}">
                         ${valor}%
                     </div>
@@ -731,50 +661,99 @@
         }
     }
 
-    function listarServidores() {
-            const fkEmpresa = sessionStorage.ID_EMPRESA;
+    // Gerar Relatório
 
-            fetch(`/servidores/listarServidores/${fkEmpresa}`)
-                .then(resposta => resposta.json())
-                .then((lista) => {
-                    select_servidor.innerHTML = lista.map(servidor =>
-                        `<option value = "${servidor.id_servidor}">${servidor.hostname}</option>`
-                    ).join('')
-                    nomeServidor.textContent =
-                        select_servidor.options[select_servidor.selectedIndex].text;
-                })
+    function gerarRelatorio() {
 
-            select_servidor.addEventListener("change", () => {
-                nomeServidor.textContent =
-                    select_servidor.options[select_servidor.selectedIndex].text;
-            })
+        const servidor =
+            select_servidor.options[
+                select_servidor.selectedIndex
+            ].text;
+
+        const email =
+            sessionStorage.EMAIL_USUARIO;
+
+        window.open(
+            `/relatorio/${
+                encodeURIComponent(servidor)
+            }/${
+                encodeURIComponent(email)
+            }`
+        );
     }
 
-    
-        
-    //Modal para o menu sanduíche
+    // Lista de Servidores
 
-    const btnHamburguer = document.getElementById("hamburguer");
-    const lateral = document.getElementById("lateral");
-    const overlay = document.getElementById("overlay");
+    function listarServidores() {
+
+        const fkEmpresa =
+            sessionStorage.ID_EMPRESA;
+
+        fetch(`/servidores/listarServidores/${fkEmpresa}`)
+
+            .then(resposta => resposta.json())
+
+            .then((lista) => {
+
+                select_servidor.innerHTML =
+                    lista.map(servidor =>
+
+                        `<option value="${servidor.id_servidor}">
+                            ${servidor.hostname}
+                        </option>`
+
+                    ).join('');
+
+                nomeServidor.textContent =
+                    select_servidor.options[
+                        select_servidor.selectedIndex
+                    ].text;
+            });
+
+        select_servidor.addEventListener("change", () => {
+
+            nomeServidor.textContent =
+                select_servidor.options[
+                    select_servidor.selectedIndex
+                ].text;
+        });
+    }
+
+    //Menu Sanduiche
+    const btnHamburguer =
+        document.getElementById("hamburguer");
+
+    const lateral =
+        document.getElementById("lateral");
+
+    const overlay =
+        document.getElementById("overlay");
 
     function abrirMenu() {
+
         lateral.classList.add("ativo");
+
         overlay.classList.add("ativo");
     }
 
     function fecharMenu() {
+
         lateral.classList.remove("ativo");
+
         overlay.classList.remove("ativo");
     }
 
     if (btnHamburguer) {
+
         btnHamburguer.addEventListener("click", function (e) {
+
             e.stopPropagation();
 
             if (lateral.classList.contains("ativo")) {
                 fecharMenu();
-            } else {
+            }
+
+            else {
                 abrirMenu();
             }
         });
@@ -783,6 +762,7 @@
     overlay.addEventListener("click", fecharMenu);
 
     document.addEventListener("click", function (e) {
+
         if (
             lateral.classList.contains("ativo") &&
             !lateral.contains(e.target) &&
@@ -792,114 +772,11 @@
         }
     });
 
-    exibirUsuarioAtivo();
-    carregarDashboard();
-    listarServidores()
-    /*if (tipo == "gestor") {
-        const ctxInd = document.getElementById("graficoIndisponibilidade");
+    window.addEventListener('resize', function () {
 
-        new Chart(ctxInd, {
-            type: "line",
-            data: {
-                labels: ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"],
-                datasets: [{
-                    data: [0, 0.15, 0.02, 0.11, 0.05, null, null, null, null, null, null, null],
-                    borderColor: "#0057D9",
-                    backgroundColor: "#0057D9",
-                    tension: 0.4,
-                    pointRadius: 5,
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-
-        const ctxCap = document.getElementById("graficoCapacidade");
-
-        new Chart(ctxCap, {
-            type: "line",
-            data: {
-                labels: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
-                datasets: [
-                    {
-                        label: "Demanda Operacional",
-                        data: [100, 320, 120, 620, 380, 360],
-                        borderColor: "#0066FF",
-                        backgroundColor: "transparent",
-                        tension: 0,
-                        borderWidth: 3
-                    },
-                    {
-                        label: "Capacidade Total",
-                        data: [500, 500, 500, 500, 500, 500],
-                        borderColor: "#FF4D4D",
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-
-        const ctxSLA = document.getElementById("graficoSLA");
-
-        new Chart(ctxSLA, {
-            type: "doughnut",
-            data: {
-                datasets: [{
-                    data: [94.4, 5.6],
-                    backgroundColor: [
-                        "#FF2B2B",
-                        "#EEEEEE"
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: "75%",
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: false
-                    }
-                }
-            },
-            plugins: [{
-                id: 'textoCentro',
-                beforeDraw(chart) {
-                    const { width } = chart;
-                    const { height } = chart;
-                    const ctx = chart.ctx;
-
-                    ctx.restore();
-                    ctx.font = "bold 28px Arial";
-                    ctx.textBaseline = "middle";
-                    ctx.textAlign = "center";
-                    ctx.fillStyle = "#111";
-
-                    ctx.fillText("94.4%", width / 2, height / 2);
-
-                    ctx.save();
-                }
-            }]
-        });
-    } else {*/
-
+        if (graficoTransferencia) {
+            graficoTransferencia.resize();
+        }
+    });
 
 </script>

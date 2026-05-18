@@ -10,24 +10,35 @@ const s3 = new S3Client({
 });
 
 async function buscarDadosRede(req, res) {
+
     try {
 
+        const periodo = req.params.periodo;
+
         const command = new GetObjectCommand({
+
             Bucket: "horus-monitoring",
-            Key: "client/empresa_1/c0:35:32:c7:0b:59/dashboard.json"
+
+            Key:
+                `client/empresa_1/c0:35:32:c7:0b:59/dashboard_${periodo}.json`
         });
 
         const data = await s3.send(command);
 
-        const jsonString = await data.Body.transformToString();
+        const jsonString =
+            await data.Body.transformToString();
 
         const json = JSON.parse(jsonString);
 
         res.json(json);
 
     } catch (erro) {
+
         console.log(erro);
-        res.status(500).json(erro);
+
+        res.status(500).json({
+            erro: "Erro ao buscar dashboard"
+        });
     }
 }
 
