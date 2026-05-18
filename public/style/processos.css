@@ -450,6 +450,23 @@ canvas {
   font-size: 16px;
 }
 
+/* .status-tabela {
+  background-color: #C70C0C;
+  justify-content: center;
+  flex: 2;
+} */
+
+.cor-status {
+  display: flex;
+  /* background-color: #B9F8CF; */
+  padding: 5px;
+  border-radius: 10px;
+  gap: 5px;
+  justify-content: center;
+  width: 90px;
+  align-items: center;
+}
+
 /* Resoluções menores */
 @media (max-width: 1440px) {
   .lateral {
