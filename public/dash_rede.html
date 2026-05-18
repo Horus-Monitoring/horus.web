@@ -79,10 +79,7 @@
                                 <div class="select-status">
                                     <span class="status-dot verde"></span>
 
-                                    <select>
-                                        <option>SRV-WEB-01</option>
-                                        <option>SRV-DB-02</option>
-                                        <option>SRV-API-03</option>
+                                    <select id="select_servidor">
                                     </select>
                                 </div>
 
@@ -137,14 +134,16 @@
                                 Perda de Pacotes
                                 <img src="assets/imgs/rede/rede.png" alt="">
                             </div>
-                            <span id="perdaPacotesValor" class="valor"></span>
-                            <img src="assets/imgs/rede/caindo-verde.png" alt="">
-                            <span class="situacao">melhorando</span>
-                            <select name="" id="">
-                                <option value="24">24 horas</option>
-                                <option value="3">3 dias</option>
-                                <option value="7">7 dias</option>
-                            </select>
+                            <div class="nome">
+                                <span id="perdaPacotesValor" class="valor"></span>
+                                <img src="assets/imgs/rede/caindo-verde.png" alt="">
+                                <span class="situacao">melhorando</span>
+                                <select name="" id="">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="kpi-card">
@@ -709,6 +708,20 @@
             `;
         }
     }
+
+    function listarServidores() {
+            const fkEmpresa = sessionStorage.ID_EMPRESA;
+
+            fetch(`/servidores/listarServidores/${fkEmpresa}`)
+                .then(resposta => resposta.json())
+                .then((lista) => {
+                    select_servidor.innerHTML = lista.map(servidor =>
+                        `<option value = "${servidor.id_servidor}">${servidor.hostname}</option>`
+                    ).join('')
+                })
+    }
+
+        
     //Modal para o menu sanduíche
 
     const btnHamburguer = document.getElementById("hamburguer");
@@ -751,6 +764,7 @@
 
     exibirUsuarioAtivo();
     carregarDashboard();
+    listarServidores()
     /*if (tipo == "gestor") {
         const ctxInd = document.getElementById("graficoIndisponibilidade");
 
