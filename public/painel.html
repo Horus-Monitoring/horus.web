@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Horus</title>
-    <link rel="stylesheet" href="./style/painel.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./assets/icon/logo.png" />
     
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style/painel.css">
 </head>
 
 <body>
@@ -31,12 +31,7 @@
                 <div onclick="window.location.href='painel.html'" class="item-menu selecionado">
                     <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
                 </div>
-                <div onclick="window.location.href='dash_analista.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </div>
-                <div onclick="window.location.href='telaIncidente.html'" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
-                </div>
+                
 
                 <div class="categoria adm" id="administracao">Administração</div>
                     <div onclick="window.location.href='dash_usuarios.html'" class="item-menu adm" id="cadastrarUsuario">
@@ -46,8 +41,6 @@
                         <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                     </div>
                 
-
-                <button id="gerarRelatorio" class="adm" style="align-items: center;">Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -59,19 +52,56 @@
         <main class="main">
 
             <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
 
-                <span class="header-titulo">Dashboard</span>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
 
-                <div class="usuario">
-                    <div>
-                        <p  id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong id="nomeServidor"></strong> /
+                                <span class="renomear">Comunicação e Rede</span>
+                            </span>
+
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span class="status-dot verde"></span>
+
+                                    <select id="select_servidor">
+                                    </select>
+                                </div>
+
+                                <div class="alertas">
+                                    <img src="assets/imgs/rede/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <span id="inicial_usuario"></span>
+
+
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
+                    </div>
                 </div>
+
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="painel.html" class="ativo">Resumo</a>
+                        <a href="#">Processos</a>
+                        <a href="dash_rede.html">Comunicação e rede</a>
+                        <a href="#">Temperatura</a>
+                        <a href="#">Logs</a>
+                    </nav>
+                </div>
+
             </header>
 
             <section class="conteudo">
