@@ -85,7 +85,7 @@
                         <div class="header-servidor">
                             <span class="breadcrumb">
                                 Servidores /
-                                <strong>SRV-WEB-01</strong> /
+                                <strong id="nomeServidor"></strong> /
                                 <span class="renomear">Incidentes</span>
                             </span>
 
@@ -93,11 +93,8 @@
                                 <div class="select-status">
                                     <span id="status-dot" class="status-dot verde"></span>
 
-                                    <select id="servidores" onchange="selecionar()">
-                                        <option value="#">Todos</option>
-                                        <option>SRV-WEB-01</option>
-                                        <option>SRV-DB-02</option>
-                                        <option>SRV-API-03</option>
+                                    <select id="select_servidor" onchange="selecionar()">
+                                        <option value="#" selected>Todos</option>
                                     </select>
                                 </div>
 
@@ -310,15 +307,6 @@
                             <div style="margin-bottom: 0px;" class="titulo">
                                 <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                                 <h1>Horários críticos de falhas</h1>
-
-                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
-                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                    <select name="" id="tempo">
-                                        <option value="30s">Últimas 24 horas</option>
-                                        <option value="1min">Última Semana</option>
-                                        <option value="5min">Último Mês</option>
-                                    </select>
-                                </div>
                             </div>
                             <div id="heatmapFalhas"></div>
 
@@ -519,7 +507,7 @@
     <script>
 
         function selecionar() {
-            select = document.getElementById("servidores")
+            select = document.getElementById("select_servidor")
             if (select.value == "#") {
                 document.getElementById("corpo-dashboard-todos").style.display = "grid";
                 document.getElementById("corpo-dashboard-servidor").style.display = "none";
@@ -533,6 +521,7 @@
             }
         }
         selecionar();
+        exibirUsuarioAtivo();
 
         const ctx = document.getElementById('graficoSeveridade');
 
@@ -757,6 +746,26 @@
     );
 
     chart.render();
+
+    function listarServidores() {
+        const fkEmpresa = sessionStorage.ID_EMPRESA;
+
+        fetch(`/servidores/listarServidores/${fkEmpresa}`)
+            .then(resposta => resposta.json())
+            .then((lista) => {
+                select_servidor.innerHTML += lista.map(servidor =>
+                    `<option value = "${servidor.id_servidor}">${servidor.hostname}</option>`
+                ).join('')
+                nomeServidor.textContent =
+                    select_servidor.options[select_servidor.selectedIndex].text;
+            })
+
+        select_servidor.addEventListener("change", () => {
+            nomeServidor.textContent =
+                select_servidor.options[select_servidor.selectedIndex].text;
+        })
+    }
+    listarServidores()
 
 
 </script>
