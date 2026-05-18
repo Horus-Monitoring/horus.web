@@ -28,7 +28,7 @@ var usuarioRouter = require("./src/routes/usuario");
 var perfilRouter = require("./src/routes/perfil");
 var servidoresRouter = require("./src/routes/servidores");
 var redeRouter = require("./src/routes/rede");
-
+var relatorioRouter = require("./src/routes/relatorio")
 var faleConoscoRouter = require("./src/routes/faleConosco");
 
 app.use(express.json());
@@ -43,6 +43,7 @@ app.use("/perfil", perfilRouter);
 app.use("/faleConosco", faleConoscoRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/rede", redeRouter);
+app.use("/relatorio", relatorioRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
