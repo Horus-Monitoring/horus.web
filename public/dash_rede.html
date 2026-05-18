@@ -71,7 +71,7 @@
                         <div class="header-servidor">
                             <span class="breadcrumb">
                                 Servidores /
-                                <strong>SRV-WEB-01</strong> /
+                                <strong id="nomeServidor"></strong> /
                                 <span class="renomear">Comunicação e Rede</span>
                             </span>
 
@@ -724,9 +724,17 @@
                     select_servidor.innerHTML = lista.map(servidor =>
                         `<option value = "${servidor.id_servidor}">${servidor.hostname}</option>`
                     ).join('')
+                    nomeServidor.textContent =
+                        select_servidor.options[select_servidor.selectedIndex].text;
                 })
+
+            select_servidor.addEventListener("change", () => {
+                nomeServidor.textContent =
+                    select_servidor.options[select_servidor.selectedIndex].text;
+            })
     }
 
+    
         
     //Modal para o menu sanduíche
 
