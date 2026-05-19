@@ -1,8 +1,12 @@
 const axios = require("axios");
 
-const JIRA_EMAIL = "vitoria.psilva@sptech.school";
-const JIRA_TOKEN = "";
-const JIRA_DOMINIO = "horusmonitoring";
+var ambiente_processo = 'desenvolvimento';
+var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
+require("dotenv").config({ path: caminho_env });
+
+const JIRA_EMAIL = process.env.JIRA_EMAIL;
+const JIRA_TOKEN = process.env.JIRA_TOKEN;
+const JIRA_DOMINIO = process.env.JIRA_DOMINIO;
 
 const servidorModel = require("../models/servidoresModel")
 
