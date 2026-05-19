@@ -41,21 +41,6 @@
                 <a href="painel.html" class="item-menu selecionado">
                     <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
                 </a>
-                <!-- <a href="dash_analista.html" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </a>
-                <a href="telaIncidente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
-                </a>
-                <a href="comunicacao.html" class="item-menu">
-                    <img src="./assets/imgs/painel/comunicacao.png" alt="">Comunicação
-                </a>
-                <a href="processos.html" class="item-menu">
-                    <img src="./assets/imgs/processos/engrenagem.png" alt="">Processos
-                </a>
-                <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt="">  Temperatura
-                </a> -->
 
                 <div class="categoria adm" id="administracao">Administração </div>
                     <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
@@ -74,22 +59,6 @@
         </aside>
 
         <main class="main">
-
-           <!-- <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
-
-                <span class="header-titulo">Processos</span>
-
-                <div class="usuario">
-                    <div>
-                        <p  id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
-                    </div>
-                    <span id="inicial_usuario"></span>
-                </div>        
-            </header> -->
 
             <header class="header">
 
@@ -146,36 +115,7 @@
             </header>
 
             <section class="conteudo" id="conteudo">
-                <!-- <div class="padrao-serv">
-                    <div class="servidores">
-                        <div class="detalhes-servidores">
-                            <div class="info-servidores nome">
-                                <div style="padding-right: 10px;">
-                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
-                                </div>
-                                <div>
-                                    <span>Nome Servidor</span>
-                                    <p>[Local Servidor]</p>
-                                </div>
-                            </div>
-                            <div class="info-servidores ip">
-                                <p>IP do Servidor</p>
-                                <span>[ip do servidor]</span>
-                            </div>
-                            <div class="info-servidores att">
-                                <p>Última Atualização</p>
-                                <span>[Data e Hora]</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="selecionar-servidores">
-                        <p style="color:#5f5f5f; font-weight: bold;">Selecione o Servidor</p>
-                        <select name="servidores" id="servidores">
-                            <option value="#" selected disabled>Nome Servidor</option>
-                        </select>
-                    </div>
-                </div> -->
-            
+                  
                 <div class="cards">
 
                     <div class="card-critico pequeno">
@@ -189,20 +129,20 @@
                                 </div>
                             </div>
                             <div class="info-critico">
-                                <span style="color: #fd3434; font-weight: bold; font-size: 25px;">1</span>
-                                <span style="color: #5f5f5f; font-size: 15px;">processo afetado</span>
+                                <span id="qtdProcessosCriticos" style="color: #fd3434; font-weight: bold; font-size: 25px;">1</span>
+                                <span id="texto-processo" style="color: #5f5f5f; font-size: 15px;">processo afetado</span>
                             </div>
                             <div class="qtd-critico">
                                 <div style="color: #C70C0C; font-size: 15px; font-weight: bold; background-color: #FAAAAA;" class="info-alerta">
-                                    <span>1</span>
+                                    <span id="latenciaQtd">1</span>
                                     <span>Latência</span>
                                 </div>
                                 <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
-                                    <span>0</span>
+                                    <span id="cpuQtd">0</span>
                                     <span>CPU</span>
                                 </div>
                                 <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
-                                    <span>0</span>
+                                    <span id="ramQtd">0</span>
                                     <span>RAM</span>
                                 </div>
                             </div>
@@ -226,7 +166,7 @@
                                             <img src="./assets/imgs/processos/bolinha-verde.png">
                                             <span class="texto-status">Running</span>
                                         </div>
-                                        <span style="color: #20A200; font-weight: bold; font-size: 15px;">10</span>
+                                        <span id="qtdRunning" style="color: #20A200; font-weight: bold; font-size: 15px;">10</span>
                                     </div>
                                 </div>
                                 <div class="sleeping">
@@ -235,7 +175,7 @@
                                             <img src="./assets/imgs/processos/lua.png">
                                             <span class="texto-status">Sleeping</span>
                                         </div>
-                                    <span style="color: #308CFF; font-weight: bold; font-size: 15px;">3</span>
+                                    <span id="qtdSleeping" style="color: #308CFF; font-weight: bold; font-size: 15px;">3</span>
                                     </div>
                                 </div>
                                 <div class="stopped">
@@ -244,7 +184,7 @@
                                             <img src="./assets/imgs/processos/retangulo-amarelo.png">
                                             <span class="texto-status">Stopped</span>
                                         </div>
-                                        <span style="color: #FFCC00; font-weight: bold; font-size: 15px;">2</span>
+                                        <span id="qtdStopped" style="color: #FFCC00; font-weight: bold; font-size: 15px;">2</span>
                                     </div>
                                 </div>
                             </div>
@@ -262,9 +202,9 @@
                                 </div>
                             </div>
                             <div class="info-latencia">
-                                <span class="nome-proc">node</span>
-                                <span class="latencia-proc">100ms</span>
-                                <span class="pid-proc">PID: 3456</span>
+                                <span id="nome-proc" class="nome-proc">node</span>
+                                <span id="latencia-proc" class="latencia-proc">100ms</span>
+                                <span id="pid-proc" class="pid-proc">PID: 3456</span>
                             </div>
                         </div>
                     </div>
@@ -389,7 +329,7 @@
 
     <script>
 
-        window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+        /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
                     if (funcao == "Gestor") {
                         document.getElementById("administracao").style.display = "block";
@@ -397,7 +337,7 @@
                         document.getElementById("cadastrarServidor").style.display = "flex";
                         document.getElementById("cadastrarUsuario").style.display = "flex";
                     }
-        }
+        }*/
 
         // exibirUsuarioAtivo();
 
@@ -441,21 +381,64 @@
                 }
             });
 
-                const dados = {
-                    cpu: [92.35, 78.65, 65.23, 58.11, 31.29],
-                    ram: [70.12, 88.45, 45.90, 62.33, 55.18]
+            let dados;
+
+            async function capturarDados() {
+
+                try{
+                    
+                const resposta = await fetch("/processos/capturarDados");
+                dados = await resposta.json();
+
+                document.getElementById("qtdProcessosCriticos").innerHTML =
+                    dados.totalCriticos;
+
+                if (dados.totalCriticos > 1) {
+                    document.getElementById("texto-processo").innerHTML = "processos afetados"
+                }
+
+                document.getElementById("latenciaQtd").innerHTML = dados.latencia;
+                document.getElementById("cpuQtd").innerHTML = dados.cpu;
+                document.getElementById("ramQtd").innerHTML = dados.ram;
+                document.getElementById("qtdRunning").innerHTML = dados.running;
+                document.getElementById("qtdSleeping").innerHTML = dados.sleeping;
+                document.getElementById("qtdStopped").innerHTML = dados.stopped;
+                document.getElementById("nome-proc").innerHTML = dados.nome;
+                document.getElementById("latencia-proc").innerHTML = dados.latencia_ms;
+                document.getElementById("pid-proc").innerHTML = dados.pid;
+
+                carregarDados();
+                    
+                
+                } catch (erro) {
+                    console.error("Erro ao carregar dashboards:", erro);
+                }
+
+                
+            }
+
+            capturarDados();
+
+            function carregarDados() {
+
+                console.log(dados)
+                
+            const dadosGrafico = {
+                    cpu: [dados["cpu-1"], dados["cpu-2"], dados["cpu-3"], dados["cpu-4"], dados["cpu-5"]],
+                    ram: [dados["ram-1"], dados["ram-2"], dados["ram-3"], dados["ram-4"], dados["ram-5"]]
                 };
 
                 const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
                     type: 'bar',
 
                     data: {
-                        labels: ['node', 'python', 'mysql', 'docker', 'chrome'],
+                        labels: ["banana", "queijo", "euamoqueijo", "hahaha", "é"],
+                        /*[dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],*/
 
                         datasets: [{
                             label: 'CPU %',
 
-                            data: dados.cpu,
+                            data: dadosGrafico.cpu,
 
                             backgroundColor: 'rgba(139, 92, 246, 0.75)',
 
@@ -574,7 +557,7 @@
 
                 btnCPU.addEventListener('click', () => {
 
-                    graficoTop5.data.datasets[0].data = dados.cpu;
+                    graficoTop5.data.datasets[0].data = dadosGrafico.cpu;
 
                     graficoTop5.data.datasets[0].label = 'CPU %';
 
@@ -588,7 +571,7 @@
 
                 btnRAM.addEventListener('click', () => {
 
-                    graficoTop5.data.datasets[0].data = dados.ram;
+                    graficoTop5.data.datasets[0].data = dadosGrafico.ram;
 
                     graficoTop5.data.datasets[0].label = 'RAM %';
 
@@ -815,6 +798,9 @@
             }
         }
         });
+
+            } 
+            
 
     </script>
 
