@@ -202,34 +202,12 @@
                                 <h1>Painel de Saúde de Servidores</h1>
                             </div>
 
-                            <div class="lista-servidores">
-                                <div style="border: 3px solid #C70C0C; background-color: #FFB9B9;"
-                                    class="card-servidor">
-                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
-                                    <h2>Nome Servidor</h2>
-                                </div>
-
-                                <div style="border: 3px solid #C70C0C; background-color: #FFB9B9;"
-                                    class="card-servidor">
-                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
-                                    <h2>Nome Servidor</h2>
-                                </div>
-
-                                <div style="border: 3px solid #20A200; background-color: #BFFBB0;"
-                                    class="card-servidor">
-                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
-                                    <h2>Nome Servidor</h2>
-                                </div>
-
-                                <div style="border: 3px solid #FFCC00; background-color: #FAFCA5;"
-                                    class="card-servidor">
-                                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
-                                    <h2>Nome Servidor</h2>
-                                </div>
+                            <div id="lista_servidores" class="lista-servidores">
+                                
                             </div>
 
                             <div class="opcao-ocultar-servidores">
-                                <input type="checkbox">
+                                <input id="checkbox-servidores" type="checkbox" onchange="mostrarPainelSaude()">
                                 <span>Ocultar servidores estáveis</span>
                             </div>
                         </div>
@@ -532,6 +510,25 @@
             "7": 7 * 24 * 60 * 60 * 1000  // 7 dias em ms
         };
 
+        const status_servidor = {
+            Online: {
+                fundo: "#BFFBB0",
+                borda: "#20A200"
+            },
+            'Atenção': {
+                fundo: "#FAFCA5",
+                borda: "#FFCC00"
+            },
+            'Crítico': {
+                fundo: "#FFB9B9",
+                borda: "#C70C0C"
+            },
+            'Offline': {
+                fundo: "#FFB9B9",
+                borda: "#C70C0C"
+            }
+        };
+
 
         const ctx = document.getElementById('graficoSeveridade');
 
@@ -766,7 +763,7 @@
             .then((lista) => {
                 var servidoresComAcesso = lista.filter(servidor => servidor.tem_acesso == 1);
 
-                servidoresPermitidos = servidoresComAcesso.map(s => s.hostname);
+                servidoresPermitidos = servidoresComAcesso.map(s => [s.hostname, s.status_servidor]);
 
                 select_servidor.innerHTML += servidoresComAcesso.map(servidor =>
                     `<option value = "${servidor.hostname}">${servidor.hostname}</option>`
@@ -782,6 +779,30 @@
         })
 
         select_servidor.addEventListener("change", selecionar);
+    }
+
+    function mostrarPainelSaude(){
+        const checkbox = document.getElementById('checkbox-servidores');
+        var listarPainelFiltro = servidoresPermitidos;
+        console.log(listarPainelFiltro)
+
+        if(checkbox.checked){
+            listarPainelFiltro = servidoresPermitidos.filter(servidor => {
+                return !servidor.includes("Online")
+            })
+        }
+
+        lista_servidores.innerHTML = listarPainelFiltro.map(servidor => {
+            const visual = status_servidor[servidor[1]];
+
+            return `
+                <div style="border: 3px solid ${visual.borda}; background-color: ${visual.fundo};"
+                    class="card-servidor">
+                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
+                    <h2>${servidor[0]}</h2>
+                </div>
+            `;
+        }).join('');
     }
 
     async function carregarAlertas() {
@@ -943,9 +964,8 @@
         const alertasFiltrados = alertas.filter(alerta => {
             const dataCriacao = new Date(alerta.criadoEm).getTime();
             const estaAtivo = alerta.status !== "Concluído" && alerta.resolvidoEm === null;
-            const responsavel = servidoresPermitidos.includes(alerta.servidor);
-
-            return dataCriacao >= limiteTempo && estaAtivo && responsavel;
+            
+            return dataCriacao >= limiteTempo && estaAtivo;
         })
 
         
@@ -964,6 +984,7 @@
             document.getElementById("status-dot").style.display = "none";
 
             mostrarKPITodos();
+            mostrarPainelSaude();
         } else {
             document.getElementById("corpo-dashboard-todos").style.display = "none";
             document.getElementById("corpo-dashboard-servidor").style.display = "block";
