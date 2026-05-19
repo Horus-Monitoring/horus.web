@@ -52,8 +52,8 @@ body {
   gap: 1vw;
   width: 260px;
   height: 100vh;
-  background-color: #f5f5f0;
-  border-right: 1px solid #ddddd8;
+  background-color: #091627;
+  border-right: 1px solid #2b3646;
   position: fixed;
   z-index: 999;
   transition: transform 0.3s ease;
@@ -67,8 +67,9 @@ body {
   padding: 20px;
   font-weight: bold;
   font-size: 24px;
-  border-bottom: 1px solid #111827;;
-  color: var(--turquesa);
+  border-bottom: 1px solid #2b3646;
+  color: white;
+  font-family: "Jura";
 }
 
 /* .logo img {
@@ -86,7 +87,13 @@ body {
 }
 
 .menu button {
-  background-color: #4383d6;
+  background-color: #576CA8;
+  color: #fff;
+  font-weight: bold;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin-top: auto;
+  margin-bottom: 10px;
 }
 
 .menu img {
@@ -94,39 +101,33 @@ body {
 }
 
 .categoria {
-  color: #111b57;
-  margin: 16px 0 4px 10px;
-  font-size: 11px;
-  /* text-transform: uppercase; */
-}
-
-.item-menu.adm {
-  display: none;
-}
-
-.adm {
-  display: none;
-}
-
-.card.pequeno.prejuizo {
-  display: none;
+  color: #a0a5a8;
+  margin: 16px 0 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .item-menu {
-  color: #111b57;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s;
+  color: #fff;
 }
 
 .item-menu:hover {
-  background-color: #eaeae4;
+  transition: 0.2s; 
+  background-color: #2a3646;
+  border-radius: 5px;
 }
 
 .selecionado {
-  background-color: #1e2d4a;
-  color: white;
-}
-
-#gerarRelatorio {
-  background-color: #1e2d4a;
+  background-color: #2a3646;
+  color: #35BBD4;
 }
 
 .sair {
@@ -134,10 +135,10 @@ body {
   padding: 20px;
   gap: 15px;
   font-size: 16px;
-  color: #888888;
+  color: var(--ciano);
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #111827;
+  border-top: 1px solid #2b3646;
   transition: 0.2s;
 }
 
@@ -179,6 +180,11 @@ body {
   padding: 0 20px;
 }
 
+#hora {
+  font-size: 16px;
+  padding-right: 5em;
+}
+
 .hamburguer {
   display: none;
   cursor: pointer;
@@ -212,17 +218,81 @@ body {
   flex: 1;
 }
 
+.titulo-dash {
+  font-size: 22px;
+}
+
+.box-topo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.box-relatorio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0b121a;
+  width: 240px;
+  border: 1px solid #1e2732;
+  border-radius: 8px;
+  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  gap: 12px;
+  margin-right: 20px;
+  color: white;
+}
+
+.box-relatorio img {
+  width: 40px;
+  background-color: rgb(4, 56, 56);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.filtro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: 0.2s ease-in-out;
+  color: #e2e8f0;
+}
+
+.filtro:hover {
+  background-color: rgba(211, 211, 211, 0.26);
+  border: 1px solid rgb(153, 153, 153);
+}
+
+.filtro.selecionado {
+  background-color: #41d3ff91;
+  border: 1px solid #41d3ff;
+}
+
 .tabela-sistema {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 40%;
+  height: 360px;
   color: var(--texto);
   border: 1px solid #1e2732;
-  border-left: 3px solid rgb(255, 99, 99);
-  border-radius: 10px;
+  border-left: 2px solid rgb(201, 64, 64);
+  border-radius: 8px;
   background-color: #0b121a;
   box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.header-tabela-fixa {
+  position: sticky;
+  top: 0;
+  background-color: #0b121a;
 }
 
 .header-tabela {
@@ -397,21 +467,43 @@ body {
   padding: 24px;
   border-radius: 8px;
   color: white;
+  border-left: 2px solid rgb(0, 47, 150);
+}
+
+.topo-grafico-estabilidade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid rgb(0, 47, 150);
+  padding-left: 8px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: var(--subtexto);
+}
+
+#graficoEstabilidade {
+  width: 100%;
+  padding: 16px 0 16px 0;
 }
 
 .tendencia-falhas {
   display: flex;
+  flex-direction: column;
   width: 40%;
+  height: 360px;
   background-color: #0b121a;
   border: 1px solid #1e2732;
   border-radius: 8px;
   box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgb(159, 0, 173);
+  padding: 24px;
+  gap: 12px;
+  overflow-y: auto;
 }
 
 .topo-tendencia {
   display: flex;
   gap: 12px;
-  padding: 24px;
   color: white;
 }
 
@@ -423,9 +515,27 @@ body {
 
 .item-tendencia {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 70px;
+  border-radius: 8px;
+  padding: 16px 10px;
+  gap: 6px;
+  background-color: rgba(121, 4, 121, 0.185);
+  border: 1px solid rgb(112, 0, 124);
 }
 
-.grafico-saude {
+.item-tendencia .metrica {
+  font-size: 14px;
+  color: white;
+}
+
+.item-tendencia .descricao {
+  font-size: 12px;
+  color: rgb(151, 151, 151);
+}
+
+.grafico-impacto {
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -436,10 +546,37 @@ body {
   padding: 24px;
   border-radius: 8px;
   color: white;
+  border-left: 2px solid rgb(54, 245, 235);
 }
 
-#graficoSaude {
+.topo-grafico-impacto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 8px;
+  border-radius: 2px;
+  font-size: 14px;
+  color: var(--subtexto);
+}
+
+.topo-grafico-impacto span:first-child {
+    border-left: 4px solid #4a9eff;
+    padding-left: 8px;
+    border-radius: 2px;
+}
+
+.maior-impacto {
+  background-color: rgba(255, 0, 0, 0.137);
+  border: 1px solid red;
+  border-radius: 4px;
+  color: red;
+  padding: 5px;
+  font-size: 11px;
+}
+
+#graficoImpacto {
   width: 100px;
+  padding: 16px 0 16px 0;
 }
 
 .linha {

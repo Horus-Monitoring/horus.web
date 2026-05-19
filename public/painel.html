@@ -66,6 +66,8 @@
                 <span class="header-titulo">Dashboard</span>
 
                 <div class="usuario">
+                    <span id="hora" class="hora"></span>
+
                     <div>
                         <p id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
@@ -77,8 +79,16 @@
             <section class="conteudo">
                 <div class="topo">
                     <div class="topo-filtro">
-                        <span>Visão Operacional e Estratégica</span>
-                        <span>Filtrar por:</span>
+                        <span class="titulo-dash">Visão Operacional e Estratégica</span>
+
+                        <div class="box-topo">
+
+
+                            <span>Filtrar por:</span>
+                            <span class="filtro selecionado">24h</span>
+                            <span class="filtro">7d</span>
+                            <span class="filtro">30d</span>
+                        </div>
                     </div>
                 </div>
 
@@ -181,7 +191,7 @@
                 <div class="linha">
                     <div class="grafico-estabilidade">
                         <div class="topo-grafico-estabilidade">
-                            <span>Estabilidade Operacional - Últimas 24h</span>
+                            <span>ESTABILIDADE OPERACIONAL</span>
                         </div>
 
                         <canvas id="graficoEstabilidade"></canvas>
@@ -194,14 +204,27 @@
                         </div>
 
                         <div class="item-tendencia">
-
+                            <span class="metrica">Tendência de aumento nas próximas 4 horas</span>
+                            <span class="descricao">Modelo preditivo estima +5 incidentes médios entre 22:00 e
+                                2:00</span>
                         </div>
+                        <div class="item-tendencia">
+                            <span class="metrica">Tendência de aumento nas próximas 4 horas</span>
+                            <span class="descricao">Modelo preditivo estima +5 incidentes médios entre 22:00 e
+                                2:00</span>
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="linha">
-                    <div class="grafico-saude">
-                        <canvas id="graficoSaude"></canvas>
+                    <div class="grafico-impacto">
+                        <div class="topo-grafico-impacto">
+                            <span>IMPACTO OPERACIONAL POR AMBIENTE</span>
+                            <span class="maior-impacto">Processos: CRÍTICO</span>
+                        </div>
+
+                        <canvas id="graficoImpacto"></canvas>
                     </div>
 
                     <div class="tabela-sistema">
@@ -211,7 +234,7 @@
                         </div>
 
                         <table>
-                            <tr>
+                            <tr class="header-tabela-fixa">
                                 <th>ÁREA / SISTEMA</th>
                                 <th>INCIDENTES</th>
                                 <th>ANALISTAS</th>
@@ -252,6 +275,10 @@
                         </table>
                     </div>
 
+                </div>
+                <div class="box-relatorio">
+                    <img src="assets/imgs/painel/relatorio.png" alt="">
+                    <span>Exportar Relatório</span>
                 </div>
             </section>
 
@@ -298,6 +325,24 @@
 
         modal.addEventListener('click', fecharMenu);
     };
+
+    document.querySelectorAll('.filtro').forEach(filtro => {
+        filtro.addEventListener('click', () => {
+            document.querySelectorAll('.filtro').forEach(f => f.classList.remove('selecionado'));
+            filtro.classList.add('selecionado');
+        })
+    });
+
+    function atualizarHora() {
+        const horaAtual = new Date();
+        const horas = String(horaAtual.getHours()).padStart(2, '0');
+        const minutos = String(horaAtual.getMinutes()).padStart(2, '0');
+        const segundos = String(horaAtual.getSeconds()).padStart(2, '0');
+
+        document.getElementById('hora').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+    setInterval(atualizarHora, 1000);
+    atualizarHora();
 
     const ctx_estabilidade = document.getElementById('graficoEstabilidade');
     const dados_estabilidade = [97, 97.8, 97.2, 97.6, 97.1, 82.5, 80.5, 84.1, 96.8, 97.5];
@@ -352,25 +397,67 @@
         }
     });
 
-    const saude = 87;
+    const ctx = document.getElementById('graficoImpacto');
 
-    new Chart(document.getElementById('graficoSaude'), {
-        type: 'doughnut',
+    const labels = [
+        'Comunicação',
+        'Rede',
+        'CPU',
+        'RAM',
+        'Disco',
+        'Temperatura',
+        'Processos'
+    ];
+
+    const valores = [42, 57, 52, 67, 63, 78, 96];
+
+    // cores por nivel de impacto
+    function getCor(valor) {
+        if (valor >= 80) return '#ff4d6d'; // vermelho
+        if (valor >= 60) return '#f5a623'; // amarelo
+        return '#4a9eff'; // azul
+    }
+
+    new Chart(ctx, {
+        type: 'bar',
         data: {
+            labels: labels,
             datasets: [{
-                data: [saude, 100 - saude],
-                backgroundColor: ['#00d2c8', 'rgba(255,255,255,0.05)'],
-                borderWidth: 0,
+                data: valores,
+                backgroundColor: valores.map(getCor),
+                borderRadius: 3,
+                borderSkipped: false,
             }]
         },
         options: {
-            cutout: '80%',
+            indexAxis: 'y',
+            maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
-                tooltip: { enabled: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.raw}%`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    min: 0,
+                    max: 100,
+                    ticks: {
+                        color: '#6b7280',
+                        callback: v => v + '%'
+                    },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                },
+                y: {
+                    ticks: { color: '#9ca3af' },
+                    grid: { display: false }
+                }
             }
-        },
+        }
     });
+
 </script>
 
 </html>
