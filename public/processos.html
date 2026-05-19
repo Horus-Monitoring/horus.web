@@ -288,9 +288,13 @@
                         </div>
                     </div>
                     <div class="card card-grafico">
-                        <h3 class="tipo-grafico"></h3>
+                        <div class="topo-grafico">
+                            <h3 class="tipo-grafico">
+                                Quantidade de Processos Críticos nas Últimas 24h
+                            </h3>
+                        </div>
                         <div class="interface-grafico">
-                            <canvas id="grafico-cpu"></canvas>
+                            <canvas id="processos-criticos"></canvas>
                         </div>
                     </div>
                 </section>
@@ -628,6 +632,189 @@
                     btnRunning.classList.remove('ativo');
                     btnSleeping.classList.remove('ativo');
                 });
+
+
+        const ctx = document.getElementById('processos-criticos');
+        const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 500);
+
+        gradient.addColorStop(0, 'rgba(255, 0, 111, 0.35)');
+        gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');
+
+        new Chart(ctx, {
+        type: 'line',
+
+        data: {
+            labels: [
+            '00:00',
+            '04:00',
+            '08:00',
+            '12:00',
+            '16:00',
+            '20:00',
+            '00:00'
+            ],
+
+            datasets: [
+            {
+                label: 'Processos Críticos',
+
+                data: [100, 320, 650, 800, 320, 100, 180],
+
+                borderColor: '#c9023e',
+
+                backgroundColor: gradient,
+
+                fill: true,
+
+                tension: 0.4,
+
+                borderWidth: 2,
+
+                pointRadius: 2,
+
+                pointHoverRadius: 2,
+
+                pointBackgroundColor: '#ffffff',
+
+                pointBorderColor: '#c9023e',
+
+                pointBorderWidth: 3
+            },
+
+            {
+                label: 'Limite',
+
+                data: [500, 500, 500, 500, 500, 500, 500],
+
+                borderColor: '#ff3b30',
+
+                borderDash: [10, 10],
+
+                borderWidth: 2,
+
+                pointRadius: 0,
+
+                fill: false
+            }
+            ]
+        },
+
+        options: {
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+            legend: {
+                position: 'bottom',
+
+                labels: {
+                    usePointStyle: true,
+
+                    padding: 15,
+
+                    color: '#5f5f5f',
+
+                    font: {
+                        size: 14
+                    },
+
+                    generateLabels(chart) {
+
+                        const datasets = chart.data.datasets;
+
+                        return datasets.map((dataset, i) => {
+
+                            if (dataset.label === 'Limite') {
+
+                                return {
+                                    text: dataset.label,
+
+                                    strokeStyle: dataset.borderColor,
+
+                                    lineDash: dataset.borderDash,
+
+                                    lineWidth: 2,
+
+                                    pointStyle: 'line',
+
+                                    hidden: !chart.isDatasetVisible(i),
+
+                                    datasetIndex: i
+                                };
+                            }
+
+                            return {
+                                text: dataset.label,
+
+                                fillStyle: dataset.borderColor,
+
+                                strokeStyle: dataset.borderColor,
+
+                                pointStyle: 'rect',
+
+                                hidden: !chart.isDatasetVisible(i),
+
+                                datasetIndex: i
+                            };
+                        });
+                    }
+                }
+            },
+
+            tooltip: {
+                backgroundColor: '#2f2f2f',
+                padding: 12,
+
+                titleFont: {
+                size: 14
+                },
+
+                bodyFont: {
+                size: 14
+                }
+            }
+            },
+
+            scales: {
+            x: {
+                grid: {
+                color: '#e7e7e7',
+                borderDash: [5, 5]
+                },
+
+                ticks: {
+                color: '#555',
+
+                font: {
+                    size: 16
+                }
+                }
+            },
+
+            y: {
+                beginAtZero: true,
+
+                suggestedMax: 900,
+
+                grid: {
+                color: '#e7e7e7',
+                borderDash: [5, 5]
+                },
+
+                ticks: {
+                color: '#555',
+
+                stepSize: 160,
+
+                font: {
+                    size: 16
+                }
+                }
+            }
+            }
+        }
+        });
 
     </script>
 
