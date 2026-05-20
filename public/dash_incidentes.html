@@ -530,66 +530,7 @@
         };
 
 
-        const ctx = document.getElementById('graficoSeveridade');
-
-        new Chart(ctx, {
-            type: 'bar',
-
-            data: {
-                labels: ['Baixa', 'Média', 'Alta', 'Crítica'],
-
-                datasets: [{
-                    label: 'Alertas',
-                    data: [19, 6, 1, 6],
-
-                    backgroundColor: [
-                        '#7A88C7',
-                        '#FFD633',
-                        '#FFA133',
-                        '#D93B3B'
-                    ],
-
-                    borderRadius: {
-                        topLeft: 6,
-                        topRight: 6,
-                        bottomLeft: 0,
-                        bottomRight: 0
-                    },
-                    borderSkipped: false
-                }]
-            },
-
-            options: {
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true,
-
-                        grid: {
-                            display: false
-                        },
-
-                        ticks: {
-                            stepSize: 4
-                        }
-                    },
-
-                    x: {
-                        grid: {
-                            borderDash: [4, 4],
-                            color: '#D9D9D9'
-                        }
-                    }
-                }
-            }
-        });
+        
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </body>
@@ -975,6 +916,74 @@
 
     }
 
+    function plotarDadosAlertas(){
+        var criticos = dadosGlobaisAlertas.criticos;
+        var altos = dadosGlobaisAlertas.altos;
+        var medios = dadosGlobaisAlertas.medios;
+        var baixos = dadosGlobaisAlertas.baixos;
+
+        const ctx = document.getElementById('graficoSeveridade');
+
+        new Chart(ctx, {
+            type: 'bar',
+
+            data: {
+                labels: ['Baixa', 'Média', 'Alta', 'Crítica'],
+
+                datasets: [{
+                    label: 'Alertas',
+                    data: [baixos, medios, altos, criticos],
+
+                    backgroundColor: [
+                        '#7A88C7',
+                        '#FFD633',
+                        '#FFA133',
+                        '#D93B3B'
+                    ],
+
+                    borderRadius: {
+                        topLeft: 6,
+                        topRight: 6,
+                        bottomLeft: 0,
+                        bottomRight: 0
+                    },
+                    borderSkipped: false
+                }]
+            },
+
+            options: {
+                responsive: true,
+
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                        grid: {
+                            display: false
+                        },
+
+                        ticks: {
+                            stepSize: 4
+                        }
+                    },
+
+                    x: {
+                        grid: {
+                            borderDash: [4, 4],
+                            color: '#D9D9D9'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     function selecionar() {
         select = document.getElementById("select_servidor");
         if (select.value == "#") {
@@ -985,6 +994,7 @@
 
             mostrarKPITodos();
             mostrarPainelSaude();
+            plotarDadosAlertas();
         } else {
             document.getElementById("corpo-dashboard-todos").style.display = "none";
             document.getElementById("corpo-dashboard-servidor").style.display = "block";
