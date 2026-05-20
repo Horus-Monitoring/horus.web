@@ -215,9 +215,9 @@ section{
 
 /* celular */
 @media (max-width: 799px) {
-  *{
+  /* *{
     font-size: small;
-  }
+  } */
   .conteudo {
     padding: 12px;
     gap: 12px;

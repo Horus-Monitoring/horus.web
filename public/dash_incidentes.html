@@ -156,17 +156,17 @@
                                     src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
                                 <div class="informacoes-principais">
                                     <span>Servidor com mais Alertas</span>
-                                    <h1>10</h1>
+                                    <h1 id="kpi_mais_alertas">10</h1>
                                 </div>
                             </div>
                             <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                         </div>
                         <div class="tempo_dash">
                             <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                            <select name="" id="tempo">
-                                <option value="30s">Últimas 24 horas</option>
-                                <option value="1min">Última Semana</option>
-                                <option value="5min">Último Mês</option>
+                            <select class="tempo" name="" id="tempo_mais_alertas">
+                                <option value="1">Última hora</option>
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="7">Última Semana</option>
                             </select>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                             </div>
 
                             <div id="lista_servidores" class="lista-servidores">
-                                
+
                             </div>
 
                             <div class="opcao-ocultar-servidores">
@@ -530,7 +530,7 @@
         };
 
 
-        
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </body>
@@ -711,7 +711,7 @@
                 ).join('')
                 nomeServidor.textContent =
                     select_servidor.options[select_servidor.selectedIndex].text;
-                     carregarAlertas()
+                carregarAlertas()
             })
 
         select_servidor.addEventListener("change", () => {
@@ -722,12 +722,12 @@
         select_servidor.addEventListener("change", selecionar);
     }
 
-    function mostrarPainelSaude(){
+    function mostrarPainelSaude() {
         const checkbox = document.getElementById('checkbox-servidores');
         var listarPainelFiltro = servidoresPermitidos;
         console.log(listarPainelFiltro)
 
-        if(checkbox.checked){
+        if (checkbox.checked) {
             listarPainelFiltro = servidoresPermitidos.filter(servidor => {
                 return !servidor.includes("Online")
             })
@@ -905,18 +905,51 @@
         const alertasFiltrados = alertas.filter(alerta => {
             const dataCriacao = new Date(alerta.criadoEm).getTime();
             const estaAtivo = alerta.status !== "Concluído" && alerta.resolvidoEm === null;
-            
+
             return dataCriacao >= limiteTempo && estaAtivo;
         })
 
-        
-
         kpi_total_alertas_todos.innerText = alertasFiltrados.length;
-        console.log(alertasFiltrados)
+
+
+        // servidor com mais alertas
+        const filtroTempoSelecionadoServidor = tempo_mais_alertas.value;
+        const limiteTempoServidor = agora.getTime() - filtros_tempo[filtroTempoSelecionadoServidor];
+
+        const alertasFiltradosServidor = alertas.filter(alerta => {
+            const dataCriacao = new Date(alerta.criadoEm).getTime();
+
+            return dataCriacao >= limiteTempoServidor;
+        })
+
+        console.log("ALERTAS" + alertasFiltradosServidor)
+
+        var hostname_mais_alertas = "Nenhum";
+        var qtd_mais_alertas = 0;
+
+        const contagemServidores = {};
+
+        for (let i = 0; i < alertasFiltradosServidor.length; i++) {
+            const hostname = alertasFiltradosServidor[i].servidor;
+            if (contagemServidores[hostname] === undefined) {
+                contagemServidores[hostname] = 1;
+            } else {
+                contagemServidores[hostname]++;
+            }
+        }
+
+        for (const hostname in contagemServidores) {
+            if (contagemServidores[hostname] > qtd_mais_alertas) {
+                hostname_mais_alertas = hostname;
+                qtd_mais_alertas = contagemServidores[hostname];
+            }
+        }
+
+        kpi_mais_alertas.innerText = `${hostname_mais_alertas} (${qtd_mais_alertas})`;
 
     }
 
-    function plotarDadosAlertas(){
+    function plotarDadosAlertas() {
         var criticos = dadosGlobaisAlertas.criticos;
         var altos = dadosGlobaisAlertas.altos;
         var medios = dadosGlobaisAlertas.medios;
@@ -1011,6 +1044,7 @@
     tempo_lista_alertas.addEventListener("change", listarAlertas);
 
     tempo_total_alertas_todos.addEventListener("change", mostrarKPITodos);
+    tempo_mais_alertas.addEventListener("change", mostrarKPITodos)
 
     // Quando o servidor mudar, AMBOS precisam atualizar
     select_servidor.addEventListener("change", selecionar);
