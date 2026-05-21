@@ -16,12 +16,14 @@ async function capturarDados(req, res) {
 
         const command = new GetObjectCommand({
 
-            Bucket: "horus-monitoring",
+            Bucket: "s3-raw-lab-060",
 
             // client -> id da empresa -> mac address -> processos.json 
             Key:
-                `client/empresa_1/c0:35:32:c7:0b:59/processos.json`
+                `client/kpis/raw_processos_kpis.json`
         });
+
+        //console.log(Key);
 
         // aguardando resposta da requisição
         const data = await s3.send(command);
@@ -33,10 +35,11 @@ async function capturarDados(req, res) {
         const json = JSON.parse(jsonString);
 
         res.json(json);
+        console.log(json);
 
     } catch (erro) {
 
-        console.log(erro);
+        console.error("ERRO AWS:", erro);
 
         res.status(500).json({
             erro: "Erro ao buscar dashboard"
