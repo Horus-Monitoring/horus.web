@@ -59,7 +59,8 @@ function listarServidores(fkEmpresa) {
     var instrucaoSql = `
         SELECT 
         id_servidor, 
-        hostname 
+        hostname,
+        mac_address 
         FROM servidor 
         WHERE fk_empresa = ${fkEmpresa};
     `;
