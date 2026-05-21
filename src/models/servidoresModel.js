@@ -59,7 +59,8 @@ function listarServidores(fkEmpresa) {
     var instrucaoSql = `
         SELECT 
         id_servidor, 
-        hostname 
+        hostname,
+        mac_address 
         FROM servidor 
         WHERE fk_empresa = ${fkEmpresa};
     `;
@@ -133,6 +134,7 @@ function listarServidoresComAcesso(fkEmpresa, fkFuncionario) {
         SELECT 
             s.id_servidor,
             s.hostname,
+            s.status_servidor,
             CASE 
                 WHEN a.fk_servidor IS NOT NULL THEN 1
                 ELSE 0
