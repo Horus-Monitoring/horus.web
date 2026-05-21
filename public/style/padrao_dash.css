@@ -260,7 +260,7 @@ html, body {
 /* ─── Cards e listas ─── */
 .cards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
 }
 
@@ -270,7 +270,7 @@ html, body {
   border: 1px solid #ddd;
   overflow-x: auto;
   flex: 0 0 auto;
-  max-width: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
