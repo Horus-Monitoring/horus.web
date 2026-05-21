@@ -21,22 +21,25 @@
   --vermelho: #ef4444;
 }
 
-body {
-  background: var(--cinza);
-  height: 100vh;
-  overflow: hidden;
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
 .container {
   display: flex;
-  height: 100%;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .main {
-  flex: auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   margin-left: 260px;
+  min-height: 100vh;
+  overflow: visible;
 }
 
 .conteudo {
@@ -61,7 +64,168 @@ body {
   display: none;
 }
 
-/* ─── Overlays ─── */
+
+/*INICIO HEADER NOVO*/
+.header {
+  background: white;
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 0;
+}
+
+.header-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.header-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.header-servidor {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb {
+  font-size: 15px;
+  color: var(--subtexto);
+  white-space: nowrap;
+}
+
+.breadcrumb strong {
+  color: var(--texto);
+}
+
+.renomear {
+  color: var(--azul);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.renomear:hover {
+  opacity: 0.7;
+}
+
+.status-servidor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.select-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #fff;
+}
+
+.select-status select {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  color: var(--texto);
+  cursor: pointer;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.verde {
+  background: #22c55e;
+}
+
+.laranja {
+  background: #f59e0b;
+}
+
+.vermelho {
+  background: #ef4444;
+}
+
+.alertas {
+  background: #fff4e5;
+  color: #b45309;
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.header-nav-scroll {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-top: 1px solid var(--borda);
+  min-height: 42px;
+  background: #fff;
+  scrollbar-width: none;
+}
+
+.header-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  min-width: max-content;
+
+  padding: 6px 16px;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: var(--subtexto);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.header-nav a:hover {
+  background: #f3f4f6;
+  color: var(--texto);
+}
+
+.header-nav a.ativo {
+  background: #edf2ff;
+  color: var(--azul);
+  font-weight: 600;
+}
+
+/*FIM HEADER NOVO*/
+
+
+/* overlay do menu hamburguer */
 .modal-lateral {
   position: fixed;
   inset: 0;
@@ -96,7 +260,7 @@ body {
 /* ─── Cards e listas ─── */
 .cards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
 }
 
@@ -106,7 +270,7 @@ body {
   border: 1px solid #ddd;
   overflow-x: auto;
   flex: 0 0 auto;
-  max-width: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -801,92 +965,41 @@ body {
     gap: 14px;
   }
 
-  .card-cpu,
-  .card-ram,
-  .card-disk,
-  .card-info {
-    flex: 1 1 calc(50% - 7px);
-    max-width: none;
-    min-width: 0;
-    height: 130px;
+  .header {
+    padding: 10px 12px 0;
   }
 
-  /* Gráficos: empilham */
-  .linha { flex-direction: column; gap: 0; }
+  .header-topo {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-  .cards-detalhes-grafico {
+  .header-servidor {
     width: 100%;
-    height: 320px;
-    margin-bottom: 16px;
+    gap: 10px;
   }
 
-  .card-grafico-processos {
+  .status-servidor {
     width: 100%;
-    height: 320px;
-    margin-bottom: 16px;
+    overflow-x: auto;
+    padding-bottom: 2px;
   }
 
-  .card-processos {
-    width: 100%;
-    height: auto;
-    min-height: 280px;
-    margin-bottom: 16px;
+  .breadcrumb {
+    font-size: 13px;
   }
 
-  .grafico-recursos,
-  .grafico-processos,
-  .grafico-rede { width: 100%; height: 88%; }
 }
 
-/* ─── Mobile (≤599px) ─── */
-@media (max-width: 599px) {
-
-  body { overflow: hidden; }
-
-  .conteudo { padding: 12px; gap: 12px; }
-
-  /* Visão */
-  .card-visao      { padding: 14px 16px; }
-  .visao-titulo    { font-size: 15px; }
-  .visao-subtitulo { font-size: 11px; }
-  .visao-descricao { font-size: 12px; }
-  .visao-badges    { gap: 6px; }
-  .badge           { font-size: 11px; padding: 4px 10px; }
-
-  /* Severidade */
-  .card-severidade { padding: 14px 16px; }
-  .sev-label       { width: 90px; font-size: 11px; }
-  .sev-titulo      { font-size: 13px; }
-
-  /* Contadores */
-  .card-contadores { flex-direction: row; gap: 8px; min-width: unset; }
-  .contador        { flex: 1; padding: 10px 6px; }
-  .cont-num        { font-size: 20px; }
-  .cont-label      { font-size: 9px; }
-
-  /* Busca */
-  .pequeno-filtro { flex-direction: row; gap: 10px; padding: 12px 14px; }
-  .card-pesquisar { width: 90%; margin: 0; }
-  .pequeno-filtro input { width: 90%; }
-
-  /* Filtro modal */
-  .filtros {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    z-index: 1000;
-    transition: 0.3s;
-    opacity: 0;
-    padding: 16px;
-    background-color: var(--cinza);
-    border: 3px var(--borda) solid;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: auto;
-    min-height: 250px;
-    width: 82%;
+/* celular */
+@media (max-width: 799px) {
+  .conteudo {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .servidores{
+    width: 60%;
   }
 
   .filtros.ativo {
@@ -894,43 +1007,7 @@ body {
     opacity: 1;
   }
 
-  .tempo_dash { width: 100%; }
-
-  /* Lista */
-  .att-servidor { display: none; }
-
-  .box-servidor {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 14px;
-  }
-
-  .info-servidor {
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    padding: 4px 0;
-  }
-
-  /* Modal detalhes */
-  .popup { overflow-y: auto; }
-  .modal { padding: 14px; border-radius: 0; }
-
-  .topo { flex-direction: column; gap: 12px; align-items: flex-start; }
-  .local  { margin-left: 0; margin-top: 8px; }
-  .status { align-self: flex-start; }
-
-  /* Cards CPU/RAM/Disco: 1 por linha */
-  .cards-detalhes {
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-
-  .card-cpu,
-  .card-ram,
-  .card-disk {
+  .selecionar-servidores select{
     width: 100%;
     height: auto;
     min-width: 0;
@@ -950,32 +1027,45 @@ body {
     gap: 4px;
   }
 
-  .registro { font-size: 26px; }
+  .header {
+    padding: 10px 12px 0;
 
-  .linha,
-  .linha-topo { flex-direction: column; gap: 0; }
+  }
 
-  .cards-detalhes-grafico { width: 100%; height: 240px; padding: 12px; margin-bottom: 14px; }
-  .card-grafico-processos { width: 100%; height: 240px; padding: 12px; margin-bottom: 14px; }
+  .header-topo {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-  .grafico-recursos,
-  .grafico-processos,
-  .grafico-rede { width: 100%; height: 84%; }
+  .header-servidor {
+    width: 100%;
+    gap: 10px;
+  }
 
-  .card-detalhes-topo { flex-direction: row; align-items: center; justify-content: space-between; }
+  .status-servidor {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
 
-  .select_filtro { width: 120px; font-size: 11px; padding-left: 26px; }
+  .breadcrumb {
+    display: none;
+  }
 
-  .card-processos { width: 100%; height: auto; min-height: 260px; margin-bottom: 16px; }
+  .usuario{
+    align-self: center;
+  }
 
-  .titulo-tabela { font-size: 13px; padding: 12px 0 0 12px; }
-
-  .tabela-processos th,
-  .tabela-processos td { padding: 10px 6px; font-size: 11px; }
-
-  .barra { width: 56px; margin-right: 6px; }
-
-  .info-servidor button { height: 32px; width: 68px; font-size: 11px; }
-
-  .sumir-celular { display: none; }
 }
+
+/* desktop */
+@media (min-width: 1440px) {
+  .modal-lateral {
+    display: none !important;
+  }
+}
+
+
+
+
+
