@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatura | Horus</title>
+
+    <link rel="icon" href="./assets/icon/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style/DashTemp.css">
+    <link rel="stylesheet" href="./style/dash_rede.css">
+</head>
+
+<body>
+
+    <div class="modal-lateral" id="overlay"></div>
+
+    <div class="container">
+
+        <!-- MENU LATERAL -->
+
+        <aside class="lateral" id="lateral">
+
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+
+                <div class="categoria">Monitoramento</div>
+
+                <a href="painel.html" class="item-menu">
+                    <img src="./assets/imgs/painel/dash.png" alt="">
+                    Dashboard
+                </a>
+
+                <a href="dash_analista.html" class="item-menu">
+                    <img src="./assets/imgs/painel/servidores.png" alt="">
+                    Servidores
+                </a>
+
+                <a href="telaIncidente.html" class="item-menu">
+                    <img src="./assets/imgs/painel/alerta.png" alt="">
+                    Incidentes
+                </a>
+
+                <a href="comunicacao.html" class="item-menu">
+                    <img src="./assets/imgs/painel/comunicacao.png" alt="">
+                    Comunicação
+                </a>
+
+                <a href="processos.html" class="item-menu">
+                    <img src="./assets/imgs/painel/processos.png" alt="">
+                    Processos
+                </a>
+
+                <a href="temperatura.html" class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/temperatura.png" alt="">
+                    Temperatura
+                </a>
+
+                <div class="categoria adm">Administração</div>
+
+                <a href="dash_usuarios.html" class="item-menu adm">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">
+                    Usuários
+                </a>
+
+                <a href="servidor-componente.html" class="item-menu adm">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">
+                    Cadastrar servidor
+                </a>
+
+            </nav>
+
+            <div class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p>Sair</p>
+            </div>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="hamburguer">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="">
+                </div>
+
+                <span class="header-titulo">
+                    Temperatura
+                </span>
+
+                <div class="usuario">
+
+                    <div>
+                        <p>Fernando Brandão</p>
+                        <p class="cargo">Administrador</p>
+                    </div>
+
+                    <span>FB</span>
+
+                </div>
+
+            </header>
+
+            <!-- CONTEUDO -->
+
+            <section class="conteudo">
+
+                <!-- TOPO -->
+
+                <div class="padrao-serv">
+
+                    <div class="servidores">
+
+                        <div class="detalhes-servidores">
+
+                            <div class="info-servidores nome">
+
+                                <div style="padding-right: 10px;">
+                                    <img src="assets/imgs/painel/servidores_cabecario.png">
+                                </div>
+
+                                <div>
+                                    <span>SRV-TEMP-SP-01</span>
+                                    <p>São Paulo, SP</p>
+                                </div>
+
+                            </div>
+
+                            <div class="info-servidores ip">
+                                <p>IP do Servidor</p>
+                                <span>192.168.1.100</span>
+                            </div>
+
+                            <div class="info-servidores att">
+                                <p>Última atualização</p>
+                                <span>07/05/2026 às 22:41</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="selecionar-servidores">
+
+                        <p>Selecione o servidor:</p>
+
+                        <select>
+
+                            <option>
+                                SRV-TEMP-SP-01
+                            </option>
+
+                            <option>
+                                SRV-TEMP-RJ-01
+                            </option>
+
+                            <option>
+                                SRV-TEMP-MG-01
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- CARDS -->
+
+                <section class="cards">
+
+                    <div class="card">
+                        <h3>Margem de Segurança Térmica</h3>
+                        <div class="big">+14°C</div>
+                        <span class="green">▼ melhorando</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Índice de Eficiência de Resfriamento</h3>
+                        <div class="big">78%</div>
+                        <span class="red">▲ piorando</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Dia com maior estresse térmico</h3>
+                        <div class="big">Sexta-feira</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Throttling Status</h3>
+                        <div class="big">Não</div>
+                        <div class="status">
+                            Operacional
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- GRID -->
+
+                <section class="grid">
+
+                    <!-- GRAFICO -->
+
+                    <div class="chart-card">
+
+                        <div class="chart-header">
+                            <h2>
+                                Temperatura CPU — Núcleo Mais Quente
+                            </h2>
+
+                            <p>
+                                Zonas de alerta • linha da média do dia
+                            </p>
+                        </div>
+
+                        <canvas id="cpuChart"></canvas>
+
+                    </div>
+
+                    <!-- HEATMAP -->
+
+                    <div class="heatmap-card">
+
+                        <div class="chart-header">
+                            <h2>
+                                Heatmap — Temperatura por Core
+                            </h2>
+
+                            <p>
+                                16 núcleos • snapshot atual
+                            </p>
+                        </div>
+
+                        <div class="heatmap">
+
+                            <div class="core alert">
+                                <small>C0</small>
+                                <span>72°</span>
+                            </div>
+
+                            <div class="core critical">
+                                <small>C1</small>
+                                <span>85°</span>
+                            </div>
+
+                            <div class="core normal">
+                                <small>C2</small>
+                                <span>61°</span>
+                            </div>
+
+                            <div class="core critical">
+                                <small>C3</small>
+                                <span>91°</span>
+                            </div>
+
+                            <div class="core alert">
+                                <small>C4</small>
+                                <span>68°</span>
+                            </div>
+
+                            <div class="core alert">
+                                <small>C5</small>
+                                <span>74°</span>
+                            </div>
+
+                            <div class="core critical">
+                                <small>C6</small>
+                                <span>88°</span>
+                            </div>
+
+                            <div class="core alert">
+                                <small>C7</small>
+                                <span>65°</span>
+                            </div>
+
+                            <div class="core medium">
+                                <small>C8</small>
+                                <span>79°</span>
+                            </div>
+
+                            <div class="core medium">
+                                <small>C9</small>
+                                <span>82°</span>
+                            </div>
+
+                            <div class="core normal">
+                                <small>C10</small>
+                                <span>57°</span>
+                            </div>
+
+                            <div class="core critical">
+                                <small>C11</small>
+                                <span>93°</span>
+                            </div>
+
+                        </div>
+
+                        <!-- LEGENDA -->
+
+                        <div class="heatmap-legend">
+
+                            <div class="legend-item">
+                                <span class="legend-color normal-bg"></span>
+                                <small>&lt; 65°</small>
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-color alert-bg"></span>
+                                <small>65° - 75°</small>
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-color medium-bg"></span>
+                                <small>75° - 85°</small>
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-color critical-bg"></span>
+                                <small>&gt; 85°</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- GRAFICO FINAL -->
+
+                <section class="bottom-chart">
+
+                    <div class="chart-header">
+
+                        <h2>
+                            Impacto Térmico na Latência
+                        </h2>
+
+                        <p>
+                            Correlação entre temperatura e degradação
+                        </p>
+
+                    </div>
+
+                    <canvas id="latencyChart"></canvas>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+
+        const tooltipConfig = {
+
+            responsive: true,
+
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+
+            plugins: {
+
+                legend: {
+                    position: 'top'
+                },
+
+                tooltip: {
+
+                    enabled: true,
+
+                    backgroundColor: '#111827',
+
+                    titleColor: '#fff',
+
+                    bodyColor: '#fff',
+
+                    borderColor: '#3b82f6',
+
+                    borderWidth: 1,
+
+                    padding: 12,
+
+                    callbacks: {
+
+                        label: function (context) {
+
+                            if (context.dataset.label.includes('Latência')) {
+
+                                return `${context.dataset.label}: ${context.parsed.y} ms`;
+
+                            }
+
+                            return `${context.dataset.label}: ${context.parsed.y}°C`;
+
+                        }
+                    }
+                }
+            }
+        };
+
+        // CPU
+
+        new Chart(document.getElementById('cpuChart'), {
+
+            type: 'line',
+
+            data: {
+
+                labels: [
+                    '00:00', '02:00', '04:00',
+                    '06:00', '08:00', '10:00',
+                    '12:00', '14:00', '16:00',
+                    '18:00', '20:00', '22:00'
+                ],
+
+                datasets: [
+
+                    {
+                        label: 'Temp. CPU',
+
+                        data: [
+                            42, 48, 49, 58,
+                            66, 68, 72, 79,
+                            74, 68, 52, 44
+                        ],
+
+                        borderColor: '#3b82f6',
+
+                        tension: 0.4,
+
+                        borderWidth: 3
+                    },
+
+                    {
+                        label: 'Temp. Clima',
+
+                        data: [
+                            18, 19, 19, 21,
+                            24, 26, 33, 34,
+                            33, 28, 25, 21
+                        ],
+
+                        borderColor: '#10b981',
+
+                        tension: 0.4,
+
+                        borderWidth: 3
+                    }
+
+                ]
+            },
+
+            options: tooltipConfig
+
+        });
+
+        // LATENCIA
+
+        new Chart(document.getElementById('latencyChart'), {
+
+            type: 'line',
+
+            data: {
+
+                labels: [
+                    '00:00', '02:00', '04:00',
+                    '06:00', '08:00', '10:00',
+                    '12:00', '14:00', '16:00',
+                    '18:00', '20:00', '22:00'
+                ],
+
+                datasets: [
+
+                    {
+                        label: 'Latência',
+
+                        data: [
+                            4, 5, 7, 8,
+                            10, 11, 12, 16,
+                            14, 12, 7, 6
+                        ],
+
+                        borderColor: '#8b5cf6',
+
+                        backgroundColor: 'rgba(139,92,246,0.08)',
+
+                        fill: true,
+
+                        tension: 0.4,
+
+                        borderWidth: 3
+                    },
+
+                    {
+                        label: 'Temperatura',
+
+                        data: [
+                            42, 44, 47, 50,
+                            61, 68, 70, 82,
+                            76, 72, 48, 44
+                        ],
+
+                        borderColor: '#f97316',
+
+                        tension: 0.4,
+
+                        borderWidth: 3
+                    }
+
+                ]
+            },
+
+            options: tooltipConfig
+
+        });
+
+    </script>
+
+</body>
+
+</html>
