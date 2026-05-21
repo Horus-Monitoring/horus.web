@@ -274,8 +274,8 @@
                                 <th>Tempo de Execução</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="corpoTabela">
+                            <!-- <tr>
                                 <td class="proc-cinza">3456</td>
                                 <td class="proc-cinza">node</td>
                                 <td class="proc-cinza">nodejs</td>
@@ -319,7 +319,7 @@
                                     </div>
                                 </td>
                                 <td><span class="proc-cinza">40m</span></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -395,26 +395,28 @@
                     
                 const resposta = await fetch("/processos/capturarDados");
                 dados = await resposta.json();
-                console.log(dados);
+            
 
                 document.getElementById("qtdProcessosCriticos").innerHTML =
-                    dados.total;
+                    dados.kpis.total;
 
-                if (dados.total > 1) {
+                if (dados.kpis.total > 1) {
                     document.getElementById("texto-processo").innerHTML = "processos afetados"
                 }
 
-                document.getElementById("latenciaQtd").innerHTML = dados.latencia;
-                document.getElementById("cpuQtd").innerHTML = dados.cpu;
-                document.getElementById("ramQtd").innerHTML = dados.ram;
-                document.getElementById("qtdRunning").innerHTML = dados.running;
-                document.getElementById("qtdSleeping").innerHTML = dados.sleeping;
-                document.getElementById("qtdStopped").innerHTML = dados.stopped;
-                document.getElementById("nome-proc").innerHTML = dados.nome;
-                document.getElementById("latencia-proc").innerHTML = dados.latencia_ms;
-                document.getElementById("pid-proc").innerHTML = dados.pid;
+                console.log(dados.kpis.cpu_1 + "oie")
+                document.getElementById("latenciaQtd").innerHTML = dados.kpis.latencia;
+                document.getElementById("cpuQtd").innerHTML = dados.kpis.cpu;
+                document.getElementById("ramQtd").innerHTML = dados.kpis.ram;
+                document.getElementById("qtdRunning").innerHTML = dados.kpis.running;
+                document.getElementById("qtdSleeping").innerHTML = dados.kpis.sleeping;
+                document.getElementById("qtdStopped").innerHTML = dados.kpis.stopped;
+                document.getElementById("nome-proc").innerHTML = dados.kpis.nome;
+                document.getElementById("latencia-proc").innerHTML = dados.kpis.latencia_ms;
+                document.getElementById("pid-proc").innerHTML = dados.kpis.pid;
 
                 carregarDados();
+                carregarTabela();
                     
                 
                 } catch (erro) {
@@ -431,15 +433,15 @@
                 console.log(dados)
                 
             const dadosGrafico = {
-                    cpu: [dados["cpu_1"], dados["cpu_2"], dados["cpu_3"], dados["cpu_4"], dados["cpu_5"]],
-                    ram: [dados["ram_1"], dados["ram_2"], dados["ram_3"], dados["ram_4"], dados["ram_5"]]
+                    cpu: [dados.kpis["cpu_1"], dados.kpis["cpu_2"], dados.kpis["cpu_3"], dados.kpis["cpu_4"], dados.kpis["cpu_5"]],
+                    ram: [dados.kpis["ram_1"], dados.kpis["ram_2"], dados.kpis["ram_3"], dados.kpis["ram_4"], dados.kpis["ram_5"]]
                 };
 
                 const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
                     type: 'bar',
 
                     data: {
-                        labels: [dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],
+                        labels: [dados.kpis["nome_cpu1"], dados.kpis["nome_cpu2"], dados.kpis["nome_cpu3"], dados.kpis["nome_cpu4"], dados.kpis["nome_cpu5"]],
                         /*[dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],*/
 
                         datasets: [{
@@ -569,7 +571,7 @@
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
                     graficoTop5.options.scales.x.max = 100;
                     graficoTop5.options.scales.x.min = 0;
-                    graficoTop5.data.labels = [dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]];
+                    graficoTop5.data.labels = [dados.kpis["nome_cpu1"], dados.kpis["nome_cpu2"], dados.kpis["nome_cpu3"], dados.kpis["nome_cpu4"], dados.kpis["nome_cpu5"]];
 
                     graficoTop5.update();
 
@@ -586,7 +588,7 @@
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
                     graficoTop5.options.scales.x.max = 50;
                     graficoTop5.options.scales.x.min = 0;
-                    graficoTop5.data.labels = [dados["nome_ram1"], dados["nome_ram2"], dados["nome_ram3"], dados["nome_ram4"], dados["nome_ram5"]];
+                    graficoTop5.data.labels = [dados.kpis["nome_ram1"], dados.kpis["nome_ram2"], dados.kpis["nome_ram3"], dados.kpis["nome_ram4"], dados.kpis["nome_ram5"]];
 
                     graficoTop5.update();
 
@@ -811,7 +813,115 @@
         });
 
             } 
-            
+    
+            function carregarTabela() {
+
+    const tbody = document.getElementById("corpoTabela");
+
+    let linhas = "";
+
+    dados.processos.forEach(processo => {
+
+        let classeCPU = "";
+        let classeRAM = "";
+        let classeLatencia = "";
+
+        if (processo.cpu >= 40) {
+            classeCPU = "proc-grave";
+        } else if (processo.cpu >= 20) {
+            classeCPU = "proc-alerta";
+        } else {
+            classeCPU = "proc-estavel";
+        }
+
+        if (processo.ram >= 15) {
+            classeRAM = "proc-grave";
+        } else if (processo.ram >= 8) {
+            classeRAM = "proc-alerta";
+        } else {
+            classeRAM = "proc-estavel";
+        }
+
+        if (processo.latencia >= 80) {
+            classeLatencia = "proc-grave";
+        } else if (processo.latencia >= 40) {
+            classeLatencia = "proc-alerta";
+        } else {
+            classeLatencia = "proc-estavel";
+        }
+
+        let corFundo = "";
+        let corTexto = "";
+        let icone = "";
+
+        if (processo.status === "running") {
+            corFundo = "#b9f8cf";
+            corTexto = "#20A200";
+            icone = "./assets/imgs/processos/bolinha-verde.png";
+
+        } else if (processo.status === "sleeping") {
+            corFundo = "#9bcffa";
+            corTexto = "#308CFF";
+            icone = "./assets/imgs/processos/lua.png";
+
+        } else {
+            corFundo = "#f8eab2";
+            corTexto = "#FFCC00";
+            icone = "./assets/imgs/processos/retangulo-amarelo.png";
+        }
+
+        linhas += `
+            <tr>
+                <td class="proc-cinza">${processo.pid}</td>
+                <td class="proc-cinza">${processo.nome}</td>
+                <td class="proc-cinza">${processo.usuario}</td>
+
+                <td>
+                    <span class="${classeCPU}">
+                        ${processo.cpu}%
+                    </span>
+                </td>
+
+                <td>
+                    <span class="${classeRAM}">
+                        ${processo.ram}%
+                    </span>
+                </td>
+
+                <td>
+                    <span class="${classeLatencia}">
+                        ${processo.latencia}ms
+                    </span>
+                </td>
+
+                <td style="display:flex; justify-content:center;">
+                    <div class="cor-status"
+                         style="background-color:${corFundo};">
+
+                        <img style="width:8px; height:8px;"
+                             src="${icone}">
+
+                        <span style="
+                            color:${corTexto};
+                            font-weight:bold;
+                            font-size:15px;
+                        ">
+                            ${processo.status}
+                        </span>
+                    </div>
+                </td>
+
+                <td>
+                    <span class="proc-cinza">
+                        ${processo.tempo_execucao}
+                    </span>
+                </td>
+            </tr>
+        `;
+    });
+
+    tbody.innerHTML = linhas;
+}
 
     </script>
 
