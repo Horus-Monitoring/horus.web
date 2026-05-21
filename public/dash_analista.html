@@ -114,87 +114,6 @@
                         <span class="badge badge-critico">1 Crítico</span>
                     </div>
                 </div>
-                <div class="card-severidade-wrapper">
-
-                    <div class="card-severidade">
-
-                        <div class="sev-header">
-                            <div class="sev-titulo">Severidade por escala de uso</div>
-                            <div class="sev-escala">
-                                70–79 baixa · 80–89 média · 90+ crítica
-                            </div>
-                        </div>
-                        <div class="container-cards-severidade">
-                            <div class="sev-linhas">
-
-                                <div class="sev-linha">
-
-                                    <div class="sev-topo">
-                                        <span class="sev-label">Baixa (70–79%)</span>
-                                       
-                                    </div>
-
-                                    <div class="sev-barra-bg">
-                                        <div class="sev-barra sev-verde" style="width: 40%;"> 
-                                            <span class="sev-pct">40%</span>
-                                        </div>
-                                        
-                                    </div>
-
-                                </div>
-                                <div class="sev-linha">
-
-                                    <div class="sev-topo">
-                                        <span class="sev-label">Média (80–89%)</span>
-                              
-                                    </div>
-
-                                    <div class="sev-barra-bg">
-                                        <div class="sev-barra sev-amarela" style="width: 28%;">
-                                               <span class="sev-pct">28%</span>
-                                        </div>
-                                               
-                                    </div>
-
-                                </div>
-
-                                <div class="sev-linha">
-
-                                    <div class="sev-topo">
-                                        <span class="sev-label">Crítica (90–100%)</span>
-                                      
-                                    </div>
-
-                                    <div class="sev-barra-bg">
-                                        <div class="sev-barra sev-vermelha" style="width: 16%;">
-                                             <span class="sev-pct">16%</span>
-                                        </div>
-                                         
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <div class="card-contadores">
-
-                                <div class="contador contador-estaveis">
-                                    <span class="cont-num">2</span>
-                                    <span class="cont-label">ESTÁVEIS</span>
-                                </div>
-
-                                <div class="contador contador-atencao">
-                                    <span class="cont-num">2</span>
-                                    <span class="cont-label">ATENÇÃO</span>
-                                </div>
-
-                                <div class="contador contador-criticos">
-                                    <span class="cont-num">1</span>
-                                    <span class="cont-label">CRÍTICOS</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="cards">
                     <div class="card pequeno-filtro">
                         <div class="card-pesquisar">
@@ -357,8 +276,7 @@
                                         <div class="barra">
                                             <div class="preencher barra-verde" style="width: 25%;"></div>
                                         </div>
-                                        <img src="./assets/imgs/painel/ram-cinza.png" alt=""><span
-                                            class="pct">40%</span>
+                                        <img src=./assets/imgs/painel/ram-cinza.png" alt=""><span class="pct">40%</span>
                                         <div class="barra">
                                             <div class="preencher barra-verde" style="width: 40%;"></div>
                                         </div>
@@ -582,13 +500,45 @@
                                 <canvas id="graficoRecursos24h"></canvas>
                             </div>
                         </div>
+
                         <div class="card-grafico-processos">
                             <div class="card-detalhes-topo">
                                 <span>Análise preditiva do aumento de RAM</span>
                             </div>
-                            <!--grafico preditivo regressao linear-->
-                            <div class="grafico-processos">
-                                <canvas id="graficoProcessos"></canvas>
+
+                            <div class="container">
+
+                                <div class="topbar">
+                                    <h1>Predição de Uso de RAM</h1>
+
+                                    <select id="periodSelect">
+                                        <option value="24h">Últimas 24 Horas</option>
+                                        <option value="7d">Última Semana</option>
+                                        <option value="30d">Último Mês</option>
+                                    </select>
+                                </div>
+
+                                <div class="chart-box">
+                                    <canvas id="graficoRam"></canvas>
+                                </div>
+
+                                <div class="info">
+                                    <div class="card">
+                                        <h3>Média RAM</h3>
+                                        <p id="mediaRam">0%</p>
+                                    </div>
+
+                                    <div class="card">
+                                        <h3>Pico RAM</h3>
+                                        <p id="maxRam">0%</p>
+                                    </div>
+
+                                    <div class="card">
+                                        <h3>Tendência</h3>
+                                        <p id="tendenciaRam">-</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -596,27 +546,69 @@
                     <div class="linha">
                         <div class="card-grafico-processos">
                             <div class="card-detalhes-topo">
-                                <span>quantidade de chamados criticos e alertas</span>
+                                <span>Quantidade de chamados de cada componente</span>
                             </div>
-                            <!--Mudar para grafico de pizza vermelho critico e amarelo alerta-->
-                            <div class="grafico-rede">
-                                <canvas id="graficoRede"></canvas>
+                            <div class="graficoQtdChamados">
+                                <canvas id="graficoQtdChamados"></canvas>
                             </div>
                         </div>
-                        <!--mudar para grafico de saude da maquina-->
                         <div class="card-processos">
-                            <span class="titulo-tabela">Analise de saude do servidor</span>
-                            <!--grafico de analise de saude da maquina-->
-                            <div class="grafico-rede">
-                                <canvas id="graficoRede"></canvas>
+                            <div class="card-processos-topo">
+                                <span class="titulo-tabela">Monitor de Saúde do Servidor</span>
+                                <div id="badgeSaude" class="badge-saude">Calculando...</div>
+                            </div>
+                            <div class="container2">
+                                <div class="dashboard">
+                                    <div class="card">
+                                        <canvas id="healthChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: flex-end; padding: 10px 20px 14px;">
+                                <button class="btn-detalhes-saude"
+                                    onclick="document.getElementById('modalSaude').classList.add('ativo')">
+                                    Detalhes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Modal de Detalhes de Saúde -->
+                        <div class="modal-saude-overlay" id="modalSaude">
+                            <div class="modal-saude">
+                                <div class="modal-saude-header">
+                                    <span>Indicadores de Saúde</span>
+                                    <button
+                                        onclick="document.getElementById('modalSaude').classList.remove('ativo')">&times;</button>
+                                </div>
+                                <div class="modal-saude-body">
+                                    <div class="metric">
+                                        <h3>CPU</h3>
+                                        <p id="cpuValue">0%</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h3>RAM</h3>
+                                        <p id="ramValue">0%</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h3>SWAP</h3>
+                                        <p id="swapValue">0%</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h3>DISCO</h3>
+                                        <p id="diskValue">0%</p>
+                                    </div>
+                                </div>
+                                <div id="serverStatus" class="status" style="margin: 0 20px 20px;">
+                                    Calculando...
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
+    </div>
 
-        </main>
+    </main>
     </div>
 
     <script>
@@ -734,8 +726,516 @@
                 }
             });
         });
-    </script>
 
+        new Chart(document.getElementById('graficoQtdChamados'), {
+            type: 'pie',
+
+            data: {
+                labels: [
+                    'Chamados CPU',
+                    'Chamados Ram',
+                    'Chamados Disco'
+                ],
+
+                datasets: [{
+                    data: [18, 42, 29],
+                    backgroundColor: [
+                        '#1B264F',
+                        '#274690',
+                        '#576CA8'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+
+            options: {
+                responsive: true,
+
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+
+                        labels: {
+                            font: {
+                                size: 16
+                            },
+
+                            padding: 20
+                        }
+                    },
+
+                    tooltip: {
+                        bodyFont: {
+                            size: 15
+                        },
+
+                        titleFont: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+
+        /*Essa parte de baixo vai ser especifica para o grafico de regressao linear com linha de tendencia da ram*/
+        /*Fins de organização de codigo para facilitar o dinamismo posteriormente*/
+
+        var chart;
+
+        function gerarDados(type) {
+
+            var labels = [];
+            var data = [];
+
+            if (type == '24h') {
+
+                // Intervalo de 6h
+                for (var i = 24; i >= 0; i -= 6) {
+
+                    labels.push(`${i}h atrás`);
+
+                    data.push(
+                        Math.floor(
+                            35 + Math.random() * 40
+                        )
+                    );
+                }
+
+                labels.reverse();
+                data.reverse();
+            }
+
+            if (type == '7d') {
+
+                const dias = [
+                    'Seg',
+                    'Ter',
+                    'Qua',
+                    'Qui',
+                    'Sex',
+                    'Sab',
+                    'Dom'
+                ];
+
+                labels = dias;
+
+                data = dias.map(() =>
+                    Math.floor(45 + Math.random() * 35)
+                );
+            }
+
+            if (type == '30d') {
+
+                for (var i = 1; i <= 30; i++) {
+
+                    labels.push(`Dia ${i}`);
+
+                    data.push(
+                        Math.floor(
+                            40 + Math.random() * 45
+                        )
+                    );
+                }
+            }
+
+            return { labels, data };
+        }
+
+
+        function linearRegression(y) {
+
+            const x = y.map((_, i) => i);
+
+            const n = y.length;
+
+            const sumX = x.reduce((a, b) => a + b, 0);
+            const sumY = y.reduce((a, b) => a + b, 0);
+
+            const sumXY = x.reduce((total, val, i) => {
+                return total + val * y[i];
+            }, 0);
+
+            const sumXX = x.reduce((total, val) => {
+                return total + val * val;
+            }, 0);
+
+            const slope =
+                (n * sumXY - sumX * sumY) /
+                (n * sumXX - sumX * sumX);
+
+            const intercept =
+                (sumY - slope * sumX) / n;
+
+            const trendLine = x.map(v =>
+                slope * v + intercept
+            );
+
+            return {
+                trendLine,
+                slope
+            };
+        }
+
+        function updateCards(data, slope) {
+
+            const avg =
+                (
+                    data.reduce((a, b) => a + b, 0) /
+                    data.length
+                ).toFixed(1);
+
+            const max = Math.max(...data);
+
+            document.getElementById('mediaRam').innerText =
+                avg + '%';
+
+            document.getElementById('maxRam').innerText =
+                max + '%';
+
+            var trend = 'Estável';
+
+            if (slope > 0.5) {
+                trend = 'Subindo';
+            }
+
+            if (slope < -0.5) {
+                trend = 'Caindo';
+            }
+
+            document.getElementById('tendenciaRam').innerText =
+                trend;
+        }
+
+        function renderChart(type) {
+
+            const gerar = gerarDados(type);
+
+            const labels = gerar.labels;
+            const ramDados = gerar.data;
+
+            const regression =
+                linearRegression(ramDados);
+
+            const trendLine =
+                regression.trendLine;
+
+            updateCards(ramDados, regression.slope);
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(
+                document.getElementById('graficoRam'),
+                {
+                    type: 'line',
+
+                    data: {
+                        labels,
+
+                        datasets: [
+                            {
+                                label: 'Uso de RAM (%)',
+                                data: ramDados,
+                                borderWidth: 3,
+                                tension: 0.35,
+                                pointRadius: 5,
+                                fill: false
+                            },
+
+                            {
+                                label: 'Linha de Tendência',
+                                data: trendLine,
+                                borderDash: [8, 5],
+                                borderWidth: 3,
+                                pointRadius: 0,
+                                tension: 0
+                            }
+                        ]
+                    },
+
+                    options: {
+
+                        responsive: true,
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                labels: {
+                                    color: 'white'
+                                }
+                            },
+
+                            title: {
+                                display: true,
+                                text: 'Análise Preditiva de Consumo de RAM',
+                                color: 'white',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        },
+
+                        scales: {
+
+                            x: {
+                                ticks: {
+                                    color: '#cbd5e1'
+                                },
+
+                                grid: {
+                                    color: 'rgba(255,255,255,0.06)'
+                                }
+                            },
+
+                            y: {
+
+                                min: 0,
+                                max: 100,
+
+                                ticks: {
+                                    color: '#cbd5e1',
+                                    callback: (value) => value + '%'
+                                },
+
+                                grid: {
+                                    color: 'rgba(255,255,255,0.06)'
+                                }
+                            }
+                        }
+                    }
+                }
+            );
+        }
+
+        renderChart('24h');
+
+        document
+            .getElementById('periodSelect')
+            .addEventListener('change', (e) => {
+
+                renderChart(e.target.value);
+
+            });
+        /*Fim*/
+
+
+        /*Grafico de saude do servidor começa aqui*/
+
+
+        function generateServerMetrics() {
+
+            return {
+
+                cpu:
+                    Math.floor(40 + Math.random() * 45),
+
+                ram:
+                    Math.floor(45 + Math.random() * 40),
+
+                disk:
+                    Math.floor(30 + Math.random() * 50),
+
+                swap:
+                    Math.floor(10 + Math.random() * 50)
+
+            };
+
+        }
+
+        function calculateHealth(metrics) {
+
+            const health =
+                100 - (
+
+                    metrics.cpu * 0.35 +
+                    metrics.ram * 0.30 +
+                    metrics.disk * 0.20 +
+                    metrics.swap * 0.15
+
+                );
+
+            return Math.max(0, health.toFixed(1));
+
+        }
+
+        const labels = [];
+        const healthData = [];
+
+        for (let i = 12; i >= 0; i--) {
+
+            const metrics =
+                generateServerMetrics();
+
+            const health =
+                calculateHealth(metrics);
+
+            labels.push(`${i}h atrás`);
+
+            healthData.push(health);
+
+        }
+
+
+        const currentMetrics =
+            generateServerMetrics();
+
+        const currentHealth =
+            calculateHealth(currentMetrics);
+
+        // Atualiza cards
+        document.getElementById('cpuValue')
+            .innerText = currentMetrics.cpu + '%';
+
+        document.getElementById('ramValue')
+            .innerText = currentMetrics.ram + '%';
+
+        document.getElementById('diskValue')
+            .innerText = currentMetrics.disk + '%';
+
+        document.getElementById('swapValue')
+            .innerText = currentMetrics.swap + '%';
+
+
+        const statusBox = document.getElementById('serverStatus');
+        const badgeSaude = document.getElementById('badgeSaude');
+
+        if (currentHealth >= 70) {
+            statusBox.classList.add('healthy');
+            statusBox.innerText = `Servidor Saudável (${currentHealth}%)`;
+            badgeSaude.innerText = 'Saudável';
+            badgeSaude.style.cssText = 'background:#dcfce7; color:#15803d; border:1px solid #86efac; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;';
+        } else if (currentHealth >= 45) {
+            statusBox.classList.add('warning');
+            statusBox.innerText = `Servidor em Atenção (${currentHealth}%)`;
+            badgeSaude.innerText = 'Atenção';
+            badgeSaude.style.cssText = 'background:#fef9c3; color:#a16207; border:1px solid #fde047; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;';
+        } else {
+            statusBox.classList.add('critical');
+            statusBox.innerText = `Servidor Crítico (${currentHealth}%)`;
+            badgeSaude.innerText = 'Crítico';
+            badgeSaude.style.cssText = 'background:#fee2e2; color:#b91c1c; border:1px solid #fca5a5; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;';
+        }
+        new Chart(
+            document.getElementById('healthChart'),
+            {
+
+                type: 'line',
+
+                data: {
+
+                    labels,
+
+                    datasets: [
+
+                        {
+
+                            label: 'Saúde do Servidor (%)',
+
+                            data: healthData,
+
+                            borderWidth: 4,
+
+                            tension: 0.35,
+
+                            pointRadius: 4,
+
+                            fill: true
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            labels: {
+
+                                color: 'white'
+
+                            }
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text: 'Histórico de Saúde do Servidor',
+
+                            color: 'white',
+
+                            font: {
+
+                                size: 20
+
+                            }
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            ticks: {
+
+                                color: '#cbd5e1'
+
+                            },
+
+                            grid: {
+
+                                color: 'rgba(255,255,255,0.05)'
+
+                            }
+
+                        },
+
+                        y: {
+
+                            min: 0,
+
+                            max: 100,
+
+                            ticks: {
+
+                                color: '#cbd5e1',
+
+                                callback: (value) => value + '%'
+
+                            },
+
+                            grid: {
+
+                                color: 'rgba(255,255,255,0.05)'
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        );
+
+
+        /*termina aqui*/
+    </script>
 </body>
 
 </html>
