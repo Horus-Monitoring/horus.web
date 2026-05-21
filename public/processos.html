@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processos | Horus </title>
+    <title> Processos | Horus </title>
     <link rel="icon" href="./assets/icon/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -569,6 +569,7 @@
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
                     graficoTop5.options.scales.x.max = 100;
                     graficoTop5.options.scales.x.min = 0;
+                    graficoTop5.data.labels = [dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]];
 
                     graficoTop5.update();
 
@@ -583,8 +584,9 @@
                     graficoTop5.data.datasets[0].data = dadosGrafico.ram;
                     graficoTop5.data.datasets[0].label = 'RAM %';
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
-                    graficoTop5.options.scales.x.max = 14;
+                    graficoTop5.options.scales.x.max = 50;
                     graficoTop5.options.scales.x.min = 0;
+                    graficoTop5.data.labels = [dados["nome_ram1"], dados["nome_ram2"], dados["nome_ram3"], dados["nome_ram4"], dados["nome_ram5"]];
 
                     graficoTop5.update();
 
