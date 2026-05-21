@@ -38,21 +38,6 @@
                 <a href="painel.html" class="item-menu">
                     <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
                 </a>
-                <a href="dash_analista.html" class="item-menu selecionado">
-                    <img src="./assets/imgs/painel/servidores-selecionado.png" alt="">Servidores
-                </a>
-                <a href="telaIncidente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
-                </a>
-                <a href="comunicacao.html" class="item-menu">
-                    <img src="./assets/imgs/painel/comunicacao.png" alt="">Comunicação
-                </a>
-                <a href="processos.html" class="item-menu">
-                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
-                </a>
-                <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt="">Temperatura
-                </a>
 
                 <div class="categoria adm" id="administracao">Administração</div>
                 <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
@@ -73,19 +58,55 @@
         <main class="main">
 
             <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
 
-                <span class="header-titulo">Servidores</span>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
 
-                <div class="usuario">
-                    <div>
-                        <p id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong id="nomeServidor"></strong> /
+                                <span class="renomear">Dashboard</span>
+                            </span>
+
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span class="status-dot verde"></span>
+
+                                    <select id="select_servidor">
+                                    </select>
+                                </div>
+
+                                <div class="alertas">
+                                    <img src="assets/imgs/rede/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <span id="inicial_usuario"></span>
+
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
+                    </div>
                 </div>
+
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="painel.html" class="ativo">Resumo</a>
+                        <a href="processos.html">Processos</a>
+                        <a href="dash_rede.html">Comunicação e rede</a>
+                        <a href="dash_temperaturas">Temperatura</a>
+                        <a href="dash_incidentes">Incidentes</a>
+                    </nav>
+                </div>
+
             </header>
 
             <section class="conteudo" id="conteudo">
