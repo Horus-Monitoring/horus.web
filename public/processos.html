@@ -389,6 +389,7 @@
                     
                 const resposta = await fetch("/processos/capturarDados");
                 dados = await resposta.json();
+                console.log(dados);
 
                 document.getElementById("qtdProcessosCriticos").innerHTML =
                     dados.totalCriticos;
