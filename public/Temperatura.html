@@ -47,31 +47,6 @@
                     Dashboard
                 </a>
 
-                <a href="dash_analista.html" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">
-                    Servidores
-                </a>
-
-                <a href="telaIncidente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">
-                    Incidentes
-                </a>
-
-                <a href="comunicacao.html" class="item-menu">
-                    <img src="./assets/imgs/painel/comunicacao.png" alt="">
-                    Comunicação
-                </a>
-
-                <a href="processos.html" class="item-menu">
-                    <img src="./assets/imgs/painel/processos.png" alt="">
-                    Processos
-                </a>
-
-                <a href="temperatura.html" class="item-menu selecionado">
-                    <img src="./assets/imgs/painel/temperatura.png" alt="">
-                    Temperatura
-                </a>
-
                 <div class="categoria adm">Administração</div>
 
                 <a href="dash_usuarios.html" class="item-menu adm">
@@ -101,23 +76,53 @@
 
             <header class="header">
 
-                <div class="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="">
-                </div>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
 
-                <span class="header-titulo">
-                    Temperatura
-                </span>
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong id="nomeServidor"></strong> /
+                                <span class="renomear">Temperatura</span>
+                            </span>
 
-                <div class="usuario">
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span id="status-dot" class="status-dot verde"></span>
 
-                    <div>
-                        <p>Fernando Brandão</p>
-                        <p class="cargo">Administrador</p>
+                                    <select id="select_servidor" onchange="selecionar()">
+                                        <option value="#" selected>Todos</option>
+                                    </select>
+                                </div>
+
+                                <!-- <div class="alertas">
+                                    <img src="assets/imgs/incidentes/alerta-lar.png" alt=""
+                                        style="height: 12px !important; width: 12px !important;"> 3 alertas
+                                </div> -->
+                            </div>
+                        </div>
                     </div>
 
-                    <span>FB</span>
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
+                    </div>
+                </div>
 
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="dash_analista.html">Resumo</a>
+                        <a href="processos.html">Processos</a>
+                        <a href="dash_rede.html">Comunicação e rede</a>
+                        <a href="Temperatura.html"class="ativo">Temperatura</a>
+                        <a href="dash_incidentes.html">Incidentes</a>
+                    </nav>
                 </div>
 
             </header>
@@ -127,63 +132,6 @@
             <section class="conteudo">
 
                 <!-- TOPO -->
-
-                <div class="padrao-serv">
-
-                    <div class="servidores">
-
-                        <div class="detalhes-servidores">
-
-                            <div class="info-servidores nome">
-
-                                <div style="padding-right: 10px;">
-                                    <img src="assets/imgs/painel/servidores_cabecario.png">
-                                </div>
-
-                                <div>
-                                    <span>SRV-TEMP-SP-01</span>
-                                    <p>São Paulo, SP</p>
-                                </div>
-
-                            </div>
-
-                            <div class="info-servidores ip">
-                                <p>IP do Servidor</p>
-                                <span>192.168.1.100</span>
-                            </div>
-
-                            <div class="info-servidores att">
-                                <p>Última atualização</p>
-                                <span>07/05/2026 às 22:41</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="selecionar-servidores">
-
-                        <p>Selecione o servidor:</p>
-
-                        <select>
-
-                            <option>
-                                SRV-TEMP-SP-01
-                            </option>
-
-                            <option>
-                                SRV-TEMP-RJ-01
-                            </option>
-
-                            <option>
-                                SRV-TEMP-MG-01
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
 
                 <!-- CARDS -->
 
