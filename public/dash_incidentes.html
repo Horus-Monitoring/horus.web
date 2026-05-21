@@ -84,24 +84,8 @@
                         <div class="header-servidor">
                             <span class="breadcrumb">
                                 Servidores /
-                                <strong id="nomeServidor"></strong> /
                                 <span class="renomear">Incidentes</span>
                             </span>
-
-                            <div class="status-servidor">
-                                <div class="select-status">
-                                    <span id="status-dot" class="status-dot verde"></span>
-
-                                    <select id="select_servidor" onchange="selecionar()">
-                                        <option value="#" selected>Todos</option>
-                                    </select>
-                                </div>
-
-                                <!-- <div class="alertas">
-                                    <img src="assets/imgs/incidentes/alerta-lar.png" alt=""
-                                        style="height: 12px !important; width: 12px !important;"> 3 alertas
-                                </div> -->
-                            </div>
                         </div>
                     </div>
 
@@ -234,96 +218,70 @@
                 </div>
 
                 <div class="corpo-dashboard" id="corpo-dashboard-todos">
-                    <div class="corpo-esquerda" id="corpo-esquerda">
-                        <div class="painel-saude card">
-                            <div class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Painel de Saúde de Servidores</h1>
-                            </div>
+                    <div class="painel-saude card">
+                        <div class="titulo">
+                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                            <h1>Painel de Saúde de Servidores</h1>
+                        </div>
 
-                            <div id="lista_servidores" class="lista-servidores">
+                        <div id="lista_servidores" class="lista-servidores">
 
-                            </div>
+                        </div>
 
-                            <div class="opcao-ocultar-servidores">
-                                <input id="checkbox-servidores" type="checkbox" onchange="mostrarPainelSaude()">
-                                <span>Ocultar servidores estáveis</span>
-                            </div>
+                        <div class="opcao-ocultar-servidores">
+                            <input id="checkbox-servidores" type="checkbox" onchange="mostrarPainelSaude()">
+                            <span>Ocultar servidores estáveis</span>
                         </div>
                     </div>
 
-                    <div class="corpo-direita" id="corpo-direita">
-                        <!-- <div class="painel-saude card">
-                            <div class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Principais causas de Incidentes</h1>
 
-                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
-                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                    <select name="" id="tempo">
-                                        <option value="30s">Últimas 24 horas</option>
-                                        <option value="1min">Última Semana</option>
-                                        <option value="5min">Último Mês</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="podio">
-                                <div class="posicoes">
-                                    <img src="./assets/imgs/incidentes/podium-um.png" alt="">
-                                    <span>Vazamento de Memória</span>
-
-                                    <div style="color: #FFCC00; border: 3px solid #FFCC00; background-color: #FAFCA5;"
-                                        class="posicao-representante">
-                                        Representam 20% de 20 incidentes
-                                    </div>
-                                </div>
-
-                                <div class="posicoes">
-                                    <img src="./assets/imgs/incidentes/podium-dois.png" alt="">
-                                    <span>Sobrecarga de Processamento</span>
-
-                                    <div style="color: #FFCC00; border: 3px solid #FFCC00; background-color: #FAFCA5;"
-                                        class="posicao-representante">
-                                        Representam 15% de 20 incidentes
-                                    </div>
-                                </div>
-
-                                <div class="posicoes">
-                                    <img src="./assets/imgs/incidentes/podium-tres.png" alt="">
-                                    <span>IOWAIT Elevado</span>
-
-                                    <div style="color: #20A200; border: 3px solid #20A200; background-color: #BFFBB0;"
-                                        class="posicao-representante">
-                                        Representam 5% de 20 incidentes
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <div class="painel-saude card">
-                            <div style="margin-bottom: 0px;" class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Horários críticos de falhas</h1>
-                            </div>
-                            <div id="heatmapFalhas"></div>
-
-                            <div class="legenda-heatmap">
-
-                                <span>Baixa</span>
-
-                                <div class="cores-legenda">
-                                    <div class="cor"></div>
-                                    <div style="background-color: #F3F4F6;" class="cor"></div>
-                                    <div style="background-color: #B9F8CF;" class="cor"></div>
-                                    <div style="background-color: #FFDF20;" class="cor"></div>
-                                    <div style="background-color: #FF8904;" class="cor"></div>
-                                    <div style="background-color: #FB2C36;" class="cor"></div>
-                                </div>
-
-                                <span>Alta</span>
-
-                            </div>
+                    <div class="painel-saude card">
+                        <div style="margin-bottom: 0px;" class="titulo">
+                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                            <h1>Horários críticos de falhas</h1>
                         </div>
+                        <div id="heatmapFalhas"></div>
+
+                        <div class="legenda-heatmap">
+
+                            <span>Baixa</span>
+
+                            <div class="cores-legenda">
+                                <div class="cor"></div>
+                                <div style="background-color: #F3F4F6;" class="cor"></div>
+                                <div style="background-color: #B9F8CF;" class="cor"></div>
+                                <div style="background-color: #FFDF20;" class="cor"></div>
+                                <div style="background-color: #FF8904;" class="cor"></div>
+                                <div style="background-color: #FB2C36;" class="cor"></div>
+                            </div>
+
+                            <span>Alta</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-servidor card">
+
+                    <div style="display: flex; flex-direction: row; gap: 10px; padding: 20px 25px;">
+                        <h3>Selecione um servidor para ver seus alertas:</h3>
+
+                        <div class="select-status">
+                            <span id="status-dot" class="status-dot verde"></span>
+
+                            <select id="select_servidor" onchange="selecionar()">
+                                <option value="#" selected>selecione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <a href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20created%20DESC">
+                            <img height="20px" src="./assets/imgs/incidentes/jira.png" alt="">
+                        </a>
+                        <a href="https://app.slack.com/client/T0AQZ02KUJE/C0AQWUMQJBG?teamClassificationType=work">
+                            <img height="40px" src="./assets/imgs/incidentes/slack.png" alt="">
+                        </a>
                     </div>
                 </div>
 
@@ -451,6 +409,7 @@
         let severidadeAtiva = "Todos";
         let statusAtivo = "Todos";
         let servidoresPermitidos = [];
+        let graficoHeatmap = null;
 
         const prioridades = {
 
@@ -614,107 +573,6 @@
     });
 
 
-    const options = {
-        chart: {
-            type: 'heatmap',
-            height: 350,
-            toolbar: {
-                show: false
-            }
-        }, legend: {
-            show: false
-        },
-
-        series: [
-            {
-                name: 'Sáb',
-                data: [1, 0, 2, 3, 5, 2]
-            },
-            {
-                name: 'Sex',
-                data: [0, 1, 3, 6, 4, 1]
-            },
-            {
-                name: 'Qui',
-                data: [1, 2, 4, 7, 5, 2]
-            },
-            {
-                name: 'Qua',
-                data: [0, 1, 5, 8, 6, 1]
-            },
-            {
-                name: 'Ter',
-                data: [1, 2, 4, 7, 5, 2]
-            },
-            {
-                name: 'Seg',
-                data: [0, 1, 3, 5, 4, 1]
-            },
-            {
-                name: 'Dom',
-                data: [2, 1, 1, 2, 3, 3]
-            }
-        ],
-
-        xaxis: {
-            categories: ['00h', '04h', '08h', '12h', '16h', '20h']
-        },
-
-        dataLabels: {
-            enabled: true
-        },
-
-        colors: ['#B8F1C6'],
-
-        plotOptions: {
-            heatmap: {
-                radius: 4,
-
-                colorScale: {
-                    ranges: [
-                        {
-                            from: 0,
-                            to: 0,
-                            color: '#E9E9E9'
-                        },
-                        {
-                            from: 1,
-                            to: 2,
-                            color: '#B8F1C6'
-                        },
-                        {
-                            from: 3,
-                            to: 4,
-                            color: '#FFD633'
-                        },
-                        {
-                            from: 5,
-                            to: 6,
-                            color: '#FF8A00'
-                        },
-                        {
-                            from: 7,
-                            to: 10,
-                            color: '#FB2C36'
-                        }
-                    ]
-                }
-            }
-        },
-
-        stroke: {
-            width: 4,
-            colors: ['#FFFFFF']
-        }
-    };
-
-    const chart = new ApexCharts(
-        document.querySelector("#heatmapFalhas"),
-        options
-    );
-
-    chart.render();
-
     function listarServidores() {
         const fkEmpresa = sessionStorage.ID_EMPRESA;
         const idUsuario = sessionStorage.ID_USUARIO;
@@ -729,15 +587,9 @@
                 select_servidor.innerHTML += servidoresComAcesso.map(servidor =>
                     `<option value = "${servidor.hostname}">${servidor.hostname}</option>`
                 ).join('')
-                nomeServidor.textContent =
-                    select_servidor.options[select_servidor.selectedIndex].text;
-                carregarAlertas()
-            })
 
-        select_servidor.addEventListener("change", () => {
-            nomeServidor.textContent =
-                select_servidor.options[select_servidor.selectedIndex].text;
-        })
+                carregarAlertas()
+            });
 
         select_servidor.addEventListener("change", selecionar);
     }
@@ -1075,26 +927,100 @@
         mttr_baixa.innerText = obterMTTRPorSeveridade(alertasResolvidos, "Low");
     }
 
+    function plotarHeatmap() {
+        if (!dadosGlobaisAlertas || !dadosGlobaisAlertas.incidentes) return;
+        const alertas = dadosGlobaisAlertas.incidentes;
+
+        const diasSemana = ["Sáb", "Sex", "Qui", "Qua", "Ter", "Seg", "Dom"];
+
+        var seriesDinamica = diasSemana.map(dia => {
+            return {
+                name: dia,
+                data: [0, 0, 0, 0, 0, 0]
+            }
+        })
+
+        alertas.forEach(alerta => {
+            const dataCriacao = new Date(alerta.criadoEm);
+            const diaCriacao = dataCriacao.getDay();
+            const horaCriacao = dataCriacao.getHours();
+
+            // ajusta dias da semana com dias do mapa, domingo é 6 no diasSemana mas é 0 no gráfico
+            const mapaIndicesDias = { 6: 0, 5: 1, 4: 2, 3: 3, 2: 4, 1: 5, 0: 6 };
+            const indiceDia = mapaIndicesDias[diaCriacao];
+
+            // define de que bloco de 4 horas o alerta percente
+            const indiceBlocoHora = Math.floor(horaCriacao / 4);
+
+            // adiciona mais um incidente no indice dia (dom, seg) no bloco de quatro horas 
+            seriesDinamica[indiceDia].data[indiceBlocoHora]++;
+        });
+
+        const options = {
+            chart: {
+                type: 'heatmap',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            }, legend: {
+                show: false
+            },
+
+            series: seriesDinamica,
+
+            xaxis: {
+                categories: ['00h', '04h', '08h', '12h', '16h', '20h']
+            },
+
+            dataLabels: {
+                enabled: true
+            },
+
+            colors: ['#B8F1C6'],
+
+            plotOptions: {
+                heatmap: {
+                    radius: 4,
+
+                    colorScale: {
+                        ranges: [
+                            { from: 0, to: 0, color: '#E9E9E9' },
+                            { from: 1, to: 2, color: '#B8F1C6' },
+                            { from: 3, to: 4, color: '#FFD633' },
+                            { from: 5, to: 6, color: '#FF8A00' },
+                            { from: 7, to: 10, color: '#FB2C36' }
+                        ]
+                    }
+                }
+            },
+
+            stroke: {
+                width: 4,
+                colors: ['#FFFFFF']
+            }
+        };
+
+        graficoHeatmap = new ApexCharts(document.querySelector("#heatmapFalhas"), options);
+        graficoHeatmap.render();
+    }
+
+
 
     function selecionar() {
         select = document.getElementById("select_servidor");
-        if (select.value == "#") {
-            document.getElementById("corpo-dashboard-todos").style.display = "grid";
-            document.getElementById("corpo-dashboard-servidor").style.display = "none";
-            document.getElementById("kpis-todos").style.display = "grid";
-            document.getElementById("status-dot").style.display = "none";
 
-            mostrarKPITodos();
-            mostrarPainelSaude();
-        } else {
-            document.getElementById("corpo-dashboard-todos").style.display = "none";
+        if (select.value != "#") {
             document.getElementById("corpo-dashboard-servidor").style.display = "block";
-            document.getElementById("kpis-todos").style.display = "none";
-            document.getElementById("status-dot").style.display = "block";
-
             listarAlertas();
             mostrarKPIs();
+        } else {
+            document.getElementById("corpo-dashboard-servidor").style.display = "none";
+            mostrarKPITodos();
+            mostrarPainelSaude();
+            plotarHeatmap();
         }
+
     }
 
     // Quando o tempo mudar, apenas a KPI precisa recalcular

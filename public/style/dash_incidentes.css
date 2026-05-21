@@ -205,7 +205,7 @@ section{
   .status-servidor {
     width: 100%;
     overflow-x: auto;
-    padding-bottom: 2px;
+    padding: 50px 0;
   }
 
   .breadcrumb {
@@ -404,8 +404,11 @@ section{
   cursor: pointer;
 }
 
+#corpo-dashboard-todos{
+  display: grid !important;
+}
+
 .corpo-dashboard {
-  display: grid;
   gap: 50px;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 25px;
@@ -434,7 +437,7 @@ section{
   .opcao-ocultar-servidores {
     display: flex;
     gap: 4px;
-    margin-top: 25px;
+    margin-top: auto;
 
     input[type="checkbox"] {
       width: 15px;
@@ -762,9 +765,12 @@ section{
 }
 
 .status-servidor {
-  display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 14px;
+  padding: 0;
+  padding-right: 25px;
+  margin: 25px 0;
 }
 
 .select-status {
