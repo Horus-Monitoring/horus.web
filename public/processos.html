@@ -203,8 +203,14 @@
                             </div>
                             <div class="info-latencia">
                                 <span id="nome-proc" class="nome-proc">node</span>
-                                <span id="latencia-proc" class="latencia-proc">100ms</span>
-                                <span id="pid-proc" class="pid-proc">PID: 3456</span>
+                                <div>
+                                    <span id="latencia-proc" class="latencia-proc"></span>
+                                    <span class="latencia-proc">ms</span>
+                                </div>
+                                <div>
+                                    <span class="pid-proc">PID:</span>
+                                    <span id="pid-proc" class="pid-proc"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -392,9 +398,9 @@
                 console.log(dados);
 
                 document.getElementById("qtdProcessosCriticos").innerHTML =
-                    dados.totalCriticos;
+                    dados.total;
 
-                if (dados.totalCriticos > 1) {
+                if (dados.total > 1) {
                     document.getElementById("texto-processo").innerHTML = "processos afetados"
                 }
 
@@ -425,15 +431,15 @@
                 console.log(dados)
                 
             const dadosGrafico = {
-                    cpu: [dados["cpu-1"], dados["cpu-2"], dados["cpu-3"], dados["cpu-4"], dados["cpu-5"]],
-                    ram: [dados["ram-1"], dados["ram-2"], dados["ram-3"], dados["ram-4"], dados["ram-5"]]
+                    cpu: [dados["cpu_1"], dados["cpu_2"], dados["cpu_3"], dados["cpu_4"], dados["cpu_5"]],
+                    ram: [dados["ram_1"], dados["ram_2"], dados["ram_3"], dados["ram_4"], dados["ram_5"]]
                 };
 
                 const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
                     type: 'bar',
 
                     data: {
-                        labels: ["banana", "queijo", "euamoqueijo", "hahaha", "é"],
+                        labels: [dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],
                         /*[dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],*/
 
                         datasets: [{
@@ -559,10 +565,10 @@
                 btnCPU.addEventListener('click', () => {
 
                     graficoTop5.data.datasets[0].data = dadosGrafico.cpu;
-
                     graficoTop5.data.datasets[0].label = 'CPU %';
-
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
+                    graficoTop5.options.scales.x.max = 100;
+                    graficoTop5.options.scales.x.min = 0;
 
                     graficoTop5.update();
 
@@ -570,13 +576,15 @@
                     btnRAM.classList.remove('ativo');
                 });
 
+                //max_ram = Math.round(dados["ram_1"]);
+
                 btnRAM.addEventListener('click', () => {
 
                     graficoTop5.data.datasets[0].data = dadosGrafico.ram;
-
                     graficoTop5.data.datasets[0].label = 'RAM %';
-
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
+                    graficoTop5.options.scales.x.max = 14;
+                    graficoTop5.options.scales.x.min = 0;
 
                     graficoTop5.update();
 
