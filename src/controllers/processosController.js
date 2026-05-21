@@ -20,7 +20,7 @@ async function capturarDados(req, res) {
 
             // client -> id da empresa -> mac address -> processos.json 
             Key:
-                `client/kpis/raw_processos_kpis.json`
+                `client/dashboard_local.json`
         });
 
         //console.log(Key);
