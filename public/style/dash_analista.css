@@ -233,11 +233,29 @@ body {
   min-height: 100%;
 }
 
+/* ============================================================
+   AJUSTE 3 — NOME DO SERVIDOR STICKY NO TOPO
+   ============================================================ */
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: sticky;
+  top: 0;
+  background: var(--cinza);
+  z-index: 100;
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--borda);
+  margin-bottom: 4px;
+}
+
 .cards-detalhes {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: fit-content;
+  /* AJUSTE 1 — espaçamento horizontal entre cards cpu/ram/disco */
+  gap: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
   overflow-x: auto;
@@ -249,6 +267,7 @@ body {
   gap: 12px;
 }
 
+/* AJUSTE 1 — cards cpu/ram/disco um pouco menores e mais espaçados */
 .card-cpu,
 .card-ram,
 .card-disk,
@@ -257,14 +276,14 @@ body {
   flex-direction: column;
   justify-content: center;
   background-color: white;
-  gap: 12px;
-  padding: 14px;
+  gap: 10px;
+  padding: 12px 14px;        /* ligeiramente reduzido */
   border-radius: 5px;
-  max-width: 300px;
-  height: 130px;
+  max-width: 260px;           /* era 300px */
+  height: 120px;              /* era 130px */
   flex-shrink: 0;
   flex: 1;
-  min-width: 220px;
+  min-width: 200px;           /* era 220px */
 }
 
 .card-cpu {
@@ -444,6 +463,15 @@ body {
   background-color: var(--cinza);
   color: #576ca8;
   font-weight: bold;
+  /* AJUSTE 9 — hover dos botões Detalhes */
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* AJUSTE 9 — hover suave nos botões Detalhes */
+.info-servidor button:hover {
+  background-color: rgba(87, 112, 168, 0.25);
+  color: var(--azul);
 }
 
 .nome-servidor {
@@ -527,24 +555,27 @@ body {
   gap: 10px;
 }
 
+/* AJUSTE 4 — botão Voltar com altura mínima adequada */
 .fechar {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 8px 0;
+  padding: 10px 14px;         /* era padding: 8px 0 — corrigido */
   border-radius: 4px;
-  font-size: 19px;
+  font-size: 16px;             /* era 19px — melhor em notebooks */
   cursor: pointer;
   background-color: var(--ciano);
-  width: 110px;
+  min-width: 100px;            /* garante largura mínima */
+  min-height: 40px;            /* era sem min-height, achatava em notebooks */
+  width: auto;
   color: white;
-  transition: 0.2s;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .fechar:hover {
   background-color: var(--azul);
-  transition: 0.2s;
 }
 
 .local {
@@ -556,17 +587,14 @@ body {
   font-size: 14px;
 }
 
-.topo {
-  display: flex;
-  justify-content: space-between;
-}
-
+/* AJUSTE 2 — Status com mais espaço da borda direita */
 .status {
   display: flex;
   align-items: center;
   width: 200px;
   border-radius: 8px;
   font-size: 18px;
+  margin-right: 16px;          /* espaço extra da borda direita */
 }
 
 .status-rotulo {
@@ -600,24 +628,24 @@ body {
 
 .registro {
   color: black;
-  font-size: 42px;
+  font-size: 38px;             /* era 42px — levemente menor */
 }
 
 .card-cpu .negrito {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;             /* era 15px */
   color: #274690;
 }
 
 .card-ram .negrito {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
   color: #59168b;
 }
 
 .card-disk .negrito {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
   color: #0d542b;
 }
 
@@ -971,16 +999,18 @@ body {
   height: 100% !important;
 }
 
+/* AJUSTE 7 — novos indicadores de predição de RAM */
 .info {
   display: flex;
   gap: 8px;
-  width: 90%;
+  width: 100%;           /* era 90% */
   margin-top: -20px;
 }
 
 .info .card {
   flex: 1;
-  height: 40px;
+  height: auto;
+  min-height: 50px;
   border-radius: 10px;
   border: none;
   background: #fff;
@@ -988,25 +1018,49 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 8px;
+  padding: 10px 12px;
   transition: 0.2s;
   margin-top: 18px;
   overflow: hidden;
 }
 
-
-
 .info .card h3 {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--subtexto);
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .info .card p {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--texto);
+  line-height: 1.2;
+}
+
+/* Frase interpretativa abaixo do valor */
+.info .card .interpretacao {
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 3px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  line-height: 1.3;
+}
+
+.interpretacao-normal {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.interpretacao-atencao {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.interpretacao-critico {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 #graficoRam {
@@ -1045,6 +1099,7 @@ body {
   padding: 20px;
 }
 
+/* AJUSTE 8 — métricas de saúde maiores e mais vívidas */
 .metrics {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1069,7 +1124,8 @@ body {
   font-weight: bold;
 }
 
-.status {
+/* Status box no card de saúde — usado no modal */
+.status-saude {
   margin-top: 20px;
   padding: 18px;
   border-radius: 14px;
@@ -1159,6 +1215,7 @@ body {
     padding: 0 4px;
 }
 
+/* AJUSTE 8 — modal de saúde: métricas maiores e mais vívidas */
 .modal-saude-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1176,13 +1233,21 @@ body {
     color: #94a3b8;
     font-size: 13px;
     margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
+/* AJUSTE 8 — tamanho e cor do número no modal de saúde */
 .modal-saude-body .metric p {
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 30px;           /* era 26px */
+    font-weight: 800;          /* era bold */
     color: white;
 }
+
+/* classes para cor dinâmica dos valores no modal */
+.metric-valor-verde { color: #4ade80 !important; }
+.metric-valor-amarelo { color: #facc15 !important; }
+.metric-valor-vermelho { color: #f87171 !important; }
 
 
 .card-processos-topo {
@@ -1204,9 +1269,25 @@ body {
     letter-spacing: 0.03em;
 }
 
+/* ============================================================
+   AJUSTE 6 — Gráfico de chamados: canvas com altura explícita
+   ============================================================ */
+.graficoQtdChamados {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  min-height: 220px;
+}
+
+.graficoQtdChamados canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
 
 
-
+/* ============================================================
+   RESPONSIVIDADE — ajustes para notebooks e telas médias
+   ============================================================ */
 
 @media (max-width: 1549px) {
 
@@ -1214,13 +1295,38 @@ body {
   .card-ram,
   .card-disk,
   .card-info {
-    max-width: 270px;
+    max-width: 240px;          /* era 270px */
   }
 }
 
 @media (min-width: 1440px) {
   .modal-lateral {
     display: none !important;
+  }
+}
+
+/* AJUSTE 10 — notebook (1024px–1280px): botão Voltar e cards proporcionais */
+@media (max-width: 1280px) {
+  .fechar {
+    font-size: 14px;
+    padding: 8px 12px;
+    min-height: 38px;
+  }
+
+  .cards-detalhes {
+    gap: 14px;
+  }
+
+  .card-cpu,
+  .card-ram,
+  .card-disk,
+  .card-info {
+    min-width: 170px;
+    height: 115px;
+  }
+
+  .registro {
+    font-size: 32px;
   }
 }
 
@@ -1542,10 +1648,12 @@ body {
     border-radius: 0;
   }
 
+  /* AJUSTE 3 mobile — sticky topo */
   .topo {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+    padding: 8px 0 10px;
   }
 
   .local {
@@ -1553,8 +1661,10 @@ body {
     margin-top: 8px;
   }
 
+  /* AJUSTE 2 mobile — sem margin-right extra */
   .status {
     align-self: flex-start;
+    margin-right: 0;
   }
 
   .cards-detalhes {
@@ -1684,7 +1794,7 @@ body {
 
   .info .card {
     width: 100%;
-    min-height: 75px;
+    min-height: 60px;
     padding: 12px;
   }
 
@@ -1693,6 +1803,6 @@ body {
   }
 
   .info .card p {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
