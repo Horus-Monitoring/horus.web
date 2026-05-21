@@ -139,6 +139,25 @@
                             </div>
                             <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                         </div>
+                        <div>
+                            <div class="ativos-severidade especificacoes-metricas">
+                                <span>Crítica</span>
+                                <h2 id="ativos_critica"></h2>
+                            </div>
+                            <div class="ativos-severidade especificacoes-metricas">
+                                <span>Alta</span>
+                                <h2 id="ativos_alta"></h2>
+                            </div>
+                            <div class="ativos-severidade especificacoes-metricas">
+                                <span>Média</span>
+                                <h2 id="ativos_media"></h2>
+                            </div>
+
+                            <div class="ativos-severidade especificacoes-metricas">
+                                <span>Baixa</span>
+                                <h2 id="ativos_baixa"></h2>
+                            </div>
+                        </div>
                         <div class="tempo_dash">
                             <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
                             <select class="tempo" name="" id="tempo_total_alertas_todos">
@@ -178,17 +197,37 @@
                                     src="./assets/imgs/incidentes/tempo-reparo.png" alt="">
                                 <div class="informacoes-principais">
                                     <span>Tempo Médio para Reparo</span>
-                                    <h1>5 minutos</h1>
+                                    <h1 id="kpi_mttr">5 minutos</h1>
                                 </div>
                             </div>
                             <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                         </div>
+                        <div>
+                            <div class="mttr-severidade especificacoes-metricas">
+                                <span>Crítica</span>
+                                <h2 id="mttr_critica"></h2>
+                            </div>
+                            <div class="mttr-severidade especificacoes-metricas">
+                                <span>Alta</span>
+                                <h2 id="mttr_alta"></h2>
+                            </div>
+                            <div class="mttr-severidade especificacoes-metricas">
+                                <span>Média</span>
+                                <h2 id="mttr_media"></h2>
+                            </div>
+
+                            <div class="mttr-severidade especificacoes-metricas">
+                                <span>Baixa</span>
+                                <h2 id="mttr_baixa"></h2>
+                            </div>
+                        </div>
+
                         <div class="tempo_dash">
                             <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                            <select name="" id="tempo">
-                                <option value="30s">Últimas 24 horas</option>
-                                <option value="1min">Última Semana</option>
-                                <option value="5min">Último Mês</option>
+                            <select class="tempo" name="" id="tempo_mttr">
+                                <option value="1">Última hora</option>
+                                <option value="24">Últimas 24 horas</option>
+                                <option value="7">Última Semana</option>
                             </select>
                         </div>
                     </div>
@@ -211,29 +250,10 @@
                                 <span>Ocultar servidores estáveis</span>
                             </div>
                         </div>
-
-                        <div class="painel-saude card">
-                            <div class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Alertas por Severidade</h1>
-
-                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
-                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                    <select name="" id="tempo">
-                                        <option value="30s">Últimas 24 horas</option>
-                                        <option value="1min">Última Semana</option>
-                                        <option value="5min">Último Mês</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="grafico-container">
-                                <canvas id="graficoSeveridade"></canvas>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="corpo-direita" id="corpo-direita">
-                        <div class="painel-saude card">
+                        <!-- <div class="painel-saude card">
                             <div class="titulo">
                                 <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                                 <h1>Principais causas de Incidentes</h1>
@@ -278,7 +298,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="painel-saude card">
                             <div style="margin-bottom: 0px;" class="titulo">
@@ -338,17 +358,17 @@
                                         src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
                                     <div class="informacoes-principais">
                                         <span>Disponibilidade do Servidor</span>
-                                        <h1>100%</h1>
+                                        <h1 id="kpi_disponibilidade">100%</h1>
                                     </div>
                                 </div>
                                 <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                <select name="" id="tempo">
-                                    <option value="30s">Últimas 24 horas</option>
-                                    <option value="1min">Última Semana</option>
-                                    <option value="5min">Último Mês</option>
+                                <select class="tempo" name="" id="tempo_disponibilidade">
+                                    <option value="1">Última hora</option>
+                                    <option value="24">Últimas 24 horas</option>
+                                    <option value="7">Última Semana</option>
                                 </select>
                             </div>
                         </div>
@@ -875,22 +895,56 @@
         // se dadosGlobais não for definida, a função não continua
         if (!dadosGlobaisAlertas || !dadosGlobaisAlertas.incidentes) return;
 
+        const alertas = dadosGlobaisAlertas.incidentes;
         const filtroSelecionado = tempo_total_alertas.value;
         const servidorSelecionado = select_servidor.value;
 
         const agora = new Date();
         const limiteTempo = agora.getTime() - filtros_tempo[filtroSelecionado];
 
-        const incidentesFiltrados = dadosGlobaisAlertas.incidentes.filter(incidente => {
-            const dataCriacao = new Date(incidente.criadoEm).getTime();
+        const incidentesFiltrados = alertas.filter(alertas => {
+            const dataCriacao = new Date(alertas.criadoEm).getTime();
             const estaNoPeriodo = dataCriacao >= limiteTempo;
-            const estaAtivo = incidente.status !== "Concluído" && incidente.resolvidoEm === null;
-            const filtroServidor = incidente.servidor === servidorSelecionado;
+            const estaAtivo = alertas.status !== "Concluído" && alertas.resolvidoEm === null;
+            const filtroServidor = alertas.servidor === servidorSelecionado;
 
             return estaNoPeriodo && estaAtivo && filtroServidor;
         })
 
         kpi_valor_total_alertas.innerText = incidentesFiltrados.length;
+
+        // disponibilidade do servidor
+        const filtroTempoUptime = tempo_disponibilidade.value;
+        const tempoTotalPeriodoMs = filtros_tempo[filtroTempoUptime];
+        const limiteTempoUptime = agora.getTime() - tempoTotalPeriodoMs;
+
+        const paradasDoServidor = alertas.filter(alerta => {
+            const dataResolucao = alerta.resolvidoEm ? new Date(alerta.resolvidoEm).getTime() : null;
+            const ehDesteServidor = alerta.servidor === servidorSelecionado;
+
+            return ehDesteServidor && dataResolucao && dataResolucao >= limiteTempoUptime;
+        });
+
+        let tempoForaDoArMs = 0;
+
+
+        for (let i = 0; i < paradasDoServidor.length; i++) {
+            const inicio = new Date(paradasDoServidor[i].criadoEm).getTime();
+            const fim = new Date(paradasDoServidor[i].resolvidoEm).getTime();
+
+            const inicioReal = Math.max(inicio, limiteTempoUptime);
+
+            tempoForaDoArMs += (fim - inicioReal);
+        }
+
+        if (tempoForaDoArMs >= tempoTotalPeriodoMs) {
+            kpi_disponibilidade.innerText = "0.00%";
+        } else {
+            const tempoOnlineMs = tempoTotalPeriodoMs - tempoForaDoArMs;
+            const porcentagemUptime = (tempoOnlineMs / tempoTotalPeriodoMs) * 100;
+
+            kpi_disponibilidade.innerText = `${porcentagemUptime.toFixed(2)}%`;
+        }
     }
 
     function mostrarKPITodos() {
@@ -910,6 +964,15 @@
         })
 
         kpi_total_alertas_todos.innerText = alertasFiltrados.length;
+        function contarAtivosPorSeveridade(listaAlertas, nivelSeveridade) {
+            const filtrados = listaAlertas.filter(alerta => alerta.prioridade === nivelSeveridade);
+            return filtrados.length;
+        }
+
+        ativos_critica.innerText = contarAtivosPorSeveridade(alertasFiltrados, "Highest");
+        ativos_alta.innerText = contarAtivosPorSeveridade(alertasFiltrados, "High");
+        ativos_media.innerText = contarAtivosPorSeveridade(alertasFiltrados, "Medium");
+        ativos_baixa.innerText = contarAtivosPorSeveridade(alertasFiltrados, "Low");
 
 
         // servidor com mais alertas
@@ -947,75 +1010,71 @@
 
         kpi_mais_alertas.innerText = `${hostname_mais_alertas} (${qtd_mais_alertas})`;
 
-    }
+        // MTTR
+        const filtroTempoMTTR = tempo_mttr.value;
+        const limiteTempoMTTR = agora.getTime() - filtros_tempo[filtroTempoMTTR];
 
-    function plotarDadosAlertas() {
-        var criticos = dadosGlobaisAlertas.criticos;
-        var altos = dadosGlobaisAlertas.altos;
-        var medios = dadosGlobaisAlertas.medios;
-        var baixos = dadosGlobaisAlertas.baixos;
+        const alertasResolvidos = alertas.filter(alerta => {
+            const dataResolucao = alerta.resolvidoEm ? new Date(alerta.resolvidoEm).getTime() : null;
 
-        const ctx = document.getElementById('graficoSeveridade');
-
-        new Chart(ctx, {
-            type: 'bar',
-
-            data: {
-                labels: ['Baixa', 'Média', 'Alta', 'Crítica'],
-
-                datasets: [{
-                    label: 'Alertas',
-                    data: [baixos, medios, altos, criticos],
-
-                    backgroundColor: [
-                        '#7A88C7',
-                        '#FFD633',
-                        '#FFA133',
-                        '#D93B3B'
-                    ],
-
-                    borderRadius: {
-                        topLeft: 6,
-                        topRight: 6,
-                        bottomLeft: 0,
-                        bottomRight: 0
-                    },
-                    borderSkipped: false
-                }]
-            },
-
-            options: {
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true,
-
-                        grid: {
-                            display: false
-                        },
-
-                        ticks: {
-                            stepSize: 4
-                        }
-                    },
-
-                    x: {
-                        grid: {
-                            borderDash: [4, 4],
-                            color: '#D9D9D9'
-                        }
-                    }
-                }
-            }
+            return dataResolucao && dataResolucao >= limiteTempoMTTR;
         });
+
+        var somaTempoResolucaoMs = 0;
+
+        for (let i = 0; i < alertasResolvidos.length; i++) {
+            const inicio = new Date(alertasResolvidos[i].criadoEm).getTime();
+            const fim = new Date(alertasResolvidos[i].resolvidoEm).getTime();
+            somaTempoResolucaoMs += (fim - inicio);
+        }
+
+        const mttrMedioMs = alertasResolvidos.length > 0 ? (somaTempoResolucaoMs / alertasResolvidos.length) : 0;
+
+        if (mttrMedioMs === 0) {
+            kpi_mttr.innerText = "Sem dados";
+        } else {
+            const totalMinutos = Math.floor(mttrMedioMs / (1000 * 60));
+
+            if (totalMinutos < 60) {
+                kpi_mttr.innerText = `${totalMinutos}m`;
+            } else {
+                const horas = Math.floor(totalMinutos / 60);
+                const minutos = totalMinutos % 60;
+                kpi_mttr.innerText = `${horas}h ${minutos}m`;
+            }
+        }
+
+
+        function obterMTTRPorSeveridade(listaAlertas, nivelSeveridade) {
+            const filtrados = listaAlertas.filter(alerta => alerta.prioridade === nivelSeveridade);
+
+            if (filtrados.length === 0) return "Sem dados";
+
+            let somaMs = 0;
+            for (let i = 0; i < filtrados.length; i++) {
+                const inicio = new Date(filtrados[i].criadoEm).getTime();
+                const fim = new Date(filtrados[i].resolvidoEm).getTime();
+                somaMs += (fim - inicio);
+            }
+
+            const mediaMs = somaMs / filtrados.length;
+            const totalMinutos = Math.floor(mediaMs / (1000 * 60));
+
+            if (totalMinutos < 60) {
+                return `${totalMinutos}m`;
+            } else {
+                const horas = Math.floor(totalMinutos / 60);
+                const minutos = totalMinutos % 60;
+                return `${horas}h ${minutos}m`;
+            }
+        }
+
+        mttr_critica.innerText = obterMTTRPorSeveridade(alertasResolvidos, "Highest");
+        mttr_alta.innerText = obterMTTRPorSeveridade(alertasResolvidos, "High");
+        mttr_media.innerText = obterMTTRPorSeveridade(alertasResolvidos, "Medium");
+        mttr_baixa.innerText = obterMTTRPorSeveridade(alertasResolvidos, "Low");
     }
+
 
     function selecionar() {
         select = document.getElementById("select_servidor");
@@ -1027,7 +1086,6 @@
 
             mostrarKPITodos();
             mostrarPainelSaude();
-            plotarDadosAlertas();
         } else {
             document.getElementById("corpo-dashboard-todos").style.display = "none";
             document.getElementById("corpo-dashboard-servidor").style.display = "block";
@@ -1041,10 +1099,13 @@
 
     // Quando o tempo mudar, apenas a KPI precisa recalcular
     tempo_total_alertas.addEventListener("change", mostrarKPIs);
+    tempo_disponibilidade.addEventListener("change", mostrarKPIs);
+
     tempo_lista_alertas.addEventListener("change", listarAlertas);
 
     tempo_total_alertas_todos.addEventListener("change", mostrarKPITodos);
-    tempo_mais_alertas.addEventListener("change", mostrarKPITodos)
+    tempo_mais_alertas.addEventListener("change", mostrarKPITodos);
+    tempo_mttr.addEventListener("change", mostrarKPITodos);
 
     // Quando o servidor mudar, AMBOS precisam atualizar
     select_servidor.addEventListener("change", selecionar);
