@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processos | Horus </title>
+    <link rel="icon" href="./assets/icon/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/script.js"></script>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style/processos.css">
+    <link rel="stylesheet" href="style/padrao_dash.css">
+    
+</head>
+
+<body>
+
+    <div class="modal-lateral" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+                <a href="painel.html" class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
+                </a>
+
+                <div class="categoria adm" id="administracao">Administração </div>
+                    <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
+                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                    </a>
+                    <a href="servidor-componente.html" class="item-menu adm" id="cadastrarServidor">
+                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                    </a>
+                
+            </nav>
+
+            <div onclick="limparSessionStorage()" class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p onclick="window.location.href='index.html'">Sair</p>
+            </div>
+        </aside>
+
+        <main class="main">
+
+            <header class="header">
+
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
+
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong>SRV-WEB-01</strong> /
+                                <span class="renomear">Processos</span>
+                            </span>
+
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span class="status-dot verde"></span>
+
+                                    <select>
+                                        <option>SRV-WEB-01</option>
+                                        <option>SRV-DB-02</option>
+                                        <option>SRV-API-03</option>
+                                    </select>
+                                </div>
+
+                                <div class="alertas">
+                                    <img src="assets/imgs/processos/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
+                    </div>
+                </div>
+
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="#">Resumo</a>
+                        <a href="#" class="ativo">Processos</a>
+                        <a href="#">Comunicação e Rede</a>
+                        <a href="#">Temperatura</a>
+                        <a href="#">Logs</a>
+                    </nav>
+                </div>
+
+            </header>
+
+            <section class="conteudo" id="conteudo">
+                  
+                <div class="cards">
+
+                    <div class="card-critico pequeno">
+                        <div class="indicador">
+                            <div class="titulo">
+                                <div class="card-img" style="background-color: #FAAAAA;">
+                                    <img src="./assets/imgs/processos/alerta.png">
+                                </div>
+                                <div class="tipo-kpi">
+                                    <span class="nome-kpi">Processos Críticos</span>
+                                </div>
+                            </div>
+                            <div class="info-critico">
+                                <span id="qtdProcessosCriticos" style="color: #fd3434; font-weight: bold; font-size: 25px;">1</span>
+                                <span id="texto-processo" style="color: #5f5f5f; font-size: 15px;">processo afetado</span>
+                            </div>
+                            <div class="qtd-critico">
+                                <div style="color: #C70C0C; font-size: 15px; font-weight: bold; background-color: #FAAAAA;" class="info-alerta">
+                                    <span id="latenciaQtd">1</span>
+                                    <span>Latência</span>
+                                </div>
+                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                    <span id="cpuQtd">0</span>
+                                    <span>CPU</span>
+                                </div>
+                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                    <span id="ramQtd">0</span>
+                                    <span>RAM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="indicador">
+                            <div class="titulo">
+                                <div class="card-img" style="background-color: #e5edff;">
+                                    <img src="./assets/imgs/processos/info.png">
+                                </div>
+                                <div class="tipo-kpi">
+                                    <span class="nome-kpi">Status do Sistema</span>
+                                </div>
+                            </div>
+                            <div class="info-status">
+                                <div class="running">
+                                    <div class="status">
+                                        <div class="tipo-proc">
+                                            <img src="./assets/imgs/processos/bolinha-verde.png">
+                                            <span class="texto-status">Running</span>
+                                        </div>
+                                        <span id="qtdRunning" style="color: #20A200; font-weight: bold; font-size: 15px;">10</span>
+                                    </div>
+                                </div>
+                                <div class="sleeping">
+                                    <div class="status">
+                                        <div class="tipo-proc">
+                                            <img src="./assets/imgs/processos/lua.png">
+                                            <span class="texto-status">Sleeping</span>
+                                        </div>
+                                    <span id="qtdSleeping" style="color: #308CFF; font-weight: bold; font-size: 15px;">3</span>
+                                    </div>
+                                </div>
+                                <div class="stopped">
+                                    <div class="status">
+                                        <div class="tipo-proc">
+                                            <img src="./assets/imgs/processos/retangulo-amarelo.png">
+                                            <span class="texto-status">Stopped</span>
+                                        </div>
+                                        <span id="qtdStopped" style="color: #FFCC00; font-weight: bold; font-size: 15px;">2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card pequeno">
+                        <div class="indicador">        
+                            <div class="titulo">
+                                <div class="card-img" style="background-color: #FAAAAA;">
+                                    <img src="./assets/imgs/processos/raio.png">
+                                </div>
+                                <div class="tipo-kpi">
+                                    <span class="nome-kpi">Maior Latência</span>
+                                </div>
+                            </div>
+                            <div class="info-latencia">
+                                <span id="nome-proc" class="nome-proc">node</span>
+                                <span id="latencia-proc" class="latencia-proc">100ms</span>
+                                <span id="pid-proc" class="pid-proc">PID: 3456</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <section class="linha">
+                    <div class="card card-grafico">
+                        <div class="topo-grafico">
+                            <h3 class="tipo-grafico">
+                                Top 5 processos que mais estão consumindo recursos
+                            </h3>
+
+                            <div class="alternador">
+                                <button id="btnCPU" class="ativo">CPU</button>
+                                <button id="btnRAM">RAM</button>
+                            </div>
+                        </div>
+                        <div class="interface-grafico">
+                            <canvas id="grafico-top5"></canvas>
+                        </div>
+                    </div>
+                    <div class="card card-grafico">
+                        <div class="topo-grafico">
+                            <h3 class="tipo-grafico">
+                                Quantidade de Processos Críticos nas Últimas 24h
+                            </h3>
+                        </div>
+                        <div class="interface-grafico">
+                            <canvas id="processos-criticos"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="linha">
+                    <div class="card card-pesquisa">
+                        <div class="pesquisar">
+                            <img src="./assets/imgs/processos/lupa.png">
+                            <input type="text" id="procurar-processo" placeholder="Buscar por PID ou Nome...">
+                        </div>
+                        <div class="alternador-pesquisar">
+                            <button id="btnTodos" class="ativo">Todos</button>
+                            <button id="btnRunning">Running</button>
+                            <button id="btnSleeping">Sleeping</button>
+                            <button id="btnStopped">Stopped</button>
+                        </div>   
+                    </div>
+                </section>
+
+                <div class="tabela-container">
+                    <table class="tabela-processos">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Nome</th>
+                                <th>Usuário</th>
+                                <th>CPU</th>
+                                <th>RAM</th>
+                                <th>Latência</th>
+                                <th>Status</th>
+                                <th>Tempo de Execução</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="proc-cinza">3456</td>
+                                <td class="proc-cinza">node</td>
+                                <td class="proc-cinza">nodejs</td>
+                                <td><span class="proc-alerta">48.2%</span></td>
+                                <td><span class="proc-grave">19.7%</span></td>
+                                <td><span class="proc-grave">100ms</span></td>
+                                <td style="display: flex; justify-content: center;">
+                                    <div style="background-color: #b9f8cf;" class="cor-status">
+                                        <img style="width: 8px; height: 8px;" src="./assets/imgs/processos/bolinha-verde.png">
+                                        <span style="color: #20A200; font-weight: bold; font-size: 15px;">running</span>
+                                    </div>
+                                </td>
+                                <td><span class="proc-cinza">2d 4h</span></td>
+                            </tr>
+                            <tr>
+                                <td class="proc-cinza">1234</td>
+                                <td class="proc-cinza">docker</td>
+                                <td class="proc-cinza">root</td>
+                                <td><span class="proc-estavel">30.5%</span></td>
+                                <td><span class="proc-alerta">12.8%</span></td>
+                                <td><span class="proc-alerta">60ms</span></td>
+                                <td style="display: flex; justify-content: center;">
+                                    <div style="background-color: #9bcffa;" class="cor-status">
+                                        <img style="width: 8px; height: 8px;" src="./assets/imgs/processos/lua.png">
+                                        <span style="color: #308CFF; font-weight: bold; font-size: 15px;">sleeping</span>
+                                    </div>
+                                </td>
+                                <td><span class="proc-cinza">15h</span></td>    
+                            </tr>
+                            <tr>
+                                <td class="proc-cinza">7685</td>
+                                <td class="proc-cinza">chrome.exe</td>
+                                <td class="proc-cinza">leticia</td>
+                                <td><span class="proc-estavel">21.6%</span></td>
+                                <td><span class="proc-estavel">7.9%</span></td>
+                                <td><span class="proc-estavel">35ms</span></td>
+                                <td style="display: flex; justify-content: center;">
+                                    <div style="background-color: #f8eab2;" class="cor-status">
+                                        <img style="width: 8px; height: 8px;" src="./assets/imgs/processos/retangulo-amarelo.png">
+                                        <span style="color: #FFCC00; font-weight: bold; font-size: 15px;">stopped</span>
+                                    </div>
+                                </td>
+                                <td><span class="proc-cinza">40m</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+        </main>
+
+    </div>
+
+    <!-- <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script> -->
+
+    <script>
+
+        /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+
+                    if (funcao == "Gestor") {
+                        document.getElementById("administracao").style.display = "block";
+                        document.getElementById("gerarRelatorio").style.display = "block";
+                        document.getElementById("cadastrarServidor").style.display = "flex";
+                        document.getElementById("cadastrarUsuario").style.display = "flex";
+                    }
+        }*/
+
+        // exibirUsuarioAtivo();
+
+            //Modal para o menu sanduíche
+
+            const btnHamburguer = document.getElementById("hamburguer");
+            const lateral = document.getElementById("lateral");
+            const overlay = document.getElementById("overlay");
+
+            function abrirMenu() {
+                lateral.classList.add("ativo");
+                overlay.classList.add("ativo");
+            }
+
+            function fecharMenu() {
+                lateral.classList.remove("ativo");
+                overlay.classList.remove("ativo");
+            }
+
+            if (btnHamburguer) {
+                btnHamburguer.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    
+                    if (lateral.classList.contains("ativo")) {
+                        fecharMenu();
+                    } else {
+                        abrirMenu();
+                    }
+                });
+            }
+
+            overlay.addEventListener("click", fecharMenu);
+
+            document.addEventListener("click", function (e) {
+                if (
+                    lateral.classList.contains("ativo") &&
+                    !lateral.contains(e.target) &&
+                    !btnHamburguer.contains(e.target)
+                ) {
+                    fecharMenu();
+                }
+            });
+
+            let dados;
+
+            async function capturarDados() {
+
+                try{
+                    
+                const resposta = await fetch("/processos/capturarDados");
+                dados = await resposta.json();
+                console.log(dados);
+
+                document.getElementById("qtdProcessosCriticos").innerHTML =
+                    dados.totalCriticos;
+
+                if (dados.totalCriticos > 1) {
+                    document.getElementById("texto-processo").innerHTML = "processos afetados"
+                }
+
+                document.getElementById("latenciaQtd").innerHTML = dados.latencia;
+                document.getElementById("cpuQtd").innerHTML = dados.cpu;
+                document.getElementById("ramQtd").innerHTML = dados.ram;
+                document.getElementById("qtdRunning").innerHTML = dados.running;
+                document.getElementById("qtdSleeping").innerHTML = dados.sleeping;
+                document.getElementById("qtdStopped").innerHTML = dados.stopped;
+                document.getElementById("nome-proc").innerHTML = dados.nome;
+                document.getElementById("latencia-proc").innerHTML = dados.latencia_ms;
+                document.getElementById("pid-proc").innerHTML = dados.pid;
+
+                carregarDados();
+                    
+                
+                } catch (erro) {
+                    console.error("Erro ao carregar dashboards:", erro);
+                }
+
+                
+            }
+
+            capturarDados();
+
+            function carregarDados() {
+
+                console.log(dados)
+                
+            const dadosGrafico = {
+                    cpu: [dados["cpu-1"], dados["cpu-2"], dados["cpu-3"], dados["cpu-4"], dados["cpu-5"]],
+                    ram: [dados["ram-1"], dados["ram-2"], dados["ram-3"], dados["ram-4"], dados["ram-5"]]
+                };
+
+                const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
+                    type: 'bar',
+
+                    data: {
+                        labels: ["banana", "queijo", "euamoqueijo", "hahaha", "é"],
+                        /*[dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],*/
+
+                        datasets: [{
+                            label: 'CPU %',
+
+                            data: dadosGrafico.cpu,
+
+                            backgroundColor: 'rgba(139, 92, 246, 0.75)',
+
+                            borderRadius: 0,
+
+                            barThickness: 25
+                        }]
+                    },
+
+                    options: {
+
+                        indexAxis: 'y',
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        layout: {
+                            padding: {
+                                right: 35
+                            }
+                        },
+
+                        plugins: {
+
+                            legend: {
+                                position: 'bottom',
+
+                                labels: {
+                                    boxWidth: 14,
+                                    color: '#5f5f5f',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+
+                            tooltip: {
+                                backgroundColor: '#fff',
+                                titleColor: '#111',
+                                bodyColor: '#555',
+                                borderColor: '#ddd',
+                                borderWidth: 1
+                            }
+                        },
+
+                        scales: {
+
+                            x: {
+
+                                min: 0,
+                                max: 100,
+
+                                grid: {
+                                    color: '#dddddd',
+                                    borderDash: [5, 5]
+                                },
+
+                                ticks: {
+                                    color: '#5f5f5f'
+                                }
+                            },
+
+                            y: {
+
+                                grid: {
+                                    display: false
+                                },
+
+                                ticks: {
+                                    color: '#5f5f5f',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    plugins: [{
+                        id: 'valorNasBarras',
+
+                        afterDatasetsDraw(chart) {
+
+                            const { ctx } = chart;
+
+                            chart.data.datasets.forEach((dataset, i) => {
+
+                                const meta = chart.getDatasetMeta(i);
+
+                                meta.data.forEach((bar, index) => {
+
+                                    const valor = dataset.data[index];
+
+                                    ctx.fillStyle = '#5f5f5f';
+
+                                    ctx.font = window.innerWidth <= 768
+                                        ? '11px Inter'
+                                        : '14px Inter';
+
+                                    ctx.fillText(
+                                        valor,
+                                        window.innerWidth <= 768
+                                            ? bar.x + 4
+                                            : bar.x + 8,
+                                        bar.y + 5
+                                    );
+                                });
+                            });
+                        }
+                    }]
+                });
+
+                const btnCPU = document.getElementById('btnCPU');
+                const btnRAM = document.getElementById('btnRAM');
+
+                btnCPU.addEventListener('click', () => {
+
+                    graficoTop5.data.datasets[0].data = dadosGrafico.cpu;
+
+                    graficoTop5.data.datasets[0].label = 'CPU %';
+
+                    graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
+
+                    graficoTop5.update();
+
+                    btnCPU.classList.add('ativo');
+                    btnRAM.classList.remove('ativo');
+                });
+
+                btnRAM.addEventListener('click', () => {
+
+                    graficoTop5.data.datasets[0].data = dadosGrafico.ram;
+
+                    graficoTop5.data.datasets[0].label = 'RAM %';
+
+                    graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
+
+                    graficoTop5.update();
+
+                    btnRAM.classList.add('ativo');
+                    btnCPU.classList.remove('ativo');
+                });
+
+                const btnTodos = document.getElementById('btnTodos');
+                const btnRunning = document.getElementById('btnRunning');
+                const btnSleeping = document.getElementById('btnSleeping');
+                const btnStopped = document.getElementById('btnStopped');
+
+                btnTodos.addEventListener('click', () => {
+                    btnTodos.classList.add('ativo');
+                    btnRunning.classList.remove('ativo');
+                    btnSleeping.classList.remove('ativo');
+                    btnStopped.classList.remove('ativo');
+                });
+
+                btnRunning.addEventListener('click', () => {
+                    btnRunning.classList.add('ativo');
+                    btnTodos.classList.remove('ativo');
+                    btnSleeping.classList.remove('ativo');
+                    btnStopped.classList.remove('ativo');
+                });
+
+                btnSleeping.addEventListener('click', () => {
+                    btnSleeping.classList.add('ativo');
+                    btnTodos.classList.remove('ativo');
+                    btnRunning.classList.remove('ativo');
+                    btnStopped.classList.remove('ativo');
+                });
+
+                btnStopped.addEventListener('click', () => {
+                    btnStopped.classList.add('ativo');
+                    btnTodos.classList.remove('ativo');
+                    btnRunning.classList.remove('ativo');
+                    btnSleeping.classList.remove('ativo');
+                });
+
+
+        const ctx = document.getElementById('processos-criticos');
+        const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 500);
+
+        gradient.addColorStop(0, 'rgba(255, 0, 111, 0.35)');
+        gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');
+
+        new Chart(ctx, {
+        type: 'line',
+
+        data: {
+            labels: [
+            '00:00',
+            '04:00',
+            '08:00',
+            '12:00',
+            '16:00',
+            '20:00',
+            '00:00'
+            ],
+
+            datasets: [
+            {
+                label: 'Processos Críticos',
+
+                data: [100, 320, 650, 800, 320, 100, 180],
+
+                borderColor: '#c9023e',
+
+                backgroundColor: gradient,
+
+                fill: true,
+
+                tension: 0.4,
+
+                borderWidth: 2,
+
+                pointRadius: 2,
+
+                pointHoverRadius: 2,
+
+                pointBackgroundColor: '#ffffff',
+
+                pointBorderColor: '#c9023e',
+
+                pointBorderWidth: 3
+            },
+
+            {
+                label: 'Limite',
+
+                data: [500, 500, 500, 500, 500, 500, 500],
+
+                borderColor: '#ff3b30',
+
+                borderDash: [10, 10],
+
+                borderWidth: 2,
+
+                pointRadius: 0,
+
+                fill: false
+            }
+            ]
+        },
+
+        options: {
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+            legend: {
+                position: 'bottom',
+
+                labels: {
+                    usePointStyle: true,
+
+                    padding: 15,
+
+                    color: '#5f5f5f',
+
+                    font: {
+                        size: 14
+                    },
+
+                    generateLabels(chart) {
+
+                        const datasets = chart.data.datasets;
+
+                        return datasets.map((dataset, i) => {
+
+                            if (dataset.label === 'Limite') {
+
+                                return {
+                                    text: dataset.label,
+
+                                    strokeStyle: dataset.borderColor,
+
+                                    lineDash: dataset.borderDash,
+
+                                    lineWidth: 2,
+
+                                    pointStyle: 'line',
+
+                                    hidden: !chart.isDatasetVisible(i),
+
+                                    datasetIndex: i
+                                };
+                            }
+
+                            return {
+                                text: dataset.label,
+
+                                fillStyle: dataset.borderColor,
+
+                                strokeStyle: dataset.borderColor,
+
+                                pointStyle: 'rect',
+
+                                hidden: !chart.isDatasetVisible(i),
+
+                                datasetIndex: i
+                            };
+                        });
+                    }
+                }
+            },
+
+            tooltip: {
+                backgroundColor: '#2f2f2f',
+                padding: 12,
+
+                titleFont: {
+                size: 14
+                },
+
+                bodyFont: {
+                size: 14
+                }
+            }
+            },
+
+            scales: {
+            x: {
+                grid: {
+                color: '#e7e7e7',
+                borderDash: [5, 5]
+                },
+
+                ticks: {
+                color: '#555',
+
+                font: {
+                    size: 16
+                }
+                }
+            },
+
+            y: {
+                beginAtZero: true,
+
+                suggestedMax: 900,
+
+                grid: {
+                color: '#e7e7e7',
+                borderDash: [5, 5]
+                },
+
+                ticks: {
+                color: '#555',
+
+                stepSize: 160,
+
+                font: {
+                    size: 16
+                }
+                }
+            }
+            }
+        }
+        });
+
+            } 
+            
+
+    </script>
+
+</body>
+
+</html>
+
+
