@@ -7,11 +7,19 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 
 require("dotenv").config({ path: caminho_env });
 
+var AWS = require("@aws-sdk/client-s3");
+
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    sessionToken: process.env.AWS_SESSION_TOKEN,
+    region: process.env.AWS_REGION
+});
 
 var app = express();
 
@@ -21,6 +29,8 @@ var perfilRouter = require("./src/routes/perfil");
 var servidoresRouter = require("./src/routes/servidores");
 var processosRouter = require("./src/routes/processos");
 
+var redeRouter = require("./src/routes/rede");
+var relatorioRouter = require("./src/routes/relatorio")
 var faleConoscoRouter = require("./src/routes/faleConosco");
 
 app.use(express.json());
@@ -35,6 +45,8 @@ app.use("/perfil", perfilRouter);
 app.use("/faleConosco", faleConoscoRouter);
 app.use("/servidores", servidoresRouter);
 app.use("/processos", processosRouter);
+app.use("/rede", redeRouter);
+app.use("/relatorio", relatorioRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
