@@ -813,21 +813,30 @@
     // Gerar Relatório
 
     function gerarRelatorio() {
+      
+        const usuario = sessionStorage.NOME_USUARIO;
+        const email = sessionStorage.EMAIL_USUARIO;
+        const id_empresa = sessionStorage.ID_EMPRESA;
 
-        const servidor =
-            select_servidor.options[
-                select_servidor.selectedIndex
-            ].text;
 
-        const email =
-            sessionStorage.EMAIL_USUARIO;
+        const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
+        const mac_address = opcaoSelecionada.id; 
+        const servidor = opcaoSelecionada.text;
 
         window.open(
-            `/relatorio/${
-                encodeURIComponent(servidor)
+            `/relatorio
+            /${
+            encodeURIComponent(usuario)
             }/${
-                encodeURIComponent(email)
-            }`
+            encodeURIComponent(email)
+            }/${
+            encodeURIComponent(mac_address)
+            }/${
+            encodeURIComponent(servidor)
+            }/${
+            encodeURIComponent(id_empresa)    
+            }
+            `
         );
     }
 
@@ -847,7 +856,7 @@
                 select_servidor.innerHTML =
                     lista.map(servidor =>
 
-                        `<option value="${servidor.id_servidor}">
+                        `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
                             ${servidor.hostname}
                         </option>`
 
