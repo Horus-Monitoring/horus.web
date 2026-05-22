@@ -19,8 +19,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuario");
 var perfilRouter = require("./src/routes/perfil");
 var servidoresRouter = require("./src/routes/servidores");
-
 var faleConoscoRouter = require("./src/routes/faleConosco");
+var s3Router = require("./src/routes/s3");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +33,7 @@ app.use("/usuario", usuarioRouter);
 app.use("/perfil", perfilRouter);
 app.use("/faleConosco", faleConoscoRouter);
 app.use("/servidores", servidoresRouter);
+app.use("/s3", s3Router);
 
 app.listen(PORTA_APP, function () {
     console.log(`
