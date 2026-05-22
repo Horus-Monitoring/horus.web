@@ -31,7 +31,7 @@ async function capturarDados(req, res) {
 
     try {
 
-        const [kpis, processos] = await Promise.all([
+        const [kpis, processos, criticos] = await Promise.all([
 
             lerJson(
                 "client/kpis/process_raw_kpis.json"
@@ -39,7 +39,12 @@ async function capturarDados(req, res) {
 
             lerJson(
                 "client/processos/process_raw.json"
+            ),
+
+            lerJson(
+                "client/kpis/raw_criticos_4h.json"
             )
+
         ]);
 
         res.json({
