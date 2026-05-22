@@ -118,7 +118,7 @@
                   
                 <div class="cards">
 
-                    <div class="card-critico pequeno">
+                    <div id="critico" class="card pequeno">
                         <div class="indicador">
                             <div class="titulo">
                                 <div class="card-img" style="background-color: #FAAAAA;">
@@ -129,19 +129,19 @@
                                 </div>
                             </div>
                             <div class="info-critico">
-                                <span id="qtdProcessosCriticos" style="color: #fd3434; font-weight: bold; font-size: 25px;">1</span>
+                                <span id="qtdProcessosCriticos" style="color: #5f5f5f; font-weight: bold; font-size: 25px;">1</span>
                                 <span id="texto-processo" style="color: #5f5f5f; font-size: 15px;">processo afetado</span>
                             </div>
                             <div class="qtd-critico">
-                                <div style="color: #C70C0C; font-size: 15px; font-weight: bold; background-color: #FAAAAA;" class="info-alerta">
+                                <div id="latenciaQtdDiv" class="info-qtd">
                                     <span id="latenciaQtd">1</span>
                                     <span>Latência</span>
                                 </div>
-                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                <div id="cpuQtdDiv" class="info-qtd">
                                     <span id="cpuQtd">0</span>
                                     <span>CPU</span>
                                 </div>
-                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                <div id="ramQtdDiv" class="info-qtd">
                                     <span id="ramQtd">0</span>
                                     <span>RAM</span>
                                 </div>
@@ -395,13 +395,33 @@
                     
                 const resposta = await fetch("/processos/capturarDados");
                 dados = await resposta.json();
-            
+
+                if(dados.kpis.total > 0) {
+                    critico.classList.add('card-critico');
+                    document.getElementById("qtdProcessosCriticos")
+                    qtdProcessosCriticos.classList.add('vermelho-texto');     
+                }
 
                 document.getElementById("qtdProcessosCriticos").innerHTML =
                     dados.kpis.total;
 
-                if (dados.kpis.total > 1) {
+                if(dados.kpis.total > 1) {
                     document.getElementById("texto-processo").innerHTML = "processos afetados"
+                }
+
+                if(dados.kpis.latencia > 0) {
+                    document.getElementById("latenciaQtdDiv");
+                    latenciaQtdDiv.classList.add("info-alerta");
+                }
+
+                if(dados.kpis.cpu > 0) {
+                    document.getElementById("cpuQtdDiv");
+                    cpuQtdDiv.classList.add("info-alerta");
+                }
+
+                if(dados.kpis.ram > 0) {
+                    document.getElementById("ramQtdDiv");
+                    ramQtdDiv.classList.add("info-alerta");
                 }
 
                 console.log(dados.kpis.cpu_1 + "oie")
@@ -825,6 +845,8 @@
         let classeCPU = "";
         let classeRAM = "";
         let classeLatencia = "";
+        let usuario = "";
+        let nome = "";
 
         if (processo.cpu >= 40) {
             classeCPU = "proc-grave";
@@ -870,11 +892,23 @@
             icone = "./assets/imgs/processos/retangulo-amarelo.png";
         }
 
+        if (processo.usuario == "") {
+            usuario = `<i>usuário não identificado</i>`
+        } else {
+            usuario = processo.usuario
+        }
+
+        if (processo.nome == "") {
+            nome = `<i>nome não identificado</i>`
+        } else {
+            nome = processo.nome
+        }
+
         linhas += `
             <tr>
                 <td class="proc-cinza">${processo.pid}</td>
-                <td class="proc-cinza">${processo.nome}</td>
-                <td class="proc-cinza">${processo.usuario}</td>
+                <td class="proc-cinza">${nome}</td>
+                <td class="proc-cinza">${usuario}</td>
 
                 <td>
                     <span class="${classeCPU}">
@@ -884,13 +918,16 @@
 
                 <td>
                     <span class="${classeRAM}">
-                        ${processo.ram}%
+                        <div class = "ram_tabela">
+                            <span>${processo.ram_percent}%</span>
+                            <span>${processo.ram_mb} MB</span>
+                        </div>
                     </span>
                 </td>
 
                 <td>
                     <span class="${classeLatencia}">
-                        ${processo.latencia}ms
+                        ${processo.latencia_ms}ms
                     </span>
                 </td>
 

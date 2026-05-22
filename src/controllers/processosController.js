@@ -42,7 +42,7 @@ async function capturarDados(req, res) {
             ),
 
             lerJson(
-                "client/kpis/raw_criticos_4h.json"
+                "client/kpis/process_raw_criticos_4h.json"
             )
 
         ]);
@@ -51,6 +51,8 @@ async function capturarDados(req, res) {
             kpis,
             processos
         });
+
+        console.log(criticos)
 
         //console.log("KPIS:");
         //console.log(kpis);
