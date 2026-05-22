@@ -5,22 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Horus</title>
-    <link rel="stylesheet" href="./style/painel.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/painel.css">
     <link rel="icon" href="./assets/icon/logo.png" />
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
     <script src="./js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-
     <div class="modal" id="modal"></div>
 
     <div class="container">
 
-       <aside class="lateral" id="lateral">
+        <aside class="lateral" id="lateral">
             <div class="logo">
                 <img src="./assets/imgs/painel/logo.png" alt="" style="font-family: Jura, sans-serif;">
                 Horus
@@ -38,16 +37,15 @@
                     <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
                 </div>
 
-                <div class="categoria adm" id="administracao">Administração</div>
-                    <div onclick="window.location.href='dash_usuarios.html'" class="item-menu adm" id="cadastrarUsuario">
-                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                    </div>
-                    <div onclick="window.location.href='servidor-componente.html'" class="item-menu adm" id="cadastrarServidor">
-                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                    </div>
-                
+                <div class="categoria">Administração</div>
+                <div onclick="window.location.href='dash_usuarios.html'" class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </div>
+                <div onclick="window.location.href='servidor-componente.html'" class="item-menu">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </div>
 
-                <button id="gerarRelatorio" class="adm" style="align-items: center;">Gerar Relatório em PDF</button>
+                <button>Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -65,9 +63,11 @@
 
                 <span class="header-titulo">Dashboard</span>
 
+                <span id="hora" class="hora"></span>
                 <div class="usuario">
+
                     <div>
-                        <p  id="nome_usuario"></p>
+                        <p id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
                     <span id="inicial_usuario"></span>
@@ -75,108 +75,223 @@
             </header>
 
             <section class="conteudo">
+                <div class="topo">
+                    <div class="topo-filtro">
+                        <span class="titulo-dash">Visão Operacional e Estratégica</span>
 
-                <div class="cards">
+                        <div class="box-topo">
 
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Dia mais crítico</span>
-                            <span class="kpi">16/03/2026</span>
-                        </div>
-                        <div class="card-img" style="background-color: #e5edff;">
-                            <img src="./assets/imgs/painel/servidor.png">
+                            <span>Filtrar por:</span>
+                            <span class="filtro selecionado">24h</span>
+                            <span class="filtro">7d</span>
+                            <span class="filtro">30d</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Servidor com mais incidentes</span>
-                            <span class="kpi">SRV-ACC-SP-01</span>
+                <div class="kpis">
+                    <div class="kpi">
+                        <div class="topo-kpi">
+                            <span class="nome-kpi">DISPONIBILIDADE GLOBAL</span>
+                            <img src="assets/imgs/painel/online.png" alt="" style="background-color: #0f2412;">
                         </div>
-                        <div class="card-img" style="background-color: #fef2f2;">
-                            <img src="./assets/imgs/painel/offline.png">
+
+                        <div>
+                            <span id="kpi_disponibilidade" class="valor-kpi" style="color: green;"></span><span class="medida-kpi"> % </span>
                         </div>
+
+                        <span>meta: 99.5%</span>
+
+                        <span class="variacao-kpi" style="color: green;">+0.04%</span>
                     </div>
 
-                    <div class="card pequeno">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Tempo de recuperação</span>
-                            <span class="kpi">5 minutos</span>
+                    <div class="kpi">
+                        <div class="topo-kpi">
+                            <span class="nome-kpi">NÍVEL DE RISCO</span>
+                            <img src="assets/imgs/painel/escudo.png" alt="" style="background-color: #494428;">
                         </div>
-                        <div class="card-img" style="background-color: #f0fdf4;">
-                            <img src="./assets/imgs/painel/online.png">
+
+                        <div>
+                            <span id="kpi_risco" class="valor-kpi" style="color: yellow;"></span><span class="medida-kpi"> /100
+                            </span>
                         </div>
+
+                        <span>nível: moderado</span>
+
+                        <span class="variacao-kpi" style="color: yellow;">+6 pts</span>
                     </div>
 
-                    <div class="card pequeno prejuizo" id="prejuizo">
-                        <div class="tipo-kpi">
-                            <span class="nome-kpi">Prejuizos estimados</span>
-                            <span class="kpi">R$ 31.048.101,58</span>
+                    <div class="kpi">
+                        <div class="topo-kpi">
+                            <span class="nome-kpi">INCIDENTES CRÍTICOS</span>
+                            <img src="assets/imgs/painel/exclamacao.png" alt="" style="background-color: #3b0303;">
                         </div>
-                        <div class="card-img" style="background-color: #fefce8;">
-                            <img src="./assets/imgs/painel/alertas.png">
+
+                        <div>
+                            <span id="kpi_criticos" class="valor-kpi" style="color: red;"></span><span class="medida-kpi"> ativos </span>
                         </div>
+
+                        <span>nível: moderado</span>
+
+                        <span class="variacao-kpi" style="color: red;">+2</span>
+                    </div>
+
+                    <div class="kpi">
+                        <div class="topo-kpi">
+                            <span class="nome-kpi">ESTABILIDADE OPERACIONAL</span>
+                            <img src="assets/imgs/painel/estavel.png" alt="" style="background-color: #062a47;">
+                        </div>
+
+                        <div>
+                            <span id="kpi_estabilidade" class="valor-kpi" style="color: rgb(0, 140, 255);"></span><span class="medida-kpi"> % </span>
+                        </div>
+
+                        <span>meta: 85%</span>
+
+                        <span class="variacao-kpi" style="color: red;">-1.8</span>
+                    </div>
+
+                    <div class="kpi">
+                        <div class="topo-kpi">
+                            <span class="nome-kpi">MTTR MÉDIO</span>
+                            <img src="assets/imgs/painel/cronometro.png" alt="" style="background-color: #052c2a;">
+                        </div>
+
+                        <div>
+                            <span id="kpi_mttr" class="valor-kpi" style="color: rgb(56, 255, 228);"></span><span class="medida-kpi"> min </span>
+                        </div>
+
+                        <span>meta: 25 min</span>
+
+                        <span class="variacao-kpi" style="color: rgb(56, 255, 228);">-18%</span>
+                    </div>
+
+                    <div class="kpi">
+                        <div class="topo-kpi">
+                            <span class="nome-kpi">TENDÊNCIA OPERACIONAL</span>
+                            <img src="assets/imgs/painel/tendencia.png" alt="" style="background-color: #27013b;">
+                        </div>
+
+                        <div>
+                            <span id="kpi_previsao" class="valor-kpi" style="color: rgb(154, 24, 194);"></span><span class="medida-kpi"> > 4h </span>
+                        </div>
+
+                        <span>próx 4h: risco elevado</span>
+
+                        <span class="variacao-kpi" style="color: rgb(154, 24, 194);">previsão</span>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="grafico-estabilidade">
+                        <div class="topo-grafico-estabilidade">
+                            <span>ESTABILIDADE OPERACIONAL</span>
+                        </div>
+
+                        <canvas id="graficoEstabilidade"></canvas>
+                    </div>
+
+                    <div class="tendencia-falhas">
+                        <div class="topo-tendencia">
+                            <img src="assets/imgs/painel/cerebro.png" alt="" width="40px" height="40px">
+                            <span>Previsão de Falhas</span>
+                        </div>
+
+                        <div class="item-tendencia">
+                            <span class="metrica">Tendência de aumento nas próximas 4 horas</span>
+                            <span class="descricao">Modelo preditivo estima +5 incidentes médios entre 22:00 e
+                                2:00</span>
+                        </div>
+                        <div class="item-tendencia">
+                            <span class="metrica">Tendência de aumento nas próximas 4 horas</span>
+                            <span class="descricao">Modelo preditivo estima +5 incidentes médios entre 22:00 e
+                                2:00</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="grafico-impacto">
+                        <div class="topo-grafico-impacto">
+                            <span>IMPACTO OPERACIONAL POR AMBIENTE</span>
+                            <span class="maior-impacto">Processos: CRÍTICO</span>
+                        </div>
+
+                        <canvas id="graficoImpacto"></canvas>
+                    </div>
+
+                    <div class="tabela-sistema">
+                        <div class="header-tabela">
+                            <span>Necessidade de Analistas</span>
+                            <span class="subtexto">Onde redistribuir equipe</span>
+                        </div>
+
+                        <table>
+                            <tr class="header-tabela-fixa">
+                                <th>ÁREA / SISTEMA</th>
+                                <th>INCIDENTES</th>
+                                <th>ANALISTAS</th>
+                                <th>SITUAÇÃO</th>
+                                <th>AÇÃO</th>
+                            </tr>
+                            <tr class="item-tabela">
+                                <td>ATC-CORE-01</td>
+                                <td>7</td>
+                                <td>2</td>
+                                <td><span class="status atencao">ATENÇÃO</span></td>
+                                <td><button class="btn-reatribuir">
+                                        <img src="assets/imgs/painel/adicionar.png" alt="">
+                                        Reatribuir
+                                    </button></td>
+                            </tr>
+                            <tr class="item-tabela">
+                                <td>ATC-CORE-01</td>
+                                <td>7</td>
+                                <td>2</td>
+                                <td><span class="status critico">CRÍTICO</span></td>
+                                <td><button class="btn-reatribuir">
+                                        <img src="assets/imgs/painel/adicionar.png" alt="">
+                                        Reatribuir
+                                    </button></td>
+                            </tr>
+                            <tr class="item-tabela">
+                                <td>ATC-CORE-01</td>
+                                <td>7</td>
+                                <td>2</td>
+                                <td><span class="status normal">NORMAL</span></td>
+                                <td><button class="btn-reatribuir">
+                                        <img src="assets/imgs/painel/adicionar.png" alt="">
+                                        Reatribuir
+                                    </button></td>
+                            </tr>
+
+                        </table>
                     </div>
 
                 </div>
-
-                <section class="linha">
-                    <div class="card card-grafico">
-                        <h3 class="tipo-grafico">Incidentes por dia</h3>
-                        <div class="interface-grafico">
-                            <canvas id="grafico-incidentes"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-grafico">
-                        <h3 class="tipo-grafico">Uso de CPU (24h)</h3>
-                        <div class="interface-grafico">
-                            <canvas id="grafico-cpu"></canvas>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="linha">
-                    <div class="card card-grafico">
-                        <h3 class="tipo-grafico">Uso de RAM (24h)</h3>
-                        <div class="interface-grafico">
-                            <canvas id="grafico-ram"></canvas>
-                        </div>
-                    </div>
-                    <div class="card card-grafico">
-                        <h3 class="tipo-grafico">Uso de Disco (24h)</h3>
-                        <div class="interface-grafico">
-                            <canvas id="grafico-disco"></canvas>
-                        </div>
-                    </div>
-                </section>
-
+                <div class="box-relatorio">
+                    <img src="assets/imgs/painel/relatorio.png" alt="">
+                    <span>Exportar Relatório</span>
+                </div>
             </section>
 
         </main>
 
     </div>
+</body>
 
-    <script>
-
-        window.onload = () => {
-
+<script>
+window.onload = () => {
         const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
-            if (funcao == "Gestor") {
-                document.getElementById("administracao").style.display = "block";
-                document.getElementById("gerarRelatorio").style.display = "block";
-                document.getElementById("cadastrarServidor").style.display = "flex";
-                document.getElementById("cadastrarUsuario").style.display = "flex";
-                document.getElementById("prejuizo").style.display = "flex";
-            }
-    
         const btnHamburguer = document.getElementById('hamburguer');
         const lateral = document.getElementById('lateral');
         const modal = document.getElementById('modal');
 
-        try{
+        try {
             exibirUsuarioAtivo()
-        }catch(erro){
+        } catch (erro) {
             console.warn("Erro ao exibir o usuario", erro)
         }
 
@@ -195,103 +310,176 @@
         });
 
         modal.addEventListener('click', fecharMenu);
+    };
 
-        new Chart(document.getElementById('grafico-cpu'), {
-            type: 'line',
-            data: {
-                labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
-                datasets: [
-                    { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                    { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                    { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-                ]
+    document.querySelectorAll('.filtro').forEach(filtro => {
+        filtro.addEventListener('click', () => {
+            document.querySelectorAll('.filtro').forEach(f => f.classList.remove('selecionado'));
+            filtro.classList.add('selecionado');
+            periodo = filtro.textContent.trim();
+            console.log("Filtro: " + periodo);
+            buscarDadosS3(periodo);
+        })
+    });
+
+    function atualizarHora() {
+        const horaAtual = new Date();
+        const horas = String(horaAtual.getHours()).padStart(2, '0');
+        const minutos = String(horaAtual.getMinutes()).padStart(2, '0');
+        const segundos = String(horaAtual.getSeconds()).padStart(2, '0');
+
+        document.getElementById('hora').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+    setInterval(atualizarHora, 1000);
+    atualizarHora();
+
+    const ctx_estabilidade = document.getElementById('graficoEstabilidade');
+
+    const graficoEstabilidade = new Chart(ctx_estabilidade, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Estabilidade',
+                data: [],
+                borderColor: '#00d2c8',
+                backgroundColor: 'rgba(0, 210, 200, 0.15)',
+                fill: true,
+                tension: 0.2,
+                pointRadius: [],
+                pointBackgroundColor: [],
+            }, {
+                label: 'Meta mínima',
+                data: [],
+                borderColor: 'rgba(255, 100, 100, 0.5)',
+                borderDash: [4, 2],
+                borderWidth: 2,
+                pointRadius: 0,
+                fill: false,
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
             },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                    legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
+            scales: {
+                x: {
+                    ticks: { color: '#6b7280' },
+                    grid: {
+                        color: 'rgba(255,255,255,0.05)',
+                        display: false
+                    }
                 },
-                scales: {
-                    x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                    y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
+                y: {
+                    min: 0,
+                    ticks: {
+                        color: '#6b7280',
+                        callback: i => i + '%'
+                    },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
                 }
             }
-        });
+        }
+    });
 
-        new Chart(document.getElementById('grafico-incidentes'), {
-            type: 'bar',
-            data: {
-                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                datasets: [
-                    { label: 'Baixa', data: [5,4,7,2,1,5,3], backgroundColor: '#274690', borderRadius: 5, borderWidth: 0 },
-                    { label: 'Média',    data: [4,2,4,1,3,6,2], backgroundColor: '#ffcc00', borderRadius: 5, borderWidth: 0 },
-                    { label: 'Alta',    data: [3,1,3,5,2,4,1], backgroundColor: '#ff8400', borderRadius: 5, borderWidth: 0 },
-                    { label: 'Crítica', data: [3,2,4,1,1,2,4], backgroundColor: '#c70c0c', borderRadius: 5, borderWidth: 0 }
-                ]
+    const ctx = document.getElementById('graficoImpacto');
+
+    const labels = [
+        'Comunicação',
+        'CPU',
+        'RAM',
+        'Disco',
+        'Temperatura',
+        'Processos'
+    ];
+
+    const valores = [42, 52, 67, 63, 78, 96];
+
+    // cores por nivel de impacto
+    function getCor(valor) {
+        if (valor >= 80) return '#ff4d6d'; // vermelho
+        if (valor >= 60) return '#f5a623'; // amarelo
+        return '#4a9eff'; // azul
+    }
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: valores,
+                backgroundColor: valores.map(getCor),
+                borderRadius: 3,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.raw}%`
+                    }
+                }
             },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                    legend: { display: true, position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', color: '#6b7280', font: { size: 13 }, boxWidth: 10, boxHeight: 10, padding: 20 } }
+            scales: {
+                x: {
+                    min: 0,
+                    max: 100,
+                    ticks: {
+                        color: '#6b7280',
+                        callback: v => v + '%'
+                    },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
                 },
-                scales: {
-                    x: { grid: { display: false }, ticks: { color: '#9ca3af', font: { size: 11 } } },
-                    y: { min: 0, max: 8, grid: { color: '#f0f2f5' }, ticks: { stepSize: 2, color: '#9ca3af', font: { size: 11 } } }
+                y: {
+                    ticks: { color: '#9ca3af' },
+                    grid: { display: false }
                 }
             }
-        });
+        }
+    });
 
-        new Chart(document.getElementById('grafico-ram'), {
-            type: 'line',
-            data: {
-                labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
-                datasets: [
-                    { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                    { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                    { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                    legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-                },
-                scales: {
-                    x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                    y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-                }
-            }
-        });
+    var periodo = '24h'
 
-        new Chart(document.getElementById('grafico-disco'), {
-            type: 'line',
-            data: {
-                labels: ['17:48','18:48','19:48','20:48','21:48','22:48','23:48','00:48','01:48','02:48','03:48','04:48','05:48','06:48','07:48','08:48','09:48','10:48','11:48','12:48','13:48','14:48','15:48','16:48','17:48'],
-                datasets: [
-                    { label: 'SRV-01', data: [52,50,54,26,53,48,37,35,38,32,28,34,42,48,53,60,68,72,65,62,60,65,38,32,28], borderColor: '#3577d4', backgroundColor: 'rgba(59,130,246,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                    { label: 'SRV-02', data: [55,58,62,60,57,53,46,44,42,40,45,48,52,56,58,54,50,56,60,63,58,62,44,42,40], borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                    { label: 'SRV-03', data: [50,52,51,50,49,51,55,53,50,48,47,49,51,50,52,54,57,60,58,55,47,45,49,51,50], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.08)', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                    legend: { display: true, position: 'bottom', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-                },
-                scales: {
-                    x: { grid: { color: '#f0f2f5' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                    y: { min: 0, max: 100, grid: { color: '#f0f2f5' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-                }
-            }
-        });};
-    </script>
-</body>
+    async function buscarDadosS3(periodo) {
+
+        try {
+            const resposta = await fetch(`/s3/buscarDadosS3`);
+            const dadosS3 = await resposta.json();
+            const dados = dadosS3.periodos[periodo];
+            
+            console.log("DADOS DO S3: ", dadosS3);
+            
+            // Kpis
+            const kpis = dados.kpis
+            console.log("KPIS: ", kpis);
+
+            document.getElementById('kpi_disponibilidade').textContent = kpis.disponibilidade_global.valor;
+            document.getElementById('kpi_risco').textContent = Math.round(kpis.nivel_risco.valor);
+            document.getElementById('kpi_criticos').textContent = kpis.incidentes_criticos.valor;
+            document.getElementById('kpi_estabilidade').textContent = Math.round(kpis.estabilidade_operacional.valor);
+            document.getElementById('kpi_previsao').textContent = kpis.tendencia_operacional;
+
+            // Gráficos
+            const dadosGraficoEstabilidade = dados.grafico_estabilidade;
+            console.log("Gráfico estabilidade: ", dadosGraficoEstabilidade)
+
+            graficoEstabilidade.data.labels = dadosGraficoEstabilidade.labels;
+            graficoEstabilidade.data.datasets[0].data = dadosGraficoEstabilidade.valores;
+            graficoEstabilidade.data.datasets[1].data = Array(dadosGraficoEstabilidade.labels.length).fill(85);
+            graficoEstabilidade.update();
+            
+        } catch (erro) {
+            console.error("ERRO: " + erro);
+        }
+
+    }
+    buscarDadosS3(periodo);
+
+</script>
+
 </html>
