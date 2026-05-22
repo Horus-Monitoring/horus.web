@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Temperatura | Horus</title>
+
+    <link rel="icon"
+        href="./assets/icon/logo.png" />
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+    <link rel="stylesheet"
+        href="./style/DashTemp.css">
+
+    <link rel="stylesheet"
+        href="./style/dash_rede.css">
+
+</head>
+
+<body>
+
+    <div class="modal-lateral"
+        id="overlay"></div>
+
+    <div class="container">
+
+        <!-- MENU LATERAL -->
+
+        <aside class="lateral"
+            id="lateral">
+
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png"
+                    alt="">
+                Horus
+            </div>
+
+            <nav class="menu">
+
+                <div class="categoria">
+                    Monitoramento
+                </div>
+
+                <a href="painel.html"
+                    class="item-menu">
+
+                    <img src="./assets/imgs/painel/dash.png"
+                        alt="">
+
+                    Dashboard
+                </a>
+
+                <div class="categoria adm">
+                    Administração
+                </div>
+
+                <a href="dash_usuarios.html"
+                    class="item-menu adm">
+
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png"
+                        alt="">
+
+                    Usuários
+                </a>
+
+                <a href="servidor-componente.html"
+                    class="item-menu adm">
+
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png"
+                        alt="">
+
+                    Cadastrar servidor
+                </a>
+
+            </nav>
+
+            <div class="sair">
+
+                <img src="./assets/imgs/painel/sair.png"
+                    alt="">
+
+                <p>Sair</p>
+
+            </div>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="header-topo">
+
+                    <div class="header-esquerda">
+
+                        <div class="hamburguer"
+                            id="hamburguer">
+
+                            <img src="./assets/imgs/painel/hamburguer.png"
+                                alt="Menu">
+
+                        </div>
+
+                        <div class="header-servidor">
+
+                            <span class="breadcrumb">
+
+                                Servidores /
+
+                                <strong id="nomeServidor">
+                                    Servidor
+                                </strong>
+
+                                /
+
+                                <span class="renomear">
+                                    Temperatura
+                                </span>
+
+                            </span>
+
+                            <div class="status-servidor">
+
+                                <div class="select-status">
+
+                                    <span id="status-dot"
+                                        class="status-dot verde"></span>
+
+                                    <select id="select_servidor"
+                                        onchange="selecionar()">
+
+                                        <option value="#">
+                                            Selecione
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="usuario">
+
+                        <div>
+
+                            <p id="nome_usuario"></p>
+
+                            <p id="funcao_usuario"
+                                class="cargo"></p>
+
+                        </div>
+
+                        <span id="inicial_usuario"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="header-nav-scroll">
+
+                    <nav class="header-nav">
+
+                        <a href="dash_analista.html">
+                            Resumo
+                        </a>
+
+                        <a href="processos.html">
+                            Processos
+                        </a>
+
+                        <a href="dash_rede.html">
+                            Comunicação e rede
+                        </a>
+
+                        <a href="Temperatura.html"
+                            class="ativo">
+
+                            Temperatura
+                        </a>
+
+                        <a href="dash_incidentes.html">
+                            Incidentes
+                        </a>
+
+                    </nav>
+
+                </div>
+
+            </header>
+
+            <!-- CONTEUDO -->
+
+            <section class="conteudo">
+
+                <!-- CARDS -->
+
+                <section class="cards">
+
+                    <div class="card">
+
+                        <h3>
+                            Margem de Segurança Térmica (Atual)
+                        </h3>
+
+                        <div class="big">
+                            --
+                        </div>
+
+                        <span class="green">
+                            Atualizando...
+                        </span>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>
+                            Índice de Eficiência de Resfriamento (Atual)
+                        </h3>
+
+                        <div class="big">
+                            --
+                        </div>
+
+                        <span class="red">
+                            Atualizando...
+                        </span>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>
+                            Pico de Estresse Térmico (Semanal)
+                        </h3>
+
+                        <div class="big">
+                            --
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+
+                        <h3>
+                            Throttling Status
+                        </h3>
+
+                        <div class="big">
+                            --
+                        </div>
+
+                        <div class="status">
+                            Operacional
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- GRID -->
+
+                <section class="grid">
+
+                    <!-- GRAFICO -->
+
+                    <div class="chart-card">
+
+                        <div class="chart-header">
+
+                            <h2>
+                                Temperatura CPU — Núcleo Mais Quente
+                            </h2>
+
+                            <p>
+                                Zonas de alerta • linha da média do dia
+                            </p>
+
+                        </div>
+
+                        <canvas id="cpuChart"></canvas>
+
+                    </div>
+
+                    <!-- HEATMAP -->
+
+                    <div class="heatmap-card">
+
+                        <div class="chart-header">
+
+                            <h2>
+                                Heatmap — Temperatura por Core (Atual)
+                            </h2>
+
+                            <p>
+                                Snapshot atual
+                            </p>
+
+                        </div>
+
+                        <div class="heatmap"></div>
+
+                        <!-- LEGENDA -->
+
+                        <div class="heatmap-legend">
+
+                            <div class="legend-item">
+
+                                <span class="legend-color normal-bg"></span>
+
+                                <small>
+                                    &lt; 65°
+                                </small>
+
+                            </div>
+
+                            <div class="legend-item">
+
+                                <span class="legend-color alert-bg"></span>
+
+                                <small>
+                                    65° - 75°
+                                </small>
+
+                            </div>
+
+                            <div class="legend-item">
+
+                                <span class="legend-color medium-bg"></span>
+
+                                <small>
+                                    75° - 85°
+                                </small>
+
+                            </div>
+
+                            <div class="legend-item">
+
+                                <span class="legend-color critical-bg"></span>
+
+                                <small>
+                                    &gt; 85°
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- GRAFICO FINAL -->
+
+                <section class="bottom-chart">
+
+                    <div class="chart-header">
+
+                        <h2>
+                            Impacto Térmico na Latência
+                        </h2>
+
+                        <p>
+                            Correlação entre temperatura e degradação (Diária)
+                        </p>
+
+                    </div>
+
+                    <canvas id="latencyChart"></canvas>
+                    <div id="ultimaAtualizacao" class="ultima-atualizacao">
+                    Última atualização: --
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+<script>
+
+    // =========================
+    // VALIDAR SESSAO
+    // =========================
+
+    if (!sessionStorage.ID_USUARIO) {
+
+        window.location = "index.html";
+    }
+
+    // =========================
+    // USUARIO
+    // =========================
+
+    document.getElementById("nome_usuario")
+        .innerHTML =
+        sessionStorage.NOME_USUARIO;
+
+    document.getElementById("funcao_usuario")
+        .innerHTML =
+        sessionStorage.FUNCAO_USUARIO;
+
+    document.getElementById("inicial_usuario")
+        .innerHTML =
+        sessionStorage.NOME_USUARIO.charAt(0);
+
+    // =========================
+    // EMPRESA
+    // =========================
+
+    const empresa =
+        sessionStorage.ID_EMPRESA;
+
+    // =========================
+    // CHARTS
+    // =========================
+
+    let cpuChart;
+    let latencyChart;
+    let intervaloAtualizacao;
+
+    // =========================
+    // CONFIG GRAFICOS
+    // =========================
+
+    const tooltipConfig = {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
+
+        plugins: {
+
+            legend: {
+                position: 'top'
+            },
+
+            tooltip: {
+
+                enabled: true,
+
+                backgroundColor: '#111827',
+
+                titleColor: '#fff',
+
+                bodyColor: '#fff',
+
+                borderColor: '#3b82f6',
+
+                borderWidth: 1,
+
+                padding: 12
+            }
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true
+            }
+        }
+    };
+
+    // =========================
+    // CARREGAR SERVIDORES
+    // =========================
+
+    async function carregarServidores() {
+
+        try {
+
+            const resposta =
+                await fetch(
+                    `/servidores/listarServidores/${empresa}`
+                );
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    "Erro ao buscar servidores"
+                );
+            }
+
+            const servidores =
+                await resposta.json();
+
+            console.log(
+                "SERVIDORES:",
+                servidores
+            );
+
+            const select =
+                document.getElementById(
+                    "select_servidor"
+                );
+
+            select.innerHTML = "";
+
+            if (!servidores ||
+                servidores.length === 0) {
+
+                select.innerHTML = `
+                    <option value="#">
+                        Nenhum servidor
+                    </option>
+                `;
+
+                return;
+            }
+
+            servidores.forEach((servidor, index) => {
+
+                const valorMac =
+                    servidor.mac_address ||
+                    servidor.mac ||
+                    servidor.id_servidor;
+
+                select.innerHTML += `
+
+                    <option
+                        value="${valorMac}"
+                        ${index === 0 ? "selected" : ""}>
+                        ${servidor.hostname}
+                    </option>
+
+                `;
+            });
+
+            atualizarNomeServidor();
+
+            await carregarTemperatura();
+
+            iniciarAtualizacao();
+
+        } catch (erro) {
+
+            console.log(
+                "Erro servidores:",
+                erro
+            );
+        }
+    }
+
+    // =========================
+    // CARREGAR TEMPERATURA
+    // =========================
+
+    async function carregarTemperatura() {
+
+        try {
+
+            const select =
+                document.getElementById(
+                    "select_servidor"
+                );
+
+            const mac =
+                select.value;
+
+            if (!mac || mac === "#") {
+                return;
+            }
+
+            console.log(
+                "Buscando temperatura:",
+                mac
+            );
+
+            const resposta =
+                await fetch(
+                    `/temperatura/${empresa}/${encodeURIComponent(mac)}/tempo_real`
+                );
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    "Erro ao buscar temperatura"
+                );
+            }
+
+            const json =
+                await resposta.json();
+
+            console.log(
+                "JSON TEMPERATURA:",
+                json
+            );
+
+            const dados =
+                json.dados;
+
+            if (!dados ||
+                dados.length === 0) {
+
+                console.log(
+                    "Sem dados"
+                );
+
+                return;
+            }
+
+            atualizarCards(json);
+
+            atualizarGraficoCPU(dados);
+
+            atualizarGraficoLatencia(dados);
+
+            atualizarHeatmap(dados);
+
+            atualizarNomeServidor();
+
+            atualizarStatus(
+                dados[dados.length - 1]
+            );
+
+            atualizarHorarioUltimaAtualizacao();
+
+        } catch (erro) {
+
+            console.log(
+                "Erro temperatura:",
+                erro
+            );
+        }
+    }
+
+    // =========================
+    // STATUS TOPO
+    // =========================
+
+    function atualizarStatus(ultimo) {
+
+        const dot =
+            document.getElementById(
+                "status-dot"
+            );
+
+        dot.classList.remove(
+            "verde",
+            "amarelo",
+            "vermelho"
+        );
+
+        if (
+            ultimo.temp_max_cpu >= 85
+        ) {
+
+            dot.classList.add(
+                "vermelho"
+            );
+        }
+
+        else if (
+            ultimo.temp_max_cpu >= 70
+        ) {
+
+            dot.classList.add(
+                "amarelo"
+            );
+        }
+
+        else {
+
+            dot.classList.add(
+                "verde"
+            );
+        }
+    }
+
+    // =========================
+    // NOME SERVIDOR
+    // =========================
+
+    function atualizarNomeServidor() {
+
+        const select =
+            document.getElementById(
+                "select_servidor"
+            );
+
+        if (!select.options.length) {
+            return;
+        }
+
+        const texto =
+            select.options[
+                select.selectedIndex
+            ].text;
+
+        document.getElementById(
+            "nomeServidor"
+        ).innerHTML = texto;
+    }
+
+    // =========================
+    // GRAFICO CPU
+    // =========================
+
+    function atualizarGraficoCPU(dados) {
+
+        const labels =
+            dados.map(item => {
+
+                return item.timestamp
+                    .split(" ")[1]
+                    .substring(0, 5);
+            });
+
+        const temperaturas =
+            dados.map(item =>
+                item.temp_max_cpu || 0
+            );
+
+        const ambiente =
+            dados.map(item =>
+                item.temperatura_ambiente || 0
+            );
+
+        if (cpuChart) {
+            cpuChart.destroy();
+        }
+
+        cpuChart = new Chart(
+            document.getElementById(
+                'cpuChart'
+            ),
+            {
+
+                type: 'line',
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [
+
+                        {
+                            label: 'Temp. CPU',
+
+                            data: temperaturas,
+
+                            borderColor: '#3b82f6',
+
+                            backgroundColor:
+                                'rgba(59,130,246,0.1)',
+
+                            fill: true,
+
+                            tension: 0.4,
+
+                            borderWidth: 3
+                        },
+
+                        {
+                            label: 'Temp. Ambiente',
+
+                            data: ambiente,
+
+                            borderColor: '#10b981',
+
+                            backgroundColor:
+                                'rgba(16,185,129,0.1)',
+
+                            fill: true,
+
+                            tension: 0.4,
+
+                            borderWidth: 3
+                        }
+
+                    ]
+                },
+
+                options: tooltipConfig
+            }
+        );
+    }
+
+    // =========================
+    // GRAFICO LATENCIA
+    // =========================
+
+    function atualizarGraficoLatencia(dados) {
+
+        const labels =
+            dados.map(item => {
+
+                return item.timestamp
+                    .split(" ")[1]
+                    .substring(0, 5);
+            });
+
+        const latencia =
+            dados.map(item =>
+                item.latency_avg_ms || 0
+            );
+
+        const temperatura =
+            dados.map(item =>
+                item.temp_max_cpu || 0
+            );
+
+        if (latencyChart) {
+            latencyChart.destroy();
+        }
+
+        latencyChart = new Chart(
+            document.getElementById(
+                'latencyChart'
+            ),
+            {
+
+                type: 'line',
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [
+
+                        {
+                            label: 'Latência',
+
+                            data: latencia,
+
+                            borderColor: '#8b5cf6',
+
+                            backgroundColor:
+                                'rgba(139,92,246,0.08)',
+
+                            fill: true,
+
+                            tension: 0.4,
+
+                            borderWidth: 3
+                        },
+
+                        {
+                            label: 'Temperatura',
+
+                            data: temperatura,
+
+                            borderColor: '#f97316',
+
+                            tension: 0.4,
+
+                            borderWidth: 3
+                        }
+
+                    ]
+                },
+
+                options: tooltipConfig
+            }
+        );
+    }
+
+    // =========================
+    // HEATMAP
+    // =========================
+
+    function atualizarHeatmap(dados) {
+
+        const heatmap =
+            document.querySelector(
+                ".heatmap"
+            );
+
+        heatmap.innerHTML = "";
+
+        const ultimo =
+            dados[dados.length - 1];
+
+        const base =
+            ultimo.temp_max_cpu || 40;
+
+        for (let i = 0; i < 12; i++) {
+
+            const temp =
+                Math.floor(
+                    base + (
+                        Math.random() * 10 - 5
+                    )
+                );
+
+            let classe = "normal";
+
+            if (temp >= 85) {
+
+                classe = "critical";
+            }
+
+            else if (temp >= 75) {
+
+                classe = "medium";
+            }
+
+            else if (temp >= 65) {
+
+                classe = "alert";
+            }
+
+            heatmap.innerHTML += `
+
+                <div class="core ${classe}">
+                    <small>C${i}</small>
+                    <span>${temp}°</span>
+                </div>
+
+            `;
+        }
+    }
+
+    // =========================
+    // CARDS KPI
+    // =========================
+
+    function atualizarCards(json) {
+
+        const ultimo =
+            json.dados[
+                json.dados.length - 1
+            ];
+
+        const cards =
+            document.querySelectorAll(
+                ".big"
+            );
+
+        const spans =
+            document.querySelectorAll(
+                ".card span"
+            );
+
+        // KPI 1
+
+        cards[0].innerHTML =
+            `+${Number(
+                ultimo.margem_termica || 0
+            ).toFixed(1)}°C`;
+
+        if (spans[0]) {
+
+            if (
+                ultimo.margem_termica >= 40
+            ) {
+
+                spans[0].innerHTML =
+                    "Excelente";
+
+                spans[0].style.color =
+                    "#22c55e";
+            }
+
+            else if (
+                ultimo.margem_termica >= 25
+            ) {
+
+                spans[0].innerHTML =
+                    "Boa";
+
+                spans[0].style.color =
+                    "#eab308";
+            }
+
+            else {
+
+                spans[0].innerHTML =
+                    "Crítica";
+
+                spans[0].style.color =
+                    "#ef4444";
+            }
+        }
+
+        // KPI 2
+
+        cards[1].innerHTML =
+            `${Number(
+                ultimo.indice_resfriamento || 0
+            ).toFixed(1)}%`;
+
+        if (spans[1]) {
+
+            if (
+                ultimo.indice_resfriamento >= 75
+            ) {
+
+                spans[1].innerHTML =
+                    "Resfriamento ideal";
+
+                spans[1].style.color =
+                    "#22c55e";
+            }
+
+            else if (
+                ultimo.indice_resfriamento >= 50
+            ) {
+
+                spans[1].innerHTML =
+                    "Moderado";
+
+                spans[1].style.color =
+                    "#eab308";
+            }
+
+            else {
+
+                spans[1].innerHTML =
+                    "Ruim";
+
+                spans[1].style.color =
+                    "#ef4444";
+            }
+        }
+
+        // KPI 3
+
+        cards[2].innerHTML =
+            json.dia_com_mais_alertas ||
+            "Sem alertas";
+
+        // KPI 4
+
+        cards[3].innerHTML =
+            ultimo.throttling || "NAO";
+
+        const status =
+            document.querySelector(
+                ".status"
+            );
+
+        if (
+            ultimo.throttling === "SIM"
+        ) {
+
+            status.innerHTML =
+                "CRÍTICO";
+
+            status.style.background =
+                "#dc2626";
+        }
+
+        else {
+
+            status.innerHTML =
+                "Operacional";
+
+            status.style.background =
+                "#16a34a";
+        }
+
+        status.style.color =
+            "#fff";
+    }
+
+    // =========================
+    // SELECT
+    // =========================
+
+    async function selecionar() {
+
+        await carregarTemperatura();
+    }
+
+    function atualizarHorarioUltimaAtualizacao() {
+
+    const agora =
+        new Date();
+
+    const horario =
+        agora.toLocaleTimeString(
+            "pt-BR"
+        );
+
+    document.getElementById(
+        "ultimaAtualizacao"
+    ).innerHTML =
+        `Última atualização: ${horario}`;
+}
+
+    // =========================
+    // AUTO UPDATE
+    // =========================
+
+    function iniciarAtualizacao() {
+
+        if (intervaloAtualizacao) {
+
+            clearInterval(
+                intervaloAtualizacao
+            );
+        }
+
+        intervaloAtualizacao =
+            setInterval(() => {
+
+                carregarTemperatura();
+
+            }, 5000);
+    }
+
+    // =========================
+    // INIT
+    // =========================
+
+    window.onload = function () {
+
+        carregarServidores();
+    };
+
+</script>
+
+</body>
+
+</html>

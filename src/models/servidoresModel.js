@@ -58,12 +58,15 @@ function listarServidores(fkEmpresa) {
 
     var instrucaoSql = `
         SELECT 
-        id_servidor, 
-        hostname 
-        FROM servidor 
+            id_servidor,
+            hostname,
+            mac_address
+        FROM servidor
         WHERE fk_empresa = ${fkEmpresa};
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+    console.log(instrucaoSql);
+
     return database.executar(instrucaoSql);
 }
 
