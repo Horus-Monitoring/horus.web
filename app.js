@@ -23,6 +23,7 @@ var servidoresRouter = require("./src/routes/servidores");
 var faleConoscoRouter = require("./src/routes/faleConosco");
 
 var jiraRouter = require("./src/routes/jira");
+var incidentesRouter = require("./src/routes/incidentes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -37,6 +38,7 @@ app.use("/faleConosco", faleConoscoRouter);
 app.use("/servidores", servidoresRouter);
 
 app.use("/jira", jiraRouter);
+app.use("/incidentes", incidentesRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

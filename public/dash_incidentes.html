@@ -338,17 +338,17 @@
                                         src="./assets/imgs/incidentes/confiabilidade.png" alt="">
                                     <div class="informacoes-principais">
                                         <span>índice de Confiabilidade</span>
-                                        <h1>50</h1>
+                                        <h1 id="indice_confiabilidade">50</h1>
                                     </div>
                                 </div>
                                 <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                <select name="" id="tempo">
-                                    <option value="30s">Últimas 24 horas</option>
-                                    <option value="1min">Última Semana</option>
-                                    <option value="5min">Último Mês</option>
+                                <select class="tempo" name="" id="tempo_indice_confiabilidade">
+                                    <option value="1h">Última hora</option>
+                                    <option value="24h">Últimas 24 horas</option>
+                                    <option value="7d">Última Semana</option>
                                 </select>
                             </div>
                         </div>
@@ -585,7 +585,7 @@
                 servidoresPermitidos = servidoresComAcesso.map(s => [s.hostname, s.status_servidor]);
 
                 select_servidor.innerHTML += servidoresComAcesso.map(servidor =>
-                    `<option value = "${servidor.hostname}" id="${servidor.mac_address}">${servidor.hostname}</option>`
+                    `<option value = "${servidor.hostname.toLowerCase()}" id="${servidor.mac_address}">${servidor.hostname}</option>`
                 ).join('')
 
                 carregarAlertas()
@@ -663,7 +663,6 @@
             return filtroServidor && estaNoPeriodo && filtroSeveridade && filtroStatus;
         });
 
-        console.log(alertasFiltrados)
 
         if (alertasFiltrados.length == 0) {
             lista_alertas.innerHTML = `
@@ -799,7 +798,7 @@
         }
     }
 
-    async function obterDadosIndice(){
+    async function obterDadosScore(){
 
         const fkEmpresa = sessionStorage.ID_EMPRESA;
         const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
@@ -808,7 +807,19 @@
 
         const resposta = await fetch(`/incidentes/calcularIndice/${fkEmpresa}/${mac_address}`);
 
-        console.log(resposta)
+        const dados = resposta.json();
+        return dados;
+    }
+
+    async function mostrarKPIScore(){
+        const dados = await obterDadosScore();
+
+        const filtroTempoSelecionado = tempo_indice_confiabilidade.value;
+
+        const dadosFiltrados = dados[filtroTempoSelecionado];
+        indice_confiabilidade.innerText = dadosFiltrados.score;
+        console.log(dadosFiltrados)
+
     }
 
     function mostrarKPITodos() {
@@ -848,8 +859,6 @@
 
             return dataCriacao >= limiteTempoServidor;
         })
-
-        console.log("ALERTAS" + alertasFiltradosServidor)
 
         var hostname_mais_alertas = "Nenhum";
         var qtd_mais_alertas = 0;
@@ -1027,7 +1036,7 @@
 
             listarAlertas();
             mostrarKPIs();
-            obterDadosIndice();
+            mostrarKPIScore();
 
         } else {
             document.getElementById("corpo-dashboard-servidor").style.display = "none";
