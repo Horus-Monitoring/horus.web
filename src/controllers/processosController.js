@@ -49,7 +49,8 @@ async function capturarDados(req, res) {
 
         res.json({
             kpis,
-            processos
+            processos,
+            criticos
         });
 
         console.log(criticos)

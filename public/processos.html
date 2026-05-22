@@ -335,6 +335,7 @@
 
     <script>
 
+        const agora = new Date();
         /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
                     if (funcao == "Gestor") {
@@ -437,6 +438,8 @@
 
                 carregarDados();
                 carregarTabela();
+
+                setTimeout(capturarDados, 10000)
                     
                 
                 } catch (erro) {
@@ -448,6 +451,10 @@
 
             capturarDados();
 
+            let graficoTop5 = null
+            let criticos = null
+            
+
             function carregarDados() {
 
                 console.log(dados)
@@ -457,7 +464,18 @@
                     ram: [dados.kpis["ram_1"], dados.kpis["ram_2"], dados.kpis["ram_3"], dados.kpis["ram_4"], dados.kpis["ram_5"]]
                 };
 
-                const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
+                if(graficoTop5){
+                    graficoTop5.destroy()
+                    graficoTop5 = null; 
+                }
+
+
+                if(criticos){
+                    criticos.destroy()
+                    criticos = null; 
+                }
+
+                 graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
                     type: 'bar',
 
                     data: {
@@ -606,7 +624,7 @@
                     graficoTop5.data.datasets[0].data = dadosGrafico.ram;
                     graficoTop5.data.datasets[0].label = 'RAM %';
                     graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
-                    graficoTop5.options.scales.x.max = 50;
+                    graficoTop5.options.scales.x.max = 30;
                     graficoTop5.options.scales.x.min = 0;
                     graficoTop5.data.labels = [dados.kpis["nome_ram1"], dados.kpis["nome_ram2"], dados.kpis["nome_ram3"], dados.kpis["nome_ram4"], dados.kpis["nome_ram5"]];
 
@@ -652,29 +670,39 @@
 
         const ctx = document.getElementById('processos-criticos');
         const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 500);
+        
 
         gradient.addColorStop(0, 'rgba(255, 0, 111, 0.35)');
         gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');
 
-        new Chart(ctx, {
+
+        const horas = agora.getHours();       // Ex: 14
+        const minutos = agora.getMinutes();   // Ex: 51
+        // const segundos = agora.getSeconds(); // Ex: 30
+
+        // Formatando com dois dígitos (ex: 09:05:02)
+        
+
+        
+
+        criticos = new Chart(ctx, {
         type: 'line',
 
         data: {
             labels: [
-            '00:00',
-            '04:00',
-            '08:00',
-            '12:00',
-            '16:00',
-            '20:00',
-            '00:00'
+            fazHora(horas - 20, minutos),
+            fazHora(horas - 16, minutos),
+            fazHora(horas - 12, minutos),
+            fazHora(horas - 8, minutos),
+            fazHora(horas - 4, minutos),
+            fazHora(horas, minutos)
             ],
 
             datasets: [
             {
                 label: 'Processos Críticos',
 
-                data: [100, 320, 650, 800, 320, 100, 180],
+                data: [dados.criticos["0-4h"], dados.criticos["4-8h"], dados.criticos["8-12h"], dados.criticos["12-16h"], dados.criticos["16-20h"], dados.criticos["20-24h"]],
 
                 borderColor: '#c9023e',
 
@@ -700,7 +728,7 @@
             {
                 label: 'Limite',
 
-                data: [500, 500, 500, 500, 500, 500, 500],
+                data: [dados.kpis.limite, dados.kpis.limite, dados.kpis.limite, dados.kpis.limite, dados.kpis.limite, dados.kpis.limite],
 
                 borderColor: '#ff3b30',
 
@@ -811,7 +839,7 @@
             y: {
                 beginAtZero: true,
 
-                suggestedMax: 900,
+                suggestedMax: 500,
 
                 grid: {
                 color: '#e7e7e7',
@@ -834,7 +862,7 @@
 
             } 
     
-            function carregarTabela() {
+            function carregarTabela(statusFiltro = "todos") {
 
     const tbody = document.getElementById("corpoTabela");
 
@@ -959,6 +987,30 @@
 
     tbody.innerHTML = linhas;
 }
+
+// function fazHora(horas, minutos){
+//     const horaFormatada = [horas, minutos]
+//     .map(unidade => String(unidade).padStart(2, '0'))
+//     .join(':');
+
+
+//     return horaFormatada;
+// }
+
+function fazHora(horas, minutos) {
+  const data = new Date();
+  
+  data.setHours(horas, minutos, 0, 0);
+
+  const hValida = data.getHours();
+  const mValida = data.getMinutes();
+
+  return [hValida, mValida]
+    .map(unidade => String(unidade).padStart(2, '0'))
+    .join(':');
+}
+
+
 
     </script>
 
