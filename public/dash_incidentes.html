@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_incidentes.css">
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+
 </head>
 
 <body>
@@ -114,8 +116,10 @@
                     <div style="border: 1px solid #FFCC00;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                <img style="border: 1px solid #FFCC00;" id="kpi-alerta"
-                                    src="./assets/imgs/incidentes/kpi-alerta.png" alt="">
+                                 <div class="borda-icon" id="icone-total-ativos-geral" style="border: 1px solid #FFCC00;">
+                                    <i data-lucide="triangle-alert"
+                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
+                                </div>
                                 <div class="informacoes-principais">
                                     <span>Total de Alertas Ativos</span>
                                     <h1 id="kpi_total_alertas_todos">10</h1>
@@ -125,7 +129,8 @@
                                 <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
                                 <div class="tooltip-box">
-                                    Soma de falhas de hardware pendentes. Volumes altos indicam instabilidade e risco de perda de posição de aeronaves e rotas.
+                                    Soma de falhas de hardware pendentes. Volumes altos indicam instabilidade e risco de
+                                    perda de posição de aeronaves e rotas.
                                 </div>
                             </div>
                         </div>
@@ -177,8 +182,10 @@
                     <div style="border: 1px solid #C70C0C;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
-                                    src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
+                                <div class="borda-icon" id="icone-servidor" style="border: 1px solid #C70C0C;">
+                                    <i data-lucide="server"
+                                        style="width: 40px; height: 40px; color: #C70C0C; stroke-width: 1.5px;"></i>
+                                </div>
                                 <div class="informacoes-principais">
                                     <span>Servidor com mais Alertas</span>
                                     <h1 id="kpi_mais_alertas">10</h1>
@@ -188,7 +195,8 @@
                                 <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
                                 <div class="tooltip-box">
-                                    Identifica o servidor com maior frequência de incidentes. Estabilizá-lo é prioridade para evitar incidentes de alta escala.
+                                    Identifica o servidor com maior frequência de incidentes. Estabilizá-lo é prioridade
+                                    para evitar incidentes de alta escala.
                                 </div>
                             </div>
                         </div>
@@ -205,8 +213,10 @@
                     <div style="border: 1px solid #C70C0C;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                <img style="border: 1px solid #C70C0C; padding: 9px;" id="kpi-alerta"
-                                    src="./assets/imgs/incidentes/tempo-reparo.png" alt="">
+                                <div class="borda-icon" id="icone-mttr" style="border: 1px solid #C70C0C;">
+                                    <i data-lucide="clock-check"
+                                        style="width: 40px; height: 40px; color: #C70C0C; stroke-width: 1.7px;"></i>
+                                </div>
                                 <div class="informacoes-principais">
                                     <span>Tempo Médio para Reparo</span>
                                     <h1 id="kpi_mttr">5 minutos</h1>
@@ -216,7 +226,8 @@
                                 <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
                                 <div class="tooltip-box">
-                                    Agilidade na resolução de alertas de cada severidade. Reduzi-lo é vital para manter a disponibilidade de 99,9% e o equilíbrio real do sistema SAGITARIO.
+                                    Agilidade na resolução de alertas de cada severidade. Reduzi-lo é vital para manter
+                                    a disponibilidade de 99,9% e o equilíbrio real do sistema SAGITARIO.
                                 </div>
                             </div>
                         </div>
@@ -275,7 +286,10 @@
                                 <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
                                 <div class="tooltip-box">
-                                    Status operacional de cada nó em tempo real. Alertas visuais (<span style="color: #FFCC00;">amarelo</span> ou <span style="color: #C70C0C;">vermelho</span>) indicam instabilidade e risco de Lag de Tela ou Drop de Etiqueta.
+                                    Status operacional de cada nó em tempo real. Alertas visuais (<span
+                                        style="color: #FFCC00;">amarelo</span> ou <span
+                                        style="color: #C70C0C;">vermelho</span>) indicam instabilidade e risco de Lag de
+                                    Tela ou Drop de Etiqueta.
                                 </div>
                             </div>
                         </div>
@@ -298,7 +312,8 @@
                                 <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
                                 <div class="tooltip-box">
-                                    Mapa térmico que identifica padrões e picos de incidentes por dia/hora. Essencial para antecipar períodos de risco e garantir a alta disponibilidade do SAGITARIO.
+                                    Mapa térmico que identifica padrões e picos de incidentes por dia/hora. Essencial
+                                    para antecipar períodos de risco e garantir a alta disponibilidade do SAGITARIO.
                                 </div>
                             </div>
                         </div>
@@ -353,20 +368,23 @@
                         <div style="border: 1px solid #FFCC00;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <img style="border: 1px solid #FFCC00;" id="kpi-alerta"
-                                        src="./assets/imgs/incidentes/kpi-alerta.png" alt="">
+                                    <div class="borda-icon" id="icone-total-ativos" style="border: 1px solid #FFCC00;">
+                                    <i data-lucide="triangle-alert"
+                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
+                                </div>
                                     <div class="informacoes-principais">
                                         <span>Total de Alertas Ativos</span>
                                         <h1 id="kpi_valor_total_alertas">10</h1>
                                     </div>
                                 </div>
                                 <div class="tooltip-info">
-                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
+                                    <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
-                                <div class="tooltip-box">
-                                    Soma de falhas de hardware pendentes. Volumes altos indicam instabilidade e risco de perda de posição de aeronaves e rotas.
+                                    <div class="tooltip-box">
+                                        Soma de falhas de hardware pendentes. Volumes altos indicam instabilidade e
+                                        risco de perda de posição de aeronaves e rotas.
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
@@ -381,20 +399,24 @@
                         <div style="border: 1px solid #C70C0C;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
-                                        src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
+                                    <div class="borda-icon" id="icone-disponilidade" style="border: 1px solid #C70C0C;">
+                                        <i data-lucide="server"
+                                            style="width: 40px; height: 40px; color: #C70C0C; stroke-width: 1.5px;"></i>
+                                    </div>
                                     <div class="informacoes-principais">
                                         <span>Disponibilidade do Servidor</span>
                                         <h1 id="kpi_disponibilidade">100%</h1>
                                     </div>
                                 </div>
                                 <div class="tooltip-info">
-                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
+                                    <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
-                                <div class="tooltip-box">
-                                    Percentual de tempo operacional ininterrupto. Manter o índice de 99% é vital para evitar quedas no monitoramento e garantir a segurança das trajetórias de voo.
+                                    <div class="tooltip-box">
+                                        Percentual de tempo operacional ininterrupto. Manter o índice de 99% é vital
+                                        para evitar quedas no monitoramento e garantir a segurança das trajetórias de
+                                        voo.
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
@@ -409,20 +431,24 @@
                         <div style="border: 1px solid #FFCC00;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <img style="border: 1px solid #FFCC00; padding: 5px;" id="kpi-alerta"
-                                        src="./assets/imgs/incidentes/confiabilidade.png" alt="">
+                                    <div class="borda-icon" id="icone-confiabilidade" style="border: 1px solid #FFCC00;">
+                                    <i data-lucide="gauge"
+                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.7px;"></i>
+                                </div>
                                     <div class="informacoes-principais">
                                         <span>índice de Confiabilidade</span>
                                         <h1 id="indice_confiabilidade">50</h1>
                                     </div>
                                 </div>
                                 <div class="tooltip-info alinhar-esquerda">
-                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
+                                    <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
-                                <div class="tooltip-box">
-                                    Score sintetizado de saúde (0-100) baseado na estabilidade e eficiência de recuperação do nó. Notas baixas alertam para o risco iminente de degradação sistêmica.
+                                    <div class="tooltip-box">
+                                        Score sintetizado de saúde (0-100) baseado na estabilidade e eficiência de
+                                        recuperação do nó. Notas baixas alertam para o risco iminente de degradação
+                                        sistêmica.
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
@@ -486,6 +512,8 @@
     </div>
 
     <script>
+        lucide.createIcons();
+
         let dadosGlobaisAlertas = null;
         let severidadeAtiva = "Todos";
         let statusAtivo = "Todos";
@@ -748,10 +776,12 @@
         if (alertasFiltrados.length == 0) {
             lista_alertas.innerHTML = `
                 <div class="sem-alertas-container">
+                    <i data-lucide="smile" style="width: 70px; height: 70px;" stroke-width="2"></i>  
                     <h2>Nenhum incidente encontrado</h2>
                     <p>Ótimas notícias! Não existem alertas registrados para os filtros selecionados.</p>
                 </div>
             `;
+            lucide.createIcons();
         } else {
             lista_alertas.innerHTML = alertasFiltrados.map(alerta => {
                 const visual = prioridades[alerta.prioridade];
