@@ -120,7 +120,7 @@
 
             <section class="conteudo" id="conteudo">
                     <div class="kpis">
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="perdaPacotes">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -146,7 +146,7 @@
                             </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="latencia">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -172,7 +172,7 @@
                             </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="adsb">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -196,7 +196,7 @@
                             </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="rotas">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -319,7 +319,6 @@
 
         exibirUsuarioAtivo();
         listarServidores();
-        carregarDashboards();
         configurarFiltros();
     }
 
@@ -348,18 +347,19 @@
 
         const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
         const mac_address = opcaoSelecionada.id;
+        const id_empresa = sessionStorage.ID_EMPRESA;
 
         try {
 
            const [d24, d3, d7] = await Promise.all([
 
-                fetch(`/rede/buscarDadosRede/${mac_address}24h`)
+                fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/24h`)
                     .then(r => r.json()),
 
-                fetch(`/rede/buscarDadosRede/${mac_address}/3d`)
+                fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/3d`)
                     .then(r => r.json()),
 
-                fetch(`/rede/buscarDadosRede/${mac_address}/7d`)
+                fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/7d`)
                     .then(r => r.json())
             ]);
 
@@ -407,37 +407,7 @@
 
     // KPIs
 
-    function renderizarKPIPerdaPacotes() {
 
-        const dados = dashboards[filtros.perdaPacotes];
-
-        document.getElementById("perdaPacotesValor").innerHTML =
-            dados.kpis.perda_pacotes + "%";
-    }
-
-    function renderizarKPILatencia() {
-
-        const dados = dashboards[filtros.latencia];
-
-        document.getElementById("latenciaValor").innerHTML =
-            dados.kpis.latencia_media + " ms";
-    }
-
-    function renderizarKPIAdsb() {
-
-        const dados = dashboards[filtros.adsb];
-
-        document.getElementById("adsbValor").innerHTML =
-            dados.kpis.adsb_update + "%";
-    }
-
-    function renderizarKPIRotas() {
-
-        const dados = dashboards[filtros.rotas];
-
-        document.getElementById("rotasValor").innerHTML =
-            dados.kpis.rotas_sem_atualizacao;
-    }
 
     // Estado da KPI
 
@@ -454,6 +424,7 @@
         anterior,
         elementoTexto,
         elementoIcone,
+        elementoDiv,
         menorEhMelhor = true
     ) {
 
@@ -464,7 +435,10 @@
 
         if (atual === anterior) {
             elementoTexto.innerHTML = "estável";
-            elementoIcone.src = "assets/imgs/painel/cpu-cinza.png";
+            elementoIcone.src = "assets/imgs/rede/neutro.png";
+            elementoTexto.style.color = "black";
+            elementoTexto.style.backgroundColor = "white"
+            elementoDiv.style.border = "2px #ebe6e7 solid"
             return;
         }
 
@@ -476,19 +450,25 @@
 
         let cor = "";
         let texto = "";
+        let color = "";
+        let backgroundColor ="";
 
         if (melhorou) {
             texto = "melhorando";
             cor = "verde";
-            color = "green"
+            color = "#20A200"
+            backgroundColor = "#EAFEDC"
         } else {
             texto = "piorando";
             cor = "verm";
-            color = "red"
+            color = "#F54444"
+            backgroundColor = "#FFE4E4"
         }
 
         elementoTexto.innerHTML = texto;
         elementoTexto.style.color = color;
+        elementoDiv.style.backgroundColor = backgroundColor;
+        elementoDiv.style.border = `2px ${color} solid`;
 
         // direção da seta depende da mudança real
         const seta = subiu ? "subindo" : "caindo";
@@ -516,6 +496,7 @@
             anterior,
             document.getElementById("perdaPacotesSituacao"),
             document.getElementById("perdaPacotesIcone"),
+            document.getElementById("perdaPacotes"),
             true // menor é melhor
         );
     }
@@ -539,6 +520,7 @@
             anterior,
             document.getElementById("latenciaSituacao"),
             document.getElementById("latenciaIcone"),
+            document.getElementById("latencia"),
             true //menor é melhor
         );
     }
@@ -562,6 +544,7 @@
             anterior,
             document.getElementById("adsbSituacao"),
             document.getElementById("adsbIcone"),
+            document.getElementById("adsb"),
             false // maior é melhor
         );
     }
@@ -585,6 +568,7 @@
             anterior,
             document.getElementById("rotasSituacao"),
             document.getElementById("rotasIcone"),
+            document.getElementById("rotas"),
             true
         );
     }
@@ -869,6 +853,8 @@
                     select_servidor.options[
                         select_servidor.selectedIndex
                     ].text;
+
+                carregarDashboards()
             });
 
         select_servidor.addEventListener("change", () => {
@@ -877,6 +863,8 @@
                 select_servidor.options[
                     select_servidor.selectedIndex
                 ].text;
+
+        carregarDashboards()
         });
     }
 

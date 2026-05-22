@@ -14,13 +14,15 @@ async function buscarDadosRede(req, res) {
     try {
 
         const periodo = req.params.periodo;
+        const mac_address = req.params.mac_address;
+        const id_empresa = req.params.id_empresa;
 
         const command = new GetObjectCommand({
 
             Bucket: "horus-monitoring",
 
             Key:
-                `client/empresa_1/c0:35:32:c7:0b:59/dashboard_${periodo}.json`
+                `client/empresa_${id_empresa}/${mac_address}/dashboard_rede_${periodo}.json`
         });
 
         const data = await s3.send(command);

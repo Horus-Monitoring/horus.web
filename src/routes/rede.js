@@ -3,7 +3,7 @@ var router = express.Router();
 
 var redeController = require("../controllers/redeController");
 
-router.get("/buscarDadosRede/:mac_address/:periodo", function(req, res){
+router.get("/buscarDadosRede/:id_empresa/:mac_address/:periodo", function(req, res){
     redeController.buscarDadosRede(req,res)
 })
 
