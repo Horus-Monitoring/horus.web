@@ -346,17 +346,20 @@
 
     async function carregarDashboards() {
 
+        const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
+        const mac_address = opcaoSelecionada.id;
+
         try {
 
            const [d24, d3, d7] = await Promise.all([
 
-                fetch("/rede/buscarDadosRede/24h")
+                fetch(`/rede/buscarDadosRede/${mac_address}24h`)
                     .then(r => r.json()),
 
-                fetch("/rede/buscarDadosRede/3d")
+                fetch(`/rede/buscarDadosRede/${mac_address}/3d`)
                     .then(r => r.json()),
 
-                fetch("/rede/buscarDadosRede/7d")
+                fetch(`/rede/buscarDadosRede/${mac_address}/7d`)
                     .then(r => r.json())
             ]);
 
