@@ -958,3 +958,16 @@ section{
   opacity: 1;
   visibility: visible;
 }
+
+.tooltip-info.alinhar-esquerda .tooltip-box {
+  left: auto;        
+  right: -10px;     
+  transform: none;
+}
+
+
+.tooltip-info.alinhar-esquerda .tooltip-box::before {
+  left: auto;                     
+  right: 14px;                    
+  transform: rotate(45deg);       
+}
