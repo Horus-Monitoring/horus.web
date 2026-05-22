@@ -299,7 +299,7 @@ section{
 
 .kpi {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 15px;
 }
 
@@ -318,6 +318,15 @@ section{
   margin-left: 8px;
   display: flex;
   flex-direction: column;
+
+  h1{
+    font-size: 30px;
+  }
+
+  span{
+    font-size: 15px;
+    color: #5F5F5F;
+  }
 }
 
 .filtros {
@@ -371,11 +380,11 @@ section{
   border: 1.5px var(--borda) solid;
   height: 40px;
   padding: 0 10px;
-  border-radius: 8px;
-  margin-top: 20px;
+  border-radius: 10px;
+  margin-top: 15px;
 }
 
-#tempo, .tempo{
+.tempo{
   outline: none;
   width: 100%;
   padding: 0 5px;
@@ -430,7 +439,7 @@ section{
   display: flex;
   background-color: #fff;
   border: 1px solid #E7E4E4;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 20px 30px;
   flex-direction: column;
 
@@ -520,11 +529,6 @@ section{
   width: 100%;
 }
 
-#heatmapFalhas {
-  width: 100%;
-  min-height: 350px;
-}
-
 .legenda-heatmap {
   display: flex;
   flex-direction: row;
@@ -545,6 +549,44 @@ section{
   span {
     font-size: 14px;
   }
+}
+
+.niveis-ativos{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  .ativos-severidade {
+    margin-top: 15px;
+
+    div{
+      display: flex;
+      flex-direction: row;
+      font-size: 14px;
+      justify-content: space-between;
+      align-items: center;
+
+      h2{
+        font-size: 16px;
+      }
+
+      span{
+        color: #5F5F5F;
+      }
+      
+    }
+  }
+}
+
+.severidade{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.indicador-severidade{
+  width: 7px;
+  height: 7px;
+  border-radius: 10px;
 }
 
 .lista-alertas{
