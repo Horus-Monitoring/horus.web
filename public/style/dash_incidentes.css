@@ -971,3 +971,8 @@ section{
   right: 14px;                    
   transform: rotate(45deg);       
 }
+
+.borda-icon{
+  border-radius: 12px;
+  padding: 8px;
+}
