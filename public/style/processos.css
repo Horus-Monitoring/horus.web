@@ -208,12 +208,18 @@
   border: 2px solid #a0a0a0;
   padding: 5px;
   border-radius: 10px;
+  color: #5f5f5f; 
+  font-size: 15px;
 }
 
 .info-alerta {
   border: 2px solid #c70c0c;
   padding: 5px;
   border-radius: 10px;
+  color: #C70C0C;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #FAAAAA;
 }
 
 .graficos {
@@ -465,6 +471,15 @@ canvas {
   justify-content: center;
   width: 90px;
   align-items: center;
+}
+
+.ram_tabela {
+  display: flex;
+  flex-direction: column;
+}
+
+.vermelho-texto {
+  color: #fd3434 !important;
 }
 
 /* Resoluções menores */
