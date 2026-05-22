@@ -831,31 +831,42 @@
 
     function listarServidores() {
 
-        const fkEmpresa =
-            sessionStorage.ID_EMPRESA;
+    const fkEmpresa = sessionStorage.ID_EMPRESA;
 
-        fetch(`/servidores/listarServidores/${fkEmpresa}`)
+    // transforma string em array
+    const servidores = JSON.parse(sessionStorage.ACESSO_SERVIDORES);
 
-            .then(resposta => resposta.json())
+        fetch(`/servidores/listarServidores`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: fkEmpresa,
+                servidoresServer: servidores
+            })
+        })
 
-            .then((lista) => {
+        .then(resposta => resposta.json())
 
-                select_servidor.innerHTML =
-                    lista.map(servidor =>
+        .then((lista) => {
 
-                        `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
-                            ${servidor.hostname}
-                        </option>`
+            select_servidor.innerHTML =
+                lista.map(servidor =>
 
-                    ).join('');
+                    `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
+                        ${servidor.hostname}
+                    </option>`
 
-                nomeServidor.textContent =
-                    select_servidor.options[
-                        select_servidor.selectedIndex
-                    ].text;
+                ).join('');
 
-                carregarDashboards()
-            });
+            nomeServidor.textContent =
+                select_servidor.options[
+                    select_servidor.selectedIndex
+                ].text;
+
+            carregarDashboards()
+        });
 
         select_servidor.addEventListener("change", () => {
 
@@ -864,7 +875,7 @@
                     select_servidor.selectedIndex
                 ].text;
 
-        carregarDashboards()
+            carregarDashboards()
         });
     }
 
