@@ -53,18 +53,26 @@ function exibirServidores(fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function listarServidores(fkEmpresa) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa);
+function listarServidores(fkEmpresa, servidores) {
+
+    console.log("SERVIDORES:", servidores);
+
+    const listaMacs = servidores
+        .map(mac => `'${mac}'`)
+        .join(",");
 
     var instrucaoSql = `
         SELECT 
-        id_servidor, 
-        hostname,
-        mac_address 
+            id_servidor, 
+            hostname,
+            mac_address 
         FROM servidor 
-        WHERE fk_empresa = ${fkEmpresa};
+        WHERE fk_empresa = ${fkEmpresa}
+            AND mac_address IN (${listaMacs});
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+
     return database.executar(instrucaoSql);
 }
 

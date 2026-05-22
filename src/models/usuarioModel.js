@@ -6,7 +6,8 @@ function autenticar(email, senha) {
     )
     var instrucaoSql = `
         SELECT
-            funcionario.id_funcionario, 
+            funcionario.id_funcionario,
+            funcionario.fk_empresa, 
             funcionario.nome,
             funcionario.email,
             funcionario.funcao,
