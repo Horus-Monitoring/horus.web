@@ -45,7 +45,6 @@
                     <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                 </div>
 
-                <button>Gerar Relatório em PDF</button>
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -97,7 +96,8 @@
                         </div>
 
                         <div>
-                            <span id="kpi_disponibilidade" class="valor-kpi" style="color: green;"></span><span class="medida-kpi"> % </span>
+                            <span id="kpi_disponibilidade" class="valor-kpi" style="color: green;"></span><span
+                                class="medida-kpi"> % </span>
                         </div>
 
                         <span>meta: 99.5%</span>
@@ -112,13 +112,14 @@
                         </div>
 
                         <div>
-                            <span id="kpi_risco" class="valor-kpi" style="color: yellow;"></span><span class="medida-kpi"> /100
+                            <span id="kpi_risco" class="valor-kpi" style="color: orange;"></span><span
+                                class="medida-kpi"> /100
                             </span>
                         </div>
 
                         <span>nível: moderado</span>
 
-                        <span class="variacao-kpi" style="color: yellow;">+6 pts</span>
+                        <span class="variacao-kpi" style="color: orange;">+6 pts</span>
                     </div>
 
                     <div class="kpi">
@@ -128,7 +129,8 @@
                         </div>
 
                         <div>
-                            <span id="kpi_criticos" class="valor-kpi" style="color: red;"></span><span class="medida-kpi"> ativos </span>
+                            <span id="kpi_criticos" class="valor-kpi" style="color: red;"></span><span
+                                class="medida-kpi"> ativos </span>
                         </div>
 
                         <span>nível: moderado</span>
@@ -143,7 +145,8 @@
                         </div>
 
                         <div>
-                            <span id="kpi_estabilidade" class="valor-kpi" style="color: rgb(0, 140, 255);"></span><span class="medida-kpi"> % </span>
+                            <span id="kpi_estabilidade" class="valor-kpi" style="color: rgb(0, 140, 255);"></span><span
+                                class="medida-kpi"> % </span>
                         </div>
 
                         <span>meta: 85%</span>
@@ -153,27 +156,13 @@
 
                     <div class="kpi">
                         <div class="topo-kpi">
-                            <span class="nome-kpi">MTTR MÉDIO</span>
-                            <img src="assets/imgs/painel/cronometro.png" alt="" style="background-color: #052c2a;">
-                        </div>
-
-                        <div>
-                            <span id="kpi_mttr" class="valor-kpi" style="color: rgb(56, 255, 228);"></span><span class="medida-kpi"> min </span>
-                        </div>
-
-                        <span>meta: 25 min</span>
-
-                        <span class="variacao-kpi" style="color: rgb(56, 255, 228);">-18%</span>
-                    </div>
-
-                    <div class="kpi">
-                        <div class="topo-kpi">
                             <span class="nome-kpi">TENDÊNCIA OPERACIONAL</span>
                             <img src="assets/imgs/painel/tendencia.png" alt="" style="background-color: #27013b;">
                         </div>
 
                         <div>
-                            <span id="kpi_previsao" class="valor-kpi" style="color: rgb(154, 24, 194);"></span><span class="medida-kpi"> > 4h </span>
+                            <span id="kpi_previsao" class="valor-kpi" style="color: rgb(154, 24, 194);"></span><span
+                                class="medida-kpi"> > 4h </span>
                         </div>
 
                         <span>próx 4h: risco elevado</span>
@@ -191,30 +180,19 @@
                         <canvas id="graficoEstabilidade"></canvas>
                     </div>
 
-                    <div class="tendencia-falhas">
+                    <div id="previsao_falhas" class="tendencia-falhas">
                         <div class="topo-tendencia">
                             <img src="assets/imgs/painel/cerebro.png" alt="" width="40px" height="40px">
                             <span>Previsão de Falhas</span>
                         </div>
-
-                        <div class="item-tendencia">
-                            <span class="metrica">Tendência de aumento nas próximas 4 horas</span>
-                            <span class="descricao">Modelo preditivo estima +5 incidentes médios entre 22:00 e
-                                2:00</span>
-                        </div>
-                        <div class="item-tendencia">
-                            <span class="metrica">Tendência de aumento nas próximas 4 horas</span>
-                            <span class="descricao">Modelo preditivo estima +5 incidentes médios entre 22:00 e
-                                2:00</span>
-                        </div>
-
                     </div>
+
                 </div>
 
                 <div class="linha">
                     <div class="grafico-impacto">
                         <div class="topo-grafico-impacto">
-                            <span>IMPACTO OPERACIONAL POR AMBIENTE</span>
+                            <span>IMPACTO OPERACIONAL POR COMPONENTE</span>
                             <span class="maior-impacto">Processos: CRÍTICO</span>
                         </div>
 
@@ -228,52 +206,24 @@
                         </div>
 
                         <table>
-                            <tr class="header-tabela-fixa">
-                                <th>ÁREA / SISTEMA</th>
-                                <th>INCIDENTES</th>
-                                <th>ANALISTAS</th>
-                                <th>SITUAÇÃO</th>
-                                <th>AÇÃO</th>
-                            </tr>
-                            <tr class="item-tabela">
-                                <td>ATC-CORE-01</td>
-                                <td>7</td>
-                                <td>2</td>
-                                <td><span class="status atencao">ATENÇÃO</span></td>
-                                <td><button class="btn-reatribuir">
-                                        <img src="assets/imgs/painel/adicionar.png" alt="">
-                                        Reatribuir
-                                    </button></td>
-                            </tr>
-                            <tr class="item-tabela">
-                                <td>ATC-CORE-01</td>
-                                <td>7</td>
-                                <td>2</td>
-                                <td><span class="status critico">CRÍTICO</span></td>
-                                <td><button class="btn-reatribuir">
-                                        <img src="assets/imgs/painel/adicionar.png" alt="">
-                                        Reatribuir
-                                    </button></td>
-                            </tr>
-                            <tr class="item-tabela">
-                                <td>ATC-CORE-01</td>
-                                <td>7</td>
-                                <td>2</td>
-                                <td><span class="status normal">NORMAL</span></td>
-                                <td><button class="btn-reatribuir">
-                                        <img src="assets/imgs/painel/adicionar.png" alt="">
-                                        Reatribuir
-                                    </button></td>
-                            </tr>
+                            <thead>
+                                <tr class="header-tabela-fixa">
+                                    <th>ÁREA / SISTEMA</th>
+                                    <th>INCIDENTES</th>
+                                    <th>ANALISTAS</th>
+                                    <th>SITUAÇÃO</th>
+                                    <th>AÇÃO</th>
+                                </tr>
+                            </thead>
 
+                            <tbody id="corpo_tabela_analistas">
+
+                            </tbody>
                         </table>
                     </div>
 
                 </div>
-                <div class="box-relatorio">
-                    <img src="assets/imgs/painel/relatorio.png" alt="">
-                    <span>Exportar Relatório</span>
-                </div>
+                
             </section>
 
         </main>
@@ -282,7 +232,7 @@
 </body>
 
 <script>
-window.onload = () => {
+    window.onload = () => {
         const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
         const btnHamburguer = document.getElementById('hamburguer');
@@ -383,33 +333,25 @@ window.onload = () => {
         }
     });
 
-    const ctx = document.getElementById('graficoImpacto');
+    const ctx_impacto = document.getElementById('graficoImpacto');
 
-    const labels = [
-        'Comunicação',
-        'CPU',
-        'RAM',
-        'Disco',
-        'Temperatura',
-        'Processos'
-    ];
-
-    const valores = [42, 52, 67, 63, 78, 96];
-
-    // cores por nivel de impacto
     function getCor(valor) {
-        if (valor >= 80) return '#ff4d6d'; // vermelho
-        if (valor >= 60) return '#f5a623'; // amarelo
-        return '#4a9eff'; // azul
+        if (valor >= 80) return '#ff4d6d';
+        if (valor >= 60) return '#f5a623';
+        return '#4a9eff';
     }
 
-    new Chart(ctx, {
+    const graficoImpacto = new Chart(ctx_impacto, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: [
+                'CPU',
+                'RAM',
+                'Disco'
+            ],
             datasets: [{
-                data: valores,
-                backgroundColor: valores.map(getCor),
+                data: [],
+                backgroundColor: [],
                 borderRadius: 3,
                 borderSkipped: false,
             }]
@@ -451,30 +393,140 @@ window.onload = () => {
             const resposta = await fetch(`/s3/buscarDadosS3`);
             const dadosS3 = await resposta.json();
             const dados = dadosS3.periodos[periodo];
-            
+
+            console.log(periodo);
+            console.log(dadosS3.periodos);
+
             console.log("DADOS DO S3: ", dadosS3);
-            
+
             // Kpis
             const kpis = dados.kpis
             console.log("KPIS: ", kpis);
 
-            document.getElementById('kpi_disponibilidade').textContent = kpis.disponibilidade_global.valor;
-            document.getElementById('kpi_risco').textContent = Math.round(kpis.nivel_risco.valor);
-            document.getElementById('kpi_criticos').textContent = kpis.incidentes_criticos.valor;
-            document.getElementById('kpi_estabilidade').textContent = Math.round(kpis.estabilidade_operacional.valor);
+            document.getElementById('kpi_disponibilidade').textContent = kpis.disponibilidade_global;
+            document.getElementById('kpi_risco').textContent = Math.round(kpis.nivel_risco);
+            document.getElementById('kpi_criticos').textContent = kpis.incidentes_criticos;
+            document.getElementById('kpi_estabilidade').textContent = Math.round(kpis.estabilidade_operacional);
             document.getElementById('kpi_previsao').textContent = kpis.tendencia_operacional;
 
-            // Gráficos
+            // Gráfico estabilidade
             const dadosGraficoEstabilidade = dados.grafico_estabilidade;
             console.log("Gráfico estabilidade: ", dadosGraficoEstabilidade)
 
+            const valores = dadosGraficoEstabilidade.valores.map(Number);
+
             graficoEstabilidade.data.labels = dadosGraficoEstabilidade.labels;
-            graficoEstabilidade.data.datasets[0].data = dadosGraficoEstabilidade.valores;
-            graficoEstabilidade.data.datasets[1].data = Array(dadosGraficoEstabilidade.labels.length).fill(85);
+            graficoEstabilidade.data.datasets[0].data = valores;
+            graficoEstabilidade.data.datasets[0].pointRadius = valores.map(valor => valor < 85 ? 6 : 0);
+            graficoEstabilidade.data.datasets[0].pointBackgroundColor = valores.map(valor => valor < 85 ? '#ff4d6d' : 'transparent');
+            graficoEstabilidade.data.datasets[1].data = Array(valores.length).fill(85);
+
             graficoEstabilidade.update();
+
+            // Gráfico impacto por componente
+            const dadosImpacto = dados.impacto_por_componente;
+
+            console.log("Gráfico impacto:", dadosImpacto);
+
+            const valoresImpacto = [
+                Number(dadosImpacto.CPU.valor),
+                Number(dadosImpacto.RAM.valor),
+                Number(dadosImpacto.DISCO.valor)
+            ];
+
+            graficoImpacto.data.datasets[0].data = valoresImpacto;
+            graficoImpacto.data.datasets[0].backgroundColor = valoresImpacto.map(getCor);
+            graficoImpacto.update();
+
+            // Box predicão
+            const predicoes = dados.previsao_falhas;
+
+            const container = document.getElementById('previsao_falhas');
+
+            container.innerHTML = `
+                <div class="topo-tendencia">
+                    <img src="assets/imgs/painel/cerebro.png" alt="" width="40px" height="40px">
+                    <span>Previsão de Falhas</span>
+                </div>
+            `;
+
+            if (predicoes.length == 0) {
+                container.innerHTML += `
+                    <div class="item-tendencia">
+                        <span class="metrica">
+                            Nenhum risco previsto
+                        </span>
+
+                        <span class="descricao">
+                            O modelo não identificou tendência crítica.
+                        </span>
+                    </div>
+                `;
+
+            } else {
+                predicoes.forEach(predicao => {
+
+                    container.innerHTML += `
+                        <div class="item-tendencia">
+                            <span class="metrica">
+                                ${predicao.metrica} - ${predicao.nivel_previsao.toUpperCase()}
+                            </span>
+
+                            <span class="descricao">
+                                ${predicao.mensagem}
+                            </span>
+                        </div>
+                    `;
+                });
+            }
+
+       // Tabela necessidade de analistas
+            const tabela = document.getElementById('corpo_tabela_analistas');
+
+            tabela.innerHTML = '';
+
+            const servidores = dados.info_servidores.sort((a, b) => b.incidentes - a.incidentes);
             
+            servidores.forEach(servidor => {
+
+                let situacao = 'NORMAL';
+                let classe = 'normal';
+
+                if (servidor.incidentes >= 10) {
+                    situacao = 'CRÍTICO';
+                    classe = 'critico';
+
+                } else if (servidor.incidentes >= 5) {
+                    situacao = 'ATENÇÃO';
+                    classe = 'atencao';
+                }
+
+                tabela.innerHTML += `
+                    <tr class="item-tabela">
+
+                        <td>${servidor.servidor}</td>
+                        <td>${servidor.incidentes}</td>
+                        <td>${servidor.analistas}</td>
+
+                        <td>
+                            <span class="status ${classe}">
+                                ${situacao}
+                            </span>
+                        </td>
+
+                        <td>
+                            <button class="btn-reatribuir">
+                                <img src="assets/imgs/painel/adicionar.png" alt="">
+                                Reatribuir
+                            </button>
+                        </td>
+
+                    </tr>
+                `;
+            });
+
         } catch (erro) {
-            console.error("ERRO: " + erro);
+            console.error("ERRO: ", erro);
         }
 
     }
