@@ -15,7 +15,7 @@ async function lerJson(key) {
 
     const command = new GetObjectCommand({
 
-        Bucket: "horus-monitoring",
+        Bucket: "horus-monitoring-leticia",
 
         Key: key
     });
@@ -31,24 +31,23 @@ async function capturarDados(req, res) {
 
     try {
 
-        const [kpis, processos, criticos] = await Promise.all([
+        const [processos, criticos] = await Promise.all([
+
+            // lerJson(
+            //     "client/kpis/process_raw_kpis.json"
+            // ),
 
             lerJson(
-                "client/kpis/process_raw_kpis.json"
+                "client/process_raw_kpis.json"
             ),
 
             lerJson(
-                "client/processos/process_raw.json"
-            ),
-
-            lerJson(
-                "client/kpis/process_raw_criticos_4h.json"
+                "client/raw_criticos_4h.json"
             )
 
         ]);
 
         res.json({
-            kpis,
             processos,
             criticos
         });
