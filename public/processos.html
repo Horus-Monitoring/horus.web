@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processos | Horus </title>
+    <title> Processos | Horus </title>
     <link rel="icon" href="./assets/icon/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,7 +118,7 @@
                   
                 <div class="cards">
 
-                    <div class="card-critico pequeno">
+                    <div id="critico" class="card pequeno">
                         <div class="indicador">
                             <div class="titulo">
                                 <div class="card-img" style="background-color: #FAAAAA;">
@@ -129,19 +129,19 @@
                                 </div>
                             </div>
                             <div class="info-critico">
-                                <span id="qtdProcessosCriticos" style="color: #fd3434; font-weight: bold; font-size: 25px;">1</span>
+                                <span id="qtdProcessosCriticos" style="color: #5f5f5f; font-weight: bold; font-size: 25px;">1</span>
                                 <span id="texto-processo" style="color: #5f5f5f; font-size: 15px;">processo afetado</span>
                             </div>
                             <div class="qtd-critico">
-                                <div style="color: #C70C0C; font-size: 15px; font-weight: bold; background-color: #FAAAAA;" class="info-alerta">
+                                <div id="latenciaQtdDiv" class="info-qtd">
                                     <span id="latenciaQtd">1</span>
                                     <span>Latência</span>
                                 </div>
-                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                <div id="cpuQtdDiv" class="info-qtd">
                                     <span id="cpuQtd">0</span>
                                     <span>CPU</span>
                                 </div>
-                                <div style="color: #5f5f5f; font-size: 15px;" class="info-qtd">
+                                <div id="ramQtdDiv" class="info-qtd">
                                     <span id="ramQtd">0</span>
                                     <span>RAM</span>
                                 </div>
@@ -203,8 +203,14 @@
                             </div>
                             <div class="info-latencia">
                                 <span id="nome-proc" class="nome-proc">node</span>
-                                <span id="latencia-proc" class="latencia-proc">100ms</span>
-                                <span id="pid-proc" class="pid-proc">PID: 3456</span>
+                                <div>
+                                    <span id="latencia-proc" class="latencia-proc"></span>
+                                    <span class="latencia-proc">ms</span>
+                                </div>
+                                <div>
+                                    <span class="pid-proc">PID:</span>
+                                    <span id="pid-proc" class="pid-proc"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,54 +274,14 @@
                                 <th>Tempo de Execução</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="proc-cinza">3456</td>
-                                <td class="proc-cinza">node</td>
-                                <td class="proc-cinza">nodejs</td>
-                                <td><span class="proc-alerta">48.2%</span></td>
-                                <td><span class="proc-grave">19.7%</span></td>
-                                <td><span class="proc-grave">100ms</span></td>
-                                <td style="display: flex; justify-content: center;">
-                                    <div style="background-color: #b9f8cf;" class="cor-status">
-                                        <img style="width: 8px; height: 8px;" src="./assets/imgs/processos/bolinha-verde.png">
-                                        <span style="color: #20A200; font-weight: bold; font-size: 15px;">running</span>
-                                    </div>
-                                </td>
-                                <td><span class="proc-cinza">2d 4h</span></td>
-                            </tr>
-                            <tr>
-                                <td class="proc-cinza">1234</td>
-                                <td class="proc-cinza">docker</td>
-                                <td class="proc-cinza">root</td>
-                                <td><span class="proc-estavel">30.5%</span></td>
-                                <td><span class="proc-alerta">12.8%</span></td>
-                                <td><span class="proc-alerta">60ms</span></td>
-                                <td style="display: flex; justify-content: center;">
-                                    <div style="background-color: #9bcffa;" class="cor-status">
-                                        <img style="width: 8px; height: 8px;" src="./assets/imgs/processos/lua.png">
-                                        <span style="color: #308CFF; font-weight: bold; font-size: 15px;">sleeping</span>
-                                    </div>
-                                </td>
-                                <td><span class="proc-cinza">15h</span></td>    
-                            </tr>
-                            <tr>
-                                <td class="proc-cinza">7685</td>
-                                <td class="proc-cinza">chrome.exe</td>
-                                <td class="proc-cinza">leticia</td>
-                                <td><span class="proc-estavel">21.6%</span></td>
-                                <td><span class="proc-estavel">7.9%</span></td>
-                                <td><span class="proc-estavel">35ms</span></td>
-                                <td style="display: flex; justify-content: center;">
-                                    <div style="background-color: #f8eab2;" class="cor-status">
-                                        <img style="width: 8px; height: 8px;" src="./assets/imgs/processos/retangulo-amarelo.png">
-                                        <span style="color: #FFCC00; font-weight: bold; font-size: 15px;">stopped</span>
-                                    </div>
-                                </td>
-                                <td><span class="proc-cinza">40m</span></td>
-                            </tr>
+                        <tbody id="corpoTabela">
                         </tbody>
                     </table>
+                    <div class="paginacao">
+                        <button id="btnPrev">Anterior</button>
+                        <span id="infoPagina"></span>
+                        <button id="btnNext">Próximo</button>
+                    </div>
                 </div>
 
             </section>
@@ -323,12 +289,10 @@
 
     </div>
 
-    <!-- <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script> -->
-
     <script>
 
+        const agora = new Date();
+        
         /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
                     if (funcao == "Gestor") {
@@ -381,7 +345,22 @@
                 }
             });
 
+            const btnCPU = document.getElementById('btnCPU');
+            const btnRAM = document.getElementById('btnRAM');
+
+            const btnTodos = document.getElementById('btnTodos');
+            const btnRunning = document.getElementById('btnRunning');
+            const btnSleeping = document.getElementById('btnSleeping');
+            const btnStopped = document.getElementById('btnStopped');
+
+            const inputPesquisar = document.getElementById("procurar-processo");
+
+
             let dados;
+            let dadosGrafico = { cpu: [], ram: [] };
+            let graficoTop5 = null
+            let criticos = null
+            let graficoAtual = "cpu"
 
             async function capturarDados() {
 
@@ -389,26 +368,49 @@
                     
                 const resposta = await fetch("/processos/capturarDados");
                 dados = await resposta.json();
-                console.log(dados);
+
+                if(dados.processos.kpis.total > 0) {
+                    critico.classList.add('card-critico');
+                    document.getElementById("qtdProcessosCriticos")
+                    qtdProcessosCriticos.classList.add('vermelho-texto');     
+                }
 
                 document.getElementById("qtdProcessosCriticos").innerHTML =
-                    dados.totalCriticos;
+                    dados.processos.kpis.total;
 
-                if (dados.totalCriticos > 1) {
+                if(dados.processos.kpis.total > 1) {
                     document.getElementById("texto-processo").innerHTML = "processos afetados"
                 }
 
-                document.getElementById("latenciaQtd").innerHTML = dados.latencia;
-                document.getElementById("cpuQtd").innerHTML = dados.cpu;
-                document.getElementById("ramQtd").innerHTML = dados.ram;
-                document.getElementById("qtdRunning").innerHTML = dados.running;
-                document.getElementById("qtdSleeping").innerHTML = dados.sleeping;
-                document.getElementById("qtdStopped").innerHTML = dados.stopped;
-                document.getElementById("nome-proc").innerHTML = dados.nome;
-                document.getElementById("latencia-proc").innerHTML = dados.latencia_ms;
-                document.getElementById("pid-proc").innerHTML = dados.pid;
+                if(dados.processos.kpis.latencia > 0) {
+                    document.getElementById("latenciaQtdDiv");
+                    latenciaQtdDiv.classList.add("info-alerta");
+                }
+
+                if(dados.processos.kpis.cpu > 0) {
+                    document.getElementById("cpuQtdDiv");
+                    cpuQtdDiv.classList.add("info-alerta");
+                }
+
+                if(dados.processos.kpis.ram > 0) {
+                    document.getElementById("ramQtdDiv");
+                    ramQtdDiv.classList.add("info-alerta");
+                }
+
+                document.getElementById("latenciaQtd").innerHTML = dados.processos.kpis.latencia;
+                document.getElementById("cpuQtd").innerHTML = dados.processos.kpis.cpu;
+                document.getElementById("ramQtd").innerHTML = dados.processos.kpis.ram;
+                document.getElementById("qtdRunning").innerHTML = dados.processos.kpis.running;
+                document.getElementById("qtdSleeping").innerHTML = dados.processos.kpis.sleeping;
+                document.getElementById("qtdStopped").innerHTML = dados.processos.kpis.stopped;
+                document.getElementById("nome-proc").innerHTML = dados.processos.kpis.nome;
+                document.getElementById("latencia-proc").innerHTML = dados.processos.kpis.latencia_ms;
+                document.getElementById("pid-proc").innerHTML = dados.processos.kpis.pid;
 
                 carregarDados();
+                carregarTabela(filtroAtual, pesquisarAtual);
+
+                setTimeout(capturarDados, 60000)
                     
                 
                 } catch (erro) {
@@ -422,19 +424,39 @@
 
             function carregarDados() {
 
-                console.log(dados)
-                
-            const dadosGrafico = {
-                    cpu: [dados["cpu-1"], dados["cpu-2"], dados["cpu-3"], dados["cpu-4"], dados["cpu-5"]],
-                    ram: [dados["ram-1"], dados["ram-2"], dados["ram-3"], dados["ram-4"], dados["ram-5"]]
-                };
+            dadosGrafico.cpu = [
+                dados.processos.kpis["cpu_1"],
+                dados.processos.kpis["cpu_2"],
+                dados.processos.kpis["cpu_3"],
+                dados.processos.kpis["cpu_4"],
+                dados.processos.kpis["cpu_5"]
+            ];
 
-                const graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
+            dadosGrafico.ram = [
+                dados.processos.kpis["ram_1"],
+                dados.processos.kpis["ram_2"],
+                dados.processos.kpis["ram_3"],
+                dados.processos.kpis["ram_4"],
+                dados.processos.kpis["ram_5"]
+            ];
+
+                if(graficoTop5){
+                    graficoTop5.destroy()
+                    graficoTop5 = null; 
+                }
+
+
+                if(criticos){
+                    criticos.destroy()
+                    criticos = null; 
+                }
+
+                 graficoTop5 = new Chart(document.getElementById('grafico-top5'), {
                     type: 'bar',
 
                     data: {
-                        labels: ["banana", "queijo", "euamoqueijo", "hahaha", "é"],
-                        /*[dados["nome_cpu1"], dados["nome_cpu2"], dados["nome_cpu3"], dados["nome_cpu4"], dados["nome_cpu5"]],*/
+                        labels: [dados.processos.kpis["nome_cpu_1"], dados.processos.kpis["nome_cpu_2"], dados.processos.kpis["nome_cpu_3"], 
+                        dados.processos.kpis["nome_cpu_4"], dados.processos.kpis["nome_cpu_5"]],
 
                         datasets: [{
                             label: 'CPU %',
@@ -459,7 +481,7 @@
 
                         layout: {
                             padding: {
-                                right: 35
+                                right: 70
                             }
                         },
 
@@ -553,255 +575,502 @@
                     }]
                 });
 
-                const btnCPU = document.getElementById('btnCPU');
-                const btnRAM = document.getElementById('btnRAM');
+                if (graficoAtual === "ram") {
+                    btnRAM.click();
+                } else {
+                    btnCPU.click();
+                }
 
-                btnCPU.addEventListener('click', () => {
+            const ctx = document.getElementById('processos-criticos');
+            const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 500);
+        
 
-                    graficoTop5.data.datasets[0].data = dadosGrafico.cpu;
-
-                    graficoTop5.data.datasets[0].label = 'CPU %';
-
-                    graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
-
-                    graficoTop5.update();
-
-                    btnCPU.classList.add('ativo');
-                    btnRAM.classList.remove('ativo');
-                });
-
-                btnRAM.addEventListener('click', () => {
-
-                    graficoTop5.data.datasets[0].data = dadosGrafico.ram;
-
-                    graficoTop5.data.datasets[0].label = 'RAM %';
-
-                    graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
-
-                    graficoTop5.update();
-
-                    btnRAM.classList.add('ativo');
-                    btnCPU.classList.remove('ativo');
-                });
-
-                const btnTodos = document.getElementById('btnTodos');
-                const btnRunning = document.getElementById('btnRunning');
-                const btnSleeping = document.getElementById('btnSleeping');
-                const btnStopped = document.getElementById('btnStopped');
-
-                btnTodos.addEventListener('click', () => {
-                    btnTodos.classList.add('ativo');
-                    btnRunning.classList.remove('ativo');
-                    btnSleeping.classList.remove('ativo');
-                    btnStopped.classList.remove('ativo');
-                });
-
-                btnRunning.addEventListener('click', () => {
-                    btnRunning.classList.add('ativo');
-                    btnTodos.classList.remove('ativo');
-                    btnSleeping.classList.remove('ativo');
-                    btnStopped.classList.remove('ativo');
-                });
-
-                btnSleeping.addEventListener('click', () => {
-                    btnSleeping.classList.add('ativo');
-                    btnTodos.classList.remove('ativo');
-                    btnRunning.classList.remove('ativo');
-                    btnStopped.classList.remove('ativo');
-                });
-
-                btnStopped.addEventListener('click', () => {
-                    btnStopped.classList.add('ativo');
-                    btnTodos.classList.remove('ativo');
-                    btnRunning.classList.remove('ativo');
-                    btnSleeping.classList.remove('ativo');
-                });
+            gradient.addColorStop(0, 'rgba(255, 0, 111, 0.35)');
+            gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');
 
 
-        const ctx = document.getElementById('processos-criticos');
-        const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 500);
+            const horas = agora.getHours();       
+            const minutos = agora.getMinutes();   
 
-        gradient.addColorStop(0, 'rgba(255, 0, 111, 0.35)');
-        gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');
+        
+                criticos = new Chart(ctx, {
+                type: 'line',
 
-        new Chart(ctx, {
-        type: 'line',
+                data: {
+                    labels: [
+                    fazHora(horas - 24, minutos),
+                    fazHora(horas - 21, minutos),
+                    fazHora(horas - 18, minutos),
+                    fazHora(horas - 15, minutos),
+                    fazHora(horas - 12, minutos),
+                    fazHora(horas - 9, minutos),
+                    fazHora(horas - 6, minutos),
+                    fazHora(horas - 3, minutos),
+                    fazHora(horas, minutos)
+                    ],
 
-        data: {
-            labels: [
-            '00:00',
-            '04:00',
-            '08:00',
-            '12:00',
-            '16:00',
-            '20:00',
-            '00:00'
-            ],
+                    datasets: [
+                    {
+                        label: 'Processos Críticos',
 
-            datasets: [
-            {
-                label: 'Processos Críticos',
+                        data: [dados.criticos["21-23h59min"], dados.criticos["18-20h59min"], dados.criticos["15-17h59min"], dados.criticos["12-14h59min"], 
+                        dados.criticos["9-11h59min"], dados.criticos["6-8h59min"], dados.criticos["3-5h59min"], dados.criticos["0-2h59min"], dados.criticos["atual"]],
 
-                data: [100, 320, 650, 800, 320, 100, 180],
+                        borderColor: '#c9023e',
 
-                borderColor: '#c9023e',
+                        backgroundColor: gradient,
 
-                backgroundColor: gradient,
+                        fill: true,
 
-                fill: true,
+                        tension: 0.4,
 
-                tension: 0.4,
+                        borderWidth: 2,
 
-                borderWidth: 2,
+                        pointRadius: 2,
 
-                pointRadius: 2,
+                        pointHoverRadius: 2,
 
-                pointHoverRadius: 2,
+                        pointBackgroundColor: '#ffffff',
 
-                pointBackgroundColor: '#ffffff',
+                        pointBorderColor: '#c9023e',
 
-                pointBorderColor: '#c9023e',
-
-                pointBorderWidth: 3
-            },
-
-            {
-                label: 'Limite',
-
-                data: [500, 500, 500, 500, 500, 500, 500],
-
-                borderColor: '#ff3b30',
-
-                borderDash: [10, 10],
-
-                borderWidth: 2,
-
-                pointRadius: 0,
-
-                fill: false
-            }
-            ]
-        },
-
-        options: {
-            responsive: true,
-
-            maintainAspectRatio: false,
-
-            plugins: {
-            legend: {
-                position: 'bottom',
-
-                labels: {
-                    usePointStyle: true,
-
-                    padding: 15,
-
-                    color: '#5f5f5f',
-
-                    font: {
-                        size: 14
+                        pointBorderWidth: 3
                     },
 
-                    generateLabels(chart) {
+                    {
+                        label: 'Limite de Criticidade (30%)',
 
-                        const datasets = chart.data.datasets;
+                        data: Array(Object.keys(dados.criticos).length).fill(dados.processos.kpis.limite),
 
-                        return datasets.map((dataset, i) => {
+                        borderColor: '#ff3b30',
 
-                            if (dataset.label === 'Limite') {
+                        borderDash: [10, 10],
 
-                                return {
-                                    text: dataset.label,
+                        borderWidth: 2,
 
-                                    strokeStyle: dataset.borderColor,
+                        pointRadius: 0,
 
-                                    lineDash: dataset.borderDash,
+                        fill: false
+                    }
+                    ]
+                },
 
-                                    lineWidth: 2,
+                options: {
+                    responsive: true,
 
-                                    pointStyle: 'line',
+                    maintainAspectRatio: false,
 
-                                    hidden: !chart.isDatasetVisible(i),
+                    plugins: {
+                    legend: {
+                        position: 'bottom',
 
-                                    datasetIndex: i
-                                };
+                        labels: {
+                            usePointStyle: true,
+
+                            pointStyle: 'circle',
+
+                            boxWidth: 6,
+
+                            boxHeight: 6,
+
+                            padding: 15,
+
+                            color: '#5f5f5f',
+
+                            font: {
+                                size: 14
+                            },
+
+                            generateLabels(chart) {
+
+                                const datasets = chart.data.datasets;
+
+                                return datasets.map((dataset, i) => {
+
+                                    if (dataset.label === 'Limite de Criticidade (30%)') {
+
+                                        return {
+                                            text: dataset.label,
+
+                                            strokeStyle: dataset.borderColor,
+
+                                            lineDash: dataset.borderDash,
+
+                                            lineWidth: 2,
+
+                                            pointStyle: 'line',
+
+                                            hidden: !chart.isDatasetVisible(i),
+
+                                            datasetIndex: i
+                                        };
+                                    }
+
+                                    return {
+                                        text: dataset.label,
+
+                                        fillStyle: dataset.borderColor,
+
+                                        strokeStyle: dataset.borderColor,
+
+                                        pointStyle: 'circle',
+
+                                        hidden: !chart.isDatasetVisible(i),
+
+                                        datasetIndex: i
+                                    };
+                                });
                             }
+                        }
+                    },
 
-                            return {
-                                text: dataset.label,
+                    tooltip: {
+                        backgroundColor: '#2f2f2f',
+                        padding: 12,
 
-                                fillStyle: dataset.borderColor,
+                        titleFont: {
+                        size: 14
+                        },
 
-                                strokeStyle: dataset.borderColor,
+                        bodyFont: {
+                        size: 14
+                        }
+                    }
+                    },
 
-                                pointStyle: 'rect',
+                    scales: {
+                    x: {
+                        grid: {
+                        color: '#e7e7e7',
+                        borderDash: [5, 5]
+                        },
 
-                                hidden: !chart.isDatasetVisible(i),
+                        ticks: {
+                        color: '#555',
 
-                                datasetIndex: i
-                            };
-                        });
+                        font: {
+                            size: 16
+                        }
+                        }
+                    },
+
+                    y: {
+                        beginAtZero: true,
+
+                        grid: {
+                        color: '#e7e7e7',
+                        borderDash: [5, 5]
+                        },
+
+                        ticks: {
+                        color: '#555',
+
+                        stepSize: 160,
+
+                        font: {
+                            size: 16
+                        }
+                        }
+                    }
                     }
                 }
-            },
+                });
 
-            tooltip: {
-                backgroundColor: '#2f2f2f',
-                padding: 12,
-
-                titleFont: {
-                size: 14
-                },
-
-                bodyFont: {
-                size: 14
-                }
             }
-            },
 
-            scales: {
-            x: {
-                grid: {
-                color: '#e7e7e7',
-                borderDash: [5, 5]
-                },
+            let filtroAtual = "todos";
+            let pesquisarAtual = "";
+            let paginaAtual = 1;
+            const itensPorPagina = 15;
 
-                ticks: {
-                color: '#555',
+            function obterProcessosFiltrados() {
 
-                font: {
-                    size: 16
-                }
-                }
-            },
+                return dados.processos.dados.filter(processo => {
 
-            y: {
-                beginAtZero: true,
+                    if (filtroAtual !== "todos" &&
+                        processo.status.toLowerCase() !== filtroAtual.toLowerCase()) {
+                        return false;
+                    }
 
-                suggestedMax: 900,
+                    const termo = pesquisarAtual.toLowerCase().trim();
+                    const nomeProcesso = (processo.nome || "").toLowerCase();
+                    const pidProcesso = String(processo.pid);
 
-                grid: {
-                color: '#e7e7e7',
-                borderDash: [5, 5]
-                },
+                    const correspondePesquisa =
+                        nomeProcesso.startsWith(termo) ||
+                        pidProcesso.startsWith(termo);
 
-                ticks: {
-                color: '#555',
+                    if (termo !== "" && !correspondePesquisa) {
+                        return false;
+                    }
 
-                stepSize: 160,
-
-                font: {
-                    size: 16
-                }
-                }
+                    return true;
+                });
             }
-            }
-        }
-        });
 
-            } 
+            function totalPaginas() {
+                const processosFiltrados = obterProcessosFiltrados();
+                return Math.ceil(processosFiltrados.length / itensPorPagina);
+            }
+
+            function mudarPagina(novaPagina) {
+                paginaAtual = novaPagina;
+                carregarTabela(filtroAtual, pesquisarAtual);
+            }
             
+            function carregarTabela(statusFiltro = "todos", textoPesquisa = "") {
+
+                const tbody = document.getElementById("corpoTabela");
+                const processosFiltrados = obterProcessosFiltrados();
+
+                const inicio = (paginaAtual - 1) * itensPorPagina;
+                const fim = inicio + itensPorPagina;
+
+                const pagina = processosFiltrados.slice(inicio, fim);
+
+                let linhas = "";
+
+
+                pagina.forEach(processo => {
+
+                    let classeCPU = "";
+                    let classeRAM = "";
+                    let classeLatencia = "";
+                    let usuario = "";
+                    let nome = "";
+
+                    if (processo.cpu >= 80) {
+                        classeCPU = "proc-grave";
+                    } else if (processo.cpu > 50) {
+                        classeCPU = "proc-alerta";
+                    } else {
+                        classeCPU = "proc-estavel";
+                    }
+
+                    if (processo.ram_percent > 20) {
+                        classeRAM = "proc-grave";
+                    } else if (processo.ram_percent > 10) {
+                        classeRAM = "proc-alerta";
+                    } else {
+                        classeRAM = "proc-estavel";
+                    }
+
+                    if (processo.latencia_ms > 100) {
+                        classeLatencia = "proc-grave";
+                    } else if (processo.latencia_ms > 50) {
+                        classeLatencia = "proc-alerta";
+                    } else {
+                        classeLatencia = "proc-estavel";
+                    }
+
+                    let corFundo = "";
+                    let corTexto = "";
+                    let icone = "";
+
+                    if (processo.status === "running") {
+                        corFundo = "#b9f8cf";
+                        corTexto = "#20A200";
+                        icone = "./assets/imgs/processos/bolinha-verde.png";
+
+                    } else if (processo.status === "sleeping") {
+                        corFundo = "#9bcffa";
+                        corTexto = "#308CFF";
+                        icone = "./assets/imgs/processos/lua.png";
+
+                    } else {
+                        corFundo = "#f8eab2";
+                        corTexto = "#FFCC00";
+                        icone = "./assets/imgs/processos/retangulo-amarelo.png";
+                    }
+
+                    if (processo.usuario == "") {
+                        usuario = `<i>usuário não identificado</i>`
+                    } else {
+                        usuario = processo.usuario
+                    }
+
+                    if (processo.nome == "") {
+                        nome = `<i>nome não identificado</i>`
+                    } else {
+                        nome = processo.nome
+                    }
+
+                    linhas += `
+                        <tr>
+                            <td class="proc-cinza">${processo.pid}</td>
+                            <td class="proc-cinza">${nome}</td>
+                            <td class="proc-cinza">${usuario}</td>
+
+                            <td>
+                                <span class="${classeCPU}">
+                                    ${processo.cpu}%
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="${classeRAM}">
+                                    <div class = "ram_tabela">
+                                        <span>${processo.ram_percent}%</span>
+                                        <span>${processo.ram_mb} MB</span>
+                                    </div>
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="${classeLatencia}">
+                                    ${processo.latencia_ms}ms
+                                </span>
+                            </td>
+
+                            <td class="td-status">
+                                <div class="cor-status"
+                                    style="background-color:${corFundo};">
+
+                                    <img style="width:8px; height:8px;"
+                                        src="${icone}">
+
+                                    <span style="
+                                        color:${corTexto};
+                                        font-weight:bold;
+                                        font-size:15px;
+                                    ">
+                                        ${processo.status}
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="proc-cinza">
+                                    ${processo.tempo_execucao}
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tbody.innerHTML = linhas;
+                infoPagina.innerHTML = `Página ${paginaAtual} de ${totalPaginas()}`;
+                btnPrev.disabled = paginaAtual === 1;
+                btnNext.disabled = paginaAtual === totalPaginas();
+            }
+
+            const btnPrev = document.getElementById("btnPrev");
+            const btnNext = document.getElementById("btnNext");
+            const infoPagina = document.getElementById("infoPagina");
+
+            btnPrev.addEventListener("click", () => {
+                if (paginaAtual > 1) {
+                    paginaAtual--;
+                    carregarTabela(filtroAtual, pesquisarAtual);
+                }
+            });
+
+            btnNext.addEventListener("click", () => {
+                if (paginaAtual < totalPaginas()) {
+                    paginaAtual++;
+                    carregarTabela(filtroAtual, pesquisarAtual);
+                }
+            });
+
+            btnCPU.addEventListener('click', () => {
+
+            graficoAtual = "cpu";
+
+            graficoTop5.data.datasets[0].data = dadosGrafico.cpu;
+            graficoTop5.data.datasets[0].label = 'CPU %';
+            graficoTop5.data.datasets[0].backgroundColor = 'rgba(139, 92, 246, 0.75)';
+            graficoTop5.options.scales.x.max = 100;
+            graficoTop5.options.scales.x.min = 0;
+            graficoTop5.data.labels = [dados.processos.kpis["nome_cpu_1"], dados.processos.kpis["nome_cpu_2"], dados.processos.kpis["nome_cpu_3"], 
+            dados.processos.kpis["nome_cpu_4"], dados.processos.kpis["nome_cpu_5"]];
+            graficoTop5.update();
+
+            btnCPU.classList.add('ativo');
+            btnRAM.classList.remove('ativo');
+            });  
+
+            btnRAM.addEventListener('click', () => {
+
+            graficoAtual = "ram";
+
+            graficoTop5.data.datasets[0].data = dadosGrafico.ram;
+            graficoTop5.data.datasets[0].label = 'RAM %';
+            graficoTop5.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.75)';
+            const maiorRAM = Math.max(...dadosGrafico.ram);
+            graficoTop5.options.scales.x.max = Math.ceil(maiorRAM);
+            graficoTop5.options.scales.x.min = 0;
+            graficoTop5.data.labels = [dados.processos.kpis["nome_ram_1"], dados.processos.kpis["nome_ram_2"], dados.processos.kpis["nome_ram_3"], 
+            dados.processos.kpis["nome_ram_4"], dados.processos.kpis["nome_ram_5"]];
+            graficoTop5.update();
+
+            btnRAM.classList.add('ativo');
+            btnCPU.classList.remove('ativo');
+            });
+
+
+            btnTodos.addEventListener('click', () => {
+                paginaAtual = 1;
+                filtroAtual = "todos";
+                carregarTabela(filtroAtual, pesquisarAtual);
+
+                btnTodos.classList.add('ativo');
+                btnRunning.classList.remove('ativo');
+                btnSleeping.classList.remove('ativo');
+                btnStopped.classList.remove('ativo');
+            });
+
+            btnRunning.addEventListener('click', () => {
+                paginaAtual=1;
+                filtroAtual = "running";
+                carregarTabela(filtroAtual, pesquisarAtual);
+
+                btnRunning.classList.add('ativo');
+                btnTodos.classList.remove('ativo');
+                btnSleeping.classList.remove('ativo');
+                btnStopped.classList.remove('ativo');
+            });
+
+            btnSleeping.addEventListener('click', () => {
+                paginaAtual=1;
+                filtroAtual = "sleeping";
+                carregarTabela(filtroAtual, pesquisarAtual);
+
+                btnSleeping.classList.add('ativo');
+                btnTodos.classList.remove('ativo');
+                btnRunning.classList.remove('ativo');
+                btnStopped.classList.remove('ativo');
+            });
+
+            btnStopped.addEventListener('click', () => {
+                paginaAtual=1;
+                filtroAtual = "stopped";
+                carregarTabela(filtroAtual, pesquisarAtual);
+
+                btnStopped.classList.add('ativo');
+                btnTodos.classList.remove('ativo');
+                btnRunning.classList.remove('ativo');
+                btnSleeping.classList.remove('ativo');
+            });
+
+            inputPesquisar.addEventListener("input", () => {
+
+                pesquisarAtual = inputPesquisar.value;
+                paginaAtual = 1;
+                carregarTabela(filtroAtual, pesquisarAtual);
+            });
+
+            function fazHora(horas, minutos) {
+            const data = new Date();
+            
+            data.setHours(horas, minutos, 0, 0);
+
+            const hValida = data.getHours();
+            const mValida = data.getMinutes();
+
+            return [hValida, mValida]
+                .map(unidade => String(unidade).padStart(2, '0'))
+                .join(':');
+            }
 
     </script>
 
