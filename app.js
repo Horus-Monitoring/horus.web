@@ -5,7 +5,7 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 // Acima, temos o uso do operador ternário para definir o caminho do arquivo .env
 // A sintaxe do operador ternário é: condição ? valor_se_verdadeiro : valor_se_falso
 
-require("dotenv").config({ path: caminho_env });
+require("dotenv").config({path: caminho_env, override: true});
 
 var AWS = require("@aws-sdk/client-s3");
 

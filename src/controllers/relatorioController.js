@@ -1,6 +1,5 @@
 const path = require("path");
 const { spawn } = require("child_process");
-require("dotenv").config({ path: ".env.dev" });
 
 async function gerarRelatorio(req, res) {
 
