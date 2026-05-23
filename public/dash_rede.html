@@ -82,10 +82,15 @@
                                     <select id="select_servidor">
                                     </select>
                                 </div>
-
-                                <div class="alertas">
-                                    <img src="assets/imgs/rede/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
-                                </div>
+                                <a href="dash_incidentes.html">
+                                    <div class="alertas" id="alertasBox">
+                                        <img id="alertaIcone"src="assets/imgs/rede/alerta-lar.png" alt="" style="width: 12px !important; height: 12 px !important;">
+                                        
+                                        <span id="alertaTexto">
+                                            0 alertas
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
 
@@ -120,7 +125,7 @@
 
             <section class="conteudo" id="conteudo">
                     <div class="kpis">
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="perdaPacotes">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -146,7 +151,7 @@
                             </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="latencia">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -172,7 +177,7 @@
                             </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="adsb">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -196,7 +201,7 @@
                             </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="rotas">
                             <div class="nome">
                                 <div class="tooltip-info">
                                     <img src="assets/imgs/rede/info.png" alt="Informação">
@@ -319,7 +324,6 @@
 
         exibirUsuarioAtivo();
         listarServidores();
-        carregarDashboards();
         configurarFiltros();
     }
 
@@ -343,33 +347,86 @@
     let graficoTransferencia = null;
     let graficoLatencia = null;
     let graficoBanda = null;
+    let alertasAtivos = [];
 
     async function carregarDashboards() {
 
-        try {
+    const opcaoSelecionada =
+        select_servidor.options[
+            select_servidor.selectedIndex
+        ];
 
-           const [d24, d3, d7] = await Promise.all([
+    const mac_address =
+        opcaoSelecionada.id;
 
-                fetch("/rede/buscarDadosRede/24h")
-                    .then(r => r.json()),
+    const id_empresa =
+        sessionStorage.ID_EMPRESA;
 
-                fetch("/rede/buscarDadosRede/3d")
-                    .then(r => r.json()),
+    try {
 
-                fetch("/rede/buscarDadosRede/7d")
-                    .then(r => r.json())
-            ]);
+        const [
+            d24,
+            d3,
+            d7
+        ] = await Promise.all([
 
-            dashboards["24"] = d24;
-            dashboards["3"] = d3;
-            dashboards["7"] = d7;
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/24h`)
+                .then(r => r.json()),
 
-            renderizarTudo();
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/3d`)
+                .then(r => r.json()),
 
-        } catch (erro) {
-            console.error("Erro ao carregar dashboards:", erro);
-        }
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/7d`)
+                .then(r => r.json())
+        ]);
+
+        dashboards["24"] = d24;
+        dashboards["3"] = d3;
+        dashboards["7"] = d7;
+
+        await carregarAlertas();
+
+        renderizarTudo();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar dashboards:",
+            erro
+        );
     }
+}
+    function agruparDados(labels, valores, tamanhoGrupo = 7) {
+
+    const novasLabels = [];
+    const novosValores = [];
+
+    for (let i = 0; i < valores.length; i += tamanhoGrupo) {
+
+        const blocoValores =
+            valores.slice(i, i + tamanhoGrupo);
+
+        const blocoLabels =
+            labels.slice(i, i + tamanhoGrupo);
+
+        const media =
+            blocoValores.reduce((a, b) => a + b, 0)
+            / blocoValores.length;
+
+        novosValores.push(
+            Number(media.toFixed(2))
+        );
+
+        novasLabels.push(
+            blocoLabels[blocoLabels.length - 1]
+        );
+    }
+
+    return {
+        labels: novasLabels,
+        valores: novosValores
+    };
+}
 
     function configurarFiltros() {
 
@@ -404,37 +461,7 @@
 
     // KPIs
 
-    function renderizarKPIPerdaPacotes() {
 
-        const dados = dashboards[filtros.perdaPacotes];
-
-        document.getElementById("perdaPacotesValor").innerHTML =
-            dados.kpis.perda_pacotes + "%";
-    }
-
-    function renderizarKPILatencia() {
-
-        const dados = dashboards[filtros.latencia];
-
-        document.getElementById("latenciaValor").innerHTML =
-            dados.kpis.latencia_media + " ms";
-    }
-
-    function renderizarKPIAdsb() {
-
-        const dados = dashboards[filtros.adsb];
-
-        document.getElementById("adsbValor").innerHTML =
-            dados.kpis.adsb_update + "%";
-    }
-
-    function renderizarKPIRotas() {
-
-        const dados = dashboards[filtros.rotas];
-
-        document.getElementById("rotasValor").innerHTML =
-            dados.kpis.rotas_sem_atualizacao;
-    }
 
     // Estado da KPI
 
@@ -451,6 +478,7 @@
         anterior,
         elementoTexto,
         elementoIcone,
+        elementoDiv,
         menorEhMelhor = true
     ) {
 
@@ -461,7 +489,10 @@
 
         if (atual === anterior) {
             elementoTexto.innerHTML = "estável";
-            elementoIcone.src = "assets/imgs/painel/cpu-cinza.png";
+            elementoIcone.src = "assets/imgs/rede/neutro.png";
+            elementoTexto.style.color = "black";
+            elementoTexto.style.backgroundColor = "white"
+            elementoDiv.style.border = "2px #ebe6e7 solid"
             return;
         }
 
@@ -473,19 +504,25 @@
 
         let cor = "";
         let texto = "";
+        let color = "";
+        let backgroundColor ="";
 
         if (melhorou) {
             texto = "melhorando";
             cor = "verde";
-            color = "green"
+            color = "#20A200"
+            backgroundColor = "#EAFEDC"
         } else {
             texto = "piorando";
             cor = "verm";
-            color = "red"
+            color = "#F54444"
+            backgroundColor = "#FFE4E4"
         }
 
         elementoTexto.innerHTML = texto;
         elementoTexto.style.color = color;
+        elementoDiv.style.backgroundColor = backgroundColor;
+        elementoDiv.style.border = `2px ${color} solid`;
 
         // direção da seta depende da mudança real
         const seta = subiu ? "subindo" : "caindo";
@@ -513,6 +550,7 @@
             anterior,
             document.getElementById("perdaPacotesSituacao"),
             document.getElementById("perdaPacotesIcone"),
+            document.getElementById("perdaPacotes"),
             true // menor é melhor
         );
     }
@@ -536,6 +574,7 @@
             anterior,
             document.getElementById("latenciaSituacao"),
             document.getElementById("latenciaIcone"),
+            document.getElementById("latencia"),
             true //menor é melhor
         );
     }
@@ -559,6 +598,7 @@
             anterior,
             document.getElementById("adsbSituacao"),
             document.getElementById("adsbIcone"),
+            document.getElementById("adsb"),
             false // maior é melhor
         );
     }
@@ -582,291 +622,324 @@
             anterior,
             document.getElementById("rotasSituacao"),
             document.getElementById("rotasIcone"),
+            document.getElementById("rotas"),
             true
         );
     }
 
-    function renderizarGraficoTransferencia() {
+    function agruparDados(labels, valores, tamanhoGrupo = 7) {
 
-        const dados = dashboards[filtros.transferencia];
+    const novasLabels = [];
+    const novosValores = [];
 
-        const chartDom =
-            document.getElementById("graficoTransferencia");
+    for (let i = 0; i < valores.length; i += tamanhoGrupo) {
 
-        if (!graficoTransferencia) {
-            graficoTransferencia = echarts.init(chartDom);
-        }
+        const blocoValores =
+            valores.slice(i, i + tamanhoGrupo);
 
-        graficoTransferencia.setOption({
+        const blocoLabels =
+            labels.slice(i, i + tamanhoGrupo);
 
-            tooltip: {
-                trigger: 'axis'
-            },
+        const media =
+            blocoValores.reduce((a, b) => a + b, 0)
+            / blocoValores.length;
 
-            legend: {
-                data: ['Rastreamento', 'Rotas', 'Correlação']
-            },
+        novosValores.push(
+            Number(media.toFixed(2))
+        );
 
-            grid: {
-                left: '5%',
-                right: '5%',
-                bottom: '15%',
-                containLabel: true
-            },
+        novasLabels.push(
+            blocoLabels[blocoLabels.length - 1]
+        );
+    }
 
-            xAxis: {
-                type: 'category',
-                data: dados.grafico_transferencia.labels,
-                axisLabel: {
-                    rotate: 45
-                }
-            },
+    return {
+        labels: novasLabels,
+        valores: novosValores
+    };
+}
 
-            yAxis: {
-                type: 'value',
-                name: 'Mbps'
-            },
+function renderizarGraficoTransferencia() {
 
-            dataZoom: [
-                {
-                    type: 'inside'
-                },
-                {
-                    type: 'slider'
-                }
-            ],
+    const dados =
+        dashboards[filtros.transferencia];
 
-            series: [
-                {
-                    name: 'Rastreamento',
-                    type: 'line',
-                    smooth: true,
-                    data: dados.grafico_transferencia.rastreamento
-                },
-                {
-                    name: 'Rotas',
-                    type: 'line',
-                    smooth: true,
-                    data: dados.grafico_transferencia.rotas
-                },
-                {
-                    name: 'Correlação',
-                    type: 'line',
-                    smooth: true,
-                    data: dados.grafico_transferencia.correlacao
-                }
+    const agrupar =
+        filtros.transferencia === "24";
+
+    const dadosOriginais =
+        dados.grafico_transferencia;
+
+    const rastreamento =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.rastreamento
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.rastreamento
+            };
+
+    const rotas =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.rotas
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.rotas
+            };
+
+    const correlacao =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.correlacao
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.correlacao
+            };
+
+    const chartDom =
+        document.getElementById("graficoTransferencia");
+
+    if (!graficoTransferencia) {
+
+        graficoTransferencia =
+            echarts.init(chartDom);
+    }
+
+    graficoTransferencia.setOption({
+
+        tooltip: {
+            trigger: "axis"
+        },
+
+        legend: {
+            data: [
+                "Rastreamento",
+                "Rotas",
+                "Correlação"
             ]
-        });
-    }
+        },
 
+        grid: {
+            left: "5%",
+            right: "5%",
+            bottom: "15%",
+            containLabel: true
+        },
 
-    function renderizarGraficoLatencia() {
+        xAxis: {
+            type: "category",
 
-        const dados =
-            dashboards[filtros.latenciaComponentes];
+            data:
+                rastreamento.labels,
 
-        const ctx =
-            document.getElementById("graficoLatencia");
+            axisLabel: {
+                rotate: 45
+            }
+        },
 
-        if (graficoLatencia) {
-            graficoLatencia.destroy();
-        }
+        yAxis: {
+            type: "value",
+            name: "Mbps"
+        },
 
-        graficoLatencia = new Chart(ctx, {
+        dataZoom: [
+            {
+                type: "inside"
+            },
+            {
+                type: "slider"
+            }
+        ],
 
-            type: "bar",
-
-            data: {
-                labels: Object.keys(
-                    dados.grafico_latencia_componentes
-                ),
-
-                datasets: [{
-                    label: "Latência (ms)",
-
-                    data: Object.values(
-                        dados.grafico_latencia_componentes
-                    ),
-
-                    backgroundColor: [
-                        "#05056B",
-                        "#0A4A96",
-                        "#12B7E5",
-                        "#2F80ED",
-                        "#56CCF2"
-                    ],
-
-                    borderRadius: 8
-                }]
+        series: [
+            {
+                name: "Rastreamento",
+                type: "line",
+                smooth: true,
+                data:
+                    rastreamento.valores
             },
 
-            options: {
-                indexAxis: "y",
-                responsive: true,
+            {
+                name: "Rotas",
+                type: "line",
+                smooth: true,
+                data:
+                    rotas.valores
+            },
 
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
+            {
+                name: "Correlação",
+                type: "line",
+                smooth: true,
+                data:
+                    correlacao.valores
             }
-        });
+        ]
+    });
+}
+
+function renderizarGraficoBanda() {
+
+    const dados =
+        dashboards[filtros.banda];
+
+    const ctx =
+        document.getElementById("graficoBanda");
+
+    if (graficoBanda) {
+        graficoBanda.destroy();
     }
 
+    graficoBanda = new Chart(ctx, {
 
-    function renderizarGraficoBanda() {
+        type: "bar",
 
-        const dados =
-            dashboards[filtros.banda];
+        data: {
 
-        const ctx =
-            document.getElementById("graficoBanda");
+            labels: Object.keys(
+                dados.consumo_banda
+            ),
 
-        if (graficoBanda) {
-            graficoBanda.destroy();
-        }
+            datasets: [{
 
-        graficoBanda = new Chart(ctx, {
+                label: "Mbps",
 
-            type: "bar",
-
-            data: {
-
-                labels: Object.keys(
+                data: Object.values(
                     dados.consumo_banda
                 ),
 
-                datasets: [{
+                backgroundColor: "#0E7AB5",
 
-                    label: "Mbps",
+                borderRadius: 12
+            }]
+        },
 
-                    data: Object.values(
-                        dados.consumo_banda
-                    ),
+        options: {
 
-                    backgroundColor: "#0E7AB5",
+            indexAxis: "y",
 
-                    borderRadius: 12
-                }]
-            },
+            responsive: true,
 
-            options: {
-
-                indexAxis: "y",
-
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+            plugins: {
+                legend: {
+                    display: false
                 }
             }
-        });
-    }
-
-    
-
-    function renderizarPerdaPacotesServico() {
-
-        const dados =
-            dashboards[filtros.perdaServicos];
-
-        const container =
-            document.getElementById("listaPacotes");
-
-        container.innerHTML = "";
-
-        const perdas =
-            dados.perda_pacotes_servico;
-
-        for (let servico in perdas) {
-
-            const valor = perdas[servico];
-
-            let corClasse = "";
-
-            if (valor < 1) {
-                corClasse = "verde";
-            }
-
-            else if (valor <= 2) {
-                corClasse = "laranja";
-            }
-
-            else {
-                corClasse = "vermelho";
-            }
-
-            container.innerHTML += `
-                <div class="tabela-pacotes">
-                    <div>${servico}</div>
-
-                    <div class="indicador-pacotes ${corClasse}">
-                        ${valor}%
-                    </div>
-                </div>
-            `;
         }
+    });
+}
+
+function renderizarPerdaPacotesServico() {
+
+    const dados =
+        dashboards[filtros.perdaServicos];
+
+    const container =
+        document.getElementById("listaPacotes");
+
+    container.innerHTML = "";
+
+    const perdas =
+        dados.perda_pacotes_servico;
+
+    for (let servico in perdas) {
+
+        const valor = perdas[servico];
+
+        let corClasse = "";
+
+        if (valor < 1) {
+
+            corClasse = "verde";
+
+        } else if (valor <= 2) {
+
+            corClasse = "laranja";
+
+        } else {
+
+            corClasse = "vermelho";
+        }
+
+        container.innerHTML += `
+            <div class="tabela-pacotes">
+
+                <div>${servico}</div>
+
+                <div class="indicador-pacotes ${corClasse}">
+                    ${valor}%
+                </div>
+
+            </div>
+        `;
     }
+}
 
     // Gerar Relatório
 
     function gerarRelatorio() {
-      
-        const usuario = sessionStorage.NOME_USUARIO;
-        const email = sessionStorage.EMAIL_USUARIO;
+ 
+        const usuario    = sessionStorage.NOME_USUARIO;
+        const email      = sessionStorage.EMAIL_USUARIO;
         const id_empresa = sessionStorage.ID_EMPRESA;
-
-
+    
         const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
-        const mac_address = opcaoSelecionada.id; 
-        const servidor = opcaoSelecionada.text;
-
-        window.open(
-            `/relatorio
-            /${
-            encodeURIComponent(usuario)
-            }/${
-            encodeURIComponent(email)
-            }/${
-            encodeURIComponent(mac_address)
-            }/${
-            encodeURIComponent(servidor)
-            }/${
-            encodeURIComponent(id_empresa)    
-            }
-            `
-        );
+        const mac_address = opcaoSelecionada.id;
+        const servidor    = opcaoSelecionada.text;
+    
+        const url = `/relatorio/${encodeURIComponent(usuario)}/${encodeURIComponent(email)}/${encodeURIComponent(mac_address)}/${encodeURIComponent(servidor)}/${encodeURIComponent(id_empresa)}`;
+    
+        window.open(url);
     }
 
     // Lista de Servidores
 
     function listarServidores() {
 
-        const fkEmpresa =
-            sessionStorage.ID_EMPRESA;
+    const fkEmpresa = sessionStorage.ID_EMPRESA;
 
-        fetch(`/servidores/listarServidores/${fkEmpresa}`)
+    // transforma string em array
+    const servidores = JSON.parse(sessionStorage.ACESSO_SERVIDORES);
 
-            .then(resposta => resposta.json())
+        fetch(`/servidores/listarServidores`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: fkEmpresa,
+                servidoresServer: servidores
+            })
+        })
 
-            .then((lista) => {
+        .then(resposta => resposta.json())
 
-                select_servidor.innerHTML =
-                    lista.map(servidor =>
+        .then((lista) => {
 
-                        `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
-                            ${servidor.hostname}
-                        </option>`
+            select_servidor.innerHTML =
+                lista.map(servidor =>
 
-                    ).join('');
+                    `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
+                        ${servidor.hostname}
+                    </option>`
 
-                nomeServidor.textContent =
-                    select_servidor.options[
-                        select_servidor.selectedIndex
-                    ].text;
-            });
+                ).join('');
+
+            nomeServidor.textContent =
+                select_servidor.options[
+                    select_servidor.selectedIndex
+                ].text;
+
+            carregarDashboards()
+        });
 
         select_servidor.addEventListener("change", () => {
 
@@ -874,6 +947,8 @@
                 select_servidor.options[
                     select_servidor.selectedIndex
                 ].text;
+
+            carregarDashboards()
         });
     }
 
@@ -936,5 +1011,99 @@
             graficoTransferencia.resize();
         }
     });
+
+    
+
+    async function carregarAlertas() {
+
+    const opcaoSelecionada =
+        select_servidor.options[
+            select_servidor.selectedIndex
+        ];
+
+    const mac_address = opcaoSelecionada.id;
+
+    const id_empresa =
+        sessionStorage.ID_EMPRESA;
+
+    try {
+
+        const resposta = await fetch(
+    `/rede/buscarAlertas/${id_empresa}/${encodeURIComponent(mac_address)}`
+    )
+
+        if (!resposta.ok) {
+            throw new Error(
+                `Erro HTTP: ${resposta.status}`
+            );
+        }
+
+        const dados = await resposta.json();
+
+        alertasAtivos = dados;
+
+        renderizarAlertas();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao buscar alertas:",
+            erro
+        );
+    }
+}
+
+function renderizarAlertas() {
+    
+    const box =
+        document.getElementById("alertasBox");
+
+    const texto =
+        document.getElementById("alertaTexto");
+
+    const icone =
+        document.getElementById("alertaIcone");
+
+    const quantidade =
+        alertasAtivos.length;
+
+    texto.innerHTML =
+        `${quantidade} alerta${quantidade != 1 ? "s" : ""}`;
+
+    box.classList.remove(
+        "critico",
+        "alto"
+    );
+
+    if (quantidade === 0) {
+
+        box.style.display = "none";
+
+        return;
+    }
+
+    box.style.display = "flex";
+    
+    const possuiCritico =
+        alertasAtivos.some(
+            alerta =>
+                alerta.criticidade === "critico"
+        );
+
+    if (possuiCritico) {
+
+        box.classList.add("critico");
+
+        icone.src =
+            "assets/imgs/rede/alerta-verm.png";
+
+    } else {
+
+        box.classList.add("alto");
+
+        icone.src =
+            "assets/imgs/rede/alerta-lar.png";
+    }
+}
 
 </script>

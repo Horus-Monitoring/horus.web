@@ -157,6 +157,23 @@ body {
   white-space: nowrap;
 }
 
+.alertas.critico {
+    background-color: #ffe5e5;
+    color: #d90000;
+    animation: piscar 1s infinite;
+}
+
+.alertas.alto {
+    background-color: #fff0d9;
+    color: #ff8800;
+}
+
+@keyframes piscar {
+    0% {opacity: 1;}
+    50% {opacity: 0.45;}
+    100% {opacity: 1;}
+}
+
 .acoes-header {
   display: flex;
   align-items: center;

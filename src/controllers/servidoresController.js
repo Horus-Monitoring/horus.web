@@ -138,23 +138,27 @@ function exibirServidores(req, res) {
 }
 
 function listarServidores(req, res) {
-    var fkEmpresa = req.params.fkEmpresa
-    
-    servidoresModel.listarServidores(fkEmpresa)
-        .then(
-            (resultado => {
-                res.json(resultado);
-            })
-        ).catch(
-            (erro => {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro ao listar os servidores!\nErro: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }) 
-        );
+
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var servidores = req.body.servidoresServer;
+
+    servidoresModel.listarServidores(fkEmpresa, servidores)
+
+        .then((resultado) => {
+            res.json(resultado);
+        })
+
+        .catch((erro) => {
+
+            console.log(erro);
+
+            console.log(
+                "\nHouve um erro ao listar os servidores!\nErro: ",
+                erro.sqlMessage
+            );
+
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function deletarServidor(req, res) {
