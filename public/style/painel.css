@@ -325,8 +325,6 @@ body {
   min-height: 0;
 }
 
-<<<<<<< HEAD
-=======
 .header {
   display: flex;
   align-items: center;
@@ -344,7 +342,7 @@ body {
   white-space: nowrap;
 }
 
->>>>>>> gestor
+
 .hamburguer {
   display: none;
   cursor: pointer;
