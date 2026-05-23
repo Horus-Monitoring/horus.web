@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servidores | Horus</title>
     <link rel="icon" href="./assets/icon/logo.png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
@@ -55,10 +54,10 @@
                 <p onclick="window.location.href='index.html'">Sair</p>
             </div>
         </aside>
+
         <main class="main">
 
             <header class="header">
-
                 <div class="header-topo">
                     <div class="header-esquerda">
                         <div class="hamburguer" id="hamburguer">
@@ -75,17 +74,15 @@
                             <div class="status-servidor">
                                 <div class="select-status">
                                     <span class="status-dot verde"></span>
-
-                                    <select id="select_servidor">
-                                    </select>
+                                    <select id="select_servidor"></select>
                                 </div>
 
                                 <div class="alertas">
-                                    <img src="assets/imgs/rede/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
+                                    <img src="assets/imgs/rede/alerta-lar.png" alt=""
+                                        style="height: 12px !important; width: 12px !important;"> 3 alertas
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="usuario">
@@ -106,843 +103,374 @@
                         <a href="painel.html" class="ativo">Resumo</a>
                     </nav>
                 </div>
-
             </header>
 
             <section class="conteudo" id="conteudo">
 
-                <div class="card-visao">
-                    <div class="visao-topo">
-                        <div class="visao-icone">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                            </svg>
-                        </div>
-                        <span class="visao-subtitulo">Visão consolidada da frota — SISCEAB / SAGITARIO · 5
-                            servidores</span>
-                    </div>
-                    <div id="visao-status-geral">
-                        <h2 class="visao-titulo">Boa tarde, Erick. A operação está sob controle.</h2>
-                    </div>
-                    <div id="visao-alerta">
-                        <p class="visao-descricao">1 servidor(es) em estado crítico — abra os detalhes para investigar.
-                        </p>
-                    </div>
-                    <div class="visao-badges">
-                        <span class="badge badge-online">2 Online</span>
-                        <span class="badge badge-atencao">2 Atenção</span>
-                        <span class="badge badge-critico">1 Crítico</span>
-                    </div>
-                </div>
-                <div class="cards">
-                    <div class="card pequeno-filtro">
-                        <div class="card-pesquisar">
-                            <input type="text" placeholder="Buscar servidor pelo nome...">
-                            <img id="lupa" src="./assets/imgs/dash_user/lupa.png" alt="lupa">
-                        </div>
-                        <img class="filtro" id="filtro" src="assets/imgs/dash_analista/filtro.png" alt="">
-                        <div class="filtros" id="filtros">
-                            <button data-status="todos" class="ativo">Todos (8)</button>
-                            <button data-status="verde">Online (5)</button>
-                            <button data-status="amarelo">Atenção (1)</button>
-                            <button data-status="vermelho">Crítico (1)</button>
-                            <button data-status="cinza">Offline (1)</button>
-                            <div class="tempo_dash">
-                                <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                <select id="tempo">
-                                    <option value="30s">Últimas 24 horas</option>
-                                    <option value="1min">Última Semana</option>
-                                    <option value="5min">Último Mês</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                <div class="popup ativo" id="modal" style="position: static; background: none; padding: 0;">
+                    <div class="modal">
 
-                    <div class="card pequeno">
-                        <div class="lista-servidores">
-
-                            <div class="box-servidor cabecario">
-                                <div class="info-servidor"><b>Servidor</b></div>
-                                <div class="metricas"><b>CPU(%)</b></div>
-                                <div class="metricas"><b>RAM(%)</b></div>
-                                <div class="metricas"><b>DISCO(%)</b></div>
-                                <div class="metricas"><b>Última Atualização</b></div>
-                                <div class="info-servidor"><b>Ações</b></div>
+                        <div class="topo">
+                            <div class="linha-topo">
+                                <div class="local">
+                                    <h3 id="nomeServidorModal"></h3>
+                                    <div class="linha">
+                                        <img src="assets/imgs/painel/local.png" alt="" width="16px">
+                                        <span class="nome-local" id="nomeLocal"></span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div id="listarServidores"></div>
-                                    
-                            
+                            <div class="status">
+                                <div class="status-rotulo">
+                                    <img src="assets/imgs/painel/i.png" alt="" width="20px">
+                                    <span>Status</span>
+                                </div>
+                                <div class="status-info">Online</div>
+                            </div>
+                        </div>
+
+                        <div class="cards-detalhes">
+                            <div class="card-cpu">
+                                <div class="topo-card">
+                                    <img src="assets/imgs/painel/cpu-card.png" width="55px">
+                                    <div>
+                                        <span class="negrito">CPU</span>
+                                        <h1 class="registro" id="cpuModal">—</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-ram">
+                                <div class="topo-card">
+                                    <img src="assets/imgs/painel/ram-card.png" width="55px">
+                                    <div>
+                                        <span class="negrito">RAM</span>
+                                        <h1 class="registro" id="ramModal">—</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-disk">
+                                <div class="topo-card">
+                                    <img src="assets/imgs/painel/disco-card.png" width="55px">
+                                    <div>
+                                        <span class="negrito">Disco</span>
+                                        <h1 class="registro" id="discoModal">—</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <span class="subtexto">Última atualização</span>
+                                <span id="ultimaAtualizacao">—</span>
+                                <span class="subtexto">Endereço IP</span>
+                                <span id="ipServidorModal">—</span>
+                            </div>
+                        </div>
+
+                        <div class="linha">
+                            <div class="card-processos">
+                                <div class="card-processos-topo">
+                                    <span class="titulo-tabela">Monitor de Saúde do Servidor</span>
+                                    <div id="badgeSaude" class="badge-saude">Calculando...</div>
+                                </div>
+                                <div class="container2">
+                                    <div class="dashboard">
+                                        <div class="card">
+                                            <canvas id="healthChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: flex-end; padding: 10px 20px 14px;">
+                                    <button class="btn-detalhes-saude"
+                                        onclick="document.getElementById('modalSaude').classList.add('ativo')">
+                                        Detalhes
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-grafico-processos">
+                                <div class="container">
+                                    <div class="topbar">
+                                        <h1>Predição de Uso de RAM</h1>
+                                        <select id="periodSelect">
+                                            <option value="24h">24 horas</option>
+                                            <option value="7d">7 dias</option>
+                                            <option value="30d">30 dias</option>
+                                        </select>
+                                    </div>
+                                    <div class="chart-box">
+                                        <canvas id="graficoRam"></canvas>
+                                    </div>
+                                    <div class="info">
+                                        <div class="card">
+                                            <h3 id="labelProbabilidade">Prob. Crescimento/h</h3>
+                                            <p id="probabilidadeCrescimento">—</p>
+                                            <span id="fraseInterpretativa"
+                                                class="interpretacao interpretacao-normal">Uso normal</span>
+                                        </div>
+                                        <div class="card">
+                                            <h3>Tendência</h3>
+                                            <p id="tendenciaRam">-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="linha">
+                            <div class="card-grafico-processos">
+                                <div class="card-detalhes-topo">
+                                    <span>Quantidade de chamados de cada componente</span>
+                                </div>
+                                <div class="graficoQtdChamados">
+                                    <canvas id="graficoQtdChamados"></canvas>
+                                </div>
+                            </div>
+                            <div class="cards-detalhes-grafico">
+                                <div class="card-detalhes-topo">
+                                    <span>Uso dos principais componentes (%)</span>
+                                </div>
+                                <div class="grafico-recursos">
+                                    <canvas id="graficoRecursos24h"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-saude-overlay" id="modalSaude">
+                            <div class="modal-saude">
+                                <div class="modal-saude-header">
+                                    <span>Indicadores de Saúde</span>
+                                    <button
+                                        onclick="document.getElementById('modalSaude').classList.remove('ativo')">&times;</button>
+                                </div>
+                                <div class="modal-saude-body">
+                                    <div class="metric">
+                                        <h3>CPU</h3>
+                                        <p id="cpuValue">0%</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h3>RAM</h3>
+                                        <p id="ramValue">0%</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h3>SWAP</h3>
+                                        <p id="swapValue">0%</p>
+                                    </div>
+                                    <div class="metric">
+                                        <h3>DISCO</h3>
+                                        <p id="diskValue">0%</p>
+                                    </div>
+                                </div>
+                                <div id="serverStatus" class="status status-saude" style="margin: 0 20px 20px;">
+                                    Calculando...
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
-
             </section>
 
-            <div class="popup" id="modal">
-                <div class="modal">
-
-              
-                    <div class="topo">
-                        <div class="linha-topo">
-                         
-                            <div id="fechar" class="fechar">
-                                <img src="assets/imgs/painel/seta-esquerda.png" alt="" width="20px">
-                                <p>Voltar</p>
-                            </div>
-                            <div class="local">
-                                <h3 id="nomeServidorModal"></h3>
-                                <div class="linha">
-                                    <img src="assets/imgs/painel/local.png" alt="" width="16px">
-                                    <span class="nome-local">São Paulo, SP</span>
-                                </div>
-                            </div>
-                        </div>
-                      
-                        <div class="status">
-                            <div class="status-rotulo">
-                                <img src="assets/imgs/painel/i.png" alt="" width="20px">
-                                <span>Status</span>
-                            </div>
-                            <div class="status-info">Online</div>
-                        </div>
-                    </div>
-
-    
-                    <div class="cards-detalhes">
-                        <div class="card-cpu">
-                            <div class="topo-card">
-                                <img src="assets/imgs/painel/cpu-card.png" width="55px">
-                                <div>
-                                    <span class="negrito">CPU</span>
-                                    <h1 class="registro" id="cpuModal">38%</h1>
-                                </div>
-                            </div>
-                            <div class="barra-registro">
-                                <div class="preencher barra-azul" style="width: 38%;"></div>
-                            </div>
-                        </div>
-                        <div class="card-ram">
-                            <div class="topo-card">
-                                <img src="assets/imgs/painel/ram-card.png" width="55px">
-                                <div>
-                                    <span class="negrito">RAM</span>
-                                    <h1 class="registro">58%</h1>
-                                </div>
-                            </div>
-                            <div class="barra-registro">
-                                <div class="preencher barra-roxa" style="width: 58%;"></div>
-                            </div>
-                        </div>
-                        <div class="card-disk">
-                            <div class="topo-card">
-                                <img src="assets/imgs/painel/disco-card.png" width="55px">
-                                <div>
-                                    <span class="negrito">Disco</span>
-                                    <h1 class="registro">72%</h1>
-                                </div>
-                            </div>
-                            <div class="barra-registro">
-                                <div class="preencher barra-verde2" style="width: 72%;"></div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <span class="subtexto">Última atualização</span>
-                            <span>18/04/2026 ás 20:06</span>
-                            <span class="subtexto">Endereço IP</span>
-                            <span id="ipServidorModal"></span>
-                        </div>
-                    </div>
-
-                    
-
-                    <div class="linha">
-                          <div class="card-processos">
-                            <div class="card-processos-topo">
-                                <span class="titulo-tabela">Monitor de Saúde do Servidor</span>
-                                <div id="badgeSaude" class="badge-saude">Calculando...</div>
-                            </div>
-                            <div class="container2">
-                                <div class="dashboard">
-                                    <div class="card">
-                                        <canvas id="healthChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: flex; justify-content: flex-end; padding: 10px 20px 14px;">
-                                <button class="btn-detalhes-saude"
-                                    onclick="document.getElementById('modalSaude').classList.add('ativo')">
-                                    Detalhes
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="card-grafico-processos">
-                            <div class="card-detalhes-topo">
-                                <span>Análise preditiva do aumento de RAM</span>
-                            </div>
-
-                            <div class="container">
-                                <div class="topbar">
-                                    <h1>Predição de Uso de RAM</h1>
-                                    <select id="periodSelect">
-                                        <option value="24h">Últimas 24 Horas</option>
-                                        <option value="7d">Últimos 3 dias</option>
-                                        <option value="30d">Últimos 7 dias</option>
-                                    </select>
-                                </div>
-
-                                <div class="chart-box">
-                                    <canvas id="graficoRam"></canvas>
-                                </div>
-
-                        
-                                <div class="info">
-                                    <div class="card">
-                                        <h3 id="labelProbabilidade">Prob. Crescimento/h</h3>
-                                        <p id="probabilidadeCrescimento">—</p>
-                                        <span id="fraseInterpretativa" class="interpretacao interpretacao-normal">Uso normal</span>
-                                    </div>
-                                    <div class="card">
-                                        <h3>Tendência</h3>
-                                        <p id="tendenciaRam">-</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-
-                       
-                        <div class="card-grafico-processos">
-                            <div class="card-detalhes-topo">
-                                <span>Quantidade de chamados de cada componente</span>
-                            </div>
-                          
-                            <div class="graficoQtdChamados">
-                                <canvas id="graficoQtdChamados"></canvas>
-                            </div>
-                        </div>
-
-                   
-                        <div class="cards-detalhes-grafico">
-                            <div class="card-detalhes-topo">
-                                <span>Uso dos principais componentes (%)</span>
-                                <select class="select_filtro">
-                                    <option value="1">Últimas 24 horas</option>
-                                    <option value="2">Últimos 3 dias</option>
-                                    <option value="3">Últimos 7 dias</option>
-                                </select>
-                            </div>
-                            <div class="grafico-recursos">
-                                <canvas id="graficoRecursos24h"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal de Detalhes de Saúde -->
-                    <div class="modal-saude-overlay" id="modalSaude">
-                        <div class="modal-saude">
-                            <div class="modal-saude-header">
-                                <span>Indicadores de Saúde</span>
-                                <button onclick="document.getElementById('modalSaude').classList.remove('ativo')">&times;</button>
-                            </div>
-                            <div class="modal-saude-body">
-                
-                                <div class="metric">
-                                    <h3>CPU</h3>
-                                    <p id="cpuValue">0%</p>
-                                </div>
-                                <div class="metric">
-                                    <h3>RAM</h3>
-                                    <p id="ramValue">0%</p>
-                                </div>
-                                <div class="metric">
-                                    <h3>SWAP</h3>
-                                    <p id="swapValue">0%</p>
-                                </div>
-                                <div class="metric">
-                                    <h3>DISCO</h3>
-                                    <p id="diskValue">0%</p>
-                                </div>
-                            </div>
-                            <div id="serverStatus" class="status status-saude" style="margin: 0 20px 20px;">
-                                Calculando...
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </main>
     </div>
 
     <script>
+        var chartRam, chartRecursos, chartChamados, chartHealth;
+        var servidoresCache = [];
+        var servidorAtual = null;
+        var intervaloCaptura = null;
 
-        async function carregarServidores() {
+        const fkEmpresa = sessionStorage.ID_EMPRESA;
+        const fkFuncionario = sessionStorage.ID_USUARIO;
 
-    const idFuncionario = sessionStorage.ID_FUNCIONARIO;
-
-    const resposta = await fetch(
-        `/servidores/listarServidoresAnalista/${idFuncionario}`
-    );
-
-    const servidores = await resposta.json();
-
-    const divLista = document.getElementById("listaServidores");
-
-    divLista.innerHTML = "";
-
-    servidores.forEach(servidor => {
-
-        divLista.innerHTML += `
-
-            <div class="box-servidor">
-
-                <div class="info-servidor">
-                    <div>
-                        <p class="nome-servidor">
-                            ${servidor.hostname}
-                        </p>
-
-                        <p class="endereco">
-                            ${servidor.localizacao}
-                        </p>
-                    </div>
-                </div>
-
-                <div class="metricas">
-                    CPU Bucket
-                </div>
-
-                <div class="metricas">
-                    RAM Bucket
-                </div>
-
-                <div class="metricas">
-                    DISCO Bucket
-                </div>
-
-                <div class="att-servidor">
-                    ${servidor.data_status}
-                </div>
-
-                <button
-                    class="detalhes"
-                    onclick="abrirDetalhes(${servidor.id_servidor})"
-                >
-                    Detalhes
-                </button>
-
-            </div>
-
-        `;
-    });
-}
-
-carregarServidores();
-
-async function abrirDetalhes(idServidor) {
-
-    const resposta = await fetch(
-        `/servidores/detalhes/${idServidor}`
-    );
-
-    const dadosServidor = await resposta.json();
-
-    console.log(dadosServidor);
-
-    document.getElementById('modal').classList.add('ativo');
-
-    document.getElementById('conteudo').style.display = "none";
-
-}
-
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
-            if (funcao == "Gestor") {
-                document.getElementById("administracao").style.display = "block";
-                document.getElementById("gerarRelatorio").style.display = "block";
-                document.getElementById("cadastrarServidor").style.display = "flex";
-                document.getElementById("cadastrarUsuario").style.display = "flex";
-            }
-
-            try {
-                exibirUsuarioAtivo();
-            } catch (e) {
-                console.warn('script.js não carregado ou exibirUsuarioAtivo() indisponível:', e);
-            }
-
-        
-            const btnHamburguer = document.getElementById('hamburguer');
-            const lateral = document.getElementById('lateral');
-            const overlay = document.getElementById('overlay');
-
-            function abrirMenu() {
-                lateral.classList.add('ativo');
-                overlay.classList.add('ativo');
-            }
-
-            function fecharMenu() {
-                lateral.classList.remove('ativo');
-                overlay.classList.remove('ativo');
-            }
-
-            btnHamburguer.addEventListener('click', (e) => {
-                e.stopPropagation();
-                lateral.classList.contains('ativo') ? fecharMenu() : abrirMenu();
-            });
-
-            overlay.addEventListener('click', fecharMenu);
-
-            document.addEventListener('click', (e) => {
-                if (lateral.classList.contains('ativo') &&
-                    !lateral.contains(e.target) &&
-                    !btnHamburguer.contains(e.target)) {
-                    fecharMenu();
-                }
-            });
-
-        
-            const btnFiltro = document.getElementById('filtro');
-            const filtros = document.getElementById('filtros');
-            const modalFiltro = document.getElementById('modalFiltro');
-
-            function abrirFiltro() {
-                filtros.classList.add('ativo');
-                modalFiltro.classList.add('ativo');
-            }
-
-            function fecharFiltro() {
-                filtros.classList.remove('ativo');
-                modalFiltro.classList.remove('ativo');
-            }
-
-            btnFiltro.addEventListener('click', (e) => {
-                e.stopPropagation();
-                filtros.classList.contains('ativo') ? fecharFiltro() : abrirFiltro();
-            });
-
-            modalFiltro.addEventListener('click', fecharFiltro);
-
-            document.addEventListener('click', (e) => {
-                if (!filtros.contains(e.target) && !btnFiltro.contains(e.target)) {
-                    fecharFiltro();
-                }
-            });
-
-            
-            const modal = document.getElementById('modal');
-            const conteudo = document.getElementById('conteudo');
-
-          
-            async function abrirDetalhes(idServidor) {
-
-    const modal = document.getElementById('modal');
-    const conteudo = document.getElementById('conteudo');
-
-    modal.classList.add('ativo');
-
-    conteudo.style.display = "none";
-
-    console.log("Servidor clicado:", idServidor);
-
-}
-
-            document.getElementById('fechar').addEventListener('click', () => {
-                modal.classList.remove('ativo');
-                conteudo.style.display = "flex";
-            });
-
-            
-            new Chart(document.getElementById('graficoRecursos24h'), {
-                type: 'line',
-                data: {
-                    labels: ['17:48', '18:48', '19:48', '20:48', '21:48', '22:48', '23:48', '00:48', '01:48', '02:48', '03:48', '04:48', '05:48', '06:48', '07:48', '08:48', '09:48', '10:48', '11:48', '12:48', '13:48', '14:48', '15:48', '16:48', '17:48'],
-                    datasets: [
-                        { label: 'CPU', data: [52, 50, 54, 26, 53, 48, 37, 35, 38, 32, 28, 34, 42, 48, 53, 60, 68, 72, 65, 62, 60, 65, 38, 32, 28], borderColor: '#308cff', backgroundColor: '#308cff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                        { label: 'RAM', data: [55, 58, 62, 60, 57, 53, 46, 44, 42, 40, 45, 48, 52, 56, 58, 54, 50, 56, 60, 63, 58, 62, 44, 42, 40], borderColor: '#b772ff', backgroundColor: '#b772ff', borderWidth: 2, pointRadius: 0, tension: 0.4 },
-                        { label: 'Disco', data: [50, 52, 51, 50, 49, 51, 55, 53, 50, 48, 47, 49, 51, 50, 52, 54, 57, 60, 58, 55, 47, 45, 49, 51, 50], borderColor: '#3bff7f', backgroundColor: '#3bff7f', borderWidth: 2, pointRadius: 0, tension: 0.4 }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                        tooltip: { backgroundColor: '#fff', borderColor: '#e2e4e8', borderWidth: 1, titleColor: '#111827', bodyColor: '#6b7280', padding: 12 },
-                        legend: { display: true, position: 'top', labels: { color: '#6b7280', font: { size: 13 }, boxWidth: 16, boxHeight: 10, padding: 14 } }
-                    },
-                    scales: {
-                        x: { grid: { color: '#ffff' }, ticks: { color: '#9ca3af', font: { size: 10 }, maxTicksLimit: 8 } },
-                        y: { min: 0, max: 100, grid: { color: '#ffff' }, ticks: { stepSize: 25, color: '#9ca3af', font: { size: 11 } } }
-                    }
-                }
-            });
-        }); // fim 
-
-
-        new Chart(document.getElementById('graficoQtdChamados'), {
-            type: 'bar',
-            data: {
-                labels: ['Chamados CPU', 'Chamados RAM', 'Chamados Disco'],
-                datasets: [{
-                    data: [18, 42, 29],
-                    backgroundColor: ['#1B264F', '#274690', '#576CA8'],
-                    borderWidth: 2,
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                layout: {
-                    padding: { bottom: 10 }
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        bodyFont: { size: 14 },
-                        titleFont: { size: 14 }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: { size: 12 },
-                            color: '#444',
-                            maxRotation: 0,
-                            minRotation: 0,
-                            autoSkip: false
-                        },
-                        grid: { display: false }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#6b7280', font: { size: 11 } },
-                        grid: { color: 'rgba(0,0,0,0.05)' }
-                    }
-                }
-            }
-        });
-
-        var chart;
-
-        function gerarDados(type) {
-            var labels = [];
-            var data = [];
-
-            if (type == '24h') {
-                for (var i = 24; i >= 0; i -= 6) {
-                    labels.push(`${i}h atrás`);
-                    data.push(Math.floor(35 + Math.random() * 40));
-                }
-                labels.reverse();
-                data.reverse();
-            }
-
-            if (type == '7d') {
-                const dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
-                labels = dias;
-                data = dias.map(() => Math.floor(45 + Math.random() * 35));
-            }
-
-            if (type == '30d') {
-                for (var i = 1; i <= 30; i++) {
-                    labels.push(`Dia ${i}`);
-                    data.push(Math.floor(40 + Math.random() * 45));
-                }
-            }
-
-            return { labels, data };
-        }
-
-        function linearRegression(y) {
-            const x = y.map((_, i) => i);
-            const n = y.length;
-            const sumX = x.reduce((a, b) => a + b, 0);
-            const sumY = y.reduce((a, b) => a + b, 0);
-            const sumXY = x.reduce((total, val, i) => total + val * y[i], 0);
-            const sumXX = x.reduce((total, val) => total + val * val, 0);
-            const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-            const intercept = (sumY - slope * sumX) / n;
-            const trendLine = x.map(v => slope * v + intercept);
-            return { trendLine, slope };
-        }
-
- 
         function updateCards(data, slope, period) {
-
-           
             var trend = 'Estável';
             if (slope > 0.5) trend = 'Subindo';
             if (slope < -0.5) trend = 'Caindo';
             document.getElementById('tendenciaRam').innerText = trend;
 
-         
-            var probValor;
-            var labelProb;
-            var unidade;
-
+            var probValor, labelProb, unidade;
             if (period === '24h') {
-                
                 probValor = Math.abs(slope * 4 / 24).toFixed(1);
                 labelProb = 'Prob. Crescimento/h';
                 unidade = '%/h';
             } else if (period === '7d') {
-               
                 probValor = Math.abs(slope * 7).toFixed(1);
                 labelProb = 'Prob. Crescimento/sem';
                 unidade = '%/semana';
             } else {
-           
                 probValor = Math.abs(slope * 30).toFixed(1);
                 labelProb = 'Prob. Crescimento/mês';
                 unidade = '%/mês';
             }
-
-
             probValor = Math.min(parseFloat(probValor), 99).toFixed(1);
 
             document.getElementById('labelProbabilidade').innerText = labelProb;
             document.getElementById('probabilidadeCrescimento').innerText = probValor + unidade;
 
-         
             const fraseEl = document.getElementById('fraseInterpretativa');
-            fraseEl.className = 'interpretacao'; // reset
-
+            fraseEl.className = 'interpretacao';
             var prob = parseFloat(probValor);
-            if (period === '24h') {
-                if (prob < 1) {
-                    fraseEl.innerText = 'Uso normal';
-                    fraseEl.classList.add('interpretacao-normal');
-                } else if (prob < 3) {
-                    fraseEl.innerText = 'Crescimento preocupante';
-                    fraseEl.classList.add('interpretacao-atencao');
-                } else {
-                    fraseEl.innerText = 'Alta probabilidade de saturação';
-                    fraseEl.classList.add('interpretacao-critico');
-                }
-            } else if (period === '7d') {
-                if (prob < 5) {
-                    fraseEl.innerText = 'Uso normal';
-                    fraseEl.classList.add('interpretacao-normal');
-                } else if (prob < 15) {
-                    fraseEl.innerText = 'Crescimento preocupante';
-                    fraseEl.classList.add('interpretacao-atencao');
-                } else {
-                    fraseEl.innerText = 'Alta probabilidade de saturação';
-                    fraseEl.classList.add('interpretacao-critico');
-                }
+            const limites = period === '24h' ? [1, 3] : period === '7d' ? [5, 15] : [15, 35];
+            if (prob < limites[0]) {
+                fraseEl.innerText = 'Uso normal';
+                fraseEl.classList.add('interpretacao-normal');
+            } else if (prob < limites[1]) {
+                fraseEl.innerText = 'Crescimento preocupante';
+                fraseEl.classList.add('interpretacao-atencao');
             } else {
-                if (prob < 15) {
-                    fraseEl.innerText = 'Uso normal';
-                    fraseEl.classList.add('interpretacao-normal');
-                } else if (prob < 35) {
-                    fraseEl.innerText = 'Crescimento preocupante';
-                    fraseEl.classList.add('interpretacao-atencao');
-                } else {
-                    fraseEl.innerText = 'Alta probabilidade de saturação';
-                    fraseEl.classList.add('interpretacao-critico');
-                }
+                fraseEl.innerText = 'Alta probabilidade de saturação';
+                fraseEl.classList.add('interpretacao-critico');
             }
         }
 
-        function renderChart(type) {
-            const gerar = gerarDados(type);
-            const labels = gerar.labels;
-            const ramDados = gerar.data;
-            const regression = linearRegression(ramDados);
-            const trendLine = regression.trendLine;
+        async function renderChart(periodo, hostname, empresa) {
+            const resposta = await fetch(`/dashboard/metricas/${empresa}/${hostname}/${periodo}`);
+            const dados = await resposta.json();
+            const regression = linearRegression(dados.ram);
 
-            updateCards(ramDados, regression.slope, type); // AJUSTE 7: passa period
+            updateCards(dados.ram, regression.slope, periodo);
 
-            if (chart) chart.destroy();
+            if (chartRam) chartRam.destroy();
 
-            chart = new Chart(document.getElementById('graficoRam'), {
+            chartRam = new Chart(document.getElementById('graficoRam'), {
                 type: 'line',
                 data: {
-                    labels,
+                    labels: dados.labels,
                     datasets: [
                         {
                             label: 'Uso de RAM (%)',
-                            data: ramDados,
+                            data: dados.ram,
                             borderColor: '#576ca8',
                             backgroundColor: 'rgba(87,108,168,0.15)',
-                            borderWidth: 3,
-                            tension: 0.35,
-                            pointRadius: 4,
-                            fill: false
+                            borderWidth: 3, tension: 0.35, pointRadius: 4, fill: false
                         },
                         {
                             label: 'Linha de Tendência',
-                            data: trendLine,
+                            data: regression.trendLine,
                             borderColor: '#f59e0b',
                             borderDash: [8, 5],
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            tension: 0
+                            borderWidth: 2, pointRadius: 0, tension: 0
                         }
                     ]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { labels: { color: '#374151', font: { size: 12 } } },
-                        title: { display: false }
-                    },
-                    scales: {
-                        x: {
-                            ticks: { color: '#6b7280', font: { size: 11 } },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        },
-                        y: {
-                            min: 0, max: 100,
-                            ticks: { color: '#6b7280', callback: (v) => v + '%', font: { size: 11 } },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        }
-                    }
-                }
+                options: { responsive: true, maintainAspectRatio: false }
             });
         }
 
-        renderChart('24h');
+        function iniciarCaptura(empresa, hostname) {
+            if (intervaloCaptura) clearInterval(intervaloCaptura);
 
-        document.getElementById('periodSelect').addEventListener('change', (e) => {
-            renderChart(e.target.value);
-        });
+            capturarDados(empresa, hostname);
 
-
-        function generateServerMetrics() {
-            return {
-                cpu:  Math.floor(40 + Math.random() * 45),
-                ram:  Math.floor(45 + Math.random() * 40),
-                disk: Math.floor(30 + Math.random() * 50),
-                swap: Math.floor(10 + Math.random() * 50)
-            };
+            intervaloCaptura = setInterval(() => capturarDados(empresa, hostname), 10000);
         }
 
-        function calculateHealth(metrics) {
-            const health = 100 - (
-                metrics.cpu  * 0.35 +
-                metrics.ram  * 0.30 +
-                metrics.disk * 0.20 +
-                metrics.swap * 0.15
-            );
-            return Math.max(0, parseFloat(health.toFixed(1)));
-        }
+        async function capturarDados(empresa, hostname) {
+            try {
+                const resposta = await fetch(`/servidores/capturarDados/${empresa}/${hostname}`, {
+                    cache: "no-store"
+                });
+                const dados = await resposta.json();
 
-      
-        function corMetrica(valor) {
-            if (valor <= 60) return 'metric-valor-verde';
-            if (valor <= 80) return 'metric-valor-amarelo';
-            return 'metric-valor-vermelho';
-        }
+                const metricas = dados.metricas;
 
-        const labels = [];
-        const healthData = [];
-
-        for (let i = 12; i >= 0; i--) {
-            const metrics = generateServerMetrics();
-            const health = calculateHealth(metrics);
-            labels.push(`${i}h atrás`);
-            healthData.push(health);
-        }
-
-        const currentMetrics = generateServerMetrics();
-        const currentHealth = calculateHealth(currentMetrics);
-
-
-        function aplicarCorMetrica(elId, valor) {
-            const el = document.getElementById(elId);
-            el.innerText = valor + '%';
-            el.className = corMetrica(valor);
-        }
-
-        aplicarCorMetrica('cpuValue', currentMetrics.cpu);
-        aplicarCorMetrica('ramValue', currentMetrics.ram);
-        aplicarCorMetrica('diskValue', currentMetrics.disk);
-        aplicarCorMetrica('swapValue', currentMetrics.swap);
-
- 
-        const statusBox = document.getElementById('serverStatus');
-        const badgeSaude = document.getElementById('badgeSaude');
-
-      
-        var healthColor, healthBg;
-
-        if (currentHealth >= 70) {
-            statusBox.classList.add('healthy');
-            statusBox.innerText = `Servidor Saudável (${currentHealth}%)`;
-            badgeSaude.innerText = 'Saudável';
-            badgeSaude.style.cssText = 'background:#dcfce7; color:#15803d; border:1px solid #86efac; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;';
-            healthColor = '#22c55e';            /* verde vivo */
-            healthBg    = 'rgba(34,197,94,0.15)';
-        } else if (currentHealth >= 40) {
-            statusBox.classList.add('warning');
-            statusBox.innerText = `Servidor em Atenção (${currentHealth}%)`;
-            badgeSaude.innerText = 'Atenção';
-            badgeSaude.style.cssText = 'background:#fef9c3; color:#a16207; border:1px solid #fde047; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;';
-            healthColor = '#f59e0b';            /* amarelo vivo */
-            healthBg    = 'rgba(245,158,11,0.15)';
-        } else {
-            statusBox.classList.add('critical');
-            statusBox.innerText = `Servidor Crítico (${currentHealth}%)`;
-            badgeSaude.innerText = 'Crítico';
-            badgeSaude.style.cssText = 'background:#fee2e2; color:#b91c1c; border:1px solid #fca5a5; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px;';
-            healthColor = '#ef4444';            /* vermelho vivo */
-            healthBg    = 'rgba(239,68,68,0.15)';
-        }
-
-        new Chart(document.getElementById('healthChart'), {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [{
-                    label: 'Saúde do Servidor (%)',
-                    data: healthData,
-                    borderColor: healthColor,         /* AJUSTE 8: cor dinâmica */
-                    backgroundColor: healthBg,        /* AJUSTE 8: área dinâmica */
-                    borderWidth: 3,
-                    tension: 0.35,
-                    pointRadius: 4,
-                    pointBackgroundColor: healthColor,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#374151', font: { size: 12 } }
-                    },
-                    title: { display: false }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#6b7280', font: { size: 11 } },
-                        grid: { color: 'rgba(0,0,0,0.04)' }
-                    },
-                    y: {
-                        min: 0, max: 100,
-                        ticks: {
-                            color: '#6b7280',
-                            callback: (value) => value + '%',
-                            font: { size: 11 }
-                        },
-                        grid: { color: 'rgba(0,0,0,0.05)' }
-                    }
+                if (!metricas || metricas.length === 0) {
+                    console.warn("Nenhuma métrica recebida")
                 }
+
+                const item = dados.metricas
+                    .sort((a, b) => new Date(a.data_hora) - new Date(b.data_hora))
+                    .at(-1);
+
+                document.getElementById("cpuModal").innerHTML = item.metricas.cpu + "%";
+                document.getElementById("ramModal").innerHTML = item.metricas.ram + "%";
+                document.getElementById("discoModal").innerHTML = item.metricas.disco + "%";
+                document.getElementById("ultimaAtualizacao").innerHTML = item.data_hora || "—";
+            } catch (erro) {
+                console.error("Erro ao capturar dados:", erro);
             }
+        }
+
+        async function carregarServidores() {
+            try {
+                const resposta = await fetch(
+                    `/servidores/listarServidoresComAcesso/${fkEmpresa}/${fkFuncionario}`
+                );
+
+                const servidores = await resposta.json();
+                console.log("Servidores:", servidores);
+
+                servidoresCache = servidores;
+
+                const servidoresComAcesso = servidores.filter(s => s.tem_acesso === 1);
+
+                const select = document.getElementById("select_servidor");
+                select.innerHTML = "";
+
+                if (servidoresComAcesso.length === 0) {
+                    select.innerHTML = `<option>Nenhum servidor disponível</option>`;
+                    return;
+                }
+
+                servidoresComAcesso.forEach((servidor, index) => {
+                    const option = document.createElement("option");
+                    option.value = servidor.id_servidor;
+                    option.textContent = servidor.hostname;
+                    select.appendChild(option);
+
+                    if (index === 0) servidorAtual = servidor.id_servidor;
+                });
+
+                select.value = servidorAtual;
+                await carregarDashboardServidor(servidorAtual);
+
+            } catch (erro) {
+                console.log("Erro ao carregar servidores:", erro);
+            }
+        }
+
+        async function carregarDashboardServidor(idServidor) {
+            try {
+                servidorAtual = idServidor;
+
+                const resposta = await fetch(`/servidores/abrirDetalhes/${idServidor}`);
+                const dadosServidor = await resposta.json();
+
+                console.log("Detalhes servidor:", dadosServidor);
+
+                document.getElementById("nomeServidor").innerText = dadosServidor.hostname;
+                document.getElementById("nomeServidorModal").innerText = dadosServidor.hostname;
+                document.getElementById("ipServidorModal").innerText = dadosServidor.endereco_ip;
+
+                const localEl = document.querySelector(".nome-local");
+                if (localEl) localEl.innerText = dadosServidor.localizacao;
+
+                iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
+
+                await renderChart("24h", dadosServidor.hostname, dadosServidor.fk_empresa);
+
+            } catch (erro) {
+                console.log("Erro ao carregar dashboard:", erro);
+            }
+        }
+
+        document.getElementById("select_servidor").addEventListener("change", async function () {
+            await carregarDashboardServidor(this.value);
         });
+
+        document.getElementById("periodSelect").addEventListener("change", async function () {
+            const periodo = this.value;
+            const servidor = servidoresCache.find(s => s.id_servidor == servidorAtual);
+            if (!servidor) return;
+            await renderChart(periodo, servidor.hostname, fkEmpresa);
+        });
+
+        window.onload = () => {
+            exibirUsuarioAtivo();
+            carregarServidores();
+        };
     </script>
+
 </body>
 
 </html>

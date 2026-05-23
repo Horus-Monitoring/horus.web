@@ -43,4 +43,8 @@ router.post("/atualizarAcessos", function (req, res) {
     servidoresController.atualizarAcessos(req, res);
 });
 
+router.get("/capturarDados/:fkEmpresa/:hostname", function(req, res){
+    servidoresController.capturarDados(req, res)
+})
+
 module.exports = router;
