@@ -191,11 +191,6 @@
                                 <div class="container">
                                     <div class="topbar">
                                         <h1>Predição de Uso de RAM</h1>
-                                        <select id="periodSelect">
-                                            <option value="24h">24 horas</option>
-                                            <option value="7d">7 dias</option>
-                                            <option value="30d">30 dias</option>
-                                        </select>
                                     </div>
                                     <div class="chart-box">
                                         <canvas id="graficoRam"></canvas>
@@ -282,88 +277,247 @@
         const fkEmpresa = sessionStorage.ID_EMPRESA;
         const fkFuncionario = sessionStorage.ID_USUARIO;
 
-        function updateCards(data, slope, period) {
-            var trend = 'Estável';
-            if (slope > 0.5) trend = 'Subindo';
-            if (slope < -0.5) trend = 'Caindo';
-            document.getElementById('tendenciaRam').innerText = trend;
 
-            var probValor, labelProb, unidade;
-            if (period === '24h') {
-                probValor = Math.abs(slope * 4 / 24).toFixed(1);
-                labelProb = 'Prob. Crescimento/h';
-                unidade = '%/h';
-            } else if (period === '7d') {
-                probValor = Math.abs(slope * 7).toFixed(1);
-                labelProb = 'Prob. Crescimento/sem';
-                unidade = '%/semana';
-            } else {
-                probValor = Math.abs(slope * 30).toFixed(1);
-                labelProb = 'Prob. Crescimento/mês';
-                unidade = '%/mês';
-            }
-            probValor = Math.min(parseFloat(probValor), 99).toFixed(1);
 
-            document.getElementById('labelProbabilidade').innerText = labelProb;
-            document.getElementById('probabilidadeCrescimento').innerText = probValor + unidade;
-
-            const fraseEl = document.getElementById('fraseInterpretativa');
-            fraseEl.className = 'interpretacao';
-            var prob = parseFloat(probValor);
-            const limites = period === '24h' ? [1, 3] : period === '7d' ? [5, 15] : [15, 35];
-            if (prob < limites[0]) {
-                fraseEl.innerText = 'Uso normal';
-                fraseEl.classList.add('interpretacao-normal');
-            } else if (prob < limites[1]) {
-                fraseEl.innerText = 'Crescimento preocupante';
-                fraseEl.classList.add('interpretacao-atencao');
-            } else {
-                fraseEl.innerText = 'Alta probabilidade de saturação';
-                fraseEl.classList.add('interpretacao-critico');
-            }
-        }
-
-        async function renderChart(periodo, hostname, empresa) {
-            const resposta = await fetch(`/dashboard/metricas/${empresa}/${hostname}/${periodo}`);
-            const dados = await resposta.json();
-            const regression = linearRegression(dados.ram);
-
-            updateCards(dados.ram, regression.slope, periodo);
-
-            if (chartRam) chartRam.destroy();
-
-            chartRam = new Chart(document.getElementById('graficoRam'), {
-                type: 'line',
-                data: {
-                    labels: dados.labels,
-                    datasets: [
-                        {
-                            label: 'Uso de RAM (%)',
-                            data: dados.ram,
-                            borderColor: '#576ca8',
-                            backgroundColor: 'rgba(87,108,168,0.15)',
-                            borderWidth: 3, tension: 0.35, pointRadius: 4, fill: false
-                        },
-                        {
-                            label: 'Linha de Tendência',
-                            data: regression.trendLine,
-                            borderColor: '#f59e0b',
-                            borderDash: [8, 5],
-                            borderWidth: 2, pointRadius: 0, tension: 0
-                        }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
-        }
 
         function iniciarCaptura(empresa, hostname) {
             if (intervaloCaptura) clearInterval(intervaloCaptura);
 
-            capturarDados(empresa, hostname);
+            historicoRam = Array(24).fill(null);
+            historicoTendencia = Array(24).fill(null);
+            historicoHealth = Array(24).fill(null);
+            historicoCpu = Array(24).fill(null);
+            historicoRamR = Array(24).fill(null);
+            historicoDisco = Array(24).fill(null);
+            contadorRecursos = 0;
+            contadorHora = 0;
+            contadorHealth = 0;
 
+            if (chartRam) {
+                chartRam.destroy(); chartRam = null;
+            }
+
+            if (chartHealth) {
+                chartHealth.destroy(); chartHealth = null;
+            }
+
+            if (chartRecursos) {
+                chartRecursos.destroy(); chartRecursos = null;
+            }
+
+            capturarDados(empresa, hostname);
             intervaloCaptura = setInterval(() => capturarDados(empresa, hostname), 10000);
+
+
         }
+
+        var historicoRam = Array(24).fill(null);
+        var historicoTendencia = Array(24).fill(null);
+        var contadorHora = 0;
+
+        const labelsFixos = Array.from({ length: 24 }, (_, i) => i + 1);
+
+
+        var historicoHealth = Array(24).fill(null);
+        var contadorHealth = 0;
+
+        const coresHealth = {
+            estavel: { borda: '#22c55e', fundo: 'rgba(34,197,94,0.15)', badge: '#16a34a', texto: 'Estável' },
+            atencao: { borda: '#f59e0b', fundo: 'rgba(245,158,11,0.15)', badge: '#d97706', texto: 'Atenção' },
+            critico: { borda: '#ef4444', fundo: 'rgba(239,68,68,0.15)', badge: '#dc2626', texto: 'Crítico' }
+        };
+
+        function corDoStatus(status) {
+            return coresHealth[status] ?? coresHealth['estavel'];
+        }
+
+        function atualizarGraficoSaude(healthScore, statusHealth) {
+            const cor = corDoStatus(statusHealth);
+
+
+            const badge = document.getElementById('badgeSaude');
+            badge.textContent = cor.texto;
+            badge.style.backgroundColor = cor.fundo;
+            badge.style.color = cor.badge;
+            badge.style.border = `1px solid ${cor.borda}`;
+            badge.style.borderRadius = '999px';
+            badge.style.padding = '2px 12px';
+            badge.style.fontWeight = '600';
+            badge.style.fontSize = '13px';
+
+
+            const serverStatus = document.getElementById('serverStatus');
+            if (serverStatus) {
+                serverStatus.textContent = cor.texto;
+                serverStatus.style.background = cor.fundo;
+                serverStatus.style.color = cor.badge;
+                serverStatus.style.border = `1px solid ${cor.borda}`;
+            }
+
+
+            if (contadorHealth < 24) {
+                historicoHealth[contadorHealth] = healthScore;
+                contadorHealth++;
+            } else {
+                historicoHealth.shift();
+                historicoHealth.push(healthScore);
+            }
+
+            if (chartHealth) {
+
+                chartHealth.data.datasets[0].borderColor = cor.borda;
+                chartHealth.data.datasets[0].backgroundColor = cor.fundo;
+                chartHealth.data.datasets[0].data = [...historicoHealth];
+                chartHealth.update();
+            } else {
+                chartHealth = new Chart(document.getElementById('healthChart'), {
+                    type: 'line',
+                    data: {
+                        labels: labelsFixos,
+                        datasets: [{
+                            label: 'Health Score (%)',
+                            data: [...historicoHealth],
+                            borderColor: cor.borda,
+                            backgroundColor: cor.fundo,
+                            borderWidth: 2.5,
+                            tension: 0.4,
+                            cubicInterpolationMode: 'monotone',
+                            spanGaps: true,
+                            pointRadius: 0,
+                            pointHoverRadius: 5,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 400 },
+                        scales: {
+                            x: {
+                                title: { display: true, text: '(24 horas)' },
+                                ticks: { stepSize: 1 }
+                            },
+                            y: {
+                                min: 0,
+                                max: 100,
+                                title: { display: true, text: 'Saúde (%)' },
+                                ticks: {
+                                    stepSize: 20,
+                                    callback: val => val + '%'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+            }
+        }
+
+
+        var historicoCpu = Array(24).fill(null);
+        var historicoRamR = Array(24).fill(null);
+        var historicoDisco = Array(24).fill(null);
+        var contadorRecursos = 0;
+
+        function atualizarGraficoRecursos(cpu, ram, disco) {
+            if (contadorRecursos < 24) {
+                historicoCpu[contadorRecursos] = cpu;
+                historicoRamR[contadorRecursos] = ram;
+                historicoDisco[contadorRecursos] = disco;
+                contadorRecursos++;
+            } else {
+                historicoCpu.shift(); historicoCpu.push(cpu);
+                historicoRamR.shift(); historicoRamR.push(ram);
+                historicoDisco.shift(); historicoDisco.push(disco);
+            }
+
+            if (chartRecursos) {
+                chartRecursos.data.datasets[0].data = [...historicoCpu];
+                chartRecursos.data.datasets[1].data = [...historicoRamR];
+                chartRecursos.data.datasets[2].data = [...historicoDisco];
+                chartRecursos.update();
+            } else {
+                chartRecursos = new Chart(document.getElementById('graficoRecursos24h'), {
+                    type: 'line',
+                    data: {
+                        labels: labelsFixos,
+                        datasets: [
+                            {
+                                label: 'CPU',
+                                data: [...historicoCpu],
+                                borderColor: '#576ca8',
+                                backgroundColor: 'rgba(87,108,168,0.08)',
+                                borderWidth: 2.5,
+                                tension: 0.4,
+                                cubicInterpolationMode: 'monotone',
+                                spanGaps: true,
+                                pointRadius: 0,
+                                pointHoverRadius: 5,
+                                fill: false
+                            },
+                            {
+                                label: 'RAM',
+                                data: [...historicoRamR],
+                                borderColor: '#a855f7',
+                                backgroundColor: 'rgba(168,85,247,0.08)',
+                                borderWidth: 2.5,
+                                tension: 0.4,
+                                cubicInterpolationMode: 'monotone',
+                                spanGaps: true,
+                                pointRadius: 0,
+                                pointHoverRadius: 5,
+                                fill: false
+                            },
+                            {
+                                label: 'Disco',
+                                data: [...historicoDisco],
+                                borderColor: '#22c55e',
+                                backgroundColor: 'rgba(34,197,94,0.08)',
+                                borderWidth: 2.5,
+                                tension: 0.4,
+                                cubicInterpolationMode: 'monotone',
+                                spanGaps: true,
+                                pointRadius: 0,
+                                pointHoverRadius: 5,
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 400 },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: '(24 horas)' },
+                                ticks: { stepSize: 1 }
+                            },
+                            y: {
+                                min: 0,
+                                max: 100,
+                                title: { display: true, text: 'Uso (%)' },
+                                ticks: {
+                                    stepSize: 20,
+                                    callback: val => val + '%'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: true, position: 'top' }
+                        }
+                    }
+                });
+            }
+        }
+
+
+
 
         async function capturarDados(empresa, hostname) {
             try {
@@ -373,23 +527,165 @@
                 const dados = await resposta.json();
 
                 const metricas = dados.metricas;
-
                 if (!metricas || metricas.length === 0) {
-                    console.warn("Nenhuma métrica recebida")
+                    console.warn("Nenhuma métrica recebida");
+                    return;
                 }
 
-                const item = dados.metricas
+                const item = metricas
                     .sort((a, b) => new Date(a.data_hora) - new Date(b.data_hora))
                     .at(-1);
 
-                document.getElementById("cpuModal").innerHTML = item.metricas.cpu + "%";
-                document.getElementById("ramModal").innerHTML = item.metricas.ram + "%";
-                document.getElementById("discoModal").innerHTML = item.metricas.disco + "%";
-                document.getElementById("ultimaAtualizacao").innerHTML = item.data_hora || "—";
+                const m = item.metricas;
+
+                const valorReal = Number(m?.linha_real ?? m?.ram ?? 0);
+                const valorTendencia = Number(m?.linha_tendencia ?? m?.ram ?? 0);
+
+                let tendenciaTexto = "Estável";
+
+
+                const margem = 0.5;
+
+                if (valorTendencia > valorReal + margem) {
+                    tendenciaTexto = "Subindo";
+                } else if (valorTendencia < valorReal - margem) {
+                    tendenciaTexto = "Caindo";
+                }
+
+                document.getElementById("tendenciaRam").innerHTML = tendenciaTexto;
+
+
+                document.getElementById("cpuModal").innerHTML = (m?.cpu ?? "--") + "%";
+                document.getElementById("ramModal").innerHTML = (m?.ram ?? "--") + "%";
+                document.getElementById("discoModal").innerHTML = (m?.disco ?? "--") + "%";
+                document.getElementById("ultimaAtualizacao").innerHTML = item.data_hora || "--";
+                document.getElementById("probabilidadeCrescimento").innerHTML = (m?.tendencia_aumento_hora ?? "--");
+                document.getElementById("ipServidorModal").innerHTML = item.ip || "--";
+                document.getElementById("cpuValue").textContent = (m?.cpu ?? 0) + "%";
+                document.getElementById("ramValue").textContent = (m?.ram ?? 0) + "%";
+                document.getElementById("diskValue").textContent = (m?.disco ?? 0) + "%";
+
+                atualizarGraficoSaude(m?.health_score ?? 0, m?.status_health ?? 'estavel');
+                atualizarGraficoRecursos(m?.cpu ?? null, m?.ram ?? null, m?.disco ?? null);
+
+
+
+                if (contadorHora < 24) {
+                    historicoRam[contadorHora] = m?.linha_real ?? m?.ram ?? null;
+                    historicoTendencia[contadorHora] = m?.linha_tendencia ?? m?.ram ?? null;
+                    contadorHora++;
+                } else {
+
+                    historicoRam.shift();
+                    historicoRam.push(m?.linha_real ?? m?.ram ?? null);
+                    historicoTendencia.shift();
+                    historicoTendencia.push(m?.linha_tendencia ?? m?.ram ?? null);
+                }
+
+
+                if (chartRam) {
+                    chartRam.data.datasets[0].data = [...historicoRam];
+                    chartRam.data.datasets[1].data = [...historicoTendencia];
+                    chartRam.update();
+                } else {
+                    chartRam = new Chart(document.getElementById('graficoRam'), {
+                        type: 'line',
+                        data: {
+                            labels: labelsFixos,
+                            datasets: [
+                                {
+                                    label: 'Uso de RAM (%)',
+                                    data: [...historicoRam],
+                                    borderColor: '#576ca8',
+                                    backgroundColor: 'rgba(87,108,168,0.15)',
+                                    borderWidth: 3,
+                                    tension: 0.4,
+                                    cubicInterpolationMode: 'monotone',
+                                    pointRadius: 0,
+                                    spanGaps: true,
+                                    pointHoverRadius: 5,
+                                    fill: true,
+                                    borderDash: []
+                                },
+                                {
+                                    label: 'Linha de Tendência',
+                                    data: [...historicoTendencia],
+                                    borderColor: '#f59e0b',
+                                    borderDash: [8, 5],
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                    tension: 0.4,
+                                    cubicInterpolationMode: 'monotone',
+                                    spanGaps: true,
+                                    pointRadius: 0,
+                                    pointHoverRadius: 5,
+                                    fill: true
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: { duration: 400 },
+                            scales: {
+                                x: {
+                                    title: { display: true, text: '(24 horas)' },
+                                    ticks: { stepSize: 1 }
+                                },
+                                y: {
+                                    min: 0,
+                                    max: 100,
+                                    title: { display: true, text: 'Uso (%)' },
+                                    ticks: {
+                                        stepSize: 20,
+                                        callback: val => val + '%'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: { display: true, position: 'top' }
+                            }
+                        }
+                    });
+                }
+
             } catch (erro) {
                 console.error("Erro ao capturar dados:", erro);
             }
         }
+
+        async function carregarGraficoChamados(hostname) {
+
+            const resposta = await fetch(
+                `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
+            );
+
+            const dados = await resposta.json();
+
+            const labels = Object.keys(dados);
+
+            const valores = Object.values(dados);
+
+            if (chartChamados) {
+                chartChamados.destroy();
+            }
+
+            chartChamados = new Chart(
+                document.getElementById("graficoQtdChamados"),
+                {
+                    type: "bar",
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "Chamados",
+                            data: valores
+                        }]
+                    }
+                }
+            );
+        }
+
+
 
         async function carregarServidores() {
             try {
@@ -429,6 +725,8 @@
             }
         }
 
+
+
         async function carregarDashboardServidor(idServidor) {
             try {
                 servidorAtual = idServidor;
@@ -446,6 +744,8 @@
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
                 iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
+                
+                await carregarGraficoChamados(dadosServidor.hostname);
 
                 await renderChart("24h", dadosServidor.hostname, dadosServidor.fk_empresa);
 
@@ -458,12 +758,7 @@
             await carregarDashboardServidor(this.value);
         });
 
-        document.getElementById("periodSelect").addEventListener("change", async function () {
-            const periodo = this.value;
-            const servidor = servidoresCache.find(s => s.id_servidor == servidorAtual);
-            if (!servidor) return;
-            await renderChart(periodo, servidor.hostname, fkEmpresa);
-        });
+
 
         window.onload = () => {
             exibirUsuarioAtivo();
