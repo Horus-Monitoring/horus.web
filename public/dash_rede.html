@@ -17,6 +17,7 @@
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script> <!--Vai melhorar a vusualização?-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_rede.css">
@@ -40,21 +41,6 @@
                 <a href="painel.html" class="item-menu">
                     <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
                 </a>
-                <a href="dash_analista.html" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </a>
-                <a href="telaIncidente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
-                </a>
-                <a href="comunicacao.html" class="item-menu selecionado">
-                    <img src="./assets/imgs/painel/comunicacao-selecionado.png" alt="">Comunicação
-                </a>
-                <a href="processos.html" class="item-menu">
-                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
-                </a>
-                <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt=""> Temperatura
-                </a>
 
                 <div class="categoria adm" id="administracao">Administração </div>
                 <a href="dash_usuarios.html" class="item-menu adm" id="cadastrarUsuario">
@@ -75,148 +61,170 @@
         <main class="main">
 
             <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                </div>
 
-                <span class="header-titulo">Comunicação e Rede</span>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
 
-                <div class="usuario">
-                    <div>
-                        <p id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
+                        <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Servidores /
+                                <strong id="nomeServidor"></strong> /
+                                <span class="renomear">Comunicação e Rede</span>
+                            </span>
+
+                            <div class="status-servidor">
+                                <div class="select-status">
+                                    <span class="status-dot verde"></span>
+
+                                    <select id="select_servidor">
+                                    </select>
+                                </div>
+                                <a href="dash_incidentes.html">
+                                    <div class="alertas" id="alertasBox">
+                                        <img id="alertaIcone"src="assets/imgs/rede/alerta-lar.png" alt="" style="width: 12px !important; height: 12 px !important;">
+                                        
+                                        <span id="alertaTexto">
+                                            0 alertas
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
-                    <span id="inicial_usuario"></span>
+
+                    <div class="acoes-header">
+                            <button class="btn-turno" onclick="gerarRelatorio()">
+                                Relatório de troca de turno
+                            </button>
+                    </div>
+
+                    <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
+                    </div>
                 </div>
+
+                <div class="header-nav-scroll">
+                    <nav class="header-nav">
+                        <a href="dash_analista.html">Resumo</a>
+                        <a href="processos.html">Processos</a>
+                        <a href="dash_rede.html" class="ativo">Comunicação e rede</a>
+                        <a href="Temperatura.html">Temperatura</a>
+                        <a href="dash_incidentes.html">Incidentes</a>
+                    </nav>
+                </div>
+
             </header>
 
             <section class="conteudo" id="conteudo">
-                
-            </section>
-
-
-        </main>
-
-    </div>
-
-</body>
-
-</html>
-
-<script>
-
-    /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
- 
-              if (funcao == "Gestor") {
-                 document.getElementById("administracao").style.display = "block";
-                 document.getElementById("gerarRelatorio").style.display = "block";
-                 document.getElementById("cadastrarServidor").style.display = "flex";
-                 document.getElementById("cadastrarUsuario").style.display = "flex";
-             }
-    }
- 
-    exibirUsuarioAtivo(); */
-
-    var tipo = "analista";
-
-    if (tipo == "analista") {
-    document.getElementById("conteudo").innerHTML = 
-        `<div class="padrao-serv">
-                    <div class="servidores">
-                        <div class="detalhes-servidores">
-                            <div class="info-servidores nome">
-                                <div style="padding-right: 10px;">
-                                    <img src="assets/imgs/painel/servidores_cabecario.png" alt="">
-                                </div>
-                                <div>
-                                    <span>Nome Servidor</span>
-                                    <p>[Local Servidor]</p>
-                                </div>
-                            </div>
-                            <div class="info-servidores ip">
-                                <p>IP do Servidor</p>
-                                <span>[ip do servidor]</span>
-                            </div>
-                            <div class="info-servidores att">
-                                <p>Última atualização</p>
-                                <span>[Data e Hora]</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="selecionar-servidores">
-                        <p>Selecione o servidor:</p>
-                        <select name="servidores" id="servidores">
-                            <option value="#" selected disabled>Nome Servidor</option>
-                        </select>
-                    </div>
-                </div>
                     <div class="kpis">
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="perdaPacotes">
                             <div class="nome">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Pacotes de dados perdidos durante a tentativa de comunicação entre os diferentes
+                                        sistemas do SAGITARIO.
+                                        Altas taxas de perda ocasionam perda de informação.
+                                    </div>
+                                </div>
                                 Perda de Pacotes
-                                <img src="assets/imgs/rede/info.png" alt="">
                                 <img src="assets/imgs/rede/rede.png" alt="">
                             </div>
-                            <span class="valor">2.3%</span>
-                            <img src="assets/imgs/rede/caindo-verde.png" alt="">
-                            <span class="situacao">melhorando</span>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div class="nome">
+                                <span id="perdaPacotesValor" class="valor"></span>
+                                <img id="perdaPacotesIcone">
+                                <span id="perdaPacotesSituacao" class="situacao"></span>
+                                <select data-filtro="perdaPacotes">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="latencia">
                             <div class="nome">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Indica o ping médio do servidor. 
+                                        Influencia o recebimento de pacotes e indica falha de comunicação.
+                                        Alta latência gera lentidão.
+                                    </div>
+                                </div>
                                 Latência
-                                <img src="assets/imgs/rede/info.png" alt="">
                                 <img src="assets/imgs/rede/velocimetro.png" alt="">
                             </div>
-                            <span class="valor">18ms</span>
-                            <img src="assets/imgs/rede/subindo_verm.png" alt="">
-                            <span class="situacao">piorando</span>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div class="nome">
+                                <span id="latenciaValor" class="valor"></span>
+                                <img id="latenciaIcone" alt="">
+                                <span id="latenciaSituacao" class="situacao"></span>
+                                <select data-filtro="latencia">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="adsb">
                             <div class="nome">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+                                    <div class="tooltip-box">
+                                        Indica a taxa média de atualização do Sensor ADS-B.
+                                        Níveis baixos de atualização impactam na operação, gerando perda de aeronaves e rotas.
+                                    </div>
+                                </div>
                                 Atualização ADS-B
-                                <img src="assets/imgs/rede/info.png" alt="">
                                 <img src="assets/imgs/rede/sinal.png" alt="">
                             </div>
-                            <span class="valor">98.7%</span>
-                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                            <span class="situacao">melhorando</span>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div class="nome">
+                                <span id="adsbValor" class="valor"></span>
+                                <img id="adsbIcone" alt="">
+                                <span id="adsbSituacao" class="situacao">melhorando</span>
+                                <select data-filtro="adsb">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="kpi-card">
+                        <div class="kpi-card" id="rotas">
                             <div class="nome">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/rede/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Indica o número de rotas que seguem sem atualização há mais de 8 horas.
+                                        Falta de atualização pode ser causada por lentidão no sistema, problemas de hardware no ADS-B 
+                                        e até mesmo questões climáticas.
+                                    </div>
+                                </div>
                                 Rotas Sem Atualização
-                                <img src="assets/imgs/rede/info.png" alt="">
                                 <img src="assets/imgs/rede/nuvem.png" alt="">
                             </div>
-                            <span class="valor">14 rotas</span>
-                            <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                            <span class="situacao">melhorando</span>
-                            <select name="" id="">
-                                <option value="24">Últimas 24 horas</option>
-                                <option value="3">Últimos 3 dias</option>
-                                <option value="7">Últimos 7 dias</option>
-                                <option value="30">Últimos 30 dias</option>
-                            </select>
+                            <div class="nome">
+                                <span id="rotasValor" class="valor"></span>
+                                <img id="rotasIcone" alt="">
+                                <span id="rotasSituacao" class="situacao">melhorando</span>
+                                <select data-filtro="rotas">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
+                                </select>
+                            </div>
                         </div>
 
                     </div>
@@ -225,77 +233,28 @@
                         <div class="grafico-linha-box" style="flex: 3;">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Taxa de Transferência de Rede por Servidor</h3>
-                                <select name="" id="">
-                                    <option value="24">Últimas 24 horas</option>
-                                    <option value="3">Últimos 3 dias</option>
-                                    <option value="7">Últimos 7 dias</option>
-                                    <option value="30">Últimos 30 dias</option>
+                                <select data-filtro="transferencia">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
                                 </select>
                             </div>
-                            <canvas id="graficoTransferencia"></canvas>
+                            <div id="graficoTransferencia" style="width:100%; height:400px;"></div>
                         </div>
                         <div class="box-grafico" style="flex: 1;">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Taxa de perda de pacotes</h3>
-                                <select name="" id="">
-                                    <option value="24">Últimas 24 horas</option>
-                                    <option value="3">Últimos 3 dias</option>
-                                    <option value="7">Últimos 7 dias</option>
-                                    <option value="30">Últimos 30 dias</option>
+                                <select data-filtro="perdaServicos">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
                                 </select>
                             </div>   
-                            <div class="tabela-pacotes" >
-                                <div>
-                                    Rastreamento
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Rotas
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Correlação
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    API Gateway
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Banco de Dados
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
-                            <div class="tabela-pacotes"  >
-                                <div>
-                                    Sinc Service
-                                </div>
-                                <div class="indicador-pacotes">
-                                    2.5%
-                                </div>
-                            </div>
+                            <div id="listaPacotes"></div>
                             <div style="border: #ebe6e7 1px solid; height: 1px; width: 95%; margin: 5px"></div>
                             <div style="display: flex; flex-direction:row; justify-content: space-evenly;">
                                 <div style="display: flex; flex-direction:row">
-                                    <div style="border: green 2px solid; background-color: rgb(149, 246, 149); width: 10px; height: 10px; align-self: center; margin-right: 3px">
+                                    <div style="border: green 2px solid; background-color: rgb(149,246, 149); width: 10px; height: 10px; align-self: center; margin-right: 3px">
 
                                     </div>
                                     <span> < 1% </span>
@@ -320,11 +279,10 @@
                         <div class="box-grafico">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Latência entre Componentes</h3>
-                                <select name="" id="">
-                                    <option value="24">Últimas 24 horas</option>
-                                    <option value="3">Últimos 3 dias</option>
-                                    <option value="7">Últimos 7 dias</option>
-                                    <option value="30">Últimos 30 dias</option>
+                                <select data-filtro="latenciaComponentes">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
                                 </select>
                             </div>
                             <canvas id="graficoLatencia"></canvas>
@@ -332,230 +290,703 @@
                         <div class="box-grafico">
                             <div style="display: flex; justify-content: space-between;">
                                 <h3>Processos com maior consumo de banda</h3>
-                                <select name="" id="">
-                                    <option value="24">Últimas 24 horas</option>
-                                    <option value="3">Últimos 3 dias</option>
-                                    <option value="7">Últimos 7 dias</option>
-                                    <option value="30">Últimos 30 dias</option>
+                                <select data-filtro="banda">
+                                    <option value="24">24 horas</option>
+                                    <option value="3">3 dias</option>
+                                    <option value="7">7 dias</option>
                                 </select>   
                             </div>
                             <canvas id="graficoBanda"></canvas>
                         </div>
-                    </div>`        
-    } else {
-     document.getElementById("conteudo").innerHTML = `
-                <div class="box-alerta">
-                    <div>
-                        <span>Impacto Operacional</span>
-                        <span class="span-subtitulo">últimas 24 horas</span>
                     </div>
+            </section>
 
-                    <div style="display: flex; justify-content: space-evenly;">
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/aviao-lar.png" alt="">
-                                Voos atrasados
-                            </div>
-                            <div>
-                                8 voos
-                            </div>
-                            <p> Atrasos por falha de comunicação</p>
-                        </div>
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/user-verm.png" alt="">
-                                Usuários Afetados
-                            </div>
-                            <div>
-                                4 mil
-                            </div>
-                            <p>Devido a indisponibilidade do sistema</p>
-                        </div>
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/pin-lar.png" alt="">
-                                Aeroportos Afetados
-                            </div>
-                            <div>
-                                3 aeroportos
-                            </div>
-                            <p>GRU, CGH, BSB</p>
-                        </div>
-                        <div class="dados">
-                            <div>
-                                <img src="assets/imgs/rede/alerta-lar.png" alt="">
-                                Nível de Impacto
-                            </div>
-                            <div>
-                                Médio
-                            </div>
-                            <p> Com base em histórico e severidade</p>
-                        </div>
-                    </div>
-                    <div style="border: 1px #ebe6e7 solid; height: 1%; width: 100%;">
 
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <div>
-                            <p>Ação Recomendada</p>
-                            <span class="span-subtitulo">Verificar servidores de alta latência e otimizar configurações
-                                de rede</span>
-                        </div>
-                        <div style="align-self: center;">
-                            <button style="background-color: blue;">Gerar Relatório</button>
-                        </div>
-                    </div>
-                </div>
+        </main>
 
-                <div class="kpis">
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Disponibilidade
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/transmissao.png" alt="">
-                        </div>
-                        <span class="valor">99.94%</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+    </div>
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Aeronaves Impactadas
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/aviao.png" alt="">
-                        </div>
-                        <span class="valor">14 aviões</span>
-                        <img src="assets/imgs/rede/subindo_verm.png" alt="">
-                        <span class="situacao">piorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+</body>
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Rotas Desatualizadas
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/rotas.png" alt="">
-                        </div>
-                        <span class="valor">4 rotas</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+</html>
 
-                    <div class="kpi-card">
-                        <div class="nome">
-                            Média de Recuperação
-                            <img src="assets/imgs/rede/info.png" alt="">
-                            <img src="assets/imgs/rede/relogio.png" alt="">
-                        </div>
-                        <span class="valor">4 min.</span>
-                        <img src="assets/imgs/rede/subindo-verde.png" alt="">
-                        <span class="situacao">melhorando</span>
-                        <select name="" id="">
-                            <option value="24">Últimas 24 horas</option>
-                            <option value="3">Últimos 3 dias</option>
-                            <option value="7">Últimos 7 dias</option>
-                            <option value="30">Últimos 30 dias</option>
-                        </select>
-                    </div>
+<script>
 
-                </div>
+    window.onload = () => {
 
-                
+        const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
-                <div class="graficos-inferiores">
+        if (funcao == "Gestor") {
+            document.getElementById("administracao").style.display = "block";
+            document.getElementById("cadastrarServidor").style.display = "flex";
+            document.getElementById("cadastrarUsuario").style.display = "flex";
+        }
 
-                    <div class="coluna-esquerda">
-                        <div class="grafico-card grande">
-                            <div class="titulo-grafico">
-                                <h3>Tendência de Indisponibilidade Mensal</h3>
-                                <select name="" id="">
-                                    <option value="">Últimas 24 horas</option>
-                                </select>
-                            </div>
-                            <canvas id="graficoIndisponibilidade"></canvas>
-                        </div>
-
-                        <div class="grafico-card grande">
-                            <div class="titulo-grafico">
-                                <h3>Capacidade de Rede vs Demanda Operacional</h3>
-                                <select name="" id="">
-                                    <option value="">Últimas 24 horas</option>
-                                </select>
-                            </div>
-                            <canvas id="graficoCapacidade"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="grafico-card sla-card">
-                        <div class="titulo-grafico" style="margin-bottom: 60px;">
-                            <h3>Cumprimento de SLA</h3>
-                            <select name="" id="">
-                                <option value="">Últimas 24 horas</option>
-                            </select>
-                        </div>
-                        <div class="indicador-sla">
-                            Abaixo da Meta
-                        </div>
-                        <canvas id="graficoSLA"></canvas>
-                        
-                        <div class="sla-metricas">
-                            <span>Meta SLA</span>
-                            <span style="color: black !important; font-weight: bold;">99.9%</span>
-                        </div>
-                        <div class="sla-metricas">
-                            <span>Desempenho Atual</span>
-                            <span><b>94.4%</b></span>
-                        </div>
-                        <div class="sla-metricas">
-                            <span>Diferença</span>
-                            <span><b>5.5%</b></span>
-                        </div>                        
-                    </div>
-
-                </div>`  
+        exibirUsuarioAtivo();
+        listarServidores();
+        configurarFiltros();
     }
 
-    //Modal para o menu sanduíche
+    let dashboards = {
+        "24": null,
+        "3": null,
+        "7": null
+    };
 
-    const btnHamburguer = document.getElementById("hamburguer");
-    const lateral = document.getElementById("lateral");
-    const overlay = document.getElementById("overlay");
+    let filtros = {
+        perdaPacotes: "24",
+        latencia: "24",
+        adsb: "24",
+        rotas: "24",
+        transferencia: "24",
+        perdaServicos: "24",
+        latenciaComponentes: "24",
+        banda: "24"
+    };
+
+    let graficoTransferencia = null;
+    let graficoLatencia = null;
+    let graficoBanda = null;
+    let alertasAtivos = [];
+
+    async function carregarDashboards() {
+
+    const opcaoSelecionada =
+        select_servidor.options[
+            select_servidor.selectedIndex
+        ];
+
+    const mac_address =
+        opcaoSelecionada.id;
+
+    const id_empresa =
+        sessionStorage.ID_EMPRESA;
+
+    try {
+
+        const [
+            d24,
+            d3,
+            d7
+        ] = await Promise.all([
+
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/24h`)
+                .then(r => r.json()),
+
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/3d`)
+                .then(r => r.json()),
+
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/7d`)
+                .then(r => r.json())
+        ]);
+
+        dashboards["24"] = d24;
+        dashboards["3"] = d3;
+        dashboards["7"] = d7;
+
+        await carregarAlertas();
+
+        renderizarTudo();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar dashboards:",
+            erro
+        );
+    }
+}
+    function agruparDados(labels, valores, tamanhoGrupo = 7) {
+
+    const novasLabels = [];
+    const novosValores = [];
+
+    for (let i = 0; i < valores.length; i += tamanhoGrupo) {
+
+        const blocoValores =
+            valores.slice(i, i + tamanhoGrupo);
+
+        const blocoLabels =
+            labels.slice(i, i + tamanhoGrupo);
+
+        const media =
+            blocoValores.reduce((a, b) => a + b, 0)
+            / blocoValores.length;
+
+        novosValores.push(
+            Number(media.toFixed(2))
+        );
+
+        novasLabels.push(
+            blocoLabels[blocoLabels.length - 1]
+        );
+    }
+
+    return {
+        labels: novasLabels,
+        valores: novosValores
+    };
+}
+
+    function configurarFiltros() {
+
+        const selects = document.querySelectorAll("select[data-filtro]");
+
+        selects.forEach(select => {
+
+            select.addEventListener("change", function () {
+
+                const chave = this.dataset.filtro;
+
+                filtros[chave] = this.value;
+
+                renderizarTudo();
+            });
+        });
+    }
+
+    function renderizarTudo() {
+
+        renderizarKPIPerdaPacotes();
+        renderizarKPILatencia();
+        renderizarKPIAdsb();
+        renderizarKPIRotas();
+
+        renderizarGraficoTransferencia();
+        renderizarGraficoLatencia();
+        renderizarGraficoBanda();
+
+        renderizarPerdaPacotesServico();
+    }
+
+    // KPIs
+
+
+
+    // Estado da KPI
+
+    function obterPeriodoAnterior(periodo) {
+
+        if (periodo === "24") return "3";
+        if (periodo === "3") return "7";
+
+        return null;
+    }
+
+    function atualizarSituacao(
+        atual,
+        anterior,
+        elementoTexto,
+        elementoIcone,
+        elementoDiv,
+        menorEhMelhor = true
+    ) {
+
+        if (anterior == null) {
+            elementoTexto.innerHTML = "—";
+            return;
+        }
+
+        if (atual === anterior) {
+            elementoTexto.innerHTML = "estável";
+            elementoIcone.src = "assets/imgs/rede/neutro.png";
+            elementoTexto.style.color = "black";
+            elementoTexto.style.backgroundColor = "white"
+            elementoDiv.style.border = "2px #ebe6e7 solid"
+            return;
+        }
+
+        const melhorou = menorEhMelhor
+            ? atual < anterior
+            : atual > anterior;
+
+        const subiu = atual > anterior;
+
+        let cor = "";
+        let texto = "";
+        let color = "";
+        let backgroundColor ="";
+
+        if (melhorou) {
+            texto = "melhorando";
+            cor = "verde";
+            color = "#20A200"
+            backgroundColor = "#EAFEDC"
+        } else {
+            texto = "piorando";
+            cor = "verm";
+            color = "#F54444"
+            backgroundColor = "#FFE4E4"
+        }
+
+        elementoTexto.innerHTML = texto;
+        elementoTexto.style.color = color;
+        elementoDiv.style.backgroundColor = backgroundColor;
+        elementoDiv.style.border = `2px ${color} solid`;
+
+        // direção da seta depende da mudança real
+        const seta = subiu ? "subindo" : "caindo";
+
+        elementoIcone.src =
+            `assets/imgs/rede/${seta}-${cor}.png`;
+    }
+
+    function renderizarKPIPerdaPacotes() {
+
+        const periodoAtual = filtros.perdaPacotes;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = dashboards[periodoAtual].kpis.perda_pacotes;
+
+        document.getElementById("perdaPacotesValor").innerHTML =
+            atual + "%";
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.perda_pacotes;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("perdaPacotesSituacao"),
+            document.getElementById("perdaPacotesIcone"),
+            document.getElementById("perdaPacotes"),
+            true // menor é melhor
+        );
+    }
+
+    function renderizarKPILatencia() {
+
+        const periodoAtual = filtros.latencia;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = Number(dashboards[periodoAtual].kpis.latencia_media);
+
+        document.getElementById("latenciaValor").innerHTML =
+            atual.toFixed(1) + " ms";
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.latencia_media;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("latenciaSituacao"),
+            document.getElementById("latenciaIcone"),
+            document.getElementById("latencia"),
+            true //menor é melhor
+        );
+    }
+
+    function renderizarKPIAdsb() {
+
+        const periodoAtual = filtros.adsb;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = dashboards[periodoAtual].kpis.adsb_update;
+
+        document.getElementById("adsbValor").innerHTML =
+            atual + "%";
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.adsb_update;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("adsbSituacao"),
+            document.getElementById("adsbIcone"),
+            document.getElementById("adsb"),
+            false // maior é melhor
+        );
+    }
+
+    function renderizarKPIRotas() {
+
+        const periodoAtual = filtros.rotas;
+        const periodoAnterior = obterPeriodoAnterior(periodoAtual);
+
+        const atual = dashboards[periodoAtual].kpis.rotas_sem_atualizacao;
+
+        document.getElementById("rotasValor").innerHTML =
+            atual;
+
+        if (!periodoAnterior) return;
+
+        const anterior = dashboards[periodoAnterior].kpis.rotas_sem_atualizacao;
+
+        atualizarSituacao(
+            atual,
+            anterior,
+            document.getElementById("rotasSituacao"),
+            document.getElementById("rotasIcone"),
+            document.getElementById("rotas"),
+            true
+        );
+    }
+
+    function agruparDados(labels, valores, tamanhoGrupo = 7) {
+
+    const novasLabels = [];
+    const novosValores = [];
+
+    for (let i = 0; i < valores.length; i += tamanhoGrupo) {
+
+        const blocoValores =
+            valores.slice(i, i + tamanhoGrupo);
+
+        const blocoLabels =
+            labels.slice(i, i + tamanhoGrupo);
+
+        const media =
+            blocoValores.reduce((a, b) => a + b, 0)
+            / blocoValores.length;
+
+        novosValores.push(
+            Number(media.toFixed(2))
+        );
+
+        novasLabels.push(
+            blocoLabels[blocoLabels.length - 1]
+        );
+    }
+
+    return {
+        labels: novasLabels,
+        valores: novosValores
+    };
+}
+
+function renderizarGraficoTransferencia() {
+
+    const dados =
+        dashboards[filtros.transferencia];
+
+    const agrupar =
+        filtros.transferencia === "24";
+
+    const dadosOriginais =
+        dados.grafico_transferencia;
+
+    const rastreamento =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.rastreamento
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.rastreamento
+            };
+
+    const rotas =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.rotas
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.rotas
+            };
+
+    const correlacao =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.correlacao
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.correlacao
+            };
+
+    const chartDom =
+        document.getElementById("graficoTransferencia");
+
+    if (!graficoTransferencia) {
+
+        graficoTransferencia =
+            echarts.init(chartDom);
+    }
+
+    graficoTransferencia.setOption({
+
+        tooltip: {
+            trigger: "axis"
+        },
+
+        legend: {
+            data: [
+                "Rastreamento",
+                "Rotas",
+                "Correlação"
+            ]
+        },
+
+        grid: {
+            left: "5%",
+            right: "5%",
+            bottom: "15%",
+            containLabel: true
+        },
+
+        xAxis: {
+            type: "category",
+
+            data:
+                rastreamento.labels,
+
+            axisLabel: {
+                rotate: 45
+            }
+        },
+
+        yAxis: {
+            type: "value",
+            name: "Mbps"
+        },
+
+        dataZoom: [
+            {
+                type: "inside"
+            },
+            {
+                type: "slider"
+            }
+        ],
+
+        series: [
+            {
+                name: "Rastreamento",
+                type: "line",
+                smooth: true,
+                data:
+                    rastreamento.valores
+            },
+
+            {
+                name: "Rotas",
+                type: "line",
+                smooth: true,
+                data:
+                    rotas.valores
+            },
+
+            {
+                name: "Correlação",
+                type: "line",
+                smooth: true,
+                data:
+                    correlacao.valores
+            }
+        ]
+    });
+}
+
+function renderizarGraficoBanda() {
+
+    const dados =
+        dashboards[filtros.banda];
+
+    const ctx =
+        document.getElementById("graficoBanda");
+
+    if (graficoBanda) {
+        graficoBanda.destroy();
+    }
+
+    graficoBanda = new Chart(ctx, {
+
+        type: "bar",
+
+        data: {
+
+            labels: Object.keys(
+                dados.consumo_banda
+            ),
+
+            datasets: [{
+
+                label: "Mbps",
+
+                data: Object.values(
+                    dados.consumo_banda
+                ),
+
+                backgroundColor: "#0E7AB5",
+
+                borderRadius: 12
+            }]
+        },
+
+        options: {
+
+            indexAxis: "y",
+
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+function renderizarPerdaPacotesServico() {
+
+    const dados =
+        dashboards[filtros.perdaServicos];
+
+    const container =
+        document.getElementById("listaPacotes");
+
+    container.innerHTML = "";
+
+    const perdas =
+        dados.perda_pacotes_servico;
+
+    for (let servico in perdas) {
+
+        const valor = perdas[servico];
+
+        let corClasse = "";
+
+        if (valor < 1) {
+
+            corClasse = "verde";
+
+        } else if (valor <= 2) {
+
+            corClasse = "laranja";
+
+        } else {
+
+            corClasse = "vermelho";
+        }
+
+        container.innerHTML += `
+            <div class="tabela-pacotes">
+
+                <div>${servico}</div>
+
+                <div class="indicador-pacotes ${corClasse}">
+                    ${valor}%
+                </div>
+
+            </div>
+        `;
+    }
+}
+
+    // Gerar Relatório
+
+    function gerarRelatorio() {
+ 
+        const usuario    = sessionStorage.NOME_USUARIO;
+        const email      = sessionStorage.EMAIL_USUARIO;
+        const id_empresa = sessionStorage.ID_EMPRESA;
+    
+        const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
+        const mac_address = opcaoSelecionada.id;
+        const servidor    = opcaoSelecionada.text;
+    
+        const url = `/relatorio/${encodeURIComponent(usuario)}/${encodeURIComponent(email)}/${encodeURIComponent(mac_address)}/${encodeURIComponent(servidor)}/${encodeURIComponent(id_empresa)}`;
+    
+        window.open(url);
+    }
+
+    // Lista de Servidores
+
+    function listarServidores() {
+
+    const fkEmpresa = sessionStorage.ID_EMPRESA;
+
+    // transforma string em array
+    const servidores = JSON.parse(sessionStorage.ACESSO_SERVIDORES);
+
+        fetch(`/servidores/listarServidores`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: fkEmpresa,
+                servidoresServer: servidores
+            })
+        })
+
+        .then(resposta => resposta.json())
+
+        .then((lista) => {
+
+            select_servidor.innerHTML =
+                lista.map(servidor =>
+
+                    `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
+                        ${servidor.hostname}
+                    </option>`
+
+                ).join('');
+
+            nomeServidor.textContent =
+                select_servidor.options[
+                    select_servidor.selectedIndex
+                ].text;
+
+            carregarDashboards()
+        });
+
+        select_servidor.addEventListener("change", () => {
+
+            nomeServidor.textContent =
+                select_servidor.options[
+                    select_servidor.selectedIndex
+                ].text;
+
+            carregarDashboards()
+        });
+    }
+
+    //Menu Sanduiche
+    const btnHamburguer =
+        document.getElementById("hamburguer");
+
+    const lateral =
+        document.getElementById("lateral");
+
+    const overlay =
+        document.getElementById("overlay");
 
     function abrirMenu() {
+
         lateral.classList.add("ativo");
+
         overlay.classList.add("ativo");
     }
 
     function fecharMenu() {
+
         lateral.classList.remove("ativo");
+
         overlay.classList.remove("ativo");
     }
 
     if (btnHamburguer) {
+
         btnHamburguer.addEventListener("click", function (e) {
+
             e.stopPropagation();
 
             if (lateral.classList.contains("ativo")) {
                 fecharMenu();
-            } else {
+            }
+
+            else {
                 abrirMenu();
             }
         });
@@ -564,6 +995,7 @@
     overlay.addEventListener("click", fecharMenu);
 
     document.addEventListener("click", function (e) {
+
         if (
             lateral.classList.contains("ativo") &&
             !lateral.contains(e.target) &&
@@ -573,221 +1005,105 @@
         }
     });
 
-    if (tipo == "gestor") {
-        const ctxInd = document.getElementById("graficoIndisponibilidade");
+    window.addEventListener('resize', function () {
 
-        new Chart(ctxInd, {
-            type: "line",
-            data: {
-                labels: ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"],
-                datasets: [{
-                    data: [0, 0.15, 0.02, 0.11, 0.05, null, null, null, null, null, null, null],
-                    borderColor: "#0057D9",
-                    backgroundColor: "#0057D9",
-                    tension: 0.4,
-                    pointRadius: 5,
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
+        if (graficoTransferencia) {
+            graficoTransferencia.resize();
+        }
+    });
 
-        const ctxCap = document.getElementById("graficoCapacidade");
+    
 
-        new Chart(ctxCap, {
-            type: "line",
-            data: {
-                labels: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
-                datasets: [
-                    {
-                        label: "Demanda Operacional",
-                        data: [100, 320, 120, 620, 380, 360],
-                        borderColor: "#0066FF",
-                        backgroundColor: "transparent",
-                        tension: 0,
-                        borderWidth: 3
-                    },
-                    {
-                        label: "Capacidade Total",
-                        data: [500, 500, 500, 500, 500, 500],
-                        borderColor: "#FF4D4D",
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
+    async function carregarAlertas() {
 
-        const ctxSLA = document.getElementById("graficoSLA");
+    const opcaoSelecionada =
+        select_servidor.options[
+            select_servidor.selectedIndex
+        ];
 
-        new Chart(ctxSLA, {
-            type: "doughnut",
-            data: {
-                datasets: [{
-                    data: [94.4, 5.6],
-                    backgroundColor: [
-                        "#FF2B2B",
-                        "#EEEEEE"
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: "75%",
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: false
-                    }
-                }
-            },
-            plugins: [{
-                id: 'textoCentro',
-                beforeDraw(chart) {
-                    const { width } = chart;
-                    const { height } = chart;
-                    const ctx = chart.ctx;
+    const mac_address = opcaoSelecionada.id;
 
-                    ctx.restore();
-                    ctx.font = "bold 28px Arial";
-                    ctx.textBaseline = "middle";
-                    ctx.textAlign = "center";
-                    ctx.fillStyle = "#111";
+    const id_empresa =
+        sessionStorage.ID_EMPRESA;
 
-                    ctx.fillText("94.4%", width / 2, height / 2);
+    try {
 
-                    ctx.save();
-                }
-            }]
-        });
-    } else {
-        const ctxTransferencia = document.getElementById("graficoTransferencia");
+        const resposta = await fetch(
+    `/rede/buscarAlertas/${id_empresa}/${encodeURIComponent(mac_address)}`
+    )
 
-        new Chart(ctxTransferencia, {
-            type: "line",
-            data: {
-                labels: [
-                    "0:00",
-                    "1:00",
-                    "4:00",
-                    "7:00",
-                    "10:00",
-                    "13:00",
-                    "16:00",
-                    "19:00",
-                    "23:00"
-                ],
-                datasets: [
-                    {
-                        label: "Rastreamento",
-                        data: [50, 90, 180, 200, 270, 260, 150, 140, 70],
-                        borderColor: "#2F80ED",
-                        backgroundColor: "transparent",
-                        tension: 0.4,
-                        borderWidth: 4
-                    },
-                    {
-                        label: "Rotas",
-                        data: [20, 60, 140, 160, 250, 230, 110, 100, 30],
-                        borderColor: "#9B51E0",
-                        backgroundColor: "transparent",
-                        tension: 0.4,
-                        borderWidth: 4
-                    },
-                    {
-                        label: "Correlação",
-                        data: [0, 20, 80, 90, 150, 145, 60, 55, 0],
-                        borderColor: "#2ECC71",
-                        backgroundColor: "transparent",
-                        tension: 0.4,
-                        borderWidth: 4
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-            }
-        });
+        if (!resposta.ok) {
+            throw new Error(
+                `Erro HTTP: ${resposta.status}`
+            );
+        }
 
-        const ctxLatencia = document.getElementById("graficoLatencia");
+        const dados = await resposta.json();
 
-        new Chart(ctxLatencia, {
-            type: "bar",
-            data: {
-                labels: [
-                    "Radar - Rastreamento",
-                    "Rastreamento - Correlação",
-                    "Correlação - Data Base"
-                ],
-                datasets: [{
-                    label: "Latência (ms)",
-                    data: [20, 18, 13],
-                    backgroundColor: [
-                        "#05056B",
-                        "#0A4A96",
-                        "#12B7E5"
-                    ],
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                indexAxis: "y",
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
+        alertasAtivos = dados;
 
-        const ctxBanda = document.getElementById("graficoBanda");
+        renderizarAlertas();
 
-        new Chart(ctxBanda, {
-            type: "bar",
-            data: {
-                labels: [
-                    "ADS-B",
-                    "Sinc. de Voo",
-                    "Replicação de Rota",
-                    "API Gateway"
-                ],
-                datasets: [{
-                    label: "Mbps",
-                    data: [125, 85, 50, 100],
-                    backgroundColor: "#0E7AB5",
-                    borderRadius: 12
-                }]
-            },
-            options: {
-                indexAxis: "y",
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
+    } catch (erro) {
 
+        console.error(
+            "Erro ao buscar alertas:",
+            erro
+        );
     }
+}
+
+function renderizarAlertas() {
+    
+    const box =
+        document.getElementById("alertasBox");
+
+    const texto =
+        document.getElementById("alertaTexto");
+
+    const icone =
+        document.getElementById("alertaIcone");
+
+    const quantidade =
+        alertasAtivos.length;
+
+    texto.innerHTML =
+        `${quantidade} alerta${quantidade != 1 ? "s" : ""}`;
+
+    box.classList.remove(
+        "critico",
+        "alto"
+    );
+
+    if (quantidade === 0) {
+
+        box.style.display = "none";
+
+        return;
+    }
+
+    box.style.display = "flex";
+    
+    const possuiCritico =
+        alertasAtivos.some(
+            alerta =>
+                alerta.criticidade === "critico"
+        );
+
+    if (possuiCritico) {
+
+        box.classList.add("critico");
+
+        icone.src =
+            "assets/imgs/rede/alerta-verm.png";
+
+    } else {
+
+        box.classList.add("alto");
+
+        icone.src =
+            "assets/imgs/rede/alerta-lar.png";
+    }
+}
 
 </script>
