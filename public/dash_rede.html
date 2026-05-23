@@ -82,10 +82,15 @@
                                     <select id="select_servidor">
                                     </select>
                                 </div>
-
-                                <div class="alertas">
-                                    <img src="assets/imgs/rede/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
-                                </div>
+                                <a href="dash_incidentes.html">
+                                    <div class="alertas" id="alertasBox">
+                                        <img id="alertaIcone"src="assets/imgs/rede/alerta-lar.png" alt="" style="width: 12px !important; height: 12 px !important;">
+                                        
+                                        <span id="alertaTexto">
+                                            0 alertas
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
 
@@ -342,37 +347,86 @@
     let graficoTransferencia = null;
     let graficoLatencia = null;
     let graficoBanda = null;
+    let alertasAtivos = [];
 
     async function carregarDashboards() {
 
-        const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
-        const mac_address = opcaoSelecionada.id;
-        const id_empresa = sessionStorage.ID_EMPRESA;
+    const opcaoSelecionada =
+        select_servidor.options[
+            select_servidor.selectedIndex
+        ];
 
-        try {
+    const mac_address =
+        opcaoSelecionada.id;
 
-           const [d24, d3, d7] = await Promise.all([
+    const id_empresa =
+        sessionStorage.ID_EMPRESA;
 
-                fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/24h`)
-                    .then(r => r.json()),
+    try {
 
-                fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/3d`)
-                    .then(r => r.json()),
+        const [
+            d24,
+            d3,
+            d7
+        ] = await Promise.all([
 
-                fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/7d`)
-                    .then(r => r.json())
-            ]);
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/24h`)
+                .then(r => r.json()),
 
-            dashboards["24"] = d24;
-            dashboards["3"] = d3;
-            dashboards["7"] = d7;
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/3d`)
+                .then(r => r.json()),
 
-            renderizarTudo();
+            fetch(`/rede/buscarDadosRede/${id_empresa}/${mac_address}/7d`)
+                .then(r => r.json())
+        ]);
 
-        } catch (erro) {
-            console.error("Erro ao carregar dashboards:", erro);
-        }
+        dashboards["24"] = d24;
+        dashboards["3"] = d3;
+        dashboards["7"] = d7;
+
+        await carregarAlertas();
+
+        renderizarTudo();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar dashboards:",
+            erro
+        );
     }
+}
+    function agruparDados(labels, valores, tamanhoGrupo = 7) {
+
+    const novasLabels = [];
+    const novosValores = [];
+
+    for (let i = 0; i < valores.length; i += tamanhoGrupo) {
+
+        const blocoValores =
+            valores.slice(i, i + tamanhoGrupo);
+
+        const blocoLabels =
+            labels.slice(i, i + tamanhoGrupo);
+
+        const media =
+            blocoValores.reduce((a, b) => a + b, 0)
+            / blocoValores.length;
+
+        novosValores.push(
+            Number(media.toFixed(2))
+        );
+
+        novasLabels.push(
+            blocoLabels[blocoLabels.length - 1]
+        );
+    }
+
+    return {
+        labels: novasLabels,
+        valores: novosValores
+    };
+}
 
     function configurarFiltros() {
 
@@ -573,229 +627,261 @@
         );
     }
 
-    function renderizarGraficoTransferencia() {
+    function agruparDados(labels, valores, tamanhoGrupo = 7) {
 
-        const dados = dashboards[filtros.transferencia];
+    const novasLabels = [];
+    const novosValores = [];
 
-        const chartDom =
-            document.getElementById("graficoTransferencia");
+    for (let i = 0; i < valores.length; i += tamanhoGrupo) {
 
-        if (!graficoTransferencia) {
-            graficoTransferencia = echarts.init(chartDom);
-        }
+        const blocoValores =
+            valores.slice(i, i + tamanhoGrupo);
 
-        graficoTransferencia.setOption({
+        const blocoLabels =
+            labels.slice(i, i + tamanhoGrupo);
 
-            tooltip: {
-                trigger: 'axis'
-            },
+        const media =
+            blocoValores.reduce((a, b) => a + b, 0)
+            / blocoValores.length;
 
-            legend: {
-                data: ['Rastreamento', 'Rotas', 'Correlação']
-            },
+        novosValores.push(
+            Number(media.toFixed(2))
+        );
 
-            grid: {
-                left: '5%',
-                right: '5%',
-                bottom: '15%',
-                containLabel: true
-            },
+        novasLabels.push(
+            blocoLabels[blocoLabels.length - 1]
+        );
+    }
 
-            xAxis: {
-                type: 'category',
-                data: dados.grafico_transferencia.labels,
-                axisLabel: {
-                    rotate: 45
-                }
-            },
+    return {
+        labels: novasLabels,
+        valores: novosValores
+    };
+}
 
-            yAxis: {
-                type: 'value',
-                name: 'Mbps'
-            },
+function renderizarGraficoTransferencia() {
 
-            dataZoom: [
-                {
-                    type: 'inside'
-                },
-                {
-                    type: 'slider'
-                }
-            ],
+    const dados =
+        dashboards[filtros.transferencia];
 
-            series: [
-                {
-                    name: 'Rastreamento',
-                    type: 'line',
-                    smooth: true,
-                    data: dados.grafico_transferencia.rastreamento
-                },
-                {
-                    name: 'Rotas',
-                    type: 'line',
-                    smooth: true,
-                    data: dados.grafico_transferencia.rotas
-                },
-                {
-                    name: 'Correlação',
-                    type: 'line',
-                    smooth: true,
-                    data: dados.grafico_transferencia.correlacao
-                }
+    const agrupar =
+        filtros.transferencia === "24";
+
+    const dadosOriginais =
+        dados.grafico_transferencia;
+
+    const rastreamento =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.rastreamento
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.rastreamento
+            };
+
+    const rotas =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.rotas
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.rotas
+            };
+
+    const correlacao =
+        agrupar
+            ? agruparDados(
+                dadosOriginais.labels,
+                dadosOriginais.correlacao
+            )
+            : {
+                labels: dadosOriginais.labels,
+                valores: dadosOriginais.correlacao
+            };
+
+    const chartDom =
+        document.getElementById("graficoTransferencia");
+
+    if (!graficoTransferencia) {
+
+        graficoTransferencia =
+            echarts.init(chartDom);
+    }
+
+    graficoTransferencia.setOption({
+
+        tooltip: {
+            trigger: "axis"
+        },
+
+        legend: {
+            data: [
+                "Rastreamento",
+                "Rotas",
+                "Correlação"
             ]
-        });
-    }
+        },
 
+        grid: {
+            left: "5%",
+            right: "5%",
+            bottom: "15%",
+            containLabel: true
+        },
 
-    function renderizarGraficoLatencia() {
+        xAxis: {
+            type: "category",
 
-        const dados =
-            dashboards[filtros.latenciaComponentes];
+            data:
+                rastreamento.labels,
 
-        const ctx =
-            document.getElementById("graficoLatencia");
+            axisLabel: {
+                rotate: 45
+            }
+        },
 
-        if (graficoLatencia) {
-            graficoLatencia.destroy();
-        }
+        yAxis: {
+            type: "value",
+            name: "Mbps"
+        },
 
-        graficoLatencia = new Chart(ctx, {
+        dataZoom: [
+            {
+                type: "inside"
+            },
+            {
+                type: "slider"
+            }
+        ],
 
-            type: "bar",
-
-            data: {
-                labels: Object.keys(
-                    dados.grafico_latencia_componentes
-                ),
-
-                datasets: [{
-                    label: "Latência (ms)",
-
-                    data: Object.values(
-                        dados.grafico_latencia_componentes
-                    ),
-
-                    backgroundColor: [
-                        "#05056B",
-                        "#0A4A96",
-                        "#12B7E5",
-                        "#2F80ED",
-                        "#56CCF2"
-                    ],
-
-                    borderRadius: 8
-                }]
+        series: [
+            {
+                name: "Rastreamento",
+                type: "line",
+                smooth: true,
+                data:
+                    rastreamento.valores
             },
 
-            options: {
-                indexAxis: "y",
-                responsive: true,
+            {
+                name: "Rotas",
+                type: "line",
+                smooth: true,
+                data:
+                    rotas.valores
+            },
 
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
+            {
+                name: "Correlação",
+                type: "line",
+                smooth: true,
+                data:
+                    correlacao.valores
             }
-        });
+        ]
+    });
+}
+
+function renderizarGraficoBanda() {
+
+    const dados =
+        dashboards[filtros.banda];
+
+    const ctx =
+        document.getElementById("graficoBanda");
+
+    if (graficoBanda) {
+        graficoBanda.destroy();
     }
 
+    graficoBanda = new Chart(ctx, {
 
-    function renderizarGraficoBanda() {
+        type: "bar",
 
-        const dados =
-            dashboards[filtros.banda];
+        data: {
 
-        const ctx =
-            document.getElementById("graficoBanda");
+            labels: Object.keys(
+                dados.consumo_banda
+            ),
 
-        if (graficoBanda) {
-            graficoBanda.destroy();
-        }
+            datasets: [{
 
-        graficoBanda = new Chart(ctx, {
+                label: "Mbps",
 
-            type: "bar",
-
-            data: {
-
-                labels: Object.keys(
+                data: Object.values(
                     dados.consumo_banda
                 ),
 
-                datasets: [{
+                backgroundColor: "#0E7AB5",
 
-                    label: "Mbps",
+                borderRadius: 12
+            }]
+        },
 
-                    data: Object.values(
-                        dados.consumo_banda
-                    ),
+        options: {
 
-                    backgroundColor: "#0E7AB5",
+            indexAxis: "y",
 
-                    borderRadius: 12
-                }]
-            },
+            responsive: true,
 
-            options: {
-
-                indexAxis: "y",
-
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+            plugins: {
+                legend: {
+                    display: false
                 }
             }
-        });
-    }
-
-    
-
-    function renderizarPerdaPacotesServico() {
-
-        const dados =
-            dashboards[filtros.perdaServicos];
-
-        const container =
-            document.getElementById("listaPacotes");
-
-        container.innerHTML = "";
-
-        const perdas =
-            dados.perda_pacotes_servico;
-
-        for (let servico in perdas) {
-
-            const valor = perdas[servico];
-
-            let corClasse = "";
-
-            if (valor < 1) {
-                corClasse = "verde";
-            }
-
-            else if (valor <= 2) {
-                corClasse = "laranja";
-            }
-
-            else {
-                corClasse = "vermelho";
-            }
-
-            container.innerHTML += `
-                <div class="tabela-pacotes">
-                    <div>${servico}</div>
-
-                    <div class="indicador-pacotes ${corClasse}">
-                        ${valor}%
-                    </div>
-                </div>
-            `;
         }
+    });
+}
+
+function renderizarPerdaPacotesServico() {
+
+    const dados =
+        dashboards[filtros.perdaServicos];
+
+    const container =
+        document.getElementById("listaPacotes");
+
+    container.innerHTML = "";
+
+    const perdas =
+        dados.perda_pacotes_servico;
+
+    for (let servico in perdas) {
+
+        const valor = perdas[servico];
+
+        let corClasse = "";
+
+        if (valor < 1) {
+
+            corClasse = "verde";
+
+        } else if (valor <= 2) {
+
+            corClasse = "laranja";
+
+        } else {
+
+            corClasse = "vermelho";
+        }
+
+        container.innerHTML += `
+            <div class="tabela-pacotes">
+
+                <div>${servico}</div>
+
+                <div class="indicador-pacotes ${corClasse}">
+                    ${valor}%
+                </div>
+
+            </div>
+        `;
     }
+}
 
     // Gerar Relatório
 
@@ -925,5 +1011,99 @@
             graficoTransferencia.resize();
         }
     });
+
+    
+
+    async function carregarAlertas() {
+
+    const opcaoSelecionada =
+        select_servidor.options[
+            select_servidor.selectedIndex
+        ];
+
+    const mac_address = opcaoSelecionada.id;
+
+    const id_empresa =
+        sessionStorage.ID_EMPRESA;
+
+    try {
+
+        const resposta = await fetch(
+    `/rede/buscarAlertas/${id_empresa}/${encodeURIComponent(mac_address)}`
+    )
+
+        if (!resposta.ok) {
+            throw new Error(
+                `Erro HTTP: ${resposta.status}`
+            );
+        }
+
+        const dados = await resposta.json();
+
+        alertasAtivos = dados;
+
+        renderizarAlertas();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao buscar alertas:",
+            erro
+        );
+    }
+}
+
+function renderizarAlertas() {
+    
+    const box =
+        document.getElementById("alertasBox");
+
+    const texto =
+        document.getElementById("alertaTexto");
+
+    const icone =
+        document.getElementById("alertaIcone");
+
+    const quantidade =
+        alertasAtivos.length;
+
+    texto.innerHTML =
+        `${quantidade} alerta${quantidade != 1 ? "s" : ""}`;
+
+    box.classList.remove(
+        "critico",
+        "alto"
+    );
+
+    if (quantidade === 0) {
+
+        box.style.display = "none";
+
+        return;
+    }
+
+    box.style.display = "flex";
+    
+    const possuiCritico =
+        alertasAtivos.some(
+            alerta =>
+                alerta.criticidade === "critico"
+        );
+
+    if (possuiCritico) {
+
+        box.classList.add("critico");
+
+        icone.src =
+            "assets/imgs/rede/alerta-verm.png";
+
+    } else {
+
+        box.classList.add("alto");
+
+        icone.src =
+            "assets/imgs/rede/alerta-lar.png";
+    }
+}
 
 </script>

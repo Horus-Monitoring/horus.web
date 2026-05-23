@@ -44,6 +44,56 @@ async function buscarDadosRede(req, res) {
     }
 }
 
+async function buscarAlertas(req, res) {
+
+    const idEmpresa =
+        req.params.idEmpresa;
+
+    const macAddress =
+        decodeURIComponent(
+            req.params.macAddress
+        );
+
+    const key =
+        `client/alertas/empresa_${idEmpresa}/${macAddress}/incidentes_rede_24h.json`;
+
+    console.log("KEY:", key);
+
+    try {
+
+        const command = new GetObjectCommand({
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: key
+        });
+
+        const data = await s3.send(command);
+
+        const jsonString =
+            await data.Body.transformToString();
+
+        const json =
+            JSON.parse(jsonString);
+
+        res.status(200).json(json);
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        if (
+            erro.name === "NoSuchKey" ||
+            erro.Code === "NoSuchKey"
+        ) {
+            return res.status(200).json([]);
+        }
+
+        res.status(500).json({
+            erro: "Erro ao buscar alertas"
+        });
+    }
+}
+
 module.exports = {
-    buscarDadosRede
+    buscarDadosRede,
+    buscarAlertas
 }
