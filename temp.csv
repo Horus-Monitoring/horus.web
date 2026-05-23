@@ -1,4 +1,0 @@
-data_hora,hostname,id_empresa,servidor_id,ip,cpu,ram,disco,health_score,status_cpu,status_ram,status_disco
-2026-05-21 11:33:15,Gustavo,1,7,192.168.56.1,19.6,81.1,91.0,36.1,estavel,atencao,critico
-2026-05-21 11:33:28,Gustavo,1,7,192.168.56.1,24.4,82.5,91.0,34.03,estavel,atencao,critico
-2026-05-21 11:33:41,Gustavo,1,7,192.168.56.1,16.4,87.0,91.0,35.2,estavel,critico,critico

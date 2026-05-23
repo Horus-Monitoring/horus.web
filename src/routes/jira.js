@@ -9,4 +9,9 @@ router.get("/dashboard/:fkEmpresa/:fkFuncionario", function (req, res) {
     jiraController.filtrarDashboard(req, res);
 });
 
+
+router.get("/chamadosComponente/:fkFuncionario/:fkEmpresa/:hostname", function (req, res){
+    jiraController.chamadosPorComponente(req,res)
+})
+
 module.exports = router;
