@@ -78,15 +78,14 @@ async function buscarIssues(fkFuncionario, fkEmpresa) {
             };
         });
 
-        // pega os servidores que o analista tem acesso
         const servidores = await servidorModel.listarServidoresComAcesso(fkEmpresa, fkFuncionario);
 
-        // guarda o hostname desses servidores
+
         const servidoresPermitidos = servidores.filter(s => s.tem_acesso == 1).map(s => s.hostname.toLowerCase());
 
-        // filtra os incidentes do jira com base no hostname
+
         const incidentesFiltrados = incidentes.filter(incidente => servidoresPermitidos.includes(incidente.servidor.toLowerCase())
-    );
+        );
 
         return incidentesFiltrados;
     } catch (erro) {
@@ -126,7 +125,7 @@ async function filtrarDashboard(fkFuncionario, fkEmpresa) {
         i => i.prioridade == "Low"
     )
 
-    return{
+    return {
         incidentes: incidentes,
         incidentesAtivos: ativos.length,
         incidentesResolvidos: resolvidos.length,
@@ -137,7 +136,38 @@ async function filtrarDashboard(fkFuncionario, fkEmpresa) {
     }
 }
 
+
+async function chamadosPorComponente(fkFuncionario, fkEmpresa, hostname) {
+
+    const incidentes = await buscarIssues(fkFuncionario, fkEmpresa);
+
+
+    const incidentesServidor = incidentes.filter(
+        incidente =>
+            incidente.servidor.toLowerCase() === hostname.toLowerCase()
+    );
+
+    const componentes = {
+        cpu: 0,
+        ram: 0,
+        disco: 0,
+    };
+
+    incidentesServidor.forEach(incidente => {
+
+        const comp = incidente.componente?.toLowerCase();
+
+        if (componentes.hasOwnProperty(comp)) {
+            componentes[comp]++;
+        }
+
+    });
+
+    return componentes;
+}
+
 module.exports = {
     buscarIssues,
-    filtrarDashboard
+    filtrarDashboard,
+    chamadosPorComponente
 };
