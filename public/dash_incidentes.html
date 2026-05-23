@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_incidentes.css">
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+
 </head>
 
 <body>
@@ -69,24 +71,8 @@
                         <div class="header-servidor">
                             <span class="breadcrumb">
                                 Servidores /
-                                <strong id="nomeServidor"></strong> /
                                 <span class="renomear">Incidentes</span>
                             </span>
-
-                            <div class="status-servidor">
-                                <div class="select-status">
-                                    <span id="status-dot" class="status-dot verde"></span>
-
-                                    <select id="select_servidor" onchange="selecionar()">
-                                        <option value="#" selected>Todos</option>
-                                    </select>
-                                </div>
-
-                                <!-- <div class="alertas">
-                                    <img src="assets/imgs/incidentes/alerta-lar.png" alt=""
-                                        style="height: 12px !important; width: 12px !important;"> 3 alertas
-                                </div> -->
-                            </div>
                         </div>
                     </div>
 
@@ -115,32 +101,57 @@
                     <div style="border: 1px solid #FFCC00;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                <img style="border: 1px solid #FFCC00;" id="kpi-alerta"
-                                    src="./assets/imgs/incidentes/kpi-alerta.png" alt="">
+                                 <div class="borda-icon" id="icone-total-ativos-geral" style="border: 1px solid #FFCC00;">
+                                    <i data-lucide="triangle-alert"
+                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
+                                </div>
                                 <div class="informacoes-principais">
                                     <span>Total de Alertas Ativos</span>
                                     <h1 id="kpi_total_alertas_todos">10</h1>
                                 </div>
                             </div>
-                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                        </div>
-                        <div>
-                            <div class="ativos-severidade especificacoes-metricas">
-                                <span>Crítica</span>
-                                <h2 id="ativos_critica"></h2>
-                            </div>
-                            <div class="ativos-severidade especificacoes-metricas">
-                                <span>Alta</span>
-                                <h2 id="ativos_alta"></h2>
-                            </div>
-                            <div class="ativos-severidade especificacoes-metricas">
-                                <span>Média</span>
-                                <h2 id="ativos_media"></h2>
-                            </div>
+                            <div class="tooltip-info">
+                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
-                            <div class="ativos-severidade especificacoes-metricas">
-                                <span>Baixa</span>
-                                <h2 id="ativos_baixa"></h2>
+                                <div class="tooltip-box">
+                                    Soma de falhas de hardware pendentes. Volumes altos indicam instabilidade e risco de
+                                    perda de posição de aeronaves e rotas.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="niveis-ativos">
+                            <div class="ativos-severidade " style="margin-right: 30px;">
+                                <div class="especificacoes-metricas" style="color: #C70C0C;">
+                                    <div class="severidade">
+                                        <span style="background-color: #C70C0C;" class="indicador-severidade"></span>
+                                        <span>Crítica</span>
+                                    </div>
+                                    <h2 id="ativos_critica"></h2>
+                                </div>
+                                <div class="especificacoes-metricas" style="color: #FF8904;">
+                                    <div class="severidade">
+                                        <span style="background-color: #FF8904;" class="indicador-severidade"></span>
+                                        <span>Alta</span>
+                                    </div>
+                                    <h2 id="ativos_alta"></h2>
+                                </div>
+                            </div>
+                            <div class="ativos-severidade ">
+                                <div class="especificacoes-metricas" style="color: #FFCC00;">
+                                    <div class="severidade">
+                                        <span style="background-color: #FFCC00;" class="indicador-severidade"></span>
+                                        <span>Média</span>
+                                    </div>
+                                    <h2 id="ativos_media"></h2>
+                                </div>
+
+                                <div class="especificacoes-metricas" style="color: #308CFF;">
+                                    <div class="severidade">
+                                        <span style="background-color: #308CFF;" class="indicador-severidade"></span>
+                                        <span>Baixa</span>
+                                    </div>
+                                    <h2 id="ativos_baixa"></h2>
+                                </div>
                             </div>
                         </div>
                         <div class="tempo_dash">
@@ -156,14 +167,23 @@
                     <div style="border: 1px solid #C70C0C;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
-                                    src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
+                                <div class="borda-icon" id="icone-servidor" style="border: 1px solid #C70C0C;">
+                                    <i data-lucide="server"
+                                        style="width: 40px; height: 40px; color: #C70C0C; stroke-width: 1.5px;"></i>
+                                </div>
                                 <div class="informacoes-principais">
                                     <span>Servidor com mais Alertas</span>
                                     <h1 id="kpi_mais_alertas">10</h1>
                                 </div>
                             </div>
-                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                            <div class="tooltip-info">
+                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
+
+                                <div class="tooltip-box">
+                                    Identifica o servidor com maior frequência de incidentes. Estabilizá-lo é prioridade
+                                    para evitar incidentes de alta escala.
+                                </div>
+                            </div>
                         </div>
                         <div class="tempo_dash">
                             <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
@@ -178,32 +198,57 @@
                     <div style="border: 1px solid #C70C0C;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                <img style="border: 1px solid #C70C0C; padding: 9px;" id="kpi-alerta"
-                                    src="./assets/imgs/incidentes/tempo-reparo.png" alt="">
+                                <div class="borda-icon" id="icone-mttr" style="border: 1px solid #C70C0C;">
+                                    <i data-lucide="clock-check"
+                                        style="width: 40px; height: 40px; color: #C70C0C; stroke-width: 1.7px;"></i>
+                                </div>
                                 <div class="informacoes-principais">
                                     <span>Tempo Médio para Reparo</span>
                                     <h1 id="kpi_mttr">5 minutos</h1>
                                 </div>
                             </div>
-                            <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                        </div>
-                        <div>
-                            <div class="mttr-severidade especificacoes-metricas">
-                                <span>Crítica</span>
-                                <h2 id="mttr_critica"></h2>
-                            </div>
-                            <div class="mttr-severidade especificacoes-metricas">
-                                <span>Alta</span>
-                                <h2 id="mttr_alta"></h2>
-                            </div>
-                            <div class="mttr-severidade especificacoes-metricas">
-                                <span>Média</span>
-                                <h2 id="mttr_media"></h2>
-                            </div>
+                            <div class="tooltip-info alinhar-esquerda">
+                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
-                            <div class="mttr-severidade especificacoes-metricas">
-                                <span>Baixa</span>
-                                <h2 id="mttr_baixa"></h2>
+                                <div class="tooltip-box">
+                                    Agilidade na resolução de alertas de cada severidade. Reduzi-lo é vital para manter
+                                    a disponibilidade de 99,9% e o equilíbrio real do sistema SAGITARIO.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="niveis-ativos">
+                            <div class="ativos-severidade" style="margin-right: 30px;">
+                                <div class="especificacoes-metricas" style="color: #C70C0C;">
+                                    <div class="severidade">
+                                        <span style="background-color: #C70C0C;" class="indicador-severidade"></span>
+                                        <span>Crítica</span>
+                                    </div>
+                                    <h2 id="mttr_critica"></h2>
+                                </div>
+                                <div class="especificacoes-metricas" style="color: #FF8904;">
+                                    <div class="severidade">
+                                        <span style="background-color: #FF8904;" class="indicador-severidade"></span>
+                                        <span>Alta</span>
+                                    </div>
+                                    <h2 id="mttr_alta"></h2>
+                                </div>
+                            </div>
+                            <div class="ativos-severidade">
+                                <div class="especificacoes-metricas" style="color: #FFCC00;">
+                                    <div class="severidade">
+                                        <span style="background-color: #FFCC00;" class="indicador-severidade"></span>
+                                        <span>Média</span>
+                                    </div>
+                                    <h2 id="mttr_media"></h2>
+                                </div>
+
+                                <div class="especificacoes-metricas" style="color: #308CFF;">
+                                    <div class="severidade">
+                                        <span style="background-color: #308CFF;" class="indicador-severidade"></span>
+                                        <span>Baixa</span>
+                                    </div>
+                                    <h2 id="mttr_baixa"></h2>
+                                </div>
                             </div>
                         </div>
 
@@ -219,96 +264,87 @@
                 </div>
 
                 <div class="corpo-dashboard" id="corpo-dashboard-todos">
-                    <div class="corpo-esquerda" id="corpo-esquerda">
-                        <div class="painel-saude card">
-                            <div class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Painel de Saúde de Servidores</h1>
-                            </div>
+                    <div class="painel-saude card">
+                        <div class="titulo">
+                            <h1>Painel de Saúde de Servidores</h1>
+                            <div class="tooltip-info">
+                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
 
-                            <div id="lista_servidores" class="lista-servidores">
-
+                                <div class="tooltip-box">
+                                    Status operacional de cada nó em tempo real. Alertas visuais (<span
+                                        style="color: #FFCC00;">amarelo</span> ou <span
+                                        style="color: #C70C0C;">vermelho</span>) indicam instabilidade e risco de Lag de
+                                    Tela ou Drop de Etiqueta.
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="opcao-ocultar-servidores">
-                                <input id="checkbox-servidores" type="checkbox" onchange="mostrarPainelSaude()">
-                                <span>Ocultar servidores estáveis</span>
-                            </div>
+                        <div id="lista_servidores" class="lista-servidores">
+
+                        </div>
+
+                        <div class="opcao-ocultar-servidores">
+                            <input id="checkbox-servidores" type="checkbox" onchange="mostrarPainelSaude()">
+                            <span>Ocultar servidores estáveis</span>
                         </div>
                     </div>
 
-                    <div class="corpo-direita" id="corpo-direita">
-                        <!-- <div class="painel-saude card">
-                            <div class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Principais causas de Incidentes</h1>
 
-                                <div style="margin: 0;" class="tempo_dash tempo_alerta">
-                                    <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                    <select name="" id="tempo">
-                                        <option value="30s">Últimas 24 horas</option>
-                                        <option value="1min">Última Semana</option>
-                                        <option value="5min">Último Mês</option>
-                                    </select>
+                    <div class="painel-saude card">
+                        <div style="margin-bottom: 0px;" class="titulo">
+                            <h1>Horários críticos de falhas</h1>
+                            <div class="tooltip-info alinhar-esquerda">
+                                <img src="assets/imgs/incidentes/info.png" alt="Informação">
+
+                                <div class="tooltip-box">
+                                    Mapa térmico que identifica padrões e picos de incidentes por dia/hora. Essencial
+                                    para antecipar períodos de risco e garantir a alta disponibilidade do SAGITARIO.
                                 </div>
-                            </div>
-                            <div class="podio">
-                                <div class="posicoes">
-                                    <img src="./assets/imgs/incidentes/podium-um.png" alt="">
-                                    <span>Vazamento de Memória</span>
-
-                                    <div style="color: #FFCC00; border: 3px solid #FFCC00; background-color: #FAFCA5;"
-                                        class="posicao-representante">
-                                        Representam 20% de 20 incidentes
-                                    </div>
-                                </div>
-
-                                <div class="posicoes">
-                                    <img src="./assets/imgs/incidentes/podium-dois.png" alt="">
-                                    <span>Sobrecarga de Processamento</span>
-
-                                    <div style="color: #FFCC00; border: 3px solid #FFCC00; background-color: #FAFCA5;"
-                                        class="posicao-representante">
-                                        Representam 15% de 20 incidentes
-                                    </div>
-                                </div>
-
-                                <div class="posicoes">
-                                    <img src="./assets/imgs/incidentes/podium-tres.png" alt="">
-                                    <span>IOWAIT Elevado</span>
-
-                                    <div style="color: #20A200; border: 3px solid #20A200; background-color: #BFFBB0;"
-                                        class="posicao-representante">
-                                        Representam 5% de 20 incidentes
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <div class="painel-saude card">
-                            <div style="margin-bottom: 0px;" class="titulo">
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
-                                <h1>Horários críticos de falhas</h1>
-                            </div>
-                            <div id="heatmapFalhas"></div>
-
-                            <div class="legenda-heatmap">
-
-                                <span>Baixa</span>
-
-                                <div class="cores-legenda">
-                                    <div class="cor"></div>
-                                    <div style="background-color: #F3F4F6;" class="cor"></div>
-                                    <div style="background-color: #B9F8CF;" class="cor"></div>
-                                    <div style="background-color: #FFDF20;" class="cor"></div>
-                                    <div style="background-color: #FF8904;" class="cor"></div>
-                                    <div style="background-color: #FB2C36;" class="cor"></div>
-                                </div>
-
-                                <span>Alta</span>
-
                             </div>
                         </div>
+                        <div id="heatmapFalhas"></div>
+
+                        <div class="legenda-heatmap">
+
+                            <span>Baixa</span>
+
+                            <div class="cores-legenda">
+                                <div class="cor"></div>
+                                <div style="background-color: #F3F4F6;" class="cor"></div>
+                                <div style="background-color: #B9F8CF;" class="cor"></div>
+                                <div style="background-color: #FFDF20;" class="cor"></div>
+                                <div style="background-color: #FF8904;" class="cor"></div>
+                                <div style="background-color: #FB2C36;" class="cor"></div>
+                            </div>
+
+                            <span>Alta</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-servidor card">
+
+                    <div style="display: flex; flex-direction: row; gap: 10px; padding: 20px 25px;">
+                        <h3>Selecione um servidor para ver seus alertas:</h3>
+
+                        <div class="select-status">
+                            <span id="status-dot" class="status-dot verde"></span>
+
+                            <select id="select_servidor" onchange="selecionar()">
+                                <option value="#" disabled selected>selecione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <a
+                            href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20created%20DESC">
+                            <img height="20px" src="./assets/imgs/incidentes/jira.png" alt="">
+                        </a>
+                        <a href="https://app.slack.com/client/T0AQZ02KUJE/C0AQWUMQJBG?teamClassificationType=work">
+                            <img height="40px" src="./assets/imgs/incidentes/slack.png" alt="">
+                        </a>
                     </div>
                 </div>
 
@@ -317,14 +353,23 @@
                         <div style="border: 1px solid #FFCC00;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <img style="border: 1px solid #FFCC00;" id="kpi-alerta"
-                                        src="./assets/imgs/incidentes/kpi-alerta.png" alt="">
+                                    <div class="borda-icon" id="icone-total-ativos" style="border: 1px solid #FFCC00;">
+                                    <i data-lucide="triangle-alert"
+                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
+                                </div>
                                     <div class="informacoes-principais">
                                         <span>Total de Alertas Ativos</span>
                                         <h1 id="kpi_valor_total_alertas">10</h1>
                                     </div>
                                 </div>
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/incidentes/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Soma de falhas de hardware pendentes. Volumes altos indicam instabilidade e
+                                        risco de perda de posição de aeronaves e rotas.
+                                    </div>
+                                </div>
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
@@ -339,14 +384,24 @@
                         <div style="border: 1px solid #C70C0C;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <img style="border: 1px solid #C70C0C;" id="kpi-alerta"
-                                        src="./assets/imgs/incidentes/kpi-servidor.png" alt="">
+                                    <div class="borda-icon" id="icone-disponilidade" style="border: 1px solid #C70C0C;">
+                                        <i data-lucide="server"
+                                            style="width: 40px; height: 40px; color: #C70C0C; stroke-width: 1.5px;"></i>
+                                    </div>
                                     <div class="informacoes-principais">
                                         <span>Disponibilidade do Servidor</span>
                                         <h1 id="kpi_disponibilidade">100%</h1>
                                     </div>
                                 </div>
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <div class="tooltip-info">
+                                    <img src="assets/imgs/incidentes/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Percentual de tempo operacional ininterrupto. Manter o índice de 99% é vital
+                                        para evitar quedas no monitoramento e garantir a segurança das trajetórias de
+                                        voo.
+                                    </div>
+                                </div>
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
@@ -361,21 +416,31 @@
                         <div style="border: 1px solid #FFCC00;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <img style="border: 1px solid #FFCC00; padding: 5px;" id="kpi-alerta"
-                                        src="./assets/imgs/incidentes/confiabilidade.png" alt="">
+                                    <div class="borda-icon" id="icone-confiabilidade" style="border: 1px solid #FFCC00;">
+                                    <i data-lucide="gauge"
+                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.7px;"></i>
+                                </div>
                                     <div class="informacoes-principais">
                                         <span>índice de Confiabilidade</span>
-                                        <h1>50</h1>
+                                        <h1 id="indice_confiabilidade">50</h1>
                                     </div>
                                 </div>
-                                <img src="./assets/imgs/incidentes/icon-info.svg" alt="">
+                                <div class="tooltip-info alinhar-esquerda">
+                                    <img src="assets/imgs/incidentes/info.png" alt="Informação">
+
+                                    <div class="tooltip-box">
+                                        Score sintetizado de saúde (0-100) baseado na estabilidade e eficiência de
+                                        recuperação do nó. Notas baixas alertam para o risco iminente de degradação
+                                        sistêmica.
+                                    </div>
+                                </div>
                             </div>
                             <div class="tempo_dash">
                                 <img id="relogio" src="./assets/imgs/dash_analista/relogio.png" alt="">
-                                <select name="" id="tempo">
-                                    <option value="30s">Últimas 24 horas</option>
-                                    <option value="1min">Última Semana</option>
-                                    <option value="5min">Último Mês</option>
+                                <select class="tempo" name="" id="tempo_indice_confiabilidade">
+                                    <option value="1h">Última hora</option>
+                                    <option value="24h">Últimas 24 horas</option>
+                                    <option value="7d">Última Semana</option>
                                 </select>
                             </div>
                         </div>
@@ -432,10 +497,13 @@
     </div>
 
     <script>
+        lucide.createIcons();
+
         let dadosGlobaisAlertas = null;
         let severidadeAtiva = "Todos";
         let statusAtivo = "Todos";
         let servidoresPermitidos = [];
+        let graficoHeatmap = null;
 
         const prioridades = {
 
@@ -599,107 +667,6 @@
     });
 
 
-    const options = {
-        chart: {
-            type: 'heatmap',
-            height: 350,
-            toolbar: {
-                show: false
-            }
-        }, legend: {
-            show: false
-        },
-
-        series: [
-            {
-                name: 'Sáb',
-                data: [1, 0, 2, 3, 5, 2]
-            },
-            {
-                name: 'Sex',
-                data: [0, 1, 3, 6, 4, 1]
-            },
-            {
-                name: 'Qui',
-                data: [1, 2, 4, 7, 5, 2]
-            },
-            {
-                name: 'Qua',
-                data: [0, 1, 5, 8, 6, 1]
-            },
-            {
-                name: 'Ter',
-                data: [1, 2, 4, 7, 5, 2]
-            },
-            {
-                name: 'Seg',
-                data: [0, 1, 3, 5, 4, 1]
-            },
-            {
-                name: 'Dom',
-                data: [2, 1, 1, 2, 3, 3]
-            }
-        ],
-
-        xaxis: {
-            categories: ['00h', '04h', '08h', '12h', '16h', '20h']
-        },
-
-        dataLabels: {
-            enabled: true
-        },
-
-        colors: ['#B8F1C6'],
-
-        plotOptions: {
-            heatmap: {
-                radius: 4,
-
-                colorScale: {
-                    ranges: [
-                        {
-                            from: 0,
-                            to: 0,
-                            color: '#E9E9E9'
-                        },
-                        {
-                            from: 1,
-                            to: 2,
-                            color: '#B8F1C6'
-                        },
-                        {
-                            from: 3,
-                            to: 4,
-                            color: '#FFD633'
-                        },
-                        {
-                            from: 5,
-                            to: 6,
-                            color: '#FF8A00'
-                        },
-                        {
-                            from: 7,
-                            to: 10,
-                            color: '#FB2C36'
-                        }
-                    ]
-                }
-            }
-        },
-
-        stroke: {
-            width: 4,
-            colors: ['#FFFFFF']
-        }
-    };
-
-    const chart = new ApexCharts(
-        document.querySelector("#heatmapFalhas"),
-        options
-    );
-
-    chart.render();
-
     function listarServidores() {
         const fkEmpresa = sessionStorage.ID_EMPRESA;
         const idUsuario = sessionStorage.ID_USUARIO;
@@ -712,17 +679,11 @@
                 servidoresPermitidos = servidoresComAcesso.map(s => [s.hostname, s.status_servidor]);
 
                 select_servidor.innerHTML += servidoresComAcesso.map(servidor =>
-                    `<option value = "${servidor.hostname}">${servidor.hostname}</option>`
+                    `<option value = "${servidor.hostname.toLowerCase()}" id="${servidor.mac_address}">${servidor.hostname}</option>`
                 ).join('')
-                nomeServidor.textContent =
-                    select_servidor.options[select_servidor.selectedIndex].text;
-                carregarAlertas()
-            })
 
-        select_servidor.addEventListener("change", () => {
-            nomeServidor.textContent =
-                select_servidor.options[select_servidor.selectedIndex].text;
-        })
+                carregarAlertas()
+            });
 
         select_servidor.addEventListener("change", selecionar);
     }
@@ -796,15 +757,16 @@
             return filtroServidor && estaNoPeriodo && filtroSeveridade && filtroStatus;
         });
 
-        console.log(alertasFiltrados)
 
         if (alertasFiltrados.length == 0) {
             lista_alertas.innerHTML = `
                 <div class="sem-alertas-container">
+                    <i data-lucide="smile" style="width: 70px; height: 70px;" stroke-width="2"></i>  
                     <h2>Nenhum incidente encontrado</h2>
                     <p>Ótimas notícias! Não existem alertas registrados para os filtros selecionados.</p>
                 </div>
             `;
+            lucide.createIcons();
         } else {
             lista_alertas.innerHTML = alertasFiltrados.map(alerta => {
                 const visual = prioridades[alerta.prioridade];
@@ -932,6 +894,30 @@
         }
     }
 
+    async function obterDadosScore() {
+
+        const fkEmpresa = sessionStorage.ID_EMPRESA;
+        const opcaoSelecionada = select_servidor.options[select_servidor.selectedIndex];
+        console.log(opcaoSelecionada.id)
+        const mac_address = opcaoSelecionada.id;
+
+        const resposta = await fetch(`/incidentes/calcularIndice/${fkEmpresa}/${mac_address}`);
+
+        const dados = resposta.json();
+        return dados;
+    }
+
+    async function mostrarKPIScore() {
+        const dados = await obterDadosScore();
+
+        const filtroTempoSelecionado = tempo_indice_confiabilidade.value;
+
+        const dadosFiltrados = dados[filtroTempoSelecionado];
+        indice_confiabilidade.innerText = dadosFiltrados.score;
+        console.log(dadosFiltrados)
+
+    }
+
     function mostrarKPITodos() {
         if (!dadosGlobaisAlertas || !dadosGlobaisAlertas.incidentes) return;
 
@@ -969,8 +955,6 @@
 
             return dataCriacao >= limiteTempoServidor;
         })
-
-        console.log("ALERTAS" + alertasFiltradosServidor)
 
         var hostname_mais_alertas = "Nenhum";
         var qtd_mais_alertas = 0;
@@ -1033,7 +1017,7 @@
         function obterMTTRPorSeveridade(listaAlertas, nivelSeveridade) {
             const filtrados = listaAlertas.filter(alerta => alerta.prioridade === nivelSeveridade);
 
-            if (filtrados.length === 0) return "Sem dados";
+            if (filtrados.length === 0) return "-";
 
             let somaMs = 0;
             for (let i = 0; i < filtrados.length; i++) {
@@ -1060,26 +1044,106 @@
         mttr_baixa.innerText = obterMTTRPorSeveridade(alertasResolvidos, "Low");
     }
 
+    function plotarHeatmap() {
+        if (!dadosGlobaisAlertas || !dadosGlobaisAlertas.incidentes) return;
+        const alertas = dadosGlobaisAlertas.incidentes;
+
+        const diasSemana = ["Sáb", "Sex", "Qui", "Qua", "Ter", "Seg", "Dom"];
+
+        var seriesDinamica = diasSemana.map(dia => {
+            return {
+                name: dia,
+                data: [0, 0, 0, 0, 0, 0]
+            }
+        })
+
+        alertas.forEach(alerta => {
+            const dataCriacao = new Date(alerta.criadoEm);
+            const diaCriacao = dataCriacao.getDay();
+            const horaCriacao = dataCriacao.getHours();
+
+            // ajusta dias da semana com dias do mapa, domingo é 6 no diasSemana mas é 0 no gráfico
+            const mapaIndicesDias = { 6: 0, 5: 1, 4: 2, 3: 3, 2: 4, 1: 5, 0: 6 };
+            const indiceDia = mapaIndicesDias[diaCriacao];
+
+            // define de que bloco de 4 horas o alerta percente
+            const indiceBlocoHora = Math.floor(horaCriacao / 4);
+
+            // adiciona mais um incidente no indice dia (dom, seg) no bloco de quatro horas 
+            seriesDinamica[indiceDia].data[indiceBlocoHora]++;
+        });
+
+        const options = {
+            chart: {
+                type: 'heatmap',
+                height: 250,
+                toolbar: {
+                    show: false
+                }
+            }, legend: {
+                show: false
+            },
+
+            series: seriesDinamica,
+
+            xaxis: {
+                categories: ['00h', '04h', '08h', '12h', '16h', '20h']
+            },
+
+            dataLabels: {
+                enabled: true
+            },
+
+            colors: ['#B8F1C6'],
+
+            plotOptions: {
+                heatmap: {
+                    radius: 4,
+
+                    colorScale: {
+                        ranges: [
+                            { from: 0, to: 0, color: '#E9E9E9' },
+                            { from: 1, to: 2, color: '#B8F1C6' },
+                            { from: 3, to: 4, color: '#FFD633' },
+                            { from: 5, to: 6, color: '#FF8A00' },
+                            { from: 7, to: 10, color: '#FB2C36' }
+                        ]
+                    }
+                }
+            },
+
+            stroke: {
+                width: 4,
+                colors: ['#FFFFFF']
+            }
+        };
+
+        graficoHeatmap = new ApexCharts(document.querySelector("#heatmapFalhas"), options);
+        graficoHeatmap.render();
+    }
+
+
 
     function selecionar() {
         select = document.getElementById("select_servidor");
-        if (select.value == "#") {
-            document.getElementById("corpo-dashboard-todos").style.display = "grid";
-            document.getElementById("corpo-dashboard-servidor").style.display = "none";
-            document.getElementById("kpis-todos").style.display = "grid";
-            document.getElementById("status-dot").style.display = "none";
 
-            mostrarKPITodos();
-            mostrarPainelSaude();
-        } else {
-            document.getElementById("corpo-dashboard-todos").style.display = "none";
+        if (select.value != "#") {
             document.getElementById("corpo-dashboard-servidor").style.display = "block";
-            document.getElementById("kpis-todos").style.display = "none";
             document.getElementById("status-dot").style.display = "block";
 
             listarAlertas();
             mostrarKPIs();
+            mostrarKPIScore();
+
+        } else {
+            document.getElementById("corpo-dashboard-servidor").style.display = "none";
+            document.getElementById("status-dot").style.display = "none";
+
+            mostrarKPITodos();
+            mostrarPainelSaude();
+            plotarHeatmap();
         }
+
     }
 
     // Quando o tempo mudar, apenas a KPI precisa recalcular
@@ -1094,6 +1158,15 @@
 
     // Quando o servidor mudar, AMBOS precisam atualizar
     select_servidor.addEventListener("change", selecionar);
+
+    select_servidor.addEventListener('change', function () {
+        if (this.value !== "#") {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            })
+        }
+    })
 
     listarServidores();
     exibirUsuarioAtivo();
