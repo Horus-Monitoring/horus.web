@@ -27,11 +27,13 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuario");
 var perfilRouter = require("./src/routes/perfil");
 var servidoresRouter = require("./src/routes/servidores");
+
 var processosRouter = require("./src/routes/processos");
 
 var redeRouter = require("./src/routes/rede");
 var relatorioRouter = require("./src/routes/relatorio")
 var faleConoscoRouter = require("./src/routes/faleConosco");
+var s3Router = require("./src/routes/s3");
 
 var jiraRouter = require("./src/routes/jira");
 var incidentesRouter = require("./src/routes/incidentes");
@@ -47,12 +49,15 @@ app.use("/usuario", usuarioRouter);
 app.use("/perfil", perfilRouter);
 app.use("/faleConosco", faleConoscoRouter);
 app.use("/servidores", servidoresRouter);
+
 app.use("/processos", processosRouter);
 app.use("/rede", redeRouter);
 app.use("/relatorio", relatorioRouter);
 
 app.use("/jira", jiraRouter);
 app.use("/incidentes", incidentesRouter);
+
+app.use("/s3", s3Router);
 
 app.listen(PORTA_APP, function () {
     console.log(`
