@@ -12,9 +12,9 @@ router.get("/exibirServidores/:fkEmpresa", function (req, res) {
     servidoresController.exibirServidores(req, res);
 })
 
-router.get("/listarServidores/:fkEmpresa", function (req, res) {
+router.post("/listarServidores", function (req, res) {
     servidoresController.listarServidores(req, res);
-})
+});
 
 
 

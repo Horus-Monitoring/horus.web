@@ -16,7 +16,7 @@ async function capturarDados(req, res) {
 
         const command = new GetObjectCommand({
 
-            Bucket: "s3-raw-lab-060",
+            Bucket: "horus-monitoring",
 
             // client -> id da empresa -> mac address -> processos.json 
             Key:
