@@ -12,9 +12,11 @@ router.get("/exibirServidores/:fkEmpresa", function (req, res) {
     servidoresController.exibirServidores(req, res);
 })
 
-router.get("/listarServidores/:fkEmpresa", function (req, res) {
+router.post("/listarServidores", function (req, res) {
     servidoresController.listarServidores(req, res);
-})
+});
+
+
 
 router.delete("/deletarServidor/:id", function (req, res) {
     servidoresController.deletarServidor(req, res);
@@ -40,5 +42,9 @@ router.get("/listarServidoresComAcesso/:fkEmpresa/:fkFuncionario", function (req
 router.post("/atualizarAcessos", function (req, res) {
     servidoresController.atualizarAcessos(req, res);
 });
+
+router.get("/capturarDados/:fkEmpresa/:hostname", function(req, res){
+    servidoresController.capturarDados(req, res)
+})
 
 module.exports = router;
