@@ -106,6 +106,8 @@ function deletarServidor(req, res) {
         );
 }
 
+
+
 // Componentes
 function cadastrarComponente(req, res) {
     var fkServidor = req.body.fkServidorServer
@@ -211,5 +213,6 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
+    listarServidoresAnalista,
     atualizarAcessos
 }
