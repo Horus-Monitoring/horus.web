@@ -64,7 +64,9 @@ function listarServidores(fkEmpresa) {
         FROM servidor 
         WHERE fk_empresa = ${fkEmpresa};
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+    console.log(instrucaoSql);
+
     return database.executar(instrucaoSql);
 }
 
