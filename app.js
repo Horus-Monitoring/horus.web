@@ -1,5 +1,5 @@
-// var ambiente_processo = 'producao';
-var ambiente_processo = 'desenvolvimento';
+var ambiente_processo = 'producao';
+// var ambiente_processo = 'desenvolvimento';
 
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 // Acima, temos o uso do operador ternário para definir o caminho do arquivo .env
@@ -22,11 +22,11 @@ const s3 = new AWS.S3({
 });
 
 var app = express();
-
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuario");
 var perfilRouter = require("./src/routes/perfil");
 var servidoresRouter = require("./src/routes/servidores");
+const temperaturaRouter = require("./src/routes/temperatura");
 
 var processosRouter = require("./src/routes/processos");
 
@@ -49,6 +49,7 @@ app.use("/usuario", usuarioRouter);
 app.use("/perfil", perfilRouter);
 app.use("/faleConosco", faleConoscoRouter);
 app.use("/servidores", servidoresRouter);
+app.use("/temperatura", temperaturaRouter);
 
 app.use("/processos", processosRouter);
 app.use("/rede", redeRouter);
