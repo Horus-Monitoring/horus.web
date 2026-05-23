@@ -186,5 +186,5 @@ module.exports = {
     deletarComponente,
     listarServidoresComAcesso,
     limparAcessos,
-    inserirAcessos
+    inserirAcessos,
 };
