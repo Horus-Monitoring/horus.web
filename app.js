@@ -34,6 +34,7 @@ var relatorioRouter = require("./src/routes/relatorio")
 var faleConoscoRouter = require("./src/routes/faleConosco");
 
 var jiraRouter = require("./src/routes/jira");
+var incidentesRouter = require("./src/routes/incidentes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -51,6 +52,7 @@ app.use("/rede", redeRouter);
 app.use("/relatorio", relatorioRouter);
 
 app.use("/jira", jiraRouter);
+app.use("/incidentes", incidentesRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
