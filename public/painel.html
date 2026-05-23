@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Horus</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./style/painel.css">
     <link rel="icon" href="./assets/icon/logo.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
@@ -53,33 +51,11 @@
         <main class="main">
 
             <header class="header">
+                <div class="hamburguer" id="hamburguer">
+                    <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                </div>
 
-                <div class="header-topo">
-                    <div class="header-esquerda">
-                        <div class="hamburguer" id="hamburguer">
-                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
-                        </div>
-
-                        <div class="header-servidor">
-                            <span class="breadcrumb">
-                                Servidores /
-                                <strong id="nomeServidor"></strong> /
-                                <span class="renomear">Comunicação e Rede</span>
-                            </span>
-
-                            <div class="status-servidor">
-                                <div class="select-status">
-                                    <span class="status-dot verde"></span>
-
-                                    <select id="select_servidor">
-                                    </select>
-                                </div>
-
-                                <div class="alertas">
-                                    <img src="assets/imgs/rede/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
-                                </div>
-                            </div>
-                        </div>
+                <span class="header-titulo">Dashboard</span>
 
                 <span id="hora" class="hora"></span>
                 <div class="usuario">
@@ -88,26 +64,8 @@
                         <p id="nome_usuario"></p>
                         <p id="funcao_usuario" class="cargo"></p>
                     </div>
-
-                    <div class="usuario">
-                        <div>
-                            <p id="nome_usuario"></p>
-                            <p id="funcao_usuario" class="cargo"></p>
-                        </div>
-                        <span id="inicial_usuario"></span>
-                    </div>
+                    <span id="inicial_usuario"></span>
                 </div>
-
-                <div class="header-nav-scroll">
-                    <nav class="header-nav">
-                        <a href="painel.html" class="ativo">Resumo</a>
-                        <a href="#">Processos</a>
-                        <a href="dash_rede.html">Comunicação e rede</a>
-                        <a href="#">Temperatura</a>
-                        <a href="#">Incidentes</a>
-                    </nav>
-                </div>
-
             </header>
 
             <section class="conteudo">
