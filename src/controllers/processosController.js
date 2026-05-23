@@ -1,5 +1,6 @@
-// npm i @aws-sdk/client-s3 (conexao entre s3 e front)
-const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
+// npm i @aws-sdk/client-s3
+
+const {S3Client,GetObjectCommand} = require("@aws-sdk/client-s3");
 
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
@@ -10,43 +11,69 @@ const s3 = new S3Client({
     }
 });
 
+async function lerJson(key) {
+
+    const command = new GetObjectCommand({
+
+        Bucket: "horus-monitoring-leticia",
+
+        Key: key
+    });
+
+    const data = await s3.send(command);
+
+    const jsonString = await data.Body.transformToString();
+
+    return JSON.parse(jsonString);
+}
+
 async function capturarDados(req, res) {
 
     try {
 
-        const command = new GetObjectCommand({
+        const [processos, criticos] = await Promise.all([
 
-            Bucket: "horus-monitoring",
+            // lerJson(
+            //     "client/kpis/process_raw_kpis.json"
+            // ),
 
-            // client -> id da empresa -> mac address -> processos.json 
-            Key:
-                `client/kpis/raw_processos_kpis.json`
+            lerJson(
+                "client/process_raw_kpis.json"
+            ),
+
+            lerJson(
+                "client/raw_criticos_4h.json"
+            )
+
+        ]);
+
+        res.json({
+            processos,
+            criticos
         });
 
-        //console.log(Key);
+        console.log(criticos)
 
-        // aguardando resposta da requisição
-        const data = await s3.send(command);
+        //console.log("KPIS:");
+        //console.log(kpis);
 
-        // transforma json em string
-        const jsonString =
-            await data.Body.transformToString();
-
-        const json = JSON.parse(jsonString);
-
-        res.json(json);
-        console.log(json);
+        //console.log("PROCESSOS:");
+        //console.log(processos);
 
     } catch (erro) {
 
-        console.error("ERRO AWS:", erro);
+        console.error(
+            "ERRO AWS:",
+            erro
+        );
 
         res.status(500).json({
-            erro: "Erro ao buscar dashboard"
+            erro:
+                "Erro ao buscar dashboard"
         });
     }
 }
 
 module.exports = {
     capturarDados
-}
+};
