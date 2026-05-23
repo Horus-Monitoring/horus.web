@@ -16,6 +16,8 @@ router.get("/listarServidores/:fkEmpresa", function (req, res) {
     servidoresController.listarServidores(req, res);
 })
 
+
+
 router.delete("/deletarServidor/:id", function (req, res) {
     servidoresController.deletarServidor(req, res);
 })
