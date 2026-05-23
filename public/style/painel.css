@@ -325,8 +325,15 @@ body {
   min-height: 0;
 }
 
-.header {
+.container {
   display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main .header {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   height: 60px;
@@ -722,6 +729,7 @@ body {
   text-align: center;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+  color: gray;
 }
 
 .btn-reatribuir img {
