@@ -135,6 +135,7 @@ function listarServidoresComAcesso(fkEmpresa, fkFuncionario) {
             s.id_servidor,
             s.hostname,
             s.status_servidor,
+            s.mac_address,
             CASE 
                 WHEN a.fk_servidor IS NOT NULL THEN 1
                 ELSE 0
