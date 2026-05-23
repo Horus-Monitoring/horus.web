@@ -213,6 +213,5 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
-    listarServidoresAnalista,
     atualizarAcessos
 }
