@@ -73,7 +73,7 @@
 
                             <div class="status-servidor">
                                 <div class="select-status">
-                                    <span class="status-dot verde"></span>
+                                    <span id="status-dot" class="status-dot verde"></span>
                                     <select id="select_servidor"></select>
                                 </div>
 
@@ -294,7 +294,7 @@
             contadorHealth = 0;
             const opcaoSelecionada =
                 select_servidor.options[
-                    select_servidor.selectedIndex
+                select_servidor.selectedIndex
                 ];
 
             const mac_address =
@@ -523,14 +523,39 @@
             }
         }
 
+        function atualizarStatusDot(m) {
+            const dot = document.getElementById("status-dot");
 
+            if (!dot || !m) return;
+
+            dot.classList.remove("verde","laranja","vermelho");
+
+            const possuiCritico =
+                (m.cpu ?? 0) > 85 ||
+                (m.ram ?? 0) > 85 ||
+                (m.disco ?? 0) > 90 ||
+                (m.health_score ?? 100) < 40;
+
+            const possuiAlerta =
+                (m.cpu ?? 0) > 70 ||
+                (m.ram ?? 0) > 70 ||
+                (m.health_score ?? 100) < 70;
+
+            if (possuiCritico) {
+                dot.classList.add("vermelho");
+            } else if (possuiAlerta) {
+                dot.classList.add("laranja");
+            } else {
+                dot.classList.add("verde");
+            }
+        }
 
 
         async function capturarDados(empresa) {
 
             const opcaoSelecionada =
                 select_servidor.options[
-                    select_servidor.selectedIndex
+                select_servidor.selectedIndex
                 ];
 
             const mac_address =
@@ -553,6 +578,7 @@
                     .at(-1);
 
                 const m = item.metricas;
+                atualizarStatusDot(m);
 
                 const valorReal = Number(m?.linha_real ?? m?.ram ?? 0);
                 const valorTendencia = Number(m?.linha_tendencia ?? m?.ram ?? 0);
@@ -703,59 +729,59 @@
 
 
 
-       function listarServidores() {
+        function listarServidores() {
 
-    const fkEmpresa = sessionStorage.ID_EMPRESA;
+            const fkEmpresa = sessionStorage.ID_EMPRESA;
 
-    // transforma string em array
-    const servidores = JSON.parse(sessionStorage.ACESSO_SERVIDORES);
+            // transforma string em array
+            const servidores = JSON.parse(sessionStorage.ACESSO_SERVIDORES);
 
-        fetch(`/servidores/listarServidores`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fkEmpresaServer: fkEmpresa,
-                servidoresServer: servidores
+            fetch(`/servidores/listarServidores`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fkEmpresaServer: fkEmpresa,
+                    servidoresServer: servidores
+                })
             })
-        })
 
-        .then(resposta => resposta.json())
+                .then(resposta => resposta.json())
 
-        .then((lista) => {
+                .then((lista) => {
 
-            select_servidor.innerHTML =
-                lista.map(servidor =>
+                    select_servidor.innerHTML =
+                        lista.map(servidor =>
 
-                    `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
+                            `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
                         ${servidor.hostname}
                     </option>`
 
-                ).join('');
+                        ).join('');
 
-            nomeServidor.textContent =
-                select_servidor.options[
-                    select_servidor.selectedIndex
-                ].text;
+                    nomeServidor.textContent =
+                        select_servidor.options[
+                            select_servidor.selectedIndex
+                        ].text;
 
-            carregarDashboardServidor(
-                select_servidor.value
-            );
-        });
+                    carregarDashboardServidor(
+                        select_servidor.value
+                    );
+                });
 
-        select_servidor.addEventListener("change", () => {
+            select_servidor.addEventListener("change", () => {
 
-            nomeServidor.textContent =
-                select_servidor.options[
-                    select_servidor.selectedIndex
-                ].text;
+                nomeServidor.textContent =
+                    select_servidor.options[
+                        select_servidor.selectedIndex
+                    ].text;
 
-            carregarDashboardServidor(
+                carregarDashboardServidor(
                     select_servidor.value
                 );
-        });
-    }
+            });
+        }
 
 
 
@@ -776,7 +802,7 @@
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
                 iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
-                
+
                 await carregarGraficoChamados(dadosServidor.hostname);
 
 

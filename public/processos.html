@@ -76,7 +76,7 @@
 
                             <div class="status-servidor">
                                 <div class="select-status">
-                                    <span class="status-dot verde"></span>
+                                    <span id="status-dot" class="status-dot verde"></span>
 
                                     <select id="select_servidor">
                                     </select>
@@ -364,6 +364,43 @@
         let criticos = null
         let graficoAtual = "cpu"
 
+        function atualizarStatusServidor(dados) {
+
+            const dot = document.getElementById("status-dot");
+
+            if (!dot || !dados?.processos?.kpis) return;
+
+            dot.classList.remove(
+                "verde",
+                "amarelo",
+                "vermelho"
+            );
+
+            const kpis = dados.processos.kpis;
+
+            const possuiCritico =
+                kpis.total > 0 ||
+                kpis.cpu > 0 ||
+                kpis.ram > 0 ||
+                kpis.latencia > 0;
+
+            const possuiAlerta =
+                kpis.running < 3;
+
+            if (possuiCritico) {
+
+                dot.classList.add("vermelho");
+
+            } else if (possuiAlerta) {
+
+                dot.classList.add("amarelo");
+
+            } else {
+
+                dot.classList.add("verde");
+            }
+        }
+
         async function capturarDados() {
 
             const id_empresa = sessionStorage.ID_EMPRESA;
@@ -379,13 +416,14 @@
 
                 const resposta = await fetch(`/processos/capturarDados/${id_empresa}/${encodeURIComponent(mac_address)}`);
 
-  
+
                 if (!resposta.ok) {
                     throw new Error(`HTTP ${resposta.status}`);
                 }
 
                 dados = await resposta.json();
-        
+                atualizarStatusServidor(dados);
+
 
                 if (dados.processos.kpis.total > 0) {
                     critico.classList.add('card-critico');
