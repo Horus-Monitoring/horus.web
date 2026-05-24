@@ -28,11 +28,14 @@ var processosRouter = require("./src/routes/processos");
 var redeRouter = require("./src/routes/rede");
 var relatorioRouter = require("./src/routes/relatorio")
 var faleConoscoRouter = require("./src/routes/faleConosco");
+var agenteRouter = require("./src/routes/agente");
 var s3Router = require("./src/routes/s3");
 
 var jiraRouter = require("./src/routes/jira");
 var incidentesRouter = require("./src/routes/incidentes");
 
+
+app.use("/agente", agenteRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
