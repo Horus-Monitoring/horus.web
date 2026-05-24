@@ -9,10 +9,10 @@ const s3 = new S3Client({
     }
 });
 
-async function buscarJsonS3(){
+async function buscarJsonS3(empresa){
 /* async function buscarJsonS3(empresa, mac_adress,  periodo){
         const key = `client/${empresa}/${mac_adress}/${servidor}_${periodo}.json`;*/
-    const key = `client/gestor/empresa_1/dashboard.json`;
+    const key = `client/gestor/empresa_${empresa}/dashboard.json`;
 
     const command = new GetObjectCommand({
         Bucket: process.env.AWS_BUCKET,

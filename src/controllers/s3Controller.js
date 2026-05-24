@@ -10,6 +10,8 @@ const s3 = new S3Client({
 });
 
 async function buscarDadosS3(req, res) {
+    const empresa = req.params.empresa;
+    console.log("Empresa recebida:", empresa);
 
     try {
 
@@ -18,7 +20,7 @@ async function buscarDadosS3(req, res) {
             Bucket: process.env.AWS_BUCKET,
 
             Key:
-                `client/gestor/empresa_1/dashboard_gestor.json`
+                `client/gestor/empresa_${empresa}/dashboard_gestor.json`
         });
 
         const data = await s3.send(command);

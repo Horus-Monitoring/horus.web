@@ -1,74 +1,80 @@
-    <!DOCTYPE html>
-    <html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard | Horus</title>
-        <link rel="icon" href="./assets/icon/logo.png" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Horus</title>
+    <link rel="icon" href="./assets/icon/logo.png" />
 
-        <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
-        <script src="./js/script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="style/painel.css">
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style/painel.css">
+</head>
 
-    <body>
-        <div class="modal" id="modal"></div>
+<body>
+    <div class="modal" id="modal"></div>
 
-        <div class="container">
+    <div class="alerta-reatribuicao" id="alerta_reatribuicao">
+        <img src="assets/imgs/painel/bola-verde.png" alt="">
+        <span id="alerta_reatribuicao_mensagem"></span>
+    </div>
 
-            <aside class="lateral" id="lateral">
-                <div class="logo">
-                    <img src="./assets/imgs/painel/logo.png" alt="" style="font-family: Jura, sans-serif;">
-                    Horus
+    <div class="container">
+
+        <aside class="lateral" id="lateral">
+            <div class="logo">
+                <img src="./assets/imgs/painel/logo.png" alt="" style="font-family: Jura, sans-serif;">
+                Horus
+            </div>
+
+            <nav class="menu">
+                <div class="categoria">Monitoramento</div>
+                <div onclick="window.location.href='painel.html'" class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
                 </div>
 
-                <nav class="menu">
-                    <div class="categoria">Monitoramento</div>
-                    <div onclick="window.location.href='painel.html'" class="item-menu selecionado">
-                        <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
-                    </div>
+
+                <div class="categoria adm" id="administracao">Administração</div>
+                <div onclick="window.location.href='dash_usuarios.html'" class="item-menu adm" id="cadastrarUsuario">
+                    <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
+                </div>
+                <div onclick="window.location.href='servidor-componente.html'" class="item-menu adm"
+                    id="cadastrarServidor">
+                    <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
+                </div>
 
 
-                    <div class="categoria adm" id="administracao">Administração</div>
-                    <div onclick="window.location.href='dash_usuarios.html'" class="item-menu adm" id="cadastrarUsuario">
-                        <img src="./assets/imgs/painel/cadastrar-usuario.png" alt="">Usuários
-                    </div>
-                    <div onclick="window.location.href='servidor-componente.html'" class="item-menu adm"
-                        id="cadastrarServidor">
-                        <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
-                    </div>
-        
+                <div class="categoria">Agentes</div>
 
-            <div class="categoria">Agentes</div>
+                <div onclick="baixarAgente()" class="item-menu">
+                    <img src="./assets/imgs/painel/agente.png" style="height: 19px; width: 19px;" alt="">
+                    Instalar agente
+                </div>
 
-            <div onclick="baixarAgente()" class="item-menu">
-                <img src="./assets/imgs/painel/agente.png" style="height: 19px; width: 19px;" alt="">
-                Instalar agente
+                <div class="categoria" style="padding-bottom: 10px !important;">Gestão de Incidentes</div>
+                <div>
+                    <a
+                        href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20created%20DESC">
+                        <img src="assets/imgs/painel/jira.png" alt="" style="width: 25% !important;">
+                    </a>
+
+                </div>
+                <div>
+                    <a href="https://app.slack.com/client/T0AQZ02KUJE/C0AQWUMQJBG?teamClassificationType=work">
+                        <img src="assets/imgs/painel/slack.png" alt="" style="width: 35% !important;">
+                    </a>
+
+                </div>
+
+            </nav>
+
+            <div onclick="limparSessionStorage()" class="sair">
+                <img src="./assets/imgs/painel/sair.png" alt="">
+                <p onclick="window.location.href='index.html'">Sair</p>
             </div>
-
-            <div class="categoria" style="padding-bottom: 10px !important;">Gestão de Incidentes</div>
-            <div>
-                <a href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20created%20DESC">
-                    <img src="assets/imgs/painel/jira.png" alt="" style="width: 25% !important;">
-                </a>
-                
-            </div>
-            <div>
-                <a href="https://app.slack.com/client/T0AQZ02KUJE/C0AQWUMQJBG?teamClassificationType=work">
-                    <img src="assets/imgs/painel/slack.png" alt="" style="width: 35% !important;">
-                </a>
-                
-            </div>
-
-        </nav>
-
-        <div onclick="limparSessionStorage()" class="sair">
-            <img src="./assets/imgs/painel/sair.png" alt="">
-            <p onclick="window.location.href='index.html'">Sair</p>
-        </div>
         </aside>
 
         <main class="main">
@@ -128,7 +134,8 @@
                         </div>
 
                         <div>
-                            <span id="kpi_risco" class="valor-kpi" style="color: orange;"></span><span class="medida-kpi">
+                            <span id="kpi_risco" class="valor-kpi" style="color: orange;"></span><span
+                                class="medida-kpi">
                                 /100
                             </span>
                         </div>
@@ -143,7 +150,8 @@
                         </div>
 
                         <div>
-                            <span id="kpi_criticos" class="valor-kpi" style="color: red;"></span><span class="medida-kpi">
+                            <span id="kpi_criticos" class="valor-kpi" style="color: red;"></span><span
+                                class="medida-kpi">
                                 ativos </span>
                         </div>
                     </div>
@@ -251,162 +259,162 @@
 
         </main>
 
-        </div>
-    </body>
+    </div>
+</body>
 
-    <script>
-        window.onload = () => {
-            const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
+<script>
+    window.onload = () => {
+        const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
-            const btnHamburguer = document.getElementById('hamburguer');
-            const lateral = document.getElementById('lateral');
-            const modal = document.getElementById('modal');
+        const btnHamburguer = document.getElementById('hamburguer');
+        const lateral = document.getElementById('lateral');
+        const modal = document.getElementById('modal');
 
-            try {
-                exibirUsuarioAtivo()
-            } catch (erro) {
-                console.warn("Erro ao exibir o usuario", erro)
-            }
-
-            function abrirMenu() {
-                lateral.classList.add('aberto');
-                modal.classList.add('ativo');
-            }
-
-            function fecharMenu() {
-                lateral.classList.remove('aberto');
-                modal.classList.remove('ativo');
-            }
-
-            btnHamburguer.addEventListener('click', () => {
-                lateral.classList.contains('aberto') ? fecharMenu() : abrirMenu();
-            });
-
-            modal.addEventListener('click', fecharMenu);
-        };
-
-        document.querySelectorAll('.filtro').forEach(filtro => {
-            filtro.addEventListener('click', () => {
-                document.querySelectorAll('.filtro').forEach(f => f.classList.remove('selecionado'));
-                filtro.classList.add('selecionado');
-                periodo = filtro.textContent.trim();
-                console.log("Filtro: " + periodo);
-                buscarDadosS3(periodo);
-            })
-        });
-
-        function atualizarHora() {
-            const horaAtual = new Date();
-            const horas = String(horaAtual.getHours()).padStart(2, '0');
-            const minutos = String(horaAtual.getMinutes()).padStart(2, '0');
-            const segundos = String(horaAtual.getSeconds()).padStart(2, '0');
-
-            document.getElementById('hora').textContent = `${horas}:${minutos}:${segundos}`;
-        }
-        setInterval(atualizarHora, 1000);
-        atualizarHora();
-
-        const ctx_estabilidade = document.getElementById('graficoEstabilidade');
-
-        const graficoEstabilidade = new Chart(ctx_estabilidade, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Estabilidade',
-                    data: [],
-                    borderColor: '#00d2c8',
-                    backgroundColor: 'rgba(0, 210, 200, 0.15)',
-                    fill: true,
-                    tension: 0.2,
-                    pointRadius: [],
-                    pointBackgroundColor: [],
-                }, {
-                    label: 'Meta mínima',
-                    data: [],
-                    borderColor: 'rgba(255, 100, 100, 0.5)',
-                    borderDash: [4, 2],
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    fill: false,
-                }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#6b7280' },
-                        grid: {
-                            color: 'rgba(255,255,255,0.05)',
-                            display: false
-                        }
-                    },
-                    y: {
-                        min: 0,
-                        ticks: {
-                            color: '#6b7280',
-                            callback: i => i + '%'
-                        },
-                        grid: { color: 'rgba(255,255,255,0.05)' }
-                    }
-                }
-            }
-        });
-
-        const ctx_impacto = document.getElementById('graficoImpacto');
-
-        function getCor(valor) {
-            if (valor >= 80) return '#ff4d6d';
-            if (valor >= 60) return '#f5a623';
-            return '#4a9eff';
+        try {
+            exibirUsuarioAtivo()
+        } catch (erro) {
+            console.warn("Erro ao exibir o usuario", erro)
         }
 
-        const graficoImpacto = new Chart(ctx_impacto, {
-            type: 'bar',
-            data: {
-                labels: [
-                    'CPU',
-                    'RAM',
-                    'Disco'
-                ],
-                datasets: [{
-                    data: [],
-                    backgroundColor: [],
-                    borderRadius: 3,
-                    borderSkipped: false,
-                }]
+        function abrirMenu() {
+            lateral.classList.add('aberto');
+            modal.classList.add('ativo');
+        }
+
+        function fecharMenu() {
+            lateral.classList.remove('aberto');
+            modal.classList.remove('ativo');
+        }
+
+        btnHamburguer.addEventListener('click', () => {
+            lateral.classList.contains('aberto') ? fecharMenu() : abrirMenu();
+        });
+
+        modal.addEventListener('click', fecharMenu);
+    };
+
+    document.querySelectorAll('.filtro').forEach(filtro => {
+        filtro.addEventListener('click', () => {
+            document.querySelectorAll('.filtro').forEach(f => f.classList.remove('selecionado'));
+            filtro.classList.add('selecionado');
+            periodo = filtro.textContent.trim();
+            console.log("Filtro: " + periodo);
+            buscarDadosS3(periodo, sessionStorage.ID_EMPRESA);
+        })
+    });
+
+    function atualizarHora() {
+        const horaAtual = new Date();
+        const horas = String(horaAtual.getHours()).padStart(2, '0');
+        const minutos = String(horaAtual.getMinutes()).padStart(2, '0');
+        const segundos = String(horaAtual.getSeconds()).padStart(2, '0');
+
+        document.getElementById('hora').textContent = `${horas}:${minutos}:${segundos}`;
+    }
+    setInterval(atualizarHora, 1000);
+    atualizarHora();
+
+    const ctx_estabilidade = document.getElementById('graficoEstabilidade');
+
+    const graficoEstabilidade = new Chart(ctx_estabilidade, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Estabilidade',
+                data: [],
+                borderColor: '#00d2c8',
+                backgroundColor: 'rgba(0, 210, 200, 0.15)',
+                fill: true,
+                tension: 0.2,
+                pointRadius: [],
+                pointBackgroundColor: [],
+            }, {
+                label: 'Meta mínima',
+                data: [],
+                borderColor: 'rgba(255, 100, 100, 0.5)',
+                borderDash: [4, 2],
+                borderWidth: 2,
+                pointRadius: 0,
+                fill: false,
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
             },
-            options: {
-                indexAxis: 'y',
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: ctx => ` ${ctx.raw}%`
-                        }
+            scales: {
+                x: {
+                    ticks: { color: '#6b7280' },
+                    grid: {
+                        color: 'rgba(255,255,255,0.05)',
+                        display: false
                     }
                 },
-                scales: {
-                    x: {
-                        min: 0,
-                        max: 100,
-                        ticks: {
-                            color: '#6b7280',
-                            callback: v => v + '%'
-                        },
-                        grid: { color: 'rgba(255,255,255,0.05)' }
+                y: {
+                    min: 0,
+                    ticks: {
+                        color: '#6b7280',
+                        callback: i => i + '%'
                     },
-                    y: {
-                        ticks: { color: '#9ca3af' },
-                        grid: { display: false }
-                    }
+                    grid: { color: 'rgba(255,255,255,0.05)' }
                 }
             }
-        });
+        }
+    });
+
+    const ctx_impacto = document.getElementById('graficoImpacto');
+
+    function getCor(valor) {
+        if (valor >= 80) return '#ff4d6d';
+        if (valor >= 60) return '#f5a623';
+        return '#4a9eff';
+    }
+
+    const graficoImpacto = new Chart(ctx_impacto, {
+        type: 'bar',
+        data: {
+            labels: [
+                'CPU',
+                'RAM',
+                'Disco'
+            ],
+            datasets: [{
+                data: [],
+                backgroundColor: [],
+                borderRadius: 3,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.raw}%`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    min: 0,
+                    max: 100,
+                    ticks: {
+                        color: '#6b7280',
+                        callback: v => v + '%'
+                    },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                },
+                y: {
+                    ticks: { color: '#9ca3af' },
+                    grid: { display: false }
+                }
+            }
+        }
+    });
 
     var periodo = '24h'
     var hostnameReatribuicao = '';
@@ -551,21 +559,21 @@
         }
     });
 
-        async function buscarDadosS3(periodo) {
+    async function buscarDadosS3(periodo, idEmpresa) {
 
-            try {
-                const resposta = await fetch(`/s3/buscarDadosS3`);
-                const dadosS3 = await resposta.json();
-                const dados = dadosS3.periodos[periodo];
+        try {
+            const resposta = await fetch(`/s3/buscarDadosS3/${idEmpresa}`);
+            const dadosS3 = await resposta.json();
+            const dados = dadosS3.periodos[periodo];
 
-                console.log(periodo);
-                console.log(dadosS3.periodos);
+            console.log(periodo);
+            console.log(dadosS3.periodos);
 
-                console.log("DADOS DO S3: ", dadosS3);
+            console.log("DADOS DO S3: ", dadosS3);
 
-                // Kpis
-                const kpis = dados.kpis
-                console.log("KPIS: ", kpis);
+            // Kpis
+            const kpis = dados.kpis
+            console.log("KPIS: ", kpis);
 
             document.getElementById('kpi_disponibilidade').textContent = kpis.disponibilidade_global;
             document.getElementById('kpi_risco').textContent = Math.round(kpis.nivel_risco);
@@ -629,30 +637,30 @@
                 document.getElementById('card_estabilidade').style.borderLeft = '4px solid red';
             }
 
-                // Gráfico estabilidade
-                const dadosGraficoEstabilidade = dados.grafico_estabilidade;
-                console.log("Gráfico estabilidade: ", dadosGraficoEstabilidade)
+            // Gráfico estabilidade
+            const dadosGraficoEstabilidade = dados.grafico_estabilidade;
+            console.log("Gráfico estabilidade: ", dadosGraficoEstabilidade)
 
-                const valores = dadosGraficoEstabilidade.valores.map(Number);
+            const valores = dadosGraficoEstabilidade.valores.map(Number);
 
-                graficoEstabilidade.data.labels = dadosGraficoEstabilidade.labels;
-                graficoEstabilidade.data.datasets[0].data = valores;
-                graficoEstabilidade.data.datasets[0].pointRadius = valores.map(valor => valor < 85 ? 6 : 0);
-                graficoEstabilidade.data.datasets[0].pointBackgroundColor = valores.map(valor => valor < 85 ? '#ff4d6d' : 'transparent');
-                graficoEstabilidade.data.datasets[1].data = Array(valores.length).fill(85);
+            graficoEstabilidade.data.labels = dadosGraficoEstabilidade.labels;
+            graficoEstabilidade.data.datasets[0].data = valores;
+            graficoEstabilidade.data.datasets[0].pointRadius = valores.map(valor => valor < 85 ? 6 : 0);
+            graficoEstabilidade.data.datasets[0].pointBackgroundColor = valores.map(valor => valor < 85 ? '#ff4d6d' : 'transparent');
+            graficoEstabilidade.data.datasets[1].data = Array(valores.length).fill(85);
 
-                graficoEstabilidade.update();
+            graficoEstabilidade.update();
 
-                // Gráfico impacto por componente
-                const dadosImpacto = dados.impacto_por_componente;
+            // Gráfico impacto por componente
+            const dadosImpacto = dados.impacto_por_componente;
 
-                console.log("Gráfico impacto:", dadosImpacto);
+            console.log("Gráfico impacto:", dadosImpacto);
 
-                const valoresImpacto = [
-                    Number(dadosImpacto.CPU.valor),
-                    Number(dadosImpacto.RAM.valor),
-                    Number(dadosImpacto.DISCO.valor)
-                ];
+            const valoresImpacto = [
+                Number(dadosImpacto.CPU.valor),
+                Number(dadosImpacto.RAM.valor),
+                Number(dadosImpacto.DISCO.valor)
+            ];
 
             if (valoresImpacto[0] >= 80 || valoresImpacto[1] >= 80 || valoresImpacto[2] >= 80) {
                 alertaImpactoCritico.style.display = 'flex';
@@ -664,36 +672,52 @@
             graficoImpacto.data.datasets[0].backgroundColor = valoresImpacto.map(getCor);
             graficoImpacto.update();
 
-                // Box predicão
-                const predicoes = dados.previsao_falhas;
+            // Box predicão
+            const predicoes = dados.previsao_falhas;
 
-                const container = document.getElementById('previsao_falhas');
+            const container = document.getElementById('previsao_falhas');
 
-                container.innerHTML = `
-                    <div class="topo-tendencia">
-                        <img src="assets/imgs/painel/cerebro.png" alt="" width="40px" height="40px">
-                        <span>Previsão de Falhas</span>
+            container.innerHTML = `
+                <div class="topo-tendencia">
+                    <img src="assets/imgs/painel/cerebro.png" alt="" width="40px" height="40px">
+                    <span>Previsão de Falhas</span>
+                </div>
+            `;
+
+            if (predicoes.length == 0) {
+                container.innerHTML += `
+                    <div class="item-tendencia">
+                        <span class="metrica">
+                            Nenhum risco previsto
+                        </span>
+
+                        <span class="descricao">
+                            O modelo não identificou tendência crítica.
+                        </span>
                     </div>
                 `;
 
-                if (predicoes.length == 0) {
+            } else {
+                predicoes.forEach(predicao => {
+
                     container.innerHTML += `
                         <div class="item-tendencia">
                             <span class="metrica">
-                                Nenhum risco previsto
+                                ${predicao.metrica} - ${predicao.nivel_previsao.toUpperCase()}
                             </span>
 
                             <span class="descricao">
-                                O modelo não identificou tendência crítica.
+                                ${predicao.mensagem}
                             </span>
                         </div>
                     `;
+                });
+            }
 
             // Tabela necessidade de analistas
             const tabela = document.getElementById('corpo_tabela_analistas');
 
-                // Tabela necessidade de analistas
-                const tabela = document.getElementById('corpo_tabela_analistas');
+            tabela.innerHTML = '';
 
             var analistasPorServidor = {};
             var carregouAnalistasServidor = false;
@@ -741,74 +765,67 @@
                 var situacao = 'NORMAL';
                 var classe = 'normal';
 
-                servidores.forEach(servidor => {
+                if (servidor.incidentes >= 10) {
+                    situacao = 'CRÍTICO';
+                    classe = 'critico';
 
-                    let situacao = 'NORMAL';
-                    let classe = 'normal';
+                } else if (servidor.incidentes >= 5) {
+                    situacao = 'ATENÇÃO';
+                    classe = 'atencao';
+                }
 
-                    if (servidor.incidentes >= 10) {
-                        situacao = 'CRÍTICO';
-                        classe = 'critico';
+                tabela.innerHTML += `
+                    <tr class="item-tabela">
 
                         <td>${servidor.servidor}</td>
                         <td>${servidor.incidentes}</td>
                         <td id="${idColunaAnalistas}">${qtdAnalistas}</td>
 
-                    tabela.innerHTML += `
-                        <tr class="item-tabela">
+                        <td>
+                            <span class="status ${classe}">
+                                ${situacao}
+                            </span>
+                        </td>
 
                         <td>
                             ${botaoReatribuir}
                         </td>
 
-                            <td>
-                                <span class="status ${classe}">
-                                    ${situacao}
-                                </span>
-                            </td>
+                    </tr>
+                `;
+            });
 
-                            <td>
-                                <button class="btn-reatribuir">
-                                    <img src="assets/imgs/painel/adicionar.png" alt="">
-                                    Reatribuir
-                                </button>
-                            </td>
-
-                        </tr>
-                    `;
-                });
-
-            } catch (erro) {
-                console.error("ERRO: ", erro);
-            }
-
-        }
-        buscarDadosS3(periodo);
-
-        async function baixarAgente() {
-
-            try {
-
-                const resposta =
-                    await fetch("/agente/download");
-
-                const dados =
-                    await resposta.json();
-
-                window.open(
-                    dados.url,
-                    "_blank"
-                );
-
-            } catch (erro) {
-
-                console.error(
-                    "Erro ao baixar agente:",
-                    erro
-                );
-            }
+        } catch (erro) {
+            console.error("ERRO: ", erro);
         }
 
-    </script>
+    }
+    buscarDadosS3(periodo, sessionStorage.ID_EMPRESA);
+
+    async function baixarAgente() {
+
+        try {
+
+            const resposta =
+                await fetch("/agente/download");
+
+            const dados =
+                await resposta.json();
+
+            window.open(
+                dados.url,
+                "_blank"
+            );
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao baixar agente:",
+                erro
+            );
+        }
+    }
+
+</script>
 
 </html>

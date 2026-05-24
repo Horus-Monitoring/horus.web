@@ -24,7 +24,6 @@ const temperaturaRouter = require("./src/routes/temperatura");
 
 var processosRouter = require("./src/routes/processos");
 
-
 var redeRouter = require("./src/routes/rede");
 var relatorioRouter = require("./src/routes/relatorio")
 var faleConoscoRouter = require("./src/routes/faleConosco");
