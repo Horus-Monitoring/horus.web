@@ -86,9 +86,21 @@
                                     </select>
                                 </div>
 
-                                <div class="alertas">
+                                
+                                <!-- <div class="alertas">
                                     <img src="assets/imgs/processos/alerta-lar.png" alt="" style="height: 12px !important; width: 12px !important;"> 3 alertas
+                                </div> -->
+
+                                <div class="ultima-atualizacao">
+                                    <span class="texto-atualizacao">
+                                        Última Atualização:
+                                    </span>
+
+                                    <span id="ultimaAtualizacao" class="horario-atualizacao">
+                                        <span id="data"></span> às <span id="hora"></span>
+                                    </span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -252,10 +264,10 @@
                             <input type="text" id="procurar-processo" placeholder="Buscar por PID ou Nome...">
                         </div>
                         <div class="alternador-pesquisar">
-                            <button id="btnTodos" class="ativo">Todos</button>
-                            <button id="btnRunning">Running</button>
-                            <button id="btnSleeping">Sleeping</button>
-                            <button id="btnStopped">Stopped</button>
+                            <button id="btnTodos" class="ativo">Todos (<span id="qtdTodos">0</span>)</button>
+                            <button id="btnRunning">Running (<span id="Running">0</span>)</button>
+                            <button id="btnSleeping">Sleeping (<span id="Sleeping">0</span>)</button>
+                            <button id="btnStopped">Stopped (<span id="Stopped">0</span>)</button>
                         </div>   
                     </div>
                 </section>
@@ -267,22 +279,59 @@
                                 <th>PID</th>
                                 <th>Nome</th>
                                 <th>Usuário</th>
-                                <th>CPU</th>
-                                <th>RAM</th>
-                                <th>Latência</th>
+                                <!-- <th>CPU</th> -->
+                                <th onclick="ordenarTabela('cpu')">
+                                    <div class="teste">
+                                        <span>CPU</span> 
+                                        <span class="setas">
+                                            <img class="seta-cinza cres" id="cpuSetaCres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                            <img class="seta-cinza" id="cpuSetaDecres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                        </span>
+                                    </div>
+                                </th>
+                                <th onclick="ordenarTabela('ram')">
+                                    <div class="teste">
+                                        <span>RAM</span> 
+                                        <span class="setas">
+                                            <img class="seta-cinza cres" id="ramSetaCres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                            <img class="seta-cinza" id="ramSetaDecres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                        </span>
+                                    </div>
+                                </th>
+                                <th onclick="ordenarTabela('latencia')">
+                                    <div class="teste">
+                                        <span>Latência</span> 
+                                        <span class="setas">
+                                            <img class="seta-cinza cres" id="latSetaCres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                            <img class="seta-cinza" id="latSetaDecres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                        </span>
+                                    </div>
+                                </th>
+                                <!-- <th>RAM</th> -->
+                                <!-- <th>Latência</th> -->
                                 <th>Status</th>
-                                <th>Tempo de Execução</th>
+                                <!-- <th>Tempo de Execução</th> -->
+                                <th onclick="ordenarTabela('tempo_execucao')">
+                                    <div class="teste">
+                                        <span>Tempo de Execução</span> 
+                                        <span class="setas">
+                                            <img class="seta-cinza cres" id="tempSetaCres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                            <img class="seta-cinza" id="tempSetaDecres" src="./assets/imgs/processos/seta-cinza.png" alt="">
+                                        </span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody id="corpoTabela">
                         </tbody>
                     </table>
-                    <div class="paginacao">
+                </div>
+
+                <div class="paginacao">
                         <button id="btnPrev">Anterior</button>
                         <span id="infoPagina"></span>
                         <button id="btnNext">Próximo</button>
                     </div>
-                </div>
 
             </section>
         </main>
@@ -291,7 +340,7 @@
 
     <script>
 
-        const agora = new Date();
+        
         
         /*window.onload = () => {const funcao = sessionStorage.getItem("FUNCAO_USUARIO");
 
@@ -365,6 +414,10 @@
             async function capturarDados() {
 
                 try{
+                
+                const agora = new Date();
+                const horas = agora.getHours();       
+                const minutos = agora.getMinutes();
                     
                 const resposta = await fetch("/processos/capturarDados");
                 dados = await resposta.json();
@@ -397,15 +450,26 @@
                     ramQtdDiv.classList.add("info-alerta");
                 }
 
+                let running = dados.processos.kpis.running;
+                let sleeping = dados.processos.kpis.sleeping;
+                let stopped= dados.processos.kpis.stopped;
+                let total = running + sleeping + stopped;
+
                 document.getElementById("latenciaQtd").innerHTML = dados.processos.kpis.latencia;
                 document.getElementById("cpuQtd").innerHTML = dados.processos.kpis.cpu;
                 document.getElementById("ramQtd").innerHTML = dados.processos.kpis.ram;
-                document.getElementById("qtdRunning").innerHTML = dados.processos.kpis.running;
-                document.getElementById("qtdSleeping").innerHTML = dados.processos.kpis.sleeping;
-                document.getElementById("qtdStopped").innerHTML = dados.processos.kpis.stopped;
+                document.getElementById("qtdTodos").innerHTML = total;
+                document.getElementById("qtdRunning").innerHTML = running;
+                document.getElementById("qtdSleeping").innerHTML = sleeping;
+                document.getElementById("qtdStopped").innerHTML = stopped;
+                document.getElementById("Running").innerHTML = running;
+                document.getElementById("Sleeping").innerHTML = sleeping;
+                document.getElementById("Stopped").innerHTML = stopped;
                 document.getElementById("nome-proc").innerHTML = dados.processos.kpis.nome;
                 document.getElementById("latencia-proc").innerHTML = dados.processos.kpis.latencia_ms;
                 document.getElementById("pid-proc").innerHTML = dados.processos.kpis.pid;
+                document.getElementById("hora").innerHTML = fazHora(horas, minutos);
+                document.getElementById("data").innerHTML = agora.toLocaleDateString("pt-BR");
 
                 carregarDados();
                 carregarTabela(filtroAtual, pesquisarAtual);
@@ -423,6 +487,10 @@
             capturarDados();
 
             function carregarDados() {
+
+            const agora = new Date();
+            const horas = agora.getHours();
+            const minutos = agora.getMinutes();
 
             dadosGrafico.cpu = [
                 dados.processos.kpis["cpu_1"],
@@ -586,11 +654,7 @@
         
 
             gradient.addColorStop(0, 'rgba(255, 0, 111, 0.35)');
-            gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');
-
-
-            const horas = agora.getHours();       
-            const minutos = agora.getMinutes();   
+            gradient.addColorStop(1, 'rgba(255, 0, 111, 0)');   
 
         
                 criticos = new Chart(ctx, {
@@ -782,6 +846,8 @@
             let pesquisarAtual = "";
             let paginaAtual = 1;
             const itensPorPagina = 15;
+            let colunaOrdenacao = "";
+            let direcaoOrdenacao = "desc";
 
             function obterProcessosFiltrados() {
 
@@ -817,11 +883,135 @@
                 paginaAtual = novaPagina;
                 carregarTabela(filtroAtual, pesquisarAtual);
             }
+
+            function atualizarSetas() {
+
+                const colunas = ["cpu", "ram", "lat", "temp"];
+
+                colunas.forEach(prefixo => {
+
+                    const setaCres = document.getElementById(`${prefixo}SetaCres`);
+                    const setaDecres = document.getElementById(`${prefixo}SetaDecres`);
+
+                    setaCres.src = "./assets/imgs/processos/seta-cinza.png";
+                    setaDecres.src = "./assets/imgs/processos/seta-cinza.png";
+                });
+
+                let prefixoAtual = "";
+
+                if (colunaOrdenacao === "cpu") {
+                    prefixoAtual = "cpu";
+                } else if (colunaOrdenacao === "ram") {
+                    prefixoAtual = "ram";
+                } else if (colunaOrdenacao === "latencia") {
+                    prefixoAtual = "lat";
+                } else if (colunaOrdenacao === "tempo_execucao") {
+                    prefixoAtual = "temp";
+                }
+
+                if (!prefixoAtual) return;
+
+                if (direcaoOrdenacao === "asc") {
+                    document.getElementById(`${prefixoAtual}SetaCres`).src =
+                        "./assets/imgs/processos/seta-preta.png";
+                } else {
+                    document.getElementById(`${prefixoAtual}SetaDecres`).src =
+                        "./assets/imgs/processos/seta-preta.png";
+                }
+            }
+
+            function ordenarTabela(coluna) {
+
+                if (colunaOrdenacao === coluna) {
+
+                    if (direcaoOrdenacao === "asc") {
+                        direcaoOrdenacao = "desc";
+                    } else {
+                    direcaoOrdenacao = "asc";
+                    }
+
+                } else {
+
+                    colunaOrdenacao = coluna;
+                    direcaoOrdenacao = "desc";
+                }
+
+                paginaAtual = 1;
+                atualizarSetas();
+                carregarTabela(filtroAtual, pesquisarAtual);
+            }
+
+            function converterTempoParaSegundos(tempo) {
+
+                if (!tempo) return 0;
+
+                let dias = 0;
+                let horas = 0;
+                let minutos = 0;
+
+                const diasEncontrados = tempo.match(/(\d+)d/);
+                const horasEncontradas = tempo.match(/(\d+)h/);
+                const minutosEncontrados = tempo.match(/(\d+)min/);
+
+                if (diasEncontrados) {
+                    dias = Number(diasEncontrados[1]);
+                }
+
+                if (horasEncontradas) {
+                    horas = Number(horasEncontradas[1]);
+                }
+
+                if (minutosEncontrados) {
+                    minutos = Number(minutosEncontrados[1]);
+                }
+
+                return (
+                    dias * 86400 +
+                    horas * 3600 +
+                    minutos * 60
+                );
+            }
             
             function carregarTabela(statusFiltro = "todos", textoPesquisa = "") {
 
                 const tbody = document.getElementById("corpoTabela");
                 const processosFiltrados = obterProcessosFiltrados();
+
+                if (colunaOrdenacao) {
+
+                    processosFiltrados.sort((a, b) => {
+
+                        let valorA;
+                        let valorB;
+
+                        if (colunaOrdenacao === "cpu") {
+                            valorA = a.cpu;
+                            valorB = b.cpu;
+                        }
+
+                        else if (colunaOrdenacao === "ram") {
+                            valorA = a.ram_percent;
+                            valorB = b.ram_percent;
+                        }
+
+                        else if (colunaOrdenacao === "latencia") {
+                            valorA = a.latencia_ms;
+                            valorB = b.latencia_ms;
+                        }
+
+                        else if (colunaOrdenacao === "tempo_execucao") {
+                            valorA = converterTempoParaSegundos(a.tempo_execucao);
+                            valorB = converterTempoParaSegundos(b.tempo_execucao);
+                        }
+
+                        if (direcaoOrdenacao === "asc") {
+                            return valorA - valorB;
+                        } else {
+                            return valorB - valorA;
+                        }
+
+                    });
+                }
 
                 const inicio = (paginaAtual - 1) * itensPorPagina;
                 const fim = inicio + itensPorPagina;
@@ -838,6 +1028,7 @@
                     let classeLatencia = "";
                     let usuario = "";
                     let nome = "";
+                    let unidade = "";
 
                     if (processo.cpu >= 80) {
                         classeCPU = "proc-grave";
@@ -895,6 +1086,13 @@
                         nome = processo.nome
                     }
 
+                    if (processo.ram_mb >= 1000) {
+                        processo.ram_mb = processo.ram_mb / 1000;
+                        unidade = "GB";
+                    } else {
+                        unidade = "MB";
+                    }
+
                     linhas += `
                         <tr>
                             <td class="proc-cinza">${processo.pid}</td>
@@ -911,7 +1109,7 @@
                                 <span class="${classeRAM}">
                                     <div class = "ram_tabela">
                                         <span>${processo.ram_percent}%</span>
-                                        <span>${processo.ram_mb} MB</span>
+                                        <span>${processo.ram_mb.toFixed(2)} ${unidade}</span>
                                     </div>
                                 </span>
                             </td>

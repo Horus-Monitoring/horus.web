@@ -402,7 +402,7 @@ canvas {
   overflow-y: auto;
   overflow-x: auto;
   max-height: 400px;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
 }
 
 .tabela-processos {
@@ -417,7 +417,10 @@ canvas {
   color: #000000;
   font-size: 14px;
   border-bottom: 2px solid #ececec;
-  /* position: sticky; */
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
 }
 
 .tabela-processos td {
@@ -526,6 +529,52 @@ canvas {
     padding: 0 10px;
 }
 
+.ultima-atualizacao {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.texto-atualizacao {
+    color: #8a8a8a;
+}
+
+.horario-atualizacao {
+    color: #5f5f5f;
+    font-weight: 600;
+}
+
+.seta-cinza {
+  width: 15px;
+  height: 15px;
+}
+
+.cres {
+  transform: rotate(180deg);
+  /* background-color: red; */
+}
+
+.setas {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  /* height: 50px; */
+}
+
+.setas img {
+  /* background-color: yellow; */
+}
+
+.teste {
+  /* background-color: #20A200; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+
 /* Resoluções menores */
 @media (max-width: 1440px) {
   .lateral {
@@ -541,7 +590,7 @@ canvas {
   }
 
   .alternador-pesquisar {
-    flex: 2;
+    flex: 3;
   }
 }
 
@@ -565,11 +614,12 @@ canvas {
   }
 
   .pesquisar {
-    flex: 3;
+    flex: 2;
+    min-width: 200px;
   }
 
   .alternador-pesquisar {
-    flex: 4;
+    flex: 5;
   }
 }
 
@@ -720,6 +770,24 @@ canvas {
     flex: 1;
     padding: 8px 10px;
     font-size: 12px;
+  }
+
+ .ultima-atualizacao {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .texto-atualizacao {
+    font-size: 12px;
+  }
+
+  .horario-atualizacao {
+    font-size: 12px;
+    font-weight: 600;
+    word-break: break-word;
   }
   
 }
