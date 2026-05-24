@@ -481,7 +481,7 @@
         }
 
         function atualizarGraficoRecursos(cpu, ram, disco) {
-            
+
             if (chartRecursos) {
                 chartRecursos.data.datasets[0].data = [...historicoCpu];
                 chartRecursos.data.datasets[1].data = [...historicoRamR];
@@ -745,58 +745,58 @@
 
 
 
-      async function carregarGraficoChamados(hostname) {
+        async function carregarGraficoChamados(hostname) {
 
-    const resposta = await fetch(
-        `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
-    );
+            const resposta = await fetch(
+                `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
+            );
 
-    const dados = await resposta.json();
+            const dados = await resposta.json();
 
-    const labels = Object.keys(dados);
-    const valores = Object.values(dados);
+            const labels = Object.keys(dados);
+            const valores = Object.values(dados);
 
-    if (chartChamados) {
-        chartChamados.destroy();
-    }
+            if (chartChamados) {
+                chartChamados.destroy();
+            }
 
-    chartChamados = new Chart(
-        document.getElementById("graficoQtdChamados"),
-        {
-            type: "bar",
+            chartChamados = new Chart(
+                document.getElementById("graficoQtdChamados"),
+                {
+                    type: "bar",
 
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "Chamados",
-                    data: valores
-                }]
-            },
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "Chamados",
+                            data: valores
+                        }]
+                    },
 
-            options: {
-                scales: {
-                    y: {
-                        min: 1,
-                        max: 100,
-                        ticks: {
-                            stepSize: 25
-                        }
-                    }
-                },
+                    options: {
+                        scales: {
+                            y: {
+                                min: 1,
+                                max: 100,
+                                ticks: {
+                                    stepSize: 25
+                                }
+                            }
+                        },
 
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                return `Chamados: ${context.parsed.y}`;
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return `Chamados: ${context.parsed.y}`;
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
+            );
         }
-    );
-}
 
         function resetarHistoricos() {
             historicoRam = Array(JANELA).fill(null);
@@ -875,35 +875,44 @@
             switch ((status || "").toLowerCase()) {
 
                 case "online":
+
                     statusInfo.innerText = "Online";
 
                     statusDot.style.backgroundColor = "#22c55e";
                     statusInfo.style.backgroundColor = "rgba(34,197,94,0.15)";
                     statusInfo.style.color = "#22c55e";
+
                     break;
 
                 case "offline":
+
                     statusInfo.innerText = "Offline";
 
                     statusDot.style.backgroundColor = "#ef4444";
                     statusInfo.style.backgroundColor = "rgba(239,68,68,0.15)";
                     statusInfo.style.color = "#ef4444";
+
                     break;
 
+                case "crítico":
                 case "critico":
+
                     statusInfo.innerText = "Crítico";
 
                     statusDot.style.backgroundColor = "#f59e0b";
                     statusInfo.style.backgroundColor = "rgba(245,158,11,0.15)";
                     statusInfo.style.color = "#f59e0b";
+
                     break;
 
                 default:
+
                     statusInfo.innerText = "Desconhecido";
 
                     statusDot.style.backgroundColor = "#9ca3af";
                     statusInfo.style.backgroundColor = "rgba(156,163,175,0.15)";
                     statusInfo.style.color = "#9ca3af";
+
                     break;
             }
         }
@@ -922,7 +931,7 @@
                 document.getElementById("nomeServidorModal").innerText = dadosServidor.hostname;
                 document.getElementById("ipServidorModal").innerText = dadosServidor.endereco_ip;
 
-
+                console.log("STATUS:", dadosServidor.status_servidor);
                 atualizarStatusServidor(dadosServidor.status_servidor);
 
                 const localEl = document.getElementById("nomeLocal");
