@@ -1,5 +1,71 @@
 var servidoresModel = require("../models/servidoresModel");
 
+const {S3Client, GetObjectCommand} = require("@aws-sdk/client-s3")
+
+const s3 = new S3Client({
+    region: process.env.AWS_REGION,
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        sessionToken: process.env.AWS_SESSION_TOKEN
+    }
+});
+
+
+async function lerJson(key) {
+
+    const command = new GetObjectCommand({
+
+        Bucket: process.env.AWS_BUCKET,
+
+        Key: key
+    });
+
+    const data = await s3.send(command);
+
+    const jsonString = await data.Body.transformToString();
+
+    return JSON.parse(jsonString);
+}
+
+async function capturarDados(req, res) {
+
+    try {
+
+        const {empresa, mac_address} = req.params;
+
+        const [metricas] = await Promise.all([
+
+            lerJson(
+                `client/empresa_${empresa}/${mac_address}/metricas.json`
+            ),
+
+        ]);
+
+        res.set("Cache-Control", "no-store");
+        res.json({ metricas });
+
+        console.log(metricas);
+
+        console.log(metricas);
+
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO AWS:",
+            erro
+        );
+
+        res.status(500).json({
+            erro:
+                "Erro ao buscar dashboard"
+        });
+    }
+}
+
+
+
 // Servidores
 function cadastrarServidor(req, res) {
     var fkEmpresa = req.body.fkEmpresaServer
@@ -67,23 +133,27 @@ function exibirServidores(req, res) {
 }
 
 function listarServidores(req, res) {
-    var fkEmpresa = req.params.fkEmpresa
-    
-    servidoresModel.listarServidores(fkEmpresa)
-        .then(
-            (resultado => {
-                res.json(resultado);
-            })
-        ).catch(
-            (erro => {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro ao listar os servidores!\nErro: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }) 
-        );
+
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var servidores = req.body.servidoresServer;
+
+    servidoresModel.listarServidores(fkEmpresa, servidores)
+
+        .then((resultado) => {
+            res.json(resultado);
+        })
+
+        .catch((erro) => {
+
+            console.log(erro);
+
+            console.log(
+                "\nHouve um erro ao listar os servidores!\nErro: ",
+                erro.sqlMessage
+            );
+
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function deletarServidor(req, res) {
@@ -105,6 +175,8 @@ function deletarServidor(req, res) {
             }) 
         );
 }
+
+
 
 // Componentes
 function cadastrarComponente(req, res) {
@@ -142,23 +214,27 @@ function cadastrarComponente(req, res) {
 }
 
 function abrirDetalhes(req, res) {
-    var fkServidor = req.params.id
-    
+    var fkServidor = req.params.id;
+
     servidoresModel.abrirDetalhes(fkServidor)
-        .then(
-            (resultado => {
-                res.json(resultado);
-            })
-        ).catch(
-            (erro => {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro ao abrir os detalhes!\nErro: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }) 
-        );
+        .then((resultado) => {
+            if (!resultado || resultado.length === 0) {
+                return res.status(404).json({ erro: 'Servidor não encontrado' });
+            }
+
+            const primeiraLinha = resultado[0];
+
+            res.json({
+                hostname: primeiraLinha.hostname,
+                endereco_ip: primeiraLinha.endereco_ip,
+                fk_empresa:  primeiraLinha.fk_empresa,
+                localizacao: primeiraLinha.localizacao
+            });
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function deletarComponente(req, res) {
@@ -211,5 +287,7 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
-    atualizarAcessos
+    atualizarAcessos,
+    lerJson,
+    capturarDados
 }
