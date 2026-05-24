@@ -15,7 +15,7 @@ async function lerJson(key) {
 
     const command = new GetObjectCommand({
 
-        Bucket: "horus-monitoring-leticia",
+        Bucket: process.env.AWS_BUCKET,
 
         Key: key
     });
@@ -29,20 +29,22 @@ async function lerJson(key) {
 
 async function capturarDados(req, res) {
 
+    const mac_address =
+        decodeURIComponent(req.params.mac_address);
+
+    const id_empresa =
+        req.params.id_empresa;
+
     try {
 
         const [processos, criticos] = await Promise.all([
 
-            // lerJson(
-            //     "client/kpis/process_raw_kpis.json"
-            // ),
-
             lerJson(
-                "client/process_raw_kpis.json"
+                `client/empresa_${id_empresa}/${mac_address}/process_raw_kpis.json`
             ),
 
             lerJson(
-                "client/raw_criticos_4h.json"
+                `client/empresa_${id_empresa}/${mac_address}/raw_criticos_4h.json`
             )
 
         ]);
@@ -52,28 +54,15 @@ async function capturarDados(req, res) {
             criticos
         });
 
-        console.log(criticos)
-
-        //console.log("KPIS:");
-        //console.log(kpis);
-
-        //console.log("PROCESSOS:");
-        //console.log(processos);
-
     } catch (erro) {
 
-        console.error(
-            "ERRO AWS:",
-            erro
-        );
+        console.error("ERRO AWS:", erro);
 
         res.status(500).json({
-            erro:
-                "Erro ao buscar dashboard"
+            erro: "Erro ao buscar dashboard"
         });
     }
 }
-
 module.exports = {
     capturarDados
 };

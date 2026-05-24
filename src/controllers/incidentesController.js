@@ -18,7 +18,7 @@ async function calcularIndice(req, res) {
 
         const command = new GetObjectCommand({
 
-            Bucket: "horus-monitoring-01",
+            Bucket: process.env.AWS_BUCKET,
 
             // client -> id da empresa -> mac address -> calcularIndice.json 
             Key:

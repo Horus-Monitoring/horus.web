@@ -16,7 +16,7 @@ async function lerJson(key) {
 
     const command = new GetObjectCommand({
 
-        Bucket: "horus-monitoring-gustavo",
+        Bucket: process.env.AWS_BUCKET,
 
         Key: key
     });
@@ -32,12 +32,12 @@ async function capturarDados(req, res) {
 
     try {
 
-        const {fkEmpresa, hostname} = req.params;
+        const {empresa, mac_address} = req.params;
 
         const [metricas] = await Promise.all([
 
             lerJson(
-                `client/empresa_${fkEmpresa}/${hostname}/metricas.json`
+                `client/empresa_${empresa}/${mac_address}/metricas.json`
             ),
 
         ]);
@@ -49,11 +49,6 @@ async function capturarDados(req, res) {
 
         console.log(metricas);
 
-        //console.log("KPIS:");
-        //console.log(kpis);
-
-        //console.log("PROCESSOS:");
-        //console.log(processos);
 
     } catch (erro) {
 

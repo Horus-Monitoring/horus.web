@@ -100,12 +100,8 @@ body {
   /* text-transform: uppercase; */
 }
 
-.item-menu.adm{
-  display: none;
-}
-
-.adm{
-  display: none;
+.item-menu {
+    cursor: pointer;
 }
 
 .header {
@@ -281,7 +277,6 @@ body {
 
 .selecionado {
   background-color: #2a3646;
-  color: #3577d4;
 }
 
 .sair {

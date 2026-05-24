@@ -15,7 +15,7 @@ async function buscarDadosS3(req, res) {
 
         const command = new GetObjectCommand({
 
-            Bucket: "bucket-teste-sprint-3-2026",
+            Bucket: process.env.AWS_BUCKET,
 
             Key:
                 `client/gestor/empresa_1/dashboard_gestor.json`

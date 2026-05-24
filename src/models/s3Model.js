@@ -15,7 +15,7 @@ async function buscarJsonS3(){
     const key = `client/gestor/empresa_1/dashboard.json`;
 
     const command = new GetObjectCommand({
-        Bucket: "bucket-teste-sprint-3-2026",
+        Bucket: process.env.AWS_BUCKET,
         Key: key
     });
 

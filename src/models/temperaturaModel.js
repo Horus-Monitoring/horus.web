@@ -36,7 +36,7 @@ async function buscarJsonS3(
         const command =
             new GetObjectCommand({
 
-                Bucket: "horus-dados-raw",
+                Bucket: process.env.AWS_BUCKET,
 
                 Key: key
             });

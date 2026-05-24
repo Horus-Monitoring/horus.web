@@ -73,7 +73,7 @@
 
                             <div class="status-servidor">
                                 <div class="select-status">
-                                    <span class="status-dot verde"></span>
+                                    <span id="status-dot" class="status-dot verde"></span>
                                     <select id="select_servidor"></select>
                                 </div>
 
@@ -292,6 +292,13 @@
             contadorRecursos = 0;
             contadorHora = 0;
             contadorHealth = 0;
+            const opcaoSelecionada =
+                select_servidor.options[
+                select_servidor.selectedIndex
+                ];
+
+            const mac_address =
+                opcaoSelecionada.id;
 
             if (chartRam) {
                 chartRam.destroy(); chartRam = null;
@@ -305,8 +312,8 @@
                 chartRecursos.destroy(); chartRecursos = null;
             }
 
-            capturarDados(empresa, hostname);
-            intervaloCaptura = setInterval(() => capturarDados(empresa, hostname), 10000);
+            capturarDados(empresa, mac_address);
+            intervaloCaptura = setInterval(() => capturarDados(empresa, mac_address), 10000);
 
 
         }
@@ -516,12 +523,46 @@
             }
         }
 
+        function atualizarStatusDot(m) {
+            const dot = document.getElementById("status-dot");
+
+            if (!dot || !m) return;
+
+            dot.classList.remove("verde","laranja","vermelho");
+
+            const possuiCritico =
+                (m.cpu ?? 0) > 85 ||
+                (m.ram ?? 0) > 85 ||
+                (m.disco ?? 0) > 90 ||
+                (m.health_score ?? 100) < 40;
+
+            const possuiAlerta =
+                (m.cpu ?? 0) > 70 ||
+                (m.ram ?? 0) > 70 ||
+                (m.health_score ?? 100) < 70;
+
+            if (possuiCritico) {
+                dot.classList.add("vermelho");
+            } else if (possuiAlerta) {
+                dot.classList.add("laranja");
+            } else {
+                dot.classList.add("verde");
+            }
+        }
 
 
+        async function capturarDados(empresa) {
 
-        async function capturarDados(empresa, hostname) {
+            const opcaoSelecionada =
+                select_servidor.options[
+                select_servidor.selectedIndex
+                ];
+
+            const mac_address =
+                opcaoSelecionada.id;
+
             try {
-                const resposta = await fetch(`/servidores/capturarDados/${empresa}/${hostname}`, {
+                const resposta = await fetch(`/servidores/capturarDados/${empresa}/${mac_address}`, {
                     cache: "no-store"
                 });
                 const dados = await resposta.json();
@@ -537,6 +578,7 @@
                     .at(-1);
 
                 const m = item.metricas;
+                atualizarStatusDot(m);
 
                 const valorReal = Number(m?.linha_real ?? m?.ram ?? 0);
                 const valorTendencia = Number(m?.linha_tendencia ?? m?.ram ?? 0);
@@ -687,42 +729,58 @@
 
 
 
-        async function carregarServidores() {
-            try {
-                const resposta = await fetch(
-                    `/servidores/listarServidoresComAcesso/${fkEmpresa}/${fkFuncionario}`
-                );
+        function listarServidores() {
 
-                const servidores = await resposta.json();
-                console.log("Servidores:", servidores);
+            const fkEmpresa = sessionStorage.ID_EMPRESA;
 
-                servidoresCache = servidores;
+            // transforma string em array
+            const servidores = JSON.parse(sessionStorage.ACESSO_SERVIDORES);
 
-                const servidoresComAcesso = servidores.filter(s => s.tem_acesso === 1);
+            fetch(`/servidores/listarServidores`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fkEmpresaServer: fkEmpresa,
+                    servidoresServer: servidores
+                })
+            })
 
-                const select = document.getElementById("select_servidor");
-                select.innerHTML = "";
+                .then(resposta => resposta.json())
 
-                if (servidoresComAcesso.length === 0) {
-                    select.innerHTML = `<option>Nenhum servidor disponível</option>`;
-                    return;
-                }
+                .then((lista) => {
 
-                servidoresComAcesso.forEach((servidor, index) => {
-                    const option = document.createElement("option");
-                    option.value = servidor.id_servidor;
-                    option.textContent = servidor.hostname;
-                    select.appendChild(option);
+                    select_servidor.innerHTML =
+                        lista.map(servidor =>
 
-                    if (index === 0) servidorAtual = servidor.id_servidor;
+                            `<option value="${servidor.id_servidor}" id="${servidor.mac_address}">
+                        ${servidor.hostname}
+                    </option>`
+
+                        ).join('');
+
+                    nomeServidor.textContent =
+                        select_servidor.options[
+                            select_servidor.selectedIndex
+                        ].text;
+
+                    carregarDashboardServidor(
+                        select_servidor.value
+                    );
                 });
 
-                select.value = servidorAtual;
-                await carregarDashboardServidor(servidorAtual);
+            select_servidor.addEventListener("change", () => {
 
-            } catch (erro) {
-                console.log("Erro ao carregar servidores:", erro);
-            }
+                nomeServidor.textContent =
+                    select_servidor.options[
+                        select_servidor.selectedIndex
+                    ].text;
+
+                carregarDashboardServidor(
+                    select_servidor.value
+                );
+            });
         }
 
 
@@ -744,10 +802,9 @@
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
                 iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
-                
+
                 await carregarGraficoChamados(dadosServidor.hostname);
 
-                await renderChart("24h", dadosServidor.hostname, dadosServidor.fk_empresa);
 
             } catch (erro) {
                 console.log("Erro ao carregar dashboard:", erro);
@@ -762,7 +819,7 @@
 
         window.onload = () => {
             exibirUsuarioAtivo();
-            carregarServidores();
+            listarServidores();
         };
     </script>
 

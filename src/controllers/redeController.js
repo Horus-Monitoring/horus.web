@@ -19,7 +19,7 @@ async function buscarDadosRede(req, res) {
 
         const command = new GetObjectCommand({
 
-            Bucket: "horus-monitoring",
+            Bucket: process.env.AWS_BUCKET,
 
             Key:
                 `client/empresa_${id_empresa}/${mac_address}/dashboard_rede_${periodo}.json`
@@ -62,7 +62,7 @@ async function buscarAlertas(req, res) {
     try {
 
         const command = new GetObjectCommand({
-            Bucket: process.env.AWS_BUCKET_NAME,
+            Bucket: process.env.AWS_BUCKET,
             Key: key
         });
 
