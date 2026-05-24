@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
@@ -18,6 +16,61 @@
     <script src="./js/script.js"></script>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="style/dash_analista.css">
+
+    <style>
+        /* ── Gráfico de chamados: espaçamento e legibilidade ── */
+        .graficoQtdChamados {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            padding: 12px 16px 8px;
+            box-sizing: border-box;
+        }
+
+        #graficoQtdChamados {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Wrapper dos gráficos de saúde e RAM */
+        .chart-box {
+            position: relative;
+            width: 100%;
+            height: 220px;
+        }
+
+        /* Wrapper do gráfico de recursos CPU/RAM/Disco */
+        .grafico-recursos {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            padding: 8px 12px;
+            box-sizing: border-box;
+        }
+
+        /* Estilo do canvas dentro do card-processos */
+        #healthChart {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Tooltip personalizado para o gráfico de chamados */
+        .chart-tooltip {
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 13px;
+            pointer-events: none;
+            position: absolute;
+            z-index: 50;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 
 <body>
@@ -175,7 +228,12 @@
                                 <div class="container2">
                                     <div class="dashboard">
                                         <div class="card">
-                                            <canvas id="healthChart"></canvas>
+                                            <div class="chart-box">
+                                                <canvas id="healthChart" role="img"
+                                                    aria-label="Gráfico de saúde do servidor nas últimas 24 horas">
+                                                    Saúde do servidor ao longo do tempo.
+                                                </canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +251,10 @@
                                         <h1>Predição de Uso de RAM</h1>
                                     </div>
                                     <div class="chart-box">
-                                        <canvas id="graficoRam"></canvas>
+                                        <canvas id="graficoRam" role="img"
+                                            aria-label="Gráfico de predição de uso de RAM nas últimas 24 horas">
+                                            Uso de RAM e linha de tendência ao longo do tempo.
+                                        </canvas>
                                     </div>
                                     <div class="info">
                                         <div class="card">
@@ -217,7 +278,10 @@
                                     <span>Quantidade de chamados de cada componente</span>
                                 </div>
                                 <div class="graficoQtdChamados">
-                                    <canvas id="graficoQtdChamados"></canvas>
+                                    <canvas id="graficoQtdChamados" role="img"
+                                        aria-label="Gráfico de barras com quantidade de chamados por componente">
+                                        Chamados por componente.
+                                    </canvas>
                                 </div>
                             </div>
                             <div class="cards-detalhes-grafico">
@@ -225,7 +289,10 @@
                                     <span>Uso dos principais componentes (%)</span>
                                 </div>
                                 <div class="grafico-recursos">
-                                    <canvas id="graficoRecursos24h"></canvas>
+                                    <canvas id="graficoRecursos24h" role="img"
+                                        aria-label="Gráfico de uso de CPU, RAM e Disco nas últimas 24 horas">
+                                        Uso de CPU, RAM e Disco ao longo do tempo.
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
@@ -269,6 +336,7 @@
     </div>
 
     <script>
+
         var chartRam, chartRecursos, chartChamados, chartHealth;
         var servidoresCache = [];
         var servidorAtual = null;
@@ -277,49 +345,34 @@
         const fkEmpresa = sessionStorage.ID_EMPRESA;
         const fkFuncionario = sessionStorage.ID_USUARIO;
 
+        const JANELA = 24;
 
 
+        function formatarHora(dataHora) {
+            const data = new Date(dataHora.replace(" ", "T"));
 
-        function iniciarCaptura(empresa, hostname) {
-            if (intervaloCaptura) clearInterval(intervaloCaptura);
-
-            historicoRam = Array(24).fill(null);
-            historicoTendencia = Array(24).fill(null);
-            historicoHealth = Array(24).fill(null);
-            historicoCpu = Array(24).fill(null);
-            historicoRamR = Array(24).fill(null);
-            historicoDisco = Array(24).fill(null);
-            contadorRecursos = 0;
-            contadorHora = 0;
-            contadorHealth = 0;
-
-            if (chartRam) {
-                chartRam.destroy(); chartRam = null;
-            }
-
-            if (chartHealth) {
-                chartHealth.destroy(); chartHealth = null;
-            }
-
-            if (chartRecursos) {
-                chartRecursos.destroy(); chartRecursos = null;
-            }
-
-            capturarDados(empresa, hostname);
-            intervaloCaptura = setInterval(() => capturarDados(empresa, hostname), 10000);
-
-
+            return data.toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
         }
 
-        var historicoRam = Array(24).fill(null);
-        var historicoTendencia = Array(24).fill(null);
+        var historicoRam = Array(JANELA).fill(null);
+        var historicoTendencia = Array(JANELA).fill(null);
+        var historicoHealth = Array(JANELA).fill(null);
+        var historicoCpu = Array(JANELA).fill(null);
+        var historicoRamR = Array(JANELA).fill(null);
+        var historicoDisco = Array(JANELA).fill(null);
+        var historicoLabels = [];
+
+
         var contadorHora = 0;
-
-        const labelsFixos = Array.from({ length: 24 }, (_, i) => i + 1);
-
-
-        var historicoHealth = Array(24).fill(null);
         var contadorHealth = 0;
+        var contadorRecursos = 0;
+
+
+        var ultimoDataHoraPlotado = null;
+
 
         const coresHealth = {
             estavel: { borda: '#22c55e', fundo: 'rgba(34,197,94,0.15)', badge: '#16a34a', texto: 'Estável' },
@@ -327,8 +380,23 @@
             critico: { borda: '#ef4444', fundo: 'rgba(239,68,68,0.15)', badge: '#dc2626', texto: 'Crítico' }
         };
 
+
+
+        function parseDataHora(dataHora) {
+            return new Date(dataHora.replace(" ", "T"));
+        }
+
         function corDoStatus(status) {
             return coresHealth[status] ?? coresHealth['estavel'];
+        }
+
+
+        function pushJanela(arr, valor) {
+            arr.push(valor);
+
+            if (arr.length > JANELA) {
+                arr.shift();
+            }
         }
 
         function atualizarGraficoSaude(healthScore, statusHealth) {
@@ -355,25 +423,16 @@
             }
 
 
-            if (contadorHealth < 24) {
-                historicoHealth[contadorHealth] = healthScore;
-                contadorHealth++;
-            } else {
-                historicoHealth.shift();
-                historicoHealth.push(healthScore);
-            }
-
             if (chartHealth) {
-
                 chartHealth.data.datasets[0].borderColor = cor.borda;
                 chartHealth.data.datasets[0].backgroundColor = cor.fundo;
                 chartHealth.data.datasets[0].data = [...historicoHealth];
-                chartHealth.update();
+                chartHealth.update(); /* 'none' = sem animação a cada tick */
             } else {
                 chartHealth = new Chart(document.getElementById('healthChart'), {
                     type: 'line',
                     data: {
-                        labels: labelsFixos,
+                        labels: historicoLabels,
                         datasets: [{
                             label: 'Health Score (%)',
                             data: [...historicoHealth],
@@ -394,8 +453,11 @@
                         animation: { duration: 400 },
                         scales: {
                             x: {
-                                title: { display: true, text: '(24 horas)' },
-                                ticks: { stepSize: 1 }
+                                title: { display: true, text: 'Leituras (últimas 24h)' },
+                                ticks: {
+                                    maxTicksLimit: 12,
+                                    autoSkip: true
+                                }
                             },
                             y: {
                                 min: 0,
@@ -408,31 +470,20 @@
                             }
                         },
                         plugins: {
-                            legend: { display: false }
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => `Saúde: ${ctx.parsed.y.toFixed(1)}%`
+                                }
+                            }
                         }
                     }
                 });
             }
         }
 
-
-        var historicoCpu = Array(24).fill(null);
-        var historicoRamR = Array(24).fill(null);
-        var historicoDisco = Array(24).fill(null);
-        var contadorRecursos = 0;
-
         function atualizarGraficoRecursos(cpu, ram, disco) {
-            if (contadorRecursos < 24) {
-                historicoCpu[contadorRecursos] = cpu;
-                historicoRamR[contadorRecursos] = ram;
-                historicoDisco[contadorRecursos] = disco;
-                contadorRecursos++;
-            } else {
-                historicoCpu.shift(); historicoCpu.push(cpu);
-                historicoRamR.shift(); historicoRamR.push(ram);
-                historicoDisco.shift(); historicoDisco.push(disco);
-            }
-
+            1
             if (chartRecursos) {
                 chartRecursos.data.datasets[0].data = [...historicoCpu];
                 chartRecursos.data.datasets[1].data = [...historicoRamR];
@@ -442,7 +493,7 @@
                 chartRecursos = new Chart(document.getElementById('graficoRecursos24h'), {
                     type: 'line',
                     data: {
-                        labels: labelsFixos,
+                        labels: historicoLabels,
                         datasets: [
                             {
                                 label: 'CPU',
@@ -455,7 +506,8 @@
                                 spanGaps: true,
                                 pointRadius: 0,
                                 pointHoverRadius: 5,
-                                fill: false
+                                fill: false,
+                                borderDash: []
                             },
                             {
                                 label: 'RAM',
@@ -468,7 +520,8 @@
                                 spanGaps: true,
                                 pointRadius: 0,
                                 pointHoverRadius: 5,
-                                fill: false
+                                fill: false,
+                                borderDash: [6, 3]
                             },
                             {
                                 label: 'Disco',
@@ -481,7 +534,8 @@
                                 spanGaps: true,
                                 pointRadius: 0,
                                 pointHoverRadius: 5,
-                                fill: false
+                                fill: false,
+                                borderDash: [2, 2]
                             }
                         ]
                     },
@@ -489,14 +543,11 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         animation: { duration: 400 },
-                        interaction: {
-                            mode: 'index',
-                            intersect: false
-                        },
+                        interaction: { mode: 'index', intersect: false },
                         scales: {
                             x: {
-                                title: { display: true, text: '(24 horas)' },
-                                ticks: { stepSize: 1 }
+                                title: { display: true, text: 'Leituras (últimas 24h)' },
+                                ticks: { maxTicksLimit: 12, autoSkip: true }
                             },
                             y: {
                                 min: 0,
@@ -509,14 +560,90 @@
                             }
                         },
                         plugins: {
-                            legend: { display: true, position: 'top' }
+                            legend: { display: true, position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y.toFixed(1) + '%' : '—'}`
+                                }
+                            }
                         }
                     }
                 });
             }
         }
 
+        function atualizarGraficoRam(linhaReal, linhaTendencia) {
 
+            if (chartRam) {
+                chartRam.data.datasets[0].data = [...historicoRam];
+                chartRam.data.datasets[1].data = [...historicoTendencia];
+                chartRam.update();
+            } else {
+                chartRam = new Chart(document.getElementById('graficoRam'), {
+                    type: 'line',
+                    data: {
+                        labels: historicoLabels,
+                        datasets: [
+                            {
+                                label: 'Uso de RAM (%)',
+                                data: [...historicoRam],
+                                borderColor: '#576ca8',
+                                backgroundColor: 'rgba(87,108,168,0.15)',
+                                borderWidth: 3,
+                                tension: 0.4,
+                                cubicInterpolationMode: 'monotone',
+                                pointRadius: 0,
+                                spanGaps: true,
+                                pointHoverRadius: 5,
+                                fill: true,
+                                borderDash: []
+                            },
+                            {
+                                label: 'Linha de Tendência',
+                                data: [...historicoTendencia],
+                                borderColor: '#f59e0b',
+                                borderDash: [8, 5],
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                tension: 0.4,
+                                cubicInterpolationMode: 'monotone',
+                                spanGaps: true,
+                                pointHoverRadius: 5,
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 400 },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Leituras (últimas 24h)' },
+                                ticks: { maxTicksLimit: 12, autoSkip: true }
+                            },
+                            y: {
+                                min: 0,
+                                max: 100,
+                                title: { display: true, text: 'Uso (%)' },
+                                ticks: {
+                                    stepSize: 20,
+                                    callback: val => val + '%'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: true, position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y != null ? ctx.parsed.y.toFixed(1) + '%' : '—'}`
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
 
 
         async function capturarDados(empresa, hostname) {
@@ -524,165 +651,232 @@
                 const resposta = await fetch(`/servidores/capturarDados/${empresa}/${hostname}`, {
                     cache: "no-store"
                 });
+
+                if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
                 const dados = await resposta.json();
 
                 const metricas = dados.metricas;
                 if (!metricas || metricas.length === 0) {
-                    console.warn("Nenhuma métrica recebida");
+                    console.warn("Nenhuma métrica recebida.");
                     return;
                 }
 
-                const item = metricas
-                    .sort((a, b) => new Date(a.data_hora) - new Date(b.data_hora))
-                    .at(-1);
 
-                const m = item.metricas;
+                const ordenados = metricas
+                    .slice()
 
-                const valorReal = Number(m?.linha_real ?? m?.ram ?? 0);
-                const valorTendencia = Number(m?.linha_tendencia ?? m?.ram ?? 0);
+                    .sort((a, b) =>
+                        parseDataHora(a.data_hora) -
+                        parseDataHora(b.data_hora)
+                    );
 
-                let tendenciaTexto = "Estável";
+                const novos = ultimoDataHoraPlotado
+                    ? ordenados.filter(i =>
+                        parseDataHora(i.data_hora) >
+                        parseDataHora(ultimoDataHoraPlotado)
+                    )
+                    : ordenados;
 
 
+
+                if (novos.length === 0) return;
+
+
+                novos.forEach(item => {
+                    const m = item.metricas ?? {};
+
+                    const linhaReal = Number(m.linha_real ?? m.ram ?? 0);
+                    const linhaTendencia = Number(m.linha_tendencia ?? m.ram ?? 0);
+
+
+                    const labelHora = formatarHora(item.data_hora);
+
+                    pushJanela(historicoLabels, labelHora);
+
+                    pushJanela(historicoHealth, m.health_score ?? null);
+
+                    pushJanela(historicoCpu, m.cpu ?? null);
+                    pushJanela(historicoRamR, m.ram ?? null);
+                    pushJanela(historicoDisco, m.disco ?? null);
+
+                    pushJanela(historicoRam, linhaReal);
+                    pushJanela(historicoTendencia, linhaTendencia);
+                });
+
+
+                ultimoDataHoraPlotado = novos.at(-1).data_hora;
+
+
+                const itemRecente = ordenados.at(-1);
+                const m = itemRecente.metricas ?? {};
+
+                const valorReal = Number(m.linha_real ?? m.ram ?? 0);
+                const valorTendencia = Number(m.linha_tendencia ?? m.ram ?? 0);
                 const margem = 0.5;
 
-                if (valorTendencia > valorReal + margem) {
-                    tendenciaTexto = "Subindo";
-                } else if (valorTendencia < valorReal - margem) {
-                    tendenciaTexto = "Caindo";
-                }
+                let tendenciaTexto = "Estável";
+                if (valorTendencia > valorReal + margem) tendenciaTexto = "Subindo";
+                else if (valorTendencia < valorReal - margem) tendenciaTexto = "Caindo";
 
-                document.getElementById("tendenciaRam").innerHTML = tendenciaTexto;
-
-
-                document.getElementById("cpuModal").innerHTML = (m?.cpu ?? "--") + "%";
-                document.getElementById("ramModal").innerHTML = (m?.ram ?? "--") + "%";
-                document.getElementById("discoModal").innerHTML = (m?.disco ?? "--") + "%";
-                document.getElementById("ultimaAtualizacao").innerHTML = item.data_hora || "--";
-                document.getElementById("probabilidadeCrescimento").innerHTML = (m?.tendencia_aumento_hora ?? "--");
-                document.getElementById("ipServidorModal").innerHTML = item.ip || "--";
-                document.getElementById("cpuValue").textContent = (m?.cpu ?? 0) + "%";
-                document.getElementById("ramValue").textContent = (m?.ram ?? 0) + "%";
-                document.getElementById("diskValue").textContent = (m?.disco ?? 0) + "%";
-
-                atualizarGraficoSaude(m?.health_score ?? 0, m?.status_health ?? 'estavel');
-                atualizarGraficoRecursos(m?.cpu ?? null, m?.ram ?? null, m?.disco ?? null);
+                document.getElementById("tendenciaRam").textContent = tendenciaTexto;
+                document.getElementById("cpuModal").textContent = (m.cpu ?? "--") + "%";
+                document.getElementById("ramModal").textContent = (m.ram ?? "--") + "%";
+                document.getElementById("discoModal").textContent = (m.disco ?? "--") + "%";
+                document.getElementById("ultimaAtualizacao").textContent = itemRecente.data_hora || "--";
+                document.getElementById("probabilidadeCrescimento").textContent = m.tendencia_aumento_hora ?? "--";
+                document.getElementById("ipServidorModal").textContent = itemRecente.ip || "--";
+                document.getElementById("cpuValue").textContent = (m.cpu ?? 0) + "%";
+                document.getElementById("ramValue").textContent = (m.ram ?? 0) + "%";
+                document.getElementById("diskValue").textContent = (m.disco ?? 0) + "%";
 
 
-
-                if (contadorHora < 24) {
-                    historicoRam[contadorHora] = m?.linha_real ?? m?.ram ?? null;
-                    historicoTendencia[contadorHora] = m?.linha_tendencia ?? m?.ram ?? null;
-                    contadorHora++;
-                } else {
-
-                    historicoRam.shift();
-                    historicoRam.push(m?.linha_real ?? m?.ram ?? null);
-                    historicoTendencia.shift();
-                    historicoTendencia.push(m?.linha_tendencia ?? m?.ram ?? null);
-                }
-
-
-                if (chartRam) {
-                    chartRam.data.datasets[0].data = [...historicoRam];
-                    chartRam.data.datasets[1].data = [...historicoTendencia];
-                    chartRam.update();
-                } else {
-                    chartRam = new Chart(document.getElementById('graficoRam'), {
-                        type: 'line',
-                        data: {
-                            labels: labelsFixos,
-                            datasets: [
-                                {
-                                    label: 'Uso de RAM (%)',
-                                    data: [...historicoRam],
-                                    borderColor: '#576ca8',
-                                    backgroundColor: 'rgba(87,108,168,0.15)',
-                                    borderWidth: 3,
-                                    tension: 0.4,
-                                    cubicInterpolationMode: 'monotone',
-                                    pointRadius: 0,
-                                    spanGaps: true,
-                                    pointHoverRadius: 5,
-                                    fill: true,
-                                    borderDash: []
-                                },
-                                {
-                                    label: 'Linha de Tendência',
-                                    data: [...historicoTendencia],
-                                    borderColor: '#f59e0b',
-                                    borderDash: [8, 5],
-                                    borderWidth: 2,
-                                    pointRadius: 0,
-                                    tension: 0.4,
-                                    cubicInterpolationMode: 'monotone',
-                                    spanGaps: true,
-                                    pointRadius: 0,
-                                    pointHoverRadius: 5,
-                                    fill: true
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            animation: { duration: 400 },
-                            scales: {
-                                x: {
-                                    title: { display: true, text: '(24 horas)' },
-                                    ticks: { stepSize: 1 }
-                                },
-                                y: {
-                                    min: 0,
-                                    max: 100,
-                                    title: { display: true, text: 'Uso (%)' },
-                                    ticks: {
-                                        stepSize: 20,
-                                        callback: val => val + '%'
-                                    }
-                                }
-                            },
-                            plugins: {
-                                legend: { display: true, position: 'top' }
-                            }
-                        }
-                    });
-                }
+                atualizarGraficoSaude(m.health_score ?? 0, m.status_health ?? 'estavel');
+                atualizarGraficoRecursos(m.cpu ?? null, m.ram ?? null, m.disco ?? null);
+                atualizarGraficoRam(valorReal, valorTendencia);
 
             } catch (erro) {
                 console.error("Erro ao capturar dados:", erro);
             }
         }
 
+
+
         async function carregarGraficoChamados(hostname) {
+            try {
+                const resposta = await fetch(
+                    `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
+                );
+                if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+                const dados = await resposta.json();
 
-            const resposta = await fetch(
-                `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
-            );
+                const labels = Object.keys(dados);
+                const valores = Object.values(dados);
+                const total = valores.reduce((s, v) => s + v, 0);
 
-            const dados = await resposta.json();
+                if (chartChamados) {
+                    chartChamados.destroy();
+                    chartChamados = null;
+                }
 
-            const labels = Object.keys(dados);
 
-            const valores = Object.values(dados);
+                const paletaBordas = [
+                    '#576ca8', '#a855f7', '#22c55e', '#f59e0b',
+                    '#ef4444', '#06b6d4', '#f97316', '#84cc16'
+                ];
+                const paletaFundos = paletaBordas.map(c => c + 'D9'); /* ~85% opacidade em hex */
 
-            if (chartChamados) {
-                chartChamados.destroy();
-            }
-
-            chartChamados = new Chart(
-                document.getElementById("graficoQtdChamados"),
-                {
+                chartChamados = new Chart(document.getElementById("graficoQtdChamados"), {
                     type: "bar",
                     data: {
                         labels: labels,
                         datasets: [{
                             label: "Chamados",
-                            data: valores
+                            data: valores,
+                            backgroundColor: labels.map((_, i) => paletaFundos[i % paletaFundos.length]),
+                            borderColor: labels.map((_, i) => paletaBordas[i % paletaBordas.length]),
+                            borderWidth: 1.5,
+                            borderRadius: 6,
+                            borderSkipped: false,
+                            barPercentage: 0.65,
+                            categoryPercentage: 0.8
                         }]
-                    }
-                }
-            );
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: { duration: 500 },
+                        layout: { padding: { top: 24, bottom: 4, left: 4, right: 4 } },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: {
+                                    font: { size: 12 },
+                                    maxRotation: 30,
+                                    autoSkip: false
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                grace: '10%',
+                                grid: {
+                                    color: 'rgba(128,128,128,0.12)',
+                                    lineWidth: 0.8
+                                },
+                                ticks: {
+                                    precision: 0,
+                                    font: { size: 12 },
+                                    callback: val => Number.isInteger(val) ? val : ''
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => {
+                                        const pct = total > 0
+                                            ? ((ctx.parsed.y / total) * 100).toFixed(1)
+                                            : '0.0';
+                                        return ` ${ctx.parsed.y} chamado${ctx.parsed.y !== 1 ? 's' : ''} (${pct}%)`;
+                                    }
+                                }
+                            },
+
+                            datalabels: undefined
+                        }
+                    },
+                    plugins: [{
+                        id: 'valorAcimaBarra',
+                        afterDatasetsDraw(chart) {
+                            const { ctx, scales: { x, y } } = chart;
+                            chart.data.datasets[0].data.forEach((valor, i) => {
+                                if (valor == null) return;
+                                const xPos = x.getPixelForValue(i);
+                                const yPos = y.getPixelForValue(valor);
+                                ctx.save();
+                                ctx.fillStyle = 'rgba(100,100,100,0.85)';
+                                ctx.font = '600 11px Inter, sans-serif';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'bottom';
+                                ctx.fillText(valor, xPos, yPos - 4);
+                                ctx.restore();
+                            });
+                        }
+                    }]
+                });
+            } catch (erro) {
+                console.error("Erro ao carregar gráfico de chamados:", erro);
+            }
+        }
+
+        function resetarHistoricos() {
+            historicoRam = Array(JANELA).fill(null);
+            historicoTendencia = Array(JANELA).fill(null);
+            historicoHealth = Array(JANELA).fill(null);
+            historicoCpu = Array(JANELA).fill(null);
+            historicoRamR = Array(JANELA).fill(null);
+            historicoDisco = Array(JANELA).fill(null);
+            contadorHora = 0;
+            contadorHealth = 0;
+            contadorRecursos = 0;
+        }
+
+        function destruirGraficos() {
+            [chartRam, chartHealth, chartRecursos].forEach(c => { if (c) c.destroy(); });
+            chartRam = chartHealth = chartRecursos = null;
+
+        }
+
+        function iniciarCaptura(empresa, hostname) {
+            if (intervaloCaptura) clearInterval(intervaloCaptura);
+
+            ultimoDataHoraPlotado = null;
+            resetarHistoricos();
+            destruirGraficos();
+
+
+            capturarDados(empresa, hostname);
+            intervaloCaptura = setInterval(() => capturarDados(empresa, hostname), 10000);
         }
 
 
@@ -692,14 +886,10 @@
                 const resposta = await fetch(
                     `/servidores/listarServidoresComAcesso/${fkEmpresa}/${fkFuncionario}`
                 );
-
                 const servidores = await resposta.json();
-                console.log("Servidores:", servidores);
-
                 servidoresCache = servidores;
 
                 const servidoresComAcesso = servidores.filter(s => s.tem_acesso === 1);
-
                 const select = document.getElementById("select_servidor");
                 select.innerHTML = "";
 
@@ -713,7 +903,6 @@
                     option.value = servidor.id_servidor;
                     option.textContent = servidor.hostname;
                     select.appendChild(option);
-
                     if (index === 0) servidorAtual = servidor.id_servidor;
                 });
 
@@ -721,11 +910,9 @@
                 await carregarDashboardServidor(servidorAtual);
 
             } catch (erro) {
-                console.log("Erro ao carregar servidores:", erro);
+                console.error("Erro ao carregar servidores:", erro);
             }
         }
-
-
 
         async function carregarDashboardServidor(idServidor) {
             try {
@@ -733,8 +920,6 @@
 
                 const resposta = await fetch(`/servidores/abrirDetalhes/${idServidor}`);
                 const dadosServidor = await resposta.json();
-
-                console.log("Detalhes servidor:", dadosServidor);
 
                 document.getElementById("nomeServidor").innerText = dadosServidor.hostname;
                 document.getElementById("nomeServidorModal").innerText = dadosServidor.hostname;
@@ -744,13 +929,15 @@
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
                 iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
-                
                 await carregarGraficoChamados(dadosServidor.hostname);
 
-                await renderChart("24h", dadosServidor.hostname, dadosServidor.fk_empresa);
+
+                if (typeof renderChart === 'function') {
+                    await renderChart("24h", dadosServidor.hostname, dadosServidor.fk_empresa);
+                }
 
             } catch (erro) {
-                console.log("Erro ao carregar dashboard:", erro);
+                console.error("Erro ao carregar dashboard:", erro);
             }
         }
 
@@ -758,14 +945,12 @@
             await carregarDashboardServidor(this.value);
         });
 
-
-
         window.onload = () => {
-            exibirUsuarioAtivo();
+            if (typeof exibirUsuarioAtivo === 'function') exibirUsuarioAtivo();
             carregarServidores();
+
         };
     </script>
-
 </body>
 
 </html>
