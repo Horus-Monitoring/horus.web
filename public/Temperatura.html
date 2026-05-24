@@ -31,355 +31,198 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <main class="main">
+    <main class="main">
 
-            <section class="conteudo">
+        <section class="conteudo">
 
-                <!-- KPI -->
+            <!-- ===================================== -->
+            <!-- KPIs -->
+            <!-- ===================================== -->
 
-                <section class="cards">
+            <section class="cards">
 
-                    <!-- KPI 1 -->
+                <!-- KPI 1 -->
 
-                    <div class="card">
+                <div class="card">
 
-                        <h3>
+                    <h3>
 
-                            Margem de Segurança Térmica
+                        Margem de Segurança Térmica
 
-                            <span class="info-tooltip"
-                                onclick="toggleTooltip(this)">
+                        <span class="info-tooltip"
+                            onclick="toggleTooltip(this,event)">
 
-                                i
+                            i
 
-                                <span class="tooltip-box">
+                            <span class="tooltip-box"
+                                id="tooltipMargem">
 
-                                    <strong>
-                                        O que é:
-                                    </strong>
-
-                                    Diferença entre a temperatura atual da CPU e o limite seguro operacional.
-
-                                    <hr>
-
-                                    <strong>
-                                        Status:
-                                    </strong>
-
-                                    <span id="tooltipMargemStatus">
-                                        Carregando...
-                                    </span>
-
-                                </span>
+                                Carregando...
 
                             </span>
-
-                        </h3>
-
-                        <div class="big"
-                            id="kpiMargem">
-
-                            --
-
-                        </div>
-
-                        <span class="green"
-                            id="statusMargem">
-
-                            Atualizando...
 
                         </span>
 
+                    </h3>
+
+                    <div class="big"
+                        id="kpiMargem">
+
+                        --
+
                     </div>
 
-                    <!-- KPI 2 -->
+                    <span class="green"
+                        id="statusMargem">
 
-                    <div class="card">
+                        Atualizando...
 
-                        <h3>
+                    </span>
 
-                            Eficiência de Resfriamento
+                </div>
 
-                            <span class="info-tooltip"
-                                onclick="toggleTooltip(this)">
+                <!-- KPI 2 -->
 
-                                i
+                <div class="card">
 
-                                <span class="tooltip-box">
+                    <h3>
 
-                                    <strong>
-                                        O que é:
-                                    </strong>
+                        Eficiência de Resfriamento
 
-                                    Mede a eficiência do sistema de refrigeração do servidor.
+                        <span class="info-tooltip"
+                            onclick="toggleTooltip(this,event)">
 
-                                    <hr>
+                            i
 
-                                    <strong>
-                                        Status:
-                                    </strong>
+                            <span class="tooltip-box"
+                                id="tooltipResfriamento">
 
-                                    <span id="tooltipResfriamentoStatus">
-                                        Carregando...
-                                    </span>
-
-                                </span>
+                                Carregando...
 
                             </span>
-
-                        </h3>
-
-                        <div class="big"
-                            id="kpiResfriamento">
-
-                            --
-
-                        </div>
-
-                        <span class="red"
-                            id="statusResfriamento">
-
-                            Atualizando...
 
                         </span>
 
+                    </h3>
+
+                    <div class="big"
+                        id="kpiResfriamento">
+
+                        --
+
                     </div>
 
-                    <!-- KPI 3 -->
+                    <span class="green"
+                        id="statusResfriamento">
 
-                    <div class="card">
+                        Atualizando...
 
-                        <h3>
+                    </span>
 
-                            Pico de Estresse Térmico
+                </div>
 
-                            <span class="info-tooltip"
-                                onclick="toggleTooltip(this)">
+                <!-- KPI 3 -->
 
-                                i
+                <div class="card">
 
-                                <span class="tooltip-box">
+                    <h3>
 
-                                    <strong>
-                                        O que é:
-                                    </strong>
+                        Pico de Estresse Térmico
 
-                                    Dia da semana com maior incidência de temperaturas críticas.
+                        <span class="info-tooltip"
+                            onclick="toggleTooltip(this,event)">
 
-                                    <hr>
+                            i
 
-                                    <strong>
-                                        Status:
-                                    </strong>
+                            <span class="tooltip-box"
+                                id="tooltipEstresse">
 
-                                    <span id="tooltipPicoStatus">
-                                        Carregando...
-                                    </span>
-
-                                </span>
+                                Carregando...
 
                             </span>
 
-                        </h3>
+                        </span>
 
-                        <div class="big"
-                            id="kpiPico">
+                    </h3>
 
-                            --
+                    <div class="big"
+                        id="kpiEstresse">
 
-                        </div>
+                        --
 
                     </div>
 
-                    <!-- KPI 4 -->
+                </div>
 
-                    <div class="card">
+                <!-- KPI 4 -->
 
-                        <h3>
+                <div class="card">
 
-                            Throttling Status
+                    <h3>
 
-                            <span class="info-tooltip"
-                                onclick="toggleTooltip(this)">
+                        Throttling Status
 
-                                i
+                        <span class="info-tooltip"
+                            onclick="toggleTooltip(this,event)">
 
-                                <span class="tooltip-box">
+                            i
 
-                                    <strong>
-                                        O que é:
-                                    </strong>
+                            <span class="tooltip-box"
+                                id="tooltipThrottle">
 
-                                    Redução automática de desempenho causada por superaquecimento.
-
-                                    <hr>
-
-                                    <strong>
-                                        Status:
-                                    </strong>
-
-                                    <span id="tooltipThrottleStatus">
-                                        Carregando...
-                                    </span>
-
-                                </span>
+                                Carregando...
 
                             </span>
 
-                        </h3>
+                        </span>
 
-                        <div class="big"
-                            id="kpiThrottle">
+                    </h3>
 
-                            --
+                    <div class="big"
+                        id="kpiThrottle">
 
-                        </div>
-
-                        <div class="status"
-                            id="statusThrottle">
-
-                            Operacional
-
-                        </div>
+                        --
 
                     </div>
 
-                </section>
+                    <div class="status"
+                        id="statusThrottle">
 
-                <!-- GRID -->
-
-                <section class="grid">
-
-                    <!-- CHART CPU -->
-
-                    <div class="chart-card">
-
-                        <div class="chart-header">
-
-                            <h2>
-
-                                Temperatura CPU
-
-                                <span class="info-tooltip"
-                                    onclick="toggleTooltip(this)">
-
-                                    i
-
-                                    <span class="tooltip-box">
-
-                                        <strong>
-                                            O que é:
-                                        </strong>
-
-                                        Comparação entre temperatura da CPU e ambiente.
-
-                                        <hr>
-
-                                        <strong>
-                                            Status:
-                                        </strong>
-
-                                        <span id="tooltipCpuGrafico">
-                                            Carregando...
-                                        </span>
-
-                                    </span>
-
-                                </span>
-
-                            </h2>
-
-                            <p>
-                                Monitoramento térmico diário
-                            </p>
-
-                        </div>
-
-                        <canvas id="cpuChart"></canvas>
+                        Operacional
 
                     </div>
 
-                    <!-- HEATMAP -->
+                </div>
 
-                    <div class="heatmap-card">
+            </section>
 
-                        <div class="chart-header">
+            <!-- ===================================== -->
+            <!-- GRID -->
+            <!-- ===================================== -->
 
-                            <h2>
+            <section class="grid">
 
-                                Temperatura por Core
+                <!-- CPU -->
 
-                                <span class="info-tooltip"
-                                    onclick="toggleTooltip(this)">
-
-                                    i
-
-                                    <span class="tooltip-box">
-
-                                        <strong>
-                                            O que é:
-                                        </strong>
-
-                                        Exibe a temperatura individual de cada núcleo da CPU.
-
-                                        <hr>
-
-                                        <strong>
-                                            Status:
-                                        </strong>
-
-                                        <span id="tooltipCoreStatus">
-                                            Carregando...
-                                        </span>
-
-                                    </span>
-
-                                </span>
-
-                            </h2>
-
-                        </div>
-
-                        <div class="heatmap"></div>
-
-                    </div>
-
-                </section>
-
-                <!-- LATENCIA -->
-
-                <section class="bottom-chart">
+                <div class="chart-card">
 
                     <div class="chart-header">
 
                         <h2>
 
-                            Impacto Térmico na Latência
+                            Temperatura CPU
 
                             <span class="info-tooltip"
-                                onclick="toggleTooltip(this)">
+                                onclick="toggleTooltip(this,event)">
 
                                 i
 
-                                <span class="tooltip-box">
+                                <span class="tooltip-box"
+                                    id="tooltipCpu">
 
-                                    <strong>
-                                        O que é:
-                                    </strong>
-
-                                    Relação entre aumento térmico e degradação de resposta.
-
-                                    <hr>
-
-                                    <strong>
-                                        Status:
-                                    </strong>
-
-                                    <span id="tooltipLatenciaStatus">
-                                        Carregando...
-                                    </span>
+                                    Carregando...
 
                                 </span>
 
@@ -388,77 +231,153 @@
                         </h2>
 
                         <p>
-                            Correlação térmica diária
+                            Temperatura máxima da CPU em tempo real
                         </p>
 
                     </div>
 
-                    <canvas id="latencyChart"></canvas>
+                    <canvas id="cpuChart"></canvas>
 
-                    <div id="ultimaAtualizacao"
-                        class="ultima-atualizacao">
+                </div>
 
-                        Última atualização: --
+                <!-- HEATMAP -->
+
+                <div class="heatmap-card">
+
+                    <div class="chart-header">
+
+                        <h2>
+
+                            Temperatura por Core
+
+                            <span class="info-tooltip"
+                                onclick="toggleTooltip(this,event)">
+
+                                i
+
+                                <span class="tooltip-box"
+                                    id="tooltipCore">
+
+                                    Carregando...
+
+                                </span>
+
+                            </span>
+
+                        </h2>
+
+                        <p>
+                            Temperatura atual dos núcleos
+                        </p>
 
                     </div>
 
-                </section>
+                    <div class="heatmap"
+                        id="heatmap">
+
+                    </div>
+
+                </div>
 
             </section>
 
-        </main>
+            <!-- ===================================== -->
+            <!-- LATÊNCIA -->
+            <!-- ===================================== -->
 
-    </div>
+            <section class="bottom-chart">
+
+                <div class="chart-header">
+
+                    <h2>
+
+                        Impacto Térmico na Latência
+
+                        <span class="info-tooltip"
+                            onclick="toggleTooltip(this,event)">
+
+                            i
+
+                            <span class="tooltip-box"
+                                id="tooltipLatencia">
+
+                                Carregando...
+
+                            </span>
+
+                        </span>
+
+                    </h2>
+
+                    <p>
+                        Relação entre temperatura e latência
+                    </p>
+
+                </div>
+
+                <canvas id="latencyChart"></canvas>
+
+                <div class="ultima-atualizacao"
+                    id="ultimaAtualizacao">
+
+                    Última atualização: --
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
 
 <script>
 
-   // =========================
-// CHARTS
-// =========================
+    // ============================================
+    // CONFIG
+    // ============================================
 
-let cpuChart;
-let latencyChart;
-let intervaloAtualizacao;
+    let cpuChart;
+    let latencyChart;
 
-// =========================
-// TOOLTIP CLICK
-// =========================
+    const LIMITE_REGISTROS = 12;
 
-function toggleTooltip(elemento) {
+    // ============================================
+    // TOOLTIP CLICK
+    // ============================================
 
-    const tooltip =
-        elemento.querySelector(
-            ".tooltip-box"
-        );
+    function toggleTooltip(elemento, event) {
 
-    document
-        .querySelectorAll(
-            ".tooltip-box"
-        )
-        .forEach(item => {
+        event.stopPropagation();
 
-            if (item !== tooltip) {
+        const tooltip =
+            elemento.querySelector(
+                ".tooltip-box"
+            );
 
-                item.classList.remove(
-                    "ativo"
-                );
-            }
-        });
-
-    tooltip.classList.toggle(
-        "ativo"
-    );
-}
-
-document.addEventListener(
-    "click",
-    function (event) {
-
-        if (
-            !event.target.closest(
-                ".info-tooltip"
+        document
+            .querySelectorAll(
+                ".tooltip-box"
             )
-        ) {
+            .forEach(item => {
+
+                if (item !== tooltip) {
+
+                    item.classList.remove(
+                        "ativo"
+                    );
+                }
+            });
+
+        tooltip.classList.toggle(
+            "ativo"
+        );
+    }
+
+    document.addEventListener(
+        "click",
+        function () {
 
             document
                 .querySelectorAll(
@@ -471,684 +390,771 @@ document.addEventListener(
                     );
                 });
         }
-    }
-);
+    );
 
-// =========================
-// CONFIG CHART
-// =========================
+    // ============================================
+    // CONFIG CHART
+    // ============================================
 
-const chartConfig = {
+    const tooltipConfig = {
 
-    responsive: true,
+        responsive: true,
 
-    maintainAspectRatio: false,
+        maintainAspectRatio: false,
 
-    interaction: {
-        mode: 'index',
-        intersect: false
-    },
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
 
-    plugins: {
+        plugins: {
 
-        legend: {
-            position: 'top'
+            legend: {
+                position: 'top'
+            },
+
+            tooltip: {
+
+                backgroundColor: '#111827',
+
+                titleColor: '#fff',
+
+                bodyColor: '#fff',
+
+                borderColor: '#2563eb',
+
+                borderWidth: 1,
+
+                padding: 12
+            }
+        },
+
+        scales: {
+
+            x: {
+
+                ticks: {
+                    maxTicksLimit: 6
+                },
+
+                grid: {
+                    display: false
+                }
+            },
+
+            y: {
+
+                beginAtZero: false,
+
+                grid: {
+                    color: 'rgba(148,163,184,0.1)'
+                }
+            }
         }
-    }
-};
+    };
 
-// =========================
-// EMPRESA
-// =========================
+    // ============================================
+    // API
+    // ============================================
 
-const empresa =
-    sessionStorage.ID_EMPRESA;
+    async function carregarTemperatura() {
 
-// =========================
-// LISTAR SERVIDORES
-// =========================
+        try {
 
-async function listarServidores() {
+            const resposta =
+                await fetch(
+                    "/temperatura/dados"
+                );
 
-    try {
+            if (!resposta.ok) {
 
-        const resposta =
-            await fetch(
-                `/servidores/listarServidores/${empresa}`
+                throw new Error(
+                    "Erro ao buscar dados"
+                );
+            }
+
+            const json =
+                await resposta.json();
+
+            if (
+                !json.dados ||
+                json.dados.length === 0
+            ) {
+
+                console.log(
+                    "Sem dados"
+                );
+
+                return;
+            }
+
+            const dados =
+                json.dados.slice(
+                    -LIMITE_REGISTROS
+                );
+
+            atualizarKPIs(json);
+
+            atualizarGraficoCPU(dados);
+
+            atualizarGraficoLatencia(dados);
+
+            atualizarHeatmap(
+                dados[dados.length - 1]
             );
 
-        if (!resposta.ok) {
+            atualizarHorario();
 
-            throw new Error(
-                "Erro ao listar servidores"
-            );
-        }
-
-        const lista =
-            await resposta.json();
-
-        const select =
-            document.getElementById(
-                "select_servidor"
-            );
-
-        select.innerHTML = "";
-
-        lista.forEach((servidor, index) => {
-
-            select.innerHTML += `
-
-                <option
-                    value="${servidor.mac_address}"
-                    ${index === 0 ? "selected" : ""}>
-
-                    ${servidor.hostname}
-
-                </option>
-            `;
-        });
-
-        atualizarNomeServidor();
-
-        await carregarTemperatura();
-
-        iniciarAtualizacao();
-
-    } catch (erro) {
-
-        console.log(
-            "Erro servidores:",
-            erro
-        );
-    }
-}
-
-// =========================
-// CARREGAR TEMPERATURA
-// =========================
-
-async function carregarTemperatura() {
-
-    try {
-
-        const select =
-            document.getElementById(
-                "select_servidor"
-            );
-
-        const mac =
-            select.value;
-
-        if (!mac) {
-            return;
-        }
-
-        const resposta =
-            await fetch(
-                `/temperatura/${empresa}/${encodeURIComponent(mac)}/tempo_real`
-            );
-
-        if (!resposta.ok) {
-
-            throw new Error(
-                "Erro ao buscar temperatura"
-            );
         }
 
-        const json =
-            await resposta.json();
-
-        const dados =
-            json.dados;
-
-        if (
-            !dados ||
-            dados.length === 0
-        ) {
+        catch (erro) {
 
             console.log(
-                "Sem dados"
+                "Erro:",
+                erro
+            );
+        }
+    }
+
+    // ============================================
+    // KPI
+    // ============================================
+
+    function atualizarKPIs(json) {
+
+        const ultimo =
+            json.dados[
+                json.dados.length - 1
+            ];
+
+        // =====================================
+        // KPI 1
+        // =====================================
+
+        const margem =
+            Number(
+                ultimo.margem_termica || 0
             );
 
-            return;
+        kpiMargem.innerHTML =
+            `+${margem.toFixed(1)}°C`;
+
+        let statusMargemTexto =
+            "";
+
+        let corMargem =
+            "";
+
+        if (margem >= 40) {
+
+            statusMargemTexto =
+                "Excelente";
+
+            corMargem =
+                "#22c55e";
         }
 
-        atualizarDashboard(
-            dados,
-            json
-        );
+        else if (margem >= 25) {
 
-    } catch (erro) {
+            statusMargemTexto =
+                "Moderada";
 
-        console.log(
-            "Erro temperatura:",
-            erro
-        );
-    }
-}
+            corMargem =
+                "#eab308";
+        }
 
-// =========================
-// DASHBOARD
-// =========================
+        else {
 
-function atualizarDashboard(
-    dados,
-    json
-) {
+            statusMargemTexto =
+                "Crítica";
 
-    const ultimo =
-        dados[dados.length - 1];
-
-    atualizarKPIs(
-        ultimo,
-        json
-    );
-
-    atualizarGraficoCPU(
-        dados
-    );
-
-    atualizarGraficoLatencia(
-        dados
-    );
-
-    atualizarHeatmap(
-        ultimo.temp_max_cpu
-    );
-
-    atualizarHorario();
-
-    atualizarStatus(
-        ultimo
-    );
-}
-
-// =========================
-// KPIS
-// =========================
-
-function atualizarKPIs(
-    ultimo,
-    json
-) {
-
-    const margem =
-        Number(
-            ultimo.margem_termica || 0
-        );
-
-    const resfriamento =
-        Number(
-            ultimo.indice_resfriamento || 0
-        );
-
-    // =====================
-    // KPI 1
-    // =====================
-
-    kpiMargem.innerHTML =
-        margem.toFixed(1) + "°C";
-
-    if (margem >= 40) {
+            corMargem =
+                "#ef4444";
+        }
 
         statusMargem.innerHTML =
-            "Excelente";
+            statusMargemTexto;
 
         statusMargem.style.color =
-            "#10b981";
+            corMargem;
 
-        tooltipMargemStatus.innerHTML =
-            "Servidor operando com ampla margem térmica.";
-    }
+        tooltipMargem.innerHTML = `
 
-    else if (margem >= 25) {
+            <strong>
+                O que é:
+            </strong>
 
-        statusMargem.innerHTML =
-            "Moderado";
+            <br><br>
 
-        statusMargem.style.color =
-            "#f59e0b";
+            Diferença entre a temperatura atual da CPU e o limite seguro operacional.
 
-        tooltipMargemStatus.innerHTML =
-            "Temperatura estável, mas requer monitoramento.";
-    }
+            <hr>
 
-    else {
+            <strong>
+                Status atual:
+            </strong>
 
-        statusMargem.innerHTML =
-            "Crítico";
+            <br>
 
-        statusMargem.style.color =
-            "#ef4444";
+            <span style="color:${corMargem};font-weight:700;">
+                ${statusMargemTexto}
+            </span>
 
-        tooltipMargemStatus.innerHTML =
-            "CPU próxima do limite térmico.";
-    }
+        `;
 
-    // =====================
-    // KPI 2
-    // =====================
+        // =====================================
+        // KPI 2
+        // =====================================
 
-    kpiResfriamento.innerHTML =
-        resfriamento.toFixed(1) + "%";
+        const resfriamento =
+            Number(
+                ultimo.indice_resfriamento || 0
+            );
 
-    if (resfriamento >= 75) {
+        kpiResfriamento.innerHTML =
+            `${resfriamento.toFixed(1)}%`;
+
+        let statusResf =
+            "";
+
+        let corResf =
+            "";
+
+        if (resfriamento >= 75) {
+
+            statusResf =
+                "Ideal";
+
+            corResf =
+                "#22c55e";
+        }
+
+        else if (resfriamento >= 50) {
+
+            statusResf =
+                "Moderado";
+
+            corResf =
+                "#eab308";
+        }
+
+        else {
+
+            statusResf =
+                "Ruim";
+
+            corResf =
+                "#ef4444";
+        }
 
         statusResfriamento.innerHTML =
-            "Excelente";
+            statusResf;
 
         statusResfriamento.style.color =
-            "#10b981";
+            corResf;
 
-        tooltipResfriamentoStatus.innerHTML =
-            "Sistema de refrigeração altamente eficiente.";
+        tooltipResfriamento.innerHTML = `
+
+            <strong>
+                O que é:
+            </strong>
+
+            <br><br>
+
+            Mede a eficiência do sistema de dissipação térmica.
+
+            <hr>
+
+            <strong>
+                Status atual:
+            </strong>
+
+            <br>
+
+            <span style="color:${corResf};font-weight:700;">
+                ${statusResf}
+            </span>
+
+        `;
+
+        // =====================================
+        // KPI 3
+        // =====================================
+
+        kpiEstresse.innerHTML =
+            json.dia_com_mais_alertas ||
+            "Sem dados";
+
+        tooltipEstresse.innerHTML = `
+
+            <strong>
+                O que é:
+            </strong>
+
+            <br><br>
+
+            Dia da semana com maior incidência de temperaturas críticas.
+
+            <hr>
+
+            <strong>
+                Status:
+            </strong>
+
+            <br>
+
+            Monitoramento semanal ativo.
+
+        `;
+
+        // =====================================
+        // KPI 4
+        // =====================================
+
+        const throttle =
+            ultimo.throttling || "NAO";
+
+        kpiThrottle.innerHTML =
+            throttle;
+
+        if (throttle === "SIM") {
+
+            statusThrottle.innerHTML =
+                "CRÍTICO";
+
+            statusThrottle.style.background =
+                "#dc2626";
+
+            tooltipThrottle.innerHTML = `
+
+                <strong>
+                    O que é:
+                </strong>
+
+                <br><br>
+
+                Redução automática de desempenho causada por superaquecimento.
+
+                <hr>
+
+                <strong>
+                    Status atual:
+                </strong>
+
+                <br>
+
+                <span style="color:#ef4444;font-weight:700;">
+                    Throttling detectado
+                </span>
+
+            `;
+        }
+
+        else {
+
+            statusThrottle.innerHTML =
+                "Operacional";
+
+            statusThrottle.style.background =
+                "#16a34a";
+
+            tooltipThrottle.innerHTML = `
+
+                <strong>
+                    O que é:
+                </strong>
+
+                <br><br>
+
+                Indica se a CPU reduziu clock por excesso de temperatura.
+
+                <hr>
+
+                <strong>
+                    Status atual:
+                </strong>
+
+                <br>
+
+                <span style="color:#22c55e;font-weight:700;">
+                    Sistema estável
+                </span>
+
+            `;
+        }
     }
 
-    else if (resfriamento >= 50) {
-
-        statusResfriamento.innerHTML =
-            "Moderado";
-
-        statusResfriamento.style.color =
-            "#f59e0b";
-
-        tooltipResfriamentoStatus.innerHTML =
-            "Eficiência térmica aceitável.";
-    }
-
-    else {
-
-        statusResfriamento.innerHTML =
-            "Ruim";
-
-        statusResfriamento.style.color =
-            "#ef4444";
-
-        tooltipResfriamentoStatus.innerHTML =
-            "Sistema de resfriamento insuficiente.";
-    }
-
-    // =====================
-    // KPI 3
-    // =====================
-
-    kpiPico.innerHTML =
-        json.dia_com_mais_alertas ||
-        "Sem dados";
-
-    tooltipPicoStatus.innerHTML =
-        `Maior incidência térmica registrada em ${json.dia_com_mais_alertas || "nenhum dia"}.`;
-
-    // =====================
-    // KPI 4
-    // =====================
-
-    const throttling =
-        ultimo.throttling || "NAO";
-
-    kpiThrottle.innerHTML =
-        throttling;
-
-    if (throttling === "SIM") {
-
-        statusThrottle.innerHTML =
-            "CRÍTICO";
-
-        statusThrottle.style.background =
-            "#dc2626";
-
-        tooltipThrottleStatus.innerHTML =
-            "CPU reduzindo desempenho por superaquecimento.";
-    }
-
-    else {
-
-        statusThrottle.innerHTML =
-            "Operacional";
-
-        statusThrottle.style.background =
-            "#16a34a";
-
-        tooltipThrottleStatus.innerHTML =
-            "Nenhum throttling detectado.";
-    }
-
-    // =====================
-    // TOOLTIPS GRAFICOS
-    // =====================
-
-    tooltipCpuGrafico.innerHTML =
-        ultimo.temp_max_cpu >= 80
-            ? "Temperatura elevada detectada."
-            : "Temperatura da CPU estável.";
-
-    tooltipCoreStatus.innerHTML =
-        ultimo.temp_max_cpu >= 75
-            ? "Existem núcleos próximos da zona crítica."
-            : "Temperatura dos núcleos normal.";
-
-    tooltipLatenciaStatus.innerHTML =
-        ultimo.latency_avg_ms >= 60
-            ? "Latência elevada associada ao aumento térmico."
-            : "Latência operando normalmente.";
-}
-
-// =========================
-// GRAFICO CPU
-// =========================
-
-function atualizarGraficoCPU(
-    dados
-) {
-
-    const labels =
-        dados.map(item =>
-            item.timestamp
-            .split(" ")[1]
-            .substring(0, 5)
-        );
-
-    const temperaturas =
-        dados.map(item =>
-            item.temp_max_cpu || 0
-        );
-
-    const ambiente =
-        dados.map(item =>
-            item.temperatura_ambiente || 0
-        );
-
-    if (cpuChart) {
-        cpuChart.destroy();
-    }
-
-    cpuChart =
-        new Chart(
-            document.getElementById(
-                "cpuChart"
-            ),
-            {
-
-                type: "line",
-
-                data: {
-
-                    labels,
-
-                    datasets: [
-
-                        {
-                            label: "CPU",
-
-                            data: temperaturas,
-
-                            borderColor: "#3b82f6",
-
-                            tension: 0.4
-                        },
-
-                        {
-                            label: "Ambiente",
-
-                            data: ambiente,
-
-                            borderColor: "#10b981",
-
-                            tension: 0.4
-                        }
-                    ]
-                },
-
-                options: chartConfig
-            }
-        );
-}
-
-// =========================
-// GRAFICO LATENCIA
-// =========================
-
-function atualizarGraficoLatencia(
-    dados
-) {
-
-    const labels =
-        dados.map(item =>
-            item.timestamp
-            .split(" ")[1]
-            .substring(0, 5)
-        );
-
-    const latencia =
-        dados.map(item =>
-            item.latency_avg_ms || 0
-        );
-
-    const temperatura =
-        dados.map(item =>
-            item.temp_max_cpu || 0
-        );
-
-    if (latencyChart) {
-        latencyChart.destroy();
-    }
-
-    latencyChart =
-        new Chart(
-            document.getElementById(
-                "latencyChart"
-            ),
-            {
-
-                type: "line",
-
-                data: {
-
-                    labels,
-
-                    datasets: [
-
-                        {
-                            label: "Latência",
-
-                            data: latencia,
-
-                            borderColor: "#8b5cf6",
-
-                            tension: 0.4
-                        },
-
-                        {
-                            label: "Temperatura",
-
-                            data: temperatura,
-
-                            borderColor: "#f97316",
-
-                            tension: 0.4
-                        }
-                    ]
-                },
-
-                options: chartConfig
-            }
-        );
-}
-
-// =========================
-// HEATMAP
-// =========================
-
-function atualizarHeatmap(
-    base
-) {
-
-    const heatmap =
-        document.querySelector(
-            ".heatmap"
-        );
-
-    heatmap.innerHTML = "";
-
-    const quantidadeCores = 4;
-
-    for (
-        let i = 0;
-        i < quantidadeCores;
-        i++
-    ) {
-
-        const temp =
-            Math.floor(
-                base + (
-                    Math.random() * 6 - 3
+    // ============================================
+    // CPU CHART
+    // ============================================
+
+    function atualizarGraficoCPU(dados) {
+
+        const labels =
+            dados.map(item => {
+
+                return item.timestamp
+                    .split(" ")[1]
+                    .substring(0, 5);
+            });
+
+        const temperaturas =
+            dados.map(item =>
+                Number(
+                    item.temp_max_cpu || 0
                 )
             );
 
-        let classe = "normal";
+        const ambiente =
+            dados.map(item =>
+                Number(
+                    item.temperatura_ambiente || 0
+                )
+            );
 
-        if (temp >= 85) {
-            classe = "critical";
+        if (cpuChart) {
+            cpuChart.destroy();
         }
 
-        else if (temp >= 75) {
-            classe = "medium";
+        cpuChart =
+            new Chart(
+                document.getElementById(
+                    "cpuChart"
+                ),
+                {
+
+                    type: "line",
+
+                    data: {
+
+                        labels,
+
+                        datasets: [
+
+                            {
+
+                                label: "CPU",
+
+                                data: temperaturas,
+
+                                borderColor: "#3b82f6",
+
+                                backgroundColor:
+                                    "rgba(59,130,246,0.08)",
+
+                                fill: true,
+
+                                tension: 0.4,
+
+                                borderWidth: 2
+                            },
+
+                            {
+
+                                label: "Ambiente",
+
+                                data: ambiente,
+
+                                borderColor: "#10b981",
+
+                                tension: 0.4,
+
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+
+                    options: tooltipConfig
+                }
+            );
+
+        const ultimaTemp =
+            temperaturas[
+                temperaturas.length - 1
+            ];
+
+        let statusCpu =
+            "";
+
+        let corCpu =
+            "";
+
+        if (ultimaTemp >= 85) {
+
+            statusCpu =
+                "Temperatura crítica";
+
+            corCpu =
+                "#ef4444";
         }
 
-        else if (temp >= 65) {
-            classe = "alert";
+        else if (ultimaTemp >= 70) {
+
+            statusCpu =
+                "Temperatura moderada";
+
+            corCpu =
+                "#eab308";
         }
 
-        heatmap.innerHTML += `
+        else {
 
-            <div class="core ${classe}">
+            statusCpu =
+                "Temperatura estável";
 
-                <small>
-                    Core ${i}
-                </small>
+            corCpu =
+                "#22c55e";
+        }
 
-                <span>
-                    ${temp}°
-                </span>
+        tooltipCpu.innerHTML = `
 
-            </div>
+            <strong>
+                O que é:
+            </strong>
+
+            <br><br>
+
+            Temperatura máxima registrada da CPU em tempo real.
+
+            <hr>
+
+            <strong>
+                Status atual:
+            </strong>
+
+            <br>
+
+            <span style="color:${corCpu};font-weight:700;">
+                ${statusCpu}
+            </span>
+
         `;
     }
-}
 
-// =========================
-// HORARIO
-// =========================
+    // ============================================
+    // LATÊNCIA
+    // ============================================
 
-function atualizarHorario() {
+    function atualizarGraficoLatencia(dados) {
 
-    const agora =
-        new Date();
+        const labels =
+            dados.map(item => {
 
-    ultimaAtualizacao.innerHTML =
-        `Última atualização: ${agora.toLocaleTimeString("pt-BR")}`;
-}
+                return item.timestamp
+                    .split(" ")[1]
+                    .substring(0, 5);
+            });
 
-// =========================
-// STATUS TOPO
-// =========================
+        const latencia =
+            dados.map(item =>
+                Number(
+                    item.latency_avg_ms || 0
+                )
+            );
 
-function atualizarStatus(
-    ultimo
-) {
+        const temperatura =
+            dados.map(item =>
+                Number(
+                    item.temp_max_cpu || 0
+                )
+            );
 
-    const dot =
-        document.getElementById(
-            "status-dot"
-        );
+        if (latencyChart) {
+            latencyChart.destroy();
+        }
 
-    dot.classList.remove(
-        "verde",
-        "amarelo",
-        "vermelho"
-    );
+        latencyChart =
+            new Chart(
+                document.getElementById(
+                    "latencyChart"
+                ),
+                {
 
-    if (
-        ultimo.temp_max_cpu >= 85
-    ) {
+                    type: "line",
 
-        dot.classList.add(
-            "vermelho"
-        );
+                    data: {
+
+                        labels,
+
+                        datasets: [
+
+                            {
+
+                                label: "Latência",
+
+                                data: latencia,
+
+                                borderColor: "#8b5cf6",
+
+                                tension: 0.4,
+
+                                borderWidth: 2
+                            },
+
+                            {
+
+                                label: "Temperatura",
+
+                                data: temperatura,
+
+                                borderColor: "#f97316",
+
+                                tension: 0.4,
+
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+
+                    options: tooltipConfig
+                }
+            );
+
+        tooltipLatencia.innerHTML = `
+
+            <strong>
+                O que é:
+            </strong>
+
+            <br><br>
+
+            Relação entre aumento térmico e tempo de resposta da máquina.
+
+            <hr>
+
+            <strong>
+                Status:
+            </strong>
+
+            <br>
+
+            Correlação monitorada em tempo real.
+
+        `;
     }
 
-    else if (
-        ultimo.temp_max_cpu >= 70
-    ) {
+    // ============================================
+    // HEATMAP
+    // ============================================
 
-        dot.classList.add(
-            "amarelo"
+    function atualizarHeatmap(ultimo) {
+
+        const heatmap =
+            document.getElementById(
+                "heatmap"
+            );
+
+        heatmap.innerHTML = "";
+
+        const temperaturas =
+            ultimo.temperaturas_cores || [];
+
+        if (
+            temperaturas.length === 0
+        ) {
+
+            heatmap.innerHTML = `
+                <div>
+                    Sem dados dos cores
+                </div>
+            `;
+
+            return;
+        }
+
+        temperaturas.forEach(
+            (temp, index) => {
+
+                let classe =
+                    "normal";
+
+                if (temp >= 85) {
+
+                    classe =
+                        "critical";
+                }
+
+                else if (temp >= 75) {
+
+                    classe =
+                        "medium";
+                }
+
+                else if (temp >= 65) {
+
+                    classe =
+                        "alert";
+                }
+
+                heatmap.innerHTML += `
+
+                    <div class="core ${classe}">
+
+                        <small>
+                            Core ${index}
+                        </small>
+
+                        <span>
+                            ${temp}°
+                        </span>
+
+                    </div>
+
+                `;
+            }
         );
+
+        tooltipCore.innerHTML = `
+
+            <strong>
+                O que é:
+            </strong>
+
+            <br><br>
+
+            Temperatura individual de cada núcleo da CPU.
+
+            <hr>
+
+            <strong>
+                Status:
+            </strong>
+
+            <br>
+
+            Monitoramento térmico por núcleo ativo.
+
+        `;
     }
 
-    else {
+    // ============================================
+    // HORÁRIO
+    // ============================================
 
-        dot.classList.add(
-            "verde"
-        );
+    function atualizarHorario() {
+
+        const agora =
+            new Date();
+
+        ultimaAtualizacao.innerHTML =
+            `Última atualização: ${
+                agora.toLocaleTimeString(
+                    "pt-BR"
+                )
+            }`;
     }
-}
 
-// =========================
-// SERVIDOR
-// =========================
+    // ============================================
+    // AUTO UPDATE
+    // ============================================
 
-function atualizarNomeServidor() {
+    carregarTemperatura();
 
-    const select =
-        document.getElementById(
-            "select_servidor"
-        );
+    setInterval(() => {
 
-    nomeServidor.innerHTML =
-        select.options[
-            select.selectedIndex
-        ].text;
-}
+        carregarTemperatura();
 
-// =========================
-// SELECT
-// =========================
-
-async function selecionar() {
-
-    atualizarNomeServidor();
-
-    await carregarTemperatura();
-}
-
-// =========================
-// AUTO UPDATE
-// =========================
-
-function iniciarAtualizacao() {
-
-    clearInterval(
-        intervaloAtualizacao
-    );
-
-    intervaloAtualizacao =
-        setInterval(() => {
-
-            carregarTemperatura();
-
-        }, 5000);
-}
-
-// =========================
-// INIT
-// =========================
-
-window.onload = function () {
-
-    listarServidores();
-
-};
+    }, 5000);
 
 </script>
 
