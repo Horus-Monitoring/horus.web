@@ -158,31 +158,6 @@ function listarServidoresComAcesso(fkEmpresa, fkFuncionario) {
     return database.executar(instrucaoSql);
 }
 
-function quantidadeAnalistasPorServidor(fkEmpresa) {
-    var instrucaoSql = `
-        SELECT
-            s.hostname,
-            COUNT(f.id_funcionario) AS analistas,
-            (
-                SELECT COUNT(*)
-                FROM funcionario
-                WHERE fk_empresa = ${fkEmpresa}
-                    AND funcao = 'Analista'
-            ) AS total_analistas
-        FROM servidor s
-        LEFT JOIN acesso_servidor a
-            ON a.fk_servidor = s.id_servidor
-        LEFT JOIN funcionario f
-            ON f.id_funcionario = a.fk_funcionario
-            AND f.funcao = 'Analista'
-        WHERE s.fk_empresa = ${fkEmpresa}
-        GROUP BY s.id_servidor, s.hostname;
-    `;
-
-    console.log("Executando SQL:\n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 function limparAcessos(fkFuncionario) {
     return database.executar(`
         DELETE FROM acesso_servidor 
@@ -201,47 +176,6 @@ function inserirAcessos(fkFuncionario, servidores) {
     `);
 }
 
-function listarAnalistasDisponiveis(fkEmpresa, hostname) {
-    var instrucaoSql = `
-        SELECT
-            f.id_funcionario,
-            f.nome AS nome_analista,
-            f.email
-        FROM funcionario f
-        JOIN servidor s
-            ON s.hostname = '${hostname}'
-            AND s.fk_empresa = ${fkEmpresa}
-        LEFT JOIN acesso_servidor a
-            ON a.fk_funcionario = f.id_funcionario
-            AND a.fk_servidor = s.id_servidor
-        WHERE f.fk_empresa = ${fkEmpresa}
-            AND f.funcao = 'Analista'
-            AND a.fk_servidor IS NULL
-        ORDER BY f.nome;
-    `;
-
-    console.log("Executando SQL:\n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function reatribuirAnalista(fkEmpresa, hostname, fkFuncionario) {
-    var instrucaoSql = `
-        INSERT INTO acesso_servidor (fk_funcionario, fk_servidor)
-        VALUES (
-            ${fkFuncionario},
-            (
-                SELECT id_servidor
-                FROM servidor
-                WHERE hostname = '${hostname}'
-                    AND fk_empresa = ${fkEmpresa}
-            )
-        );
-    `;
-
-    console.log("Executando SQL:\n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 module.exports = {
     cadastrarServidor,
     exibirServidores,
@@ -251,9 +185,6 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
-    quantidadeAnalistasPorServidor,
-    listarAnalistasDisponiveis,
     limparAcessos,
     inserirAcessos,
-    reatribuirAnalista,
 };
