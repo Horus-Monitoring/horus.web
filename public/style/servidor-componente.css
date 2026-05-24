@@ -22,13 +22,13 @@
 
 body {
   background: var(--cinza);
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .container {
   display: flex;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .modal {
