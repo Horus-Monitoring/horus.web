@@ -480,83 +480,112 @@
 
     // =========================
     // CARREGAR SERVIDORES
-    // =========================
+    // =========================a
 
-    async function carregarServidores() {
+    async function listarServidores() {
 
-        try {
+    try {
 
-            const resposta =
-                await fetch(
-                    `/servidores/listarServidores/${empresa}`
-                );
+        const fkEmpresa =
+            sessionStorage.ID_EMPRESA;
 
-            if (!resposta.ok) {
-
-                throw new Error(
-                    "Erro ao buscar servidores"
-                );
-            }
-
-            const servidores =
-                await resposta.json();
-
-            console.log(
-                "SERVIDORES:",
-                servidores
+        // transforma string em array
+        const servidores =
+            JSON.parse(
+                sessionStorage.ACESSO_SERVIDORES
             );
 
-            const select =
-                document.getElementById(
-                    "select_servidor"
-                );
+        const resposta =
+            await fetch(
+                `/servidores/listarServidores`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        fkEmpresaServer: fkEmpresa,
+                        servidoresServer: servidores
+                    })
+                }
+            );
 
-            select.innerHTML = "";
+        if (!resposta.ok) {
 
-            if (!servidores ||
-                servidores.length === 0) {
-
-                select.innerHTML = `
-                    <option value="#">
-                        Nenhum servidor
-                    </option>
-                `;
-
-                return;
-            }
-
-            servidores.forEach((servidor, index) => {
-
-                const valorMac =
-                    servidor.mac_address ||
-                    servidor.mac ||
-                    servidor.id_servidor;
-
-                select.innerHTML += `
-
-                    <option
-                        value="${valorMac}"
-                        ${index === 0 ? "selected" : ""}>
-                        ${servidor.hostname}
-                    </option>
-
-                `;
-            });
-
-            atualizarNomeServidor();
-
-            await carregarTemperatura();
-
-            iniciarAtualizacao();
-
-        } catch (erro) {
-
-            console.log(
-                "Erro servidores:",
-                erro
+            throw new Error(
+                "Erro ao buscar servidores"
             );
         }
+
+        const lista =
+            await resposta.json();
+
+        console.log(
+            "SERVIDORES:",
+            lista
+        );
+
+        const select =
+            document.getElementById(
+                "select_servidor"
+            );
+
+        select.innerHTML = "";
+
+        if (!lista ||
+            lista.length === 0) {
+
+            select.innerHTML = `
+                <option value="#">
+                    Nenhum servidor
+                </option>
+            `;
+
+            return;
+        }
+
+        lista.forEach((servidor, index) => {
+
+            select.innerHTML += `
+
+                <option
+                    value="${servidor.id_servidor}"
+                    data-mac="${servidor.mac_address}"
+                    ${index === 0 ? "selected" : ""}>
+                    ${servidor.hostname}
+                </option>
+
+            `;
+        });
+
+        nomeServidor.textContent =
+            select.options[
+                select.selectedIndex
+            ].text;
+
+        await carregarDashboards();
+
+        select.addEventListener(
+            "change",
+            async () => {
+
+                nomeServidor.textContent =
+                    select.options[
+                        select.selectedIndex
+                    ].text;
+
+                await carregarDashboards();
+            }
+        );
+
+    } catch (erro) {
+
+        console.log(
+            "Erro servidores:",
+            erro
+        );
     }
+}
 
     // =========================
     // CARREGAR TEMPERATURA
@@ -571,8 +600,13 @@
                     "select_servidor"
                 );
 
+            const optionSelecionada =
+                select.options[
+                    select.selectedIndex
+                ];
+
             const mac =
-                select.value;
+                optionSelecionada.dataset.mac;
 
             if (!mac || mac === "#") {
                 return;
@@ -1123,7 +1157,7 @@
 
     window.onload = function () {
 
-        carregarServidores();
+        listarServidores();
     };
 
 </script>
