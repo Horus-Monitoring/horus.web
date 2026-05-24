@@ -269,6 +269,23 @@ function listarServidoresComAcesso(req, res) {
         });
 }
 
+function quantidadeAnalistasPorServidor(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+
+    servidoresModel.quantidadeAnalistasPorServidor(fkEmpresa)
+        .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao buscar quantidade de analistas!\nErro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 function atualizarAcessos(req, res) {
     const { fkFuncionario, servidores } = req.body;
 
@@ -276,6 +293,51 @@ function atualizarAcessos(req, res) {
         .then(() => servidoresModel.inserirAcessos(fkFuncionario, servidores))
         .then(() => res.sendStatus(200))
         .catch(err => res.status(500).json(err));
+}
+
+function listarAnalistasDisponiveis(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+    var hostname = req.params.hostname;
+
+    servidoresModel.listarAnalistasDisponiveis(fkEmpresa, hostname)
+        .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao listar analistas disponíveis!\nErro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function reatribuirAnalista(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var hostname = req.body.hostnameServer;
+    var fkFuncionario = req.body.fkFuncionarioServer;
+
+    if (fkEmpresa == undefined) {
+        res.status(400).send("fkEmpresa está undefined!");
+    } else if (hostname == undefined) {
+        res.status(400).send("Hostname está undefined!");
+    } else if (fkFuncionario == undefined) {
+        res.status(400).send("fkFuncionario está undefined!");
+    } else {
+        servidoresModel.reatribuirAnalista(fkEmpresa, hostname, fkFuncionario)
+            .then(() => {
+                res.sendStatus(200);
+            })
+            .catch((erro) => {
+                console.log(erro);
+                console.log(
+                    "Houve um erro ao reatribuir analista!Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
 }
 
 module.exports = {
@@ -287,7 +349,10 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
+    quantidadeAnalistasPorServidor,
+    listarAnalistasDisponiveis,
     atualizarAcessos,
+    reatribuirAnalista,
     lerJson,
     capturarDados
 }

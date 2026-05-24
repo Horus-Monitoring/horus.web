@@ -107,10 +107,10 @@
                 </div>
 
                 <div class="kpis">
-                    <div class="kpi">
+                    <div class="kpi" id="card_disponibilidade">
                         <div class="topo-kpi">
                             <span class="nome-kpi">DISPONIBILIDADE GLOBAL</span>
-                            <img src="assets/imgs/painel/online.png" alt="" style="background-color: #0f2412;">
+                            <img src="assets/imgs/painel/online.png" alt="" style="background-color: #d7f5db;">
                         </div>
 
                         <div>
@@ -118,15 +118,13 @@
                                 class="medida-kpi"> % </span>
                         </div>
 
-                        <span>meta: 99.5%</span>
-
-                        <span class="variacao-kpi" style="color: green;">+0.04%</span>
+                        <span>Meta: 99%</span>
                     </div>
 
-                    <div class="kpi">
+                    <div class="kpi" id="card_risco">
                         <div class="topo-kpi">
                             <span class="nome-kpi">NÍVEL DE RISCO</span>
-                            <img src="assets/imgs/painel/escudo.png" alt="" style="background-color: #494428;">
+                            <img src="assets/imgs/painel/escudo.png" alt="" style="background-color: #f3edce;">
                         </div>
 
                         <div>
@@ -135,31 +133,25 @@
                             </span>
                         </div>
 
-                        <span>nível: moderado</span>
-
-                        <span class="variacao-kpi" style="color: orange;">+6 pts</span>
+                        <span>Ideal: abaixo de 30</span>
                     </div>
 
-                    <div class="kpi">
+                    <div class="kpi" id="card_criticos">
                         <div class="topo-kpi">
                             <span class="nome-kpi">INCIDENTES CRÍTICOS</span>
-                            <img src="assets/imgs/painel/exclamacao.png" alt="" style="background-color: #3b0303;">
+                            <img src="assets/imgs/painel/exclamacao.png" alt="" style="background-color: #f3bfbf;">
                         </div>
 
                         <div>
                             <span id="kpi_criticos" class="valor-kpi" style="color: red;"></span><span class="medida-kpi">
                                 ativos </span>
                         </div>
-
-                        <span>nível: moderado</span>
-
-                        <span class="variacao-kpi" style="color: red;">+2</span>
                     </div>
 
-                    <div class="kpi">
+                    <div class="kpi" id="card_estabilidade">
                         <div class="topo-kpi">
                             <span class="nome-kpi">ESTABILIDADE OPERACIONAL</span>
-                            <img src="assets/imgs/painel/estavel.png" alt="" style="background-color: #062a47;">
+                            <img src="assets/imgs/painel/estavel.png" alt="" style="background-color: #d1eaff;">
                         </div>
 
                         <div>
@@ -167,32 +159,27 @@
                                 class="medida-kpi"> % </span>
                         </div>
 
-                        <span>meta: 85%</span>
-
-                        <span class="variacao-kpi" style="color: red;">-1.8</span>
+                        <span>Meta: 85%</span>
                     </div>
 
-                    <div class="kpi">
+                    <div class="kpi" id="card_previsao">
                         <div class="topo-kpi">
                             <span class="nome-kpi">TENDÊNCIA OPERACIONAL</span>
-                            <img src="assets/imgs/painel/tendencia.png" alt="" style="background-color: #27013b;">
+                            <img src="assets/imgs/painel/tendencia.png" alt="" style="background-color: #e6bffc;">
                         </div>
 
                         <div>
-                            <span id="kpi_previsao" class="valor-kpi" style="color: rgb(154, 24, 194);"></span><span
-                                class="medida-kpi"> > 4h </span>
+                            <span id="kpi_previsao" class="valor-kpi" style="color: rgb(154, 24, 194);"></span>
                         </div>
 
-                        <span>próx 4h: risco elevado</span>
-
-                        <span class="variacao-kpi" style="color: rgb(154, 24, 194);">previsão</span>
+                        <span class="variacao-kpi">Na próxima hora</span>
                     </div>
                 </div>
 
                 <div class="linha">
                     <div class="grafico-estabilidade">
                         <div class="topo-grafico-estabilidade">
-                            <span>ESTABILIDADE OPERACIONAL</span>
+                            <span>ESTABILIDADE OPERACIONAL - ÚLTIMAS 7 HORAS</span>
                         </div>
 
                         <canvas id="graficoEstabilidade"></canvas>
@@ -201,17 +188,16 @@
                     <div id="previsao_falhas" class="tendencia-falhas">
                         <div class="topo-tendencia">
                             <img src="assets/imgs/painel/cerebro.png" alt="" width="40px" height="40px">
-                            <span>Previsão de Falhas</span>
+                            <span>PREVISÃO DE RISCOS</span>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="linha">
                     <div class="grafico-impacto">
                         <div class="topo-grafico-impacto">
                             <span>IMPACTO OPERACIONAL POR COMPONENTE</span>
-                            <span class="maior-impacto">Processos: CRÍTICO</span>
+                            <span class="maior-impacto" id="alertaImpactoCritico" style="display: none;">CRÍTICO</span>
                         </div>
 
                         <canvas id="graficoImpacto"></canvas>
@@ -239,10 +225,29 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
 
             </section>
+
+            <div class="popup-reatribuicao" id="modalReatribuicao">
+                <div class="modal-reatribuicao">
+                    <div class="topo-modal-reatribuicao">
+                        <div>
+                            <h2>Reatribuir analista</h2>
+                            <span id="textoServidorReatribuicao"></span>
+                        </div>
+                        <button onclick="fecharModalReatribuicao()" class="btn-fechar-reatribuicao">X</button>
+                    </div>
+
+                    <div id="listaAnalistasReatribuicao" class="lista-analistas-reatribuicao"></div>
+
+                    <div class="acoes-reatribuicao">
+                        <button onclick="fecharModalReatribuicao()" class="btn-cancelar-reatribuicao">Cancelar</button>
+                        <button onclick="salvarReatribuicao()" id="btnSalvarReatribuicao"
+                            class="btn-salvar-reatribuicao" disabled>Atribuir</button>
+                    </div>
+                </div>
+            </div>
 
         </main>
 
@@ -403,7 +408,148 @@
             }
         });
 
-        var periodo = '24h'
+    var periodo = '24h'
+    var hostnameReatribuicao = '';
+    var botaoReatribuicao = null;
+    var analistaSelecionado = null;
+    var nomeAnalistaSelecionado = '';
+    var totalAnalistasEmpresa = 0;
+    var idColunaAnalistasReatribuicao = '';
+
+    function mostrarAlertaSucesso(mensagem) {
+        alerta_reatribuicao_mensagem.innerHTML = mensagem;
+        alerta_reatribuicao.classList.add('ativo');
+
+        setTimeout(function () {
+            alerta_reatribuicao.classList.remove('ativo');
+        }, 2500);
+    }
+
+    function reatribuirAnalista(hostname) {
+        var botao = document.getElementById('btn_reatribuir_' + hostname);
+        var idColunaAnalistas = 'qtd_analistas_' + hostname;
+
+        botao.disabled = true;
+
+        fetch('/servidores/listarAnalistasDisponiveis/' + sessionStorage.ID_EMPRESA + '/' + hostname)
+            .then(resposta => resposta.json())
+            .then((analistas) => {
+
+                if (analistas.length == 0) {
+                    botao.innerHTML = `
+                        <img src="assets/imgs/painel/adicionar.png" alt="">
+                        Sem analistas
+                    `;
+                    return;
+                }
+
+                hostnameReatribuicao = hostname;
+                botaoReatribuicao = botao;
+                analistaSelecionado = null;
+                nomeAnalistaSelecionado = '';
+                idColunaAnalistasReatribuicao = idColunaAnalistas;
+
+                textoServidorReatribuicao.textContent = `Servidor: ${hostname}`;
+                btnSalvarReatribuicao.disabled = true;
+
+                listaAnalistasReatribuicao.innerHTML = analistas.map(analista => `
+                    <button onclick="selecionarAnalista(${analista.id_funcionario}, '${analista.nome_analista}', this)" class="item-analista-reatribuicao">
+                        <span>${analista.nome_analista}</span>
+                        <small>${analista.email}</small>
+                    </button>
+                `).join("");
+
+                modalReatribuicao.classList.add('ativo');
+            })
+            .catch(erro => {
+                console.log(`#ERRO: ${erro}`);
+                botao.disabled = false;
+                alert('Erro ao carregar analistas');
+            });
+    }
+
+    function selecionarAnalista(idAnalista, nomeAnalista, botao) {
+        analistaSelecionado = idAnalista;
+        nomeAnalistaSelecionado = nomeAnalista;
+
+        document.querySelectorAll('.item-analista-reatribuicao').forEach(botaoAnalista => {
+            botaoAnalista.classList.remove('selecionado');
+        });
+
+        botao.classList.add('selecionado');
+        btnSalvarReatribuicao.disabled = false;
+    }
+
+    function fecharModalReatribuicao() {
+        modalReatribuicao.classList.remove('ativo');
+        listaAnalistasReatribuicao.innerHTML = '';
+        analistaSelecionado = null;
+        nomeAnalistaSelecionado = '';
+        hostnameReatribuicao = '';
+        idColunaAnalistasReatribuicao = '';
+
+        if (botaoReatribuicao != null) {
+            botaoReatribuicao.disabled = false;
+        }
+
+        botaoReatribuicao = null;
+    }
+
+    function salvarReatribuicao() {
+        if (analistaSelecionado == null) {
+            alert('Selecione um analista');
+            return;
+        }
+
+        btnSalvarReatribuicao.disabled = true;
+
+        fetch('/servidores/reatribuirAnalista', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: sessionStorage.ID_EMPRESA,
+                hostnameServer: hostnameReatribuicao,
+                fkFuncionarioServer: analistaSelecionado
+            })
+        })
+            .then((resposta) => {
+
+                if (!resposta.ok) {
+                    throw 'Erro ao reatribuir analista';
+                }
+
+                var botaoAtual = botaoReatribuicao;
+                var colunaAnalistas = document.getElementById(idColunaAnalistasReatribuicao);
+                var novaQtdAnalistas = Number(colunaAnalistas.textContent) + 1;
+                colunaAnalistas.textContent = novaQtdAnalistas;
+                var mensagemSucesso = `Analista ${nomeAnalistaSelecionado} atribuído para ${hostnameReatribuicao}`;
+
+                fecharModalReatribuicao();
+
+                if (totalAnalistasEmpresa > 0 && novaQtdAnalistas >= totalAnalistasEmpresa) {
+                    botaoAtual.disabled = true;
+                    botaoAtual.innerHTML = `
+                        <img src="assets/imgs/painel/adicionar.png" alt="">
+                        Sem analistas
+                    `;
+                }
+
+                mostrarAlertaSucesso(mensagemSucesso);
+            })
+            .catch(erro => {
+                console.log(`#ERRO: ${erro}`);
+                btnSalvarReatribuicao.disabled = false;
+                alert('Erro ao reatribuir analista');
+            });
+    }
+
+    modalReatribuicao.addEventListener('click', function (evento) {
+        if (evento.target === modalReatribuicao) {
+            fecharModalReatribuicao();
+        }
+    });
 
         async function buscarDadosS3(periodo) {
 
@@ -421,11 +567,67 @@
                 const kpis = dados.kpis
                 console.log("KPIS: ", kpis);
 
-                document.getElementById('kpi_disponibilidade').textContent = kpis.disponibilidade_global;
-                document.getElementById('kpi_risco').textContent = Math.round(kpis.nivel_risco);
-                document.getElementById('kpi_criticos').textContent = kpis.incidentes_criticos;
-                document.getElementById('kpi_estabilidade').textContent = Math.round(kpis.estabilidade_operacional);
+            document.getElementById('kpi_disponibilidade').textContent = kpis.disponibilidade_global;
+            document.getElementById('kpi_risco').textContent = Math.round(kpis.nivel_risco);
+            document.getElementById('kpi_criticos').textContent = kpis.incidentes_criticos;
+            document.getElementById('kpi_estabilidade').textContent = Math.round(kpis.estabilidade_operacional);
+
+            if (kpis.tendencia_operacional == 'Caindo') {
+                document.getElementById('kpi_previsao').textContent = 'Melhorando';
+            } else if (kpis.tendencia_operacional == 'Subindo') {
+                document.getElementById('kpi_previsao').textContent = 'Piorando';
+            } else {
                 document.getElementById('kpi_previsao').textContent = kpis.tendencia_operacional;
+            }
+
+            var disponibilidade = Number(kpis.disponibilidade_global);
+            var risco = Number(kpis.nivel_risco);
+            var criticos = Number(kpis.incidentes_criticos);
+            var estabilidade = Number(kpis.estabilidade_operacional);
+
+            if (disponibilidade >= 99) {
+                document.getElementById('kpi_disponibilidade').style.color = 'green';
+                document.getElementById('card_disponibilidade').style.borderLeft = '4px solid green';
+            } else if (disponibilidade >= 95) {
+                document.getElementById('kpi_disponibilidade').style.color = 'orange';
+                document.getElementById('card_disponibilidade').style.borderLeft = '4px solid orange';
+            } else {
+                document.getElementById('kpi_disponibilidade').style.color = 'red';
+                document.getElementById('card_disponibilidade').style.borderLeft = '4px solid red';
+            }
+
+            if (risco <= 30) {
+                document.getElementById('kpi_risco').style.color = 'green';
+                document.getElementById('card_risco').style.borderLeft = '4px solid green';
+            } else if (risco <= 70) {
+                document.getElementById('kpi_risco').style.color = 'orange';
+                document.getElementById('card_risco').style.borderLeft = '4px solid orange';
+            } else {
+                document.getElementById('kpi_risco').style.color = 'red';
+                document.getElementById('card_risco').style.borderLeft = '4px solid red';
+            }
+
+            if (criticos == 0) {
+                document.getElementById('kpi_criticos').style.color = 'green';
+                document.getElementById('card_criticos').style.borderLeft = '4px solid green';
+            } else if (criticos < 10) {
+                document.getElementById('kpi_criticos').style.color = 'orange';
+                document.getElementById('card_criticos').style.borderLeft = '4px solid orange';
+            } else {
+                document.getElementById('kpi_criticos').style.color = 'red';
+                document.getElementById('card_criticos').style.borderLeft = '4px solid red';
+            }
+
+            if (estabilidade >= 85) {
+                document.getElementById('kpi_estabilidade').style.color = 'rgb(0, 140, 255)';
+                document.getElementById('card_estabilidade').style.borderLeft = '4px solid rgb(0, 140, 255)';
+            } else if (estabilidade >= 60) {
+                document.getElementById('kpi_estabilidade').style.color = 'orange';
+                document.getElementById('card_estabilidade').style.borderLeft = '4px solid orange';
+            } else {
+                document.getElementById('kpi_estabilidade').style.color = 'red';
+                document.getElementById('card_estabilidade').style.borderLeft = '4px solid red';
+            }
 
                 // Gráfico estabilidade
                 const dadosGraficoEstabilidade = dados.grafico_estabilidade;
@@ -452,9 +654,15 @@
                     Number(dadosImpacto.DISCO.valor)
                 ];
 
-                graficoImpacto.data.datasets[0].data = valoresImpacto;
-                graficoImpacto.data.datasets[0].backgroundColor = valoresImpacto.map(getCor);
-                graficoImpacto.update();
+            if (valoresImpacto[0] >= 80 || valoresImpacto[1] >= 80 || valoresImpacto[2] >= 80) {
+                alertaImpactoCritico.style.display = 'flex';
+            } else {
+                alertaImpactoCritico.style.display = 'none';
+            }
+
+            graficoImpacto.data.datasets[0].data = valoresImpacto;
+            graficoImpacto.data.datasets[0].backgroundColor = valoresImpacto.map(getCor);
+            graficoImpacto.update();
 
                 // Box predicão
                 const predicoes = dados.previsao_falhas;
@@ -481,29 +689,57 @@
                         </div>
                     `;
 
-                } else {
-                    predicoes.forEach(predicao => {
-
-                        container.innerHTML += `
-                            <div class="item-tendencia">
-                                <span class="metrica">
-                                    ${predicao.metrica} - ${predicao.nivel_previsao.toUpperCase()}
-                                </span>
-
-                                <span class="descricao">
-                                    ${predicao.mensagem}
-                                </span>
-                            </div>
-                        `;
-                    });
-                }
+            // Tabela necessidade de analistas
+            const tabela = document.getElementById('corpo_tabela_analistas');
 
                 // Tabela necessidade de analistas
                 const tabela = document.getElementById('corpo_tabela_analistas');
 
-                tabela.innerHTML = '';
+            var analistasPorServidor = {};
+            var carregouAnalistasServidor = false;
+            totalAnalistasEmpresa = 0;
 
-                const servidores = dados.info_servidores.sort((a, b) => b.incidentes - a.incidentes);
+            try {
+                var respostaAnalistasServidor = await fetch('/servidores/quantidadeAnalistasPorServidor/' + sessionStorage.ID_EMPRESA);
+                var listaAnalistasServidor = await respostaAnalistasServidor.json();
+
+                listaAnalistasServidor.forEach(item => {
+                    analistasPorServidor[item.hostname] = item.analistas;
+                    totalAnalistasEmpresa = item.total_analistas;
+                });
+
+                carregouAnalistasServidor = true;
+            } catch (erro) {
+                console.error('Erro ao buscar quantidade de analistas:', erro);
+            }
+
+            const servidores = dados.info_servidores.sort((a, b) => b.incidentes - a.incidentes);
+
+            servidores.forEach(servidor => {
+                var qtdAnalistas = analistasPorServidor[servidor.servidor] || 0;
+                var semAnalistasDisponiveis = carregouAnalistasServidor && (totalAnalistasEmpresa == 0 || qtdAnalistas >= totalAnalistasEmpresa);
+                var idColunaAnalistas = 'qtd_analistas_' + servidor.servidor;
+                var idBotaoReatribuir = 'btn_reatribuir_' + servidor.servidor;
+                var botaoReatribuir = '';
+
+                if (semAnalistasDisponiveis) {
+                    botaoReatribuir = `
+                        <button id="${idBotaoReatribuir}" class="btn-reatribuir" disabled>
+                            <img src="assets/imgs/painel/adicionar.png" alt="">
+                            Sem analistas
+                        </button>
+                    `;
+                } else {
+                    botaoReatribuir = `
+                        <button id="${idBotaoReatribuir}" onclick="reatribuirAnalista('${servidor.servidor}')" class="btn-reatribuir">
+                            <img src="assets/imgs/painel/adicionar.png" alt="">
+                            Reatribuir
+                        </button>
+                    `;
+                }
+
+                var situacao = 'NORMAL';
+                var classe = 'normal';
 
                 servidores.forEach(servidor => {
 
@@ -514,17 +750,16 @@
                         situacao = 'CRÍTICO';
                         classe = 'critico';
 
-                    } else if (servidor.incidentes >= 5) {
-                        situacao = 'ATENÇÃO';
-                        classe = 'atencao';
-                    }
+                        <td>${servidor.servidor}</td>
+                        <td>${servidor.incidentes}</td>
+                        <td id="${idColunaAnalistas}">${qtdAnalistas}</td>
 
                     tabela.innerHTML += `
                         <tr class="item-tabela">
 
-                            <td>${servidor.servidor}</td>
-                            <td>${servidor.incidentes}</td>
-                            <td>${servidor.analistas}</td>
+                        <td>
+                            ${botaoReatribuir}
+                        </td>
 
                             <td>
                                 <span class="status ${classe}">
@@ -576,4 +811,4 @@
 
     </script>
 
-    </html>
+</html>
