@@ -1,6 +1,6 @@
 var servidoresModel = require("../models/servidoresModel");
 
-const {S3Client, GetObjectCommand} = require("@aws-sdk/client-s3")
+const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3")
 
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
@@ -16,7 +16,7 @@ async function lerJson(key) {
 
     const command = new GetObjectCommand({
 
-        Bucket: "horus-monitoring-gustavo",
+        Bucket: process.env.AWS_BUCKET,
 
         Key: key
     });
@@ -32,12 +32,14 @@ async function capturarDados(req, res) {
 
     try {
 
-        const {fkEmpresa, hostname} = req.params;
+
+        const { empresa, mac_adress } = req.params;
 
         const [metricas] = await Promise.all([
 
             lerJson(
-                `client/empresa_${fkEmpresa}/${hostname}/metricas.json`
+
+                `client/${empresa}/${mac_adress}/metricas.json`
             ),
 
         ]);
@@ -98,7 +100,7 @@ function cadastrarServidor(req, res) {
     } else if (sistemaOperacional == undefined) {
         res.status(400).send("Sistema Operacional está undefined!");
     } else {
-        
+
         servidoresModel.cadastrarServidor(nome, ip, localizacao, sistemaOperacional, fkEmpresa, limiteCpu, unidadeMedidaCpu, limiteRam, unidadeMedidaRam, limiteDisco, unidadeMedidaDisco)
             .then(
                 (resultado => {
@@ -112,14 +114,14 @@ function cadastrarServidor(req, res) {
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
-                }) 
+                })
             );
     }
 }
 
 function exibirServidores(req, res) {
     var fkEmpresa = req.params.fkEmpresa
-    
+
     servidoresModel.exibirServidores(fkEmpresa)
         .then(
             (resultado => {
@@ -133,7 +135,7 @@ function exibirServidores(req, res) {
                     erro.sqlMessage
                 );
                 res.status(500).json(erro.sqlMessage);
-            }) 
+            })
         );
 }
 
@@ -163,7 +165,7 @@ function listarServidores(req, res) {
 
 function deletarServidor(req, res) {
     var id = req.params.id
-    
+
     servidoresModel.deletarServidor(id)
         .then(
             (resultado => {
@@ -177,7 +179,7 @@ function deletarServidor(req, res) {
                     erro.sqlMessage
                 );
                 res.status(500).json(erro.sqlMessage);
-            }) 
+            })
         );
 }
 
@@ -199,7 +201,7 @@ function cadastrarComponente(req, res) {
     } else if (componenteLimite == undefined) {
         res.status(400).send("Limite está undefined!");
     } else {
-        
+
         servidoresModel.cadastrarComponente(fkServidor, fkComponente, unidadeMedida, componenteLimite)
             .then(
                 (resultado => {
@@ -213,7 +215,7 @@ function cadastrarComponente(req, res) {
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
-                }) 
+                })
             );
     }
 }
@@ -232,7 +234,7 @@ function abrirDetalhes(req, res) {
             res.json({
                 hostname: primeiraLinha.hostname,
                 endereco_ip: primeiraLinha.endereco_ip,
-                fk_empresa:  primeiraLinha.fk_empresa,
+                fk_empresa: primeiraLinha.fk_empresa,
                 localizacao: primeiraLinha.localizacao,
                 status_servidor: primeiraLinha.status_servidor
             });
@@ -245,7 +247,7 @@ function abrirDetalhes(req, res) {
 
 function deletarComponente(req, res) {
     var id = req.params.id
-    
+
     servidoresModel.deletarComponente(id)
         .then(
             (resultado => {
@@ -259,7 +261,7 @@ function deletarComponente(req, res) {
                     erro.sqlMessage
                 );
                 res.status(500).json(erro.sqlMessage);
-            }) 
+            })
         );
 }
 
@@ -273,6 +275,25 @@ function listarServidoresComAcesso(req, res) {
             console.log(erro);
             res.status(500).json(erro.sqlMessage);
         });
+
+}
+
+
+function quantidadeAnalistasPorServidor(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+
+    servidoresModel.quantidadeAnalistasPorServidor(fkEmpresa)
+        .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao buscar quantidade de analistas!\nErro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        });
 }
 
 function atualizarAcessos(req, res) {
@@ -284,6 +305,52 @@ function atualizarAcessos(req, res) {
         .catch(err => res.status(500).json(err));
 }
 
+
+function listarAnalistasDisponiveis(req, res) {
+    var fkEmpresa = req.params.fkEmpresa;
+    var hostname = req.params.hostname;
+
+    servidoresModel.listarAnalistasDisponiveis(fkEmpresa, hostname)
+        .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao listar analistas disponíveis!\nErro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function reatribuirAnalista(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var hostname = req.body.hostnameServer;
+    var fkFuncionario = req.body.fkFuncionarioServer;
+
+    if (fkEmpresa == undefined) {
+        res.status(400).send("fkEmpresa está undefined!");
+    } else if (hostname == undefined) {
+        res.status(400).send("Hostname está undefined!");
+    } else if (fkFuncionario == undefined) {
+        res.status(400).send("fkFuncionario está undefined!");
+    } else {
+        servidoresModel.reatribuirAnalista(fkEmpresa, hostname, fkFuncionario)
+            .then(() => {
+                res.sendStatus(200);
+            })
+            .catch((erro) => {
+                console.log(erro);
+                console.log(
+                    "Houve um erro ao reatribuir analista!Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
 module.exports = {
     cadastrarServidor,
     exibirServidores,
@@ -293,7 +360,10 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
+    quantidadeAnalistasPorServidor,
+    listarAnalistasDisponiveis,
     atualizarAcessos,
+    reatribuirAnalista,
     lerJson,
     capturarDados
 }
