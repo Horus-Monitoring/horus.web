@@ -1,6 +1,6 @@
 // npm i @aws-sdk/client-s3
 
-const {S3Client,GetObjectCommand} = require("@aws-sdk/client-s3");
+const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
@@ -13,36 +13,54 @@ const s3 = new S3Client({
 
 async function lerJson(key) {
 
-    const command = new GetObjectCommand({
+     try{ 
+        const command = new GetObjectCommand({
 
-        Bucket: "horus-monitoring-leticia",
+            Bucket: process.env.AWS_BUCKET,
 
-        Key: key
-    });
+            Key:
+                key
+        });
 
     const data = await s3.send(command);
 
     const jsonString = await data.Body.transformToString();
 
+    const jsonCorrigido =
+        jsonString.replace(/\bNaN\b/g, "null");
+
+    return JSON.parse(jsonCorrigido);
+
     return JSON.parse(jsonString);
+
+    } catch (erro) {
+
+        console.log(erro);
+
+        res.status(500).json({
+            erro: "Erro ao em lerJson"
+        });
+    }
 }
 
 async function capturarDados(req, res) {
+
+    const mac =
+        req.params.mac_address.toLowerCase();
+
+    const id_empresa =
+        req.params.id_empresa;
 
     try {
 
         const [processos, criticos] = await Promise.all([
 
-            // lerJson(
-            //     "client/kpis/process_raw_kpis.json"
-            // ),
-
             lerJson(
-                "client/process_raw_kpis.json"
+                `client/empresa_${id_empresa}/${mac}/process_raw_kpis.json`
             ),
 
             lerJson(
-                "client/raw_criticos_4h.json"
+                `client/empresa_${id_empresa}/${mac}/raw_criticos_4h.json`
             )
 
         ]);
@@ -52,28 +70,15 @@ async function capturarDados(req, res) {
             criticos
         });
 
-        console.log(criticos)
-
-        //console.log("KPIS:");
-        //console.log(kpis);
-
-        //console.log("PROCESSOS:");
-        //console.log(processos);
-
     } catch (erro) {
 
-        console.error(
-            "ERRO AWS:",
-            erro
-        );
+        console.error("ERRO AWS:", erro);
 
         res.status(500).json({
-            erro:
-                "Erro ao buscar dashboard"
+            erro: "Erro ao buscar dashboard"
         });
     }
 }
-
 module.exports = {
     capturarDados
 };

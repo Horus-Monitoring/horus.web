@@ -22,8 +22,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/script.js"></script>
-    <link rel="stylesheet" href="style/dash_usuarios.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style/dash_usuarios.css">
+    
 </head>
 
 <body>
@@ -40,12 +41,7 @@
                 <a href="painel.html" class="item-menu">
                     <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
                 </a>
-                <a href="dash_analista.html" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </a>
-                <a href="telaIncidente.html" class="item-menu">
-                    <img src="./assets/imgs/painel/alerta.png" alt="">Incidentes
-                </a>
+                
 
                 <div class="categoria">Administração</div>
                 <a href="dash_usuarios.html" class="item-menu selecionado">
@@ -55,7 +51,27 @@
                     <img src="./assets/imgs/painel/cadastrar-servidor.png" alt="">Cadastrar servidor
                 </a>
 
-                <button>Gerar Relatório em PDF</button>
+                <div class="categoria">Agentes</div>
+
+            <div onclick="baixarAgente()" class="item-menu">
+                <img src="./assets/imgs/painel/agente.png" style="height: 19px; width: 19px;" alt="">
+                Instalar agente
+            </div>
+
+            <div class="categoria" style="padding-bottom: 10px !important;">Gestão de Incidentes</div>
+            <div>
+                <a href="https://horusmonitoring.atlassian.net/jira/software/projects/KAN/list?jql=project%20%3D%20KAN%20ORDER%20BY%20created%20DESC">
+                    <img src="assets/imgs/painel/jira.png" alt="" style="width: 25% !important;">
+                </a>
+                
+            </div>
+            <div>
+                <a href="https://app.slack.com/client/T0AQZ02KUJE/C0AQWUMQJBG?teamClassificationType=work">
+                    <img src="assets/imgs/painel/slack.png" alt="" style="width: 35% !important;">
+                </a>
+                
+            </div>
+
             </nav>
 
             <div onclick="limparSessionStorage()" class="sair">
@@ -67,17 +83,29 @@
         <main class="main">
 
             <header class="header">
-                <div class="hamburguer" id="hamburguer">
-                    <img src="assets/imgs/painel/menu-sand.png" alt="">
-                </div>
-                <span class="titulo"><b>Gerenciamento de Usuários</b></span>
 
-                <div class="usuario">
-                    <div>
-                        <p  id="nome_usuario"></p>
-                        <p id="funcao_usuario" class="cargo"></p>
+                <div class="header-topo">
+                    <div class="header-esquerda">
+                        <div class="hamburguer" id="hamburguer">
+                            <img src="./assets/imgs/painel/hamburguer.png" alt="Menu">
+                        </div>
+
+                         <div class="header-servidor">
+                            <span class="breadcrumb">
+                                Gestão de Usuários
+                            </span>
+
+                        </div>
+
                     </div>
-                    <span id="inicial_usuario"></span>
+
+                        <div class="usuario">
+                        <div>
+                            <p id="nome_usuario"></p>
+                            <p id="funcao_usuario" class="cargo"></p>
+                        </div>
+                        <span id="inicial_usuario"></span>
+                    </div>
                 </div>
             </header>
 

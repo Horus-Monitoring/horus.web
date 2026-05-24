@@ -12,18 +12,18 @@ function cadastrarServidor(nome, ip, localizacao, sistemaOperacional, fkEmpresa,
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
     return database.executar(instrucaoSql)
-    .then ((resultado) => {
-        var idServidor = resultado.insertId;
+        .then((resultado) => {
+            var idServidor = resultado.insertId;
 
-        var componentesSql = `
+            var componentesSql = `
             INSERT INTO servidor_componente (fk_servidor, fk_componente, unidade_medida, limite) VALUES
             ('${idServidor}', '1',  '${unidadeMedidaCpu}',  '${limiteCpu}'),
             ('${idServidor}', '2',  '${unidadeMedidaRam}',  '${limiteRam}'),
             ('${idServidor}', '3','${unidadeMedidaDisco}','${limiteDisco}');
         `;
 
-        return database.executar(componentesSql)
-    });
+            return database.executar(componentesSql)
+        });
 }
 
 function exibirServidores(fkEmpresa) {
@@ -53,17 +53,26 @@ function exibirServidores(fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function listarServidores(fkEmpresa) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkEmpresa);
+function listarServidores(fkEmpresa, servidores) {
+
+    console.log("SERVIDORES:", servidores);
+
+    const listaMacs = servidores
+        .map(mac => `'${mac}'`)
+        .join(",");
 
     var instrucaoSql = `
         SELECT 
-        id_servidor, 
-        hostname 
+            id_servidor, 
+            hostname,
+            mac_address 
         FROM servidor 
-        WHERE fk_empresa = ${fkEmpresa};
+        WHERE fk_empresa = ${fkEmpresa}
+            AND mac_address IN (${listaMacs});
     `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+
     return database.executar(instrucaoSql);
 }
 
@@ -103,8 +112,8 @@ function cadastrarComponente(fkServidor, fkComponente, unidadeMedida, componente
     return database.executar(instrucaoSql);
 }
 
-function abrirDetalhes(fkServidor) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor);
+function abrirDetalhes(macAddress) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", macAddress);
 
     var instrucaoSql = `
         SELECT *,
@@ -113,7 +122,7 @@ function abrirDetalhes(fkServidor) {
         FROM servidor_componente 
         JOIN componente ON fk_componente = id_componente
         JOIN servidor ON fk_servidor = id_servidor
-        WHERE fk_servidor = '${fkServidor}';
+        WHERE servidor.mac_address = '${macAddress}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -133,6 +142,8 @@ function listarServidoresComAcesso(fkEmpresa, fkFuncionario) {
         SELECT 
             s.id_servidor,
             s.hostname,
+            s.status_servidor,
+            s.mac_address,
             CASE 
                 WHEN a.fk_servidor IS NOT NULL THEN 1
                 ELSE 0
@@ -147,11 +158,81 @@ function listarServidoresComAcesso(fkEmpresa, fkFuncionario) {
     return database.executar(instrucaoSql);
 }
 
+function quantidadeAnalistasPorServidor(fkEmpresa) {
+    var instrucaoSql = `
+        SELECT
+            s.hostname,
+            COUNT(f.id_funcionario) AS analistas,
+            (
+                SELECT COUNT(*)
+                FROM funcionario
+                WHERE fk_empresa = ${fkEmpresa}
+                    AND funcao = 'Analista'
+            ) AS total_analistas
+        FROM servidor s
+        LEFT JOIN acesso_servidor a
+            ON a.fk_servidor = s.id_servidor
+        LEFT JOIN funcionario f
+            ON f.id_funcionario = a.fk_funcionario
+            AND f.funcao = 'Analista'
+        WHERE s.fk_empresa = ${fkEmpresa}
+        GROUP BY s.id_servidor, s.hostname;
+    `;
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
 function limparAcessos(fkFuncionario) {
     return database.executar(`
         DELETE FROM acesso_servidor 
         WHERE fk_funcionario = ${fkFuncionario}
     `);
+}
+
+
+function listarAnalistasDisponiveis(fkEmpresa, hostname) {
+    var instrucaoSql = `
+        SELECT
+            f.id_funcionario,
+            f.nome AS nome_analista,
+            f.email
+        FROM funcionario f
+        JOIN servidor s
+            ON s.hostname = '${hostname}'
+            AND s.fk_empresa = ${fkEmpresa}
+        LEFT JOIN acesso_servidor a
+            ON a.fk_funcionario = f.id_funcionario
+            AND a.fk_servidor = s.id_servidor
+        WHERE f.fk_empresa = ${fkEmpresa}
+            AND f.funcao = 'Analista'
+            AND a.fk_servidor IS NULL
+        ORDER BY f.nome;
+    `;
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function reatribuirAnalista(fkEmpresa, hostname, fkFuncionario) {
+    var instrucaoSql = `
+        INSERT INTO acesso_servidor (fk_funcionario, fk_servidor)
+        VALUES (
+            ${fkFuncionario},
+            (
+                SELECT id_servidor
+                FROM servidor
+                WHERE hostname = '${hostname}'
+                    AND fk_empresa = ${fkEmpresa}
+            )
+        );
+    `;
+
+    console.log("Executando SQL:\n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function inserirAcessos(fkFuncionario, servidores) {
@@ -174,6 +255,9 @@ module.exports = {
     deletarServidor,
     deletarComponente,
     listarServidoresComAcesso,
+    quantidadeAnalistasPorServidor,
+    listarAnalistasDisponiveis,
     limparAcessos,
-    inserirAcessos
+    inserirAcessos,
+    reatribuirAnalista
 };
