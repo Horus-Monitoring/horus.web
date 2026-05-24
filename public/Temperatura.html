@@ -547,18 +547,20 @@
 
     // ONLOAD
 
-    window.onload = () => {
+    window.onload = async () => {
 
-        exibirUsuarioAtivo();
+    exibirUsuarioAtivo();
 
-        carregarTemperatura();
+    await listarServidores();
 
-        document
-            .getElementById("filtroPeriodo")
-            .addEventListener(
-                "change",
-                carregarTemperatura
-            );
+    carregarTemperatura();
+
+    document
+        .getElementById("filtroPeriodo")
+        .addEventListener(
+            "change",
+            carregarTemperatura
+        );
 
         document
             .getElementById("filtroLatencia")
@@ -724,19 +726,133 @@
         });
     }
 
+    async function listarServidores() {
+
+    const fkEmpresa =
+        sessionStorage.ID_EMPRESA;
+
+    const servidores =
+        JSON.parse(
+            sessionStorage.ACESSO_SERVIDORES
+        );
+
+    try {
+
+        const resposta =
+            await fetch(
+                `/servidores/listarServidores`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        fkEmpresaServer:
+                            fkEmpresa,
+
+                        servidoresServer:
+                            servidores
+                    })
+                }
+            );
+
+        const lista =
+            await resposta.json();
+
+        const select =
+            document.getElementById(
+                "select_servidor"
+            );
+
+        select.innerHTML =
+            lista.map(servidor => `
+
+                <option
+                    value="${servidor.mac_address}"
+                >
+                    ${servidor.hostname}
+                </option>
+
+            `).join("");
+
+        // seleciona primeiro servidor automaticamente
+
+        if (lista.length > 0) {
+
+            sessionStorage.MAC_SERVIDOR =
+                lista[0].mac_address;
+
+            document.getElementById(
+                "nomeServidor"
+            ).textContent =
+                lista[0].hostname;
+        }
+
+        // troca servidor
+
+        select.addEventListener(
+            "change",
+            function () {
+
+                sessionStorage.MAC_SERVIDOR =
+                    this.value;
+
+                document.getElementById(
+                    "nomeServidor"
+                ).textContent =
+                    this.options[
+                        this.selectedIndex
+                    ].text;
+
+                carregarTemperatura();
+            }
+        );
+
+    } catch (erro) {
+
+        console.log(
+            "Erro ao listar servidores:",
+            erro
+        );
+    }
+}
     // API
 
     async function carregarTemperatura() {
+        
+
+        const empresa =
+            sessionStorage.ID_EMPRESA;
+
+        const mac =
+            sessionStorage.MAC_SERVIDOR;
+
+        const periodo =
+            document.getElementById("filtroPeriodo").value;
+
+            console.log({
+            empresa,
+            mac,
+            periodo
+        });
+
 
         try {
 
-            const resposta =
-                await fetch("/temperatura/dados");
+             const resposta =
+            await fetch(
+                `/temperatura/${empresa}/${mac}/${periodo}`
+            );
 
             if (!resposta.ok) {
 
+                const erroResposta = await resposta.text();
+
                 throw new Error(
-                    "Erro ao buscar dados"
+                    `Erro ao buscar dados: ${erroResposta}`
                 );
             }
 
@@ -1095,23 +1211,19 @@
         temperaturas.forEach(
             (temp, index) => {
 
-                let classe =
-                    "normal";
+                let classe = "normal";
 
                 if (temp >= 85) {
 
-                    classe =
-                        "crítico";
+                    classe = "critical";
 
                 } else if (temp >= 75) {
 
-                    classe =
-                        "médio";
+                    classe = "medium";
 
                 } else if (temp >= 65) {
 
-                    classe =
-                        "alerta";
+                    classe = "alert";
                 }
 
                 heatmap.innerHTML += `
