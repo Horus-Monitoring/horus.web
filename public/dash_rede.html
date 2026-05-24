@@ -786,6 +786,69 @@ function renderizarGraficoTransferencia() {
     });
 }
 
+function renderizarGraficoLatencia() {
+
+    const dados =
+        dashboards[filtros.latenciaComponentes];
+
+    const ctx =
+        document.getElementById("graficoLatencia");
+
+    if (graficoLatencia) {
+        graficoLatencia.destroy();
+    }
+
+    graficoLatencia = new Chart(ctx, {
+
+        type: "bar",
+
+        data: {
+
+            labels: Object.keys(
+                dados.grafico_latencia_componentes
+            ),
+
+            datasets: [{
+
+                label: "Latência (ms)",
+
+                data: Object.values(
+                    dados.grafico_latencia_componentes
+                ),
+
+                backgroundColor: [
+                    "#05056B",
+                    "#0A4A96",
+                    "#12B7E5",
+                    "#2F80ED",
+                    "#56CCF2"
+                ],
+
+                borderRadius: 8
+            }]
+        },
+
+        options: {
+
+            indexAxis: "y",
+
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
 function renderizarGraficoBanda() {
 
     const dados =
@@ -1043,6 +1106,7 @@ function renderizarPerdaPacotesServico() {
         alertasAtivos = dados;
 
         renderizarAlertas();
+        atualizarStatus();
 
     } catch (erro) {
 
@@ -1103,6 +1167,36 @@ function renderizarAlertas() {
 
         icone.src =
             "assets/imgs/rede/alerta-lar.png";
+    }
+}
+
+function atualizarStatus() {
+
+    const dot = document.querySelector(".status-dot");
+
+    if (!dot) return;
+
+    dot.classList.remove("verde", "amarelo", "vermelho");
+
+    // sem alertas = verde
+    if (alertasAtivos.length === 0) {
+
+        dot.classList.add("verde");
+        return;
+    }
+
+    // verifica se existe alerta crítico
+    const possuiCritico = alertasAtivos.some(
+        alerta => alerta.criticidade === "critico"
+    );
+
+    if (possuiCritico) {
+
+        dot.classList.add("vermelho");
+
+    } else {
+
+        dot.classList.add("amarelo");
     }
 }
 
