@@ -33,13 +33,13 @@ async function capturarDados(req, res) {
     try {
 
 
-        const { empresa, mac_adress } = req.params;
+        const { fkEmpresa, macAddress } = req.params;
 
         const [metricas] = await Promise.all([
 
             lerJson(
 
-                `client/${empresa}/${mac_adress}/metricas.json`
+                `client/empresa_${fkEmpresa}/${macAddress}/metricas.json`   
             ),
 
         ]);
@@ -221,9 +221,9 @@ function cadastrarComponente(req, res) {
 }
 
 function abrirDetalhes(req, res) {
-    var fkServidor = req.params.id;
+    var macAddress = req.params.macAddress;
 
-    servidoresModel.abrirDetalhes(fkServidor)
+    servidoresModel.abrirDetalhes(macAddress)
         .then((resultado) => {
             if (!resultado || resultado.length === 0) {
                 return res.status(404).json({ erro: 'Servidor não encontrado' });
@@ -232,12 +232,13 @@ function abrirDetalhes(req, res) {
             const primeiraLinha = resultado[0];
 
             res.json({
-                hostname: primeiraLinha.hostname,
-                endereco_ip: primeiraLinha.endereco_ip,
-                fk_empresa: primeiraLinha.fk_empresa,
-                localizacao: primeiraLinha.localizacao,
-                status_servidor: primeiraLinha.status_servidor
-            });
+            hostname: primeiraLinha.hostname,
+            endereco_ip: primeiraLinha.endereco_ip,
+            fk_empresa: primeiraLinha.fk_empresa,
+            localizacao: primeiraLinha.localizacao,
+            status_servidor: primeiraLinha.status_servidor,
+            mac_address: primeiraLinha.mac_address
+        });
         })
         .catch((erro) => {
             console.log(erro);

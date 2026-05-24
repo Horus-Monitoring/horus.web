@@ -112,8 +112,8 @@ function cadastrarComponente(fkServidor, fkComponente, unidadeMedida, componente
     return database.executar(instrucaoSql);
 }
 
-function abrirDetalhes(fkServidor) {
-    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkServidor);
+function abrirDetalhes(macAddress) {
+    console.log("ACESSEI O MODEL SERVIDORES \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", macAddress);
 
     var instrucaoSql = `
         SELECT *,
@@ -122,7 +122,7 @@ function abrirDetalhes(fkServidor) {
         FROM servidor_componente 
         JOIN componente ON fk_componente = id_componente
         JOIN servidor ON fk_servidor = id_servidor
-        WHERE fk_servidor = '${fkServidor}';
+        WHERE servidor.mac_address = '${macAddress}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

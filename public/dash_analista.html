@@ -126,7 +126,7 @@
                                 <div class="select-status">
                                     <span class="status-dot verde" id="statusDot"></span>
                                     <select id="select_servidor"></select>
-                                </div>F
+                                </div>
 
                                 <div class="alertas">
                                     <img src="assets/imgs/rede/alerta-lar.png" alt=""
@@ -644,9 +644,9 @@
         }
 
 
-        async function capturarDados(empresa, hostname) {
+        async function capturarDados(empresa, macAddress) {
             try {
-                const resposta = await fetch(`/servidores/capturarDados/${empresa}/${hostname}`, {
+                const resposta = await fetch(`/servidores/capturarDados/${empresa}/${macAddress}`, {
                     cache: "no-store"
                 });
 
@@ -816,7 +816,7 @@
 
         }
 
-        function iniciarCaptura(empresa, hostname) {
+        function iniciarCaptura(empresa, macAddress) {
             if (intervaloCaptura) clearInterval(intervaloCaptura);
 
             ultimoDataHoraPlotado = null;
@@ -824,8 +824,8 @@
             destruirGraficos();
 
 
-            capturarDados(empresa, hostname);
-            intervaloCaptura = setInterval(() => capturarDados(empresa, hostname), 10000);
+            capturarDados(empresa, macAddress);
+            intervaloCaptura = setInterval(() => capturarDados(empresa, macAddress), 10000);
         }
 
 
@@ -849,10 +849,10 @@
 
                 servidoresComAcesso.forEach((servidor, index) => {
                     const option = document.createElement("option");
-                    option.value = servidor.id_servidor;
+                    option.value = servidor.mac_address;
                     option.textContent = servidor.hostname;
                     select.appendChild(option);
-                    if (index === 0) servidorAtual = servidor.id_servidor;
+                    if (index === 0) servidorAtual = servidor.mac_address;
                 });
 
                 select.value = servidorAtual;
@@ -911,11 +911,11 @@
 
 
 
-        async function carregarDashboardServidor(idServidor) {
+        async function carregarDashboardServidor(macAddress) {
             try {
-                servidorAtual = idServidor;
+                servidorAtual = macAddress;
 
-                const resposta = await fetch(`/servidores/abrirDetalhes/${idServidor}`);
+                const resposta = await fetch(`/servidores/abrirDetalhes/${macAddress}`);
                 const dadosServidor = await resposta.json();
 
                 document.getElementById("nomeServidor").innerText = dadosServidor.hostname;
@@ -928,12 +928,21 @@
                 const localEl = document.getElementById("nomeLocal");
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
-                iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
-                await carregarGraficoChamados(dadosServidor.hostname);
+                iniciarCaptura(
+                    dadosServidor.fk_empresa,
+                    dadosServidor.mac_address
+                );;
+                await carregarGraficoChamados(
+                    dadosServidor.hostname
+                );
 
 
                 if (typeof renderChart === 'function') {
-                    await renderChart("24h", dadosServidor.hostname, dadosServidor.fk_empresa);
+                    await renderChart(
+                        "24h",
+                        dadosServidor.mac_address,
+                        dadosServidor.fk_empresa
+                    );
                 }
 
             } catch (erro) {

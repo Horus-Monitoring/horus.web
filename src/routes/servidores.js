@@ -25,7 +25,7 @@ router.post("/cadastrarComponente", function (req, res) {
     servidoresController.cadastrarComponente(req, res);
 })
 
-router.get("/abrirDetalhes/:id", function (req, res) {
+router.get("/abrirDetalhes/:macAddress", function (req, res) {
     servidoresController.abrirDetalhes(req, res);
 })
 
@@ -53,7 +53,7 @@ router.post("/reatribuirAnalista", function (req, res) {
     servidoresController.reatribuirAnalista(req, res);
 });
 
-router.get("/capturarDados/:fkEmpresa/:hostname", function(req, res){
+router.get("/capturarDados/:fkEmpresa/:macAddress", function(req, res){
     servidoresController.capturarDados(req, res)
 })
 
