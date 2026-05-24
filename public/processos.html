@@ -414,7 +414,7 @@
 
             try {
 
-                const resposta = await fetch(`/processos/capturarDados/${id_empresa}/${encodeURIComponent(mac_address)}`);
+                const resposta = await fetch(`/processos/capturarDados/${id_empresa}/${mac_address}`);
 
 
                 if (!resposta.ok) {
