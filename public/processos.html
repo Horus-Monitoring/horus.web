@@ -1032,6 +1032,9 @@
 
         function carregarTabela(statusFiltro = "todos", textoPesquisa = "") {
 
+                const processosFiltrados = obterProcessosFiltrados();
+                const tbody = document.getElementById("corpoTabela");
+                
                 if (colunaOrdenacao) {
 
                     processosFiltrados.sort((a, b) => {
