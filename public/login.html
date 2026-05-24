@@ -146,7 +146,8 @@
 
                     console.log(listaMacs);
 
-                    window.location = "dash_analista.html";
+                    if (sessionStorage.FUNCAO_USUARIO == "Gestor") window.location = "painel.html";
+                    else window.location = "dash_analista.html";
 
                 })
                 .catch(function (resposta) {
