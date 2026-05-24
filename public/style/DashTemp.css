@@ -1,6 +1,5 @@
-/* =========================================================
-   CONTEÚDO
-========================================================= */
+
+/* CONTEÚDO */
 
 .conteudo{
     padding:20px;
@@ -8,10 +7,52 @@
     min-height:calc(100vh - 60px);
 }
 
-/* =========================================================
-   CARDS KPI
-========================================================= */
+/* MENU LATERAL */
 
+.lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 10000;
+}
+
+.lateral.ativo {
+    transform: translateX(0);
+}
+
+.lateral.ativo{
+    left:0;
+}
+
+.modal-lateral{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.35);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:0.3s;
+
+    z-index:9999;
+}
+
+.modal-lateral.ativo{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+/* CARDS KPI */ 
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -26,12 +67,15 @@
     box-shadow:0 2px 8px rgba(0,0,0,0.05);
     transition:0.2s;
     position:relative;
-    overflow:visible;
+    overflow:visible !important;
+    z-index:1;
 }
 
 .card:hover{
     transform:translateY(-2px);
 }
+
+/* TITULOS */
 
 .card h3{
     color:#64748b;
@@ -44,9 +88,7 @@
     line-height:1.4;
 }
 
-/* =========================================================
-   KPI VALUE
-========================================================= */
+/* KPI VALUE */
 
 .big{
     font-size:32px;
@@ -56,9 +98,7 @@
     line-height:1;
 }
 
-/* =========================================================
-   STATUS TEXT
-========================================================= */
+/* STATUS TEXT */
 
 .green{
     color:#10b981;
@@ -72,9 +112,7 @@
     font-weight:600;
 }
 
-/* =========================================================
-   STATUS BADGE
-========================================================= */
+/* STATUS BADGE */
 
 .status{
     display:inline-flex;
@@ -89,13 +127,13 @@
     margin-top:10px;
 }
 
-/* =========================================================
-   TOOLTIP INFO
-========================================================= */
+/* TOOLTIP INFO */
 
 .info-tooltip{
 
     position:relative;
+
+    z-index:9999;
 
     display:inline-flex;
 
@@ -128,19 +166,19 @@
     transform:scale(1.08);
 }
 
-/* =========================================================
-   TOOLTIP BOX
-========================================================= */
+/* TOOLTIP BOX */
 
 .tooltip-box{
 
     position:absolute;
 
-    top:30px;
+    top:32px;
 
     right:0;
 
     width:260px;
+
+    max-width:260px;
 
     padding:14px;
 
@@ -166,7 +204,15 @@
 
     transition:0.2s;
 
-    z-index:9999;
+    z-index:999999 !important;
+
+    overflow-wrap:break-word;
+
+    word-break:break-word;
+
+    white-space:normal;
+
+    pointer-events:auto;
 }
 
 .tooltip-box.ativo{
@@ -178,9 +224,7 @@
     transform:translateY(0);
 }
 
-/* =========================================================
-   TOOLTIP STATUS COLORS
-========================================================= */
+/* TOOLTIP STATUS COLORS */
 
 .tooltip-normal{
     border-left:4px solid #10b981;
@@ -194,9 +238,7 @@
     border-left:4px solid #ef4444;
 }
 
-/* =========================================================
-   GRID PRINCIPAL
-========================================================= */
+/* GRID PRINCIPAL */
 
 .grid{
     display:grid;
@@ -206,23 +248,28 @@
     align-items:stretch;
 }
 
-/* =========================================================
-   CARDS DOS GRÁFICOS
-========================================================= */
+/* CARDS DOS GRÁFICOS */
 
 .chart-card,
 .heatmap-card,
 .bottom-chart{
+
     background:white;
+
     border-radius:18px;
+
     padding:20px;
+
     box-shadow:0 2px 8px rgba(0,0,0,0.05);
-    overflow:visible;
+
+    overflow:visible !important;
+
+    position:relative;
+
+    z-index:1;
 }
 
-/* =========================================================
-   HEADER DOS GRÁFICOS
-========================================================= */
+/* HEADER DOS GRÁFICOS */
 
 .chart-header{
     margin-bottom:20px;
@@ -244,18 +291,50 @@
     color:#64748b;
 }
 
-/* =========================================================
-   CHART.JS
-========================================================= */
+/* SELECT FILTRO */
+
+#filtroPeriodo{
+
+    border:1px solid #dbe2ea;
+
+    border-radius:10px;
+
+    padding:8px 12px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    background:white;
+
+    color:#111827;
+
+    outline:none;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+#filtroPeriodo:hover{
+    border-color:#2563eb;
+}
+
+#filtroPeriodo:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* CHART.JS */
 
 canvas{
     width:100% !important;
     height:300px !important;
 }
 
-/* =========================================================
-   HEATMAP
-========================================================= */
+/* HEATMAP */
 
 .heatmap{
     display:grid;
@@ -263,18 +342,22 @@ canvas{
     gap:12px;
 }
 
-/* =========================================================
-   CORE CARD
-========================================================= */
+/* CORE CARD */
 
 .core{
+
     border-radius:16px;
+
     padding:18px;
+
     min-height:100px;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 
     font-weight:700;
@@ -297,9 +380,7 @@ canvas{
     font-size:24px;
 }
 
-/* =========================================================
-   CORES
-========================================================= */
+/* CORES */
 
 .normal{
     background:#e0f7ee;
@@ -321,9 +402,7 @@ canvas{
     color:#ef4444;
 }
 
-/* =========================================================
-   LEGENDA HEATMAP
-========================================================= */
+/* LEGENDA HEATMAP */
 
 .heatmap-legend{
     display:flex;
@@ -365,9 +444,7 @@ canvas{
     background:#ef4444;
 }
 
-/* =========================================================
-   ÚLTIMA ATUALIZAÇÃO
-========================================================= */
+/* ÚLTIMA ATUALIZAÇÃO */
 
 .ultima-atualizacao{
 
@@ -382,9 +459,7 @@ canvas{
     font-family:'Inter', sans-serif;
 }
 
-/* =========================================================
-   STATUS DOT
-========================================================= */
+/* STATUS DOT */
 
 .status-dot{
     width:10px;
@@ -405,9 +480,62 @@ canvas{
     background:#ef4444;
 }
 
-/* =========================================================
-   RESPONSIVO
-========================================================= */
+/* HEADER */
+
+.header-topo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+}
+
+.header-esquerda{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.header-nav-scroll{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    border-top:1px solid #e5e7eb;
+}
+
+.header-nav{
+
+    display:flex;
+
+    gap:30px;
+
+    padding:15px 20px;
+}
+
+.header-nav a{
+
+    text-decoration:none;
+
+    color:#64748b;
+
+    font-weight:600;
+
+    white-space:nowrap;
+}
+
+.header-nav a.ativo{
+    color:#2563eb;
+}
+
+/* RESPONSIVO */
 
 @media(max-width:1400px){
 
@@ -447,6 +575,37 @@ canvas{
 
     .tooltip-box{
         width:220px;
+        right:-50px;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .header-topo{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+    }
+
+    .usuario{
+        align-self:flex-end;
+    }
+
+    .chart-header > div{
+
+        flex-direction:column;
+
+        align-items:flex-start !important;
+
+        gap:12px;
+    }
+
+    #filtroPeriodo{
+        width:100%;
     }
 }
 
@@ -472,7 +631,13 @@ canvas{
     }
 
     .tooltip-box{
-        width:200px;
+
+        width:190px;
+
         right:-40px;
+    }
+
+    .core span{
+        font-size:20px;
     }
 }
