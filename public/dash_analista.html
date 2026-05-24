@@ -481,7 +481,7 @@
         }
 
         function atualizarGraficoRecursos(cpu, ram, disco) {
-            1
+            
             if (chartRecursos) {
                 chartRecursos.data.datasets[0].data = [...historicoCpu];
                 chartRecursos.data.datasets[1].data = [...historicoRamR];
@@ -925,7 +925,7 @@
 
                 atualizarStatusServidor(dadosServidor.status_servidor);
 
-                const localEl = document.querySelector(".nomeLocal");
+                const localEl = document.getElementById("nomeLocal");
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
                 iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
