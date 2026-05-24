@@ -2,267 +2,246 @@
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>Temperatura | Horus</title>
 
-    <link rel="icon" href="./assets/icon/logo.png" />
+    <link rel="icon"
+        href="./assets/icon/logo.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
         rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style/DashTemp.css">
-    <link rel="stylesheet" href="./style/dash_rede.css">
+    <link rel="stylesheet"
+        href="./style.css">
+
+    <link rel="stylesheet"
+        href="./style/DashTemp.css">
+
 </head>
 
 <body>
 
-    <div class="modal-lateral" id="overlay"></div>
-
     <div class="container">
-
-        <!-- MENU LATERAL -->
-
-        <aside class="lateral" id="lateral">
-
-            <div class="logo">
-                <img src="./assets/imgs/painel/logo.png" alt="">
-                Horus
-            </div>
-
-            <nav class="menu">
-
-                <div class="categoria">
-                    Monitoramento
-                </div>
-
-                <a href="painel.html"
-                    class="item-menu">
-
-                    <img src="./assets/imgs/painel/dash.png"
-                        alt="">
-
-                    Dashboard
-                </a>
-
-                <div class="categoria adm">
-                    Administração
-                </div>
-
-                <a href="dash_usuarios.html"
-                    class="item-menu adm">
-
-                    <img src="./assets/imgs/painel/cadastrar-usuario.png"
-                        alt="">
-
-                    Usuários
-                </a>
-
-                <a href="servidor-componente.html"
-                    class="item-menu adm">
-
-                    <img src="./assets/imgs/painel/cadastrar-servidor.png"
-                        alt="">
-
-                    Cadastrar servidor
-                </a>
-
-            </nav>
-
-            <div class="sair">
-
-                <img src="./assets/imgs/painel/sair.png"
-                    alt="">
-
-                <p>Sair</p>
-
-            </div>
-
-        </aside>
-
-        <!-- MAIN -->
 
         <main class="main">
 
-            <!-- HEADER -->
+            <section class="conteudo">
 
-            <header class="header">
+                <!-- KPI -->
 
-                <div class="header-topo">
+                <section class="cards">
 
-                    <div class="header-esquerda">
+                    <!-- KPI 1 -->
 
-                        <div class="hamburguer"
-                            id="hamburguer">
+                    <div class="card">
 
-                            <img src="./assets/imgs/painel/hamburguer.png"
-                                alt="Menu">
+                        <h3>
 
-                        </div>
+                            Margem de Segurança Térmica
 
-                        <div class="header-servidor">
+                            <span class="info-tooltip"
+                                onclick="toggleTooltip(this)">
 
-                            <span class="breadcrumb">
+                                i
 
-                                Servidores /
+                                <span class="tooltip-box">
 
-                                <strong id="nomeServidor">
-                                    Servidor
-                                </strong>
+                                    <strong>
+                                        O que é:
+                                    </strong>
 
-                                /
+                                    Diferença entre a temperatura atual da CPU e o limite seguro operacional.
 
-                                <span class="renomear">
-                                    Temperatura
+                                    <hr>
+
+                                    <strong>
+                                        Status:
+                                    </strong>
+
+                                    <span id="tooltipMargemStatus">
+                                        Carregando...
+                                    </span>
+
                                 </span>
 
                             </span>
 
-                            <div class="status-servidor">
-
-                                <div class="select-status">
-
-                                    <span id="status-dot"
-                                        class="status-dot verde"></span>
-
-                                    <select id="select_servidor"
-                                        onchange="selecionar()">
-
-                                        <option value="#">
-                                            Selecione
-                                        </option>
-
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="usuario">
-
-                        <div>
-
-                            <p id="nome_usuario"></p>
-
-                            <p id="funcao_usuario"
-                                class="cargo"></p>
-
-                        </div>
-
-                        <span id="inicial_usuario"></span>
-
-                    </div>
-
-                </div>
-
-                <div class="header-nav-scroll">
-
-                    <nav class="header-nav">
-
-                        <a href="dash_analista.html">
-                            Resumo
-                        </a>
-
-                        <a href="processos.html">
-                            Processos
-                        </a>
-
-                        <a href="dash_rede.html">
-                            Comunicação e rede
-                        </a>
-
-                        <a href="Temperatura.html"
-                            class="ativo">
-
-                            Temperatura
-                        </a>
-
-                        <a href="dash_incidentes.html">
-                            Incidentes
-                        </a>
-
-                    </nav>
-
-                </div>
-
-            </header>
-
-            <!-- CONTEUDO -->
-
-            <section class="conteudo">
-
-                <!-- CARDS -->
-
-                <section class="cards">
-
-                    <div class="card">
-
-                        <h3>
-                            Margem de Segurança Térmica (Atual)
                         </h3>
 
-                        <div class="big">
+                        <div class="big"
+                            id="kpiMargem">
+
                             --
+
                         </div>
 
-                        <span class="green">
+                        <span class="green"
+                            id="statusMargem">
+
                             Atualizando...
+
                         </span>
 
                     </div>
 
+                    <!-- KPI 2 -->
+
                     <div class="card">
 
                         <h3>
-                            Índice de Eficiência de Resfriamento (Atual)
+
+                            Eficiência de Resfriamento
+
+                            <span class="info-tooltip"
+                                onclick="toggleTooltip(this)">
+
+                                i
+
+                                <span class="tooltip-box">
+
+                                    <strong>
+                                        O que é:
+                                    </strong>
+
+                                    Mede a eficiência do sistema de refrigeração do servidor.
+
+                                    <hr>
+
+                                    <strong>
+                                        Status:
+                                    </strong>
+
+                                    <span id="tooltipResfriamentoStatus">
+                                        Carregando...
+                                    </span>
+
+                                </span>
+
+                            </span>
+
                         </h3>
 
-                        <div class="big">
+                        <div class="big"
+                            id="kpiResfriamento">
+
                             --
+
                         </div>
 
-                        <span class="red">
+                        <span class="red"
+                            id="statusResfriamento">
+
                             Atualizando...
+
                         </span>
 
                     </div>
 
+                    <!-- KPI 3 -->
+
                     <div class="card">
 
                         <h3>
-                            Pico de Estresse Térmico (Semanal)
+
+                            Pico de Estresse Térmico
+
+                            <span class="info-tooltip"
+                                onclick="toggleTooltip(this)">
+
+                                i
+
+                                <span class="tooltip-box">
+
+                                    <strong>
+                                        O que é:
+                                    </strong>
+
+                                    Dia da semana com maior incidência de temperaturas críticas.
+
+                                    <hr>
+
+                                    <strong>
+                                        Status:
+                                    </strong>
+
+                                    <span id="tooltipPicoStatus">
+                                        Carregando...
+                                    </span>
+
+                                </span>
+
+                            </span>
+
                         </h3>
 
-                        <div class="big">
+                        <div class="big"
+                            id="kpiPico">
+
                             --
+
                         </div>
 
                     </div>
 
+                    <!-- KPI 4 -->
+
                     <div class="card">
 
                         <h3>
+
                             Throttling Status
+
+                            <span class="info-tooltip"
+                                onclick="toggleTooltip(this)">
+
+                                i
+
+                                <span class="tooltip-box">
+
+                                    <strong>
+                                        O que é:
+                                    </strong>
+
+                                    Redução automática de desempenho causada por superaquecimento.
+
+                                    <hr>
+
+                                    <strong>
+                                        Status:
+                                    </strong>
+
+                                    <span id="tooltipThrottleStatus">
+                                        Carregando...
+                                    </span>
+
+                                </span>
+
+                            </span>
+
                         </h3>
 
-                        <div class="big">
+                        <div class="big"
+                            id="kpiThrottle">
+
                             --
+
                         </div>
 
-                        <div class="status">
+                        <div class="status"
+                            id="statusThrottle">
+
                             Operacional
+
                         </div>
 
                     </div>
@@ -273,18 +252,49 @@
 
                 <section class="grid">
 
-                    <!-- GRAFICO -->
+                    <!-- CHART CPU -->
 
                     <div class="chart-card">
 
                         <div class="chart-header">
+
                             <h2>
-                                Temperatura CPU — Núcleo Mais Quente
+
+                                Temperatura CPU
+
+                                <span class="info-tooltip"
+                                    onclick="toggleTooltip(this)">
+
+                                    i
+
+                                    <span class="tooltip-box">
+
+                                        <strong>
+                                            O que é:
+                                        </strong>
+
+                                        Comparação entre temperatura da CPU e ambiente.
+
+                                        <hr>
+
+                                        <strong>
+                                            Status:
+                                        </strong>
+
+                                        <span id="tooltipCpuGrafico">
+                                            Carregando...
+                                        </span>
+
+                                    </span>
+
+                                </span>
+
                             </h2>
 
                             <p>
-                                Zonas de alerta • linha da média do dia
+                                Monitoramento térmico diário
                             </p>
+
                         </div>
 
                         <canvas id="cpuChart"></canvas>
@@ -298,86 +308,98 @@
                         <div class="chart-header">
 
                             <h2>
-                                Heatmap — Temperatura por Core (Atual)
-                            </h2>
 
-                            <p>
-                                Snapshot atual
-                            </p>
+                                Temperatura por Core
+
+                                <span class="info-tooltip"
+                                    onclick="toggleTooltip(this)">
+
+                                    i
+
+                                    <span class="tooltip-box">
+
+                                        <strong>
+                                            O que é:
+                                        </strong>
+
+                                        Exibe a temperatura individual de cada núcleo da CPU.
+
+                                        <hr>
+
+                                        <strong>
+                                            Status:
+                                        </strong>
+
+                                        <span id="tooltipCoreStatus">
+                                            Carregando...
+                                        </span>
+
+                                    </span>
+
+                                </span>
+
+                            </h2>
 
                         </div>
 
                         <div class="heatmap"></div>
 
-                        <!-- LEGENDA -->
-
-                        <div class="heatmap-legend">
-
-                            <div class="legend-item">
-
-                                <span class="legend-color normal-bg"></span>
-
-                                <small>
-                                    &lt; 65°
-                                </small>
-
-                            </div>
-
-                            <div class="legend-item">
-
-                                <span class="legend-color alert-bg"></span>
-
-                                <small>
-                                    65° - 75°
-                                </small>
-
-                            </div>
-
-                            <div class="legend-item">
-
-                                <span class="legend-color medium-bg"></span>
-
-                                <small>
-                                    75° - 85°
-                                </small>
-
-                            </div>
-
-                            <div class="legend-item">
-
-                                <span class="legend-color critical-bg"></span>
-
-                                <small>
-                                    &gt; 85°
-                                </small>
-
-                            </div>
-
-                        </div>
-
                     </div>
 
                 </section>
 
-                <!-- GRAFICO FINAL -->
+                <!-- LATENCIA -->
 
                 <section class="bottom-chart">
 
                     <div class="chart-header">
 
                         <h2>
+
                             Impacto Térmico na Latência
+
+                            <span class="info-tooltip"
+                                onclick="toggleTooltip(this)">
+
+                                i
+
+                                <span class="tooltip-box">
+
+                                    <strong>
+                                        O que é:
+                                    </strong>
+
+                                    Relação entre aumento térmico e degradação de resposta.
+
+                                    <hr>
+
+                                    <strong>
+                                        Status:
+                                    </strong>
+
+                                    <span id="tooltipLatenciaStatus">
+                                        Carregando...
+                                    </span>
+
+                                </span>
+
+                            </span>
+
                         </h2>
 
                         <p>
-                            Correlação entre temperatura e degradação (Diária)
+                            Correlação térmica diária
                         </p>
 
                     </div>
 
                     <canvas id="latencyChart"></canvas>
-                    <div id="ultimaAtualizacao" class="ultima-atualizacao">
-                    Última atualização: --
+
+                    <div id="ultimaAtualizacao"
+                        class="ultima-atualizacao">
+
+                        Última atualização: --
+
                     </div>
 
                 </section>
@@ -390,140 +412,120 @@
 
 <script>
 
-    // =========================
-    // VALIDAR SESSAO
-    // =========================
+   // =========================
+// CHARTS
+// =========================
 
-    if (!sessionStorage.ID_USUARIO) {
+let cpuChart;
+let latencyChart;
+let intervaloAtualizacao;
 
-        window.location = "index.html";
-    }
+// =========================
+// TOOLTIP CLICK
+// =========================
 
-    // =========================
-    // USUARIO
-    // =========================
+function toggleTooltip(elemento) {
 
-    document.getElementById("nome_usuario")
-        .innerHTML =
-        sessionStorage.NOME_USUARIO;
+    const tooltip =
+        elemento.querySelector(
+            ".tooltip-box"
+        );
 
-    document.getElementById("funcao_usuario")
-        .innerHTML =
-        sessionStorage.FUNCAO_USUARIO;
+    document
+        .querySelectorAll(
+            ".tooltip-box"
+        )
+        .forEach(item => {
 
-    document.getElementById("inicial_usuario")
-        .innerHTML =
-        sessionStorage.NOME_USUARIO.charAt(0);
+            if (item !== tooltip) {
 
-    // =========================
-    // EMPRESA
-    // =========================
-
-    const empresa =
-        sessionStorage.ID_EMPRESA;
-
-    // =========================
-    // CHARTS
-    // =========================
-
-    let cpuChart;
-    let latencyChart;
-    let intervaloAtualizacao;
-
-    // =========================
-    // CONFIG GRAFICOS
-    // =========================
-
-    const tooltipConfig = {
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        interaction: {
-            mode: 'index',
-            intersect: false
-        },
-
-        plugins: {
-
-            legend: {
-                position: 'top'
-            },
-
-            tooltip: {
-
-                enabled: true,
-
-                backgroundColor: '#111827',
-
-                titleColor: '#fff',
-
-                bodyColor: '#fff',
-
-                borderColor: '#3b82f6',
-
-                borderWidth: 1,
-
-                padding: 12
+                item.classList.remove(
+                    "ativo"
+                );
             }
-        },
+        });
 
-        scales: {
+    tooltip.classList.toggle(
+        "ativo"
+    );
+}
 
-            y: {
+document.addEventListener(
+    "click",
+    function (event) {
 
-                beginAtZero: true
-            }
+        if (
+            !event.target.closest(
+                ".info-tooltip"
+            )
+        ) {
+
+            document
+                .querySelectorAll(
+                    ".tooltip-box"
+                )
+                .forEach(item => {
+
+                    item.classList.remove(
+                        "ativo"
+                    );
+                });
         }
-    };
+    }
+);
 
-    // =========================
-    // CARREGAR SERVIDORES
-    // =========================a
+// =========================
+// CONFIG CHART
+// =========================
 
-    async function listarServidores() {
+const chartConfig = {
+
+    responsive: true,
+
+    maintainAspectRatio: false,
+
+    interaction: {
+        mode: 'index',
+        intersect: false
+    },
+
+    plugins: {
+
+        legend: {
+            position: 'top'
+        }
+    }
+};
+
+// =========================
+// EMPRESA
+// =========================
+
+const empresa =
+    sessionStorage.ID_EMPRESA;
+
+// =========================
+// LISTAR SERVIDORES
+// =========================
+
+async function listarServidores() {
 
     try {
 
-        const fkEmpresa =
-            sessionStorage.ID_EMPRESA;
-
-        // transforma string em array
-        const servidores =
-            JSON.parse(
-                sessionStorage.ACESSO_SERVIDORES
-            );
-
         const resposta =
             await fetch(
-                `/servidores/listarServidores`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        fkEmpresaServer: fkEmpresa,
-                        servidoresServer: servidores
-                    })
-                }
+                `/servidores/listarServidores/${empresa}`
             );
 
         if (!resposta.ok) {
 
             throw new Error(
-                "Erro ao buscar servidores"
+                "Erro ao listar servidores"
             );
         }
 
         const lista =
             await resposta.json();
-
-        console.log(
-            "SERVIDORES:",
-            lista
-        );
 
         const select =
             document.getElementById(
@@ -532,51 +534,25 @@
 
         select.innerHTML = "";
 
-        if (!lista ||
-            lista.length === 0) {
-
-            select.innerHTML = `
-                <option value="#">
-                    Nenhum servidor
-                </option>
-            `;
-
-            return;
-        }
-
         lista.forEach((servidor, index) => {
 
             select.innerHTML += `
 
                 <option
-                    value="${servidor.id_servidor}"
-                    data-mac="${servidor.mac_address}"
+                    value="${servidor.mac_address}"
                     ${index === 0 ? "selected" : ""}>
-                    ${servidor.hostname}
-                </option>
 
+                    ${servidor.hostname}
+
+                </option>
             `;
         });
 
-        nomeServidor.textContent =
-            select.options[
-                select.selectedIndex
-            ].text;
+        atualizarNomeServidor();
 
-        await carregarDashboards();
+        await carregarTemperatura();
 
-        select.addEventListener(
-            "change",
-            async () => {
-
-                nomeServidor.textContent =
-                    select.options[
-                        select.selectedIndex
-                    ].text;
-
-                await carregarDashboards();
-            }
-        );
+        iniciarAtualizacao();
 
     } catch (erro) {
 
@@ -587,578 +563,592 @@
     }
 }
 
-    // =========================
-    // CARREGAR TEMPERATURA
-    // =========================
+// =========================
+// CARREGAR TEMPERATURA
+// =========================
 
-    async function carregarTemperatura() {
+async function carregarTemperatura() {
 
-        try {
-
-            const select =
-                document.getElementById(
-                    "select_servidor"
-                );
-
-            const optionSelecionada =
-                select.options[
-                    select.selectedIndex
-                ];
-
-            const mac =
-                optionSelecionada.dataset.mac;
-
-            if (!mac || mac === "#") {
-                return;
-            }
-
-            console.log(
-                "Buscando temperatura:",
-                mac
-            );
-
-            const resposta =
-                await fetch(
-                    `/temperatura/${empresa}/${encodeURIComponent(mac)}/tempo_real`
-                );
-
-            if (!resposta.ok) {
-
-                throw new Error(
-                    "Erro ao buscar temperatura"
-                );
-            }
-
-            const json =
-                await resposta.json();
-
-            console.log(
-                "JSON TEMPERATURA:",
-                json
-            );
-
-            const dados =
-                json.dados;
-
-            if (!dados ||
-                dados.length === 0) {
-
-                console.log(
-                    "Sem dados"
-                );
-
-                return;
-            }
-
-            atualizarCards(json);
-
-            atualizarGraficoCPU(dados);
-
-            atualizarGraficoLatencia(dados);
-
-            atualizarHeatmap(dados);
-
-            atualizarNomeServidor();
-
-            atualizarStatus(
-                dados[dados.length - 1]
-            );
-
-            atualizarHorarioUltimaAtualizacao();
-
-        } catch (erro) {
-
-            console.log(
-                "Erro temperatura:",
-                erro
-            );
-        }
-    }
-
-    // =========================
-    // STATUS TOPO
-    // =========================
-
-    function atualizarStatus(ultimo) {
-
-        const dot =
-            document.getElementById(
-                "status-dot"
-            );
-
-        dot.classList.remove(
-            "verde",
-            "amarelo",
-            "vermelho"
-        );
-
-        if (
-            ultimo.temp_max_cpu >= 85
-        ) {
-
-            dot.classList.add(
-                "vermelho"
-            );
-        }
-
-        else if (
-            ultimo.temp_max_cpu >= 70
-        ) {
-
-            dot.classList.add(
-                "amarelo"
-            );
-        }
-
-        else {
-
-            dot.classList.add(
-                "verde"
-            );
-        }
-    }
-
-    // =========================
-    // NOME SERVIDOR
-    // =========================
-
-    function atualizarNomeServidor() {
+    try {
 
         const select =
             document.getElementById(
                 "select_servidor"
             );
 
-        if (!select.options.length) {
+        const mac =
+            select.value;
+
+        if (!mac) {
             return;
         }
 
-        const texto =
-            select.options[
-                select.selectedIndex
-            ].text;
-
-        document.getElementById(
-            "nomeServidor"
-        ).innerHTML = texto;
-    }
-
-    // =========================
-    // GRAFICO CPU
-    // =========================
-
-    function atualizarGraficoCPU(dados) {
-
-        const labels =
-            dados.map(item => {
-
-                return item.timestamp
-                    .split(" ")[1]
-                    .substring(0, 5);
-            });
-
-        const temperaturas =
-            dados.map(item =>
-                item.temp_max_cpu || 0
+        const resposta =
+            await fetch(
+                `/temperatura/${empresa}/${encodeURIComponent(mac)}/tempo_real`
             );
 
-        const ambiente =
-            dados.map(item =>
-                item.temperatura_ambiente || 0
-            );
+        if (!resposta.ok) {
 
-        if (cpuChart) {
-            cpuChart.destroy();
+            throw new Error(
+                "Erro ao buscar temperatura"
+            );
         }
 
-        cpuChart = new Chart(
+        const json =
+            await resposta.json();
+
+        const dados =
+            json.dados;
+
+        if (
+            !dados ||
+            dados.length === 0
+        ) {
+
+            console.log(
+                "Sem dados"
+            );
+
+            return;
+        }
+
+        atualizarDashboard(
+            dados,
+            json
+        );
+
+    } catch (erro) {
+
+        console.log(
+            "Erro temperatura:",
+            erro
+        );
+    }
+}
+
+// =========================
+// DASHBOARD
+// =========================
+
+function atualizarDashboard(
+    dados,
+    json
+) {
+
+    const ultimo =
+        dados[dados.length - 1];
+
+    atualizarKPIs(
+        ultimo,
+        json
+    );
+
+    atualizarGraficoCPU(
+        dados
+    );
+
+    atualizarGraficoLatencia(
+        dados
+    );
+
+    atualizarHeatmap(
+        ultimo.temp_max_cpu
+    );
+
+    atualizarHorario();
+
+    atualizarStatus(
+        ultimo
+    );
+}
+
+// =========================
+// KPIS
+// =========================
+
+function atualizarKPIs(
+    ultimo,
+    json
+) {
+
+    const margem =
+        Number(
+            ultimo.margem_termica || 0
+        );
+
+    const resfriamento =
+        Number(
+            ultimo.indice_resfriamento || 0
+        );
+
+    // =====================
+    // KPI 1
+    // =====================
+
+    kpiMargem.innerHTML =
+        margem.toFixed(1) + "°C";
+
+    if (margem >= 40) {
+
+        statusMargem.innerHTML =
+            "Excelente";
+
+        statusMargem.style.color =
+            "#10b981";
+
+        tooltipMargemStatus.innerHTML =
+            "Servidor operando com ampla margem térmica.";
+    }
+
+    else if (margem >= 25) {
+
+        statusMargem.innerHTML =
+            "Moderado";
+
+        statusMargem.style.color =
+            "#f59e0b";
+
+        tooltipMargemStatus.innerHTML =
+            "Temperatura estável, mas requer monitoramento.";
+    }
+
+    else {
+
+        statusMargem.innerHTML =
+            "Crítico";
+
+        statusMargem.style.color =
+            "#ef4444";
+
+        tooltipMargemStatus.innerHTML =
+            "CPU próxima do limite térmico.";
+    }
+
+    // =====================
+    // KPI 2
+    // =====================
+
+    kpiResfriamento.innerHTML =
+        resfriamento.toFixed(1) + "%";
+
+    if (resfriamento >= 75) {
+
+        statusResfriamento.innerHTML =
+            "Excelente";
+
+        statusResfriamento.style.color =
+            "#10b981";
+
+        tooltipResfriamentoStatus.innerHTML =
+            "Sistema de refrigeração altamente eficiente.";
+    }
+
+    else if (resfriamento >= 50) {
+
+        statusResfriamento.innerHTML =
+            "Moderado";
+
+        statusResfriamento.style.color =
+            "#f59e0b";
+
+        tooltipResfriamentoStatus.innerHTML =
+            "Eficiência térmica aceitável.";
+    }
+
+    else {
+
+        statusResfriamento.innerHTML =
+            "Ruim";
+
+        statusResfriamento.style.color =
+            "#ef4444";
+
+        tooltipResfriamentoStatus.innerHTML =
+            "Sistema de resfriamento insuficiente.";
+    }
+
+    // =====================
+    // KPI 3
+    // =====================
+
+    kpiPico.innerHTML =
+        json.dia_com_mais_alertas ||
+        "Sem dados";
+
+    tooltipPicoStatus.innerHTML =
+        `Maior incidência térmica registrada em ${json.dia_com_mais_alertas || "nenhum dia"}.`;
+
+    // =====================
+    // KPI 4
+    // =====================
+
+    const throttling =
+        ultimo.throttling || "NAO";
+
+    kpiThrottle.innerHTML =
+        throttling;
+
+    if (throttling === "SIM") {
+
+        statusThrottle.innerHTML =
+            "CRÍTICO";
+
+        statusThrottle.style.background =
+            "#dc2626";
+
+        tooltipThrottleStatus.innerHTML =
+            "CPU reduzindo desempenho por superaquecimento.";
+    }
+
+    else {
+
+        statusThrottle.innerHTML =
+            "Operacional";
+
+        statusThrottle.style.background =
+            "#16a34a";
+
+        tooltipThrottleStatus.innerHTML =
+            "Nenhum throttling detectado.";
+    }
+
+    // =====================
+    // TOOLTIPS GRAFICOS
+    // =====================
+
+    tooltipCpuGrafico.innerHTML =
+        ultimo.temp_max_cpu >= 80
+            ? "Temperatura elevada detectada."
+            : "Temperatura da CPU estável.";
+
+    tooltipCoreStatus.innerHTML =
+        ultimo.temp_max_cpu >= 75
+            ? "Existem núcleos próximos da zona crítica."
+            : "Temperatura dos núcleos normal.";
+
+    tooltipLatenciaStatus.innerHTML =
+        ultimo.latency_avg_ms >= 60
+            ? "Latência elevada associada ao aumento térmico."
+            : "Latência operando normalmente.";
+}
+
+// =========================
+// GRAFICO CPU
+// =========================
+
+function atualizarGraficoCPU(
+    dados
+) {
+
+    const labels =
+        dados.map(item =>
+            item.timestamp
+            .split(" ")[1]
+            .substring(0, 5)
+        );
+
+    const temperaturas =
+        dados.map(item =>
+            item.temp_max_cpu || 0
+        );
+
+    const ambiente =
+        dados.map(item =>
+            item.temperatura_ambiente || 0
+        );
+
+    if (cpuChart) {
+        cpuChart.destroy();
+    }
+
+    cpuChart =
+        new Chart(
             document.getElementById(
-                'cpuChart'
+                "cpuChart"
             ),
             {
 
-                type: 'line',
+                type: "line",
 
                 data: {
 
-                    labels: labels,
+                    labels,
 
                     datasets: [
 
                         {
-                            label: 'Temp. CPU',
+                            label: "CPU",
 
                             data: temperaturas,
 
-                            borderColor: '#3b82f6',
+                            borderColor: "#3b82f6",
 
-                            backgroundColor:
-                                'rgba(59,130,246,0.1)',
-
-                            fill: true,
-
-                            tension: 0.4,
-
-                            borderWidth: 3
+                            tension: 0.4
                         },
 
                         {
-                            label: 'Temp. Ambiente',
+                            label: "Ambiente",
 
                             data: ambiente,
 
-                            borderColor: '#10b981',
+                            borderColor: "#10b981",
 
-                            backgroundColor:
-                                'rgba(16,185,129,0.1)',
-
-                            fill: true,
-
-                            tension: 0.4,
-
-                            borderWidth: 3
+                            tension: 0.4
                         }
-
                     ]
                 },
 
-                options: tooltipConfig
+                options: chartConfig
             }
         );
+}
+
+// =========================
+// GRAFICO LATENCIA
+// =========================
+
+function atualizarGraficoLatencia(
+    dados
+) {
+
+    const labels =
+        dados.map(item =>
+            item.timestamp
+            .split(" ")[1]
+            .substring(0, 5)
+        );
+
+    const latencia =
+        dados.map(item =>
+            item.latency_avg_ms || 0
+        );
+
+    const temperatura =
+        dados.map(item =>
+            item.temp_max_cpu || 0
+        );
+
+    if (latencyChart) {
+        latencyChart.destroy();
     }
 
-    // =========================
-    // GRAFICO LATENCIA
-    // =========================
-
-    function atualizarGraficoLatencia(dados) {
-
-        const labels =
-            dados.map(item => {
-
-                return item.timestamp
-                    .split(" ")[1]
-                    .substring(0, 5);
-            });
-
-        const latencia =
-            dados.map(item =>
-                item.latency_avg_ms || 0
-            );
-
-        const temperatura =
-            dados.map(item =>
-                item.temp_max_cpu || 0
-            );
-
-        if (latencyChart) {
-            latencyChart.destroy();
-        }
-
-        latencyChart = new Chart(
+    latencyChart =
+        new Chart(
             document.getElementById(
-                'latencyChart'
+                "latencyChart"
             ),
             {
 
-                type: 'line',
+                type: "line",
 
                 data: {
 
-                    labels: labels,
+                    labels,
 
                     datasets: [
 
                         {
-                            label: 'Latência',
+                            label: "Latência",
 
                             data: latencia,
 
-                            borderColor: '#8b5cf6',
+                            borderColor: "#8b5cf6",
 
-                            backgroundColor:
-                                'rgba(139,92,246,0.08)',
-
-                            fill: true,
-
-                            tension: 0.4,
-
-                            borderWidth: 3
+                            tension: 0.4
                         },
 
                         {
-                            label: 'Temperatura',
+                            label: "Temperatura",
 
                             data: temperatura,
 
-                            borderColor: '#f97316',
+                            borderColor: "#f97316",
 
-                            tension: 0.4,
-
-                            borderWidth: 3
+                            tension: 0.4
                         }
-
                     ]
                 },
 
-                options: tooltipConfig
+                options: chartConfig
             }
         );
-    }
+}
 
-    // =========================
-    // HEATMAP
-    // =========================
+// =========================
+// HEATMAP
+// =========================
 
-    function atualizarHeatmap(dados) {
+function atualizarHeatmap(
+    base
+) {
 
-        const heatmap =
-            document.querySelector(
-                ".heatmap"
+    const heatmap =
+        document.querySelector(
+            ".heatmap"
+        );
+
+    heatmap.innerHTML = "";
+
+    const quantidadeCores = 4;
+
+    for (
+        let i = 0;
+        i < quantidadeCores;
+        i++
+    ) {
+
+        const temp =
+            Math.floor(
+                base + (
+                    Math.random() * 6 - 3
+                )
             );
 
-        heatmap.innerHTML = "";
+        let classe = "normal";
 
-        const ultimo =
-            dados[dados.length - 1];
-
-        const base =
-            ultimo.temp_max_cpu || 40;
-
-        for (let i = 0; i < 12; i++) {
-
-            const temp =
-                Math.floor(
-                    base + (
-                        Math.random() * 10 - 5
-                    )
-                );
-
-            let classe = "normal";
-
-            if (temp >= 85) {
-
-                classe = "critical";
-            }
-
-            else if (temp >= 75) {
-
-                classe = "medium";
-            }
-
-            else if (temp >= 65) {
-
-                classe = "alert";
-            }
-
-            heatmap.innerHTML += `
-
-                <div class="core ${classe}">
-                    <small>C${i}</small>
-                    <span>${temp}°</span>
-                </div>
-
-            `;
+        if (temp >= 85) {
+            classe = "critical";
         }
+
+        else if (temp >= 75) {
+            classe = "medium";
+        }
+
+        else if (temp >= 65) {
+            classe = "alert";
+        }
+
+        heatmap.innerHTML += `
+
+            <div class="core ${classe}">
+
+                <small>
+                    Core ${i}
+                </small>
+
+                <span>
+                    ${temp}°
+                </span>
+
+            </div>
+        `;
     }
+}
 
-    // =========================
-    // CARDS KPI
-    // =========================
+// =========================
+// HORARIO
+// =========================
 
-    function atualizarCards(json) {
-
-        const ultimo =
-            json.dados[
-                json.dados.length - 1
-            ];
-
-        const cards =
-            document.querySelectorAll(
-                ".big"
-            );
-
-        const spans =
-            document.querySelectorAll(
-                ".card span"
-            );
-
-        // KPI 1
-
-        cards[0].innerHTML =
-            `+${Number(
-                ultimo.margem_termica || 0
-            ).toFixed(1)}°C`;
-
-        if (spans[0]) {
-
-            if (
-                ultimo.margem_termica >= 40
-            ) {
-
-                spans[0].innerHTML =
-                    "Excelente";
-
-                spans[0].style.color =
-                    "#22c55e";
-            }
-
-            else if (
-                ultimo.margem_termica >= 25
-            ) {
-
-                spans[0].innerHTML =
-                    "Boa";
-
-                spans[0].style.color =
-                    "#eab308";
-            }
-
-            else {
-
-                spans[0].innerHTML =
-                    "Crítica";
-
-                spans[0].style.color =
-                    "#ef4444";
-            }
-        }
-
-        // KPI 2
-
-        cards[1].innerHTML =
-            `${Number(
-                ultimo.indice_resfriamento || 0
-            ).toFixed(1)}%`;
-
-        if (spans[1]) {
-
-            if (
-                ultimo.indice_resfriamento >= 75
-            ) {
-
-                spans[1].innerHTML =
-                    "Resfriamento ideal";
-
-                spans[1].style.color =
-                    "#22c55e";
-            }
-
-            else if (
-                ultimo.indice_resfriamento >= 50
-            ) {
-
-                spans[1].innerHTML =
-                    "Moderado";
-
-                spans[1].style.color =
-                    "#eab308";
-            }
-
-            else {
-
-                spans[1].innerHTML =
-                    "Ruim";
-
-                spans[1].style.color =
-                    "#ef4444";
-            }
-        }
-
-        // KPI 3
-
-        cards[2].innerHTML =
-            json.dia_com_mais_alertas ||
-            "Sem alertas";
-
-        // KPI 4
-
-        cards[3].innerHTML =
-            ultimo.throttling || "NAO";
-
-        const status =
-            document.querySelector(
-                ".status"
-            );
-
-        if (
-            ultimo.throttling === "SIM"
-        ) {
-
-            status.innerHTML =
-                "CRÍTICO";
-
-            status.style.background =
-                "#dc2626";
-        }
-
-        else {
-
-            status.innerHTML =
-                "Operacional";
-
-            status.style.background =
-                "#16a34a";
-        }
-
-        status.style.color =
-            "#fff";
-    }
-
-    // =========================
-    // SELECT
-    // =========================
-
-    async function selecionar() {
-
-        await carregarTemperatura();
-    }
-
-    function atualizarHorarioUltimaAtualizacao() {
+function atualizarHorario() {
 
     const agora =
         new Date();
 
-    const horario =
-        agora.toLocaleTimeString(
-            "pt-BR"
-        );
-
-    document.getElementById(
-        "ultimaAtualizacao"
-    ).innerHTML =
-        `Última atualização: ${horario}`;
+    ultimaAtualizacao.innerHTML =
+        `Última atualização: ${agora.toLocaleTimeString("pt-BR")}`;
 }
 
-    // =========================
-    // AUTO UPDATE
-    // =========================
+// =========================
+// STATUS TOPO
+// =========================
 
-    function iniciarAtualizacao() {
+function atualizarStatus(
+    ultimo
+) {
 
-        if (intervaloAtualizacao) {
+    const dot =
+        document.getElementById(
+            "status-dot"
+        );
 
-            clearInterval(
-                intervaloAtualizacao
-            );
-        }
+    dot.classList.remove(
+        "verde",
+        "amarelo",
+        "vermelho"
+    );
 
-        intervaloAtualizacao =
-            setInterval(() => {
+    if (
+        ultimo.temp_max_cpu >= 85
+    ) {
 
-                carregarTemperatura();
-
-            }, 5000);
+        dot.classList.add(
+            "vermelho"
+        );
     }
 
-    // =========================
-    // INIT
-    // =========================
+    else if (
+        ultimo.temp_max_cpu >= 70
+    ) {
 
-    window.onload = function () {
+        dot.classList.add(
+            "amarelo"
+        );
+    }
 
-        listarServidores();
-    };
+    else {
+
+        dot.classList.add(
+            "verde"
+        );
+    }
+}
+
+// =========================
+// SERVIDOR
+// =========================
+
+function atualizarNomeServidor() {
+
+    const select =
+        document.getElementById(
+            "select_servidor"
+        );
+
+    nomeServidor.innerHTML =
+        select.options[
+            select.selectedIndex
+        ].text;
+}
+
+// =========================
+// SELECT
+// =========================
+
+async function selecionar() {
+
+    atualizarNomeServidor();
+
+    await carregarTemperatura();
+}
+
+// =========================
+// AUTO UPDATE
+// =========================
+
+function iniciarAtualizacao() {
+
+    clearInterval(
+        intervaloAtualizacao
+    );
+
+    intervaloAtualizacao =
+        setInterval(() => {
+
+            carregarTemperatura();
+
+        }, 5000);
+}
+
+// =========================
+// INIT
+// =========================
+
+window.onload = function () {
+
+    listarServidores();
+
+};
 
 </script>
 
