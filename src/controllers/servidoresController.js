@@ -233,7 +233,8 @@ function abrirDetalhes(req, res) {
                 hostname: primeiraLinha.hostname,
                 endereco_ip: primeiraLinha.endereco_ip,
                 fk_empresa:  primeiraLinha.fk_empresa,
-                localizacao: primeiraLinha.localizacao
+                localizacao: primeiraLinha.localizacao,
+                status_servidor: primeiraLinha.status_servidor
             });
         })
         .catch((erro) => {

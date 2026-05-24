@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="style/dash_analista.css">
 
     <style>
-        /* ── Gráfico de chamados: espaçamento e legibilidade ── */
         .graficoQtdChamados {
             position: relative;
             width: 100%;
@@ -33,14 +32,13 @@
             height: 100% !important;
         }
 
-        /* Wrapper dos gráficos de saúde e RAM */
+
         .chart-box {
             position: relative;
             width: 100%;
             height: 220px;
         }
 
-        /* Wrapper do gráfico de recursos CPU/RAM/Disco */
         .grafico-recursos {
             position: relative;
             width: 100%;
@@ -49,14 +47,14 @@
             box-sizing: border-box;
         }
 
-        /* Estilo do canvas dentro do card-processos */
+
         #healthChart {
             display: block;
             width: 100% !important;
             height: 100% !important;
         }
 
-        /* Tooltip personalizado para o gráfico de chamados */
+
         .chart-tooltip {
             background: rgba(15, 23, 42, 0.92);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -126,9 +124,9 @@
 
                             <div class="status-servidor">
                                 <div class="select-status">
-                                    <span class="status-dot verde"></span>
+                                    <span class="status-dot verde" id="statusDot"></span>
                                     <select id="select_servidor"></select>
-                                </div>
+                                </div>F
 
                                 <div class="alertas">
                                     <img src="assets/imgs/rede/alerta-lar.png" alt=""
@@ -179,7 +177,7 @@
                                     <img src="assets/imgs/painel/i.png" alt="" width="20px">
                                     <span>Status</span>
                                 </div>
-                                <div class="status-info">Online</div>
+                                <div class="status-info" id="statusInfo">Online</div>
                             </div>
                         </div>
 
@@ -715,7 +713,11 @@
                 const margem = 0.5;
 
                 let tendenciaTexto = "Estável";
-                if (valorTendencia > valorReal + margem) tendenciaTexto = "Subindo";
+                document.getElementById("fraseInterpretativa").innerHTML = "uso normal"
+                if (valorTendencia > valorReal + margem) {
+                    tendenciaTexto = "Subindo";
+                    document.getElementById("fraseInterpretativa").innerHTML = "crescimento anormal"
+                }
                 else if (valorTendencia < valorReal - margem) tendenciaTexto = "Caindo";
 
                 document.getElementById("tendenciaRam").textContent = tendenciaTexto;
@@ -730,6 +732,8 @@
                 document.getElementById("diskValue").textContent = (m.disco ?? 0) + "%";
 
 
+
+
                 atualizarGraficoSaude(m.health_score ?? 0, m.status_health ?? 'estavel');
                 atualizarGraficoRecursos(m.cpu ?? null, m.ram ?? null, m.disco ?? null);
                 atualizarGraficoRam(valorReal, valorTendencia);
@@ -741,113 +745,58 @@
 
 
 
-        async function carregarGraficoChamados(hostname) {
-            try {
-                const resposta = await fetch(
-                    `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
-                );
-                if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
-                const dados = await resposta.json();
+      async function carregarGraficoChamados(hostname) {
 
-                const labels = Object.keys(dados);
-                const valores = Object.values(dados);
-                const total = valores.reduce((s, v) => s + v, 0);
+    const resposta = await fetch(
+        `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
+    );
 
-                if (chartChamados) {
-                    chartChamados.destroy();
-                    chartChamados = null;
-                }
+    const dados = await resposta.json();
 
+    const labels = Object.keys(dados);
+    const valores = Object.values(dados);
 
-                const paletaBordas = [
-                    '#576ca8', '#a855f7', '#22c55e', '#f59e0b',
-                    '#ef4444', '#06b6d4', '#f97316', '#84cc16'
-                ];
-                const paletaFundos = paletaBordas.map(c => c + 'D9'); /* ~85% opacidade em hex */
+    if (chartChamados) {
+        chartChamados.destroy();
+    }
 
-                chartChamados = new Chart(document.getElementById("graficoQtdChamados"), {
-                    type: "bar",
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: "Chamados",
-                            data: valores,
-                            backgroundColor: labels.map((_, i) => paletaFundos[i % paletaFundos.length]),
-                            borderColor: labels.map((_, i) => paletaBordas[i % paletaBordas.length]),
-                            borderWidth: 1.5,
-                            borderRadius: 6,
-                            borderSkipped: false,
-                            barPercentage: 0.65,
-                            categoryPercentage: 0.8
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        animation: { duration: 500 },
-                        layout: { padding: { top: 24, bottom: 4, left: 4, right: 4 } },
-                        scales: {
-                            x: {
-                                grid: { display: false },
-                                ticks: {
-                                    font: { size: 12 },
-                                    maxRotation: 30,
-                                    autoSkip: false
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                grace: '10%',
-                                grid: {
-                                    color: 'rgba(128,128,128,0.12)',
-                                    lineWidth: 0.8
-                                },
-                                ticks: {
-                                    precision: 0,
-                                    font: { size: 12 },
-                                    callback: val => Number.isInteger(val) ? val : ''
-                                }
+    chartChamados = new Chart(
+        document.getElementById("graficoQtdChamados"),
+        {
+            type: "bar",
+
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Chamados",
+                    data: valores
+                }]
+            },
+
+            options: {
+                scales: {
+                    y: {
+                        min: 1,
+                        max: 100,
+                        ticks: {
+                            stepSize: 25
+                        }
+                    }
+                },
+
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `Chamados: ${context.parsed.y}`;
                             }
-                        },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: ctx => {
-                                        const pct = total > 0
-                                            ? ((ctx.parsed.y / total) * 100).toFixed(1)
-                                            : '0.0';
-                                        return ` ${ctx.parsed.y} chamado${ctx.parsed.y !== 1 ? 's' : ''} (${pct}%)`;
-                                    }
-                                }
-                            },
-
-                            datalabels: undefined
                         }
-                    },
-                    plugins: [{
-                        id: 'valorAcimaBarra',
-                        afterDatasetsDraw(chart) {
-                            const { ctx, scales: { x, y } } = chart;
-                            chart.data.datasets[0].data.forEach((valor, i) => {
-                                if (valor == null) return;
-                                const xPos = x.getPixelForValue(i);
-                                const yPos = y.getPixelForValue(valor);
-                                ctx.save();
-                                ctx.fillStyle = 'rgba(100,100,100,0.85)';
-                                ctx.font = '600 11px Inter, sans-serif';
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'bottom';
-                                ctx.fillText(valor, xPos, yPos - 4);
-                                ctx.restore();
-                            });
-                        }
-                    }]
-                });
-            } catch (erro) {
-                console.error("Erro ao carregar gráfico de chamados:", erro);
+                    }
+                }
             }
         }
+    );
+}
 
         function resetarHistoricos() {
             historicoRam = Array(JANELA).fill(null);
@@ -914,6 +863,54 @@
             }
         }
 
+
+        function atualizarStatusServidor(status) {
+
+            const statusInfo = document.getElementById("statusInfo");
+            const statusDot = document.getElementById("statusDot");
+
+            statusDot.className = "status-dot";
+            statusInfo.className = "status-info";
+
+            switch ((status || "").toLowerCase()) {
+
+                case "online":
+                    statusInfo.innerText = "Online";
+
+                    statusDot.style.backgroundColor = "#22c55e";
+                    statusInfo.style.backgroundColor = "rgba(34,197,94,0.15)";
+                    statusInfo.style.color = "#22c55e";
+                    break;
+
+                case "offline":
+                    statusInfo.innerText = "Offline";
+
+                    statusDot.style.backgroundColor = "#ef4444";
+                    statusInfo.style.backgroundColor = "rgba(239,68,68,0.15)";
+                    statusInfo.style.color = "#ef4444";
+                    break;
+
+                case "critico":
+                    statusInfo.innerText = "Crítico";
+
+                    statusDot.style.backgroundColor = "#f59e0b";
+                    statusInfo.style.backgroundColor = "rgba(245,158,11,0.15)";
+                    statusInfo.style.color = "#f59e0b";
+                    break;
+
+                default:
+                    statusInfo.innerText = "Desconhecido";
+
+                    statusDot.style.backgroundColor = "#9ca3af";
+                    statusInfo.style.backgroundColor = "rgba(156,163,175,0.15)";
+                    statusInfo.style.color = "#9ca3af";
+                    break;
+            }
+        }
+
+
+
+
         async function carregarDashboardServidor(idServidor) {
             try {
                 servidorAtual = idServidor;
@@ -925,7 +922,10 @@
                 document.getElementById("nomeServidorModal").innerText = dadosServidor.hostname;
                 document.getElementById("ipServidorModal").innerText = dadosServidor.endereco_ip;
 
-                const localEl = document.querySelector(".nome-local");
+
+                atualizarStatusServidor(dadosServidor.status_servidor);
+
+                const localEl = document.querySelector(".nomeLocal");
                 if (localEl) localEl.innerText = dadosServidor.localizacao;
 
                 iniciarCaptura(dadosServidor.fk_empresa, dadosServidor.hostname);
