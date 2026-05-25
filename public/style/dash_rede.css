@@ -741,6 +741,10 @@ canvas {
     padding: 12px;
     gap: 12px;
   }
+  .linha-graficos{
+    display: flex;
+    flex-direction: column;
+  }
   
   .header {
     padding: 10px 12px 0;
@@ -773,7 +777,7 @@ canvas {
 
   .kpis {
   display: grid;
-  grid-template-columns: repeat(2, 2fr);
+  grid-template-columns: repeat(1, 2fr);
   gap: 20px;
 }
 
