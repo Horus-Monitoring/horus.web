@@ -519,7 +519,7 @@
                                 pointRadius: 0,
                                 pointHoverRadius: 5,
                                 fill: false,
-                                borderDash: [6, 3]
+                                borderDash: []
                             },
                             {
                                 label: 'Disco',
@@ -533,7 +533,7 @@
                                 pointRadius: 0,
                                 pointHoverRadius: 5,
                                 fill: false,
-                                borderDash: [2, 2]
+                                borderDash: []
                             }
                         ]
                     },
@@ -546,6 +546,7 @@
                             x: {
                                 title: { display: true, text: 'Leituras (últimas 24h)' },
                                 ticks: { maxTicksLimit: 12, autoSkip: true }
+                                
                             },
                             y: {
                                 min: 0,
@@ -748,7 +749,7 @@
         async function carregarGraficoChamados(hostname) {
 
             const resposta = await fetch(
-                `/jira/chamadosComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
+                `/jiraService/chamadosPorComponente/${fkFuncionario}/${fkEmpresa}/${hostname}`
             );
 
             const dados = await resposta.json();
