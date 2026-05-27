@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="informacoes-principais">
                                     <span>Total de Alertas Ativos</span>
-                                    <h1 id="kpi_total_alertas_todos">10</h1>
+                                    <h1 id="kpi_total_alertas_todos"></h1>
                                 </div>
                             </div>
                             <div class="tooltip-info">
@@ -188,7 +188,7 @@
                                 </div>
                                 <div class="informacoes-principais">
                                     <span>Servidor com mais Alertas</span>
-                                    <h1 id="kpi_mais_alertas">10</h1>
+                                    <h1 id="kpi_mais_alertas"></h1>
                                 </div>
                             </div>
                             <div class="tooltip-info">
@@ -929,7 +929,7 @@
 
         const dadosFiltrados = dados[filtroTempoSelecionado];
         indice_confiabilidade.innerText = dadosFiltrados.score;
-        console.log(dadosFiltrados)
+        console.log(dadosFiltrados.score)
 
     }
 
@@ -1164,6 +1164,7 @@
     // Quando o tempo mudar, apenas a KPI precisa recalcular
     tempo_total_alertas.addEventListener("change", mostrarKPIs);
     tempo_disponibilidade.addEventListener("change", mostrarKPIs);
+    tempo_indice_confiabilidade.addEventListener("change", mostrarKPIScore);
 
     tempo_lista_alertas.addEventListener("change", listarAlertas);
 
