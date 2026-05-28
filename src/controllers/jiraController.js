@@ -18,6 +18,28 @@ async function filtrarDashboard(req, res) {
     }
 }
 
+async function chamadosPorComponente(req, res) {
+
+    try {
+
+        const {fkFuncionario,fkEmpresa,hostname} = req.params;
+
+        const dados = await jiraService.chamadosPorComponente(fkFuncionario, fkEmpresa, hostname);
+
+        res.json(dados);
+
+    } catch (erro) {
+
+        console.log(erro);
+
+        res.status(500).json({
+            erro: erro.message
+        });
+
+    }
+}
+
 module.exports = {
-    filtrarDashboard
+    filtrarDashboard,
+    chamadosPorComponente
 };

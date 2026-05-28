@@ -38,23 +38,8 @@
 
             <nav class="menu">
                 <div class="categoria">Monitoramento</div>
-                <a href="painel.html" class="item-menu">
-                    <img src="./assets/imgs/painel/dash.png" alt="">Dashboard
-                </a>
-                <a href="dash_analista.html" class="item-menu">
-                    <img src="./assets/imgs/painel/servidores.png" alt="">Servidores
-                </a>
-                <a href="telaIncidente.html" class="item-menu selecionado">
-                    <img src="./assets/imgs/painel/alerta-selecionado.png" alt="">Incidentes
-                </a>
-                <a href="comunicacao.html" class="item-menu">
-                    <img src="./assets/imgs/painel/comunicacao.png" alt="">Comunicação
-                </a>
-                <a href="processos.html" class="item-menu">
-                    <img src="./assets/imgs/painel/processos.png" alt="">Processos
-                </a>
-                <a href="temperatura.html" class="item-menu">
-                    <img src="./assets/imgs/painel/temperatura.png" alt=""> Temperatura
+                <a class="item-menu selecionado">
+                    <img src="./assets/imgs/painel/dash-selecionado.png" alt="">Dashboard
                 </a>
 
                 <div class="categoria adm" id="administracao">Administração </div>
@@ -102,11 +87,11 @@
 
                 <div class="header-nav-scroll">
                     <nav class="header-nav">
-                        <a href="#">Resumo</a>
-                        <a href="#">Processos</a>
-                        <a href="#">Comunicação e rede</a>
-                        <a href="#">Temperatura</a>
-                        <a href="#" class="ativo">Incidentes</a>
+                        <a href="dash_incidentes.html" class="ativo">Incidentes</a>
+                        <a href="dash_analista.html">Resumo</a>
+                        <a href="processos.html">Processos</a>
+                        <a href="dash_rede.html">Comunicação e rede</a>
+                        <a href="Temperatura.html">Temperatura</a>
                     </nav>
                 </div>
 
@@ -116,7 +101,8 @@
                     <div style="border: 1px solid #FFCC00;" class="kpi">
                         <div class="informacoes">
                             <div>
-                                 <div class="borda-icon" id="icone-total-ativos-geral" style="border: 1px solid #FFCC00;">
+                                <div class="borda-icon" id="icone-total-ativos-geral"
+                                    style="border: 1px solid #FFCC00;">
                                     <i data-lucide="triangle-alert"
                                         style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
                                 </div>
@@ -369,9 +355,9 @@
                             <div class="informacoes">
                                 <div>
                                     <div class="borda-icon" id="icone-total-ativos" style="border: 1px solid #FFCC00;">
-                                    <i data-lucide="triangle-alert"
-                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
-                                </div>
+                                        <i data-lucide="triangle-alert"
+                                            style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.5px;"></i>
+                                    </div>
                                     <div class="informacoes-principais">
                                         <span>Total de Alertas Ativos</span>
                                         <h1 id="kpi_valor_total_alertas">10</h1>
@@ -431,10 +417,11 @@
                         <div style="border: 1px solid #FFCC00;" class="kpi">
                             <div class="informacoes">
                                 <div>
-                                    <div class="borda-icon" id="icone-confiabilidade" style="border: 1px solid #FFCC00;">
-                                    <i data-lucide="gauge"
-                                        style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.7px;"></i>
-                                </div>
+                                    <div class="borda-icon" id="icone-confiabilidade"
+                                        style="border: 1px solid #FFCC00;">
+                                        <i data-lucide="gauge"
+                                            style="width: 40px; height: 40px; color: #FFCC00; stroke-width: 1.7px;"></i>
+                                    </div>
                                     <div class="informacoes-principais">
                                         <span>índice de Confiabilidade</span>
                                         <h1 id="indice_confiabilidade">50</h1>
@@ -1183,7 +1170,54 @@
             })
         }
     })
+    async function atualizarStatus() {
 
-    listarServidores();
-    exibirUsuarioAtivo();
+        const hostnameSelecionado = select_servidor.value;
+
+        if (!hostnameSelecionado || hostnameSelecionado === "#") return;
+
+        const servidor = servidoresPermitidos.find(
+            s => s[0].toLowerCase() === hostnameSelecionado.toLowerCase()
+        );
+
+        if (!servidor) return;
+
+        const status = servidor[1];
+
+        const dot = document.getElementById("status-dot");
+
+        dot.classList.remove("verde", "amarelo", "vermelho");
+
+        if (status === "Crítico") {
+
+            dot.classList.add("vermelho");
+
+        } else if (status === "Atenção") {
+
+            dot.classList.add("amarelo");
+
+        } else {
+
+            dot.classList.add("verde");
+        }
+    }
+
+    select_servidor.addEventListener("change", async function () {
+
+        selecionar();
+
+        await atualizarStatus();
+    });
+
+    async function iniciarPagina() {
+
+        listarServidores();
+
+        exibirUsuarioAtivo();
+    }
+
+    iniciarPagina();
+
+
+
 </script>
