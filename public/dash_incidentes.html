@@ -536,13 +536,13 @@
                                     <span class="box-filtro filt-severidade filt-ativo"
                                         onclick="alterarFiltroSeveridade(this, 'Todos')">Todos</span>
                                     <span class="box-filtro filt-severidade"
-                                        onclick="alterarFiltroSeveridade(this, 'Baixa')">Baixa</span>
+                                        onclick="alterarFiltroSeveridade(this, 'Baixo')">Baixa</span>
                                     <span class="box-filtro filt-severidade"
-                                        onclick="alterarFiltroSeveridade(this, 'Média')">Média</span>
+                                        onclick="alterarFiltroSeveridade(this, 'Medio')">Média</span>
                                     <span class="box-filtro filt-severidade"
-                                        onclick="alterarFiltroSeveridade(this, 'Alta')">Alta</span>
+                                        onclick="alterarFiltroSeveridade(this, 'Alto')">Alta</span>
                                     <span class="box-filtro filt-severidade"
-                                        onclick="alterarFiltroSeveridade(this, 'Crítica')">Crítica</span>
+                                        onclick="alterarFiltroSeveridade(this, 'Critico')">Crítica</span>
                                 </div>
                             </div>
 
@@ -772,28 +772,35 @@
     }
 
     function mostrarPainelSaude() {
-        const checkbox = document.getElementById('checkbox-servidores');
-        var listarPainelFiltro = servidoresPermitidos;
-        console.log(listarPainelFiltro)
+    const checkbox = document.getElementById('checkbox-servidores');
+    var listarPainelFiltro = servidoresPermitidos;
 
-        if (checkbox.checked) {
-            listarPainelFiltro = servidoresPermitidos.filter(servidor => {
-                return !servidor.includes("Online")
-            })
-        }
-
-        lista_servidores.innerHTML = listarPainelFiltro.map(servidor => {
-            const visual = status_servidor[servidor[1]];
-
-            return `
-                <div style="border: 3px solid ${visual.borda}; background-color: ${visual.fundo};"
-                    class="card-servidor">
-                    <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
-                    <h2>${servidor[0]}</h2>
-                </div>
-            `;
-        }).join('');
+    if (checkbox.checked) {
+        listarPainelFiltro = servidoresPermitidos.filter(servidor => {
+            return !servidor.includes("Online");
+        });
     }
+
+    lista_servidores.innerHTML = listarPainelFiltro.map(servidor => {
+
+        const status = servidor[1];
+
+        const visual = status_servidor[status] || {
+            fundo: "#E5E7EB",
+            borda: "#9CA3AF"
+        };
+
+        console.log("STATUS:", status);
+
+        return `
+            <div style="border: 3px solid ${visual.borda}; background-color: ${visual.fundo};"
+                class="card-servidor">
+                <img height="24" src="./assets/imgs/incidentes/icon-server.svg" alt="">
+                <h2>${servidor[0]}</h2>
+            </div>
+        `;
+    }).join('');
+}
 
     async function carregarAlertas() {
         const fkEmpresa = sessionStorage.ID_EMPRESA;
@@ -1218,29 +1225,74 @@
         graficoHeatmap.render();
     }
 
+    function atualizarStatusServidor(status) {
 
+    const dot = document.getElementById("status-dot");
+
+    if (!dot) return;
+
+    dot.classList.remove(
+        "verde",
+        "amarelo",
+        "vermelho",
+        "cinza"
+    );
+
+    switch (status) {
+
+        case "Crítico":
+        case "Critico":
+            dot.classList.add("vermelho");
+            break;
+
+        case "Atenção":
+        case "Atencao":
+            dot.classList.add("amarelo");
+            break;
+
+        case "Offline":
+            dot.classList.add("cinza");
+            break;
+
+        default:
+            dot.classList.add("verde");
+            break;
+    }
+}
 
     function selecionar() {
-        select = document.getElementById("select_servidor");
+    const select = document.getElementById("select_servidor");
 
-        if (select.value != "#") {
-            document.getElementById("corpo-dashboard-servidor").style.display = "block";
-            document.getElementById("status-dot").style.display = "block";
+    if (select.value != "#") {
 
-            listarAlertas();
-            mostrarKPIs();
-            mostrarKPIScore();
+        document.getElementById("corpo-dashboard-servidor").style.display = "block";
+        document.getElementById("status-dot").style.display = "block";
 
-        } else {
-            document.getElementById("corpo-dashboard-servidor").style.display = "none";
-            document.getElementById("status-dot").style.display = "none";
+        // pega o servidor selecionado
+        const servidorSelecionado = servidoresPermitidos.find(
+            servidor => servidor[0].toLowerCase() === select.value.toLowerCase()
+        );
 
-            mostrarKPITodos();
-            mostrarPainelSaude();
-            plotarHeatmap();
-        }
+        // pega o status
+        const status = servidorSelecionado ? servidorSelecionado[1] : "Online";
 
+        // atualiza a bolinha
+        atualizarStatusServidor(status);
+
+        listarAlertas();
+        mostrarKPIs();
+        mostrarKPIScore();
+
+    } else {
+
+        document.getElementById("corpo-dashboard-servidor").style.display = "none";
+        document.getElementById("status-dot").style.display = "none";
+
+        mostrarKPITodos();
+        mostrarPainelSaude();
+        plotarHeatmap();
     }
+}
 
     // Quando o tempo mudar, apenas a KPI precisa recalcular
     tempo_total_alertas.addEventListener("change", mostrarKPIs);
