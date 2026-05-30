@@ -909,6 +909,11 @@
 
             <br>
 
+            <strong>
+                Dia crítico:
+                ${json.dia_com_mais_alertas || "Sem alertas"}
+            </strong>
+
             <p>
                 Recomendação:
                 Monitorar padrões recorrentes de aquecimento.
@@ -1080,6 +1085,8 @@ async function listarServidores() {
 
         const lista =
             await resposta.json();
+            
+        console.log(lista);
 
         select_servidor.innerHTML =
             lista.map(servidor => `
@@ -1173,10 +1180,6 @@ async function listarServidores() {
 
             atualizarNomeServidor();
 
-            atualizarStatus(
-                dados[dados.length - 1]
-            );
-
             atualizarHorarioUltimaAtualizacao();
 
             atualizarTooltips(
@@ -1189,47 +1192,6 @@ async function listarServidores() {
             console.log(
                 "Erro temperatura:",
                 erro
-            );
-        }
-    }
-
-    // STATUS TOPO
-
-    function atualizarStatus(ultimo) {
-
-        const dot =
-            document.getElementById(
-                "status-dot"
-            );
-
-        dot.classList.remove(
-            "verde",
-            "amarelo",
-            "vermelho"
-        );
-
-        if (
-            ultimo.temp_max_cpu >= 85
-        ) {
-
-            dot.classList.add(
-                "vermelho"
-            );
-        }
-
-        else if (
-            ultimo.temp_max_cpu >= 70
-        ) {
-
-            dot.classList.add(
-                "amarelo"
-            );
-        }
-
-        else {
-
-            dot.classList.add(
-                "verde"
             );
         }
     }
