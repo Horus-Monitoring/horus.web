@@ -968,10 +968,12 @@
             } else if (status === "Atencao") {
                 dot.classList.add("amarelo");
                 document.getElementById("statusInfo").innerHTML = "Atenção"
+                status.classList.add("atencao");
 
             } else if (status === "Offline") {
                 dot.classList.add("cinza");
                 document.getElementById("statusInfo").innerHTML = "Offline"
+                status.classList.add("offline");
             
             } else {
                 dot.classList.add("verde");
