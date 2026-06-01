@@ -955,14 +955,28 @@
 
         function atualizarStatusServidor(status) {
             const dot = document.getElementById("statusDot");
+            const status = document.getElementById("statusInfo");
             if (!dot || !status) return;
 
             dot.classList.remove("verde", "amarelo", "vermelho", "cinza");
 
-            if (status === "Critico") dot.classList.add("vermelho");
-            else if (status === "Atencao") dot.classList.add("amarelo");
-            else if (status === "Offline") dot.classList.add("cinza");
-            else dot.classList.add("verde");
+            if (status === "Critico") {
+                dot.classList.add("vermelho");
+                document.getElementById("statusInfo").innerHTML = "Crítico";
+                status.classList.add("critico");
+
+            } else if (status === "Atencao") {
+                dot.classList.add("amarelo");
+                document.getElementById("statusInfo").innerHTML = "Atenção"
+
+            } else if (status === "Offline") {
+                dot.classList.add("cinza");
+                document.getElementById("statusInfo").innerHTML = "Offline"
+            
+            } else {
+                dot.classList.add("verde");
+                document.getElementById("statusInfo").innerHTML = "Online"
+            } 
         }
 
 
