@@ -373,13 +373,13 @@
             indicadorSaudePonto: document.getElementById("indicadorSaudePonto"),
             indicadorSaudeTexto: document.getElementById("indicadorSaudeTexto"),
 
-
+           
 
         };
 
-        console.log(els.cpuValue);
-        console.log(els.ramValue);
-        console.log(els.diskValue);
+            console.log(els.cpuValue);
+            console.log(els.ramValue);
+            console.log(els.diskValue);
 
 
         const JANELA = 24;
@@ -981,47 +981,30 @@
         function atualizarStatusServidor(statusServidor) {
 
             const dot = document.getElementById("statusDot");
-            const statusInfo = document.getElementById("statusInfo");
-
-            if (!dot || !statusInfo) return;
+            const status2 = document.getElementById("statusInfo");
+            if (!dot || !status) return;
 
             dot.classList.remove("verde", "amarelo", "vermelho", "cinza");
 
-            statusInfo.classList.remove(
-                "online",
-                "atencao",
-                "critico",
-                "offline"
-            );
-
-            if (statusServidor === "Critico") {
-
+            if (status === "Critico") {
                 dot.classList.add("vermelho");
+                document.getElementById("statusInfo").innerHTML = "Crítico";
+                status2.classList.add("critico");
 
-                statusInfo.innerHTML = "Crítico";
-                statusInfo.classList.add("critico");
-
-            } else if (statusServidor === "Atencao") {
-
+            } else if (status === "Atencao") {
                 dot.classList.add("amarelo");
+                document.getElementById("statusInfo").innerHTML = "Atenção"
+                status2.classList.add("atencao");
 
-                statusInfo.innerHTML = "Atenção";
-                statusInfo.classList.add("atencao");
-
-            } else if (statusServidor === "Offline") {
-
+            } else if (status === "Offline") {
                 dot.classList.add("cinza");
-
-                statusInfo.innerHTML = "Offline";
-                statusInfo.classList.add("offline");
-
+                document.getElementById("statusInfo").innerHTML = "Offline"
+                status2.classList.add("offline");
+            
             } else {
-
                 dot.classList.add("verde");
-
-                statusInfo.innerHTML = "Online";
-                statusInfo.classList.add("online");
-            }
+                document.getElementById("statusInfo").innerHTML = "Online"
+            } 
         }
 
 
