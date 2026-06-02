@@ -373,13 +373,13 @@
             indicadorSaudePonto: document.getElementById("indicadorSaudePonto"),
             indicadorSaudeTexto: document.getElementById("indicadorSaudeTexto"),
 
-           
+
 
         };
 
-            console.log(els.cpuValue);
-            console.log(els.ramValue);
-            console.log(els.diskValue);
+        console.log(els.cpuValue);
+        console.log(els.ramValue);
+        console.log(els.diskValue);
 
 
         const JANELA = 24;
@@ -489,27 +489,28 @@
                         scales: {
                             x: {
                                 title: { display: true, text: 'Leituras (últimas 24h)' },
-                                ticks: {maxTicksLimit: 12,autoSkip: true}
-                                },
-                                y: {
-                                    min: 0,
-                                    max: 100,
-                                    title: { display: true, text: 'Saúde (%)' },
-                                    ticks: { stepSize: 20, callback: val => val + '%' }
-                                }
+                                ticks: { maxTicksLimit: 12, autoSkip: true }
                             },
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: {
-                                    callbacks: {
-                                        label: ctx => `Saúde: ${ctx.parsed.y.toFixed(1)}%`
-                                    }
+                            y: {
+                                min: 0,
+                                max: 100,
+                                title: { display: true, text: 'Saúde (%)' },
+                                ticks: { stepSize: 20, callback: val => val + '%' }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => `Saúde: ${ctx.parsed.y.toFixed(1)}%`
                                 }
                             }
                         }
                     }
+
                 });
             }
+
         }
 
         function atualizarGraficoRecursos(cpu, ram, disco) {
@@ -981,32 +982,48 @@
         function atualizarStatusServidor(statusServidor) {
 
             const dot = document.getElementById("statusDot");
-            const status2 = document.getElementById("statusInfo");
-            if (!dot || !status) return;
+            const statusInfo = document.getElementById("statusInfo");
+
+            if (!dot || !statusInfo) return;
 
             dot.classList.remove("verde", "amarelo", "vermelho", "cinza");
 
-            if (status === "Critico") {
+            statusInfo.classList.remove(
+                "online",
+                "atencao",
+                "critico",
+                "offline"
+            );
+
+            if (statusServidor === "Critico") {
+
                 dot.classList.add("vermelho");
-                document.getElementById("statusInfo").innerHTML = "Crítico";
-                status2.classList.add("critico");
 
-            } else if (status === "Atencao") {
+                statusInfo.innerHTML = "Crítico";
+                statusInfo.classList.add("critico");
+
+            } else if (statusServidor === "Atencao") {
+
                 dot.classList.add("amarelo");
-                document.getElementById("statusInfo").innerHTML = "Atenção"
-                status2.classList.add("atencao");
 
-            } else if (status === "Offline") {
+                statusInfo.innerHTML = "Atenção";
+                statusInfo.classList.add("atencao");
+
+            } else if (statusServidor === "Offline") {
+
                 dot.classList.add("cinza");
-                document.getElementById("statusInfo").innerHTML = "Offline"
-                status2.classList.add("offline");
-            
-            } else {
-                dot.classList.add("verde");
-                document.getElementById("statusInfo").innerHTML = "Online"
-            } 
-        }
 
+                statusInfo.innerHTML = "Offline";
+                statusInfo.classList.add("offline");
+
+            } else {
+
+                dot.classList.add("verde");
+
+                statusInfo.innerHTML = "Online";
+                statusInfo.classList.add("online");
+            }
+        }
 
         async function carregarDashboardServidor(macAddress) {
             try {
