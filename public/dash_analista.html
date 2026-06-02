@@ -40,6 +40,37 @@
             background: #6c757d;
         }
 
+        .status-info {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .status-info.online {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid #22c55e;
+        }
+
+        .status-info.atencao {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid #f59e0b;
+        }
+
+        .status-info.critico {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        .status-info.offline {
+            background-color: rgba(108, 117, 125, 0.15);
+            color: #6c757d;
+            border: 1px solid #6c757d;
+        }
+
         .graficoQtdChamados {
             position: relative;
             width: 100%;
@@ -458,14 +489,7 @@
                         scales: {
                             x: {
                                 title: { display: true, text: 'Leituras (últimas 24h)' },
-                                ticks: {
-                                     maxTicksLimit: 12, 
-                                    autoSkip: true,
-                                    callback: function (value, index) {
-                                        const label = this.getLabelForValue(value);
-
-                                        return label.split(" ")[1];
-                                    }
+                                ticks: {maxTicksLimit: 12,autoSkip: true}
                                 },
                                 y: {
                                     min: 0,
@@ -483,7 +507,8 @@
                                 }
                             }
                         }
-                    }});
+                    }
+                });
             }
         }
 
@@ -953,32 +978,50 @@
         }
 
 
-        function atualizarStatusServidor(status) {
+        function atualizarStatusServidor(statusServidor) {
+
             const dot = document.getElementById("statusDot");
-            const status = document.getElementById("statusInfo");
-            if (!dot || !status) return;
+            const statusInfo = document.getElementById("statusInfo");
+
+            if (!dot || !statusInfo) return;
 
             dot.classList.remove("verde", "amarelo", "vermelho", "cinza");
 
-            if (status === "Critico") {
+            statusInfo.classList.remove(
+                "online",
+                "atencao",
+                "critico",
+                "offline"
+            );
+
+            if (statusServidor === "Critico") {
+
                 dot.classList.add("vermelho");
-                document.getElementById("statusInfo").innerHTML = "Crítico";
-                status.classList.add("critico");
 
-            } else if (status === "Atencao") {
+                statusInfo.innerHTML = "Crítico";
+                statusInfo.classList.add("critico");
+
+            } else if (statusServidor === "Atencao") {
+
                 dot.classList.add("amarelo");
-                document.getElementById("statusInfo").innerHTML = "Atenção"
-                status.classList.add("atencao");
 
-            } else if (status === "Offline") {
+                statusInfo.innerHTML = "Atenção";
+                statusInfo.classList.add("atencao");
+
+            } else if (statusServidor === "Offline") {
+
                 dot.classList.add("cinza");
-                document.getElementById("statusInfo").innerHTML = "Offline"
-                status.classList.add("offline");
-            
+
+                statusInfo.innerHTML = "Offline";
+                statusInfo.classList.add("offline");
+
             } else {
+
                 dot.classList.add("verde");
-                document.getElementById("statusInfo").innerHTML = "Online"
-            } 
+
+                statusInfo.innerHTML = "Online";
+                statusInfo.classList.add("online");
+            }
         }
 
 
